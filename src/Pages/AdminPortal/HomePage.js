@@ -22,16 +22,10 @@ export class HomePage {
    }
 
   async logout() {
-    try {
       await this.page.click(this.userMenu);     
-      //await this.page.locator(this.userMenu).click();
       await this.page.locator(this.logoutButton).waitFor({ state: 'visible', timeout: 2000 });
       await this.page.click(this.logoutButton); 
-      //await this.page.locator().click();
-    } catch (error) {
-      console.error("Logout function failed:", error.message);
-      return false;
-    }
+     
   }
 
   async navigateToProgramManagement() {
