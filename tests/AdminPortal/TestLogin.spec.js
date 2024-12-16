@@ -6,7 +6,6 @@ let homePage;
 test('Login with valid credential', async ({ page }) => {
     loginPage = new LoginPage(page);
     homePage= new HomePage(page);
-    streamManagementPage = new StreamManagementPage(page);
     var baseUrl = global.testConfig.BASE_URL;
     var adminusername = global.testConfig.ADMIN_USER;
     var adminpassword = global.testConfig.ADMIN_PASS;
@@ -14,8 +13,4 @@ test('Login with valid credential', async ({ page }) => {
     var loginSuccess = await loginPage.login(adminusername, adminpassword);
     expect(loginSuccess).toBe(true);
     await homePage.logout();
-    await page.waitForTimeout(5000);
-   
-
-
-});
+    });
