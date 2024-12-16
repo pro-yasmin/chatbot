@@ -1,0 +1,16 @@
+{
+  "testSettings": {
+    "testTimeout": 45000,
+    "retryCount": 5
+  },
+
+  "person": {
+    "name": "marwa",
+    "age": 30
+  },
+  "address": {
+    "name": "dooki",
+    "age": 30
+  }
+ 
+}
