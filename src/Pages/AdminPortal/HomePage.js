@@ -1,6 +1,7 @@
 export class HomePage {
-
+//Page Construtor
   constructor(page) {
+
     this.page = page;
     this.userMenu = '//div[contains(@class, "MuiAvatar-root")]//ancestor::button';
     this.logoutButton = 'span:has-text("تسجيل الخروج")';
