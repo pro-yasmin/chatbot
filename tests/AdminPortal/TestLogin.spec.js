@@ -1,8 +1,10 @@
 const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../../src/Pages/AdminPortal/LoginPage');
 const { HomePage } = require('../../src/Pages/AdminPortal/HomePage');
+
 let loginPage;
 let homePage;
+
 test('Login with valid credential', async ({ page }) => {
     loginPage = new LoginPage(page);
     homePage= new HomePage(page);
@@ -13,4 +15,5 @@ test('Login with valid credential', async ({ page }) => {
     var loginSuccess = await loginPage.login(adminusername, adminpassword);
     expect(loginSuccess).toBe(true);
     await homePage.logout();
+    
     });

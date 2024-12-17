@@ -3,7 +3,6 @@ const { HomePage } = require('./HomePage');
 export class LoginPage {
     constructor(page) {
         this.page = page;
-        
           this.userNameField = '[id="username"]';
           this.passwordField = '[id="password"]',
           this.remeberCheckbox = '//img[@class="check--icon"]';
