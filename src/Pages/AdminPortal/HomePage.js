@@ -7,9 +7,8 @@ export class HomePage {
     this.avatar = '//div[contains(@class, "MuiAvatar-root")]';
     this.programManagementButton = '//a[@href="/programs-management"]';
     this.streamsManagementButton = '//a[@href="/programs-management/streams-management"]';
-    this.createNewStreamButton = '//button[contains(text(),"تعريف مسار")]',
-    this.streamTitle = '//span[contains(@class, "MuiTypography-root") and contains(@class, "MuiTypography-sub-headline-sm") and text()="إدارة المسارات"]';
-
+    this.createNewStreamButton = '//button[contains(text(),"تعريف مسار")]';
+   
 
   }
 
@@ -22,6 +21,7 @@ export class HomePage {
    }
 
   async logout() {
+      await this.page.locator(this.userMenu).waitFor({ state: 'visible', timeout: 2000 });
       await this.page.click(this.userMenu);     
       await this.page.locator(this.logoutButton).waitFor({ state: 'visible', timeout: 2000 });
       await this.page.click(this.logoutButton); 
@@ -42,19 +42,7 @@ export class HomePage {
    
     }
 
-  /*async navigateToCreateStreamPage() {
-    try {
-      
-      await this.page.click(this.selectors.createNewStreamButton , { state: 'visible' , timeout: 60000 });
-
-      await this.page.waitForSelector(this.selectors.streamTitle, { state: 'visible' , timeout: 60000 });
-
-      return true; 
-  } catch (error) {
-      console.error('Error in open Create Stream Page:', error);
-      return false;
-  }
-}*/
+ 
 
 }
 

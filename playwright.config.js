@@ -21,8 +21,10 @@ require('./global.js'); // Load the global configuration
  */
 
 
+const ENV = 'testing';
 
 module.exports = defineConfig({
+  timeout: 60000,
 
   globalSetup: require.resolve('./global-setup'),
  
@@ -44,17 +46,23 @@ module.exports = defineConfig({
     browserName: 'chromium',
     baseURL:   global.testConfig.BASE_URL, 
     //baseURL: global.testConfig.BASE_URL || 'http://default-url.com',  // Use the global base URL from the config
-    timeout: 30000,
+    //timeout: 30000,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    video: 'on',
+    actionTimeout: 15000, // Timeout for Playwright actions (10 seconds)
+    navigationTimeout: 60000, // Timeout for page navigation (15 seconds)
+
   },
 
+  reporter: [['html', { outputFolder: 'playwright-report' }]],
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+   
 
    /* {
       name: 'firefox',
