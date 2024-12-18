@@ -1,4 +1,4 @@
-const {Utils }= require('../../../Utils/utils.js');
+const {Utils }= require('../../Utils/utils.js');
 
 export class StreamData {
 
@@ -21,7 +21,7 @@ export class StreamData {
   // Getter and Setter for streamArabicName
   getstreamArabicName() {
       if (this.streamArabicName == null) {
-          this.streamArabicName = global.testConfig.STREAMARABICNAME + this.utils.generateRandomArabicString(5);
+          this.streamArabicName = global.testConfig.createStream.streamArabicName + this.utils.generateRandomArabicString(5);
       }
       return this.streamArabicName;
       }
@@ -32,7 +32,7 @@ export class StreamData {
     // Getter and Setter for streamEnglishName
     getstreamEnglishName() {
         if (this.streamEnglishName == null) {
-            this.streamEnglishName = global.testConfig.STREAMENGLISHNAME + this.utils.generateRandomEnglishString(5);
+            this.streamEnglishName = global.testConfig.createStream.streamEnglishName + this.utils.generateRandomEnglishString(5);
         }
         return this.streamEnglishName;
         }
@@ -43,7 +43,7 @@ export class StreamData {
      // Getter and Setter for streamArabicDescription
      getstreamArabicDescription() {
         if (this.streamArabicDescription == null) {
-            this.streamArabicDescription = global.testConfig.STREAMARABICDESCRIPTION + this.utils.generateRandomArabicString(10);
+            this.streamArabicDescription = global.testConfig.createStream.streamArabicDescription + this.utils.generateRandomArabicString(10);
         }
         return this.streamArabicDescription;
         }
@@ -54,7 +54,7 @@ export class StreamData {
   // Getter and Setter for streamEnglishDescription
   getstreamEnglishDescription() {
       if (this.streamEnglishDescription == null) {
-          this.streamEnglishDescription = global.testConfig.STREAMENGLISHDESCRIPTION + this.utils.generateRandomEnglishString(10);
+          this.streamEnglishDescription = global.testConfig.createStream.streamEnglishDescription + this.utils.generateRandomEnglishString(10);
       }
       return this.streamEnglishDescription;
       }
@@ -65,7 +65,7 @@ export class StreamData {
   // Getter and Setter for arabicStreamGoal
     getarabicStreamGoal() {
         if (this.arabicStreamGoal == null) {
-            this.arabicStreamGoal = global.testConfig.ARABICSTREAMGOAL + this.utils.generateRandomArabicString(8);
+            this.arabicStreamGoal = global.testConfig.createStream.arabicStreamGoal + this.utils.generateRandomArabicString(8);
         }
         return this.arabicStreamGoal;
        }
@@ -76,7 +76,7 @@ export class StreamData {
     // Getter and Setter for englishStreamGoal
     getenglishStreamGoal() {
         if (this.englishStreamGoal == null) {
-            this.englishStreamGoal = global.testConfig.ENGLISHSTREAMGOAL + this.utils.generateRandomEnglishString(8);
+            this.englishStreamGoal = global.testConfig.createStream.englishStreamGoal  + this.utils.generateRandomEnglishString(8);
         }
         return this.englishStreamGoal;
         }
@@ -87,7 +87,7 @@ export class StreamData {
     // Getter and Setter for arabicGoal
     getarabicGoal() {
         if (this.arabicGoal == null) {
-            this.arabicGoal = global.testConfig.ARABICGOAL + this.utils.generateRandomArabicString(6);
+            this.arabicGoal = global.testConfig.createStream.arabicGoal  + this.utils.generateRandomArabicString(6);
         }
         return this.arabicGoal;
         }
@@ -98,7 +98,7 @@ export class StreamData {
   // Getter and Setter for englishGoal
   getenglishGoal() {
       if (this.englishGoal == null) {
-          this.englishGoal = global.testConfig.ENGLISHGOAL + this.utils.generateRandomEnglishString(6);
+          this.englishGoal = global.testConfig.createStream.englishGoal + this.utils.generateRandomEnglishString(6);
       }
       return this.englishGoal;
       }
@@ -106,7 +106,21 @@ export class StreamData {
       this.englishGoal = value;
       }
 
+
+// Getter and Setter for Stream ID Number
+    getCreatedStreamId() {
+        return this.streamId;
+    }
+
+    // Setter for streamId
+    setCreatedStreamId(Value) {
+        this.streamId = Value;
+    }
+
+
+
 // Getter and Setter for Random Number
+
   getStreamNumber() {
     if (this.englishGoal == null) {
       this.streamNumber = this.utils.generateRandomNumber(5);

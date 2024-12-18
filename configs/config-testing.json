@@ -1,10 +1,13 @@
-
-  {
-    "stream": {
-          "streamArabicName": "مسار دعم الأسر والرعاية الاجتماعية"
-    }
-
-    
-    
+{
+  "createStream": {
+    "streamArabicName": "مسار دعم الأسر والرعاية الاجتماعية",
+    "streamEnglishName": "Family Support and Social Care Stream",
+    "streamArabicDescription": "تعزيز تمكين وسالمة الفئات الهشة من خلال برامج التوعي المجتمعي والدعم الشامل",
+    "streamEnglishDescription": "To promote the well-being and safety of vulnerable groups through support, awareness, and inclusion Programs",
+    "arabicStreamGoal": "تتضمن الخطوة الأولى وضع رؤية استراتيجية لتصميم البرنامج، مما يؤدي إلى تحديد الأهداف والمبادئ التوجيهية التي ستشكل تصميم البرنامج على مستوى كل من المسارات المعنية",
+    "englishStreamGoal": "Step 1 involves setting a Strategic Vision for Program reform, resulting in defined objectives and guiding principles that will shape the Program Design across each stream",
+    "arabicGoal": "1. ضمان المساواة لذوي الدخل المحدود والفئات الهشة في حقوق الحصول على الموارد الاقتصادية والخدمات األساسية في الدولة 2. تمكين جودة الحياة للفئات ذوي الخاصة من النواحي الجسدية والعقلية (مثل الأشخاص ذوي الاعاقة ومقدمي الرعاية) 3. رفع مستوى منذ مراحل الطفولة المبكرة للوقاية من سوء المعاملة و غيرها من أشكال العنف 4. ضمان الصحة النفسية للفئات الهشة التي تعاني من سوء الاعاملة أو العنف أو غيرها من الظروف الصعبة 5. تقديم الدعم النفس ي للفئات الهشة المحتاجة لضمان صحتها النفسية",
+    "englishGoal": "1. To ensure equal rights to economic resources and basic services to poor and economically vulnerable / at-risk populations of the country 2. To enable a better quality of life for groups with special physical and mental needs (e.g., people with disabilities, care-givers) 3. To raise awareness from an early stage to prevent abuse and other forms of  4. To ensure physical safety for vulnerable / at-risk groups facing abuse,4. To provide psychological support to vulnerable",
+    "streamSuccessMsg": "تم حفظ المسار للمراجعة بنجاح"
   }
-  
+}

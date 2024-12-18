@@ -1,5 +1,5 @@
-const {StreamData }= require('./StreamData');
-const { MessagePage }= require('../Shared/MessagePage');
+const {StreamData }= require('../../../Models/AdminPortal/StreamData');
+const { MessagePage }= require('../SharedPages/MessagePage');
 
 export class StreamPage {
     constructor(page) {
@@ -19,15 +19,15 @@ export class StreamPage {
          }
 
       
-      async createNewStream () {
-        var streamData = new StreamData(this.page);   
+      async createNewStream (streamData) {
+         
         var messagePage = new MessagePage(this.page);   
 
-        const createdStreamEnName = streamData.getstreamEnglishName();
-         streamData.setstreamEnglishName(createdStreamEnName);
+        var createdStreamEnName = streamData.getstreamEnglishName();
+        var createdStreamArName = streamData.getstreamArabicName();
 
           await this.page.waitForSelector(this.streamArabicName, { state: 'visible',timeout: 5000 });
-          await this.page.fill(this.streamArabicName,streamData.getstreamArabicName());
+          await this.page.fill(this.streamArabicName,createdStreamArName);
           await this.page.fill(this.streamEnglishName, createdStreamEnName);
           await this.page.fill(this.streamEnglishName,streamData.getstreamEnglishName());
           await this.page.fill(this.streamArabicDescription,streamData.getstreamArabicDescription());
@@ -40,8 +40,14 @@ export class StreamPage {
           await this.page.waitForSelector(this.streamDefinitionButton, { state: 'visible' });
           await this.page.click(this.streamDefinitionButton);
 
-          var result =await messagePage.Message( global.testConfig.STREAMSUCCESSMSG, this.successPopupTitle, this.backToAllStreamPageButton);
+          streamData.setstreamEnglishName(createdStreamEnName);
+          streamData.setstreamArabicName(createdStreamArName);
+
+          var result =await messagePage.checkMessage( this.successPopupTitle ,global.testConfig.createStream.streamSuccessMsg, this.backToAllStreamPageButton);
           return result;
+
+
+
 
   }
 }

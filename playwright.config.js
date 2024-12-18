@@ -24,7 +24,7 @@ require('./global.js'); // Load the global configuration
 const ENV = 'testing';
 
 module.exports = defineConfig({
-  timeout: 60000,
+  timeout: 120000,
 
   globalSetup: require.resolve('./global-setup'),
  
@@ -39,8 +39,6 @@ module.exports = defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
-
-  timeout: 120000,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -52,8 +50,8 @@ module.exports = defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     video: 'on',
-    actionTimeout: 15000, // Timeout for Playwright actions (10 seconds)
-    navigationTimeout: 60000, // Timeout for page navigation (15 seconds)
+    actionTimeout: 30000, // Timeout for Playwright actions (15 seconds)
+    navigationTimeout: 60000, // Timeout for page navigation (60 seconds)
 
   },
 

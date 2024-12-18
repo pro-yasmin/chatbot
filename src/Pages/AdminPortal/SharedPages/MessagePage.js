@@ -3,13 +3,11 @@ export class MessagePage {
         this.page = page; 
     }
 
-    async Message(fixedMessage, messageTitle, actionButton) {
+    async checkMessage(messageLocator, messageTitle , actionButton) {
 
-        await this.page.waitForSelector(messageTitle, { state: 'visible', timeout: 5000 });
-        var messageText = await this.page.locator(messageTitle).innerText();
-
-        
-        if (fixedMessage === messageText.trim()) {
+        await this.page.waitForSelector(messageLocator, { state: 'visible', timeout: 5000 });
+        var messageText = await this.page.textContent(messageLocator);
+        if (messageTitle === messageText.trim()) {
             console.log('Message matched, clicking the button...');
             await this.page.click(actionButton);
             return true;

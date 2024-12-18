@@ -8,8 +8,9 @@ export class HomePage {
     this.programManagementButton = '//a[@href="/programs-management"]';
     this.streamsManagementButton = '//a[@href="/programs-management/streams-management"]';
     this.createNewStreamButton = '//button[contains(text(),"تعريف مسار")]';
-   
+    this.tasksButton = '//a[@href="/my-tasks"]';
 
+ 
   }
 
   async checkAvatarIsExist() {
@@ -30,21 +31,21 @@ export class HomePage {
   }
 
   async navigateToProgramManagement() {
-    await this.page.waitForSelector(this.programManagementButton, {
-      state: "visible",
-      timeout: 100000
-    });
+    await this.page.waitForSelector(this.programManagementButton, {state: "visible",timeout: 20000 });
     await this.page.click(this.programManagementButton);
   }
 
   async navigateToStreamsManagement() {
     await this.navigateToProgramManagement();
-    await this.page.waitForSelector(this.streamsManagementButton, { state: "visible", timeout: 100000 });
+    await this.page.waitForSelector(this.streamsManagementButton, { state: "visible", timeout: 20000 });
     await this.page.click(this.streamsManagementButton);
    
     }
 
- 
+    async  navigateToTasks() {
+      await this.page.waitForSelector(this.tasksButton, { state: "visible",timeout: 20000});
+      await this.page.click(this.tasksButton);
+    }
 
 }
 
