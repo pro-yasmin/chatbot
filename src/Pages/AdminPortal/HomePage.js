@@ -1,25 +1,27 @@
 export class HomePage {
-
+  //Page Construtor
   constructor(page) {
     this.page = page;
-    this.userMenu = '//div[contains(@class, "MuiAvatar-root")]//ancestor::button';
+    this.userMenu ='//div[contains(@class, "MuiAvatar-root")]//ancestor::button';
     this.logoutButton = 'span:has-text("تسجيل الخروج")';
-    this.avatar = '//div[contains(@class, "MuiAvatar-root")]';
+    this.avatar ='//div[contains(@class, "MuiAvatar-root")]//ancestor::button';
     this.programManagementButton = '//a[@href="/programs-management"]';
     this.streamsManagementButton = '//a[@href="/programs-management/streams-management"]';
     this.createNewStreamButton = '//button[contains(text(),"تعريف مسار")]';
-   
+    this.tasksButton = '//a[@href="/my-tasks"]';
 
+ 
   }
 
-
   async checkAvatarIsExist() {
-      await this.page.waitForSelector(this.avatar, { state: 'visible', timeout: 5000 });
-      // Check if the avatar is visible
-      return await this.page.locator(this.avatar).isVisible();    
-     
-   }
+    await this.page.waitForSelector(this.avatar, {
+      state: "visible",
+      timeout: 300000,
+    });
+    return await this.page.locator(this.avatar).isVisible();
+  }
 
+  
   async logout() {
       await this.page.locator(this.userMenu).waitFor({ state: 'visible', timeout: 2000 });
       await this.page.click(this.userMenu);     
@@ -29,22 +31,22 @@ export class HomePage {
   }
 
   async navigateToProgramManagement() {
-
-    await this.page.waitForSelector(this.programManagementButton, { state: 'visible', timeout: 60000 });
+    await this.page.waitForSelector(this.programManagementButton, {state: "visible",timeout: 20000 });
     await this.page.click(this.programManagementButton);
-
   }
 
   async navigateToStreamsManagement() {
     await this.navigateToProgramManagement();
-    await this.page.waitForSelector(this.streamsManagementButton, { state: 'visible', timeout: 60000 });
+    await this.page.waitForSelector(this.streamsManagementButton, { state: "visible", timeout: 20000 });
     await this.page.click(this.streamsManagementButton);
    
     }
 
- 
+    async  navigateToTasks() {
+      await this.page.waitForSelector(this.tasksButton, { state: "visible",timeout: 20000});
+      await this.page.click(this.tasksButton);
+    }
 
 }
 
 module.exports = { HomePage };
-
