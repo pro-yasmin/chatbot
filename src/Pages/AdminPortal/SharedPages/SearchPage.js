@@ -77,11 +77,16 @@ export class SearchPage {
    return tdDetails;
   }
 
+  async clickRowAction( row , actionLocatorvalue) 
+  {
+    let lastTd;
+    if (row && row.length > 0) {
+      lastTd = row[row.length - 1].tdLocator;
+      var actionLocator = lastTd.locator(actionLocatorvalue);
+      await actionLocator.click();
+  }
 
- 
- 
-
+  }
 }
-
 module.exports = { SearchPage };
 

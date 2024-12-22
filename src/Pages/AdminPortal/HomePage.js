@@ -2,15 +2,13 @@ export class HomePage {
   //Page Construtor
   constructor(page) {
     this.page = page;
-    this.userMenu ='//div[contains(@class, "MuiAvatar-root")]//ancestor::button';
-    this.logoutButton = 'span:has-text("تسجيل الخروج")';
-    this.avatar ='//div[contains(@class, "MuiAvatar-root")]//ancestor::button';
-    this.programManagementButton = '//a[@href="/programs-management"]';
-    this.streamsManagementButton = '//a[@href="/programs-management/streams-management"]';
+    this.userMenu ='//button[@data-testid="user-menu"]';
+    this.logoutButton = '//div[@data-testid="logout-btn"]';
+    this.avatar ='//button[@data-testid="user-menu"]';
+    this.programManagementButton = '//a[@data-testid="menu-programs-management"]';
+    this.streamsManagementButton = '//a[@data-testid="submenu-streams-management"]';
     this.createNewStreamButton = '//button[contains(text(),"تعريف مسار")]';
     this.tasksButton = '//a[@href="/my-tasks"]';
-
- 
   }
 
   async checkAvatarIsExist() {

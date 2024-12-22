@@ -4,21 +4,26 @@ const { HomePage } = require('../../src/Pages/AdminPortal/HomePage');
 const { StreamPage }= require('../../src/Pages/AdminPortal/Programs/StreamPage');
 const { StreamData }= require('../../src/Models/AdminPortal/StreamData');
 const { StreamManagementPage }= require('../../src/Pages/AdminPortal/Programs/StreamManagementPage');
+const { TaskDetailsPage } = require('../../src/Pages/AdminPortal/Tasks/TaskDetailsPage');
+const { TasksPage }= require('../../src/Pages/AdminPortal/Tasks/TasksPage');
 
 let loginPage;
 let homePage;
 let streamPage;
 let streamManagementPage;
 let streamData;
+let tasksPage;
+let taskDetailsPage;
 
 test('Add and Approve Test Stream', async ({ page }) => {
 
-  
     loginPage = new LoginPage(page);
     homePage= new HomePage(page);
     streamPage=new StreamPage(page);
     streamManagementPage = new StreamManagementPage(page);
-    streamData = new StreamData(page);  
+    streamData = new StreamData(page); 
+    tasksPage = new TasksPage(page); 
+    taskDetailsPage = new TaskDetailsPage(page);
 
     var baseUrl = global.testConfig.BASE_URL;
     var adminusername = global.testConfig.ADMIN_USER;
@@ -31,23 +36,17 @@ test('Add and Approve Test Stream', async ({ page }) => {
     console.log('Navigate to Streams page');
     await homePage.navigateToStreamsManagement();
     console.log('Navigate to Create Streams page');
-    await streamManagementPage.clickOnNewStream();
-    var result = await streamPage.createNewStream(streamData);
+    var result = await streamManagementPage.clickOnNewStream(streamData);
     expect(result).toBe(true);    
     console.log('New Stream Created Successfully');
     console.log('Search on Stream');
-    await streamManagementPage.checkStreamRowDetails(streamData);
+    expect( await streamManagementPage.checkStreamRowDetails(streamData)).toBe(true);    
     console.log('New Stream Details Checked Successfully');
-//Logout 
-//Login by Autorizied appraval user 
-   // console.log('Navigate to MyTasks page to approve stream Request');
-
-    //await tasksPage.navigateToGroupTasksTab();
-    // var result =  await tasksPage.searchOnStreamTask(streamData);
-
-    // expect(result).toBe(true);  
-
-
-
-
+    console.log('Navigate to MyTasks page to approve stream Request');
+    await homePage.navigateToTasks();
+    await tasksPage.assignTaskToMe();
+    await tasksPage.navigateToMyCompletedTasksTab();
+    expect( await tasksPage.aprroveStream()).toBe(true); 
+    console.log('New Stream Approved Successfully');
+    await homePage.logout();
 });

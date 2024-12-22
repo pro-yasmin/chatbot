@@ -5,7 +5,7 @@ export class MessagePage {
 
     async checkMessage(messageLocator, messageTitle , actionButton) {
 
-        await this.page.waitForSelector(messageLocator, { state: 'visible', timeout: 5000 });
+        await this.page.waitForSelector(messageLocator, { state: 'visible', timeout: 2000 });
         var messageText = await this.page.textContent(messageLocator);
         if (messageTitle === messageText.trim()) {
             console.log('Message matched, clicking the button...');
@@ -16,6 +16,7 @@ export class MessagePage {
             return false;
                 }
     }
+    
 
 }
 

@@ -3,6 +3,8 @@ const { StreamData } = require("../../../Models/AdminPortal/StreamData");
 const { SearchPage } = require("../SharedPages/SearchPage");
 const { ProgramPage } = require("./ProgramPage");
 const { HomePage } = require("../HomePage");
+const { StreamPage } = require("./StreamPage");
+
 
 export class StreamManagementPage {
   constructor(page) {
@@ -14,12 +16,16 @@ export class StreamManagementPage {
     this.dotsLocator;
   }
 
-  async clickOnNewStream() {
+  async clickOnNewStream(streamData) {
     await this.page.waitForSelector(this.streamsTable, {
       state: "visible",
       timeout: 5000,
     });
     await this.page.click(this.createNewStreamButton);
+    var streamPage = new StreamPage(this.page);
+    const result = await streamPage.createNewStream(streamData);
+    return result;
+
   }
 
   async searchOnSpecificStream(streamName) {
@@ -43,7 +49,7 @@ export class StreamManagementPage {
     if (streamRow && streamRow.length > 0) {
       lastTd = streamRow[streamRow.length - 1].tdLocator;
       this.dotsLocator = lastTd.locator("div >> button");
-      await this.dotsLocator.waitFor({ state: "visible" });
+      await this.dotsLocator.waitForSelector({ state: "visible" });
       await this.dotsLocator.click();
       await this.page.waitForSelector(this.createSubProgramOption, {
         state: "visible",
@@ -65,6 +71,7 @@ export class StreamManagementPage {
     streamRow = await this.searchOnSpecificStream(
       streamData.getstreamArabicName()
     );
+
     if (streamRow && streamRow.length > 0) {
       arabicTd = streamRow[1].tdLocator;
       arabicName = arabicTd.locator("span");
@@ -76,10 +83,19 @@ export class StreamManagementPage {
       await englishName.waitFor({ state: "visible" });
       var actualEnglishName = await englishName.textContent();
     }
-    //add if statment to check the matched reusult - actual = get in stream data
-    let streamId = await streamRow[0].tdLocator.textContent();
-    streamData.setCreatedStreamId(streamId);
-    console.log("Created Stream ID set in StreamData: " + streamId);
+
+    if (
+      actualArabicName === streamData.getstreamArabicName() &&
+      actualEnglishName === streamData.getstreamEnglishName()
+    ) {
+      console.log("Stream names matched successfully.");    
+      let streamId = await streamRow[0].tdLocator.textContent();
+        streamData.setCreatedStreamId(streamId);
+        console.log("Created Stream ID set in StreamData: " + streamId);
+              return true;
+      }
+      return false;
+
   }
 }
 

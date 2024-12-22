@@ -10,7 +10,7 @@
     "@playwright/test": "^1.49.1",
     "@types/node": "^22.10.1",
     "cross-env": "^7.0.3",
-    "prettier": "3.4.2"
+    "prettier": "^3.0.0-alpha.6"
   },
   "dependencies": {
     "dotenv-flow": "^4.1.0",
