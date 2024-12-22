@@ -7,6 +7,7 @@ export class PopUpPage {
     const fullMessage = await this.page.textContent(messageLocator);
     if (fullMessage.includes(partialMessage)) {
       await this.page.click(actionButton);
+      await this.page.locator(actionButton).waitFor({ state: 'detached' ,timeout: 30000 });
     }
     return true;
   }
@@ -14,8 +15,8 @@ export class PopUpPage {
   async inputPopUpMessage(inputMsgLocator, actionButton, inputMsg) {
     const textAreaLocator = this.page.locator(inputMsgLocator);
     await textAreaLocator.fill(inputMsg);
-    const actionBtnLocator = this.page.locator(actionButton);
-    await actionBtnLocator.click();
+    await this.page.click(actionButton);
+    await this.page.locator(actionButton).waitFor({ state: 'detached' ,timeout: 30000 });
   }
 }
 module.exports = { PopUpPage };
