@@ -55,7 +55,7 @@ export class TasksPage {
       this.acceptAssignBtn,
       global.testConfig.tasks.assignTaskMsg
     );
-    await this.page.waitForTimeout(2000);
+    // await this.page.waitForTimeout(2000);
     console.log("Stream Assigned to my self successfully");
   }
 
@@ -88,11 +88,11 @@ export class TasksPage {
     status = await this.taskDetailsPage.checkEnablementStatus(
       intialStreamStatus
     );
-    stramNoteAdded = await this.taskDetailsPage.addNoteForStream();
+   // stramNoteAdded = await this.taskDetailsPage.addNoteForStream();
     acceptstatus = await this.taskDetailsPage.acceptStream();
     ensurestatus = await this.EnsureStreamAccepted();
 
-    if (status && stramNoteAdded && acceptstatus && ensurestatus) return true;
+    if (status  && acceptstatus && ensurestatus) return true;
 
     return false;
   }

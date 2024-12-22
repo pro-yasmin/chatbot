@@ -59,7 +59,7 @@ export class TaskDetailsPage {
     var popUpMsg = new PopUpPage(this.page);
     await popUpMsg.inputPopUpMessage(this.inputMsgLocator, this.acceptaddNoteBtn,global.testConfig.taskDetails.note);
     await popUpMsg.popUpMessage(this.ensureNoteMsgTitle, this.acceptEnsureNoteMsgBtn ,global.testConfig.taskDetails.ensureNoteMsg);
-    await this.page.waitForTimeout(2000);
+    // await this.page.waitForTimeout(2000);
     await popUpMsg.popUpMessage(this.confirmNoteMsgTitle, this.acceptConfirmNoteMsgBtn,global.testConfig.taskDetails.confirmNoteMsg);
     let result = await this.checkNoteIsAdded(global.testConfig.taskDetails.note);
     return result;
@@ -70,7 +70,7 @@ export class TaskDetailsPage {
     await this.page.click(this.acceptStreamBtn);
     var popUpMsg = new PopUpPage(this.page);
     await popUpMsg.inputPopUpMessage(this.ensureAcceptStreamNote, this.ensureAcceptStreamBtn,global.testConfig.taskDetails.addAcceptNote);
-    await this.page.waitForTimeout(2000);
+    // await this.page.waitForTimeout(2000);
     var result = await popUpMsg.popUpMessage(this.confirmStreamTitle, this.backToTasksBtn,global.testConfig.taskDetails.confirmStreamMsg);
     if (result)
       console.log("The Stream Accepted Successfully.");

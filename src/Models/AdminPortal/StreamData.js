@@ -18,7 +18,7 @@ export class StreamData {
   // Getter and Setter for streamArabicName
   getstreamArabicName() {
       if (this.streamArabicName == null) {
-          this.streamArabicName ="أوتو"+" " +global.testConfig.createStream.streamArabicName + this.utils.generateRandomArabicString(5);
+          this.streamArabicName =global.testConfig.createStream.streamArabicName + this.utils.generateRandomArabicString(5)+" "+"أوتو";
       }
       return this.streamArabicName;
       }
@@ -29,7 +29,7 @@ export class StreamData {
     // Getter and Setter for streamEnglishName
     getstreamEnglishName() {
         if (this.streamEnglishName == null) {
-            this.streamEnglishName = "Auto"+" " + global.testConfig.createStream.streamEnglishName + this.utils.generateRandomEnglishString(5);
+            this.streamEnglishName =global.testConfig.createStream.streamEnglishName + this.utils.generateRandomEnglishString(5)+" "+"Auto";
         }
         return this.streamEnglishName;
         }
