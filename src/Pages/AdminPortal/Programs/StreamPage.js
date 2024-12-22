@@ -1,5 +1,3 @@
-const {StreamData }= require('../../../Models/AdminPortal/StreamData');
-const { MessagePage }= require('../SharedPages/MessagePage');
 const { PopUpPage }= require('../SharedPages/PopUpPage');
 
 
@@ -23,7 +21,6 @@ export class StreamPage {
       
       async createNewStream (streamData) {
          
-        //var messagePage = new MessagePage(this.page); 
         var popUpMsg = new PopUpPage(this.page);
   
 
@@ -48,8 +45,6 @@ export class StreamPage {
           streamData.setstreamArabicName(createdStreamArName);
 
           var result =await popUpMsg.popUpMessage( this.successPopupTitle , this.backToAllStreamPageButton,global.testConfig.createStream.streamSuccessMsg);
-
-          //var result =await messagePage.checkMessage( this.successPopupTitle ,global.testConfig.createStream.streamSuccessMsg, this.backToAllStreamPageButton);
           return result;
 
 
