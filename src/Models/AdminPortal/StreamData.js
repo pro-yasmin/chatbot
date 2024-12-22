@@ -15,13 +15,10 @@ export class StreamData {
     this.englishGoal = null;
   }
 
-  // var utils= new Utils(page);
-
-  
   // Getter and Setter for streamArabicName
   getstreamArabicName() {
       if (this.streamArabicName == null) {
-          this.streamArabicName = global.testConfig.createStream.streamArabicName + this.utils.generateRandomArabicString(5);
+          this.streamArabicName ="أوتو"+" " +global.testConfig.createStream.streamArabicName + this.utils.generateRandomArabicString(5);
       }
       return this.streamArabicName;
       }
@@ -32,7 +29,7 @@ export class StreamData {
     // Getter and Setter for streamEnglishName
     getstreamEnglishName() {
         if (this.streamEnglishName == null) {
-            this.streamEnglishName = global.testConfig.createStream.streamEnglishName + this.utils.generateRandomEnglishString(5);
+            this.streamEnglishName = "Auto"+" " + global.testConfig.createStream.streamEnglishName + this.utils.generateRandomEnglishString(5);
         }
         return this.streamEnglishName;
         }

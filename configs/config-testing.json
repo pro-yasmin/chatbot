@@ -9,5 +9,18 @@
     "arabicGoal": "1. ضمان المساواة لذوي الدخل المحدود والفئات الهشة في حقوق الحصول على الموارد الاقتصادية والخدمات األساسية في الدولة 2. تمكين جودة الحياة للفئات ذوي الخاصة من النواحي الجسدية والعقلية (مثل الأشخاص ذوي الاعاقة ومقدمي الرعاية) 3. رفع مستوى منذ مراحل الطفولة المبكرة للوقاية من سوء المعاملة و غيرها من أشكال العنف 4. ضمان الصحة النفسية للفئات الهشة التي تعاني من سوء الاعاملة أو العنف أو غيرها من الظروف الصعبة 5. تقديم الدعم النفس ي للفئات الهشة المحتاجة لضمان صحتها النفسية",
     "englishGoal": "1. To ensure equal rights to economic resources and basic services to poor and economically vulnerable / at-risk populations of the country 2. To enable a better quality of life for groups with special physical and mental needs (e.g., people with disabilities, care-givers) 3. To raise awareness from an early stage to prevent abuse and other forms of  4. To ensure physical safety for vulnerable / at-risk groups facing abuse,4. To provide psychological support to vulnerable",
     "streamSuccessMsg": "تم حفظ المسار للمراجعة بنجاح"
-  }
+  },
+"tasks": {
+    "assignTaskMsg": "هل انت متأكد من إسناد مهمة"
+  } ,
+  "taskDetails": {
+    "enableStatusHidden":"محجوب",
+    "enableStatusActive":"متاح",
+    "note": "تم إضافة ملاحظة جديدة",
+    "ensureNoteMsg" :"هل انت متأكد من إضافة الملاحظة؟",
+    "confirmNoteMsg" : "تم إضافة الملاحظة بنجاح",
+    "addAcceptNote" :"ملاحظة لقبول المسار",
+    "confirmStreamMsg" :"تم قبول تعريف المسار بنجاح"
+
+  } 
 }

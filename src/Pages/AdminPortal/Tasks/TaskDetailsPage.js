@@ -1,0 +1,83 @@
+
+const { PopUpPage } = require("../SharedPages/PopUpPage");
+
+export class TaskDetailsPage {
+  constructor(page) {
+    this.page = page;
+    this.myStreamDataTab='//button[@id="tab-0"]';
+    this.myNotesTab='//button[@id="tab-1"]';
+    this.enablementStatus ='(//label[contains(text(),"حالة الإتاحة")]//following::span)[1]';
+    this.addNoteBtn = '//button[contains(text(),"إضافة ملاحظة")]';
+    this.inputMsgLocator = '//textarea[@name="message"]';
+    this.acceptaddNoteBtn = '//button[contains(@class, "MuiButton-containedPrimary") and contains(@class, "MuiButton-sizeMedium")]';
+    this.ensureNoteMsgTitle ='//span[@id="modal-modal-title" and contains(text(), "إضافة الملاحظة")]';
+    this.acceptEnsureNoteMsgBtn ='//button[contains(@class, "MuiButtonBase-root") and contains(text(), "نعم، أضافة")]';
+    this.confirmNoteMsgTitle ='//div[@class="MuiStack-root muirtl-zwd3xv"]/span[@id="modal-modal-title"]';
+    this.acceptConfirmNoteMsgBtn ='//button[contains(@class, "MuiButtonBase-root") and text()="العودة"]';
+    this.addedNoteLocator='div.MuiStack-root.muirtl-1ofqig9 > span:nth-child(3)';
+    this.acceptStreamBtn='//button[contains(@class, "MuiButton-containedPrimary") and contains(., "قبول المسار")]';
+    this.ensureAcceptStreamNote = '//textarea[@name="description"]';
+    this.ensureAcceptStreamBtn ='//button[@type="submit"]';
+    this.confirmStreamTitle='//span[@id="modal-modal-title"]';
+    this.backToTasksBtn ='//div[contains(@class,"MuiDialogActions")]//button[@type="button"]';
+   
+  }
+
+
+  async openStreamDataTab() {
+     await this.page.click(this.myStreamDataTab);
+  }
+
+  async openNotesTab() {
+     await this.page.click(this.myNotesTab);
+  }
+
+  async checkEnablementStatus(expectedStatus) {
+    await this.openStreamDataTab();
+    const statusElement = this.page.locator(this.enablementStatus);
+    await statusElement.waitFor({ state: 'visible' });
+    const actualStatus = await statusElement.textContent();
+    if (actualStatus.trim() === expectedStatus.trim()) {
+         console.log(`Enablement Status is as expected: "${actualStatus.trim()}".`);
+         return true;
+      }
+      return false;
+  }
+
+ async checkNoteIsAdded(addedNote) {
+    var displayedNote = this.page.locator('//*[contains(text(),"'+ addedNote +'")]');
+    await displayedNote.waitFor({ state: 'visible'});     
+    console.log(`The Note : "${addedNote}" is added Successfully`);
+    return true;
+    
+  }
+
+  async addNoteForStream() {
+    await this.openNotesTab();
+    await this.page.waitForTimeout(2000);
+    await this.page.click(this.addNoteBtn);
+    var popUpMsg = new PopUpPage(this.page);
+    await popUpMsg.inputPopUpMessage(this.inputMsgLocator, this.acceptaddNoteBtn,global.testConfig.taskDetails.note);
+    await popUpMsg.popUpMessage(this.ensureNoteMsgTitle, this.acceptEnsureNoteMsgBtn ,global.testConfig.taskDetails.ensureNoteMsg);
+    await this.page.waitForTimeout(2000);
+    await popUpMsg.popUpMessage(this.confirmNoteMsgTitle, this.acceptConfirmNoteMsgBtn,global.testConfig.taskDetails.confirmNoteMsg);
+    let result = await this.checkNoteIsAdded(global.testConfig.taskDetails.note);
+    return result;
+  }
+
+  async acceptStream() {
+    await this.openStreamDataTab();
+    await this.page.click(this.acceptStreamBtn);
+    var popUpMsg = new PopUpPage(this.page);
+    await popUpMsg.inputPopUpMessage(this.ensureAcceptStreamNote, this.ensureAcceptStreamBtn,global.testConfig.taskDetails.addAcceptNote);
+    await this.page.waitForTimeout(2000);
+    var result = await popUpMsg.popUpMessage(this.confirmStreamTitle, this.backToTasksBtn,global.testConfig.taskDetails.confirmStreamMsg);
+    if (result)
+      console.log("The Stream Accepted Successfully.");
+    return result;
+  }
+
+
+
+}
+module.exports = { TaskDetailsPage };
