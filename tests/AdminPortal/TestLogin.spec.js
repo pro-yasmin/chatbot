@@ -21,5 +21,8 @@ test("Login with valid credential", async ({ page }) => {
   await loginPage.gotoAdminPortal(baseUrl);
   var loginSuccess = await loginPage.login(adminusername, adminpassword);
   expect(loginSuccess).toBe(true);
+  console.log('Navigate to Streams page');
+  /*await homePage.navigateToStreamsManagement();
+  await streamManagementPage.createProgram('PRG_StrSt_407');*/
   await homePage.logout();
 });

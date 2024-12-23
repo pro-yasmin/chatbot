@@ -45,14 +45,13 @@ export class StreamManagementPage {
     if (streamRow && streamRow.length > 0) {
       lastTd = streamRow[streamRow.length - 1].tdLocator;
       this.dotsLocator = lastTd.locator("div >> button");
-      await this.dotsLocator.waitForSelector({ state: "visible" });
+      await this.dotsLocator.waitFor({ state: "visible" });
       await this.dotsLocator.click();
       await this.page.waitForSelector(this.createSubProgramOption, {
         state: "visible",
         timeout: 60000,
       });
       await this.page.click(this.createSubProgramOption);
-      //await this.page.waitForTimeout(5000);
       console.log("Clicked the create program button");
     }
   }
