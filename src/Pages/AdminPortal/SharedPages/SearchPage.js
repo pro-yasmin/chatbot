@@ -16,7 +16,7 @@ export class SearchPage {
     await this.page.fill(searchInputSelector, searchValue);
     // Step 2: Wait for the table rows to update (assuming the table is dynamically updated)
     await this.page.waitForSelector(`${tableSelector}//tr`, { state: 'visible' });
-    await  this.page.waitForTimeout(5000); 
+    await  this.page.waitForTimeout(4000); 
      // Step 3: Get all visible rows in the table
      rows = await  this.page.locator(`${tableSelector}//tr`).filter({ has: this.page.locator('td') });
     // Step 4: Ensure only one row is visible
@@ -53,7 +53,7 @@ export class SearchPage {
     
     // Step 2: Wait for the table rows to update (assuming the table is dynamically updated)
     await this.page.waitForSelector(`${tableSelector}//tr`, { state: 'visible' });
-    await  this.page.waitForTimeout(5000); 
+    await  this.page.waitForTimeout(4000); 
      // Step 3: Get all visible rows in the table
      rows = await  this.page.locator(`${tableSelector}//tr`).filter({ has: this.page.locator('td') });
     // Step 4: Ensure only one row is visible
