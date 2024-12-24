@@ -47,8 +47,6 @@ export class StreamPage {
           var result =await popUpMsg.popUpMessage( this.successPopupTitle , this.backToAllStreamPageButton,global.testConfig.createStream.streamSuccessMsg);
           return result;
 
-
-
   }
 }
 module.exports = { StreamPage };

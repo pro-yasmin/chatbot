@@ -2,8 +2,6 @@ const { SearchPage } = require("../SharedPages/SearchPage");
 const { PopUpPage } = require("../SharedPages/PopUpPage");
 const { TaskDetailsPage } = require("./TaskDetailsPage");
 
-let taskDetailsPage;
-let search;
 
 export class TasksPage {
   constructor(page) {
@@ -33,13 +31,6 @@ export class TasksPage {
   async navigateToGroupTasksTab() {
     await this.page.click(this.groupTasksTab);
   }
-
-  // async searchOnStreamTask(streamData) {
-  //   var taskID = streamData.getCreatedStreamId();
-  //   console.log("stream id is " + taskID);
-  //   const taskRow = await this.search.getFirstRow(this.tasksTable);
-  //   return taskRow;
-  // }
 
   async assignTaskToMe() {
     await this.navigateToGroupTasksTab();
@@ -73,6 +64,7 @@ export class TasksPage {
     return result;
   }
 
+
   async aprroveStream() {
     let status; 
     let stramNoteAdded; 
@@ -96,5 +88,45 @@ export class TasksPage {
 
     return false;
   }
+
+  async EnsureMainProgramAccepted() {
+    await this.navigateToMyCompletedTasksTab();
+    let taskStreamRow = [];
+    taskStreamRow = await this.search.getFirstRow(this.tasksTable);
+    var actionlocator = "div >> button";
+    await this.search.clickRowAction(taskStreamRow, actionlocator);
+    var expectedStatus = global.testConfig.taskDetails.enableStatusActive;
+    var result = await this.taskDetailsPage.checkEnablementStatus(
+      expectedStatus
+    );
+    if (result) console.log("MainProgram EnabledStatus is Active now");
+    return result;
+  }
+
+  async aprroveMainProgram() {
+    let status; 
+    let acceptstatus;
+    let ensurestatus; 
+    await this.navigateToMyTasksTab();
+    let taskStreamRow = [];
+    taskStreamRow = await this.search.getFirstRow(this.tasksTable);
+    var actionlocator = "div >> button";
+    await this.search.clickRowAction(taskStreamRow, actionlocator);
+    console.log("Navigate To Main Program Detials Page Successfully");
+    var intialStreamStatus = global.testConfig.taskDetails.enableStatusHidden;
+    status = await this.taskDetailsPage.checkEnablementStatus(
+      intialStreamStatus
+    );
+   // stramNoteAdded = await this.taskDetailsPage.addNoteForStream();
+    acceptstatus = await this.taskDetailsPage.acceptMainProgram();
+    ensurestatus = await this.EnsureMainProgramAccepted();
+
+    if (status  && acceptstatus && ensurestatus) return true;
+
+    return false;
+  }
+
+
+
 }
 module.exports = { TasksPage };

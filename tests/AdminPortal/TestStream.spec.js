@@ -36,7 +36,7 @@ test('Add and Approve Test Stream', async ({ page }) => {
     console.log('Navigate to Streams page');
     await homePage.navigateToStreamsManagement();
     console.log('Navigate to Create Streams page');
-    var result = await streamManagementPage.clickOnNewStream(streamData);
+    var result = await streamManagementPage.createStream(streamData);
     expect(result).toBe(true);    
     console.log('New Stream Created Successfully');
     console.log('Search on Stream');
