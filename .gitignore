@@ -4,3 +4,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /configs/AllConfigs.json
+allure-report/
+allure-results/
+
