@@ -8,8 +8,8 @@ export class TaskDetailsPage {
     this.myNotesTab='//button[@id="tab-1"]';
     this.enablementStatus ='(//label[contains(text(),"حالة الإتاحة")]//following::span)[1]';
     this.addNoteBtn = '//button[contains(text(),"إضافة ملاحظة")]';
-    this.inputMsgLocator = '//textarea[@name="message"]';
-    this.acceptaddNoteBtn = '//button[contains(@class, "MuiButton-containedPrimary") and contains(@class, "MuiButton-sizeMedium")]';
+    this.noteOnTaskField = '//textarea[@name="message"]';
+    this.acceptNoteOnTaskBtn = '//button[contains(@class, "MuiButton-containedPrimary") and contains(@class, "MuiButton-sizeMedium")]';
     this.ensureNoteMsgTitle ='//span[@id="modal-modal-title" and contains(text(), "إضافة الملاحظة")]';
     this.acceptEnsureNoteMsgBtn ='//button[contains(@class, "MuiButtonBase-root") and contains(text(), "نعم، أضافة")]';
     this.confirmNoteMsgTitle ='//div[@class="MuiStack-root muirtl-zwd3xv"]/span[@id="modal-modal-title"]';
@@ -17,15 +17,15 @@ export class TaskDetailsPage {
     this.addedNoteLocator='div.MuiStack-root.muirtl-1ofqig9 > span:nth-child(3)';
     this.acceptStreamBtn='//button[contains(@class, "MuiButton-containedPrimary") and contains(., "قبول المسار")]';
     this.acceptMainProgramBtn='//button[contains(@class, "MuiButton-containedPrimary") and contains(text(),"قبول البرنامج الرئيسي")]';
-    this.ensureAcceptStreamNote = '//textarea[@name="description"]';
-    this.ensureAcceptStreamBtn ='//button[@type="submit"]';
-    this.confirmStreamTitle='//span[@id="modal-modal-title"]';
+    this.ensureAcceptTaskNotesField = '//textarea[@name="description"]';
+    this.ensureAcceptTaskNotesBtn ='//button[@type="submit"]';
+    this.confirmTaskMsgTitle='//span[@id="modal-modal-title"]';
     this.backToTasksBtn ='//div[contains(@class,"MuiDialogActions")]//button[@type="button"]';
    
   }
 
 
-  async openStreamDataTab() {
+  async openTaskDataTab() {
      await this.page.click(this.myStreamDataTab);
   }
 
@@ -34,7 +34,7 @@ export class TaskDetailsPage {
   }
 
   async checkEnablementStatus(expectedStatus) {
-    await this.openStreamDataTab();
+    await this.openTaskDataTab();
     const statusElement = this.page.locator(this.enablementStatus);
     await statusElement.waitFor({ state: 'visible' });
     const actualStatus = await statusElement.textContent();
@@ -53,26 +53,25 @@ export class TaskDetailsPage {
     
   }
 
-  async addNoteForStream() {
+  async addNoteOnTask() {
     await this.openNotesTab();
     await this.page.waitForTimeout(2000);
     await this.page.click(this.addNoteBtn);
     var popUpMsg = new PopUpPage(this.page);
-    await popUpMsg.inputPopUpMessage(this.inputMsgLocator, this.acceptaddNoteBtn,global.testConfig.taskDetails.note);
+    await popUpMsg.inputPopUpMessage(this.noteOnTaskField, this.acceptNoteOnTaskBtn,global.testConfig.taskDetails.note);
     await popUpMsg.popUpMessage(this.ensureNoteMsgTitle, this.acceptEnsureNoteMsgBtn ,global.testConfig.taskDetails.ensureNoteMsg);
-    // await this.page.waitForTimeout(2000);
     await popUpMsg.popUpMessage(this.confirmNoteMsgTitle, this.acceptConfirmNoteMsgBtn,global.testConfig.taskDetails.confirmNoteMsg);
     let result = await this.checkNoteIsAdded(global.testConfig.taskDetails.note);
     return result;
   }
 
   async acceptStream() {
-    await this.openStreamDataTab();
+    await this.openTaskDataTab();
     await this.page.click(this.acceptStreamBtn);
     var popUpMsg = new PopUpPage(this.page);
-    await popUpMsg.inputPopUpMessage(this.ensureAcceptStreamNote, this.ensureAcceptStreamBtn,global.testConfig.taskDetails.addAcceptNote);
+    await popUpMsg.inputPopUpMessage(this.ensureAcceptTaskNotesField, this.ensureAcceptTaskNotesBtn,global.testConfig.taskDetails.addAcceptNote);
     // await this.page.waitForTimeout(2000);
-    var result = await popUpMsg.popUpMessage(this.confirmStreamTitle, this.backToTasksBtn,global.testConfig.taskDetails.confirmStreamMsg);
+    var result = await popUpMsg.popUpMessage(this.confirmTaskMsgTitle, this.backToTasksBtn,global.testConfig.taskDetails.confirmStreamMsg);
     if (result)
       console.log("The Stream Accepted Successfully.");
     return result;
@@ -80,14 +79,14 @@ export class TaskDetailsPage {
 
   async acceptMainProgram() {
     //check if will need to change or not 
-    await this.openStreamDataTab();
+    await this.openTaskDataTab();
     await this.page.click(this.acceptMainProgramBtn);
     var popUpMsg = new PopUpPage(this.page);
-    await popUpMsg.inputPopUpMessage(this.ensureAcceptStreamNote, this.ensureAcceptStreamBtn,global.testConfig.taskDetails.addAcceptMainProgramNote);
+    await popUpMsg.inputPopUpMessage(this.ensureAcceptTaskNotesField, this.ensureAcceptTaskNotesBtn,global.testConfig.taskDetails.addAcceptMainProgramNote);
     // await this.page.waitForTimeout(2000);
-    var result = await popUpMsg.popUpMessage(this.confirmStreamTitle, this.backToTasksBtn ,global.testConfig.taskDetails.confirmMainProgramMsg);
+    var result = await popUpMsg.popUpMessage(this.confirmTaskMsgTitle, this.backToTasksBtn ,global.testConfig.taskDetails.confirmMainProgramMsg);
     if (result)
-      console.log("The MainProgram Accepted Successfully.");
+      console.log("The Main Program Accepted Successfully.");
     return result;
   }
 

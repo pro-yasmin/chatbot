@@ -1,9 +1,7 @@
 const { test, expect } = require("@playwright/test");
 const { LoginPage } = require("../../src/Pages/AdminPortal/LoginPage");
 const { HomePage } = require("../../src/Pages/AdminPortal/HomePage");
-const {
-  StreamManagementPage,
-} = require("../../src/Pages/AdminPortal/Programs/StreamManagementPage");
+const { StreamManagementPage} = require("../../src/Pages/AdminPortal/Programs/StreamManagementPage");
 
 let loginPage;
 let homePage;
@@ -21,8 +19,5 @@ test("Login with valid credential", async ({ page }) => {
   await loginPage.gotoAdminPortal(baseUrl);
   var loginSuccess = await loginPage.login(adminusername, adminpassword);
   expect(loginSuccess).toBe(true);
-  console.log('Navigate to Streams page');
-  /*await homePage.navigateToStreamsManagement();
-  await streamManagementPage.createProgram('PRG_StrSt_407');*/
   await homePage.logout();
 });

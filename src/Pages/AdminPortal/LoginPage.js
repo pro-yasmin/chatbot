@@ -30,7 +30,6 @@ export class LoginPage {
       async ensureArabicLanguage() {
         try {
           await this.page.locator(this.changeLangageMenu).click();
-
           var isArabicSelected = await this.page.locator(this.nationalField).isVisible();
           if (isArabicSelected) {
              // console.log("Language is already set to Arabic.");

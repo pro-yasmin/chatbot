@@ -40,7 +40,7 @@ test('Add and Approve Test Main Program', async ({ page }) => {
     console.log('Navigate to Streams page');
     await homePage.navigateToStreamsManagement();
     console.log('Click on Define New Main Program');
-    await streamManagementPage.clickOnCreateMainProgram('PRG_StrSt_400');
+    await streamManagementPage.clickOnCreateMainProgram('PRG_StrSt_020');//PRG_StrSt_400 in testing env
     var result = await mainProgramPage.createNewMainProgram(mainProgramData);
     expect(result).toBe(true);  
     console.log('New Main Program Created Successfully');

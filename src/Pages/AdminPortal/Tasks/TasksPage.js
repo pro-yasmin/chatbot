@@ -47,27 +47,26 @@ export class TasksPage {
       global.testConfig.tasks.assignTaskMsg
     );
     // await this.page.waitForTimeout(2000);
-    console.log("Stream Assigned to my self successfully");
+    console.log("The Task Assigned to my self successfully");
   }
 
-  async EnsureStreamAccepted() {
+  async EnsureTaskAccepted() {
     await this.navigateToMyCompletedTasksTab();
-    let taskStreamRow = [];
-    taskStreamRow = await this.search.getFirstRow(this.tasksTable);
+    let taskRow = [];
+    taskRow = await this.search.getFirstRow(this.tasksTable);
     var actionlocator = "div >> button";
-    await this.search.clickRowAction(taskStreamRow, actionlocator);
+    await this.search.clickRowAction(taskRow, actionlocator);
     var expectedStatus = global.testConfig.taskDetails.enableStatusActive;
     var result = await this.taskDetailsPage.checkEnablementStatus(
       expectedStatus
     );
-    if (result) console.log("Stream EnabledStatus is Active now");
+    if (result) console.log("Task EnabledStatus is Active now");
     return result;
   }
 
 
   async aprroveStream() {
     let status; 
-    let stramNoteAdded; 
     let acceptstatus;
     let ensurestatus; 
     await this.navigateToMyTasksTab();
@@ -82,7 +81,7 @@ export class TasksPage {
     );
    // stramNoteAdded = await this.taskDetailsPage.addNoteForStream();
     acceptstatus = await this.taskDetailsPage.acceptStream();
-    ensurestatus = await this.EnsureStreamAccepted();
+    ensurestatus = await this.EnsureTaskAccepted();
 
     if (status  && acceptstatus && ensurestatus) return true;
 
@@ -91,10 +90,10 @@ export class TasksPage {
 
   async EnsureMainProgramAccepted() {
     await this.navigateToMyCompletedTasksTab();
-    let taskStreamRow = [];
-    taskStreamRow = await this.search.getFirstRow(this.tasksTable);
+    let taskMainProgramRow = [];
+    taskMainProgramRow = await this.search.getFirstRow(this.tasksTable);
     var actionlocator = "div >> button";
-    await this.search.clickRowAction(taskStreamRow, actionlocator);
+    await this.search.clickRowAction(taskMainProgramRow, actionlocator);
     var expectedStatus = global.testConfig.taskDetails.enableStatusActive;
     var result = await this.taskDetailsPage.checkEnablementStatus(
       expectedStatus
@@ -108,14 +107,14 @@ export class TasksPage {
     let acceptstatus;
     let ensurestatus; 
     await this.navigateToMyTasksTab();
-    let taskStreamRow = [];
-    taskStreamRow = await this.search.getFirstRow(this.tasksTable);
+    let taskMainProgramRow = [];
+    taskMainProgramRow = await this.search.getFirstRow(this.tasksTable);
     var actionlocator = "div >> button";
-    await this.search.clickRowAction(taskStreamRow, actionlocator);
+    await this.search.clickRowAction(taskMainProgramRow, actionlocator);
     console.log("Navigate To Main Program Detials Page Successfully");
-    var intialStreamStatus = global.testConfig.taskDetails.enableStatusHidden;
+    var intialMainProgramStatus = global.testConfig.taskDetails.enableStatusHidden;
     status = await this.taskDetailsPage.checkEnablementStatus(
-      intialStreamStatus
+      intialMainProgramStatus
     );
    // stramNoteAdded = await this.taskDetailsPage.addNoteForStream();
     acceptstatus = await this.taskDetailsPage.acceptMainProgram();

@@ -8,7 +8,7 @@ export class StreamManagementPage {
     this.createNewStreamButton = '//button[contains(text(),"تعريف مسار")]';
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
     this.streamsTable = "//table//tbody";
-    this.createSubProgramOption = '//ul[@role="menu"]//li[1]';
+    this.createMainProgramOption = '//ul[@role="menu"]//li[1]';
     this.dotsLocator;
   }
 
@@ -58,11 +58,11 @@ export class StreamManagementPage {
       lastTd = streamRow[streamRow.length - 1].tdLocator;
       this.dotsLocator = lastTd.locator("div >> button");
       await this.dotsLocator.click();
-      await this.page.waitForSelector(this.createSubProgramOption, {
+      await this.page.waitForSelector(this.createMainProgramOption, {
         state: "visible",
         timeout: 60000,
       });
-      await this.page.click(this.createSubProgramOption);
+      await this.page.click(this.createMainProgramOption);
       console.log("Clicked the Create Main program button");
     }
   }

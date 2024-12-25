@@ -3,6 +3,7 @@ export class SearchPage {
   constructor(page) {
     this.page = page;
     }
+    
    async searchOnUniqueRow(searchInputSelector, searchValue, tableSelector) 
    {
     let rows;
