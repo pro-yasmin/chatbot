@@ -21,9 +21,10 @@ require('./global.js'); // Load the global configuration
  */
 
 
-const ENV = 'testing';
+const ENV = 'uat';
 
 module.exports = defineConfig({
+
   timeout: 120000,
 
   globalSetup: require.resolve('./global-setup'),
@@ -49,7 +50,7 @@ module.exports = defineConfig({
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
     browserName: 'chromium',
-    baseURL:   global.testConfig.BASE_URL, 
+    //baseURL:   global.testConfig.BASE_URL, 
     //baseURL: global.testConfig.BASE_URL || 'http://default-url.com',  // Use the global base URL from the config
     //timeout: 30000,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
@@ -106,4 +107,5 @@ module.exports = defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
+module.exports.ENV = ENV;
 
