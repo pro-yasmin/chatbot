@@ -16,7 +16,8 @@ export class TaskDetailsPage {
     this.acceptConfirmNoteMsgBtn ='//button[contains(@class, "MuiButtonBase-root") and text()="العودة"]';
     this.addedNoteLocator='div.MuiStack-root.muirtl-1ofqig9 > span:nth-child(3)';
     this.acceptStreamBtn='//button[contains(@class, "MuiButton-containedPrimary") and contains(., "قبول المسار")]';
-    this.acceptMainProgramBtn='//button[contains(@class, "MuiButton-containedPrimary") and contains(text(),"قبول البرنامج الرئيسي")]';
+    this.acceptMainProgramBtn='//button[contains(text(),"قبول البرنامج الرئيسي")]';
+    this.acceptSubProgramsBtn='//button[contains(text(),"قبول البرنامج الفرعي")]';
     this.ensureAcceptTaskNotesField = '//textarea[@name="description"]';
     this.ensureAcceptTaskNotesBtn ='//button[@type="submit"]';
     this.confirmTaskMsgTitle='//span[@id="modal-modal-title"]';
@@ -27,6 +28,7 @@ export class TaskDetailsPage {
 
   async openTaskDataTab() {
      await this.page.click(this.myStreamDataTab);
+     await this.page.waitForTimeout(5000);
   }
 
   async openNotesTab() {
@@ -90,6 +92,18 @@ export class TaskDetailsPage {
     return result;
   }
 
+  async acceptSubPrograms() {
+    //check if will need to change or not 
+    await this.openTaskDataTab();
+    await this.page.click(this.acceptSubProgramsBtn);
+    var popUpMsg = new PopUpPage(this.page);
+    await popUpMsg.inputPopUpMessage(this.ensureAcceptTaskNotesField, this.ensureAcceptTaskNotesBtn,global.testConfig.taskDetails.addAcceptSubProgramSNote);
+    // await this.page.waitForTimeout(2000);
+    var result = await popUpMsg.popUpMessage(this.confirmTaskMsgTitle, this.backToTasksBtn ,global.testConfig.taskDetails.confirmSubProgramsMsg);
+    if (result)
+      console.log("The SubProgram Accepted Successfully.");
+    return result;
+  }
 
 
 

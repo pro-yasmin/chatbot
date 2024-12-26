@@ -7,13 +7,19 @@ export class LoginPage {
           this.passwordField = '[id="password"]',
           this.remeberCheckbox = '//img[@class="check--icon"]';
           this.loginButton = '//input[@id="kc-login"]';
-          this.changeLangageMenu = '//button[@id="locale--button" and contains(@class, "locale--btn")]';
+          this.changeLangageMenu = '//button[@id="locale--button"]';
+          // '//button[@id="locale--button" and contains(@class, "locale--btn")]';
           this.nationalField ='//span[contains(text(),"رقم الهوية الوطنية")]';
+          this.backToAppButton = '//a[@id="backToApplication"]';
+ 
 
         }   
 
       async  gotoAdminPortal (baseUrl){
              await this.page.goto(baseUrl, { waitUntil: 'networkidle' });
+             await this.clickBackToAppButton();
+             
+             await this.page.waitForTimeout(2000);
              await this.ensureArabicLanguage();
             }
 
@@ -29,24 +35,48 @@ export class LoginPage {
 
       async ensureArabicLanguage() {
         try {
+          await this.page.waitForLoadState('load');
+          console.log("Clicking on language menu...");
+
+          await this.page.locator(this.changeLangageMenu).waitFor({ state: 'visible', timeout: 10000 });
           await this.page.locator(this.changeLangageMenu).click();
+          console.log("Checking if Arabic language is selected...");
+
           var isArabicSelected = await this.page.locator(this.nationalField).isVisible();
           if (isArabicSelected) {
-             // console.log("Language is already set to Arabic.");
+            console.log("Arabic language is already selected.");
+
               return;
           }
-          await this.page.locator('li.locale--list__item', { hasText: 'عربي' }).click();
+
+          console.log("Selecting Arabic language...");
+
+          var arabicOption = this.page.locator('li.locale--list__item', { hasText: 'عربي' });
+          await arabicOption.waitFor({ state: 'visible', timeout: 10000 });
+          await arabicOption.click();          
+          console.log("Waiting for Arabic language verification...");
+
           await this.page.waitForLoadState('networkidle');
-          const verifyLangElement = this.page.locator(this.nationalField);
-          if (await verifyLangElement.isVisible()) {
-             // console.log("Language successfully changed to Arabic.");
-          } else {
-              throw new Error("Failed to verify the language change to Arabic.");
-          }
+
+        await this.page.locator(this.nationalField).waitFor({ state: 'visible', timeout: 10000 });
+        console.log("Arabic language selected successfully.");
+
       } catch (error) {
           console.error("Failed to select Arabic language or verify the change:", error);
           throw new Error("Language selection or verification failed.");
       }
+    }
+
+    async  clickBackToAppButton (){
+      var backToAppButtonExists = await this.page.locator(this.backToAppButton).isVisible( { timeout: 3000 });
+      if (backToAppButtonExists) {
+        await this.page.click(this.backToAppButton);
+        await this.page.locator(this.backToAppButton).isVisible( { timeout: 3000 });
+        await this.page.click(this.backToAppButton);
+        await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+
+      }
+    
     }
 
 

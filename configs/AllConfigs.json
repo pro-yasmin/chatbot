@@ -6,7 +6,7 @@
   "ANDROID_HOME": "C:\\Users\\VEGA Laptop\\AppData\\Local\\Android\\Sdk",
   "APPDATA": "C:\\Users\\VEGA Laptop\\AppData\\Roaming",
   "BASE_URL": "https://adminportal-uat.iis-ssb.com/auth/login",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_16164_QXDMIQKMSLPQGDMN",
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_29020_LZHZBHGLTHXYDYKK",
   "COLOR": "1",
   "COLORTERM": "truecolor",
   "CommonProgramFiles": "C:\\Program Files\\Common Files",
@@ -16,7 +16,6 @@
   "ComSpec": "C:\\Windows\\system32\\cmd.exe",
   "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
   "EDITOR": "C:\\Windows\\notepad.exe",
-  "ENV": "uat",
   "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
   "FPS_BROWSER_USER_PROFILE_STRING": "Default",
   "GIT_ASKPASS": "c:\\Users\\VEGA Laptop\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh",
@@ -115,8 +114,10 @@
     "confirmNoteMsg": "تم إضافة الملاحظة بنجاح",
     "addAcceptNote": "ملاحظة لقبول المسار",
     "addAcceptMainProgramNote": "ملاحظة لقبول البرنامج الرئيسي",
+    "addAcceptSubProgramSNote": "ملاحظة لقبول البرنامج الفرعى",
     "confirmStreamMsg": "تم قبول تعريف المسار بنجاح",
-    "confirmMainProgramMsg": "تم قبول تعريف البرنامج الرئيسي بنجاح"
+    "confirmMainProgramMsg": "تم قبول تعريف البرنامج الرئيسي بنجاح",
+    "confirmSubProgramsMsg": "تم قبول تعريف البرنامج الفرعي بنجاح"
   },
   "createMainProgram": {
     "arabicMainProgramName": "البرامج الوقائية لدعم الأسر والرعاية الاجتماعية",
@@ -134,5 +135,11 @@
     "arabicMainProgramGoal": "1. ضمان المساواة لذوي الدخل المحدود والفئات الهشة في حقوق الحصول على الموارد الاقتصادية والخدمات األساسية في الدولة 2. تمكين جودة الحياة للفئات ذوي الخاصة من النواحي الجسدية والعقلية (مثل الأشخاص ذوي الاعاقة ومقدمي الرعاية) 3. رفع مستوى منذ مراحل الطفولة المبكرة للوقاية من سوء المعاملة  5. تقديم الدعم النفس ي للفئات الهشة المحتاجة لضمان صحتها النفسية",
     "englishMainProgramGoal": "1. To ensure equal rights to economic resources and basic services to poor and economically vulnerable To provide psychological support to vulnerable",
     "mainProgramSuccessMsg": "تم حفظ البرنامج للمراجعة بنجاح"
+  },
+  "createSubPrograms": {
+    "arabicSubProgramName": "برامج التوعية والتدريب حول إدمان المخدرات",
+    "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
+    "conditionsOfAssistanceUnit": "برامج التوعية",
+    "subProgramsSuccessMsg": "تم حفظ البرنامج الفرعي للمراجعة بنجاح"
   }
 }

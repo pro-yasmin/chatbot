@@ -1,12 +1,12 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../../src/Pages/AdminPortal/LoginPage');
-const { HomePage } = require('../../src/Pages/AdminPortal/HomePage');
-const { MainProgramPage }= require('../../src/Pages/AdminPortal/Programs/MainProgramPage');
-const { MainProgramData }= require('../../src/Models/AdminPortal/MainProgramData');
-const { MainProgramManagementPage }= require('../../src/Pages/AdminPortal/Programs/MainProgramManagmentPage');
-const { TaskDetailsPage } = require('../../src/Pages/AdminPortal/Tasks/TaskDetailsPage');
-const { TasksPage }= require('../../src/Pages/AdminPortal/Tasks/TasksPage');
-const { StreamManagementPage }= require('../../src/Pages/AdminPortal/Programs/StreamManagementPage');
+const { LoginPage } = require('../../../src/Pages/AdminPortal/LoginPage');
+const { HomePage } = require('../../../src/Pages/AdminPortal/HomePage');
+const { MainProgramPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/MainProgramManagement/MainProgramPage');
+const { MainProgramManagementPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/MainProgramManagement/MainProgramManagementPage');
+const { MainProgramData } = require('../../../src/Models/AdminPortal/MainProgramData');
+const { TaskDetailsPage } = require('../../../src/Pages/AdminPortal/Tasks/TaskDetailsPage');
+const { TasksPage } = require('../../../src/Pages/AdminPortal/Tasks/TasksPage');
+const { StreamManagementPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/StreamManagement/StreamManagementPage');
 
 let loginPage;
 let homePage;
@@ -40,14 +40,14 @@ test('Add and Approve Test Main Program', async ({ page }) => {
     console.log('Navigate to Streams page');
     await homePage.navigateToStreamsManagement();
     console.log('Click on Define New Main Program');
-    await streamManagementPage.clickOnCreateMainProgram('PRG_StrSt_020');//PRG_StrSt_400 in testing env
+    await streamManagementPage.clickOnCreateMainProgram('PRG_StrSt_044');//PRG_StrSt_400 in uat env
     var result = await mainProgramPage.createNewMainProgram(mainProgramData);
     expect(result).toBe(true);  
     console.log('New Main Program Created Successfully');
     console.log('Search on MainProgram');
     expect( await mainProgramManagementPage.checkMainProgramRowDetails(mainProgramData)).toBe(true);    
     console.log('New Main Program Details Checked Successfully');
-    console.log('Navigate to MyTasks page to approve stream Request');
+    console.log('Navigate to MyTasks page to approve Main Program Request');
     await homePage.navigateToTasks();
     await tasksPage.assignTaskToMe();
     await tasksPage.navigateToMyCompletedTasksTab();

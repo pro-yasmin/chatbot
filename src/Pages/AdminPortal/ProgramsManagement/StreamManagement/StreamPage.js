@@ -1,4 +1,4 @@
-const { PopUpPage }= require('../SharedPages/PopUpPage');
+const { PopUpPage }= require('../../SharedPages/PopUpPage');
 
 
 export class StreamPage {

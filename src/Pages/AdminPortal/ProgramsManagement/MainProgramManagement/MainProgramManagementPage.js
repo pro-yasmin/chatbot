@@ -1,10 +1,9 @@
-const { SearchPage } = require("../SharedPages/SearchPage");
+const { SearchPage } = require("../../SharedPages/SearchPage");
 const { MainProgramPage } = require("./MainProgramPage");
 
 export class MainProgramManagementPage {
   constructor(page) {
     this.page = page;
-    this.createNewMainProgramButton = '//button[contains(text(),"تعريف برنامج رئيسي")]';
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
     this.mainProgramsTable = "//table//tbody";
     this.createSubProgramOption = '//ul[@role="menu"]//li[1]';

@@ -1,6 +1,5 @@
-import { TIMEOUT } from 'dns';
 
-const { PopUpPage }= require('../SharedPages/PopUpPage');
+const { PopUpPage }= require('../../SharedPages/PopUpPage');
 
 export class MainProgramPage {
   constructor(page) {
@@ -32,21 +31,17 @@ export class MainProgramPage {
     var createdMainProgramArName = mainProgramData.getArabicMainProgramName();
     var createdMainProgramEnName = mainProgramData.getEnglishMainProgramName();
 
-    await this.page.fill(this.arabicProgramNameField, mainProgramData.getArabicMainProgramName());
-    await this.page.fill(this.englishProgramNameField, mainProgramData.getEnglishMainProgramName());
+    await this.page.fill(this.arabicProgramNameField, createdMainProgramArName);
+    await this.page.fill(this.englishProgramNameField, createdMainProgramEnName);
     await this.selectDropdownOption(this.responsibleEntityDropdown)
-    // await this.selectDropdownOption(this.responsibleEntityDropdown, mainProgramData.getResponsibleEntity()); 
     await this.page.fill(this.arabicProgramDescriptionField, mainProgramData.getArabicMainProgramDescription());
     await this.page.fill(this.englishProgramDescriptionField, mainProgramData.getEnglishMainProgramDescription());
     await this.selectDropdownOption(this.yearDropdown); 
-    // await this.selectDropdownOption(this.yearDropdown, mainProgramData.getYear()); 
     await this.page.fill(this.estimatedBudgetField, mainProgramData.getEstimatedBudget());
     await this.page.fill(this.calculationMethodField, mainProgramData.getCalculationMethod());
-  //  await this.selectDropdownOption(this.riskCategoryDropdown, mainProgramData.getRiskCategory()); 
     await this.selectDropdownOption(this.riskCategoryDropdown); 
     await this.page.fill(this.riskArabicDescriptionField, mainProgramData.getRiskArabicDescription());
     await this.page.fill(this.riskEnglishDescriptionField, mainProgramData.getRiskEnglishDescription());
-    // await this.selectDropdownOption(this.risksDropdown, mainProgramData.getRisks()); 
     await this.selectDropdownOption(this.risksDropdown); 
     await this.page.fill(this.arabicProgramGoalField, mainProgramData.getArabicMainProgramGoal());
     await this.page.fill(this.englishProgramGoalField, mainProgramData.getEnglishMainProgramGoal());
@@ -62,22 +57,13 @@ export class MainProgramPage {
   }
 
 
-  //  async selectDropdownOption(dropdownLocator, value) {
-  //   await this.page.click(dropdownLocator); 
-  //   // if about el value , or index
-  //   const optionLocator = `//li[@role="option" and contains(text(),"${value}")]`;
-  //   await this.page.waitForSelector(optionLocator, { state: 'visible'});
-  //   await this.page.click(optionLocator); 
-
-  // }
-
-
   async selectDropdownOption(dropdownLocator) {
     await this.page.click(dropdownLocator);
       const optionsLocator  = `//li[@role="option" and not(@aria-disabled="true") and @tabindex="0"]`;
       await this.page.waitForSelector(optionsLocator , { state: 'visible' });
       const firstOptionLocator = `${optionsLocator}[1]`;
-      await this.page.click(firstOptionLocator);  }
+      await this.page.click(firstOptionLocator); 
+     }
 
   }
 
