@@ -1,18 +1,15 @@
 const { test, expect } = require("@playwright/test");
 const { LoginPage } = require("../../src/Pages/AdminPortal/LoginPage");
 const { HomePage } = require("../../src/Pages/AdminPortal/HomePage");
-const {
-  StreamManagementPage,
-} = require("../../src/Pages/AdminPortal/Programs/StreamManagementPage");
 
 let loginPage;
-let homePage;
-let streamManagementPage;
+let homePage , page,context;
 
-test("Login with valid credential", async ({ page }) => {
+test("Login with valid credential", async ({browser  }) => {
+  context = await browser.newContext();
+  page = await context.newPage();
   loginPage = new LoginPage(page);
   homePage = new HomePage(page);
-  streamManagementPage = new StreamManagementPage(page);
 
   var baseUrl = global.testConfig.BASE_URL;
   var adminusername = global.testConfig.ADMIN_USER;
@@ -21,8 +18,7 @@ test("Login with valid credential", async ({ page }) => {
   await loginPage.gotoAdminPortal(baseUrl);
   var loginSuccess = await loginPage.login(adminusername, adminpassword);
   expect(loginSuccess).toBe(true);
-  console.log('Navigate to Streams page');
-  /*await homePage.navigateToStreamsManagement();
-  await streamManagementPage.createProgram('PRG_StrSt_407');*/
   await homePage.logout();
+  await context.close();
+
 });

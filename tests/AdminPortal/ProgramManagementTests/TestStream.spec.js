@@ -1,11 +1,11 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../../src/Pages/AdminPortal/LoginPage');
-const { HomePage } = require('../../src/Pages/AdminPortal/HomePage');
-const { StreamPage }= require('../../src/Pages/AdminPortal/Programs/StreamPage');
-const { StreamData }= require('../../src/Models/AdminPortal/StreamData');
-const { StreamManagementPage }= require('../../src/Pages/AdminPortal/Programs/StreamManagementPage');
-const { TaskDetailsPage } = require('../../src/Pages/AdminPortal/Tasks/TaskDetailsPage');
-const { TasksPage }= require('../../src/Pages/AdminPortal/Tasks/TasksPage');
+const { LoginPage } = require('../../../src/Pages/AdminPortal/LoginPage');
+const { HomePage } = require('../../../src/Pages/AdminPortal/HomePage');
+const { StreamPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/StreamManagement/StreamPage');
+const { StreamManagementPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/StreamManagement/StreamManagementPage');
+const { StreamData } = require('../../../src/Models/AdminPortal/StreamData');
+const { TaskDetailsPage } = require('../../../src/Pages/AdminPortal/Tasks/TaskDetailsPage');
+const { TasksPage }= require('../../../src/Pages/AdminPortal/Tasks/TasksPage');
 
 let loginPage;
 let homePage;
@@ -36,7 +36,7 @@ test('Add and Approve Test Stream', async ({ page }) => {
     console.log('Navigate to Streams page');
     await homePage.navigateToStreamsManagement();
     console.log('Navigate to Create Streams page');
-    var result = await streamManagementPage.clickOnNewStream(streamData);
+    var result = await streamManagementPage.createStream(streamData);
     expect(result).toBe(true);    
     console.log('New Stream Created Successfully');
     console.log('Search on Stream');

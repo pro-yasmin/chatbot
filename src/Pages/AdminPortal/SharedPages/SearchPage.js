@@ -3,6 +3,7 @@ export class SearchPage {
   constructor(page) {
     this.page = page;
     }
+    
    async searchOnUniqueRow(searchInputSelector, searchValue, tableSelector) 
    {
     let rows;
@@ -21,6 +22,7 @@ export class SearchPage {
      rows = await  this.page.locator(`${tableSelector}//tr`).filter({ has: this.page.locator('td') });
     // Step 4: Ensure only one row is visible
      rowCount = await rows.count();
+     await  this.page.waitForTimeout(4000); 
     if (rowCount !== 1) {
       throw new Error(`Expected 1 row to be displayed, but found ${rowCount}`);
     }  

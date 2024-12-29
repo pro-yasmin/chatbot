@@ -1,6 +1,6 @@
-import { Console } from "console";
-const { SearchPage } = require("../SharedPages/SearchPage");
+const { SearchPage } = require("../../SharedPages/SearchPage");
 const { StreamPage } = require("./StreamPage");
+
 
 export class StreamManagementPage {
   constructor(page) {
@@ -8,21 +8,26 @@ export class StreamManagementPage {
     this.createNewStreamButton = '//button[contains(text(),"تعريف مسار")]';
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
     this.streamsTable = "//table//tbody";
-    this.createSubProgramOption = '//ul[@role="menu"]//li[1]';
+    this.createMainProgramOption = '//ul[@role="menu"]//li[1]';
     this.dotsLocator;
   }
 
-  async clickOnNewStream(streamData) {
+
+  async clickOnNewStream() {
     await this.page.waitForSelector(this.streamsTable, {
       state: "visible",
       timeout: 5000,
     });
     await this.page.click(this.createNewStreamButton);
-    var streamPage = new StreamPage(this.page);
+  }
+
+  async createStream(streamData) {
+    await this.clickOnNewStream();
+  var streamPage = new StreamPage(this.page);
     const result = await streamPage.createNewStream(streamData);
     return result;
-
   }
+
 
   async searchOnSpecificStream(streamName) {
     let streamRow = [];
@@ -34,25 +39,31 @@ export class StreamManagementPage {
     if (!streamRow || streamRow.length === 0) {
       return null;
     }
-
     return streamRow;
   }
 
-  async createProgram(streamName) {
+  
+  // async searchOnStreamTask(streamData) {
+  //   var taskID = streamData.getCreatedStreamId();
+  //   console.log("stream id is " + taskID);
+  //   const taskRow = await this.search.getFirstRow(this.tasksTable);
+  //   return taskRow;
+  // }
+
+  async clickOnCreateMainProgram(streamName) {
     let lastTd;
     let streamRow = [];
     streamRow = await this.searchOnSpecificStream(streamName);
     if (streamRow && streamRow.length > 0) {
       lastTd = streamRow[streamRow.length - 1].tdLocator;
       this.dotsLocator = lastTd.locator("div >> button");
-      await this.dotsLocator.waitFor({ state: "visible" });
       await this.dotsLocator.click();
-      await this.page.waitForSelector(this.createSubProgramOption, {
+      await this.page.waitForSelector(this.createMainProgramOption, {
         state: "visible",
         timeout: 60000,
       });
-      await this.page.click(this.createSubProgramOption);
-      console.log("Clicked the create program button");
+      await this.page.click(this.createMainProgramOption);
+      console.log("Clicked the Create Main program button");
     }
   }
 

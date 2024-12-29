@@ -7,6 +7,8 @@ export class HomePage {
     this.avatar ='//button[@data-testid="user-menu"]';
     this.programManagementButton = '//a[@data-testid="menu-programs-management"]';
     this.streamsManagementButton = '//a[@data-testid="submenu-streams-management"]';
+    this.mainProgramManagementButton = '//a[@data-testid="submenu-main-program-management"]';
+    // this.subProgramsManagementButton = '//a[@data-testid="submenu-main-program-management""]';
     this.createNewStreamButton = '//button[contains(text(),"تعريف مسار")]';
     this.tasksButton = '//a[@href="/my-tasks"]';
   }
@@ -39,6 +41,21 @@ export class HomePage {
     await this.page.click(this.streamsManagementButton);
    
     }
+
+    async navigateToMainProgramManagement() {
+      await this.navigateToProgramManagement();
+      await this.page.waitForSelector(this.mainProgramManagementButton, { state: "visible", timeout: 20000 });
+      await this.page.click(this.mainProgramManagementButton);
+     
+      }
+
+      async navigateToSubProgramsManagement() {
+        await this.navigateToProgramManagement();
+        await this.page.waitForSelector(this.subProgramsManagementButton, { state: "visible", timeout: 20000 });
+        await this.page.click(this.subProgramsManagementButton);
+       
+        }
+  
 
     async  navigateToTasks() {
       await this.page.waitForSelector(this.tasksButton, { state: "visible",timeout: 20000});

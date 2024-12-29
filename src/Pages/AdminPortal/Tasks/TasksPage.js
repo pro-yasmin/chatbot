@@ -2,8 +2,6 @@ const { SearchPage } = require("../SharedPages/SearchPage");
 const { PopUpPage } = require("../SharedPages/PopUpPage");
 const { TaskDetailsPage } = require("./TaskDetailsPage");
 
-let taskDetailsPage;
-let search;
 
 export class TasksPage {
   constructor(page) {
@@ -34,13 +32,6 @@ export class TasksPage {
     await this.page.click(this.groupTasksTab);
   }
 
-  // async searchOnStreamTask(streamData) {
-  //   var taskID = streamData.getCreatedStreamId();
-  //   console.log("stream id is " + taskID);
-  //   const taskRow = await this.search.getFirstRow(this.tasksTable);
-  //   return taskRow;
-  // }
-
   async assignTaskToMe() {
     await this.navigateToGroupTasksTab();
     let taskStreamRow = [];
@@ -56,26 +47,27 @@ export class TasksPage {
       global.testConfig.tasks.assignTaskMsg
     );
     // await this.page.waitForTimeout(2000);
-    console.log("Stream Assigned to my self successfully");
+    console.log("The Task Assigned to my self successfully");
   }
 
-  async EnsureStreamAccepted() {
+  async EnsureTaskAccepted() {
+    await this.page.waitForTimeout(2000);
     await this.navigateToMyCompletedTasksTab();
-    let taskStreamRow = [];
-    taskStreamRow = await this.search.getFirstRow(this.tasksTable);
+    let taskRow = [];
+    taskRow = await this.search.getFirstRow(this.tasksTable);
     var actionlocator = "div >> button";
-    await this.search.clickRowAction(taskStreamRow, actionlocator);
+    await this.search.clickRowAction(taskRow, actionlocator);
     var expectedStatus = global.testConfig.taskDetails.enableStatusActive;
     var result = await this.taskDetailsPage.checkEnablementStatus(
       expectedStatus
     );
-    if (result) console.log("Stream EnabledStatus is Active now");
+    if (result) console.log("Task EnabledStatus is Active now");
     return result;
   }
 
+
   async aprroveStream() {
     let status; 
-    let stramNoteAdded; 
     let acceptstatus;
     let ensurestatus; 
     await this.navigateToMyTasksTab();
@@ -90,11 +82,72 @@ export class TasksPage {
     );
    // stramNoteAdded = await this.taskDetailsPage.addNoteForStream();
     acceptstatus = await this.taskDetailsPage.acceptStream();
-    ensurestatus = await this.EnsureStreamAccepted();
+    ensurestatus = await this.EnsureTaskAccepted();
 
     if (status  && acceptstatus && ensurestatus) return true;
 
     return false;
   }
+
+  // async EnsureMainProgramAccepted() {
+  //   await this.navigateToMyCompletedTasksTab();
+  //   let taskMainProgramRow = [];
+  //   taskMainProgramRow = await this.search.getFirstRow(this.tasksTable);
+  //   var actionlocator = "div >> button";
+  //   await this.search.clickRowAction(taskMainProgramRow, actionlocator);
+  //   var expectedStatus = global.testConfig.taskDetails.enableStatusActive;
+  //   var result = await this.taskDetailsPage.checkEnablementStatus(
+  //     expectedStatus
+  //   );
+  //   if (result) console.log("MainProgram EnabledStatus is Active now");
+  //   return result;
+  // }
+
+  async aprroveMainProgram() {
+    let status; 
+    let acceptstatus;
+    let ensurestatus; 
+    await this.navigateToMyTasksTab();
+    let taskMainProgramRow = [];
+    taskMainProgramRow = await this.search.getFirstRow(this.tasksTable);
+    var actionlocator = "div >> button";
+    await this.search.clickRowAction(taskMainProgramRow, actionlocator);
+    console.log("Navigate To Main Program Detials Page Successfully");
+    var intialMainProgramStatus = global.testConfig.taskDetails.enableStatusHidden;
+    status = await this.taskDetailsPage.checkEnablementStatus(
+      intialMainProgramStatus
+    );
+   // stramNoteAdded = await this.taskDetailsPage.addNoteForStream();
+    acceptstatus = await this.taskDetailsPage.acceptMainProgram();
+    ensurestatus = await this.EnsureTaskAccepted();
+
+    if (status  && acceptstatus && ensurestatus) return true;
+
+    return false;
+  }
+
+  async aprroveSubPrograms() {
+    let status; 
+    let acceptstatus;
+    let ensurestatus; 
+    await this.navigateToMyTasksTab();
+    let taskSubProgramsRow = [];
+    taskSubProgramsRow = await this.search.getFirstRow(this.tasksTable);
+    var actionlocator = "div >> button";
+    await this.search.clickRowAction(taskSubProgramsRow, actionlocator);
+    console.log("Navigate To SubProgram Detials Page Successfully");
+    var intialSubProgramStatus = global.testConfig.taskDetails.enableStatusHidden;
+    status = await this.taskDetailsPage.checkEnablementStatus(
+      intialSubProgramStatus
+    );
+   // stramNoteAdded = await this.taskDetailsPage.addNoteForStream();
+    acceptstatus = await this.taskDetailsPage.acceptSubPrograms();
+    ensurestatus = await this.EnsureTaskAccepted();
+
+    if (status  && acceptstatus && ensurestatus) return true;
+
+    return false;
+  }
+
 }
 module.exports = { TasksPage };

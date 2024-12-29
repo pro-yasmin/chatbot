@@ -1,4 +1,4 @@
-const { PopUpPage }= require('../SharedPages/PopUpPage');
+const { PopUpPage }= require('../../SharedPages/PopUpPage');
 
 
 export class StreamPage {
@@ -46,8 +46,6 @@ export class StreamPage {
 
           var result =await popUpMsg.popUpMessage( this.successPopupTitle , this.backToAllStreamPageButton,global.testConfig.createStream.streamSuccessMsg);
           return result;
-
-
 
   }
 }
