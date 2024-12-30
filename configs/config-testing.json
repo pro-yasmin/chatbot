@@ -51,6 +51,13 @@
  "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
  "conditionsOfAssistanceUnit" : "برامج التوعية",
  "subProgramsSuccessMsg" :"تم حفظ البرنامج الفرعي للمراجعة بنجاح"
-}
+},
+"lookUps": {
+    "successMsgTabTwo": "تم إنشاء القائمة المرجعية بنجاح.",
+    "successMsgTabThree": "تم إضافة العنصر بنجاح",
+    "lookUpStatusActive": "مفعل",
+    "arabicName":"الأعمال والأملاك",
+    "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟"
+  }
 
 }
