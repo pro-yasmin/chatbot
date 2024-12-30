@@ -1,3 +1,5 @@
+import { LookupData } from "../../../Models/AdminPortal/LookupData";
+
 const { SearchPage } = require("../SharedPages/SearchPage");
 
 const { expect } = require('@playwright/test');
@@ -16,9 +18,10 @@ export class LookupsManagmentPage {
 
 
   async clickAddButton() {
+    await  this.page.waitForTimeout(2000);
     await this.page.waitForSelector(this.addButton, { visible: true });
     await this.page.click(this.addButton);
-  }
+    }
 
   async clickViewLookUpButton() {
     await this.page.click(this.viewLookUpButton);
@@ -36,7 +39,7 @@ export class LookupsManagmentPage {
     let lookupEnglishName;
     let lookupStatus;
     let lookupRow = [];
-    lookupRow = await this.search.getFirstRow(this.lookupTable);
+    lookupRow = await this.search.getRowInTableWithSpecificText(this.lookupTable,lookupData.getLookupEnglishName());
 
     if (lookupRow && lookupRow.length > 0) {
       arabicTd = lookupRow[1].tdLocator;
