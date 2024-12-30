@@ -37,10 +37,12 @@ export class MainProgramManagementPage {
     return mainProgramRow;
   }
 
-  async clickOnCreateSubProgram(mainProgramName) {
+  async clickOnCreateSubProgram(mainProgramName,backUpProgram) {
     let lastTd;
     let mainProgramRow = [];
-    mainProgramRow = await this.searchOnSpecificMainProgram(mainProgramName);
+    if(mainProgramName== null)
+      mainProgramRow= await this.searchOnSpecificMainProgram(backUpProgram);
+    else mainProgramRow = await this.searchOnSpecificMainProgram(mainProgramName);
     if (mainProgramRow && mainProgramRow.length > 0) {
       lastTd = mainProgramRow[mainProgramRow.length - 1].tdLocator;
       this.dotsLocator = lastTd.locator("div >> button");

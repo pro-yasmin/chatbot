@@ -29,7 +29,7 @@ export class TaskDetailsPage {
 
   async openTaskDataTab() {
      await this.page.click(this.myStreamDataTab);
-     await this.page.waitForTimeout(5000);
+     //await this.page.waitForTimeout(5000);
   }
 
   async openNotesTab() {
@@ -37,6 +37,8 @@ export class TaskDetailsPage {
   }
 
   async checkEnablementStatus(expectedStatus) {
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    //await this.openNotesTab();
     await this.openTaskDataTab();
     const statusElement = this.page.locator(this.enablementStatus);
     await statusElement.waitFor({ state: 'visible' });
@@ -69,7 +71,9 @@ export class TaskDetailsPage {
   }
 
   async acceptStream() {
-    await this.openTaskDataTab();
+    //await this.openTaskDataTab();
+    await this.page.waitForSelector(this.acceptStreamBtn , { state: 'visible' });
+    
     await this.page.click(this.acceptStreamBtn);
     var popUpMsg = new PopUpPage(this.page);
     await popUpMsg.inputPopUpMessage(this.ensureAcceptTaskNotesField, this.ensureAcceptTaskNotesBtn,global.testConfig.taskDetails.addAcceptNote);
