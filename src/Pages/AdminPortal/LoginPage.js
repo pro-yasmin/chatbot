@@ -13,6 +13,7 @@ export class LoginPage {
           //this.backToAppButton = '//a[@id="backToApplication"]';
  
 
+          
         }   
 
       async  gotoAdminPortal (baseUrl){
