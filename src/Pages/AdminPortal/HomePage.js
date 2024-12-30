@@ -11,6 +11,8 @@ export class HomePage {
     // this.subProgramsManagementButton = '//a[@data-testid="submenu-main-program-management""]';
     this.createNewStreamButton = '//button[contains(text(),"تعريف مسار")]';
     this.tasksButton = '//a[@href="/my-tasks"]';
+    this.generalSettingsButton = '//span[contains(text(),"الإعدادات العامة")]';
+    this.lookupsManagmentButton = '//span[contains(text(),"إدارة القوائم المرجعية")]';
   }
 
   async checkAvatarIsExist() {
@@ -63,6 +65,19 @@ export class HomePage {
       await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
 
     }
+
+    async navigateToGeneralSettings() {
+      await this.page.waitForSelector(this.generalSettingsButton, {state: "visible",timeout: 20000 });
+      await this.page.click(this.generalSettingsButton);
+    }
+  
+    async navigateToLookupsManagment() {
+      await this.navigateToGeneralSettings();
+      await this.page.waitForSelector(this.lookupsManagmentButton, { state: "visible", timeout: 20000 });
+      await this.page.click(this.lookupsManagmentButton);
+      await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+     
+      }
 
 }
 
