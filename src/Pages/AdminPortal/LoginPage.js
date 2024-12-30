@@ -10,14 +10,14 @@ export class LoginPage {
           this.changeLangageMenu = '//button[@id="locale--button"]';
           // '//button[@id="locale--button" and contains(@class, "locale--btn")]';
           this.nationalField ='//span[contains(text(),"رقم الهوية الوطنية")]';
-          this.backToAppButton = '//a[@id="backToApplication"]';
+          //this.backToAppButton = '//a[@id="backToApplication"]';
  
 
         }   
 
       async  gotoAdminPortal (baseUrl){
              await this.page.goto(baseUrl, { waitUntil: 'networkidle' });
-             await this.clickBackToAppButton();
+             //await this.clickBackToAppButton();
              
              await this.page.waitForTimeout(2000);
              await this.ensureArabicLanguage();

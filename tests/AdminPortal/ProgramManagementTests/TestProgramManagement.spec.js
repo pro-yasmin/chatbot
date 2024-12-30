@@ -1,0 +1,186 @@
+const { test, expect } = require('@playwright/test');
+const { LoginPage } = require('../../../src/Pages/AdminPortal/LoginPage');
+const { HomePage } = require('../../../src/Pages/AdminPortal/HomePage');
+const { StreamPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/StreamManagement/StreamPage');
+const { StreamData } = require('../../../src/Models/AdminPortal/StreamData');
+const { StreamManagementPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/StreamManagement/StreamManagementPage');
+const { MainProgramPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/MainProgramManagement/MainProgramPage');
+const { MainProgramData } = require('../../../src/Models/AdminPortal/MainProgramData');
+const { MainProgramManagementPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/MainProgramManagement/MainProgramManagementPage');
+const { SubProgramsManagementPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/SubProgramsManagement/SubProgramsManagmentPage');
+const { SubProgramsData } = require('../../../src/Models/AdminPortal/SubProgramsData');
+const { SubProgramsPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/SubProgramsManagement/SubProgramsPage');
+const { TaskDetailsPage } = require('../../../src/Pages/AdminPortal/Tasks/TaskDetailsPage');
+const { TasksPage } = require('../../../src/Pages/AdminPortal/Tasks/TasksPage');
+
+
+let loginPage, homePage, streamManagementPage, streamData, streamPage, tasksPage, taskDetailsPage;
+let mainProgramPage, mainProgramManagementPage, mainProgramData;
+let subProgramsManagementPage, subProgramsData, subProgramsPage;
+let streamNumber, programNumber, subProgramNumber;
+
+test.beforeEach(async ({ page }) => {
+  loginPage = new LoginPage(page);
+  homePage = new HomePage(page);
+  streamPage = new StreamPage(page);
+  streamManagementPage = new StreamManagementPage(page);
+  streamData = new StreamData(page);
+  tasksPage = new TasksPage(page);
+  taskDetailsPage = new TaskDetailsPage(page);
+  mainProgramPage = new MainProgramPage(page);
+  mainProgramManagementPage = new MainProgramManagementPage(page);
+  mainProgramData = new MainProgramData(page);
+  subProgramsManagementPage = new SubProgramsManagementPage(page);
+  subProgramsPage = new SubProgramsPage(page);
+  subProgramsData = new SubProgramsData(page);
+
+  var baseUrl = global.testConfig.BASE_URL;
+  var adminusername = global.testConfig.ADMIN_USER;
+  var adminpassword = global.testConfig.ADMIN_PASS;
+
+  await test.step('Login to Admin Portal', async () => {
+    await loginPage.gotoAdminPortal(baseUrl);
+    var loginSuccess = await loginPage.login(adminusername, adminpassword);
+    expect(loginSuccess).toBe(true);
+    console.log('login done successfully');
+  });
+
+});
+
+test('Add and Approve New Stream', async () => {
+  // Step1: Navigate to streams list page
+  await test.step('Navigate to StreamManagement page', async () => {
+    await homePage.navigateToStreamsManagement();
+    console.log('Navigate to Streams page');
+  });
+  // Step2: Create New stream
+  await test.step('Create New Stream Task', async () => {
+    console.log('Navigate to Create Streams page');
+    var result = await streamManagementPage.createStream(streamData);
+    expect(result).toBe(true);
+    console.log('New Stream Created Successfully');
+  });
+ // Step3: Search on new stream created
+  await test.step('Search on Stream', async () => {
+    console.log('Search on Stream');
+    expect(await streamManagementPage.checkStreamRowDetails(streamData)).toBe(true);
+    streamNumber = streamData.getCreatedStreamId();
+    console.log('New Stream Details Checked Successfully');
+  });
+ // Step4: Approve new created 
+  await test.step('Approve Stream Task', async () => {
+    console.log('Navigate to MyTasks page to approve stream Request');
+    await homePage.navigateToTasks();
+    await tasksPage.assignTaskToMe(streamNumber);
+    await tasksPage.navigateToMyCompletedTasksTab();
+    expect(await tasksPage.aprroveStream(streamNumber)).toBe(true);
+    console.log('New Stream Approved Successfully with id= ' + streamNumber);
+  });
+
+});
+
+test('Add and Approve New Main Program', async () => {
+ // Step1: Navigate to Programs list page 
+  await test.step('Navigate to StreamManagement page', async () => {
+    await homePage.navigateToStreamsManagement();
+    console.log('Click on Define New Main Program from stream');
+    await streamManagementPage.clickOnCreateMainProgram(streamNumber, global.testConfig.createMainProgram.backUpStreamNumber);
+
+  });
+  // Step2: Create New Program
+  await test.step('Create New Program Task', async () => {
+    console.log('Navigate to Programs page');
+    var result = await mainProgramPage.createNewMainProgram(mainProgramData);
+    expect(result).toBe(true);
+    console.log('New Main Program Created Successfully');
+  });
+ // Step3: Search on new Program
+  await test.step('Search on program created', async () => {
+    console.log('Search on Program created');
+    expect(await mainProgramManagementPage.checkMainProgramRowDetails(mainProgramData)).toBe(true);
+    programNumber = mainProgramData.getCreatedMainProgramId();
+    console.log('New Main Program Details Checked Successfully');
+  });
+ // Step4: Approve new Program
+  await test.step('Approve Program Task', async () => {
+    console.log('Navigate to MyTasks page to approve Program Request');
+    await homePage.navigateToTasks();
+    await tasksPage.assignTaskToMe(programNumber);
+    await tasksPage.navigateToMyCompletedTasksTab();
+    expect(await tasksPage.aprroveMainProgram(programNumber)).toBe(true);
+
+    console.log('New Main Program Approved Successfully with id= ' + programNumber);
+  });
+
+});
+
+test('Add and Approve Test Sub Programs', async () => {
+   // Step1: Navigate to Main Programs page
+  await test.step('Navigate to Main Programs  page', async () => {
+    console.log('Navigate to Main Program page');
+    await homePage.navigateToMainProgramManagement();
+    console.log('Click on Define New SubProgram');
+    await mainProgramManagementPage.clickOnCreateSubProgram(programNumber, global.testConfig.createSubPrograms.backUpProgramNumber);
+
+  });
+  // Step2: Create new Sub Program page
+  await test.step('Create New SubProgram Task', async () => {
+    console.log('Navigate to SubProgram page');
+    var result = await subProgramsPage.createNewSubPrograms(subProgramsData);
+    expect(result).toBe(true);
+    console.log('New SubProgram Created Successfully ');
+  });
+  // Step3: Search on subprogram created
+  await test.step('Search on subprogram created', async () => {
+    console.log('Search on SubProgram');
+    expect(await subProgramsManagementPage.checkSubProgramsRowDetails(subProgramsData)).toBe(true);
+    subProgramNumber = subProgramsData.getCreatedSubProgramId();
+    console.log('New SubProgram Details Checked Successfully');
+  });
+  // Step4: Approve Sub program 
+  await test.step('Approve  Sub Program Task', async () => {
+    console.log('Navigate to MyTasks page to approve SubProgram Request');
+    await homePage.navigateToTasks();
+    await tasksPage.assignTaskToMe(subProgramNumber);
+    await tasksPage.navigateToMyCompletedTasksTab();
+    expect(await tasksPage.aprroveSubPrograms(subProgramNumber)).toBe(true);
+    console.log('New Sub Program Approved Successfully with id= ' + subProgramNumber);
+
+  });
+
+});
+
+/*test('Add and Approve Test Benefits', async ({page}) => {
+
+    console.log('Navigate to Main Program page');
+    await homePage.navigateToMainProgramManagement();
+    console.log('Click on Define New SubProgram');
+    await mainProgramManagementPage.clickOnCreateSubProgram('PRG_MPRG_005');
+    var result = await subProgramsPage.createNewSubPrograms(subProgramsData);
+    expect(result).toBe(true);  
+    console.log('New SubProgram Created Successfully');
+    console.log('Search on SubProgram');
+    expect( await subProgramsManagementPage.checkSubProgramsRowDetails(subProgramsData)).toBe(true);    
+    console.log('New SubProgram Details Checked Successfully');
+    console.log('Navigate to MyTasks page to approve SubProgram Request');
+    await homePage.navigateToTasks();
+    await tasksPage.assignTaskToMe();
+    await tasksPage.navigateToMyCompletedTasksTab();
+    expect( await tasksPage.aprroveSubPrograms()).toBe(true); 
+    console.log('New benefits Approved Successfully');
+});*/
+
+
+test.afterEach(async () => {
+  //logout
+  await test.step('Logout from Admin Portal', async () => {
+    await homePage.logout();
+    console.log('User Logout Successfully');
+  });
+
+});
+
+
+// test.afterAll(async () => {
+// });
+

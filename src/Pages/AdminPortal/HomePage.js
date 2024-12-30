@@ -60,6 +60,8 @@ export class HomePage {
     async  navigateToTasks() {
       await this.page.waitForSelector(this.tasksButton, { state: "visible",timeout: 20000});
       await this.page.click(this.tasksButton);
+      await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+
     }
 
 }

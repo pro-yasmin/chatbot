@@ -6,7 +6,6 @@ export class SubProgramsManagementPage  {
     this.page = page;
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
     this.subProgramsTable = "//table//tbody";
-    // this.createSubProgramOption = '//ul[@role="menu"]//li[1]';
     this.dotsLocator;
   }
 
@@ -34,23 +33,6 @@ export class SubProgramsManagementPage  {
 
     return subProgramRow;
   }
-
-  // async clickOnCreateSubProgram(subProgramsName) {
-  //   let lastTd;
-  //   let subProgramRow = [];
-  //   subProgramRow = await this.searchOnSpecificSubProgram(subProgramsName);
-  //   if (subProgramRow && subProgramRow.length > 0) {
-  //     lastTd = subProgramRow[subProgramRow.length - 1].tdLocator;
-  //     this.dotsLocator = lastTd.locator("div >> button");
-  //     await this.dotsLocator.click();
-  //     await this.page.waitForSelector(this.createSubProgramOption, {
-  //       state: "visible",
-  //       timeout: 60000,
-  //     });
-  //     await this.page.click(this.createSubProgramOption);
-  //     console.log("Clicked the Create Sub Program button");
-  //   }
-  // }
 
   async checkSubProgramsRowDetails(subProgramsData) {
     let arabicTd;

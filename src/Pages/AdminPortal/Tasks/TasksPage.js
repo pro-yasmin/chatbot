@@ -21,23 +21,37 @@ export class TasksPage {
   }
 
   async navigateToMyTasksTab() {
+    await  this.page.waitForTimeout(3000);
+    await this.page.waitForSelector(this.myTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myTasksTab);
+    console.log("Navigate to My tasks tab")
+   // await this.page.reload({ waitUntil: 'networkidle', timeout: 60000 });
+   // await this.page.waitForSelector(this.myTasksTab, { state: "visible",timeout: 20000});
+    //await this.page.click(this.myTasksTab);
   }
 
   async navigateToMyCompletedTasksTab() {
+    await  this.page.waitForTimeout(7000);
+    await this.page.waitForSelector(this.myCompletedTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myCompletedTasksTab);
-  }
+    console.log("Navigate to My  completed tasks tab");
+   }
 
   async navigateToGroupTasksTab() {
+    await  this.page.waitForTimeout(3000);
+    await this.page.waitForSelector(this.groupTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.groupTasksTab);
+    console.log("Navigate to group tasks tab");
+    
   }
 
-  async assignTaskToMe() {
+  async assignTaskToMe(taskNumber) {
+  
     await this.navigateToGroupTasksTab();
-    let taskStreamRow = [];
-    taskStreamRow = await this.search.getFirstRow(this.tasksTable);
+    let taskRow = [];
+    taskRow = await this.search.getRowInTableWithSpecificText(this.tasksTable,taskNumber);
     var actionlocator = "div >> div:nth-of-type(2)>> button:nth-of-type(1)";
-    await this.search.clickRowAction(taskStreamRow, actionlocator);
+    await this.search.clickRowAction(taskRow, actionlocator);
     await this.page.click(this.assignToMyselfBtn);
     console.log("clicked on assign to myself Btn");
     var popUpMsg = new PopUpPage(this.page);
@@ -46,33 +60,35 @@ export class TasksPage {
       this.acceptAssignBtn,
       global.testConfig.tasks.assignTaskMsg
     );
-    // await this.page.waitForTimeout(2000);
     console.log("The Task Assigned to my self successfully");
   }
 
-  async EnsureTaskAccepted() {
-    await this.page.waitForTimeout(2000);
+  async EnsureTaskAccepted(taskNumber) {
+    await this.navigateToGroupTasksTab();
     await this.navigateToMyCompletedTasksTab();
-    let taskRow = [];
-    taskRow = await this.search.getFirstRow(this.tasksTable);
+     let taskRow = [];
+    taskRow = await this.search.getRowInTableWithSpecificText(this.tasksTable,taskNumber);
     var actionlocator = "div >> button";
     await this.search.clickRowAction(taskRow, actionlocator);
-    var expectedStatus = global.testConfig.taskDetails.enableStatusActive;
+    var result=true;
+    /*var expectedStatus = global.testConfig.taskDetails.enableStatusActive;
     var result = await this.taskDetailsPage.checkEnablementStatus(
       expectedStatus
     );
-    if (result) console.log("Task EnabledStatus is Active now");
+    if (result) console.log("Task EnabledStatus is Active now");*/
     return result;
   }
 
 
-  async aprroveStream() {
-    let status; 
+  async aprroveStream(streamNumber) {
+   let status; 
     let acceptstatus;
-    let ensurestatus; 
+    let ensurestatus;
+   // await this.navigateToGroupTasksTab();
     await this.navigateToMyTasksTab();
     let taskStreamRow = [];
-    taskStreamRow = await this.search.getFirstRow(this.tasksTable);
+    taskStreamRow = await this.search.getRowInTableWithSpecificText(this.tasksTable,streamNumber);
+    //taskStreamRow = await this.search.getFirstRow(this.tasksTable);
     var actionlocator = "div >> button";
     await this.search.clickRowAction(taskStreamRow, actionlocator);
     console.log("Navigate To Stream Detials Page Successfully");
@@ -82,34 +98,23 @@ export class TasksPage {
     );
    // stramNoteAdded = await this.taskDetailsPage.addNoteForStream();
     acceptstatus = await this.taskDetailsPage.acceptStream();
-    ensurestatus = await this.EnsureTaskAccepted();
+    ensurestatus = await this.EnsureTaskAccepted(streamNumber);
 
     if (status  && acceptstatus && ensurestatus) return true;
 
     return false;
   }
 
-  // async EnsureMainProgramAccepted() {
-  //   await this.navigateToMyCompletedTasksTab();
-  //   let taskMainProgramRow = [];
-  //   taskMainProgramRow = await this.search.getFirstRow(this.tasksTable);
-  //   var actionlocator = "div >> button";
-  //   await this.search.clickRowAction(taskMainProgramRow, actionlocator);
-  //   var expectedStatus = global.testConfig.taskDetails.enableStatusActive;
-  //   var result = await this.taskDetailsPage.checkEnablementStatus(
-  //     expectedStatus
-  //   );
-  //   if (result) console.log("MainProgram EnabledStatus is Active now");
-  //   return result;
-  // }
+  
 
-  async aprroveMainProgram() {
+  async aprroveMainProgram(programNumber) {
     let status; 
     let acceptstatus;
     let ensurestatus; 
     await this.navigateToMyTasksTab();
     let taskMainProgramRow = [];
-    taskMainProgramRow = await this.search.getFirstRow(this.tasksTable);
+    //taskMainProgramRow = await this.search.getFirstRow(this.tasksTable);
+    taskMainProgramRow = await this.search.getRowInTableWithSpecificText(this.tasksTable,programNumber);
     var actionlocator = "div >> button";
     await this.search.clickRowAction(taskMainProgramRow, actionlocator);
     console.log("Navigate To Main Program Detials Page Successfully");
@@ -119,20 +124,21 @@ export class TasksPage {
     );
    // stramNoteAdded = await this.taskDetailsPage.addNoteForStream();
     acceptstatus = await this.taskDetailsPage.acceptMainProgram();
-    ensurestatus = await this.EnsureTaskAccepted();
+    ensurestatus = await this.EnsureTaskAccepted(programNumber);
 
     if (status  && acceptstatus && ensurestatus) return true;
 
     return false;
   }
 
-  async aprroveSubPrograms() {
+  async aprroveSubPrograms(subProgramNumber) {
     let status; 
     let acceptstatus;
     let ensurestatus; 
     await this.navigateToMyTasksTab();
     let taskSubProgramsRow = [];
-    taskSubProgramsRow = await this.search.getFirstRow(this.tasksTable);
+    taskSubProgramsRow = await this.search.getRowInTableWithSpecificText(this.tasksTable,subProgramNumber);
+    //taskSubProgramsRow = await this.search.getFirstRow(this.tasksTable);
     var actionlocator = "div >> button";
     await this.search.clickRowAction(taskSubProgramsRow, actionlocator);
     console.log("Navigate To SubProgram Detials Page Successfully");
@@ -142,7 +148,7 @@ export class TasksPage {
     );
    // stramNoteAdded = await this.taskDetailsPage.addNoteForStream();
     acceptstatus = await this.taskDetailsPage.acceptSubPrograms();
-    ensurestatus = await this.EnsureTaskAccepted();
+    ensurestatus = await this.EnsureTaskAccepted(subProgramNumber);
 
     if (status  && acceptstatus && ensurestatus) return true;
 

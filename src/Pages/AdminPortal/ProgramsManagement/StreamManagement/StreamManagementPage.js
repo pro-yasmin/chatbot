@@ -22,7 +22,7 @@ export class StreamManagementPage {
   }
 
   async createStream(streamData) {
-    await this.clickOnNewStream();
+  await this.clickOnNewStream();
   var streamPage = new StreamPage(this.page);
     const result = await streamPage.createNewStream(streamData);
     return result;
@@ -42,18 +42,12 @@ export class StreamManagementPage {
     return streamRow;
   }
 
-  
-  // async searchOnStreamTask(streamData) {
-  //   var taskID = streamData.getCreatedStreamId();
-  //   console.log("stream id is " + taskID);
-  //   const taskRow = await this.search.getFirstRow(this.tasksTable);
-  //   return taskRow;
-  // }
-
-  async clickOnCreateMainProgram(streamName) {
+  async clickOnCreateMainProgram(streamName,backUpStream) {
     let lastTd;
     let streamRow = [];
-    streamRow = await this.searchOnSpecificStream(streamName);
+    if(streamName== null)
+      streamRow = await this.searchOnSpecificStream(backUpStream);
+    else streamRow = await this.searchOnSpecificStream(streamName);
     if (streamRow && streamRow.length > 0) {
       lastTd = streamRow[streamRow.length - 1].tdLocator;
       this.dotsLocator = lastTd.locator("div >> button");

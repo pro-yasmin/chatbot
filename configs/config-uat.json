@@ -28,6 +28,7 @@
     
   },
   "createMainProgram": {
+  "backUpStreamNumber":"PRG_StrSt_129",
   "arabicMainProgramName": "البرامج الوقائية لدعم الأسر والرعاية الاجتماعية",
   "englishMainProgramName": "FSSC preventive Program",
   "responsibleEntity": "الجهة المسؤولة الأولي",
@@ -45,6 +46,7 @@
   "mainProgramSuccessMsg":"تم حفظ البرنامج للمراجعة بنجاح"
 },
 "createSubPrograms": {
+ "backUpProgramNumber":"PRG_MPRG_043",
  "arabicSubProgramName": "برامج التوعية والتدريب حول إدمان المخدرات",
  "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
  "conditionsOfAssistanceUnit" : "برامج التوعية",
