@@ -5,33 +5,21 @@ export class BenefitsManagmentPage {
   constructor(page) {
     this.page = page;
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
-    this.subProgramsTable = "//table//tbody";
-    // this.createSubProgramOption = '//ul[@role="menu"]//li[1]';
+    this.benefitsTable = "//table//tbody";
     this.dotsLocator;
   }
 
-  async clickOnNewSubProgram(subProgramsData) {
-    await this.page.waitForSelector(this.subProgramsTable, {
-      state: "visible",
-      timeout: 5000,
-    });
-    await this.page.click(this.createNewSubProgramButton);
-    var subProgramsPage = new SubProgramsPage(this.page);
-    const result = await subProgramsPage.createNewSubPrograms(subProgramsData);
-    return result;
-  }
-
-  async searchOnSpecificSubProgram(subProgramsName) {
-    let subProgramRow = [];
-    subProgramRow = await new SearchPage(this.page).searchOnUniqueRow(
+  async searchOnSpecificBenefits(benefitsData) {
+    let BenefitsRow = [];
+    BenefitsRow = await new SearchPage(this.page).searchOnUniqueRow(
       this.searchInput,
-      subProgramsName,
-      this.subProgramsTable
+      benefitsData,
+      this.benefitsTable
     );
-    if (!subProgramRow || subProgramRow.length === 0) {
+    if (!BenefitsRow || BenefitsRow.length === 0) {
       return null;
     }
-    return subProgramRow;
+    return BenefitsRow;
   }
 
   // async clickOnCreateSubProgram(subProgramsName) {
@@ -51,41 +39,41 @@ export class BenefitsManagmentPage {
   //   }
   // }
 
-  async checkSubProgramsRowDetails(subProgramsData) {
+  async checkBenefitsRowDetails(benefitsData) {
     let arabicTd;
     let englishTd;
     let arabicName;
     let englishName;
-    let subProgramRow = [];
+    let benefitsRow = [];
 
-    subProgramRow = await this.searchOnSpecificSubProgram(
-      subProgramsData.getArabicSubProgramName()
+    benefitsRow = await this.searchOnSpecificBenefits(
+      benefitsData.getArabicBenefitName()
     );
 
-    if (subProgramRow && subProgramRow.length > 0) {
-      arabicTd = subProgramRow[1].tdLocator;
+    if (benefitsRow && benefitsRow.length > 0) {
+      arabicTd = benefitsRow[1].tdLocator;
       arabicName = arabicTd.locator("span");
       await arabicName.waitFor({ state: "visible" });
       var actualArabicName = await arabicName.textContent();
 
-      englishTd = subProgramRow[2].tdLocator;
+      englishTd = benefitsRow[2].tdLocator;
       englishName = englishTd.locator("span");
       await englishName.waitFor({ state: "visible" });
       var actualEnglishName = await englishName.textContent();
     }
 
     if (
-      actualArabicName === subProgramsData.getArabicSubProgramName() &&
-      actualEnglishName === subProgramsData.getEnglishSubProgramName()
+      actualArabicName === benefitsData.getArabicBenefitName() &&
+      actualEnglishName === benefitsData.getEnglishBenefitName()
     ) {
       console.log("Sub Program names matched successfully.");
-      let subProgramId = await subProgramRow[0].tdLocator.textContent();
-      subProgramsData.setCreatedSubProgramId(subProgramId);
-      console.log("Created Sub Program ID set in SubProgramData: " + subProgramId);
+      let benefitsId = await benefitsRow[0].tdLocator.textContent();
+      benefitsData.setCreatedBenefitId(benefitsId);
+      console.log("Created Benefits ID set in Benefits Data: " + benefitsId);
       return true;
     }
     return false;
   }
 }
 
-module.exports = { SubProgramsManagementPage };
+module.exports = { BenefitsManagmentPage };

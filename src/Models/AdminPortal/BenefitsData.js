@@ -1,68 +1,78 @@
 const { Utils } = require('../../Utils/utils.js');
 
-export class SubProgramsData {
+export class BenefitsData {
 
   constructor(page) {
     this.page = page;
     this.utils = Utils;
-    this.arabicSubProgramName = null;
-    this.englishSubProgramName = null;
-    this.GFS_Budget = null;
-    this.conditionsOfAssistanceUnit = null;
-
+    this.arabicBenefitName = null;
+    this.englishBenefitName = null;
+    this.benefitsGFSBudget = null;
+    this.benefitEstimatedValue = null;
   }
-
-  // Getter and Setter for Arabic Sub Program Name
-  getArabicSubProgramName() {
-    if (this.arabicSubProgramName == null) {
-      this.arabicSubProgramName = global.testConfig.createSubPrograms.arabicSubProgramName + this.utils.generateRandomArabicString(5)+" "+"أوتو";
+  
+  // Getter and Setter for Arabic Benefit Name
+  getArabicBenefitName() {
+    if (this.arabicBenefitName == null) {
+      this.arabicBenefitName = global.testConfig.createBenefits.arabicBenefitName + this.utils.generateRandomArabicString(5) + " " + "أوتو";
     }
-    return this.arabicSubProgramName;
+    return this.arabicBenefitName;
   }
-  setArabicSubProgramName(value) {
-    this.arabicSubProgramName = value;
+  setArabicBenefitName(value) {
+    this.arabicBenefitName = value;
   }
 
-  // Getter and Setter for English Sub Program Name
-  getEnglishSubProgramName() {
-    if (this.englishSubProgramName == null) {
-      this.englishSubProgramName = global.testConfig.createSubPrograms.englishSubProgramName + this.utils.generateRandomEnglishString(5)+" "+"Auto";
+  // Getter and Setter for English Benefit Name
+  getEnglishBenefitName() {
+    if (this.englishBenefitName == null) {
+      this.englishBenefitName = global.testConfig.createBenefits.englishBenefitName + this.utils.generateRandomEnglishString(5) + " " + "Auto";
     }
-    return this.englishSubProgramName;
+    return this.englishBenefitName;
   }
-  setEnglishSubProgramName(value) {
-    this.englishSubProgramName  = value;
+  setEnglishBenefitName(value) {
+    this.englishBenefitName = value;
   }
 
-  // Getter and Setter for Responsible Entity
-  getGFSBudget()  {
-    if (this.GFS_Budget == null) {
-      this.GFS_Budget = this.utils.generateRandomNumber(2)+" "+"Auto";;
+  // Getter and Setter for benefits GFS Budget
+  getgetbenefitsGFSBudget() {
+    if (this.benefitsGFSBudget == null) {
+      this.benefitsGFSBudget = this.utils.generateRandomNumber(2) + " " + "Auto";
     }
-    return this.GFS_Budget;
+    return this.benefitsGFSBudget;
   }
-  setGFSBudget(value) {
-    this.GFS_Budget = value;
+  setbenefitsGFSBudget(value) {
+    this.benefitsGFSBudget = value;
   }
 
-
-  // Getter and Setter for Responsible Entity
-  getConditionsOfAssistanceUnit()  {
-    if (this.conditionsOfAssistanceUnit == null) {
-      this.conditionsOfAssistanceUnit = global.testConfig.createSubPrograms.conditionsOfAssistanceUnit + this.utils.generateRandomArabicString(5)+" "+"أوتو";
+  // Getter and Setter for benefit Estimated Value
+  getbenefitEstimatedValue() {
+    if (this.benefitEstimatedValue == null) {
+      this.benefitEstimatedValue = global.testConfig.createBenefits.benefitEstimatedValue + this.utils.generateRandomArabicString(5) + " " + "أوتو";
     }
-    return this.conditionsOfAssistanceUnit;
+    return this.benefitEstimatedValue;
   }
-  setConditionsOfAssistanceUnit(value) {
-    this.conditionsOfAssistanceUnit = value;
+  setbenefitEstimatedValue(value) {
+    this.benefitEstimatedValue = value;
   }
 
+  // Getter and Setter for Entity
+  getentity() {
+    if (this.entity == null) {
+      this.entity = global.testConfig.createBenefits.entity + this.utils.generateRandomArabicString(5) + " " + "أوتو";
+    }
+    return this.entity;
+  }
+  setentity(value) {
+    this.entity = value;
+  }
 
-  // Getter and Setter for Random subProgram ID
-  getCreatedSubProgramId() {
+  
+
+  // Getter and Setter for Random Benefit ID
+  getCreatedBenefitId() {
     return this.programId;
   }
-  setCreatedSubProgramId(value) {
+  setCreatedBenefitId(value) {
     this.programId = value;
   }
 }

@@ -7,6 +7,9 @@ const { TasksPage } = require('../../../src/Pages/AdminPortal/Tasks/TasksPage');
 const { SubProgramsManagementPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/SubProgramsManagement/SubProgramsManagmentPage');
 const { SubProgramsPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/SubProgramsManagement/SubProgramsPage');
 const { SubProgramsData } = require('../../../src/Models/AdminPortal/SubProgramsData');
+const { BenefitsPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/BenefitsManagement/BenefitsPage');
+const { BenefitsManagmentPage } = require('../../../src/Pages/AdminPortal/ProgramsManagement/BenefitsManagement/BenefitsManagementPage');
+const { BenefitsData } = require('../../../src/Models/AdminPortal/BenefitsData');
 
 let loginPage;
 let homePage;
@@ -16,9 +19,12 @@ let tasksPage;
 let taskDetailsPage;
 let subProgramsManagementPage ;
 let subProgramsData;
+let benefitsPage;
+let benefitsManagmentPage;
+let benefitsData;
 
 
-test('Add and Approve Test Sub Programs', async ({ page }) => {
+test('Add and Approve Test Benefits', async ({ page }) => {
 
     loginPage = new LoginPage(page);
     homePage= new HomePage(page);
@@ -28,6 +34,10 @@ test('Add and Approve Test Sub Programs', async ({ page }) => {
     subProgramsData = new SubProgramsData(page); 
     tasksPage = new TasksPage(page); 
     taskDetailsPage = new TaskDetailsPage(page);
+    benefitsPage = new BenefitsPage(page);
+    benefitsManagmentPage = new BenefitsManagmentPage(page);
+    benefitsData = new BenefitsData(page); 
+
 
     var baseUrl = global.testConfig.BASE_URL;
     var adminusername = global.testConfig.ADMIN_USER;
@@ -37,21 +47,21 @@ test('Add and Approve Test Sub Programs', async ({ page }) => {
     var loginSuccess = await loginPage.login(adminusername, adminpassword);
     expect(loginSuccess).toBe(true);
     console.log('login done successfully');
-    console.log('Navigate to Main Program page');
-    await homePage.navigateToMainProgramManagement();
-    console.log('Click on Define New SubProgram');
-    await mainProgramManagementPage.clickOnCreateSubProgram('PRG_MPRG_022');
-    var result = await subProgramsPage.createNewSubPrograms(subProgramsData);
+    console.log('Navigate to SubPrograms page');
+    await homePage.navigateToSubProgramsManagement();
+    console.log('Click on Define New Benefit');
+    await subProgramsManagementPage.clickOnCreateBenefit('PRG_SPRG_015');//Uat
+    var result = await benefitsPage.createNewBenefits(benefitsData);
     expect(result).toBe(true);  
-    console.log('New SubProgram Created Successfully');
-    console.log('Search on SubProgram');
-    expect( await subProgramsManagementPage.checkSubProgramsRowDetails(subProgramsData)).toBe(true);    
-    console.log('New SubProgram Details Checked Successfully');
-    console.log('Navigate to MyTasks page to approve SubProgram Request');
+    console.log('New Benefits Created Successfully');
+    console.log('Search on Benefits');
+    expect( await benefitsManagmentPage.checkBenefitsRowDetails(benefitsData)).toBe(true);    
+    console.log('New Benefits Details Checked Successfully');
+    console.log('Navigate to MyTasks page to approve Benefit Request');
     await homePage.navigateToTasks();
     await tasksPage.assignTaskToMe();
     await tasksPage.navigateToMyCompletedTasksTab();
-    expect( await tasksPage.aprroveSubPrograms()).toBe(true); 
-    console.log('New SubProgram Approved Successfully');
+    expect( await tasksPage.approveBenefits()).toBe(true); 
+    console.log('New Benefit Approved Successfully');
     await homePage.logout();
 });

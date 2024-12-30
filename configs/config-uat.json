@@ -44,11 +44,18 @@
   "englishMainProgramGoal": "1. To ensure equal rights to economic resources and basic services to poor and economically vulnerable To provide psychological support to vulnerable",
   "mainProgramSuccessMsg":"تم حفظ البرنامج للمراجعة بنجاح"
 },
-"createSubPrograms": {
- "arabicSubProgramName": "برامج التوعية والتدريب حول إدمان المخدرات",
- "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
- "conditionsOfAssistanceUnit" : "برامج التوعية",
- "subProgramsSuccessMsg" :"تم حفظ البرنامج الفرعي للمراجعة بنجاح"
+  "createSubPrograms": {
+  "arabicSubProgramName": "برامج التوعية والتدريب حول إدمان المخدرات",
+  "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
+  "conditionsOfAssistanceUnit" : "برامج التوعية",
+  "subProgramsSuccessMsg" :"تم حفظ البرنامج الفرعي للمراجعة بنجاح"
+},
+  "createBenefits": {
+  "arabicBenefitName":"دعم الأسر والرعاية الاجتماعية",
+  "englishBenefitName" : "FSSC preventive",
+  "benefitEstimatedValue" : "زيادة الوعي والوقاية من إدمان المخدرات",
+  "entity" : "جهه خارجيه",
+  "benefitsSuccessMsg" :"تم حفظ الإعانة للمراجعة بنجاح"
 }
 
 }

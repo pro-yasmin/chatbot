@@ -149,5 +149,28 @@ export class TasksPage {
     return false;
   }
 
+  async approveBenefits() {
+    let status; 
+    let acceptstatus;
+    let ensurestatus; 
+    await this.navigateToMyTasksTab();
+    let taskSubProgramsRow = [];
+    taskSubProgramsRow = await this.search.getFirstRow(this.tasksTable);
+    var actionlocator = "div >> button";
+    await this.search.clickRowAction(taskSubProgramsRow, actionlocator);
+    console.log("Navigate To Benefits Detials Page Successfully");
+    var intialBenefitStatus = global.testConfig.taskDetails.enableStatusHidden;
+    status = await this.taskDetailsPage.checkEnablementStatus(
+      intialBenefitStatus
+    );
+   // stramNoteAdded = await this.taskDetailsPage.addNoteForStream();
+    acceptstatus = await this.taskDetailsPage.acceptBenefits();
+    ensurestatus = await this.EnsureTaskAccepted();
+
+    if (status  && acceptstatus && ensurestatus) return true;
+
+    return false;
+  }
+
 }
 module.exports = { TasksPage };

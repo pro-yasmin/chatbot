@@ -18,6 +18,7 @@ export class TaskDetailsPage {
     this.acceptStreamBtn='//button[contains(@class, "MuiButton-containedPrimary") and contains(., "قبول المسار")]';
     this.acceptMainProgramBtn='//button[contains(text(),"قبول البرنامج الرئيسي")]';
     this.acceptSubProgramsBtn='//button[contains(text(),"قبول البرنامج الفرعي")]';
+    this.acceptSubProgramsBtn='//button[contains(text(),"قبول البرنامج الفرعي")]';
     this.ensureAcceptTaskNotesField = '//textarea[@name="description"]';
     this.ensureAcceptTaskNotesBtn ='//button[@type="submit"]';
     this.confirmTaskMsgTitle='//span[@id="modal-modal-title"]';
@@ -104,6 +105,20 @@ export class TaskDetailsPage {
       console.log("The SubProgram Accepted Successfully.");
     return result;
   }
+
+  async acceptBenefits() {
+    //check if will need to change or not 
+    await this.openTaskDataTab();
+    await this.page.click(this.acceptSubProgramsBtn);
+    var popUpMsg = new PopUpPage(this.page);
+    await popUpMsg.inputPopUpMessage(this.ensureAcceptTaskNotesField, this.ensureAcceptTaskNotesBtn,global.testConfig.taskDetails.addAcceptSubProgramSNote);
+    // await this.page.waitForTimeout(2000);
+    var result = await popUpMsg.popUpMessage(this.confirmTaskMsgTitle, this.backToTasksBtn ,global.testConfig.taskDetails.confirmSubProgramsMsg);
+    if (result)
+      console.log("The SubProgram Accepted Successfully.");
+    return result;
+  }
+
 
 
 
