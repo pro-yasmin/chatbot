@@ -32,7 +32,7 @@ export class LookupData {
     // Getter and Setter for lookupEnglishName
     getLookupEnglishName() {
         if (this.lookupEnglishName == null) {
-            this.lookupEnglishName = this.utils.generateRandomEnglishString(5) + " " + "Auto";
+            this.lookupEnglishName = this.utils.generateRandomEnglishString(5) + "Auto";
         }
         return this.lookupEnglishName;
     }
@@ -76,7 +76,7 @@ export class LookupData {
     // Getter and Setter for nameInEnglish
     getNameInEnglish() {
         if (this.nameInEnglish == null) {
-            this.nameInEnglish = this.utils.generateRandomEnglishString(8);
+            this.nameInEnglish = this.utils.generateRandomEnglishString(7);
         }
         return this.nameInEnglish;
     }

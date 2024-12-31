@@ -1,3 +1,5 @@
+import { LookupData } from "../../../Models/AdminPortal/LookupData";
+
 const { SearchPage } = require("../SharedPages/SearchPage");
 
 const { expect } = require('@playwright/test');
@@ -15,9 +17,10 @@ export class LookupsManagmentPage {
     }
 
 
-    async clickAddButton() {
-        await this.page.waitForSelector(this.addButton, { visible: true });
-        await this.page.click(this.addButton);
+  async clickAddButton() {
+    await  this.page.waitForTimeout(2000);
+    await this.page.waitForSelector(this.addButton, { visible: true });
+    await this.page.click(this.addButton);
     }
 
     async clickViewLookUpButton(lookupData) {
@@ -36,15 +39,15 @@ export class LookupsManagmentPage {
         await this.search.clickRowAction(lookupRow, actionlocator);
     }
 
-    async checkNewLookupAdded(lookupData) {
-        let arabicTd;
-        let englishTd;
-        let statusTd;
-        let lookupArabicName;
-        let lookupEnglishName;
-        let lookupStatus;
-        let lookupRow = [];
-        lookupRow = await this.search.getFirstRow(this.lookupTable);
+  async checkNewLookupAdded(lookupData) {
+    let arabicTd;
+    let englishTd;
+    let statusTd;
+    let lookupArabicName;
+    let lookupEnglishName;
+    let lookupStatus;
+    let lookupRow = [];
+    lookupRow = await this.search.getRowInTableWithSpecificText(this.lookupTable,lookupData.getLookupEnglishName());
 
         if (lookupRow && lookupRow.length > 0) {
             arabicTd = lookupRow[1].tdLocator;
