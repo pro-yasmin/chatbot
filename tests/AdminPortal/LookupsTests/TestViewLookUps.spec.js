@@ -14,7 +14,7 @@ let lookupPage;
 let lookupData;
 
 
-test('Create New Lookup', async ({ page }) => {
+test('View Lookup', async ({ page }) => {
 
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
@@ -45,6 +45,12 @@ test('Create New Lookup', async ({ page }) => {
     await test.step('Check New Lookup Added', async () => {
         await lookupsManagmentPage.checkNewLookupAdded(lookupData);
         console.log('New lookup Details Checked Successfully');
+    });
+    await test.step('View LookUp After adding', async () => {
+        await lookupsManagmentPage.clickViewLookUpButton(lookupData);
+        console.log('View LookUp Data Button Clicked');
+        await lookupPage.validateViewLookupPageIsOpened();
+        console.log('View LookUp Page Opened Successfully');
     });
     await test.step('Logout from Admin Portal', async () => {
         await homePage.logout();
