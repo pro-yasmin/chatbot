@@ -15,7 +15,7 @@ let lookupData;
 
 
 test('Create New Lookup', async ({ page }) => {
-
+    
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     lookupsManagmentPage = new LookupsManagmentPage(page);
@@ -24,8 +24,8 @@ test('Create New Lookup', async ({ page }) => {
     var lookupCreated;
     var lookupFound;
     var baseUrl = global.testConfig.BASE_URL;
-    var adminusername = global.testConfig.ADMIN_USER;
-    var adminpassword = global.testConfig.ADMIN_PASS;
+    var adminusername = global.testConfig.GENERAL_SETTING_USER;
+    var adminpassword = global.testConfig.GENERAL_SETTING_PASS;
     // Step0: Login 
     await test.step('Login to Admin Portal', async () => {
         await loginPage.gotoAdminPortal(baseUrl);

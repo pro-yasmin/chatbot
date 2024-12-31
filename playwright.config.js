@@ -35,7 +35,7 @@ module.exports = defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: 1,
   /* Opt out of parallel tests on CI. */
   workers: 1,
   //workers: process.env.CI ? 1 : undefined,
@@ -50,7 +50,6 @@ module.exports = defineConfig({
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
     browserName: 'chromium',
-    //baseURL:   global.testConfig.BASE_URL, 
     //baseURL: global.testConfig.BASE_URL || 'http://default-url.com',  // Use the global base URL from the config
     //timeout: 30000,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
@@ -64,9 +63,29 @@ module.exports = defineConfig({
    /* Configure projects for major browsers */
   projects: [
     {
+      name: 'All tests',
+      testDir: './tests'              // Test directory
+                       
+    },
+    {
+      name: 'Login',
+      testDir: './tests/AdminPortal/Login'              // Test directory
+                       
+    },
+    {
+      name: 'Programs',
+      testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
+                       
+    },
+    {
+      name: 'Lookups',
+      testDir: './tests/AdminPortal/LookupsTests'             // Test directory
+     
+    },
+    /*{
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-    },
+    },*/
    
 
    /* {
@@ -100,12 +119,7 @@ module.exports = defineConfig({
     // },
   ],
 
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  
 });
 module.exports.ENV = ENV;
 
