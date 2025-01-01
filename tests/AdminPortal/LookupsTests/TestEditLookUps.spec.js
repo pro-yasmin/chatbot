@@ -24,8 +24,8 @@ test('Edit Lookup', async ({ page }) => {
 
 
     var baseUrl = global.testConfig.BASE_URL;
-    var adminusername = global.testConfig.GENERAL_SETTING_USER_SECOND;
-    var adminpassword = global.testConfig.GENERAL_SETTING_PASS_SECOND;
+    var adminusername = global.testConfig.GENERAL_SETTING_USER;
+    var adminpassword = global.testConfig.GENERAL_SETTING_PASS;
 
     await test.step('Login to Admin Portal', async () => {
         await loginPage.gotoAdminPortal(baseUrl);
