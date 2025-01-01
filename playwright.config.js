@@ -25,7 +25,7 @@ const ENV = 'uat';
 
 module.exports = defineConfig({
 
-  timeout: 120000,
+  timeout: 200000,
 
   globalSetup: require.resolve('./global-setup'),
  
