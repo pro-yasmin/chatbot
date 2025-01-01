@@ -58,7 +58,9 @@
     "successMsgTabTwo": "تم إنشاء القائمة المرجعية بنجاح.",
     "successMsgTabThree": "تم إضافة العنصر بنجاح",
     "lookUpStatusActive": "مفعل",
-    "arabicName": "الأعمال والأملاك",
+    "arabicName":"الأعمال والأملاك",
+    "englishName":"Business and property",
+    "code":"2323",
     "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟"
   },
   "createBenefits": {

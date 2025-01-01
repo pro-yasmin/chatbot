@@ -118,10 +118,10 @@ export class LookupPage {
     await this.page.waitForSelector(this.headlinePage, { visible: true });
   }
 
-  async addNewLookupItem(lookupData) {
+  async addNewLookupItem() {
     await this.page.fill(this.nameArabic, global.testConfig.lookUps.arabicName);
-    await this.page.fill(this.nameEnglish, lookupData.getNameEnglish());
-    await this.page.fill(this.codeLookup, lookupData.getCodeLookup());
+    await this.page.fill(this.nameEnglish, global.testConfig.lookUps.englishName);
+    await this.page.fill(this.codeLookup, global.testConfig.lookUps.code);
     //await this.page.click(this.mainList);
     //await this.page.click(this.mainListFirstOption);
     await this.page.click(this.visibleToggle);

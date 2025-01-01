@@ -15,9 +15,7 @@ export class LookupData {
         this.nameArabic = null;
         this.nameEnglish = null;
         this.codeLookup = null;
-        this.nameArabic2 = null;
-        this.nameEnglish2 = null;
-        this.codeLookup2 = null;
+        this.lookupId = null;
     }
 
     // Getter and Setter for lookupArabicName
