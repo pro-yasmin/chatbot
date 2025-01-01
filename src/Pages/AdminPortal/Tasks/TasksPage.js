@@ -19,7 +19,7 @@ export class TasksPage {
   }
 
   async navigateToMyTasksTab() {
-    await  this.page.waitForTimeout(7000);
+    await  this.page.waitForTimeout(3000);
     await this.page.waitForSelector(this.myTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myTasksTab);
     console.log("Navigate to My tasks tab")
@@ -29,14 +29,14 @@ export class TasksPage {
   }
 
   async navigateToMyCompletedTasksTab() {
-    await  this.page.waitForTimeout(7000);
+    await  this.page.waitForTimeout(3000);
     await this.page.waitForSelector(this.myCompletedTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myCompletedTasksTab);
     console.log("Navigate to My completed tasks tab");
    }
 
   async navigateToGroupTasksTab() {
-    await  this.page.waitForTimeout(7000);
+    await  this.page.waitForTimeout(3000);
     await this.page.waitForSelector(this.groupTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.groupTasksTab);
     console.log("Navigate to group tasks tab");
@@ -84,7 +84,6 @@ export class TasksPage {
     await this.navigateToMyTasksTab();
     let taskStreamRow = [];
     taskStreamRow = await this.search.getRowInTableWithSpecificText(this.tasksTable,streamNumber);
-    //taskStreamRow = await this.search.getFirstRow(this.tasksTable);
     var actionlocator = "div >> button";
     await this.search.clickRowAction(taskStreamRow, actionlocator);
     console.log("Navigate To Stream Detials Page Successfully");

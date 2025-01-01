@@ -36,7 +36,6 @@ export class TaskDetailsPage {
   }
 
   async checkEnablementStatus(expectedStatus) {
-    // await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
     //await this.openNotesTab();
     await this.openTaskDataTab();
     const statusElement = this.page.locator(this.enablementStatus);

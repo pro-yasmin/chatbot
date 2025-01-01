@@ -10,17 +10,6 @@ export class SubProgramsManagementPage  {
     this.dotsLocator;
   }
 
-  // async clickOnNewSubProgram(subProgramsData) {
-  //   await this.page.waitForSelector(this.subProgramsTable, {
-  //     state: "visible",
-  //     timeout: 5000,
-  //   });
-  //   await this.page.click(this.createNewSubProgramButton);
-  //   var subProgramsPage = new SubProgramsPage(this.page);
-  //   const result = await subProgramsPage.createNewSubPrograms(subProgramsData);
-  //   return result;
-  // }
-
   async searchOnSpecificSubProgram(subProgramsName) {
     let subProgramRow = [];
     subProgramRow = await new SearchPage(this.page).searchOnUniqueRow(
