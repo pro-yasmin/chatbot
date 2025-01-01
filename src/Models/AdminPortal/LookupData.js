@@ -32,7 +32,7 @@ export class LookupData {
     // Getter and Setter for lookupEnglishName
     getLookupEnglishName() {
         if (this.lookupEnglishName == null) {
-            this.lookupEnglishName = global.testConfig.lookUps.firstTabEnglishName + this.utils.generateRandomEnglishString(3) + " " + "Auto";
+            this.lookupEnglishName = global.testConfig.lookUps.firstTabEnglishName  + " " +this.utils.generateRandomEnglishString(3) + " " + "Auto";
         }
         return this.lookupEnglishName;
     }
@@ -43,7 +43,7 @@ export class LookupData {
     // Getter and Setter for lookupDescriptionArabicName
     getLookupDescriptionArabicName() {
         if (this.lookupDescriptionArabicName == null) {
-            this.lookupDescriptionArabicName = global.testConfig.lookUps.firstTabDescriptionArabicName + this.utils.generateRandomArabicString(3) + " " + "أوتو";
+            this.lookupDescriptionArabicName = global.testConfig.lookUps.firstTabDescriptionArabicName + " " + this.utils.generateRandomArabicString(3) + " " + "أوتو";
         }
         return this.lookupDescriptionArabicName;
     }
@@ -54,7 +54,7 @@ export class LookupData {
     // Getter and Setter for lookupDescriptionEnglishName
     getLookupDescriptionEnglishName() {
         if (this.lookupDescriptionEnglishName == null) {
-            this.lookupDescriptionEnglishName = global.testConfig.lookUps.firstTabDescriptionEnglishName + this.utils.generateRandomEnglishString(3) + " " + "Auto";
+            this.lookupDescriptionEnglishName = global.testConfig.lookUps.firstTabDescriptionEnglishName + " " + this.utils.generateRandomEnglishString(3) + " " + "Auto";
         }
         return this.lookupDescriptionEnglishName;
     }
@@ -65,7 +65,7 @@ export class LookupData {
     // Getter and Setter for nameInArabic
     getNameInArabic() {
         if (this.nameInArabic == null) {
-            this.nameInArabic = global.testConfig.lookUps.secondTabArabicName + this.utils.generateRandomArabicString(3) + " " + "أوتو";
+            this.nameInArabic = global.testConfig.lookUps.secondTabArabicName + " " + this.utils.generateRandomArabicString(3) + " " + "أوتو";
         }
         return this.nameInArabic;
     }
@@ -76,7 +76,7 @@ export class LookupData {
     // Getter and Setter for nameInEnglish
     getNameInEnglish() {
         if (this.nameInEnglish == null) {
-            this.nameInEnglish = global.testConfig.lookUps.secondTabEnglishName + this.utils.generateRandomEnglishString(3) + " " + "Auto";
+            this.nameInEnglish = global.testConfig.lookUps.secondTabEnglishName + " " + this.utils.generateRandomEnglishString(3) + " " + "Auto";
         }
         return this.nameInEnglish;
     }
@@ -98,7 +98,7 @@ export class LookupData {
     // Getter and Setter for nameArabic
     getNameArabic() {
         if (this.nameArabic == null) {
-            this.nameArabic = global.testConfig.lookUps.thirdTabArabicName + this.utils.generateRandomArabicString(3) + " " + "أوتو";
+            this.nameArabic = global.testConfig.lookUps.thirdTabArabicName + " " + this.utils.generateRandomArabicString(3) + " " + "أوتو";
         }
         return this.nameArabic;
     }
