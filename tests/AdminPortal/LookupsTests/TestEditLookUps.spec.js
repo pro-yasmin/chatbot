@@ -12,11 +12,10 @@ let homePage;
 let lookupsManagmentPage;
 let lookupPage;
 let lookupData;
+var lookupCreated;
 
-test.beforeEach(async () => {
-    console.log('Delay before the test starts...');
-    await new Promise(resolve => setTimeout(resolve, 7000)); // 2-second delay
-});
+
+
 
 test('Edit Lookup', async ({ page }) => {
 
@@ -43,7 +42,8 @@ test('Edit Lookup', async ({ page }) => {
     });
     await test.step('Create New Lookup', async () => {
         await lookupsManagmentPage.clickAddButton();
-        await lookupPage.createNewLookup(lookupData);
+        lookupCreated = await lookupPage.createNewLookup(lookupData);
+        expect(lookupCreated).toBe(true);
         console.log('New lookup Created Successfully');
     });
     await test.step('Check New Lookup Added', async () => {
