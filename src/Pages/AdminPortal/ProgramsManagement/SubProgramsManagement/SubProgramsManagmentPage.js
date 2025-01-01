@@ -6,19 +6,20 @@ export class SubProgramsManagementPage  {
     this.page = page;
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
     this.subProgramsTable = "//table//tbody";
+    this.createBenefitOption = '//ul[@role="menu"]//li[1]';
     this.dotsLocator;
   }
 
-  async clickOnNewSubProgram(subProgramsData) {
-    await this.page.waitForSelector(this.subProgramsTable, {
-      state: "visible",
-      timeout: 5000,
-    });
-    await this.page.click(this.createNewSubProgramButton);
-    var subProgramsPage = new SubProgramsPage(this.page);
-    const result = await subProgramsPage.createNewSubPrograms(subProgramsData);
-    return result;
-  }
+  // async clickOnNewSubProgram(subProgramsData) {
+  //   await this.page.waitForSelector(this.subProgramsTable, {
+  //     state: "visible",
+  //     timeout: 5000,
+  //   });
+  //   await this.page.click(this.createNewSubProgramButton);
+  //   var subProgramsPage = new SubProgramsPage(this.page);
+  //   const result = await subProgramsPage.createNewSubPrograms(subProgramsData);
+  //   return result;
+  // }
 
   async searchOnSpecificSubProgram(subProgramsName) {
     let subProgramRow = [];
@@ -32,6 +33,25 @@ export class SubProgramsManagementPage  {
     }
 
     return subProgramRow;
+  }
+
+  async clickOnCreateBenefit(subProgramName,backUpSubrogram) {
+    let lastTd;
+    let subProgramRow = [];
+    if(subProgramName== null)
+        subProgramRow = await this.searchOnSpecificSubProgram(backUpSubrogram);
+    else subProgramRow = await this.searchOnSpecificSubProgram(subProgramName);
+    if (subProgramRow && subProgramRow.length > 0) {
+      lastTd = subProgramRow[subProgramRow.length - 1].tdLocator;
+      this.dotsLocator = lastTd.locator("div >> button");
+      await this.dotsLocator.click();
+      await this.page.waitForSelector(this.createBenefitOption, {
+        state: "visible",
+        timeout: 60000,
+      });
+      await this.page.click(this.createBenefitOption);
+      console.log("Clicked the Create Benefit button");
+    }
   }
 
   async checkSubProgramsRowDetails(subProgramsData) {

@@ -10,22 +10,24 @@
     "englishGoal": "1. To ensure equal rights to economic resources and basic services to poor and economically vulnerable / at-risk populations of the country 2. To enable a better quality of life for groups with special physical and mental needs (e.g., people with disabilities, care-givers) 3. To raise awareness from an early stage to prevent abuse and other forms of  4. To ensure physical safety for vulnerable / at-risk groups facing abuse,4. To provide psychological support to vulnerable",
     "streamSuccessMsg": "تم حفظ المسار للمراجعة بنجاح"
   },
-"tasks": {
+  "tasks": {
     "assignTaskMsg": "هل انت متأكد من إسناد مهمة"
-  } ,
+  },
   "taskDetails": {
-    "enableStatusHidden":"محجوب",
-    "enableStatusActive":"متاح",
+    "enableStatusHidden": "محجوب",
+    "enableStatusActive": "متاح",
     "note": "تم إضافة ملاحظة جديدة",
-    "ensureNoteMsg" :"هل انت متأكد من إضافة الملاحظة؟",
-    "confirmNoteMsg" : "تم إضافة الملاحظة بنجاح",
-    "addAcceptNote" :"ملاحظة لقبول المسار",
-    "addAcceptMainProgramNote" :"ملاحظة لقبول البرنامج الرئيسي",
-    "addAcceptSubProgramSNote" :"ملاحظة لقبول البرنامج الفرعى",
-    "confirmStreamMsg" :"تم قبول تعريف المسار بنجاح",
-    "confirmMainProgramMsg" :"تم قبول تعريف البرنامج الرئيسي بنجاح",
-    "confirmSubProgramsMsg" : "تم قبول تعريف البرنامج الفرعي بنجاح"
-    
+    "ensureNoteMsg": "هل انت متأكد من إضافة الملاحظة؟",
+    "confirmNoteMsg": "تم إضافة الملاحظة بنجاح",
+    "addAcceptNote": "ملاحظة لقبول المسار",
+    "addAcceptMainProgramNote": "ملاحظة لقبول البرنامج الرئيسي",
+    "addAcceptSubProgramSNote": "ملاحظة لقبول البرنامج الفرعى",
+    "addAcceptBenefitsNote" : "ملاحظة لقبول الاعانة ",
+    "confirmStreamMsg": "تم قبول تعريف المسار بنجاح",
+    "confirmMainProgramMsg": "تم قبول تعريف البرنامج الرئيسي بنجاح",
+    "confirmSubProgramsMsg": "تم قبول تعريف البرنامج الفرعي بنجاح",
+    "confirmBenefitsMsg" :"تم قبول تعريف الإعانة بنجاح"
+
   },
   "createMainProgram": {
   "backUpStreamNumber":"PRG_StrSt_129",
@@ -60,7 +62,7 @@
     "secondTabArabicName": "الاسم باللغة العربية",
     "secondTabEnglishName": "Name in english",
     "thirdTabArabicName": "الاسم باللغة العربية",
-    "thirdTabEnglishName": "Name in english",
+    "thirdTabEnglishName": "Name in english", 
     "successMsgTabTwo": "تم إنشاء القائمة المرجعية بنجاح.",
     "successMsgTabThree": "تم إضافة العنصر بنجاح",
     "lookUpStatusActive": "مفعل",
@@ -68,6 +70,13 @@
     "englishName":"Business and property",
     "code":"2323",
     "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟"
+  },
+  "createBenefits": {
+    "backUpSubProgramNumber":"PRG_SPRG_015",
+    "arabicBenefitName": "دعم الأسر والرعاية الاجتماعية",
+    "englishBenefitName": "FSSC preventive",
+    "benefitEstimatedValue": "زيادة الوعي والوقاية من إدمان المخدرات",
+    "entity": "جهه خارجيه",
+    "benefitsSuccessMsg": "تم حفظ الإعانة للمراجعة بنجاح"
   }
-
 }

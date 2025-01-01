@@ -8,7 +8,7 @@ export class HomePage {
     this.programManagementButton = '//a[@data-testid="menu-programs-management"]';
     this.streamsManagementButton = '//a[@data-testid="submenu-streams-management"]';
     this.mainProgramManagementButton = '//a[@data-testid="submenu-main-program-management"]';
-    // this.subProgramsManagementButton = '//a[@data-testid="submenu-main-program-management""]';
+    this.subProgramsManagementButton = '//a[@data-testid="submenu-sub-program-management"]';
     this.createNewStreamButton = '//button[contains(text(),"تعريف مسار")]';
     this.tasksButton = '//a[@href="/my-tasks"]';
     this.generalSettingsButton = '//span[contains(text(),"الإعدادات العامة")]';

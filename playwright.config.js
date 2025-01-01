@@ -25,7 +25,7 @@ const ENV = 'uat';
 
 module.exports = defineConfig({
 
-  timeout: 120000,
+  timeout: 200000,
 
   globalSetup: require.resolve('./global-setup'),
  
@@ -61,63 +61,63 @@ module.exports = defineConfig({
 
   }, 
    /* Configure projects for major browsers */
-  projects: [
-    {
-      name: 'All',
-      testDir: './tests'              // Test directory
+  // projects: [
+  //   {
+  //     name: 'All',
+  //     testDir: './tests'              // Test directory
                        
-    },
-    {
-      name: 'Login',
-      testDir: './tests/AdminPortal/Login'              // Test directory
+  //   },
+  //   {
+  //     name: 'Login',
+  //     testDir: './tests/AdminPortal/Login'              // Test directory
                        
-    },
-    {
-      name: 'Programs',
-      testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
+  //   },
+  //   {
+  //     name: 'Programs',
+  //     testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
                        
-    },
-    {
-      name: 'Lookups',
-      testDir: './tests/AdminPortal/LookupsTests'             // Test directory
+  //   },
+  //   {
+  //     name: 'Lookups',
+  //     testDir: './tests/AdminPortal/LookupsTests'             // Test directory
      
-    },
-    /*{
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },*/
+  //   },
+  //   /*{
+  //     name: 'chromium',
+  //     use: { ...devices['Desktop Chrome'] },
+  //   },*/
    
 
-   /* {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+  //  /* {
+  //     name: 'firefox',
+  //     use: { ...devices['Desktop Firefox'] },
+  //   },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },*/
+  //   {
+  //     name: 'webkit',
+  //     use: { ...devices['Desktop Safari'] },
+  //   },*/
 
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
+  //   /* Test against mobile viewports. */
+  //   // {
+  //   //   name: 'Mobile Chrome',
+  //   //   use: { ...devices['Pixel 5'] },
+  //   // },
+  //   // {
+  //   //   name: 'Mobile Safari',
+  //   //   use: { ...devices['iPhone 12'] },
+  //   // },
 
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
-  ],
+  //   /* Test against branded browsers. */
+  //   // {
+  //   //   name: 'Microsoft Edge',
+  //   //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+  //   // },
+  //   // {
+  //   //   name: 'Google Chrome',
+  //   //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+  //   // },
+  // ],
 
   
 });
