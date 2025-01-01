@@ -54,7 +54,7 @@ test.beforeEach(async ({ page }) => {
 
 });
 
-test.only('Add and Approve New Stream', async () => {
+test('Add and Approve New Stream', async () => {
   // Step1: Navigate to streams list page
   await test.step('Navigate to StreamManagement page', async () => {
     await homePage.navigateToStreamsManagement();
