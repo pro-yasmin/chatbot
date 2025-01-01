@@ -100,7 +100,7 @@ export class BenefitsPage {
     await this.selectDropdownOption(this.applicationChannels);
     await this.page.keyboard.press('Tab');
     await this.page.click(this.defineBenefitsFeaturesBtn);
-    await this.page.waitForTimeout(20000);
+    await this.page.waitForTimeout(5000);
 
     //4-Review Data
     await this.page.click(this.defineBenefitsFeaturesBtn);
@@ -117,12 +117,14 @@ export class BenefitsPage {
 
   async selectTodayDate(dateLocator) {
     await this.page.click(dateLocator);
+    await this.page.waitForTimeout(2000);
     await this.page.waitForSelector('//div[@role="grid"]', { state: 'visible' });
     await this.page.click('//button[@role="gridcell" and not(contains(@class, "Mui-disabled"))]');
   }
 
   async selectTodayDateWithBtn(dateLocator) {
     await this.page.click(dateLocator);
+    await this.page.waitForTimeout(2000);
     await this.page.waitForSelector('//div[@role="grid"]', { state: 'visible' });
     await this.page.click('//button[@role="gridcell" and @aria-current="date"]');
     await this.page.click(this.selectDateBtn);

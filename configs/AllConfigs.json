@@ -6,7 +6,7 @@
   "ANDROID_HOME": "C:\\Users\\VEGA Laptop\\AppData\\Local\\Android\\Sdk",
   "APPDATA": "C:\\Users\\VEGA Laptop\\AppData\\Roaming",
   "BASE_URL": "https://adminportal-uat.iis-ssb.com/auth/login",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_11392_QGHVEDHFUYKKALRC",
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_15328_OGEDKAFMCPLAVHIM",
   "COLOR": "1",
   "COLORTERM": "truecolor",
   "CommonProgramFiles": "C:\\Program Files\\Common Files",
@@ -115,11 +115,14 @@
     "addAcceptNote": "ملاحظة لقبول المسار",
     "addAcceptMainProgramNote": "ملاحظة لقبول البرنامج الرئيسي",
     "addAcceptSubProgramSNote": "ملاحظة لقبول البرنامج الفرعى",
+    "addAcceptBenefitsNote": "ملاحظة لقبول الاعانة ",
     "confirmStreamMsg": "تم قبول تعريف المسار بنجاح",
     "confirmMainProgramMsg": "تم قبول تعريف البرنامج الرئيسي بنجاح",
-    "confirmSubProgramsMsg": "تم قبول تعريف البرنامج الفرعي بنجاح"
+    "confirmSubProgramsMsg": "تم قبول تعريف البرنامج الفرعي بنجاح",
+    "confirmBenefitsMsg": "تم قبول تعريف الإعانة بنجاح"
   },
   "createMainProgram": {
+    "backUpStreamNumber": "PRG_StrSt_129",
     "arabicMainProgramName": "البرامج الوقائية لدعم الأسر والرعاية الاجتماعية",
     "englishMainProgramName": "FSSC preventive Program",
     "responsibleEntity": "الجهة المسؤولة الأولي",
@@ -137,12 +140,21 @@
     "mainProgramSuccessMsg": "تم حفظ البرنامج للمراجعة بنجاح"
   },
   "createSubPrograms": {
+    "backUpProgramNumber": "PRG_MPRG_043",
     "arabicSubProgramName": "برامج التوعية والتدريب حول إدمان المخدرات",
     "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
     "conditionsOfAssistanceUnit": "برامج التوعية",
     "subProgramsSuccessMsg": "تم حفظ البرنامج الفرعي للمراجعة بنجاح"
   },
+  "lookUps": {
+    "successMsgTabTwo": "تم إنشاء القائمة المرجعية بنجاح.",
+    "successMsgTabThree": "تم إضافة العنصر بنجاح",
+    "lookUpStatusActive": "مفعل",
+    "arabicName": "الأعمال والأملاك",
+    "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟"
+  },
   "createBenefits": {
+    "backUpSubProgramNumber": "PRG_SPRG_015",
     "arabicBenefitName": "دعم الأسر والرعاية الاجتماعية",
     "englishBenefitName": "FSSC preventive",
     "benefitEstimatedValue": "زيادة الوعي والوقاية من إدمان المخدرات",

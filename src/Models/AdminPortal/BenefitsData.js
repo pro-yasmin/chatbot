@@ -66,13 +66,11 @@ export class BenefitsData {
     this.entity = value;
   }
 
-  
-
   // Getter and Setter for Random Benefit ID
   getCreatedBenefitId() {
-    return this.programId;
+    return this.benefitId;
   }
   setCreatedBenefitId(value) {
-    this.programId = value;
+    this.benefitId = value;
   }
 }

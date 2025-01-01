@@ -8,18 +8,11 @@ export class LoginPage {
           this.remeberCheckbox = '//img[@class="check--icon"]';
           this.loginButton = '//input[@id="kc-login"]';
           this.changeLangageMenu = '//button[@id="locale--button"]';
-          // '//button[@id="locale--button" and contains(@class, "locale--btn")]';
           this.nationalField ='//span[contains(text(),"رقم الهوية الوطنية")]';
-          //this.backToAppButton = '//a[@id="backToApplication"]';
- 
-
-          
         }   
 
       async  gotoAdminPortal (baseUrl){
-             await this.page.goto(baseUrl, { waitUntil: 'networkidle' });
-             //await this.clickBackToAppButton();
-             
+             await this.page.goto(baseUrl, { waitUntil: 'networkidle' });             
              await this.page.waitForTimeout(2000);
              await this.ensureArabicLanguage();
             }
@@ -31,34 +24,26 @@ export class LoginPage {
         var homePage = new HomePage(this.page);
         var avatarVisible = await homePage.checkAvatarIsExist();
         return avatarVisible;
-       
     }
 
       async ensureArabicLanguage() {
         try {
           await this.page.waitForLoadState('load');
-          console.log("Clicking on language menu...");
-
+          // console.log("Clicking on language menu...");
           await this.page.locator(this.changeLangageMenu).waitFor({ state: 'visible', timeout: 10000 });
           await this.page.locator(this.changeLangageMenu).click();
-          console.log("Checking if Arabic language is selected...");
-
+          // console.log("Checking if Arabic language is selected...");
           var isArabicSelected = await this.page.locator(this.nationalField).isVisible();
           if (isArabicSelected) {
             console.log("Arabic language is already selected.");
-
               return;
           }
-
-          console.log("Selecting Arabic language...");
-
+          // console.log("Selecting Arabic language...");
           var arabicOption = this.page.locator('li.locale--list__item', { hasText: 'عربي' });
           await arabicOption.waitFor({ state: 'visible', timeout: 10000 });
           await arabicOption.click();          
-          console.log("Waiting for Arabic language verification...");
-
+          // console.log("Waiting for Arabic language verification...");
           await this.page.waitForLoadState('networkidle');
-
         await this.page.locator(this.nationalField).waitFor({ state: 'visible', timeout: 10000 });
         console.log("Arabic language selected successfully.");
 

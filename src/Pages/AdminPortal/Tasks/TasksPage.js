@@ -2,7 +2,6 @@ const { SearchPage } = require("../SharedPages/SearchPage");
 const { PopUpPage } = require("../SharedPages/PopUpPage");
 const { TaskDetailsPage } = require("./TaskDetailsPage");
 
-
 export class TasksPage {
   constructor(page) {
     this.page = page;
@@ -14,14 +13,13 @@ export class TasksPage {
     this.searchInput = '//input[@placeholder="ادخل رقم الطلب"]';
     this.tasksTable = "//table//tbody";
     this.assignToMyselfBtn = '//ul[@role="menu"]//li[1]';
-    this.dotsLocator;
     this.assignPopUpMsgTitle = '//span[@id="modal-modal-title"]';
     this.acceptAssignBtn = '//button[contains(text(),"نعم، إسناد")]';
     this.cancelAssignBtn = '//button[contains(text(),"إلغاء")]';
   }
 
   async navigateToMyTasksTab() {
-    await  this.page.waitForTimeout(3000);
+    await  this.page.waitForTimeout(7000);
     await this.page.waitForSelector(this.myTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myTasksTab);
     console.log("Navigate to My tasks tab")
@@ -34,19 +32,17 @@ export class TasksPage {
     await  this.page.waitForTimeout(7000);
     await this.page.waitForSelector(this.myCompletedTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myCompletedTasksTab);
-    console.log("Navigate to My  completed tasks tab");
+    console.log("Navigate to My completed tasks tab");
    }
 
   async navigateToGroupTasksTab() {
-    await  this.page.waitForTimeout(3000);
+    await  this.page.waitForTimeout(7000);
     await this.page.waitForSelector(this.groupTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.groupTasksTab);
     console.log("Navigate to group tasks tab");
-    
   }
 
   async assignTaskToMe(taskNumber) {
-  
     await this.navigateToGroupTasksTab();
     let taskRow = [];
     taskRow = await this.search.getRowInTableWithSpecificText(this.tasksTable,taskNumber);
@@ -70,12 +66,12 @@ export class TasksPage {
     taskRow = await this.search.getRowInTableWithSpecificText(this.tasksTable,taskNumber);
     var actionlocator = "div >> button";
     await this.search.clickRowAction(taskRow, actionlocator);
-    var result=true;
-    /*var expectedStatus = global.testConfig.taskDetails.enableStatusActive;
+    // var result=true;
+    var expectedStatus = global.testConfig.taskDetails.enableStatusActive;
     var result = await this.taskDetailsPage.checkEnablementStatus(
       expectedStatus
     );
-    if (result) console.log("Task EnabledStatus is Active now");*/
+    if (result) console.log("Task EnabledStatus is Active now");
     return result;
   }
 
@@ -155,23 +151,24 @@ export class TasksPage {
     return false;
   }
 
-  async approveBenefits() {
+  async approveBenefits(benefitNumber) {
     let status; 
     let acceptstatus;
     let ensurestatus; 
     await this.navigateToMyTasksTab();
-    let taskSubProgramsRow = [];
-    taskSubProgramsRow = await this.search.getFirstRow(this.tasksTable);
+    let taskBenefitsRow = [];
+    taskBenefitsRow = await this.search.getRowInTableWithSpecificText(this.tasksTable,benefitNumber);
+    //taskSubProgramsRow = await this.search.getFirstRow(this.tasksTable);
     var actionlocator = "div >> button";
-    await this.search.clickRowAction(taskSubProgramsRow, actionlocator);
+    await this.search.clickRowAction(taskBenefitsRow, actionlocator);
     console.log("Navigate To Benefits Detials Page Successfully");
-    var intialBenefitStatus = global.testConfig.taskDetails.enableStatusHidden;
+    var intialBenefitsStatus = global.testConfig.taskDetails.enableStatusHidden;
     status = await this.taskDetailsPage.checkEnablementStatus(
-      intialBenefitStatus
+      intialBenefitsStatus
     );
    // stramNoteAdded = await this.taskDetailsPage.addNoteForStream();
     acceptstatus = await this.taskDetailsPage.acceptBenefits();
-    ensurestatus = await this.EnsureTaskAccepted();
+    ensurestatus = await this.EnsureTaskAccepted(benefitNumber);
 
     if (status  && acceptstatus && ensurestatus) return true;
 

@@ -22,22 +22,6 @@ export class BenefitsManagmentPage {
     return BenefitsRow;
   }
 
-  // async clickOnCreateSubProgram(subProgramsName) {
-  //   let lastTd;
-  //   let subProgramRow = [];
-  //   subProgramRow = await this.searchOnSpecificSubProgram(subProgramsName);
-  //   if (subProgramRow && subProgramRow.length > 0) {
-  //     lastTd = subProgramRow[subProgramRow.length - 1].tdLocator;
-  //     this.dotsLocator = lastTd.locator("div >> button");
-  //     await this.dotsLocator.click();
-  //     await this.page.waitForSelector(this.createSubProgramOption, {
-  //       state: "visible",
-  //       timeout: 60000,
-  //     });
-  //     await this.page.click(this.createSubProgramOption);
-  //     console.log("Clicked the Create Sub Program button");
-  //   }
-  // }
 
   async checkBenefitsRowDetails(benefitsData) {
     let arabicTd;
@@ -67,9 +51,9 @@ export class BenefitsManagmentPage {
       actualEnglishName === benefitsData.getEnglishBenefitName()
     ) {
       console.log("Sub Program names matched successfully.");
-      let benefitsId = await benefitsRow[0].tdLocator.textContent();
-      benefitsData.setCreatedBenefitId(benefitsId);
-      console.log("Created Benefits ID set in Benefits Data: " + benefitsId);
+      let benefitId = await benefitsRow[0].tdLocator.textContent();
+      benefitsData.setCreatedBenefitId(benefitId);
+      console.log("Created Benefits ID set in Benefits Data: " + benefitId);
       return true;
     }
     return false;

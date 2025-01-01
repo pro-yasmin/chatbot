@@ -4,7 +4,7 @@ const { PopUpPage } = require("../SharedPages/PopUpPage");
 export class TaskDetailsPage {
   constructor(page) {
     this.page = page;
-    this.myStreamDataTab='//button[@id="tab-0"]';
+    this.myDataTab='//button[@id="tab-0"]';
     this.myNotesTab='//button[@id="tab-1"]';
     this.enablementStatus ='(//label[contains(text(),"حالة الإتاحة")]//following::span)[1]';
     this.addNoteBtn = '//button[contains(text(),"إضافة ملاحظة")]';
@@ -18,7 +18,7 @@ export class TaskDetailsPage {
     this.acceptStreamBtn='//button[contains(@class, "MuiButton-containedPrimary") and contains(., "قبول المسار")]';
     this.acceptMainProgramBtn='//button[contains(text(),"قبول البرنامج الرئيسي")]';
     this.acceptSubProgramsBtn='//button[contains(text(),"قبول البرنامج الفرعي")]';
-    this.acceptSubProgramsBtn='//button[contains(text(),"قبول البرنامج الفرعي")]';
+    this.acceptBenefitBtn='//button[contains(text(),"قبول الإعانة")]';
     this.ensureAcceptTaskNotesField = '//textarea[@name="description"]';
     this.ensureAcceptTaskNotesBtn ='//button[@type="submit"]';
     this.confirmTaskMsgTitle='//span[@id="modal-modal-title"]';
@@ -26,10 +26,9 @@ export class TaskDetailsPage {
    
   }
 
-
   async openTaskDataTab() {
-     await this.page.click(this.myStreamDataTab);
-     //await this.page.waitForTimeout(5000);
+     await this.page.click(this.myDataTab);
+     await this.page.waitForTimeout(2000);
   }
 
   async openNotesTab() {
@@ -37,7 +36,7 @@ export class TaskDetailsPage {
   }
 
   async checkEnablementStatus(expectedStatus) {
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    // await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
     //await this.openNotesTab();
     await this.openTaskDataTab();
     const statusElement = this.page.locator(this.enablementStatus);
@@ -73,7 +72,6 @@ export class TaskDetailsPage {
   async acceptStream() {
     //await this.openTaskDataTab();
     await this.page.waitForSelector(this.acceptStreamBtn , { state: 'visible' });
-    
     await this.page.click(this.acceptStreamBtn);
     var popUpMsg = new PopUpPage(this.page);
     await popUpMsg.inputPopUpMessage(this.ensureAcceptTaskNotesField, this.ensureAcceptTaskNotesBtn,global.testConfig.taskDetails.addAcceptNote);
@@ -106,25 +104,22 @@ export class TaskDetailsPage {
     // await this.page.waitForTimeout(2000);
     var result = await popUpMsg.popUpMessage(this.confirmTaskMsgTitle, this.backToTasksBtn ,global.testConfig.taskDetails.confirmSubProgramsMsg);
     if (result)
-      console.log("The SubProgram Accepted Successfully.");
+      console.log("The Sub Program Accepted Successfully.");
     return result;
   }
 
   async acceptBenefits() {
     //check if will need to change or not 
     await this.openTaskDataTab();
-    await this.page.click(this.acceptSubProgramsBtn);
+    await this.page.click(this.acceptBenefitBtn);
     var popUpMsg = new PopUpPage(this.page);
-    await popUpMsg.inputPopUpMessage(this.ensureAcceptTaskNotesField, this.ensureAcceptTaskNotesBtn,global.testConfig.taskDetails.addAcceptSubProgramSNote);
+    await popUpMsg.inputPopUpMessage(this.ensureAcceptTaskNotesField, this.ensureAcceptTaskNotesBtn,global.testConfig.taskDetails.addAcceptBenefitsNote);
     // await this.page.waitForTimeout(2000);
-    var result = await popUpMsg.popUpMessage(this.confirmTaskMsgTitle, this.backToTasksBtn ,global.testConfig.taskDetails.confirmSubProgramsMsg);
+    var result = await popUpMsg.popUpMessage(this.confirmTaskMsgTitle, this.backToTasksBtn ,global.testConfig.taskDetails.confirmBenefitsMsg);
     if (result)
-      console.log("The SubProgram Accepted Successfully.");
+      console.log("The Benefits Accepted Successfully.");
     return result;
   }
-
-
-
 
 }
 module.exports = { TaskDetailsPage };

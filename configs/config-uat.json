@@ -10,60 +10,63 @@
     "englishGoal": "1. To ensure equal rights to economic resources and basic services to poor and economically vulnerable / at-risk populations of the country 2. To enable a better quality of life for groups with special physical and mental needs (e.g., people with disabilities, care-givers) 3. To raise awareness from an early stage to prevent abuse and other forms of  4. To ensure physical safety for vulnerable / at-risk groups facing abuse,4. To provide psychological support to vulnerable",
     "streamSuccessMsg": "تم حفظ المسار للمراجعة بنجاح"
   },
-"tasks": {
+  "tasks": {
     "assignTaskMsg": "هل انت متأكد من إسناد مهمة"
-  } ,
+  },
   "taskDetails": {
-    "enableStatusHidden":"محجوب",
-    "enableStatusActive":"متاح",
+    "enableStatusHidden": "محجوب",
+    "enableStatusActive": "متاح",
     "note": "تم إضافة ملاحظة جديدة",
-    "ensureNoteMsg" :"هل انت متأكد من إضافة الملاحظة؟",
-    "confirmNoteMsg" : "تم إضافة الملاحظة بنجاح",
-    "addAcceptNote" :"ملاحظة لقبول المسار",
-    "addAcceptMainProgramNote" :"ملاحظة لقبول البرنامج الرئيسي",
-    "addAcceptSubProgramSNote" :"ملاحظة لقبول البرنامج الفرعى",
-    "confirmStreamMsg" :"تم قبول تعريف المسار بنجاح",
-    "confirmMainProgramMsg" :"تم قبول تعريف البرنامج الرئيسي بنجاح",
-    "confirmSubProgramsMsg" : "تم قبول تعريف البرنامج الفرعي بنجاح"
-    
+    "ensureNoteMsg": "هل انت متأكد من إضافة الملاحظة؟",
+    "confirmNoteMsg": "تم إضافة الملاحظة بنجاح",
+    "addAcceptNote": "ملاحظة لقبول المسار",
+    "addAcceptMainProgramNote": "ملاحظة لقبول البرنامج الرئيسي",
+    "addAcceptSubProgramSNote": "ملاحظة لقبول البرنامج الفرعى",
+    "addAcceptBenefitsNote" : "ملاحظة لقبول الاعانة ",
+    "confirmStreamMsg": "تم قبول تعريف المسار بنجاح",
+    "confirmMainProgramMsg": "تم قبول تعريف البرنامج الرئيسي بنجاح",
+    "confirmSubProgramsMsg": "تم قبول تعريف البرنامج الفرعي بنجاح",
+    "confirmBenefitsMsg" :"تم قبول تعريف الإعانة بنجاح"
+
   },
   "createMainProgram": {
-  "backUpStreamNumber":"PRG_StrSt_129",
-  "arabicMainProgramName": "البرامج الوقائية لدعم الأسر والرعاية الاجتماعية",
-  "englishMainProgramName": "FSSC preventive Program",
-  "responsibleEntity": "الجهة المسؤولة الأولي",
-  "arabicMainProgramDescription": "إجراء الدورات التدريبية لرفع مستوى الوعي والوقاية من سوء المعاملة وغيرها من أشكال العنف",
-  "englishMainProgramDescription": "Trainings to raise awareness and to prevent abuse and other forms of violence",
-  "year": "تسعة عشر تسعون",
-  "estimatedBudget": "الميزانية التقديرية الميزانية التقديرية",
-  "calculationMethod": "طريقة الحساب طريقة الحس طريقة الحساب طريقة الحسابطريقة الحساب طريقة الحساب",
-  "riskCategory": "فترة الحمل والطفولة المبكرة",
-  "risks":"ضعف صحة الأمهات",
-  "riskArabicDescription": "تعزيز تمكين وسالمة الفئات الهشة من خلال برامج التوعي المجتمعي والدعم الشامل",
-  "riskEnglishDescription": "To promote the well-being and safety of vulnerable groups through support, awareness, and inclusion Programs",
-  "arabicMainProgramGoal": "1. ضمان المساواة لذوي الدخل المحدود والفئات الهشة في حقوق الحصول على الموارد الاقتصادية والخدمات األساسية في الدولة 2. تمكين جودة الحياة للفئات ذوي الخاصة من النواحي الجسدية والعقلية (مثل الأشخاص ذوي الاعاقة ومقدمي الرعاية) 3. رفع مستوى منذ مراحل الطفولة المبكرة للوقاية من سوء المعاملة  5. تقديم الدعم النفس ي للفئات الهشة المحتاجة لضمان صحتها النفسية",
-  "englishMainProgramGoal": "1. To ensure equal rights to economic resources and basic services to poor and economically vulnerable To provide psychological support to vulnerable",
-  "mainProgramSuccessMsg":"تم حفظ البرنامج للمراجعة بنجاح"
-},
-"createSubPrograms": {
- "backUpProgramNumber":"PRG_MPRG_043",
- "arabicSubProgramName": "برامج التوعية والتدريب حول إدمان المخدرات",
- "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
- "conditionsOfAssistanceUnit" : "برامج التوعية",
- "subProgramsSuccessMsg" :"تم حفظ البرنامج الفرعي للمراجعة بنجاح"
-},
-"lookUps": {
+    "backUpStreamNumber": "PRG_StrSt_129",
+    "arabicMainProgramName": "البرامج الوقائية لدعم الأسر والرعاية الاجتماعية",
+    "englishMainProgramName": "FSSC preventive Program",
+    "responsibleEntity": "الجهة المسؤولة الأولي",
+    "arabicMainProgramDescription": "إجراء الدورات التدريبية لرفع مستوى الوعي والوقاية من سوء المعاملة وغيرها من أشكال العنف",
+    "englishMainProgramDescription": "Trainings to raise awareness and to prevent abuse and other forms of violence",
+    "year": "تسعة عشر تسعون",
+    "estimatedBudget": "الميزانية التقديرية الميزانية التقديرية",
+    "calculationMethod": "طريقة الحساب طريقة الحس طريقة الحساب طريقة الحسابطريقة الحساب طريقة الحساب",
+    "riskCategory": "فترة الحمل والطفولة المبكرة",
+    "risks": "ضعف صحة الأمهات",
+    "riskArabicDescription": "تعزيز تمكين وسالمة الفئات الهشة من خلال برامج التوعي المجتمعي والدعم الشامل",
+    "riskEnglishDescription": "To promote the well-being and safety of vulnerable groups through support, awareness, and inclusion Programs",
+    "arabicMainProgramGoal": "1. ضمان المساواة لذوي الدخل المحدود والفئات الهشة في حقوق الحصول على الموارد الاقتصادية والخدمات األساسية في الدولة 2. تمكين جودة الحياة للفئات ذوي الخاصة من النواحي الجسدية والعقلية (مثل الأشخاص ذوي الاعاقة ومقدمي الرعاية) 3. رفع مستوى منذ مراحل الطفولة المبكرة للوقاية من سوء المعاملة  5. تقديم الدعم النفس ي للفئات الهشة المحتاجة لضمان صحتها النفسية",
+    "englishMainProgramGoal": "1. To ensure equal rights to economic resources and basic services to poor and economically vulnerable To provide psychological support to vulnerable",
+    "mainProgramSuccessMsg": "تم حفظ البرنامج للمراجعة بنجاح"
+  },
+  "createSubPrograms": {
+    "backUpProgramNumber": "PRG_MPRG_043",
+    "arabicSubProgramName": "برامج التوعية والتدريب حول إدمان المخدرات",
+    "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
+    "conditionsOfAssistanceUnit": "برامج التوعية",
+    "subProgramsSuccessMsg": "تم حفظ البرنامج الفرعي للمراجعة بنجاح"
+  },
+  "lookUps": {
     "successMsgTabTwo": "تم إنشاء القائمة المرجعية بنجاح.",
     "successMsgTabThree": "تم إضافة العنصر بنجاح",
     "lookUpStatusActive": "مفعل",
-    "arabicName":"الأعمال والأملاك",
+    "arabicName": "الأعمال والأملاك",
     "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟"
-  } ,
+  },
   "createBenefits": {
-  "arabicBenefitName":"دعم الأسر والرعاية الاجتماعية",
-  "englishBenefitName" : "FSSC preventive",
-  "benefitEstimatedValue" : "زيادة الوعي والوقاية من إدمان المخدرات",
-  "entity" : "جهه خارجيه",
-  "benefitsSuccessMsg" :"تم حفظ الإعانة للمراجعة بنجاح"
+    "backUpSubProgramNumber":"PRG_SPRG_015",
+    "arabicBenefitName": "دعم الأسر والرعاية الاجتماعية",
+    "englishBenefitName": "FSSC preventive",
+    "benefitEstimatedValue": "زيادة الوعي والوقاية من إدمان المخدرات",
+    "entity": "جهه خارجيه",
+    "benefitsSuccessMsg": "تم حفظ الإعانة للمراجعة بنجاح"
   }
 }

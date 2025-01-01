@@ -99,6 +99,7 @@ export class SubProgramsPage {
 
   async selectTodayDate(dateLocator) {
     await this.page.click(dateLocator);
+    await this.page.waitForTimeout(2000);
     await this.page.waitForSelector('//div[@role="grid"]', { state: 'visible' });
     await this.page.click('//button[@role="gridcell" and @aria-current="date"]');
   }

@@ -35,10 +35,12 @@ export class SubProgramsManagementPage  {
     return subProgramRow;
   }
 
-  async clickOnCreateBenefit(subProgramsName) {
+  async clickOnCreateBenefit(subProgramName,backUpSubrogram) {
     let lastTd;
     let subProgramRow = [];
-    subProgramRow = await this.searchOnSpecificSubProgram(subProgramsName);
+    if(subProgramName== null)
+        subProgramRow = await this.searchOnSpecificSubProgram(backUpSubrogram);
+    else subProgramRow = await this.searchOnSpecificSubProgram(subProgramName);
     if (subProgramRow && subProgramRow.length > 0) {
       lastTd = subProgramRow[subProgramRow.length - 1].tdLocator;
       this.dotsLocator = lastTd.locator("div >> button");
