@@ -17,37 +17,39 @@ export class LookupsManagmentPage {
     }
 
 
-  async clickAddButton() {
-    await  this.page.waitForTimeout(2000);
-    await this.page.waitForSelector(this.addButton, { visible: true });
-    await this.page.click(this.addButton);
+    // Click on Add Button
+    async clickAddButton() {
+        await this.page.waitForTimeout(2000);
+        await this.page.waitForSelector(this.addButton, { visible: true });
+        await this.page.click(this.addButton);
     }
 
+    // Click on View Lookup Button for view test case
     async clickViewLookUpButton(lookupData) {
-        //await this.page.click(this.viewLookUpButton);
         let lookupRow = [];
         lookupRow = await this.search.getRowInTableWithSpecificText(this.lookupTable, lookupData.getCreatedLookupId());
         var actionlocator = "div >> button:nth-of-type(1)";
         await this.search.clickRowAction(lookupRow, actionlocator);
     }
 
+    // Click on Edit Lookup Button for edit test case
     async clickEditLookupButton(lookupData) {
-        //await this.page.click(this.editLookupButton);
         let lookupRow = [];
         lookupRow = await this.search.getRowInTableWithSpecificText(this.lookupTable, lookupData.getCreatedLookupId());
         var actionlocator = "div >> button:nth-of-type(2)";
         await this.search.clickRowAction(lookupRow, actionlocator);
     }
 
-  async checkNewLookupAdded(lookupData) {
-    let arabicTd;
-    let englishTd;
-    let statusTd;
-    let lookupArabicName;
-    let lookupEnglishName;
-    let lookupStatus;
-    let lookupRow = [];
-    lookupRow = await this.search.getRowInTableWithSpecificText(this.lookupTable,lookupData.getLookupEnglishName());
+    // Check if the new lookup is added successfully after creating new lookup
+    async checkNewLookupAdded(lookupData) {
+        let arabicTd;
+        let englishTd;
+        let statusTd;
+        let lookupArabicName;
+        let lookupEnglishName;
+        let lookupStatus;
+        let lookupRow = [];
+        lookupRow = await this.search.getRowInTableWithSpecificText(this.lookupTable, lookupData.getLookupEnglishName());
 
         if (lookupRow && lookupRow.length > 0) {
             arabicTd = lookupRow[1].tdLocator;
