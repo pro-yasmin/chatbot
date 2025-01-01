@@ -15,7 +15,7 @@ let lookupData;
 
 test.beforeEach(async () => {
     console.log('Delay before the test starts...');
-    await new Promise(resolve => setTimeout(resolve, 5000)); // 2-second delay
+    await new Promise(resolve => setTimeout(resolve, 7000)); // 2-second delay
 });
 
 test('Edit Lookup', async ({ page }) => {
