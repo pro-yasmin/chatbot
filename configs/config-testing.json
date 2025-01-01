@@ -53,6 +53,14 @@
  "subProgramsSuccessMsg" :"تم حفظ البرنامج الفرعي للمراجعة بنجاح"
 },
 "lookUps": {
+    "firstTabArabicName": "اسم القائمة باللغة العربية",
+    "firstTabEnglishName": "Lookup English Name",
+    "firstTabDescriptionArabicName": "وصف القائمة المرجعية باللغة العربية",
+    "firstTabDescriptionEnglishName": "Lookup Description English Name",
+    "secondTabArabicName": "الاسم باللغة العربية",
+    "secondTabEnglishName": "Name in english",
+    "thirdTabArabicName": "الاسم باللغة العربية",
+    "thirdTabEnglishName": "Name in english",
     "successMsgTabTwo": "تم إنشاء القائمة المرجعية بنجاح.",
     "successMsgTabThree": "تم إضافة العنصر بنجاح",
     "lookUpStatusActive": "مفعل",
