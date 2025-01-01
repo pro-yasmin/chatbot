@@ -1,6 +1,6 @@
 const { PopUpPage } = require('../SharedPages/PopUpPage');
 const { expect } = require('@playwright/test');
-let createdLookUpArName,createdLookUpEnName;
+let createdLookUpArName, createdLookUpEnName;
 
 export class LookupPage {
   constructor(page) {
@@ -10,7 +10,7 @@ export class LookupPage {
     this.popUpMsg = new PopUpPage(this.page);
     //locators
     this.successPopupTitle = '//span[@id="modal-modal-title"]';
-    //Lookup Definition
+    //Lookup Definition - first tab
     this.lookupArabicName = '//input[@name="data[nameAr]"]';
     this.lookupEnglishName = '//input[@name="data[nameEn]"]';
     this.componentDdl = '(//div[@class="form-control ui fluid selection dropdown"])[1]';
@@ -23,14 +23,14 @@ export class LookupPage {
     this.lookupDescriptionEnglishName = '//textarea[@name="data[descriptionEn]"]';
     this.defineLookupButton = '[data-testid="next-button"]';
 
-    //Lookup Design
+    //Lookup Design - second tab
     this.nameInArabic = '//input[@name="data[nameAr]"]';
     this.nameInEnglish = '//input[@name="data[nameEn]"]';
     this.code = '//input[@name="data[code]"]';
     this.createLookupButton = '[data-testid="next-button"]';
     this.popUpDismissButton = '//button[contains(text(),"تم")]';
 
-    //Lookup Item management
+    //Lookup Item management - third tab
     this.nameArabic = '//input[@name="data[nameAr]"]';
     this.nameEnglish = '//input[@name="data[nameEn]"]';
     this.codeLookup = '//input[@name="data[code]"]';
@@ -47,7 +47,7 @@ export class LookupPage {
     this.headlinePage = '//span[contains(text(),"المعلومات الرئيسية")]';
   }
 
-
+  // fill lookup definition information - first tab
   async fillLookupDefinitionInformation(lookupData) {
     console.log("Start filling Definition information");
     this.createdLookUpArName = lookupData.getLookupArabicName();
@@ -72,6 +72,7 @@ export class LookupPage {
     console.log("End filling Definition information");
   }
 
+  // fill lookup design information - second tab
   async fillLookupDesignInformation(lookupData) {
     console.log("Start filling Design information");
     await this.page.waitForSelector(this.createLookupButton, { visible: true });
@@ -85,15 +86,16 @@ export class LookupPage {
     return result;
   }
 
+  // fill lookup item management information - third tab
   async fillLookupItemManagementInformation(lookupData) {
     console.log("Start filling items information");
     await this.page.waitForSelector(this.addItemToLookupButton, { visible: true });
     await this.page.fill(this.nameArabic, lookupData.getNameArabic());
     await this.page.fill(this.nameEnglish, lookupData.getNameEnglish());
     await this.page.fill(this.codeLookup, lookupData.getCodeLookup());
-   //await this.page.click(this.mainList);
-   // await this.page.waitForSelector(this.mainListFirstOption, { visible: true });
-   // await this.page.click(this.mainListFirstOption);
+    //await this.page.click(this.mainList);
+    // await this.page.waitForSelector(this.mainListFirstOption, { visible: true });
+    // await this.page.click(this.mainListFirstOption);
     await this.page.click(this.visibleToggle);
     await this.page.click(this.addItemToLookupButton);
     var result = await this.popUpMsg.popUpMessage(this.successPopupTitle, this.popUpDismissButton, global.testConfig.lookUps.successMsgTabThree);
@@ -103,23 +105,25 @@ export class LookupPage {
     return result;
   }
 
+  // create new lookup
   async createNewLookup(lookupData) {
     var lookupDesignDone;
     var lookupitemCreated;
     await this.fillLookupDefinitionInformation(lookupData);
-    lookupDesignDone=await this.fillLookupDesignInformation(lookupData);
-    if(lookupDesignDone)
-    {
-      lookupitemCreated= await this.fillLookupItemManagementInformation(lookupData);
-     }
-      await  this.page.waitForTimeout(3000);
-      return lookupDesignDone && lookupitemCreated;
+    lookupDesignDone = await this.fillLookupDesignInformation(lookupData);
+    if (lookupDesignDone) {
+      lookupitemCreated = await this.fillLookupItemManagementInformation(lookupData);
+    }
+    await this.page.waitForTimeout(3000);
+    return lookupDesignDone && lookupitemCreated;
   }
 
+  // validate view lookup page is opened
   async validateViewLookupPageIsOpened() {
     await this.page.waitForSelector(this.headlinePage, { visible: true });
   }
 
+  // add new lookup item for edit test case
   async addNewLookupItem() {
     await this.page.fill(this.nameArabic, global.testConfig.lookUps.arabicName);
     await this.page.fill(this.nameEnglish, global.testConfig.lookUps.englishName);
@@ -130,6 +134,7 @@ export class LookupPage {
     await this.page.click(this.addItemToLookupButton);
   }
 
+  // view new lookup item details after adding it
   async viewNewLookupItemDetails() {
     await this.page.click(this.viewLookUpButton);
     expect(await this.page.isVisible(this.lookupDetailsPage)).toBeTruthy();
