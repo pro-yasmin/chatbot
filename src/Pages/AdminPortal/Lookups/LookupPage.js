@@ -65,6 +65,7 @@ export class LookupPage {
     //await this.page.click(this.parentLookupFirstOption);
     await this.page.fill(this.lookupDescriptionArabicName, lookupData.getLookupDescriptionArabicName());
     await this.page.fill(this.lookupDescriptionEnglishName, lookupData.getLookupDescriptionEnglishName());
+    await  this.page.waitForTimeout(1000);
     await this.page.click(this.defineLookupButton);
     lookupData.setLookupArabicName(this.createdLookUpArName);
     lookupData.setLookupEnglishName(this.createdLookUpEnName);
@@ -77,6 +78,7 @@ export class LookupPage {
     await this.page.fill(this.nameInArabic, lookupData.getNameInArabic());
     await this.page.fill(this.nameInEnglish, lookupData.getNameInEnglish());
     await this.page.fill(this.code, lookupData.getCode());
+    await  this.page.waitForTimeout(1000);
     await this.page.click(this.createLookupButton);
     var result = await this.popUpMsg.popUpMessage(this.successPopupTitle, this.popUpDismissButton, global.testConfig.lookUps.successMsgTabTwo);
     console.log("End filling Design information");
