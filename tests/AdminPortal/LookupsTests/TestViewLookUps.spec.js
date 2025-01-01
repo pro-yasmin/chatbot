@@ -24,8 +24,8 @@ test('View Lookup', async ({ page }) => {
 
 
     var baseUrl = global.testConfig.BASE_URL;
-    var adminusername = global.testConfig.ADMIN_USER;
-    var adminpassword = global.testConfig.ADMIN_PASS;
+    var adminusername = global.testConfig.GENERAL_SETTING_USER;
+    var adminpassword = global.testConfig.GENERAL_SETTING_PASS;
 
     await test.step('Login to Admin Portal', async () => {
         await loginPage.gotoAdminPortal(baseUrl);
