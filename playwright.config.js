@@ -63,7 +63,7 @@ module.exports = defineConfig({
    /* Configure projects for major browsers */
   projects: [
     {
-      name: 'All tests',
+      name: 'All',
       testDir: './tests'              // Test directory
                        
     },
