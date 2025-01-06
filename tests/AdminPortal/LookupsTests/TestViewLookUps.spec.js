@@ -39,11 +39,11 @@ test('View Lookup', async ({ page }) => {
     });
     await test.step('Create New Lookup', async () => {
         await lookupsManagmentPage.clickAddButton();
-        await lookupPage.createNewLookup(lookupData);
+        expect(await lookupPage.createNewLookup(lookupData)).toBe(true);
         console.log('New lookup Created Successfully');
     });
     await test.step('Check New Lookup Added', async () => {
-        await lookupsManagmentPage.checkNewLookupAdded(lookupData);
+        expect(await lookupsManagmentPage.checkNewLookupAdded(lookupData)).toBe(true);
         console.log('New lookup Details Checked Successfully');
     });
     await test.step('View LookUp After adding', async () => {

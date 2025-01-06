@@ -24,7 +24,13 @@ export class LookupsManagmentPage {
         await this.page.click(this.addButton);
     }
 
-    // Click on View Lookup Button for view test case
+    /**
+     * Clicks the "View" button for a specific lookup entry in the lookup table.
+     *
+     * @param {Object} lookupData - The data object containing information about the lookup entry.
+     * @param {Function} lookupData.getCreatedLookupId - A function that returns the ID of the created lookup entry.
+     * @returns {Promise<void>} - A promise that resolves when the action is completed.
+     */
     async clickViewLookUpButton(lookupData) {
         let lookupRow = [];
         lookupRow = await this.search.getRowInTableWithSpecificText(this.lookupTable, lookupData.getCreatedLookupId());
@@ -32,7 +38,13 @@ export class LookupsManagmentPage {
         await this.search.clickRowAction(lookupRow, actionlocator);
     }
 
-    // Click on Edit Lookup Button for edit test case
+    /**
+     * Clicks the edit button for a specific lookup entry in the lookup table.
+     *
+     * @param {Object} lookupData - The data object containing information about the lookup entry.
+     * @param {Function} lookupData.getCreatedLookupId - A function that returns the ID of the created lookup entry.
+     * @returns {Promise<void>} - A promise that resolves when the edit button has been clicked.
+     */
     async clickEditLookupButton(lookupData) {
         let lookupRow = [];
         lookupRow = await this.search.getRowInTableWithSpecificText(this.lookupTable, lookupData.getCreatedLookupId());
@@ -40,7 +52,16 @@ export class LookupsManagmentPage {
         await this.search.clickRowAction(lookupRow, actionlocator);
     }
 
-    // Check if the new lookup is added successfully after creating new lookup
+    /**
+     * Checks if a new lookup has been added successfully by verifying the Arabic name, English name, and status.
+     * 
+     * @param {Object} lookupData - The data of the lookup to be checked.
+     * @param {Function} lookupData.getLookupArabicName - Function to get the Arabic name of the lookup.
+     * @param {Function} lookupData.getLookupEnglishName - Function to get the English name of the lookup.
+     * @param {Function} lookupData.setCreatedLookupId - Function to set the created lookup ID.
+     * 
+     * @returns {Promise<boolean>} - Returns true if the lookup names and status match the expected values, otherwise false.
+     */
     async checkNewLookupAdded(lookupData) {
         let arabicTd;
         let englishTd;

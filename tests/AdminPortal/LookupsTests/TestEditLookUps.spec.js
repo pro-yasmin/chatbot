@@ -21,8 +21,6 @@ test('Edit Lookup', async ({ page }) => {
     lookupsManagmentPage = new LookupsManagmentPage(page);
     lookupPage = new LookupPage(page);
     lookupData = new LookupData(page);
-
-
     var baseUrl = global.testConfig.BASE_URL;
     var adminusername = global.testConfig.GENERAL_SETTING_USER;
     var adminpassword = global.testConfig.GENERAL_SETTING_PASS;
@@ -39,21 +37,21 @@ test('Edit Lookup', async ({ page }) => {
     });
     await test.step('Create New Lookup', async () => {
         await lookupsManagmentPage.clickAddButton();
-        await lookupPage.createNewLookup(lookupData);
+        expect(await lookupPage.createNewLookup(lookupData)).toBe(true);
         console.log('New lookup Created Successfully');
     });
     await test.step('Check New Lookup Added', async () => {
-        await lookupsManagmentPage.checkNewLookupAdded(lookupData);
+        expect(await lookupsManagmentPage.checkNewLookupAdded(lookupData)).toBe(true);
         console.log('New lookup Details Checked Successfully');
     });
     await test.step('Edit Lookup', async () => {
         await lookupsManagmentPage.clickEditLookupButton(lookupData);
         console.log('Edit LookUp Button Clicked');
-        await lookupPage.addNewLookupItem();
+        expect(await lookupPage.addNewLookupItem()).toBe(true);
         console.log('New Lookup Item Added');
     });
     await test.step('View New Lookup Item after adding', async () => {
-        await lookupPage.viewNewLookupItemDetails();
+        expect(await lookupPage.viewNewLookupItemDetails()).toBe(true);
         console.log('New Lookup Item Details Viewed');
     });
     await test.step('Logout from Admin Portal', async () => {

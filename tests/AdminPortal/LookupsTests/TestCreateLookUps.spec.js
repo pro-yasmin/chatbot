@@ -40,7 +40,7 @@ test('Create New Lookup', async ({ page }) => {
     });
 
     // Step2: Create New Lookup
-    await test.step('Create New Stream Task', async () => {
+    await test.step('Create New Lookup', async () => {
         await lookupsManagmentPage.clickAddButton();
         lookupCreated = await lookupPage.createNewLookup(lookupData);
         expect(lookupCreated).toBe(true);
