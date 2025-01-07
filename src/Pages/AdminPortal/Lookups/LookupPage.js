@@ -47,7 +47,19 @@ export class LookupPage {
     this.headlinePage = '//span[contains(text(),"المعلومات الرئيسية")]';
   }
 
-  // fill lookup definition information - first tab
+  /**
+   * Fills the lookup definition information on the Lookup Page - first tab.
+   * 
+   * @param {Object} lookupData - The data object containing lookup information.
+   * @param {Function} lookupData.getLookupArabicName - Function to get the Arabic name of the lookup.
+   * @param {Function} lookupData.getLookupEnglishName - Function to get the English name of the lookup.
+   * @param {Function} lookupData.getLookupDescriptionArabicName - Function to get the Arabic description of the lookup.
+   * @param {Function} lookupData.getLookupDescriptionEnglishName - Function to get the English description of the lookup.
+   * @param {Function} lookupData.setLookupArabicName - Function to set the Arabic name of the lookup.
+   * @param {Function} lookupData.setLookupEnglishName - Function to set the English name of the lookup.
+   * 
+   * @returns {Promise<void>} A promise that resolves when the lookup definition information has been filled.
+   */
   async fillLookupDefinitionInformation(lookupData) {
     console.log("Start filling Definition information");
     await  this.page.waitForTimeout(1000);
@@ -61,9 +73,9 @@ export class LookupPage {
     await this.page.click(this.lookupCategory);
     await this.page.waitForSelector(this.lookupCategoryFirstOption, { visible: true });
     await this.page.click(this.lookupCategoryFirstOption);
-    //await this.page.click(this.parentLookup);
-    //await this.page.waitForSelector(this.parentLookupFirstOption, { visible: true });
-    //await this.page.click(this.parentLookupFirstOption);
+    await this.page.click(this.parentLookup);
+    await this.page.waitForSelector(this.parentLookupFirstOption, { visible: true });
+    await this.page.click(this.parentLookupFirstOption);
     await this.page.fill(this.lookupDescriptionArabicName, lookupData.getLookupDescriptionArabicName());
     await this.page.fill(this.lookupDescriptionEnglishName, lookupData.getLookupDescriptionEnglishName());
     await  this.page.waitForTimeout(1000);
@@ -73,10 +85,18 @@ export class LookupPage {
     console.log("End filling Definition information");
   }
 
-  // fill lookup design information - second tab
+  /**
+   * Fills the lookup design information form with the provided data - second tab.
+   *
+   * @param {Object} lookupData - The data to fill in the form.
+   * @param {Function} lookupData.getNameInArabic - Function to get the name in Arabic.
+   * @param {Function} lookupData.getNameInEnglish - Function to get the name in English.
+   * @param {Function} lookupData.getCode - Function to get the code.
+   * @returns {Promise<boolean>} - Returns a promise that resolves to a boolean indicating the success of the operation.
+   */
   async fillLookupDesignInformation(lookupData) {
     console.log("Start filling Design information");
-    await this.page.waitForSelector(this.createLookupButton, { visible: true });
+    await this.page.waitForSelector(this.code, { visible: true });
     await this.page.fill(this.nameInArabic, lookupData.getNameInArabic());
     await this.page.fill(this.nameInEnglish, lookupData.getNameInEnglish());
     await this.page.fill(this.code, lookupData.getCode());
@@ -87,7 +107,15 @@ export class LookupPage {
     return result;
   }
 
-  // fill lookup item management information - third tab
+  /**
+   * Fills the lookup item management information form with the provided data - third tab.
+   *
+   * @param {Object} lookupData - The data to fill in the form.
+   * @param {Function} lookupData.getNameArabic - Function to get the Arabic name.
+   * @param {Function} lookupData.getNameEnglish - Function to get the English name.
+   * @param {Function} lookupData.getCodeLookup - Function to get the lookup code.
+   * @returns {Promise<string>} - The result message from the popup.
+   */
   async fillLookupItemManagementInformation(lookupData) {
     console.log("Start filling items information");
     await this.page.waitForSelector(this.addItemToLookupButton, { visible: true });
@@ -107,7 +135,12 @@ export class LookupPage {
     return result;
   }
 
-  // create new lookup
+  /**
+   * Creates a new lookup entry by filling in the necessary information.
+   *
+   * @param {Object} lookupData - The data required to create the lookup.
+   * @returns {Promise<boolean>} - Returns true if the lookup design and item creation were successful, otherwise false.
+   */
   async createNewLookup(lookupData) {
     var lookupDesignDone;
     var lookupitemCreated;
@@ -126,6 +159,17 @@ export class LookupPage {
   }
 
   // add new lookup item for edit test case
+  /**
+   * Adds a new lookup item using the provided global test configuration.
+   * 
+   * This method fills in the Arabic name, English name, and code for the lookup item
+   * from the global test configuration. It then toggles the visibility and clicks
+   * the button to add the item to the lookup.
+   * 
+   * @async
+   * @function addNewLookupItem
+   * @returns {Promise<void>} A promise that resolves when the lookup item has been added.
+   */
   async addNewLookupItem() {
     await this.page.fill(this.nameArabic, global.testConfig.lookUps.arabicName);
     await this.page.fill(this.nameEnglish, global.testConfig.lookUps.englishName);
@@ -133,7 +177,8 @@ export class LookupPage {
     //await this.page.click(this.mainList);
     //await this.page.click(this.mainListFirstOption);
     await this.page.click(this.visibleToggle);
-    await this.page.click(this.addItemToLookupButton);
+    var newLookupitemCreated = await this.page.click(this.addItemToLookupButton);
+    return !newLookupitemCreated;
   }
 
   // view new lookup item details after adding it
@@ -141,7 +186,8 @@ export class LookupPage {
     await this.page.click(this.viewLookUpButton);
    // expect(await this.page.isVisible(this.lookupDetailsPage)).toBeTruthy();
     await this.page.waitForTimeout(2000);
-    await this.page.click(this.lookupDetailsPageCloseButton);
+    var viewLookupitem = await this.page.click(this.lookupDetailsPageCloseButton);
+    return !viewLookupitem;
   }
 
 
