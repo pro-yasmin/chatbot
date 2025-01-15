@@ -2,7 +2,6 @@ const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../../../src/Pages/AdminPortal/LoginPage');
 const { HomePage } = require('../../../src/Pages/AdminPortal/HomePage');
 const { StateMachineManagmentPage } = require('../../../src/Pages/AdminPortal/StateMachine/StateMachineManagmentPage');
-const { StateMachinePage } = require('../../../src/Pages/AdminPortal/StateMachine/StateMachinePage');
 const { StateMachineData } = require('../../../src/Models/AdminPortal/StateMachineData');
 
 
@@ -10,7 +9,6 @@ const { StateMachineData } = require('../../../src/Models/AdminPortal/StateMachi
 let loginPage;
 let homePage;
 let stateMachineManagmentPage;
-let stateMachinePage;
 let stateMachineData;
 
 
@@ -19,10 +17,7 @@ test('Edit State Machine', async ({ page }) => {
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     stateMachineManagmentPage = new StateMachineManagmentPage(page);
-    stateMachinePage = new StateMachinePage(page);
     stateMachineData = new StateMachineData(page);
-    var stateMachineCreated;
-    var stateMachineFound;
     var baseUrl = global.testConfig.BASE_URL;
     var adminusername = global.testConfig.GENERAL_SETTING_USER;
     var adminpassword = global.testConfig.GENERAL_SETTING_PASS;
@@ -41,24 +36,19 @@ test('Edit State Machine', async ({ page }) => {
 
     // Step2: Create New State Machine
     await test.step('Create New State Machine', async () => {
-        await stateMachineManagmentPage.clickAddButton();
-        stateMachineCreated = await stateMachinePage.createNewStateMachine(stateMachineData);
-        expect(stateMachineCreated).toBe(true);
+        await stateMachineManagmentPage.createNewStateMachine(stateMachineData);
         console.log('New State Machine Created Successfully');
     });
 
     // Step3: Check on State Machine in State Machines table
     await test.step('Search on State Machine created', async () => {
-        stateMachineFound = await stateMachineManagmentPage.checkNewStateMachineAdded(stateMachineData);
-        expect(stateMachineFound).toBe(true);
+        expect(await stateMachineManagmentPage.checkNewStateMachineAdded(stateMachineData)).toBe(true);
         console.log('New State Machine Details Checked Successfully');
     });
 
     //Step4: Edit State Machine
     await test.step('Edit State Machine', async () => {
-        await stateMachineManagmentPage.clickEditstateMachineDataButton(stateMachineData);
-        console.log('Edit State Machine Button Clicked');
-        expect(await stateMachinePage.editStateMachine()).toBe(true);
+        await stateMachineManagmentPage.editStateMachine(stateMachineData)
         console.log('State Machine Edit is Done Successfully');
     });
 

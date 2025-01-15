@@ -1,17 +1,53 @@
+const { expect } = require('@playwright/test');
 const { SearchPage } = require("../SharedPages/SearchPage");
+const { StateMachinePage } = require("../../AdminPortal/StateMachine/StateMachinePage");
+
 
 export class StateMachineManagmentPage {
     constructor(page) {
         this.page = page;
+        this.stateMachinePage = new StateMachinePage(this.page);
         this.search = new SearchPage(this.page);
         this.addButton = '[data-testid="toolbar-add-button"]';
-        this.stateMachineTable = "//table//tbody";
         this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
-
     }
 
+    /**
+     * Creates a new state machine using the provided data.
+     * @param {Object} stateMachineData - The data object containing information about the state machine to be created.
+     * @returns {Promise<void>} - A promise that resolves when the state machine is successfully created.
+     */
+    async createNewStateMachine(stateMachineData) {
+        await this.clickAddButton();
+        expect(await this.stateMachinePage.createNewStateMachine(stateMachineData)).toBe(true);
+    }
 
-    // Click on Add Button
+    /**
+     * Edits an existing state machine with the provided data.
+     * @param {Object} stateMachineData - The data required to edit the state machine.
+     * @returns {Promise<void>} - Resolves when the state machine has been successfully edited.
+     */
+    async editStateMachine(stateMachineData){
+        await this.clickEditstateMachineDataButton(stateMachineData);
+        console.log('Edit State Machine Button Clicked');
+        expect(await this.stateMachinePage.editStateMachine()).toBe(true);
+    }
+
+    /**
+     * Validates that the State Machine page is opened.
+     * @param {Object} stateMachineData - The data required to identify the state machine.
+     * @returns {Promise<void>} - Resolves when the validation is complete.
+     */
+    async validateStateMachinePageIsOpened(stateMachineData){
+        await this.clickViewstateMachineButton(stateMachineData);
+        console.log('View State Machine Data Button Clicked');
+        expect(await this.stateMachinePage.validateStateMachinePageIsOpened()).toBe(true);
+    }
+
+    /**
+     * Clicks the "Add" button on the State Machine Management Page.
+     * @returns {Promise<void>} - A promise that resolves when the action is completed.
+     */
     async clickAddButton() {
         await this.page.waitForTimeout(2000);
         await this.page.waitForSelector(this.addButton, { visible: true });
@@ -20,40 +56,31 @@ export class StateMachineManagmentPage {
 
     /**
      * Clicks the "View" button for a specific State Machine entry in the stateMachineData table.
-     *
      * @param {Object} stateMachineData - The data object containing information about the stateMachineData entry.
-     * @param {Function} stateMachineData.getCreatedStateMachineId - A function that returns the ID of the created stateMachineData entry.
      * @returns {Promise<void>} - A promise that resolves when the action is completed.
      */
     async clickViewstateMachineButton(stateMachineData) {
         let stateMachineTableRow = [];
-        stateMachineTableRow = await this.search.getRowInTableWithSpecificText(this.stateMachineTable, stateMachineData.getCreatedStateMachineId());
+        stateMachineTableRow = await this.search.getRowInTableWithSpecificText(stateMachineData.getCreatedStateMachineId());
         var actionlocator = "div >> button:nth-of-type(1)";
         await this.search.clickRowAction(stateMachineTableRow, actionlocator);
     }
 
     /**
      * Clicks the edit button for a specific stateMachineData entry in the State Machine table.
-     *
      * @param {Object} stateMachineData - The data object containing information about the stateMachineData entry.
-     * @param {Function} stateMachineData.getCreatedState MachineId - A function that returns the ID of the created stateMachineData entry.
      * @returns {Promise<void>} - A promise that resolves when the edit button has been clicked.
      */
     async clickEditstateMachineDataButton(stateMachineData) {
         let stateMachineTableRow = [];
-        stateMachineTableRow = await this.search.getRowInTableWithSpecificText(this.stateMachineTable, stateMachineData.getCreatedStateMachineId());
+        stateMachineTableRow = await this.search.getRowInTableWithSpecificText(stateMachineData.getCreatedStateMachineId());
         var actionlocator = "div >> button:nth-of-type(2)";
         await this.search.clickRowAction(stateMachineTableRow, actionlocator);
     }
 
     /**
      * Checks if a new stateMachineData has been added successfully by verifying the Arabic name, English name, and status.
-     * 
      * @param {Object} stateMachineData - The data of the stateMachineData to be checked.
-     * @param {Function} stateMachineData.getStateMachineArabicName - Function to get the Arabic name of the stateMachineData.
-     * @param {Function} stateMachineData.getStateMachineEnglishName - Function to get the English name of the stateMachineData.
-     * @param {Function} stateMachineData.setCreatedStateMachineId - Function to set the created stateMachineData ID.
-     * 
      * @returns {Promise<boolean>} - Returns true if the stateMachineData names match the expected values, otherwise false.
      */
     async checkNewStateMachineAdded(stateMachineData) {
@@ -64,7 +91,7 @@ export class StateMachineManagmentPage {
         let stateMachineEnglishName;
         let stateMachineStatus;
         let stateMachineRow = [];
-        stateMachineRow = await this.search.searchOnUniqueRow(this.searchInput, stateMachineData.getStateManagmentArabicName(), this.stateMachineTable);
+        stateMachineRow = await this.search.searchOnUniqueRow(this.searchInput, stateMachineData.getStateManagmentArabicName());
 
         if (stateMachineRow && stateMachineRow.length > 0) {
             arabicTd = stateMachineRow[1].tdLocator;

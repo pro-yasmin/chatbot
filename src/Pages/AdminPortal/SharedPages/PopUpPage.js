@@ -1,10 +1,11 @@
 export class PopUpPage {
   constructor(page) {
     this.page = page;
+    this.messageLocator = '//span[@id="modal-modal-title"]';
   }
 
-  async popUpMessage(messageLocator, actionButton, partialMessage) {
-    const fullMessage = await this.page.textContent(messageLocator);
+  async popUpMessage(actionButton, partialMessage) {
+    const fullMessage = await this.page.textContent(this.messageLocator);
     if (fullMessage.includes(partialMessage)) {
       await this.page.click(actionButton);
       await this.page.locator(actionButton).waitFor({ state: 'detached' ,timeout: 30000 });

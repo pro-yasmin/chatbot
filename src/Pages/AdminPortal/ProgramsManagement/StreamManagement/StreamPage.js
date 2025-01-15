@@ -44,7 +44,7 @@ export class StreamPage {
           streamData.setstreamEnglishName(createdStreamEnName);
           streamData.setstreamArabicName(createdStreamArName);
 
-          var result =await popUpMsg.popUpMessage( this.successPopupTitle , this.backToAllStreamPageButton,global.testConfig.createStream.streamSuccessMsg);
+          var result =await popUpMsg.popUpMessage(this.backToAllStreamPageButton,global.testConfig.createStream.streamSuccessMsg);
           return result;
 
   }

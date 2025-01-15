@@ -1,23 +1,58 @@
-import { LookupData } from "../../../Models/AdminPortal/LookupData";
-
-const { SearchPage } = require("../SharedPages/SearchPage");
-
 const { expect } = require('@playwright/test');
+const { SearchPage } = require("../SharedPages/SearchPage");
+const { LookupPage } = require("../../AdminPortal/Lookups/LookupPage");
 
 export class LookupsManagmentPage {
     constructor(page) {
         this.page = page;
+        this.lookupPage = new LookupPage(this.page);
         this.search = new SearchPage(this.page);
         this.addButton = '//button[contains(text(),"إنشاء قائمة مرجعية")]';
         this.viewLookUpButton = '(//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium muirtl-rrlqo"])[1]';
         this.lookupStatus = '(//span[@class="MuiChip-label MuiChip-labelMedium muirtl-11lqbxm"])[1]';
-        this.lookupTable = "//table//tbody";
         this.editLookupButton = '(//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium muirtl-rrlqo"])[2]';
 
     }
 
+    /**
+     * Creates a new lookup entry by filling in the necessary information.
+     * @param {Object} lookupData - The data required to create the lookup.
+     * @returns {Promise<void>} - Resolves when the lookup creation process is complete.
+     */
+    async createNewLookup(lookupData) {
+        await this.clickAddButton();
+        expect(await this.lookupPage.createNewLookup(lookupData)).toBe(true);
+    }
 
-    // Click on Add Button
+    /**
+     * Edits an existing lookup entry by interacting with the UI elements.
+     * @param {Object} lookupData - The data required to identify and edit the lookup.
+     * @returns {Promise<void>} - Returns a promise that resolves when the lookup has been edited and verified.
+     */
+    async editLookup(lookupData){
+        await this.clickEditLookupButton(lookupData);
+        console.log('Edit Lookup Button Clicked');
+        expect(await this.lookupPage.addNewLookupItem()).toBe(true);
+        console.log('New Lookup Item Added');
+        expect(await this.lookupPage.viewNewLookupItemDetails()).toBe(true);
+        console.log('New Lookup Item Details Viewed');
+    }
+
+    /**
+     * Validates that the View Lookup page is opened.
+     * @param {Object} lookupData - The data required to identify the lookup.
+     * @returns {Promise<void>} - Resolves when the validation is complete.
+     */
+    async validateViewLookupPageIsOpened(lookupData){
+        await this.clickViewLookUpButton(lookupData);
+        console.log('View Lookup Data Button Clicked');
+        expect(await this.lookupPage.validateViewLookupPageIsOpened()).toBe(true);
+    }
+
+    /**
+     * Clicks the "Add" button on the Lookups Management Page
+     * @returns {Promise<void>} - A promise that resolves when the button has been clicked.
+     */
     async clickAddButton() {
         await this.page.waitForTimeout(2000);
         await this.page.waitForSelector(this.addButton, { visible: true });
@@ -26,40 +61,31 @@ export class LookupsManagmentPage {
 
     /**
      * Clicks the "View" button for a specific lookup entry in the lookup table.
-     *
      * @param {Object} lookupData - The data object containing information about the lookup entry.
-     * @param {Function} lookupData.getCreatedLookupId - A function that returns the ID of the created lookup entry.
      * @returns {Promise<void>} - A promise that resolves when the action is completed.
      */
     async clickViewLookUpButton(lookupData) {
         let lookupRow = [];
-        lookupRow = await this.search.getRowInTableWithSpecificText(this.lookupTable, lookupData.getCreatedLookupId());
+        lookupRow = await this.search.getRowInTableWithSpecificText(lookupData.getCreatedLookupId());
         var actionlocator = "div >> button:nth-of-type(1)";
         await this.search.clickRowAction(lookupRow, actionlocator);
     }
 
     /**
      * Clicks the edit button for a specific lookup entry in the lookup table.
-     *
      * @param {Object} lookupData - The data object containing information about the lookup entry.
-     * @param {Function} lookupData.getCreatedLookupId - A function that returns the ID of the created lookup entry.
      * @returns {Promise<void>} - A promise that resolves when the edit button has been clicked.
      */
     async clickEditLookupButton(lookupData) {
         let lookupRow = [];
-        lookupRow = await this.search.getRowInTableWithSpecificText(this.lookupTable, lookupData.getCreatedLookupId());
+        lookupRow = await this.search.getRowInTableWithSpecificText(lookupData.getCreatedLookupId());
         var actionlocator = "div >> button:nth-of-type(2)";
         await this.search.clickRowAction(lookupRow, actionlocator);
     }
 
     /**
      * Checks if a new lookup has been added successfully by verifying the Arabic name, English name, and status.
-     * 
      * @param {Object} lookupData - The data of the lookup to be checked.
-     * @param {Function} lookupData.getLookupArabicName - Function to get the Arabic name of the lookup.
-     * @param {Function} lookupData.getLookupEnglishName - Function to get the English name of the lookup.
-     * @param {Function} lookupData.setCreatedLookupId - Function to set the created lookup ID.
-     * 
      * @returns {Promise<boolean>} - Returns true if the lookup names and status match the expected values, otherwise false.
      */
     async checkNewLookupAdded(lookupData) {
@@ -70,7 +96,7 @@ export class LookupsManagmentPage {
         let lookupEnglishName;
         let lookupStatus;
         let lookupRow = [];
-        lookupRow = await this.search.getRowInTableWithSpecificText(this.lookupTable, lookupData.getLookupEnglishName());
+        lookupRow = await this.search.getRowInTableWithSpecificText(lookupData.getLookupEnglishName());
 
         if (lookupRow && lookupRow.length > 0) {
             arabicTd = lookupRow[1].tdLocator;
@@ -94,7 +120,8 @@ export class LookupsManagmentPage {
             await lookupStatus.waitFor({ state: "visible" });
             var actualLookupStatus = await lookupStatus.textContent();
 
-            console.log("Status: ", actualLookupStatus);
+            console.log("Actual Status: ", actualLookupStatus);
+            console.log("Expected Status: ", global.testConfig.lookUps.lookUpStatusActive);
         }
 
         if (
