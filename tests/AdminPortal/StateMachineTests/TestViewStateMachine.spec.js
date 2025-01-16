@@ -20,7 +20,7 @@ test('View State Machine', async ({ page }) => {
     homePage = new HomePage(page);
     stateMachineManagmentPage = new StateMachineManagmentPage(page);
     stateMachinePage = new StateMachinePage(page);
-    stateMachineData = new StateMachineData(page);
+    stateMachineData = new StateMachineData();
     var stateMachineCreated;
     var stateMachineFound;
     var baseUrl = global.testConfig.BASE_URL;
@@ -41,9 +41,7 @@ test('View State Machine', async ({ page }) => {
 
     // Step2: Create New State Machine
     await test.step('Create New State Machine', async () => {
-        await stateMachineManagmentPage.clickAddButton();
-        stateMachineCreated = await stateMachinePage.createNewStateMachine(stateMachineData);
-        expect(stateMachineCreated).toBe(true);
+        expect(await stateMachineManagmentPage.createNewStateMachine(stateMachineData)).toBe(true);
         console.log('New State Machine Created Successfully');
     });
 
@@ -55,11 +53,9 @@ test('View State Machine', async ({ page }) => {
     });
 
     //Step4: View State Machine page After adding
-    await test.step('View State Machine After adding', async () => {
-        await stateMachineManagmentPage.clickViewstateMachineButton(stateMachineData);
-        console.log('View State Machine Data Button Clicked');
-        await stateMachinePage.validateStateMachinePageIsOpened();
-        console.log('View State Machine Page Opened Successfully');
+    await test.step('View State Machine Details After adding', async () => {
+        expect(await stateMachineManagmentPage.viewStateMachineDetails(stateMachineData)).toBe(true);
+        console.log('View State Machine Details loaded Successfully');
     });
 
     //Step5: Logout From Admin portal

@@ -58,7 +58,7 @@ export class MainProgramPage {
 
 
   async selectDropdownOption(dropdownLocator) {
-    await this.page.click(dropdownLocator);
+      await this.page.click(dropdownLocator);
       const optionsLocator  = `//li[@role="option" and not(@aria-disabled="true") and @tabindex="0"]`;
       await this.page.waitForSelector(optionsLocator , { state: 'visible' });
       const firstOptionLocator = `${optionsLocator}[1]`;

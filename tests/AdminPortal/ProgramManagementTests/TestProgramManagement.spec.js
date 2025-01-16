@@ -193,11 +193,11 @@ test('Add and Approve Test Benefits', async () => {
   });
 });
 
-
-test.afterEach(async () => {
+test.afterEach(async ({ page }) => {
   //logout
   await test.step('Logout from Admin Portal', async () => {
     await homePage.logout();
+    await page.close();
     console.log('User Logout Successfully');
   });
 

@@ -28,8 +28,7 @@ export class MainProgramManagementPage {
     mainProgramRow = await new SearchPage(this.page).searchOnUniqueRow(
       this.searchInput,
       mainProgramName,
-      this.mainProgramsTable
-    );
+      );
     if (!mainProgramRow || mainProgramRow.length === 0) {
       return null;
     }

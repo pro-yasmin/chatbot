@@ -30,6 +30,7 @@ export class HomePage {
     await this.page.click(this.userMenu);
     await this.page.locator(this.logoutButton).waitFor({ state: 'visible', timeout: 2000 });
     await this.page.click(this.logoutButton);
+    
 
   }
 

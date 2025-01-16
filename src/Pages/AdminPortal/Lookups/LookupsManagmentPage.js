@@ -21,7 +21,7 @@ export class LookupsManagmentPage {
      */
     async createNewLookup(lookupData) {
         await this.clickAddButton();
-        expect(await this.lookupPage.createNewLookup(lookupData)).toBe(true);
+       return await this.lookupPage.createNewLookup(lookupData);
     }
 
     /**
@@ -30,12 +30,17 @@ export class LookupsManagmentPage {
      * @returns {Promise<void>} - Returns a promise that resolves when the lookup has been edited and verified.
      */
     async editLookup(lookupData){
+        var lookupEdited= false;
         await this.clickEditLookupButton(lookupData);
         console.log('Edit Lookup Button Clicked');
-        expect(await this.lookupPage.addNewLookupItem()).toBe(true);
-        console.log('New Lookup Item Added');
-        expect(await this.lookupPage.viewNewLookupItemDetails()).toBe(true);
-        console.log('New Lookup Item Details Viewed');
+        if(await this.lookupPage.addNewLookupItem())
+        {
+            console.log('New Lookup Item Added');
+            lookupEdited= await this.lookupPage.viewNewLookupItemDetails();
+            console.log('New Lookup Item Details Viewed');
+        }
+       return lookupEdited;
+       
     }
 
     /**

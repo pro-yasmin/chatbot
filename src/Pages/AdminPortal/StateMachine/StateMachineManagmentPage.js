@@ -19,7 +19,7 @@ export class StateMachineManagmentPage {
      */
     async createNewStateMachine(stateMachineData) {
         await this.clickAddButton();
-        expect(await this.stateMachinePage.createNewStateMachine(stateMachineData)).toBe(true);
+        return await this.stateMachinePage.createNewStateMachine(stateMachineData);
     }
 
     /**
@@ -27,10 +27,10 @@ export class StateMachineManagmentPage {
      * @param {Object} stateMachineData - The data required to edit the state machine.
      * @returns {Promise<void>} - Resolves when the state machine has been successfully edited.
      */
-    async editStateMachine(stateMachineData){
+    async editStateMachine(stateMachineData,editStateMachineData){
         await this.clickEditstateMachineDataButton(stateMachineData);
         console.log('Edit State Machine Button Clicked');
-        expect(await this.stateMachinePage.editStateMachine()).toBe(true);
+        return await this.stateMachinePage.editStateMachine(editStateMachineData);
     }
 
     /**
@@ -38,10 +38,10 @@ export class StateMachineManagmentPage {
      * @param {Object} stateMachineData - The data required to identify the state machine.
      * @returns {Promise<void>} - Resolves when the validation is complete.
      */
-    async validateStateMachinePageIsOpened(stateMachineData){
+    async viewStateMachineDetails(stateMachineData){
         await this.clickViewstateMachineButton(stateMachineData);
         console.log('View State Machine Data Button Clicked');
-        expect(await this.stateMachinePage.validateStateMachinePageIsOpened()).toBe(true);
+        return await this.stateMachinePage.validateStateMachineDetails(stateMachineData);
     }
 
     /**

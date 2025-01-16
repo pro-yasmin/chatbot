@@ -11,7 +11,7 @@
     "streamSuccessMsg": "تم حفظ المسار للمراجعة بنجاح"
   },
   "tasks": {
-    "assignTaskMsg": "هل انت متأكد من إسناد مهمة"
+    "assignTaskMsg": "هل أنت متأكد من إسناد مهمة"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",
@@ -30,7 +30,7 @@
 
   },
   "createMainProgram": {
-  "backUpStreamNumber":"PRG_StrSt_182",
+  "backUpStreamNumber":"PRG_StrSt_296",
   "arabicMainProgramName": "البرامج الوقائية لدعم الأسر والرعاية الاجتماعية",
   "englishMainProgramName": "FSSC preventive Program",
   "responsibleEntity": "الجهة المسؤولة الأولي",
@@ -48,7 +48,7 @@
   "mainProgramSuccessMsg":"تم حفظ البرنامج للمراجعة بنجاح"
 },
 "createSubPrograms": {
- "backUpProgramNumber":"PRG_MPRG_087",
+ "backUpProgramNumber":"PRG_MPRG_160",
  "arabicSubProgramName": "برامج التوعية والتدريب حول إدمان المخدرات",
  "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
  "conditionsOfAssistanceUnit" : "برامج التوعية",
@@ -72,7 +72,7 @@
     "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟"
   },
   "createBenefits": {
-    "backUpSubProgramNumber":"PRG_SPRG_065",
+    "backUpSubProgramNumber":"PRG_SPRG_147",
     "arabicBenefitName": "دعم الأسر والرعاية الاجتماعية",
     "englishBenefitName": "FSSC preventive",
     "benefitEstimatedValue": "زيادة الوعي والوقاية من إدمان المخدرات",
@@ -92,12 +92,6 @@
     "actionEnglishName": "Action",
     "stateMachineCreatedSuccessMsg": "تم إضافة دورة الحالة بنجاح.",
     "stateMachineStatusAvailable": "متاح",
-    "editedFirstStateArabicName": "الحالة الأولى باللغة العربية معدل",
-    "editedFirstStateEnglishName": "First State in English Edited",
-    "editedSecondStateArabicName": "الحالة الثانية باللغة العربية معدل",
-    "editedSecondStateEnglishName": "Second State in English Edited",
-    "editedActionArabicName": "إجراء معدل",
-    "editedActionEnglishName": "Action Edited",
     "stateMachineEditedSuccessMsg": "تم تعديل دورة الحالة بنجاح."
   }
 }

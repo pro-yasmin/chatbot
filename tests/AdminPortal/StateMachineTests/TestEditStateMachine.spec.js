@@ -9,7 +9,7 @@ const { StateMachineData } = require('../../../src/Models/AdminPortal/StateMachi
 let loginPage;
 let homePage;
 let stateMachineManagmentPage;
-let stateMachineData;
+let stateMachineData,editStateMachineData;
 
 
 test('Edit State Machine', async ({ page }) => {
@@ -17,7 +17,8 @@ test('Edit State Machine', async ({ page }) => {
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     stateMachineManagmentPage = new StateMachineManagmentPage(page);
-    stateMachineData = new StateMachineData(page);
+    stateMachineData = new StateMachineData();
+    editStateMachineData = new StateMachineData();
     var baseUrl = global.testConfig.BASE_URL;
     var adminusername = global.testConfig.GENERAL_SETTING_USER;
     var adminpassword = global.testConfig.GENERAL_SETTING_PASS;
@@ -36,7 +37,7 @@ test('Edit State Machine', async ({ page }) => {
 
     // Step2: Create New State Machine
     await test.step('Create New State Machine', async () => {
-        await stateMachineManagmentPage.createNewStateMachine(stateMachineData);
+        expect(await stateMachineManagmentPage.createNewStateMachine(stateMachineData)).toBe(true);
         console.log('New State Machine Created Successfully');
     });
 
@@ -48,13 +49,16 @@ test('Edit State Machine', async ({ page }) => {
 
     //Step4: Edit State Machine
     await test.step('Edit State Machine', async () => {
-        await stateMachineManagmentPage.editStateMachine(stateMachineData)
+
+        expect(await stateMachineManagmentPage.editStateMachine(stateMachineData,editStateMachineData)).toBe(true);
         console.log('State Machine Edit is Done Successfully');
     });
 
+     
     //Step5: Logout From Admin portal
     await test.step('Logout from Admin Portal', async () => {
         await homePage.logout();
+        await page.close();
         console.log('Logout done Successfully');
     });
 

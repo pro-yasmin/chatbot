@@ -2,8 +2,7 @@ const { Utils } = require('../../Utils/utils.js');
 
 export class StateMachineData {
 
-    constructor(page) {
-        this.page = page;
+    constructor() {
         this.utils = Utils;
         this.stateManagmentArabicName = null;
         this.stateManagmentEnglishName = null;

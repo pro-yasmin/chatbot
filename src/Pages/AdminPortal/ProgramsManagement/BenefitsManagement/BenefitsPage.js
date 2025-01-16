@@ -132,7 +132,7 @@ export class BenefitsPage {
   }
 
   async selectDropdownOption(dropdownLocator) {
-    await this.page.click(dropdownLocator);
+      await this.page.click(dropdownLocator);
       var optionsLocator  = `//li[@role="option" and not(@aria-disabled="true") and @tabindex="0"]`;
       await this.page.waitForSelector(optionsLocator , { state: 'visible' });
       var firstOptionLocator = `${optionsLocator}[1]`;

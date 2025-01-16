@@ -11,7 +11,7 @@
     "streamSuccessMsg": "تم حفظ المسار للمراجعة بنجاح"
   },
   "tasks": {
-    "assignTaskMsg": "هل انت متأكد من إسناد مهمة"
+    "assignTaskMsg": "هل أنت متأكد من إسناد مهمة"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",
@@ -88,12 +88,6 @@
     "actionEnglishName": "Action",
     "stateMachineCreatedSuccessMsg": "تم إضافة دورة الحالة بنجاح.",
     "stateMachineStatusAvailable": "متاح",
-    "editedFirstStateArabicName": "الحالة الأولى باللغة العربية معدل",
-    "editedFirstStateEnglishName": "First State in English Edited",
-    "editedSecondStateArabicName": "الحالة الثانية باللغة العربية معدل",
-    "editedSecondStateEnglishName": "Second State in English Edited",
-    "editedActionArabicName": "إجراء معدل",
-    "editedActionEnglishName": "Action Edited",
     "stateMachineEditedSuccessMsg": "تم تعديل دورة الحالة بنجاح."
   }
 }

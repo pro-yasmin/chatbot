@@ -49,7 +49,7 @@ test('Edit Lookup', async ({ page }) => {
 
     // Step4: Edit Lookup 
     await test.step('Edit Lookup', async () => {
-        await lookupsManagmentPage.editLookup(lookupData);
+        expect(await lookupsManagmentPage.editLookup(lookupData)).toBe(true);
         console.log('Edit Lookup Done Successfully');
     });
 

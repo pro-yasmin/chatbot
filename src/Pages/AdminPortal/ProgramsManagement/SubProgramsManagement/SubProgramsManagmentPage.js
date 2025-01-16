@@ -5,7 +5,7 @@ export class SubProgramsManagementPage  {
   constructor(page) {
     this.page = page;
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
-    this.subProgramsTable = "//table//tbody";
+    //this.subProgramsTable = "//table//tbody";
     this.createBenefitOption = '//ul[@role="menu"]//li[1]';
     this.dotsLocator;
   }
@@ -15,8 +15,7 @@ export class SubProgramsManagementPage  {
     subProgramRow = await new SearchPage(this.page).searchOnUniqueRow(
       this.searchInput,
       subProgramsName,
-      this.subProgramsTable
-    );
+      );
     if (!subProgramRow || subProgramRow.length === 0) {
       return null;
     }
