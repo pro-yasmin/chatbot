@@ -65,7 +65,7 @@
     "thirdTabEnglishName": "Name in english",
     "successMsgTabTwo": "تم إنشاء القائمة المرجعية بنجاح.",
     "successMsgTabThree": "تم إضافة العنصر بنجاح",
-    "lookUpStatusActive": "مفعل",
+    "lookUpStatusActive": "مفعَّل",
     "arabicName":"الأعمال والأملاك",
     "englishName":"Business and property",
     "code":"2323",
@@ -78,5 +78,26 @@
     "benefitEstimatedValue": "زيادة الوعي والوقاية من إدمان المخدرات",
     "entity": "جهه خارجيه",
     "benefitsSuccessMsg": "تم حفظ الإعانة للمراجعة بنجاح"
+  },
+  "stateMachine": {
+    "stateManagmentArabicName": "إدارة الحالة باللغة العربية",
+    "stateManagmentEnglishName": "State Management in English",
+    "stateManagmentArabicDescription": "وصف إدارة الحالة باللغة العربية",
+    "stateManagmentEnglishDescription": "State Management Description in English",
+    "firstStateArabicName": "الحالة الأولى باللغة العربية",
+    "firstStateEnglishName": "First State in English",
+    "secondStateArabicName": "الحالة الثانية باللغة العربية",
+    "secondStateEnglishName": "Second State in English",
+    "actionArabicName": "إجراء",
+    "actionEnglishName": "Action",
+    "stateMachineCreatedSuccessMsg": "تم إضافة دورة الحالة بنجاح.",
+    "stateMachineStatusAvailable": "متاح",
+    "editedFirstStateArabicName": "الحالة الأولى باللغة العربية معدل",
+    "editedFirstStateEnglishName": "First State in English Edited",
+    "editedSecondStateArabicName": "الحالة الثانية باللغة العربية معدل",
+    "editedSecondStateEnglishName": "Second State in English Edited",
+    "editedActionArabicName": "إجراء معدل",
+    "editedActionEnglishName": "Action Edited",
+    "stateMachineEditedSuccessMsg": "تم تعديل دورة الحالة بنجاح."
   }
 }

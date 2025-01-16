@@ -109,7 +109,7 @@ export class BenefitsPage {
     benefitsData.setArabicBenefitName(createdBenefitsArName);
     benefitsData.setEnglishBenefitName(createdBenefitsEnName);
 
-    var result =await popUpMsg.popUpMessage( this.successPopupTitle , this.backToBenefitsList ,global.testConfig.createBenefits.benefitsSuccessMsg);
+    var result =await popUpMsg.popUpMessage(this.backToBenefitsList ,global.testConfig.createBenefits.benefitsSuccessMsg);
     return result;
 
   }

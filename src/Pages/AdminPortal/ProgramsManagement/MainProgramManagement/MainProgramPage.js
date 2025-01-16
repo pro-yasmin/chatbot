@@ -52,7 +52,7 @@ export class MainProgramPage {
   mainProgramData.setArabicMainProgramName(createdMainProgramArName);
   mainProgramData.setEnglishMainProgramName(createdMainProgramEnName);
 
-  var result =await popUpMsg.popUpMessage( this.successPopupTitle , this.backToMainProgramList,global.testConfig.createMainProgram.mainProgramSuccessMsg);
+  var result =await popUpMsg.popUpMessage(this.backToMainProgramList,global.testConfig.createMainProgram.mainProgramSuccessMsg);
   return result;
   }
 

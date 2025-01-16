@@ -52,7 +52,6 @@ export class TasksPage {
     console.log("clicked on assign to myself Btn");
     var popUpMsg = new PopUpPage(this.page);
     await popUpMsg.popUpMessage(
-      this.assignPopUpMsgTitle,
       this.acceptAssignBtn,
       global.testConfig.tasks.assignTaskMsg
     );
@@ -108,7 +107,7 @@ export class TasksPage {
     let ensurestatus; 
     await this.navigateToMyTasksTab();
     let taskMainProgramRow = [];
-    //taskMainProgramRow = await this.search.getFirstRow(this.tasksTable);
+    //taskMainProgramRow = await this.search.getFirstRow();
     taskMainProgramRow = await this.search.getRowInTableWithSpecificText(this.tasksTable,programNumber);
     var actionlocator = "div >> button";
     await this.search.clickRowAction(taskMainProgramRow, actionlocator);
@@ -133,7 +132,7 @@ export class TasksPage {
     await this.navigateToMyTasksTab();
     let taskSubProgramsRow = [];
     taskSubProgramsRow = await this.search.getRowInTableWithSpecificText(this.tasksTable,subProgramNumber);
-    //taskSubProgramsRow = await this.search.getFirstRow(this.tasksTable);
+    //taskSubProgramsRow = await this.search.getFirstRow();
     var actionlocator = "div >> button";
     await this.search.clickRowAction(taskSubProgramsRow, actionlocator);
     console.log("Navigate To SubProgram Detials Page Successfully");
@@ -157,7 +156,7 @@ export class TasksPage {
     await this.navigateToMyTasksTab();
     let taskBenefitsRow = [];
     taskBenefitsRow = await this.search.getRowInTableWithSpecificText(this.tasksTable,benefitNumber);
-    //taskSubProgramsRow = await this.search.getFirstRow(this.tasksTable);
+    //taskSubProgramsRow = await this.search.getFirstRow();
     var actionlocator = "div >> button";
     await this.search.clickRowAction(taskBenefitsRow, actionlocator);
     console.log("Navigate To Benefits Detials Page Successfully");
