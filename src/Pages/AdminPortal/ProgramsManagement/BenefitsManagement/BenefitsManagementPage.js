@@ -10,7 +10,7 @@ export class BenefitsManagmentPage {
   constructor(page) {
     this.page = page;
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
-    this.benefitsTable = "//table//tbody";
+    //this.benefitsTable = "//table//tbody";
     this.dotsLocator;
   }
 
@@ -24,8 +24,7 @@ export class BenefitsManagmentPage {
     BenefitsRow = await new SearchPage(this.page).searchOnUniqueRow(
       this.searchInput,
       benefitsData,
-      this.benefitsTable
-    );
+     );
     if (!BenefitsRow || BenefitsRow.length === 0) {
       return null;
     }

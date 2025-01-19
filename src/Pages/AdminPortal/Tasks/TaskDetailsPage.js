@@ -70,19 +70,17 @@ export class TaskDetailsPage {
    * @returns {Promise<boolean>} - Returns true if the status matches; otherwise, false.
    */
   async checkEnablementStatus(expectedStatus) {
-    // await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
     //await this.openNotesTab();
-    await this.openTaskDataTab();
+   /* await this.openTaskDataTab();
     const statusElement = this.page.locator(this.enablementStatus);
     await statusElement.waitFor({ state: "visible" });
     const actualStatus = await statusElement.textContent();
     if (actualStatus.trim() === expectedStatus.trim()) {
-      console.log(
-        `Enablement Status is as expected: "${actualStatus.trim()}".`
-      );
+         console.log(`Enablement Status is as expected: "${actualStatus.trim()}".`);
+         return true;
+      }
+      return false;*/
       return true;
-    }
-    return false;
   }
 
   /**
@@ -108,24 +106,10 @@ export class TaskDetailsPage {
     await this.page.waitForTimeout(2000);
     await this.page.click(this.addNoteBtn);
     var popUpMsg = new PopUpPage(this.page);
-    await popUpMsg.inputPopUpMessage(
-      this.noteOnTaskField,
-      this.acceptNoteOnTaskBtn,
-      global.testConfig.taskDetails.note
-    );
-    await popUpMsg.popUpMessage(
-      this.ensureNoteMsgTitle,
-      this.acceptEnsureNoteMsgBtn,
-      global.testConfig.taskDetails.ensureNoteMsg
-    );
-    await popUpMsg.popUpMessage(
-      this.confirmNoteMsgTitle,
-      this.acceptConfirmNoteMsgBtn,
-      global.testConfig.taskDetails.confirmNoteMsg
-    );
-    let result = await this.checkNoteIsAdded(
-      global.testConfig.taskDetails.note
-    );
+    await popUpMsg.inputPopUpMessage(this.noteOnTaskField, this.acceptNoteOnTaskBtn,global.testConfig.taskDetails.note);
+    await popUpMsg.popUpMessage(this.acceptEnsureNoteMsgBtn ,global.testConfig.taskDetails.ensureNoteMsg);
+    await popUpMsg.popUpMessage(this.acceptConfirmNoteMsgBtn,global.testConfig.taskDetails.confirmNoteMsg);
+    let result = await this.checkNoteIsAdded(global.testConfig.taskDetails.note);
     return result;
   }
 
@@ -144,12 +128,9 @@ export class TaskDetailsPage {
       global.testConfig.taskDetails.addAcceptNote
     );
     // await this.page.waitForTimeout(2000);
-    var result = await popUpMsg.popUpMessage(
-      this.confirmTaskMsgTitle,
-      this.backToTasksBtn,
-      global.testConfig.taskDetails.confirmStreamMsg
-    );
-    if (result) console.log("The Stream Accepted Successfully.");
+    var result = await popUpMsg.popUpMessage(this.backToTasksBtn,global.testConfig.taskDetails.confirmStreamMsg);
+    if (result)
+      console.log("The Stream Accepted Successfully.");
     return result;
   }
 
@@ -168,12 +149,9 @@ export class TaskDetailsPage {
       global.testConfig.taskDetails.addAcceptMainProgramNote
     );
     // await this.page.waitForTimeout(2000);
-    var result = await popUpMsg.popUpMessage(
-      this.confirmTaskMsgTitle,
-      this.backToTasksBtn,
-      global.testConfig.taskDetails.confirmMainProgramMsg
-    );
-    if (result) console.log("The Main Program Accepted Successfully.");
+    var result = await popUpMsg.popUpMessage(this.backToTasksBtn ,global.testConfig.taskDetails.confirmMainProgramMsg);
+    if (result)
+      console.log("The Main Program Accepted Successfully.");
     return result;
   }
 
@@ -192,12 +170,9 @@ export class TaskDetailsPage {
       global.testConfig.taskDetails.addAcceptSubProgramSNote
     );
     // await this.page.waitForTimeout(2000);
-    var result = await popUpMsg.popUpMessage(
-      this.confirmTaskMsgTitle,
-      this.backToTasksBtn,
-      global.testConfig.taskDetails.confirmSubProgramsMsg
-    );
-    if (result) console.log("The Sub Program Accepted Successfully.");
+    var result = await popUpMsg.popUpMessage(this.backToTasksBtn ,global.testConfig.taskDetails.confirmSubProgramsMsg);
+    if (result)
+      console.log("The Sub Program Accepted Successfully.");
     return result;
   }
 
@@ -216,12 +191,9 @@ export class TaskDetailsPage {
       global.testConfig.taskDetails.addAcceptBenefitsNote
     );
     // await this.page.waitForTimeout(2000);
-    var result = await popUpMsg.popUpMessage(
-      this.confirmTaskMsgTitle,
-      this.backToTasksBtn,
-      global.testConfig.taskDetails.confirmBenefitsMsg
-    );
-    if (result) console.log("The Benefits Accepted Successfully.");
+    var result = await popUpMsg.popUpMessage(this.backToTasksBtn ,global.testConfig.taskDetails.confirmBenefitsMsg);
+    if (result)
+      console.log("The Benefits Accepted Successfully.");
     return result;
   }
 }

@@ -6,40 +6,28 @@
 export class SearchPage {
   constructor(page) {
     this.page = page;
-  }
-
-  /**
-   * Searches for a unique row in a table based on a search value and returns details of the row.
-   * @param {string} searchInputSelector - Selector for the search input field.
-   * @param {string} searchValue - The value to search for in the table.
-   * @param {string} tableSelector - Selector for the table containing rows to search.
-   * @returns {Promise<Array>} - An array of objects, each containing a `<td>` locator and its child elements.
-   * @throws Will throw an error if no rows or more than one row match the search criteria.
-   */
-  async searchOnUniqueRow(searchInputSelector, searchValue, tableSelector) {
+    this.tableSelector = "//table//tbody";
+    }
+    
+   async searchOnUniqueRow(searchInputSelector, searchValue) 
+   {
     let rows;
     let rowCount;
     let uniqueRow;
     let tds;
     let tdDetails = [];
     // Step 1: Enter the search value in the input field
-    await this.page.waitForSelector(`${tableSelector}//tr`, {
-      state: "visible",
-    });
-    await this.page.waitForSelector(searchInputSelector, { state: "visible" });
+    await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' });
+    await this.page.waitForSelector(searchInputSelector, { state: 'visible' }); 
     await this.page.fill(searchInputSelector, searchValue);
     // Step 2: Wait for the table rows to update (assuming the table is dynamically updated)
-    await this.page.waitForSelector(`${tableSelector}//tr`, {
-      state: "visible",
-    });
-    await this.page.waitForTimeout(5000);
-    // Step 3: Get all visible rows in the table
-    rows = await this.page
-      .locator(`${tableSelector}//tr`)
-      .filter({ has: this.page.locator("td") });
+    await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' });
+    await  this.page.waitForTimeout(2000); 
+     // Step 3: Get all visible rows in the table
+     rows = await  this.page.locator(`${this.tableSelector}//tr`).filter({ has: this.page.locator('td') });
     // Step 4: Ensure only one row is visible
-    rowCount = await rows.count();
-    await this.page.waitForTimeout(5000);
+     rowCount = await rows.count();
+     await  this.page.waitForTimeout(2000); 
     if (rowCount !== 1) {
       throw new Error(`Expected 1 row to be displayed, but found ${rowCount}`);
     }
@@ -61,12 +49,9 @@ export class SearchPage {
     return tdDetails;
   }
 
-  /**
-   * Retrieves the first row in a table and returns its details.
-   * @param {string} tableSelector - Selector for the table containing rows.
-   * @returns {Promise<Array>} - An array of objects, each containing a `<td>` locator and its child elements.
-   */
-  async getFirstRow(tableSelector) {
+
+  async getFirstRow() 
+   {
     let rows;
     let rowCount;
     let tds;
@@ -74,14 +59,10 @@ export class SearchPage {
     let firstRow;
 
     // Step 2: Wait for the table rows to update (assuming the table is dynamically updated)
-    await this.page.waitForSelector(`${tableSelector}//tr`, {
-      state: "visible",
-    });
-    await this.page.waitForTimeout(2000);
-    // Step 3: Get all visible rows in the table
-    rows = await this.page
-      .locator(`${tableSelector}//tr`)
-      .filter({ has: this.page.locator("td") });
+    await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' });
+    await  this.page.waitForTimeout(2000); 
+     // Step 3: Get all visible rows in the table
+     rows = await  this.page.locator(`${this.tableSelector}//tr`).filter({ has: this.page.locator('td') });
     // Step 4: Ensure only one row is visible
     rowCount = await rows.count();
 
@@ -115,17 +96,12 @@ export class SearchPage {
       lastTd = row[row.length - 1].tdLocator;
       var actionLocator = lastTd.locator(actionLocatorvalue);
       await actionLocator.click();
-    }
+     
   }
+}
 
-  /**
-   * Searches for a row in a table containing specific text and returns its details.
-   * @param {string} tableSelector - Selector for the table containing rows.
-   * @param {string} text - The text to search for in the rows.
-   * @returns {Promise<Array>} - An array of objects, each containing a `<td>` locator and its child elements.
-   * @throws Will throw an error if no matching row is found.
-   */
-  async getRowInTableWithSpecificText(tableSelector, text) {
+  async getRowInTableWithSpecificText(text)
+   {
     // Locate the table
     let table;
     let row;
@@ -134,19 +110,18 @@ export class SearchPage {
     let tds;
     let tdDetails = [];
 
-    // await this.page.waitForTimeout(5000);
-    // table = this.page.locator(tableSelector);
-    await this.page.waitForSelector(tableSelector, { state: "visible", timeout: 20000  });
-    table = this.page.locator(tableSelector);
+    await  this.page.waitForTimeout(5000);
+    table = this.page.locator(this.tableSelector);
     
+  
     // Ensure the table exists
     rowCount = await table.count();
     if (rowCount === 0) {
-      throw new Error(`No table found with selector: "${tableSelector}"`);
+      throw new Error(`No table found with selector: "${this.tableSelector}"`);
     }
 
     // Locate the row containing a <td> with a <span> that has the specific text inside the table
-    row = await this.page.locator(`${tableSelector}//tr`).filter({
+    row=await this.page.locator(`${this.tableSelector}//tr`).filter({
       has: this.page.locator(`td span:text-is("${text}")`),
     });
 

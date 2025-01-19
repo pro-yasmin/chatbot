@@ -56,10 +56,7 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
-/**
- * Test case: Adds and approves a new stream.
- */
-test("Add and Approve New Stream", async () => {
+test('Add and Approve New Stream', async () => {
   // Step1: Navigate to streams list page
   await test.step("Navigate to StreamManagement page", async () => {
     await homePage.navigateToStreamsManagement();
@@ -222,13 +219,16 @@ test("Add and Approve Test Benefits", async () => {
   });
 });
 
-/**
- * Test teardown: Logs out of the admin portal after each test.
- */
-// test.afterEach(async () => {
-//   //logout
-//   await test.step("Logout from Admin Portal", async () => {
-//     await homePage.logout();
-//     console.log("User Logout Successfully");
-//   });
+test.afterEach(async ({ page }) => {
+  //logout
+  await test.step('Logout from Admin Portal', async () => {
+    await homePage.logout();
+    await page.close();
+    console.log('User Logout Successfully');
+  });
+
+});
+
+
+// test.afterAll(async () => {
 // });

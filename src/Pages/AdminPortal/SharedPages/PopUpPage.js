@@ -6,17 +6,11 @@
 export class PopUpPage {
   constructor(page) {
     this.page = page;
+    this.messageLocator = '//span[@id="modal-modal-title"]';
   }
 
-  /**
-   * Handles a popup message and performs an action if the message matches the partial text.
-   * @param {string} messageLocator - Selector for the popup message element.
-   * @param {string} actionButton - Selector for the button to be clicked on matching the message.
-   * @param {string} partialMessage - The expected substring to match in the popup message.
-   * @returns {Promise<boolean>} - Returns true if the action was performed successfully.
-   */
-  async popUpMessage(messageLocator, actionButton, partialMessage) {
-    const fullMessage = await this.page.textContent(messageLocator);
+  async popUpMessage(actionButton, partialMessage) {
+    const fullMessage = await this.page.textContent(this.messageLocator);
     if (fullMessage.includes(partialMessage)) {
       await this.page.click(actionButton);
       await this.page

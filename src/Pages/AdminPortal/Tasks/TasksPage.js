@@ -28,8 +28,8 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToMyTasksTab() {
-    await this.page.waitForTimeout(15000);
-    await this.page.waitForSelector(this.myTasksTab, { state: "visible", timeout: 20000 });
+    await  this.page.waitForTimeout(5000);
+    await this.page.waitForSelector(this.myTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myTasksTab);
     console.log("Navigate to My tasks tab");
     // await this.page.reload({ waitUntil: 'networkidle', timeout: 60000 });
@@ -42,8 +42,8 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToMyCompletedTasksTab() {
-    await this.page.waitForTimeout(15000);
-    await this.page.waitForSelector(this.myCompletedTasksTab, { state: "visible",timeout: 20000 });
+    await  this.page.waitForTimeout(5000);
+    await this.page.waitForSelector(this.myCompletedTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myCompletedTasksTab);
     console.log("Navigate to My completed tasks tab");
   }
@@ -53,8 +53,8 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToGroupTasksTab() {
-    await this.page.waitForTimeout(15000);
-    await this.page.waitForSelector(this.groupTasksTab, {state: "visible", timeout: 20000 });
+    await  this.page.waitForTimeout(5000);
+    await this.page.waitForSelector(this.groupTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.groupTasksTab);
     console.log("Navigate to group tasks tab");
   }
@@ -68,14 +68,16 @@ export class TasksPage {
     await this.navigateToGroupTasksTab();
     await this.page.waitForTimeout(3000);
     let taskRow = [];
-    taskRow = await this.search.getRowInTableWithSpecificText(this.tasksTable, taskNumber);
+    taskRow = await this.search.getRowInTableWithSpecificText(taskNumber);
     var actionlocator = "div >> div:nth-of-type(2)>> button:nth-of-type(1)";
     await this.search.clickRowAction(taskRow, actionlocator);
     await this.page.click(this.assignToMyselfBtn);
     console.log("clicked on assign to myself Btn");
     var popUpMsg = new PopUpPage(this.page);
-    await popUpMsg.popUpMessage(this.assignPopUpMsgTitle,this.acceptAssignBtn,global.testConfig.tasks.assignTaskMsg);
-    await this.page.click(this.acceptAssignBtn);
+    await popUpMsg.popUpMessage(
+      this.acceptAssignBtn,
+      global.testConfig.tasks.assignTaskMsg
+    );
     console.log("The Task Assigned to my self successfully");
   }
 
@@ -87,8 +89,8 @@ export class TasksPage {
   async EnsureTaskAccepted(taskNumber) {
     await this.navigateToGroupTasksTab();
     await this.navigateToMyCompletedTasksTab();
-    let taskRow = [];
-    taskRow = await this.search.getRowInTableWithSpecificText( this.tasksTable,  taskNumber );
+     let taskRow = [];
+    taskRow = await this.search.getRowInTableWithSpecificText(taskNumber);
     var actionlocator = "div >> button";
     await this.search.clickRowAction(taskRow, actionlocator);
     // var result=true;
@@ -110,8 +112,7 @@ export class TasksPage {
     // await this.navigateToGroupTasksTab();
     await this.navigateToMyTasksTab();
     let taskStreamRow = [];
-    taskStreamRow = await this.search.getRowInTableWithSpecificText( this.tasksTable,streamNumber);
-    //taskStreamRow = await this.search.getFirstRow(this.tasksTable);
+    taskStreamRow = await this.search.getRowInTableWithSpecificText(streamNumber);
     var actionlocator = "div >> button";
     await this.search.clickRowAction(taskStreamRow, actionlocator);
     console.log("Navigate To Stream Detials Page Successfully");
@@ -137,11 +138,8 @@ export class TasksPage {
     let ensurestatus;
     await this.navigateToMyTasksTab();
     let taskMainProgramRow = [];
-    //taskMainProgramRow = await this.search.getFirstRow(this.tasksTable);
-    taskMainProgramRow = await this.search.getRowInTableWithSpecificText(
-      this.tasksTable,
-      programNumber
-    );
+    //taskMainProgramRow = await this.search.getFirstRow();
+    taskMainProgramRow = await this.search.getRowInTableWithSpecificText(programNumber);
     var actionlocator = "div >> button";
     await this.search.clickRowAction(taskMainProgramRow, actionlocator);
     console.log("Navigate To Main Program Detials Page Successfully");
@@ -170,11 +168,8 @@ export class TasksPage {
     let ensurestatus;
     await this.navigateToMyTasksTab();
     let taskSubProgramsRow = [];
-    taskSubProgramsRow = await this.search.getRowInTableWithSpecificText(
-      this.tasksTable,
-      subProgramNumber
-    );
-    //taskSubProgramsRow = await this.search.getFirstRow(this.tasksTable);
+    taskSubProgramsRow = await this.search.getRowInTableWithSpecificText(subProgramNumber);
+    //taskSubProgramsRow = await this.search.getFirstRow();
     var actionlocator = "div >> button";
     await this.search.clickRowAction(taskSubProgramsRow, actionlocator);
     console.log("Navigate To SubProgram Detials Page Successfully");
@@ -200,8 +195,8 @@ export class TasksPage {
     let ensurestatus;
     await this.navigateToMyTasksTab();
     let taskBenefitsRow = [];
-    taskBenefitsRow = await this.search.getRowInTableWithSpecificText( this.tasksTable, benefitNumber);
-    //taskSubProgramsRow = await this.search.getFirstRow(this.tasksTable);
+    taskBenefitsRow = await this.search.getRowInTableWithSpecificText(benefitNumber);
+    //taskSubProgramsRow = await this.search.getFirstRow();
     var actionlocator = "div >> button";
     await this.search.clickRowAction(taskBenefitsRow, actionlocator);
     console.log("Navigate To Benefits Detials Page Successfully");
