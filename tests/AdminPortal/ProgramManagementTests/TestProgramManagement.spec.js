@@ -72,9 +72,7 @@ test('Add and Approve New Stream', async () => {
   // Step3: Search on new stream created
   await test.step("Search on Stream", async () => {
     console.log("Search on Stream");
-    expect(await streamManagementPage.checkStreamRowDetails(streamData)).toBe(
-      true
-    );
+    expect(await streamManagementPage.checkStreamRowDetails(streamData)).toBe(true);
     streamNumber = streamData.getCreatedStreamId();
     console.log("New Stream Details Checked Successfully");
   });
@@ -123,10 +121,7 @@ test("Add and Approve New Main Program", async () => {
     await tasksPage.assignTaskToMe(programNumber);
     await tasksPage.navigateToMyCompletedTasksTab();
     expect(await tasksPage.aprroveMainProgram(programNumber)).toBe(true);
-
-    console.log(
-      "New Main Program Approved Successfully with id= " + programNumber
-    );
+    console.log("New Main Program Approved Successfully with id= " + programNumber);
   });
 });
 
@@ -141,8 +136,7 @@ test("Add and Approve Test Sub Programs", async () => {
     console.log("Click on Define New SubProgram");
     await mainProgramManagementPage.clickOnCreateSubProgram(
       programNumber,
-      global.testConfig.createSubPrograms.backUpProgramNumber
-    );
+      global.testConfig.createSubPrograms.backUpProgramNumber);
   });
   // Step2: Create new Sub Program page
   await test.step("Create New SubProgram Task", async () => {

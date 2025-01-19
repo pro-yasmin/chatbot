@@ -1,9 +1,9 @@
 const { test, expect } = require('@playwright/test');
-const { StreamData } = require('../../src/Models/AdminPortal/StreamData');
-const { MainProgramData } = require('../../src/Models/AdminPortal/MainProgramData');
-const { SubProgramsData } = require('../../src/Models/AdminPortal/SubProgramsData');
-const { Programs } = require("../../src/Apis/Business/Programs");
-const { BenefitsData } = require('../../src/Models/AdminPortal/BenefitsData');
+const { StreamData } = require('../src/Models/AdminPortal/StreamData');
+const { MainProgramData } = require('../src/Models/AdminPortal/MainProgramData');
+const { SubProgramsData } = require('../src/Models/AdminPortal/SubProgramsData');
+const { Programs } = require("../src/Apis/Business/Programs");
+const { BenefitsData } = require('../src/Models/AdminPortal/BenefitsData');
 
 
 let stream,streamData;

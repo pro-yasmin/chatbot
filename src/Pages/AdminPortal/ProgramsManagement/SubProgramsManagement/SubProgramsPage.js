@@ -106,7 +106,6 @@ export class SubProgramsPage {
     subProgramsData.setEnglishSubProgramName(createdSubProgramsEnName);
 
     var result = await popUpMsg.popUpMessage(
-      this.successPopupTitle,
       this.backToSubProgramsList,
       global.testConfig.createSubPrograms.subProgramsSuccessMsg
     );

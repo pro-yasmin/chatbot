@@ -68,7 +68,7 @@ export class MainProgramPage {
     mainProgramData.setEnglishMainProgramName(createdMainProgramEnName);
 
     // Handle success pop-up
-    var result = await popUpMsg.popUpMessage(this.successPopupTitle,this.backToMainProgramList,global.testConfig.createMainProgram.mainProgramSuccessMsg);
+    var result = await popUpMsg.popUpMessage(this.backToMainProgramList,global.testConfig.createMainProgram.mainProgramSuccessMsg);
     return result;
   }
 

@@ -83,11 +83,7 @@ export class StreamPage {
     streamData.setstreamArabicName(createdStreamArName);
 
     // Handle the success popup
-    var result = await popUpMsg.popUpMessage(
-      this.successPopupTitle,
-      this.backToAllStreamPageButton,
-      global.testConfig.createStream.streamSuccessMsg
-    );
+    var result = await popUpMsg.popUpMessage(this.backToAllStreamPageButton,global.testConfig.createStream.streamSuccessMsg);
     return result;
   }
 }
