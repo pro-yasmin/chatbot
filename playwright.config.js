@@ -64,12 +64,7 @@ module.exports = defineConfig({
   projects: [
     {
       name: 'All',
-      testDir: './tests'              // Test directory
-                       
-    },
-    {
-      name: 'Login',
-      testDir: './tests/AdminPortal/Login'              // Test directory
+      testDir: './tests/AdminPortal'              // Test directory
                        
     },
     {

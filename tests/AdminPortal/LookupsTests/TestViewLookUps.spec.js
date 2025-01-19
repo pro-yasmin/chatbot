@@ -14,7 +14,7 @@ let lookupPage;
 let lookupData;
 
 
-/*test('View Lookup', async ({ page }) => {
+test('View Lookup', async ({ page }) => {
 
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
@@ -56,4 +56,4 @@ let lookupData;
         await homePage.logout();
         console.log('User Logout Successfully');
     });
-});*/
+});

@@ -19,6 +19,8 @@ test('Create and View New Lookup', async ({ page }) => {
     lookupsManagmentPage = new LookupsManagmentPage(page);
     lookupData = new LookupData(page);
     var baseUrl = global.testConfig.BASE_URL;
+    //var adminusername = global.testConfig.ADMIN_USER;
+    //var adminpassword = global.testConfig.ADMIN_PASS;
     var adminusername = global.testConfig.GENERAL_SETTING_USER;
     var adminpassword = global.testConfig.GENERAL_SETTING_PASS;
     // Step0: Login 
