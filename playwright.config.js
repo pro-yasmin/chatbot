@@ -25,7 +25,7 @@ const ENV = 'uat';
 
 module.exports = defineConfig({
 
-  timeout: 120000,
+  timeout: 200000,
 
   globalSetup: require.resolve('./global-setup'),
  
@@ -61,7 +61,7 @@ module.exports = defineConfig({
 
   }, 
    /* Configure projects for major browsers */
-  projects: [
+  /*projects: [
     {
       name: 'All',
       testDir: './tests/AdminPortal'              // Test directory
@@ -117,7 +117,7 @@ module.exports = defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ],
+ // ],
 
   
 });

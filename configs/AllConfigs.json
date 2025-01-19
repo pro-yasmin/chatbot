@@ -9,7 +9,7 @@
   "BASE_URL_API": "https://uat-gw-ext-lb.iis-ssb.com:8243",
   "BUSSINESS_ADMIN_PASS": "P@$sw0rd",
   "BUSSINESS_ADMIN_USER": "auto_uat_business_administration_manager",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_27548_VOXFMUPZQWQKULUV",
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_16520_HDKIJWGJHHXUKCYY",
   "COLOR": "1",
   "COLORTERM": "truecolor",
   "CommonProgramFiles": "C:\\Program Files\\Common Files",
@@ -109,7 +109,7 @@
     "streamSuccessMsg": "تم حفظ المسار للمراجعة بنجاح"
   },
   "tasks": {
-    "assignTaskMsg": "هل انت متأكد من إسناد مهمة"
+    "assignTaskMsg": "هل أنت متأكد من إسناد مهمة"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",
@@ -127,7 +127,7 @@
     "confirmBenefitsMsg": "تم قبول تعريف الإعانة بنجاح"
   },
   "createMainProgram": {
-    "backUpStreamNumber": "PRG_StrSt_129",
+    "backUpStreamNumber": "PRG_StrSt_296",
     "arabicMainProgramName": "البرامج الوقائية لدعم الأسر والرعاية الاجتماعية",
     "englishMainProgramName": "FSSC preventive Program",
     "responsibleEntity": "الجهة المسؤولة الأولي",
@@ -145,7 +145,7 @@
     "mainProgramSuccessMsg": "تم حفظ البرنامج للمراجعة بنجاح"
   },
   "createSubPrograms": {
-    "backUpProgramNumber": "PRG_MPRG_146",
+    "backUpProgramNumber": "PRG_MPRG_160",
     "arabicSubProgramName": "برامج التوعية والتدريب حول إدمان المخدرات",
     "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
     "conditionsOfAssistanceUnit": "برامج التوعية",
@@ -191,24 +191,26 @@
     "reApplyAfterExistCode": ""
   },
   "lookUps": {
-    "firstTabArabicName": "اسم القائمة باللغة العربية",
+    "firstTabArabicName": "قائمه مرجعيه اولى",
     "firstTabEnglishName": "Lookup English Name",
     "firstTabDescriptionArabicName": "وصف القائمة المرجعية باللغة العربية",
     "firstTabDescriptionEnglishName": "Lookup Description English Name",
-    "secondTabArabicName": "الاسم باللغة العربية",
+    "secondTabArabicName": "قائمه مرجعيه ثانيه",
     "secondTabEnglishName": "Name in english",
-    "thirdTabArabicName": "الاسم باللغة العربية",
+    "thirdTabArabicName": "الاسم باللغه العربيه",
     "thirdTabEnglishName": "Name in english",
     "successMsgTabTwo": "تم إنشاء القائمة المرجعية بنجاح.",
     "successMsgTabThree": "تم إضافة العنصر بنجاح",
-    "lookUpStatusActive": "مفعل",
+    "lookUpStatusActive": "مفعَّل",
+    "listStatus": "متاح",
+    "newLookupItemAddedStatus": "ظاهر",
     "arabicName": "الأعمال والأملاك",
     "englishName": "Business and property",
     "code": "2323",
     "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟"
   },
   "createBenefits": {
-    "backUpSubProgramNumber": "PRG_SPRG_015",
+    "backUpSubProgramNumber": "PRG_SPRG_147",
     "arabicBenefitName": "دعم الأسر والرعاية الاجتماعية",
     "englishBenefitName": "FSSC preventive",
     "benefitEstimatedValue": "زيادة الوعي والوقاية من إدمان المخدرات",
@@ -260,5 +262,20 @@
     "applicationChannelCodes": [
       "14"
     ]
+  },
+  "stateMachine": {
+    "stateManagmentArabicName": "إدارة الحالة باللغة العربية",
+    "stateManagmentEnglishName": "State Management in English",
+    "stateManagmentArabicDescription": "وصف إدارة الحالة باللغة العربية",
+    "stateManagmentEnglishDescription": "State Management Description in English",
+    "firstStateArabicName": "الحالة الأولى باللغة العربية",
+    "firstStateEnglishName": "First State in English",
+    "secondStateArabicName": "الحالة الثانية باللغة العربية",
+    "secondStateEnglishName": "Second State in English",
+    "actionArabicName": "إجراء",
+    "actionEnglishName": "Action",
+    "stateMachineCreatedSuccessMsg": "تم إضافة دورة الحالة بنجاح.",
+    "stateMachineStatusAvailable": "متاح",
+    "stateMachineEditedSuccessMsg": "تم تعديل دورة الحالة بنجاح."
   }
 }
