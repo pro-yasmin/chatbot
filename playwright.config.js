@@ -82,6 +82,11 @@ module.exports = defineConfig({
       testDir: './tests/AdminPortal/LookupsTests'             // Test directory
      
     },
+    {
+      name: 'StateMachine',
+      testDir: './tests/AdminPortal/StateMachineTests'             // Test directory
+     
+    }
     /*{
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
