@@ -1,3 +1,8 @@
+/**
+ * Represents the homepage of the application and provides methods for navigating
+ * to various sections and performing common actions like logout and user verification.
+ * @class
+ */
 export class HomePage {
   //Page Construtor
   constructor(page) {
@@ -16,6 +21,10 @@ export class HomePage {
     this.stateMachineManagmentButton = '[data-testid="submenu-state-machine-management"]';
   }
 
+  /**
+   * Checks if the user's avatar is visible, indicating a successful login.
+   * @returns {Promise<boolean>} - Returns true if the avatar is visible.
+   */
   async checkAvatarIsExist() {
     await this.page.waitForSelector(this.avatar, {
       state: "visible",
@@ -34,14 +43,25 @@ export class HomePage {
 
   }
 
+  /**
+   * Navigates to the "Program Management" section of the application.
+   * @returns {Promise<void>} - Completes the navigation.
+   */
   async navigateToProgramManagement() {
     await this.page.waitForSelector(this.programManagementButton, { state: "visible", timeout: 20000 });
     await this.page.click(this.programManagementButton);
   }
 
+  /**
+   * Navigates to the "Streams Management" section within Program Management.
+   * @returns {Promise<void>} - Completes the navigation.
+   */
   async navigateToStreamsManagement() {
     await this.navigateToProgramManagement();
-    await this.page.waitForSelector(this.streamsManagementButton, { state: "visible", timeout: 20000 });
+    await this.page.waitForSelector(this.streamsManagementButton, {
+      state: "visible",
+      timeout: 20000,
+    });
     await this.page.click(this.streamsManagementButton);
 
   }

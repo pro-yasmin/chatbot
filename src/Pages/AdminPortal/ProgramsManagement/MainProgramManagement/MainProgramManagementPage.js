@@ -1,6 +1,11 @@
 const { SearchPage } = require("../../SharedPages/SearchPage");
 const { MainProgramPage } = require("./MainProgramPage");
 
+/**
+ * Represents the Main Program Management page and provides methods for managing
+ * main programs, including searching, creating, and validating main programs.
+ * @class
+ */
 export class MainProgramManagementPage {
   constructor(page) {
     this.page = page;
@@ -10,6 +15,11 @@ export class MainProgramManagementPage {
     this.dotsLocator;
   }
 
+    /**
+   * Clicks the button to create a new main program and completes the form with provided data.
+   * @param {object} mainProgramData - The data object containing main program details.
+   * @returns {Promise<boolean>} - Returns true if the main program is created successfully.
+   */
   async clickOnNewMainProgram(mainProgramData) {
     await this.page.waitForSelector(this.mainProgramsTable, {
       state: "visible",
@@ -22,7 +32,11 @@ export class MainProgramManagementPage {
 
   }
 
-  
+    /**
+   * Searches for a specific main program by name.
+   * @param {string} mainProgramName - The name of the main program to search for.
+   * @returns {Promise<Array|null>} - An array containing row details if found, or null if not found.
+   */
   async searchOnSpecificMainProgram(mainProgramName) {
     let mainProgramRow = [];
     mainProgramRow = await new SearchPage(this.page).searchOnUniqueRow(
@@ -36,6 +50,12 @@ export class MainProgramManagementPage {
     return mainProgramRow;
   }
 
+    /**
+   * Clicks on the "Create Sub Program" option for a specific main program.
+   * @param {string|null} mainProgramName - The name of the main program for which to create a subprogram.
+   * @param {string} backUpProgram - A backup program name to use if `mainProgramName` is null.
+   * @returns {Promise<void>} - Completes the action of clicking "Create Sub Program".
+   */
   async clickOnCreateSubProgram(mainProgramName,backUpProgram) {
     let lastTd;
     let mainProgramRow = [];
@@ -55,6 +75,29 @@ export class MainProgramManagementPage {
     }
   }
 
+/**
+ * Opens the details page of a specific main program by its identifier.
+ * 
+ * @param {string} mainProgramNumber - The unique identifier of the main program to view.
+ * @returns {Promise<void>} - Completes the action of opening the main program details page.
+ */
+async viewMainProgramDetails(mainProgramNumber) {
+  let viewTd;
+  let mainProgramRow = [];
+  mainProgramRow = await this.searchOnSpecificMainProgram(mainProgramNumber);
+  if (mainProgramRow && mainProgramRow.length > 0) {
+    viewTd = mainProgramRow[mainProgramRow.length - 2].tdLocator;
+    var viewBtn = viewTd.locator('div >> div >> button:nth-of-type(1)');
+    await viewBtn.click();
+    console.log("View Main Program Details Page Opened.");
+  }
+}
+
+    /**
+   * Validates that the main program details match the expected data.
+   * @param {object} mainProgramData - The data object containing the expected main program details.
+   * @returns {Promise<boolean>} - Returns true if the main program details match; otherwise, false.
+   */
   async checkMainProgramRowDetails(mainProgramData) {  
     let arabicTd;
     let englishTd;

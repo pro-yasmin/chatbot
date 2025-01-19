@@ -6,7 +6,10 @@
   "ANDROID_HOME": "C:\\Users\\VEGA Laptop\\AppData\\Local\\Android\\Sdk",
   "APPDATA": "C:\\Users\\VEGA Laptop\\AppData\\Roaming",
   "BASE_URL": "https://adminportal-uat.iis-ssb.com/auth/login",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_14484_AJEOJBWRFHYSASDY",
+  "BASE_URL_API": "https://uat-gw-ext-lb.iis-ssb.com:8243",
+  "BUSSINESS_ADMIN_PASS": "P@$sw0rd",
+  "BUSSINESS_ADMIN_USER": "auto_uat_business_administration_manager",
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_16520_HDKIJWGJHHXUKCYY",
   "COLOR": "1",
   "COLORTERM": "truecolor",
   "CommonProgramFiles": "C:\\Program Files\\Common Files",
@@ -15,12 +18,12 @@
   "COMPUTERNAME": "DESKTOP-NJGUAIL",
   "ComSpec": "C:\\Windows\\system32\\cmd.exe",
   "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
-  "EDITOR": "C:\\WINDOWS\\notepad.exe",
-  "EFC_10000": "1",
-  "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
-  "FPS_BROWSER_USER_PROFILE_STRING": "Default",
-  "GIT_ASKPASS": "c:\\Users\\NTG\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh",
-  "HOME": "C:\\Users\\NTG",
+  "EDITOR": "C:\\Windows\\notepad.exe",
+  "GENERAL_SETTING_PASS": "P@$sw0rd",
+  "GENERAL_SETTING_USER": "auto_uat_general_settings_specialist",
+  "GENERATE_TOKEN_URL_ADMIN_PORTAL": "https://sso-uat.iis-ssb.com:8080/realms/iis-ssb-uat/protocol/openid-connect/token",
+  "GIT_ASKPASS": "c:\\Users\\VEGA Laptop\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh",
+  "HOME": "C:\\Users\\VEGA Laptop",
   "HOMEDRIVE": "C:",
   "HOMEPATH": "\\Users\\VEGA Laptop",
   "INIT_CWD": "D:\\Work\\MEP\\automation",
@@ -73,12 +76,13 @@
   "PROMPT": "$P$G",
   "PSModulePath": "C:\\Users\\VEGA Laptop\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules",
   "PUBLIC": "C:\\Users\\Public",
+  "SEE_MASK_NOZONECHECKS": "1",
   "SESSIONNAME": "Console",
   "SystemDrive": "C:",
   "SystemRoot": "C:\\Windows",
   "TEMP": "C:\\Users\\VEGALA~1\\AppData\\Local\\Temp",
   "TERM_PROGRAM": "vscode",
-  "TERM_PROGRAM_VERSION": "1.96.2",
+  "TERM_PROGRAM_VERSION": "1.96.4",
   "TMP": "C:\\Users\\VEGALA~1\\AppData\\Local\\Temp",
   "USERDOMAIN": "DESKTOP-NJGUAIL",
   "USERDOMAIN_ROAMINGPROFILE": "DESKTOP-NJGUAIL",
@@ -89,7 +93,7 @@
   "VSCODE_GIT_ASKPASS_NODE": "C:\\Users\\VEGA Laptop\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
   "VSCODE_GIT_IPC_HANDLE": "\\\\.\\pipe\\vscode-git-ca9d1d47b2-sock",
   "VSCODE_INJECTION": "1",
-  "VSCODE_NONCE": "1595cfaf-3876-4d4a-999e-0572abc53e0b",
+  "VSCODE_NONCE": "dac00810-9bd6-43cd-b61c-59c810ede12b",
   "VSCODE_STABLE": "1",
   "windir": "C:\\Windows",
   "__PSLockDownPolicy": "0",
@@ -105,7 +109,7 @@
     "streamSuccessMsg": "تم حفظ المسار للمراجعة بنجاح"
   },
   "tasks": {
-    "assignTaskMsg": "هل انت متأكد من إسناد مهمة"
+    "assignTaskMsg": "هل أنت متأكد من إسناد مهمة"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",
@@ -123,7 +127,7 @@
     "confirmBenefitsMsg": "تم قبول تعريف الإعانة بنجاح"
   },
   "createMainProgram": {
-    "backUpStreamNumber": "PRG_StrSt_129",
+    "backUpStreamNumber": "PRG_StrSt_296",
     "arabicMainProgramName": "البرامج الوقائية لدعم الأسر والرعاية الاجتماعية",
     "englishMainProgramName": "FSSC preventive Program",
     "responsibleEntity": "الجهة المسؤولة الأولي",
@@ -141,27 +145,137 @@
     "mainProgramSuccessMsg": "تم حفظ البرنامج للمراجعة بنجاح"
   },
   "createSubPrograms": {
-    "backUpProgramNumber": "PRG_MPRG_043",
+    "backUpProgramNumber": "PRG_MPRG_160",
     "arabicSubProgramName": "برامج التوعية والتدريب حول إدمان المخدرات",
     "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
     "conditionsOfAssistanceUnit": "برامج التوعية",
-    "subProgramsSuccessMsg": "تم حفظ البرنامج الفرعي للمراجعة بنجاح"
+    "subProgramsSuccessMsg": "تم حفظ البرنامج الفرعي للمراجعة بنجاح",
+    "typeCode": "currentNonUpdatedProgram",
+    "businessKey": null,
+    "regulationsPublishedDate": "2025-12-22T22:00:00.000Z",
+    "designResponsibleGovernance": [
+      {
+        "code": "Responsible",
+        "responsibleCodes": [
+          "Agency3"
+        ]
+      }
+    ],
+    "executionResponsibleGovernance": [
+      {
+        "code": "1234",
+        "responsibleCodes": [
+          "test"
+        ]
+      }
+    ],
+    "programFundingSourcesCode": "source1",
+    "relatedPastPrograms": [],
+    "subProgramRisks": [],
+    "requiresGrandfatheringAndGradualImplementation": true,
+    "assistanceUnitCode": "customGroup",
+    "conditionsAssistanceUnits": [
+      "شروط تشكيل وحدة الدعم"
+    ],
+    "approach": "COMPREHENSIVE",
+    "benefitedSegments": [],
+    "geographicalTargeting": [],
+    "activationStartDate": "2025-12-22T22:00:00.000Z",
+    "activationEndDate": "2025-12-25T22:00:00.000Z",
+    "applicationEnablement": "PERMANENT",
+    "requireRegisterApplication": true,
+    "applicationChannelCodes": [
+      "14"
+    ],
+    "periodAfterExistCode": "",
+    "reApplyAfterExistCode": ""
   },
   "lookUps": {
+    "firstTabArabicName": "قائمه مرجعيه اولى",
+    "firstTabEnglishName": "Lookup English Name",
+    "firstTabDescriptionArabicName": "وصف القائمة المرجعية باللغة العربية",
+    "firstTabDescriptionEnglishName": "Lookup Description English Name",
+    "secondTabArabicName": "قائمه مرجعيه ثانيه",
+    "secondTabEnglishName": "Name in english",
+    "thirdTabArabicName": "الاسم باللغه العربيه",
+    "thirdTabEnglishName": "Name in english",
     "successMsgTabTwo": "تم إنشاء القائمة المرجعية بنجاح.",
     "successMsgTabThree": "تم إضافة العنصر بنجاح",
-    "lookUpStatusActive": "مفعل",
+    "lookUpStatusActive": "مفعَّل",
+    "listStatus": "متاح",
+    "newLookupItemAddedStatus": "ظاهر",
     "arabicName": "الأعمال والأملاك",
     "englishName": "Business and property",
     "code": "2323",
     "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟"
   },
   "createBenefits": {
-    "backUpSubProgramNumber": "PRG_SPRG_015",
+    "backUpSubProgramNumber": "PRG_SPRG_147",
     "arabicBenefitName": "دعم الأسر والرعاية الاجتماعية",
     "englishBenefitName": "FSSC preventive",
     "benefitEstimatedValue": "زيادة الوعي والوقاية من إدمان المخدرات",
     "entity": "جهه خارجيه",
-    "benefitsSuccessMsg": "تم حفظ الإعانة للمراجعة بنجاح"
+    "benefitsSuccessMsg": "تم حفظ الإعانة للمراجعة بنجاح",
+    "responsibleCode": "1234",
+    "benefitDetails": {
+      "mechanism": "FULL",
+      "budget": "رمز التكلفة الخاص بالإعانة",
+      "benefitType": "CASH",
+      "natureValue": "test2",
+      "natureValueType": "cashBenefitNature",
+      "providerCodes": [
+        "camp"
+      ],
+      "estimatedValue": "القيمة التقديرية للإعانة"
+    },
+    "relatedPastBenefits": [],
+    "subProgramId": "awarenessProgramsAndTrainingsRegardingDrugAddictionmidjyAuto",
+    "incomeCategoryCodes": [],
+    "targetedSegments": [],
+    "assessmentNeed": false,
+    "calculationValue": "variableBasedOnDemand",
+    "calculationValueType": "benefitCalculationMechanism",
+    "calculationChildren": [],
+    "receivingEntity": "externalEntity",
+    "assessmentTypeCodes": [],
+    "assessmentFrequencyCodes": [],
+    "entitlementPeriodPattern": "DAILY",
+    "entitlementPeriodStartDate": "2025-01-13T22:00:00.000Z",
+    "entitlementPeriodEndDate": "2025-01-13T22:00:00.000Z",
+    "frequencyOfPeriodicPattern": "DAILY",
+    "frequencyOfPeriodicStartDate": "2025-01-13T22:00:00.000Z",
+    "frequencyOfPeriodicEndDate": "2025-01-13T22:00:00.000Z",
+    "activationStartDate": "2025-01-01T22:00:00.000Z",
+    "activationEndDate": "2025-01-01T22:00:00.000Z",
+    "applicationEnablement": "PERMANENT",
+    "paceValue": "periodically",
+    "paceValueType": "benefitRecurrence",
+    "paceChildren": [
+      {
+        "value": "ongoing",
+        "valueType": "benefitLimitation"
+      }
+    ],
+    "temporaryFrom": null,
+    "temporaryTo": null,
+    "requireRegisterApplication": true,
+    "applicationChannelCodes": [
+      "14"
+    ]
+  },
+  "stateMachine": {
+    "stateManagmentArabicName": "إدارة الحالة باللغة العربية",
+    "stateManagmentEnglishName": "State Management in English",
+    "stateManagmentArabicDescription": "وصف إدارة الحالة باللغة العربية",
+    "stateManagmentEnglishDescription": "State Management Description in English",
+    "firstStateArabicName": "الحالة الأولى باللغة العربية",
+    "firstStateEnglishName": "First State in English",
+    "secondStateArabicName": "الحالة الثانية باللغة العربية",
+    "secondStateEnglishName": "Second State in English",
+    "actionArabicName": "إجراء",
+    "actionEnglishName": "Action",
+    "stateMachineCreatedSuccessMsg": "تم إضافة دورة الحالة بنجاح.",
+    "stateMachineStatusAvailable": "متاح",
+    "stateMachineEditedSuccessMsg": "تم تعديل دورة الحالة بنجاح."
   }
 }

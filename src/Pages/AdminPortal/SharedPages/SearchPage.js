@@ -1,5 +1,9 @@
+/**
+ * Manages search-related actions for tables, including searching for rows by value or text,
+ * retrieving row details, and performing actions on specific rows.
+ * @class
+ */
 export class SearchPage {
-
   constructor(page) {
     this.page = page;
     this.tableSelector = "//table//tbody";
@@ -26,23 +30,23 @@ export class SearchPage {
      await  this.page.waitForTimeout(2000); 
     if (rowCount !== 1) {
       throw new Error(`Expected 1 row to be displayed, but found ${rowCount}`);
-    }  
+    }
     // Step 5: Get all <td> locators and their children for the unique row
-     uniqueRow = rows.first();
-     tds = await uniqueRow.locator('td');
+    uniqueRow = rows.first();
+    tds = await uniqueRow.locator("td");
 
-  // Step 6: Map the <td> locators and their children to an array
-  var tdCount = await tds.count(); // Get the count of <td> elements
+    // Step 6: Map the <td> locators and their children to an array
+    var tdCount = await tds.count(); // Get the count of <td> elements
 
-  for (let i = 0; i < tdCount; i++) {
-    var td = tds.nth(i); // Access each <td> locator
-    var children = await td.locator('*').all(); // Get all child elements (buttons, spans, etc.)
-    tdDetails.push({
-      tdLocator: td,
-      childLocators: children,
-    });
-  } 
-   return tdDetails;
+    for (let i = 0; i < tdCount; i++) {
+      var td = tds.nth(i); // Access each <td> locator
+      var children = await td.locator("*").all(); // Get all child elements (buttons, spans, etc.)
+      tdDetails.push({
+        tdLocator: td,
+        childLocators: children,
+      });
+    }
+    return tdDetails;
   }
 
 
@@ -53,35 +57,40 @@ export class SearchPage {
     let tds;
     let tdDetails = [];
     let firstRow;
-    
+
     // Step 2: Wait for the table rows to update (assuming the table is dynamically updated)
     await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' });
     await  this.page.waitForTimeout(2000); 
      // Step 3: Get all visible rows in the table
      rows = await  this.page.locator(`${this.tableSelector}//tr`).filter({ has: this.page.locator('td') });
     // Step 4: Ensure only one row is visible
-     rowCount = await rows.count();
-    
+    rowCount = await rows.count();
+
     // Step 5: Get all <td> locators and their children for the unique row
     firstRow = rows.first();
-     tds = await firstRow.locator('td');
+    tds = await firstRow.locator("td");
 
-  // Step 6: Map the <td> locators and their children to an array
-  var tdCount = await tds.count(); // Get the count of <td> elements
+    // Step 6: Map the <td> locators and their children to an array
+    var tdCount = await tds.count(); // Get the count of <td> elements
 
-  for (let i = 0; i < tdCount; i++) {
-    var td = tds.nth(i); // Access each <td> locator
-    var children = await td.locator('*').all(); // Get all child elements (buttons, spans, etc.)
-    tdDetails.push({
-      tdLocator: td,
-      childLocators: children,
-    });
-  } 
-   return tdDetails;
+    for (let i = 0; i < tdCount; i++) {
+      var td = tds.nth(i); // Access each <td> locator
+      var children = await td.locator("*").all(); // Get all child elements (buttons, spans, etc.)
+      tdDetails.push({
+        tdLocator: td,
+        childLocators: children,
+      });
+    }
+    return tdDetails;
   }
 
-  async clickRowAction( row , actionLocatorvalue) 
-  {
+  /**
+   * Clicks on a specific action within a row.
+   * @param {Array} row - An array containing details of the row's `<td>` elements.
+   * @param {string} actionLocatorValue - Selector for the action element within the last `<td>` of the row.
+   * @returns {Promise<void>} - Performs the action without returning a value.
+   */
+  async clickRowAction(row, actionLocatorvalue) {
     let lastTd;
     if (row && row.length > 0) {
       lastTd = row[row.length - 1].tdLocator;
@@ -110,38 +119,36 @@ export class SearchPage {
     if (rowCount === 0) {
       throw new Error(`No table found with selector: "${this.tableSelector}"`);
     }
-  
+
     // Locate the row containing a <td> with a <span> that has the specific text inside the table
     row=await this.page.locator(`${this.tableSelector}//tr`).filter({
       has: this.page.locator(`td span:text-is("${text}")`),
     });
-  
+
     // Check if the matching row exists
     rowCount = await row.count();
-   if (rowCount === 0) {
-       throw new Error(`No row found in the table with <span> containing text: "${text}"`);
-  }
-  
+    if (rowCount === 0) {
+      throw new Error(
+        `No row found in the table with <span> containing text: "${text}"`
+      );
+    }
+
     // Return the first matching row
-    firstRow =await row.first(); 
-    tds = await firstRow.locator('td');
+    firstRow = await row.first();
+    tds = await firstRow.locator("td");
 
     // Step 6: Map the <td> locators and their children to an array
     var tdCount = await tds.count(); // Get the count of <td> elements
-  
+
     for (let i = 0; i < tdCount; i++) {
       var td = tds.nth(i); // Access each <td> locator
-      var children = await td.locator('*').all(); // Get all child elements (buttons, spans, etc.)
+      var children = await td.locator("*").all(); // Get all child elements (buttons, spans, etc.)
       tdDetails.push({
         tdLocator: td,
         childLocators: children,
       });
-    } 
-     return tdDetails;
+    }
+    return tdDetails;
   }
-
-  
-
 }
 module.exports = { SearchPage };
-

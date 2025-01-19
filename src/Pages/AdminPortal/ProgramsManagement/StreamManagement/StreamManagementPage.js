@@ -1,7 +1,11 @@
 const { SearchPage } = require("../../SharedPages/SearchPage");
 const { StreamPage } = require("./StreamPage");
 
-
+/**
+ * Manages stream-related actions, such as creating new streams, searching for streams,
+ * and initiating main program creation for selected streams.
+ * @class
+ */
 export class StreamManagementPage {
   constructor(page) {
     this.page = page;
@@ -9,10 +13,13 @@ export class StreamManagementPage {
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
     this.streamsTable = "//table//tbody";
     this.createMainProgramOption = '//ul[@role="menu"]//li[1]';
-    this.dotsLocator;
+    this.viewBtn;
   }
 
-
+  /**
+   * Clicks on the "Create New Stream" button to open the stream creation form.
+   * @returns {Promise<void>} - Completes the action of opening the stream form.
+   */
   async clickOnNewStream() {
     await this.page.waitForSelector(this.streamsTable, {
       state: "visible",
@@ -21,14 +28,23 @@ export class StreamManagementPage {
     await this.page.click(this.createNewStreamButton);
   }
 
+  /**
+   * Creates a new stream using the provided stream data.
+   * @param {object} streamData - Data required for creating a new stream.
+   * @returns {Promise<boolean>} - Returns true if the stream is created successfully.
+   */
   async createStream(streamData) {
-  await this.clickOnNewStream();
-  var streamPage = new StreamPage(this.page);
+    await this.clickOnNewStream();
+    var streamPage = new StreamPage(this.page);
     const result = await streamPage.createNewStream(streamData);
     return result;
   }
 
-
+  /**
+   * Searches for a specific stream by its name.
+   * @param {string} streamName - The name of the stream to search for.
+   * @returns {Promise<Array|null>} - An array of row details if the stream is found, or null if no match is found.
+   */
   async searchOnSpecificStream(streamName) {
     let streamRow = [];
     streamRow = await new SearchPage(this.page).searchOnUniqueRow(
@@ -41,16 +57,22 @@ export class StreamManagementPage {
     return streamRow;
   }
 
-  async clickOnCreateMainProgram(streamName,backUpStream) {
+  /**
+   * Clicks on the "Create Main Program" option for a specific stream.
+   * @param {string|null} streamName - The name of the stream for which the main program should be created.
+   * @param {string} backUpStream - Backup stream name to use if `streamName` is null.
+   * @returns {Promise<void>} - Completes the action of clicking the "Create Main Program" option.
+   */
+  async clickOnCreateMainProgram(streamName, backUpStream) {
     let lastTd;
     let streamRow = [];
-    if(streamName== null)
+    if (streamName == null)
       streamRow = await this.searchOnSpecificStream(backUpStream);
     else streamRow = await this.searchOnSpecificStream(streamName);
     if (streamRow && streamRow.length > 0) {
       lastTd = streamRow[streamRow.length - 1].tdLocator;
-      this.dotsLocator = lastTd.locator("div >> button");
-      await this.dotsLocator.click();
+      this.viewBtn = lastTd.locator("div >> button");
+      await this.viewBtn.click();
       await this.page.waitForSelector(this.createMainProgramOption, {
         state: "visible",
         timeout: 60000,
@@ -60,6 +82,30 @@ export class StreamManagementPage {
     }
   }
 
+
+/**
+ * Opens the details page of a specific stream by its identifier.
+ * 
+ * @param {string} streamNumber - The unique identifier of the stream to view.
+ * @returns {Promise<void>} - Completes the action of opening the stream details page.
+ */
+  async viewStreamDetails(streamNumber) {
+    let viewTd;
+    let streamRow = [];
+     streamRow = await this.searchOnSpecificStream(streamNumber);
+    if (streamRow && streamRow.length > 0) {
+      viewTd = streamRow[streamRow.length - 2].tdLocator;
+      var viewBtn = viewTd.locator('div >> div >> button:nth-of-type(1)');
+      await viewBtn.click();
+      console.log("View Stream Details Page Opened.");
+     }
+  }
+
+  /**
+   * Verifies the details of a specific stream, ensuring the Arabic and English names match the expected values.
+   * @param {object} streamData - The stream data object containing expected names and details.
+   * @returns {Promise<boolean>} - Returns true if the stream details match the expected values; otherwise, false.
+   */
   async checkStreamRowDetails(streamData) {
     let arabicTd;
     let englishTd;
@@ -87,14 +133,13 @@ export class StreamManagementPage {
       actualArabicName === streamData.getstreamArabicName() &&
       actualEnglishName === streamData.getstreamEnglishName()
     ) {
-      console.log("Stream names matched successfully.");    
+      console.log("Stream names matched successfully.");
       let streamId = await streamRow[0].tdLocator.textContent();
-        streamData.setCreatedStreamId(streamId);
-        console.log("Created Stream ID set in StreamData: " + streamId);
-              return true;
-      }
-      return false;
-
+      streamData.setCreatedStreamId(streamId);
+      console.log("Created Stream ID set in StreamData: " + streamId);
+      return true;
+    }
+    return false;
   }
 }
 

@@ -49,7 +49,38 @@
  "arabicSubProgramName": "برامج التوعية والتدريب حول إدمان المخدرات",
  "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
  "conditionsOfAssistanceUnit" : "برامج التوعية",
- "subProgramsSuccessMsg" :"تم حفظ البرنامج الفرعي للمراجعة بنجاح"
+ "subProgramsSuccessMsg" :"تم حفظ البرنامج الفرعي للمراجعة بنجاح",
+ "typeCode": "currentNonUpdatedProgram",
+    "regulationsPublishedDate": "2025-01-10T22:00:00.000Z",
+    "designResponsibleGovernance": [
+      {
+        "code": "Responsible",
+        "responsibleCodes": ["Agency"]
+      }
+    ],
+    "executionResponsibleGovernance": [
+      {
+        "code": "1234",
+        "responsibleCodes": ["test"]
+      }
+    ],
+    "programFundingSourcesCode": "source1",
+    "relatedPastPrograms": [],
+    "subProgramRisks": [],
+    "requiresGrandfatheringAndGradualImplementation": true,
+    "assistanceUnitCode": "customGroup",
+    "conditionsAssistanceUnits": ["شروط تشكيل وحدة الدعم"],
+    "approach": "COMPREHENSIVE",
+    "benefitedSegments": [],
+    "geographicalTargeting": [],
+    "activationStartDate": "2025-01-10T22:00:00.000Z",
+    "activationEndDate": "2025-01-10T22:00:00.000Z",
+    "applicationEnablement": "PERMANENT",
+    "requireRegisterApplication": true,
+    "applicationChannelCodes": ["15"],
+    "periodAfterExistCode": "",
+    "reApplyAfterExistCode": ""
+ 
 },
 "lookUps": {
     "firstTabArabicName": "قائمه مرجعيه اولى",
@@ -71,12 +102,55 @@
     "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟"
   },
   "createBenefits": {
+    "backUpSubProgramNumber": "PRG_SPRG_259",
     "arabicBenefitName": "دعم الأسر والرعاية الاجتماعية",
     "englishBenefitName": "FSSC preventive",
     "benefitEstimatedValue": "زيادة الوعي والوقاية من إدمان المخدرات",
     "entity": "جهه خارجيه",
-    "benefitsSuccessMsg": "تم حفظ الإعانة للمراجعة بنجاح"
-  },
+    "benefitsSuccessMsg": "تم حفظ الإعانة للمراجعة بنجاح",
+    "responsibleCode": "1234",
+    "benefitDetails": {
+      "mechanism": "FULL",
+      "budget": "رمز التكلفة الخاص بالإعانة",
+      "benefitType": "CASH",
+      "natureValue": "test2",
+      "natureValueType": "cashBenefitNature",
+      "providerCodes": ["camp"],
+      "estimatedValue": "القيمة التقديرية للإعانة"
+    },
+    "relatedPastBenefits": [],
+    "subProgramId": "awarenessProgramsAndTrainingsRegardingDrugAddictionmidjyAuto",
+      "incomeCategoryCodes": [],
+      "targetedSegments": [],
+      "assessmentNeed": false,
+      "calculationValue": "variableBasedOnDemand",
+      "calculationValueType": "benefitCalculationMechanism",
+      "calculationChildren": [],
+      "receivingEntity": "externalEntity",
+      "assessmentTypeCodes": [],
+      "assessmentFrequencyCodes": [],
+      "entitlementPeriodPattern": "DAILY",
+      "entitlementPeriodStartDate": "2025-01-13T22:00:00.000Z",
+      "entitlementPeriodEndDate": "2025-01-13T22:00:00.000Z",
+      "frequencyOfPeriodicPattern": "DAILY",
+      "frequencyOfPeriodicStartDate": "2025-01-13T22:00:00.000Z",
+      "frequencyOfPeriodicEndDate": "2025-01-13T22:00:00.000Z",
+      "activationStartDate": "2025-01-01T22:00:00.000Z",
+      "activationEndDate": "2025-01-01T22:00:00.000Z",
+      "applicationEnablement": "PERMANENT",
+      "paceValue": "periodically",
+      "paceValueType": "benefitRecurrence",
+      "paceChildren": [
+        {
+          "value": "ongoing",
+          "valueType": "benefitLimitation"
+        }
+      ],
+      "temporaryFrom": null,
+      "temporaryTo": null,
+      "requireRegisterApplication": true,
+      "applicationChannelCodes": ["14"]
+    },
   "stateMachine": {
     "stateManagmentArabicName": "إدارة الحالة باللغة العربية",
     "stateManagmentEnglishName": "State Management in English",
