@@ -33,26 +33,17 @@ test('Create and View New Lookup', async ({ page }) => {
         await homePage.navigateToLookupsManagment();
         console.log('Navigate to LookUps Managment page');
     });
-
     // Step2: Create New Lookup
     await test.step('Create New Lookup', async () => {
         await lookupsManagmentPage.createNewLookup(lookupData);
         console.log('New lookup Created Successfully');
     });
-
     // Step3: Check on Lookup in Lookups table
     await test.step('Search on Lookup created', async () => {
         expect(await lookupsManagmentPage.checkNewLookupAdded(lookupData)).toBe(true);
         console.log('New lookup Details Checked Successfully');
     });
-
-    // Step4: View Lookup page After adding
-    await test.step('View LookUp After adding', async () => {
-        await lookupsManagmentPage.validateViewLookupPageIsOpened(lookupData);
-        console.log('View LookUp Page Opened Successfully');
-    });
-
-    //Step5: Logout From Admin portal
+    //Step4: Logout From Admin portal
     await test.step('Logout from Admin Portal', async () => {
         await homePage.logout();
         console.log('Logout done Successfully');

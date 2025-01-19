@@ -21,7 +21,7 @@ export class LookupsManagmentPage {
      */
     async createNewLookup(lookupData) {
         await this.clickAddButton();
-       return await this.lookupPage.createNewLookup(lookupData);
+        return await this.lookupPage.createNewLookup(lookupData);
     }
 
     /**
@@ -29,18 +29,17 @@ export class LookupsManagmentPage {
      * @param {Object} lookupData - The data required to identify and edit the lookup.
      * @returns {Promise<void>} - Returns a promise that resolves when the lookup has been edited and verified.
      */
-    async editLookup(lookupData){
-        var lookupEdited= false;
+    async editLookup(lookupData) {
+        var lookupEdited = false;
         await this.clickEditLookupButton(lookupData);
         console.log('Edit Lookup Button Clicked');
-        if(await this.lookupPage.addNewLookupItem())
-        {
+        if (await this.lookupPage.addNewLookupItem()) {
             console.log('New Lookup Item Added');
-            lookupEdited= await this.lookupPage.viewNewLookupItemDetails();
+            lookupEdited = await this.lookupPage.viewNewLookupItemDetails();
             console.log('New Lookup Item Details Viewed');
         }
-       return lookupEdited;
-       
+        return lookupEdited;
+
     }
 
     /**
@@ -48,10 +47,10 @@ export class LookupsManagmentPage {
      * @param {Object} lookupData - The data required to identify the lookup.
      * @returns {Promise<void>} - Resolves when the validation is complete.
      */
-    async validateViewLookupPageIsOpened(lookupData){
+    async viewLookupDetails(lookupData) {
         await this.clickViewLookUpButton(lookupData);
         console.log('View Lookup Data Button Clicked');
-        expect(await this.lookupPage.validateViewLookupPageIsOpened()).toBe(true);
+        return await this.lookupPage.validateLookupDetails(lookupData);
     }
 
     /**
