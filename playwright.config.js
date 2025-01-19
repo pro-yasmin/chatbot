@@ -79,7 +79,7 @@ module.exports = defineConfig({
     },
     {
       name: 'Lookups',
-      testDir: './tests/AdminPortal/LookupsTests/TestCreateLookUps.spec.js'             // Test directory
+      testDir: './tests/AdminPortal/LookupsTests'             // Test directory
      
     },
     {
