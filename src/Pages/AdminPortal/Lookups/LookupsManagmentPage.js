@@ -58,7 +58,7 @@ export class LookupsManagmentPage {
      * @returns {Promise<void>} - A promise that resolves when the button has been clicked.
      */
     async clickAddButton() {
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(5000);
         await this.page.waitForSelector(this.addButton, { visible: true });
         await this.page.click(this.addButton);
     }

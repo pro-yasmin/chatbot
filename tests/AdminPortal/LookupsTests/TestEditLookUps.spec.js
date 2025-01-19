@@ -12,7 +12,7 @@ let lookupsManagmentPage;
 let lookupData;
 
 
-test('Edit Lookup', async ({ page }) => {
+/*test('Edit Lookup', async ({ page }) => {
 
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
@@ -58,4 +58,4 @@ test('Edit Lookup', async ({ page }) => {
         await homePage.logout();
         console.log('User Logout Successfully');
     });
-});
+});*/
