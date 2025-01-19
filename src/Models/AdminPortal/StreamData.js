@@ -2,8 +2,7 @@ const {Utils }= require('../../Utils/utils.js');
 
 export class StreamData {
 
-  constructor(page) {
-    this.page = page;
+  constructor() {
     this.utils = Utils;
     this.streamArabicName = null;
     this.streamEnglishName = null;
@@ -13,6 +12,9 @@ export class StreamData {
     this.englishStreamGoal = null;
     this.arabicGoal = null;
     this.englishGoal = null;
+    this.streamId = null;
+    this.streamNumber = null;
+
   }
 
   // Getter and Setter for streamArabicName
@@ -124,9 +126,24 @@ export class StreamData {
     }
     return this.streamNumber;
     }
-  setArabicStreamName(value) {
-    this.arabicStreamName = value;
+  setStreamNumber(value) {
+    this.streamNumber = value;
     }
+    
+  toJSON() {
+    return JSON.stringify({
+        "nameAr": this.getstreamArabicName(),
+        "nameEn": this.getstreamEnglishName(),
+        "arabicDescription":  this.getstreamArabicDescription(),
+        "englishDescription":  this.getstreamEnglishDescription(),
+        "goalEn":  this.getenglishGoal(),
+        "goalAr":  this.getarabicGoal(),
+        "streamGoals": [{
+            "nameAr": this.getarabicStreamGoal(),
+            "nameEn":  this.getenglishStreamGoal() 
+            }]
+    });
+  }
 
 }
 

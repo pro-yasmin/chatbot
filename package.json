@@ -15,7 +15,7 @@
     "allure-commandline": "^2.32.0",
     "allure-playwright": "^3.0.7",
     "cross-env": "^7.0.3",
-    "prettier": "^3.0.0-alpha.6"
+    "prettier": "3.4.2"
   },
   "dependencies": {
     "dotenv-flow": "^4.1.0",

@@ -22,39 +22,63 @@
     "addAcceptNote": "ملاحظة لقبول المسار",
     "addAcceptMainProgramNote": "ملاحظة لقبول البرنامج الرئيسي",
     "addAcceptSubProgramSNote": "ملاحظة لقبول البرنامج الفرعى",
-    "addAcceptBenefitsNote" : "ملاحظة لقبول الاعانة ",
+    "addAcceptBenefitsNote": "ملاحظة لقبول الاعانة ",
     "confirmStreamMsg": "تم قبول تعريف المسار بنجاح",
     "confirmMainProgramMsg": "تم قبول تعريف البرنامج الرئيسي بنجاح",
     "confirmSubProgramsMsg": "تم قبول تعريف البرنامج الفرعي بنجاح",
-    "confirmBenefitsMsg" :"تم قبول تعريف الإعانة بنجاح"
-
+    "confirmBenefitsMsg": "تم قبول تعريف الإعانة بنجاح"
   },
   "createMainProgram": {
-  "backUpStreamNumber":"PRG_StrSt_129",
-  "arabicMainProgramName": "البرامج الوقائية لدعم الأسر والرعاية الاجتماعية",
-  "englishMainProgramName": "FSSC preventive Program",
-  "responsibleEntity": "الجهة المسؤولة الأولي",
-  "arabicMainProgramDescription": "إجراء الدورات التدريبية لرفع مستوى الوعي والوقاية من سوء المعاملة وغيرها من أشكال العنف",
-  "englishMainProgramDescription": "Trainings to raise awareness and to prevent abuse and other forms of violence",
-  "year": "تسعة عشر تسعون",
-  "estimatedBudget": "الميزانية التقديرية الميزانية التقديرية",
-  "calculationMethod": "طريقة الحساب طريقة الحس طريقة الحساب طريقة الحسابطريقة الحساب طريقة الحساب",
-  "riskCategory": "فترة الحمل والطفولة المبكرة",
-  "risks":"ضعف صحة الأمهات",
-  "riskArabicDescription": "تعزيز تمكين وسالمة الفئات الهشة من خلال برامج التوعي المجتمعي والدعم الشامل",
-  "riskEnglishDescription": "To promote the well-being and safety of vulnerable groups through support, awareness, and inclusion Programs",
-  "arabicMainProgramGoal": "1. ضمان المساواة لذوي الدخل المحدود والفئات الهشة في حقوق الحصول على الموارد الاقتصادية والخدمات األساسية في الدولة 2. تمكين جودة الحياة للفئات ذوي الخاصة من النواحي الجسدية والعقلية (مثل الأشخاص ذوي الاعاقة ومقدمي الرعاية) 3. رفع مستوى منذ مراحل الطفولة المبكرة للوقاية من سوء المعاملة  5. تقديم الدعم النفس ي للفئات الهشة المحتاجة لضمان صحتها النفسية",
-  "englishMainProgramGoal": "1. To ensure equal rights to economic resources and basic services to poor and economically vulnerable To provide psychological support to vulnerable",
-  "mainProgramSuccessMsg":"تم حفظ البرنامج للمراجعة بنجاح"
-},
-"createSubPrograms": {
- "backUpProgramNumber":"PRG_MPRG_043",
- "arabicSubProgramName": "برامج التوعية والتدريب حول إدمان المخدرات",
- "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
- "conditionsOfAssistanceUnit" : "برامج التوعية",
- "subProgramsSuccessMsg" :"تم حفظ البرنامج الفرعي للمراجعة بنجاح"
-},
-"lookUps": {
+    "backUpStreamNumber": "PRG_StrSt_129",
+    "arabicMainProgramName": "البرامج الوقائية لدعم الأسر والرعاية الاجتماعية",
+    "englishMainProgramName": "FSSC preventive Program",
+    "responsibleEntity": "الجهة المسؤولة الأولي",
+    "arabicMainProgramDescription": "إجراء الدورات التدريبية لرفع مستوى الوعي والوقاية من سوء المعاملة وغيرها من أشكال العنف",
+    "englishMainProgramDescription": "Trainings to raise awareness and to prevent abuse and other forms of violence",
+    "year": "تسعة عشر تسعون",
+    "estimatedBudget": "الميزانية التقديرية الميزانية التقديرية",
+    "calculationMethod": "طريقة الحساب طريقة الحس طريقة الحساب طريقة الحسابطريقة الحساب طريقة الحساب",
+    "riskCategory": "فترة الحمل والطفولة المبكرة",
+    "risks": "ضعف صحة الأمهات",
+    "riskArabicDescription": "تعزيز تمكين وسالمة الفئات الهشة من خلال برامج التوعي المجتمعي والدعم الشامل",
+    "riskEnglishDescription": "To promote the well-being and safety of vulnerable groups through support, awareness, and inclusion Programs",
+    "arabicMainProgramGoal": "1. ضمان المساواة لذوي الدخل المحدود والفئات الهشة في حقوق الحصول على الموارد الاقتصادية والخدمات األساسية في الدولة 2. تمكين جودة الحياة للفئات ذوي الخاصة من النواحي الجسدية والعقلية (مثل الأشخاص ذوي الاعاقة ومقدمي الرعاية) 3. رفع مستوى منذ مراحل الطفولة المبكرة للوقاية من سوء المعاملة  5. تقديم الدعم النفس ي للفئات الهشة المحتاجة لضمان صحتها النفسية",
+    "englishMainProgramGoal": "1. To ensure equal rights to economic resources and basic services to poor and economically vulnerable To provide psychological support to vulnerable",
+    "mainProgramSuccessMsg": "تم حفظ البرنامج للمراجعة بنجاح"
+  },
+  "createSubPrograms": {
+    "backUpProgramNumber": "PRG_MPRG_146",
+    "arabicSubProgramName": "برامج التوعية والتدريب حول إدمان المخدرات",
+    "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
+    "conditionsOfAssistanceUnit": "برامج التوعية",
+    "subProgramsSuccessMsg": "تم حفظ البرنامج الفرعي للمراجعة بنجاح",
+    "typeCode": "currentNonUpdatedProgram",
+    "businessKey": null,
+    "regulationsPublishedDate": "2025-12-22T22:00:00.000Z",
+    "designResponsibleGovernance": [
+      { "code": "Responsible", "responsibleCodes": ["Agency3"] }
+    ],
+    "executionResponsibleGovernance": [
+      { "code": "1234", "responsibleCodes": ["test"] }
+    ],
+    "programFundingSourcesCode": "source1",
+    "relatedPastPrograms": [],
+    "subProgramRisks": [],
+    "requiresGrandfatheringAndGradualImplementation": true,
+    "assistanceUnitCode": "customGroup",
+    "conditionsAssistanceUnits": ["شروط تشكيل وحدة الدعم"],
+    "approach": "COMPREHENSIVE",
+    "benefitedSegments": [],
+    "geographicalTargeting": [],
+    "activationStartDate": "2025-12-22T22:00:00.000Z",
+    "activationEndDate": "2025-12-25T22:00:00.000Z",
+    "applicationEnablement": "PERMANENT",
+    "requireRegisterApplication": true,
+    "applicationChannelCodes": ["14"],
+    "periodAfterExistCode": "",
+    "reApplyAfterExistCode": ""
+  },
+  "lookUps": {
     "firstTabArabicName": "اسم القائمة باللغة العربية",
     "firstTabEnglishName": "Lookup English Name",
     "firstTabDescriptionArabicName": "وصف القائمة المرجعية باللغة العربية",
@@ -62,21 +86,64 @@
     "secondTabArabicName": "الاسم باللغة العربية",
     "secondTabEnglishName": "Name in english",
     "thirdTabArabicName": "الاسم باللغة العربية",
-    "thirdTabEnglishName": "Name in english", 
+    "thirdTabEnglishName": "Name in english",
     "successMsgTabTwo": "تم إنشاء القائمة المرجعية بنجاح.",
     "successMsgTabThree": "تم إضافة العنصر بنجاح",
     "lookUpStatusActive": "مفعل",
-    "arabicName":"الأعمال والأملاك",
-    "englishName":"Business and property",
-    "code":"2323",
+    "arabicName": "الأعمال والأملاك",
+    "englishName": "Business and property",
+    "code": "2323",
     "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟"
   },
   "createBenefits": {
-    "backUpSubProgramNumber":"PRG_SPRG_015",
+    "backUpSubProgramNumber": "PRG_SPRG_015",
     "arabicBenefitName": "دعم الأسر والرعاية الاجتماعية",
     "englishBenefitName": "FSSC preventive",
     "benefitEstimatedValue": "زيادة الوعي والوقاية من إدمان المخدرات",
     "entity": "جهه خارجيه",
-    "benefitsSuccessMsg": "تم حفظ الإعانة للمراجعة بنجاح"
+    "benefitsSuccessMsg": "تم حفظ الإعانة للمراجعة بنجاح",
+    "responsibleCode": "1234",
+    "benefitDetails": {
+      "mechanism": "FULL",
+      "budget": "رمز التكلفة الخاص بالإعانة",
+      "benefitType": "CASH",
+      "natureValue": "test2",
+      "natureValueType": "cashBenefitNature",
+      "providerCodes": ["camp"],
+      "estimatedValue": "القيمة التقديرية للإعانة"
+    },
+    "relatedPastBenefits": [],
+    "subProgramId": "awarenessProgramsAndTrainingsRegardingDrugAddictionmidjyAuto",
+      "incomeCategoryCodes": [],
+      "targetedSegments": [],
+      "assessmentNeed": false,
+      "calculationValue": "variableBasedOnDemand",
+      "calculationValueType": "benefitCalculationMechanism",
+      "calculationChildren": [],
+      "receivingEntity": "externalEntity",
+      "assessmentTypeCodes": [],
+      "assessmentFrequencyCodes": [],
+      "entitlementPeriodPattern": "DAILY",
+      "entitlementPeriodStartDate": "2025-01-13T22:00:00.000Z",
+      "entitlementPeriodEndDate": "2025-01-13T22:00:00.000Z",
+      "frequencyOfPeriodicPattern": "DAILY",
+      "frequencyOfPeriodicStartDate": "2025-01-13T22:00:00.000Z",
+      "frequencyOfPeriodicEndDate": "2025-01-13T22:00:00.000Z",
+      "activationStartDate": "2025-01-01T22:00:00.000Z",
+      "activationEndDate": "2025-01-01T22:00:00.000Z",
+      "applicationEnablement": "PERMANENT",
+      "paceValue": "periodically",
+      "paceValueType": "benefitRecurrence",
+      "paceChildren": [
+        {
+          "value": "ongoing",
+          "valueType": "benefitLimitation"
+        }
+      ],
+      "temporaryFrom": null,
+      "temporaryTo": null,
+      "requireRegisterApplication": true,
+      "applicationChannelCodes": ["14"]
+    }
   }
-}
+
