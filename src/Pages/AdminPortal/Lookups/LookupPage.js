@@ -189,6 +189,11 @@ export class LookupPage {
     return !newLookupitemCreated;
   }
 
+  /**
+   * Validates if a new lookup item has been added by comparing the values in the first row of the lookup table
+   * with the expected values from the global test configuration.
+   * @returns {Promise<boolean>} A promise that resolves to true if the new lookup item matches the expected values, otherwise false.
+   */
   async validateNewLookupItemAdded() {
     let lookUpCodeValue;
     let lookupArNameValue; 
