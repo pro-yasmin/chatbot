@@ -1,5 +1,5 @@
 const { PopUpPage } = require('../SharedPages/PopUpPage');
-const { expect } = require('@playwright/test');
+const { SearchPage } = require('../SharedPages/SearchPage');
 
 export class LookupPage {
   constructor(page) {
@@ -7,6 +7,7 @@ export class LookupPage {
     this.createdLookUpArName = null;
     this.createdLookUpEnName = null;
     this.popUpMsg = new PopUpPage(this.page);
+    this.search = new SearchPage(this.page);
     //locators
     this.successPopupTitle = '//span[@id="modal-modal-title"]';
     //Lookup Definition - first tab
@@ -44,6 +45,11 @@ export class LookupPage {
 
     //view lookup
     this.headlinePage = '//span[contains(text(),"المعلومات الرئيسية")]';
+    this.lookupArNameValue = '//div[@class="form-group has-feedback formio-component formio-component-textfield formio-component-nameAr  required"]//div[@ref="value"]';
+    this.lookupEnNameValue = '//div[@class="form-group has-feedback formio-component formio-component-textfield formio-component-nameEn en required"]//div[@ref="value"]';
+    this.lookupArDescriptionValue = '//div[@class="form-group has-feedback formio-component formio-component-textarea formio-component-descriptionAr"]//div[@ref="value"]';
+    this.lookupEnDescriptionValue = '//div[@class="form-group has-feedback formio-component formio-component-textarea formio-component-descriptionEn en"]//div[@ref="value"]';
+    this.lookupStatusValue = '//div[@class="form-group has-feedback formio-component formio-component-checkbox formio-component-active mt-4 status"]//div[@ref="value"]';
   }
 
   /**
@@ -53,9 +59,11 @@ export class LookupPage {
    */
   async fillLookupDefinitionInformation(lookupData) {
     console.log("Start filling Definition information");
-    await  this.page.waitForTimeout(1000);
+    await this.page.waitForTimeout(1000);
     this.createdLookUpArName = lookupData.getLookupArabicName();
     this.createdLookUpEnName = lookupData.getLookupEnglishName();
+    this.createdLookUpDescripionArName = lookupData.getLookupDescriptionArabicName();
+    this.createdLookUpDescripionEnName = lookupData.getLookupDescriptionEnglishName();
     await this.page.fill(this.lookupArabicName, this.createdLookUpArName);
     await this.page.fill(this.lookupEnglishName, this.createdLookUpEnName);
     await this.page.click(this.componentDdl);
@@ -67,12 +75,14 @@ export class LookupPage {
     //await this.page.click(this.parentLookup);
     //await this.page.waitForSelector(this.parentLookupFirstOption, { visible: true });
     //await this.page.click(this.parentLookupFirstOption);
-    await this.page.fill(this.lookupDescriptionArabicName, lookupData.getLookupDescriptionArabicName());
-    await this.page.fill(this.lookupDescriptionEnglishName, lookupData.getLookupDescriptionEnglishName());
-    await  this.page.waitForTimeout(1000);
+    await this.page.fill(this.lookupDescriptionArabicName, this.createdLookUpDescripionArName);
+    await this.page.fill(this.lookupDescriptionEnglishName, this.createdLookUpDescripionEnName);
+    await this.page.waitForTimeout(1000);
     await this.page.click(this.defineLookupButton);
     lookupData.setLookupArabicName(this.createdLookUpArName);
     lookupData.setLookupEnglishName(this.createdLookUpEnName);
+    lookupData.setLookupDescriptionArabicName(this.createdLookUpDescripionArName);
+    lookupData.setLookupDescriptionEnglishName(this.createdLookUpDescripionEnName);
     console.log("End filling Definition information");
   }
 
@@ -87,7 +97,7 @@ export class LookupPage {
     await this.page.fill(this.nameInArabic, lookupData.getNameInArabic());
     await this.page.fill(this.nameInEnglish, lookupData.getNameInEnglish());
     await this.page.fill(this.code, lookupData.getCode());
-    await  this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(2000);
     await this.page.click(this.createLookupButton);
     var result = await this.popUpMsg.popUpMessage(this.popUpDismissButton, global.testConfig.lookUps.successMsgTabTwo);
     console.log("End filling Design information");
@@ -107,11 +117,11 @@ export class LookupPage {
     await this.page.fill(this.codeLookup, lookupData.getCodeLookup());
     //await this.page.click(this.mainList);
     //await this.page.waitForSelector(this.mainListFirstOption, { visible: true });
-   // await this.page.click(this.mainListFirstOption);
+    // await this.page.click(this.mainListFirstOption);
     await this.page.click(this.visibleToggle);
     await this.page.click(this.addItemToLookupButton);
     var result = await this.popUpMsg.popUpMessage(this.popUpDismissButton, global.testConfig.lookUps.successMsgTabThree);
-    await  this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(2000);
     await this.page.click(this.makeLookupButton);
     await this.page.click(this.popUpDismissButton);
     console.log("End filling items information");
@@ -139,9 +149,29 @@ export class LookupPage {
    * Validates that the Lookup Page is opened by checking the visibility of the headline element.
    * @returns {Promise<void>} - Resolves when the headline element is visible.
    */
-  async validateViewLookupPageIsOpened() {
+  async validateLookupDetails(lookupData) {
     await this.page.waitForSelector(this.headlinePage, { visible: true });
-    return true;
+
+    const lookupArabicNameFieldText = await this.page.innerText(this.lookupArNameValue);
+    const lookupEnglishNameFieldText = await this.page.innerText(this.lookupEnNameValue);
+    const lookupDescriptionArabicNameFieldText = await this.page.innerText(this.lookupArDescriptionValue);
+    const lookupDescriptionEnglishNameFieldText = await this.page.innerText(this.lookupEnDescriptionValue);
+    const lookupStatusFieldText = await this.page.innerText(this.lookupStatusValue);
+
+    // Collect all validation checks into an array of booleans
+    const validations = [
+      lookupArabicNameFieldText === lookupData.getLookupArabicName(),
+      lookupEnglishNameFieldText === lookupData.getLookupEnglishName(),
+      lookupDescriptionArabicNameFieldText === lookupData.getLookupDescriptionArabicName(),
+      lookupDescriptionEnglishNameFieldText === lookupData.getLookupDescriptionEnglishName(),
+      lookupStatusFieldText === global.testConfig.lookUps.listStatus
+    ];
+
+    // Check if all validations are true
+    const allValid = validations.every(Boolean);
+
+    return allValid;
+
   }
 
   /**
@@ -152,11 +182,46 @@ export class LookupPage {
     await this.page.fill(this.nameArabic, global.testConfig.lookUps.arabicName);
     await this.page.fill(this.nameEnglish, global.testConfig.lookUps.englishName);
     await this.page.fill(this.codeLookup, global.testConfig.lookUps.code);
-    await this.page.click(this.mainList);
-    await this.page.click(this.mainListFirstOption);
+    // await this.page.click(this.mainList);
+    // await this.page.click(this.mainListFirstOption);
     await this.page.click(this.visibleToggle);
     var newLookupitemCreated = await this.page.click(this.addItemToLookupButton);
     return !newLookupitemCreated;
+  }
+
+  /**
+   * Validates if a new lookup item has been added by comparing the values in the first row of the lookup table
+   * with the expected values from the global test configuration.
+   * @returns {Promise<boolean>} A promise that resolves to true if the new lookup item matches the expected values, otherwise false.
+   */
+  async validateNewLookupItemAdded() {
+    let lookUpCodeValue;
+    let lookupArNameValue; 
+    let lookupEnNameValue;
+    let lookupStatusValue;
+    let lookupNewItemRow = [];
+    lookupNewItemRow = await this.search.getFirstRow();
+    var lookUpCodeLocator = "td:nth-of-type(2) >> span";
+    var lookupArNameLocator = "td:nth-of-type(3) >> span";
+    var lookupEnNameLocator = "td:nth-of-type(4) >> span";
+    var lookupStatusLocator = "td:nth-of-type(7) >> span";
+    lookUpCodeValue = await this.page.innerText(lookUpCodeLocator);
+    lookupArNameValue = await this.page.innerText(lookupArNameLocator);
+    lookupEnNameValue = await this.page.innerText(lookupEnNameLocator);
+    lookupStatusValue = await this.page.innerText(lookupStatusLocator);
+
+    console.log("Lookup Code Value: ", lookUpCodeValue);
+    console.log("Lookup Arabic Name Value: ", lookupArNameValue);
+    console.log("Lookup English Name Value: ", lookupEnNameValue);
+    console.log("Lookup Status Value: ", lookupStatusValue);
+  
+    if (lookUpCodeValue === global.testConfig.lookUps.code && 
+      lookupArNameValue === global.testConfig.lookUps.arabicName && 
+      lookupEnNameValue === global.testConfig.lookUps.englishName && 
+      lookupStatusValue === global.testConfig.lookUps.newLookupItemAddedStatus) {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -165,10 +230,11 @@ export class LookupPage {
    * @returns {Promise<boolean>} - Returns true if the lookup details page close button was clicked successfully, otherwise false.
    */
   async viewNewLookupItemDetails() {
+    var validateNewLookupItemDetails = await this.validateNewLookupItemAdded();
     await this.page.click(this.viewLookUpButton);
     await this.page.waitForTimeout(2000);
-    var viewLookupitem = await this.page.click(this.lookupDetailsPageCloseButton);
-    return !viewLookupitem;
+    await this.page.click(this.lookupDetailsPageCloseButton);
+    return validateNewLookupItemDetails;
   }
 
 
