@@ -5,10 +5,10 @@
   "ALLUSERSPROFILE": "C:\\ProgramData",
   "ANDROID_HOME": "C:\\Users\\VEGA Laptop\\AppData\\Local\\Android\\Sdk",
   "APPDATA": "C:\\Users\\VEGA Laptop\\AppData\\Roaming",
-  "BASE_URL": "https://adminportal-uat.iis-ssb.com/auth/login",
-  "BASE_URL_API": "https://uat-gw-ext-lb.iis-ssb.com:8243",
-  "BUSSINESS_ADMIN_PASS": "P@$sw0rd",
-  "BUSSINESS_ADMIN_USER": "auto_uat_business_administration_manager",
+  "BASE_URL": "https://adminportal-tst.iis-ssb.com/auth/login",
+  "BASE_URL_API": "https://gw-tst.iis-ssb.com:8243",
+  "BUSSINESS_ADMIN_PASS": "123456",
+  "BUSSINESS_ADMIN_USER": "system_user1",
   "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_16520_HDKIJWGJHHXUKCYY",
   "COLOR": "1",
   "COLORTERM": "truecolor",
@@ -19,9 +19,9 @@
   "ComSpec": "C:\\Windows\\system32\\cmd.exe",
   "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
   "EDITOR": "C:\\Windows\\notepad.exe",
-  "GENERAL_SETTING_PASS": "P@$sw0rd",
-  "GENERAL_SETTING_USER": "auto_uat_general_settings_specialist",
-  "GENERATE_TOKEN_URL_ADMIN_PORTAL": "https://sso-uat.iis-ssb.com:8080/realms/iis-ssb-uat/protocol/openid-connect/token",
+  "GENERAL_SETTING_PASS": "123456",
+  "GENERAL_SETTING_USER": "system_user1",
+  "GENERATE_TOKEN_URL_ADMIN_PORTAL": "https://sso-dev.iis-ssb.com:8080/realms/iis-tst/protocol/openid-connect/token",
   "GIT_ASKPASS": "c:\\Users\\VEGA Laptop\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh",
   "HOME": "C:\\Users\\VEGA Laptop",
   "HOMEDRIVE": "C:",
@@ -120,14 +120,12 @@
     "addAcceptNote": "ملاحظة لقبول المسار",
     "addAcceptMainProgramNote": "ملاحظة لقبول البرنامج الرئيسي",
     "addAcceptSubProgramSNote": "ملاحظة لقبول البرنامج الفرعى",
-    "addAcceptBenefitsNote": "ملاحظة لقبول الاعانة ",
     "confirmStreamMsg": "تم قبول تعريف المسار بنجاح",
     "confirmMainProgramMsg": "تم قبول تعريف البرنامج الرئيسي بنجاح",
-    "confirmSubProgramsMsg": "تم قبول تعريف البرنامج الفرعي بنجاح",
-    "confirmBenefitsMsg": "تم قبول تعريف الإعانة بنجاح"
+    "confirmSubProgramsMsg": "تم قبول تعريف البرنامج الفرعي بنجاح"
   },
   "createMainProgram": {
-    "backUpStreamNumber": "PRG_StrSt_296",
+    "backUpStreamNumber": "PRG_StrSt_129",
     "arabicMainProgramName": "البرامج الوقائية لدعم الأسر والرعاية الاجتماعية",
     "englishMainProgramName": "FSSC preventive Program",
     "responsibleEntity": "الجهة المسؤولة الأولي",
@@ -145,19 +143,18 @@
     "mainProgramSuccessMsg": "تم حفظ البرنامج للمراجعة بنجاح"
   },
   "createSubPrograms": {
-    "backUpProgramNumber": "PRG_MPRG_160",
+    "backUpProgramNumber": "PRG_MPRG_043",
     "arabicSubProgramName": "برامج التوعية والتدريب حول إدمان المخدرات",
     "englishSubProgramName": "Awareness programs and trainings regarding drug addiction",
     "conditionsOfAssistanceUnit": "برامج التوعية",
     "subProgramsSuccessMsg": "تم حفظ البرنامج الفرعي للمراجعة بنجاح",
     "typeCode": "currentNonUpdatedProgram",
-    "businessKey": null,
-    "regulationsPublishedDate": "2025-12-22T22:00:00.000Z",
+    "regulationsPublishedDate": "2025-01-10T22:00:00.000Z",
     "designResponsibleGovernance": [
       {
         "code": "Responsible",
         "responsibleCodes": [
-          "Agency3"
+          "Agency"
         ]
       }
     ],
@@ -180,12 +177,12 @@
     "approach": "COMPREHENSIVE",
     "benefitedSegments": [],
     "geographicalTargeting": [],
-    "activationStartDate": "2025-12-22T22:00:00.000Z",
-    "activationEndDate": "2025-12-25T22:00:00.000Z",
+    "activationStartDate": "2025-01-10T22:00:00.000Z",
+    "activationEndDate": "2025-01-10T22:00:00.000Z",
     "applicationEnablement": "PERMANENT",
     "requireRegisterApplication": true,
     "applicationChannelCodes": [
-      "14"
+      "15"
     ],
     "periodAfterExistCode": "",
     "reApplyAfterExistCode": ""
@@ -210,7 +207,7 @@
     "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟"
   },
   "createBenefits": {
-    "backUpSubProgramNumber": "PRG_SPRG_147",
+    "backUpSubProgramNumber": "PRG_SPRG_259",
     "arabicBenefitName": "دعم الأسر والرعاية الاجتماعية",
     "englishBenefitName": "FSSC preventive",
     "benefitEstimatedValue": "زيادة الوعي والوقاية من إدمان المخدرات",
