@@ -66,6 +66,7 @@ export class MainProgramManagementPage {
       lastTd = mainProgramRow[mainProgramRow.length - 1].tdLocator;
       this.dotsLocator = lastTd.locator("div >> button");
       await this.dotsLocator.click();
+      await this.page.waitForTimeout(5000);
       await this.page.waitForSelector(this.createSubProgramOption, {
         state: "visible",
         timeout: 60000,
@@ -81,7 +82,7 @@ export class MainProgramManagementPage {
  * @param {string} mainProgramNumber - The unique identifier of the main program to view.
  * @returns {Promise<void>} - Completes the action of opening the main program details page.
  */
-async viewMainProgramDetails(mainProgramNumber) {
+async openViewMainProgramDetailsPage(mainProgramNumber) {
   let viewTd;
   let mainProgramRow = [];
   mainProgramRow = await this.searchOnSpecificMainProgram(mainProgramNumber);

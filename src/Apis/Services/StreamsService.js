@@ -39,7 +39,7 @@ export class StreamsService {
     }
 
     await requestContext.dispose();
-    return streamId;
+    return streamId ;
   }
 
   async getStreamNumberAPI(streamId) {

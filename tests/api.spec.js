@@ -39,7 +39,7 @@ test.beforeEach(async () => {
 
 
 
-  test('API Test - Create Main Program', async () => {
+  test.only('API Test - Create Main Program', async () => {
 
   stream = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 
   mainProgram = await programs.createMainProgramAPI(adminusername, adminpassword, mainProgramData, stream[0]);
@@ -72,13 +72,20 @@ test.beforeEach(async () => {
   test('API Test - Create Benefit', async () => {
   
     stream = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 
+    console.log('Stream', stream);
     mainProgram = await programs.createMainProgramAndApproveAPI(adminusername, adminpassword, mainProgramData, stream[0]);
+    console.log('mainProgram', mainProgram);
     subProgram = await programs.createSubProgramAndApproveAPI(adminusername, adminpassword, subProgramData, mainProgram[0]);
-
+    console.log('subProgram', subProgram);
     // createBenefit = await programs.createBenefitAPI(adminusername, adminpassword, benefitsData,subProgram[0]) 
-    // expect(createBenefit).not.toBeNull();
+    // expect(Benefit).not.toBeNull();
+    // console.log('Benefit', createBenefit);
+
     
     createApproveBenefit = await programs.createBenefitAndApproveAPI(adminusername, adminpassword, benefitsData,subProgram[0]);
     console.log('Benefit', createApproveBenefit);
 
+
    });
+
+   

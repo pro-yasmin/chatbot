@@ -26,7 +26,7 @@ export class TasksService {
     var requestContext = await request.newContext({ ignoreHTTPSErrors: true });
 
     var response = await requestContext.get(this.getgroupTasksUrl, {
-      headers: {Authorization: this.token,Accept: "application/json",},timeout: 30000,});
+      headers: {Authorization: this.token,Accept: "application/json"},timeout: 30000,});
     var responseBody = await response.json();
 
   
