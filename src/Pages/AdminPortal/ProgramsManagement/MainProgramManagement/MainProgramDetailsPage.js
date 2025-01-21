@@ -9,7 +9,7 @@ export class MainProgramDetailsPage {
 
     // Selectors for main program details elements
     this.subProgramTab = '//button[@id="tab-1"]';
-    this.createSubProgramBtn = '//div[@class="MuiStack-root muirtl-nra7hi"]//button[@type="button" and contains(text(),"تعريف برنامج فرعي")]';
+    this.createSubProgramBtn = '//button[@type="button" and contains(text(),"تعريف برنامج فرعي")]';
   }
 
  /**

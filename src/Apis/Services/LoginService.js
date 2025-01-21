@@ -9,7 +9,7 @@ export class LoginService {
     let accessToken;
     // Create a new request context
     var requestContext = await request.newContext({
-     // ignoreHTTPSErrors: true // Ignore SSL errors for UAT environment
+      ignoreHTTPSErrors: true // Ignore SSL errors for UAT environment
     });
      // Define the form parameters separately
      var formParams = {

@@ -9,7 +9,7 @@ export class StreamDetailsPage {
 
     // Selectors for stream details elements
     this.mainProgramTab = '//button[@id="tab-1"]';
-    this.createMainProgramBtn = '//div[@class="MuiStack-root muirtl-nra7hi"]//button[@type="button" and contains(text(),"تعريف برنامج رئيسي")]';
+    this.createMainProgramBtn = '//button[@type="button" and contains(text(),"تعريف برنامج رئيسي")]';
   }
 
   
