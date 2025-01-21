@@ -72,9 +72,9 @@ export class LookupPage {
     await this.page.click(this.lookupCategory);
     await this.page.waitForSelector(this.lookupCategoryFirstOption, { visible: true });
     await this.page.click(this.lookupCategoryFirstOption);
-    await this.page.click(this.parentLookup);
-    await this.page.waitForSelector(this.parentLookupFirstOption, { visible: true });
-    await this.page.click(this.parentLookupFirstOption);
+   // await this.page.click(this.parentLookup);
+   // await this.page.waitForSelector(this.parentLookupFirstOption, { visible: true });
+   // await this.page.click(this.parentLookupFirstOption);
     await this.page.fill(this.lookupDescriptionArabicName, this.createdLookUpDescripionArName);
     await this.page.fill(this.lookupDescriptionEnglishName, this.createdLookUpDescripionEnName);
     await this.page.waitForTimeout(1000);
@@ -115,9 +115,9 @@ export class LookupPage {
     await this.page.fill(this.nameArabic, lookupData.getNameArabic());
     await this.page.fill(this.nameEnglish, lookupData.getNameEnglish());
     await this.page.fill(this.codeLookup, lookupData.getCodeLookup());
-    await this.page.click(this.mainList);
-    await this.page.waitForSelector(this.mainListFirstOption, { visible: true });
-    await this.page.click(this.mainListFirstOption);
+    //await this.page.click(this.mainList);
+    //await this.page.waitForSelector(this.mainListFirstOption, { visible: true });
+    //await this.page.click(this.mainListFirstOption);
     await this.page.click(this.visibleToggle);
     await this.page.click(this.addItemToLookupButton);
     var result = await this.popUpMsg.popUpMessage(this.popUpDismissButton, global.testConfig.lookUps.successMsgTabThree);
