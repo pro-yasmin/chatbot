@@ -296,7 +296,6 @@ export class SubProgramsData {
           typeCode: this.getTypeCode(),
           regulationsPublishedDate: this.getRegulationsPublishedDate(),
           programFundingSourcesCode: this.getProgramFundingSourcesCode(),
-          //budget: this.getGFSBudget(),
           budget:"رمز التكلفة",
           designResponsibleGovernance: this.getDesignResponsibleGovernance(),
           executionResponsibleGovernance: this.getExecutionResponsibleGovernance(),

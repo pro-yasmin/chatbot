@@ -40,7 +40,7 @@ export class SubProgramsManagementPage {
  * @param {string} subProgramNumber - The unique identifier of the subprogram to view.
  * @returns {Promise<void>} - Completes the action of opening the subprogram details page.
  */
-async viewSubProgramDetails(subProgramNumber) {
+async openViewSubProgramDetailsPage(subProgramNumber) {
   let viewTd;
   let subProgramRow = [];
   subProgramRow = await this.searchOnSpecificSubProgram(subProgramNumber);

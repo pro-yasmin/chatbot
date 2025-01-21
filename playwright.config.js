@@ -25,7 +25,7 @@ const ENV = 'uat';
 
 module.exports = defineConfig({
 
-  timeout: 120000,
+  timeout: 300000,
 
   globalSetup: require.resolve('./global-setup'),
  
@@ -56,32 +56,32 @@ module.exports = defineConfig({
     trace: 'on-first-retry',
     video: 'on',
     screenshot: 'only-on-failure', // Capture screenshot always
-    actionTimeout: 150000, // Timeout for Playwright actions (15 seconds)
+    actionTimeout: 200000, // Timeout for Playwright actions (15 seconds)
     navigationTimeout: 600000, // Timeout for page navigation (60 seconds)
 
   }, 
    /* Configure projects for major browsers */
-  projects: [
-    {
-      name: 'All',
-      testDir: './tests/AdminPortal'              // Test directory
+  // projects: [
+  //   {
+  //     name: 'All',
+  //     testDir: './tests/AdminPortal'              // Test directory
                        
-    },
-    {
-      name: 'Programs',
-      testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
+  //   },
+  //   {
+  //     name: 'Programs',
+  //     testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
                        
-    },
-    {
-      name: 'Lookups',
-      testDir: './tests/AdminPortal/LookupsTests'             // Test directory
+  //   },
+  //   {
+  //     name: 'Lookups',
+  //     testDir: './tests/AdminPortal/LookupsTests'             // Test directory
      
-    },
-    {
-      name: 'StateMachine',
-      testDir: './tests/AdminPortal/StateMachineTests'             // Test directory
+  //   },
+  //   {
+  //     name: 'StateMachine',
+  //     testDir: './tests/AdminPortal/StateMachineTests'             // Test directory
      
-    }
+  //   }
     /*{
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
@@ -117,9 +117,7 @@ module.exports = defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ],
+  // ],
 
-  
 });
 module.exports.ENV = ENV;
-

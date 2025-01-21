@@ -1,7 +1,6 @@
 const { test, expect } = require("@playwright/test");
 const { LoginPage } = require("../../../src/Pages/AdminPortal/LoginPage");
 const { HomePage } = require("../../../src/Pages/AdminPortal/HomePage");
-const { StreamPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/StreamManagement/StreamPage");
 const { StreamDetailsPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/StreamManagement/StreamDetailsPage");
 const { StreamData } = require("../../../src/Models/AdminPortal/StreamData");
 const { StreamManagementPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/StreamManagement/StreamManagementPage");
@@ -13,8 +12,6 @@ const { SubProgramsManagementPage } = require("../../../src/Pages/AdminPortal/Pr
 const { SubProgramDetailsPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/SubProgramsManagement/SubProgramDetailsPage");
 const { SubProgramsData } = require("../../../src/Models/AdminPortal/SubProgramsData");
 const { SubProgramsPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/SubProgramsManagement/SubProgramsPage");
-const { TaskDetailsPage } = require("../../../src/Pages/AdminPortal/Tasks/TaskDetailsPage");
-const { TasksPage } = require("../../../src/Pages/AdminPortal/Tasks/TasksPage");
 const { BenefitsPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/BenefitsManagement/BenefitsPage");
 const { BenefitsManagmentPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/BenefitsManagement/BenefitsManagementPage");
 const { BenefitsData } = require("../../../src/Models/AdminPortal/BenefitsData");
@@ -80,8 +77,8 @@ test("Add Inside New Main Program", async () => {
       await test.step("Navigate to StreamManagement page", async () => {
       await homePage.navigateToStreamsManagement();
       console.log("Click on Define New Main Program from Stream Details Page.");
-      await streamManagementPage.viewStreamDetails(streamNumber[1]);
-      await streamDetailsPage.InsideCreateMainProgram();
+      await streamDetailsPage.InsideCreateMainProgram(streamNumber[1]);
+
       });
 
       // Step3: Create Inside New Main Program from Stream Details Page.
@@ -118,8 +115,7 @@ test("Add Inside New Sub Program", async () => {
   await test.step("Navigate to MainProgramManagement page", async () => {
     await homePage.navigateToMainProgramManagement();
     console.log("Click on Define New Sub Program from Main Program Details Page.");
-    await mainProgramManagementPage.viewMainProgramDetails(mainProgramNumber);
-    await mainProgramDetailsPage.InsideCreateSubProgram();
+    await mainProgramDetailsPage.InsideCreateSubProgram(mainProgramNumber);
   });
 
   // Step2: Create Inside New Sub Program from Main Program Details Page.
@@ -156,8 +152,7 @@ test("Add Inside New Benefits", async () => {
   await test.step("Navigate to Sub Program Management page", async () => {
     await homePage.navigateToSubProgramsManagement();
     console.log("Click on Define New Benefits from Sub Program Details Page.");
-    await subProgramsManagementPage.viewSubProgramDetails(subProgramNumber);
-    await subProgramDetailsPage.insideCreateBenefits();
+    await subProgramDetailsPage.insideCreateBenefits(subProgramNumber);
   });
 
   // Step2: Create Inside New Benefits from Sub Program Details Page.

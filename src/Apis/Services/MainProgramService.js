@@ -24,7 +24,8 @@ export class MainProgramService {
     var requestContext = await request.newContext({ ignoreHTTPSErrors: true });
 
     var jsonPayload = {...mainProgramBody.toJSON(), streamId: streamID};   
-        
+    // console.log("Payload to be sent:", jsonPayload);
+
     // Send the POST request to create the main program
       var response = await requestContext.post(this.createMainProgramUrl, {
       headers: {"Content-Type": "application/json",Accept: "application/json", Authorization: this.token},

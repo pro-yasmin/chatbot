@@ -66,8 +66,8 @@ async createStreamAPI(adminusername, adminpassword, streamData)
   
     var streamCreation = await this.createStreamAPI(adminusername, adminpassword, streamData);
     expect(streamCreation).not.toBeNull();
-    console.log('Stream ID:', streamCreation[0]);
-    console.log('Stream Number:', streamCreation[1]);
+    // console.log('Stream ID:', streamCreation[0]);
+    // console.log('Stream Number:', streamCreation[1]);
 
     var approveStream = await this.approveTaskAPI(adminusername, adminpassword,streamCreation[1]);
     expect(approveStream).not.toBeNull(); 

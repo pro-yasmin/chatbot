@@ -31,12 +31,17 @@
   "arabicMainProgramName": "البرامج الوقائية لدعم الأسر والرعاية الاجتماعية",
   "englishMainProgramName": "FSSC preventive Program",
   "responsibleEntity": "الجهة المسؤولة الأولي",
+  "responsibleId": "ResponsibleEntityFirst",
   "arabicMainProgramDescription": "إجراء الدورات التدريبية لرفع مستوى الوعي والوقاية من سوء المعاملة وغيرها من أشكال العنف",
   "englishMainProgramDescription": "Trainings to raise awareness and to prevent abuse and other forms of violence",
   "year": "تسعة عشر تسعون",
+  "yearId": "hundredThousand",
   "estimatedBudget": "الميزانية التقديرية الميزانية التقديرية",
   "calculationMethod": "طريقة الحساب طريقة الحس طريقة الحساب طريقة الحسابطريقة الحساب طريقة الحساب",
+  "calculationMethodAPI": "caluction",
   "riskCategory": "فترة الحمل والطفولة المبكرة",
+  "riskCategoryAPI": "Childhood",
+  "riskAPI": "lowEducationalOutcomes",
   "risks":"ضعف صحة الأمهات",
   "riskArabicDescription": "تعزيز تمكين وسالمة الفئات الهشة من خلال برامج التوعي المجتمعي والدعم الشامل",
   "riskEnglishDescription": "To promote the well-being and safety of vulnerable groups through support, awareness, and inclusion Programs",
@@ -149,7 +154,7 @@
       "temporaryFrom": null,
       "temporaryTo": null,
       "requireRegisterApplication": true,
-      "applicationChannelCodes": ["14"]
+      "applicationChannelCodes": ["15"]
     },
   "stateMachine": {
     "stateManagmentArabicName": "إدارة الحالة باللغة العربية",
