@@ -73,6 +73,7 @@ export class StreamManagementPage {
       lastTd = streamRow[streamRow.length - 1].tdLocator;
       this.viewBtn = lastTd.locator("div >> button");
       await this.viewBtn.click();
+      await this.page.waitForTimeout(5000);
       await this.page.waitForSelector(this.createMainProgramOption, {
         state: "visible",
         timeout: 60000,
@@ -89,7 +90,7 @@ export class StreamManagementPage {
  * @param {string} streamNumber - The unique identifier of the stream to view.
  * @returns {Promise<void>} - Completes the action of opening the stream details page.
  */
-  async viewStreamDetails(streamNumber) {
+  async openViewStreamDetailsPage(streamNumber) {
     let viewTd;
     let streamRow = [];
      streamRow = await this.searchOnSpecificStream(streamNumber);

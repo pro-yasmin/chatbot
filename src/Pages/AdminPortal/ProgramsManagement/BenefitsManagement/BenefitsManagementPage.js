@@ -44,9 +44,7 @@ export class BenefitsManagmentPage {
     let benefitsRow = [];
 
     // Search for the specific benefit
-    benefitsRow = await this.searchOnSpecificBenefits(
-      benefitsData.getArabicBenefitName()
-    );
+    benefitsRow = await this.searchOnSpecificBenefits(benefitsData.getArabicBenefitName() );
 
     if (benefitsRow && benefitsRow.length > 0) {
       // Validate Arabic benefit name

@@ -1,3 +1,6 @@
+const { MainProgramManagementPage } = require("./MainProgramManagementPage");
+
+
 /**
  * Represents the Main Program Details page and provides methods for interacting
  * with the main program details, such as managing or editing program-related data.
@@ -16,7 +19,10 @@ export class MainProgramDetailsPage {
  * Navigates to the "Sub Programs" tab and clicks the "Define Sub Program" button.
  * @returns {Promise<void>} - Completes the action of initiating Sub program creation.
  */
-  async InsideCreateSubProgram() {
+  async InsideCreateSubProgram(mainProgramNumber) {
+
+    var mainProgramManagementPage = new MainProgramManagementPage(this.page);
+    await mainProgramManagementPage.openViewMainProgramDetailsPage(mainProgramNumber);
     await this.page.click(this.subProgramTab);
     await this.page.waitForSelector(this.createSubProgramBtn, {state: "visible"});
     await this.page.waitForTimeout(1000);

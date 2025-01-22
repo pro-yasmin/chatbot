@@ -11,13 +11,18 @@ const { Utils } = require("../../Utils/utils.js");
      this.arabicMainProgramName = null;
      this.englishMainProgramName = null;
      this.responsibleEntity = null;
+     this.responsibleId = null;
      this.arabicMainProgramDescription = null;
      this.englishMainProgramDescription = null;
      this.year = null;
+     this.yearId = null;
      this.estimatedBudget = null;
      this.calculationMethod = null;
+     this.calculationMethodAPI = null;
      this.riskCategory = null;
+     this.riskCategoryAPI = null;
      this.risks = null;
+     this.risksAPI = null;
      this.riskArabicDescription = null;
      this.riskEnglishDescription = null;
      this.arabicMainProgramGoal = null;
@@ -211,17 +216,75 @@ const { Utils } = require("../../Utils/utils.js");
      this.programId = value;
    }
 
+
+   //Getter and Setter for API
+  getRiskCategoryAPI() {
+    if (this.riskCategoryAPI == null) {
+      this.riskCategoryAPI = global.testConfig.createMainProgram.riskCategoryAPI;
+    }
+    return this.riskCategoryAPI;
+  }
+  setRiskCategoryAPI(value) {
+    this.riskCategoryAPI = value;
+  }
+
+  // Getter and Setter for Risks
+  getRisksAPI() {
+    if (this.risksAPI == null) {
+      this.risksAPI = global.testConfig.createMainProgram.risksAPI;
+    }
+    return this.risksAPI;
+  }
+  setRisksAPI(value) {
+    this.risksAPI = value;
+  }
+
+     // Getter and Setter for Calculation Method
+     getcalculationMethodAPI() {
+      if (this.calculationMethodAPI == null) {
+        this.calculationMethodAPI =global.testConfig.createMainProgram.calculationMethodAPI ;
+      }
+      return this.calculationMethodAPI;
+    }
+    setcalculationMethodAPI(value) {
+      this.calculationMethodAPI = value;
+    }
+ 
+    // Getter and Setter for Year
+    getYearId() {
+      if (this.yearId == null) {
+        this.yearId = global.testConfig.createMainProgram.yearId;
+      }
+      return this.yearId;
+    }
+    setYearId(value) {
+      this.yearId = value;
+    }
+ 
+ // Getter and Setter for Responsible Entity
+ getResponsibleId() {
+  if (this.responsibleId == null) {
+    this.responsibleId =
+      global.testConfig.createMainProgram.responsibleId;
+  }
+  return this.responsibleId;
+}
+setResponsibleEntity(value) {
+  this.responsibleId = value;
+}
+
+
    toJSON() {
      return {
        nameAr: this.getArabicMainProgramName(),
        nameEn: this.getEnglishMainProgramName(),
-       responsibleId: this.getResponsibleEntity(),
+       responsibleId: this.getResponsibleId(),
        descriptionAr: this.getArabicMainProgramDescription(),
        descriptionEn: this.getEnglishMainProgramDescription(),
-       calculationMethod: this.getCalculationMethod(),
+       calculationMethod: this.getcalculationMethodAPI(),
        estimatedBudgets: [
          {
-           yearId: this.getYear(),
+           yearId: this.getYearId(),
            estimatedBudget: this.getEstimatedBudget(),
          },
        ],
@@ -233,10 +296,10 @@ const { Utils } = require("../../Utils/utils.js");
        ],
        targetedRiskCoverages: [
          {
-           riskCategoryId: this.getRiskCategory(),
+           riskCategoryId: this.getRiskCategoryAPI(),
            risks: [
              {
-               riskId: this.getRisks(),
+               riskId: this.getRisksAPI(),
                descriptionEn: this.getRiskEnglishDescription(),
                descriptionAr: this.getRiskArabicDescription(),
              },
