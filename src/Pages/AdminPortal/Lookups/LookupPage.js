@@ -117,7 +117,7 @@ export class LookupPage {
     await this.page.fill(this.codeLookup, lookupData.getCodeLookup());
     //await this.page.click(this.mainList);
     //await this.page.waitForSelector(this.mainListFirstOption, { visible: true });
-    // await this.page.click(this.mainListFirstOption);
+   // await this.page.click(this.mainListFirstOption);
     await this.page.click(this.visibleToggle);
     await this.page.click(this.addItemToLookupButton);
     var result = await this.popUpMsg.popUpMessage(this.popUpDismissButton, global.testConfig.lookUps.successMsgTabThree);
