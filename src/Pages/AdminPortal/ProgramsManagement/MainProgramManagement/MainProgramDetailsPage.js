@@ -19,10 +19,7 @@ export class MainProgramDetailsPage {
  * Navigates to the "Sub Programs" tab and clicks the "Define Sub Program" button.
  * @returns {Promise<void>} - Completes the action of initiating Sub program creation.
  */
-  async InsideCreateSubProgram(mainProgramNumber) {
-
-    var mainProgramManagementPage = new MainProgramManagementPage(this.page);
-    await mainProgramManagementPage.openViewMainProgramDetailsPage(mainProgramNumber);
+  async InsideCreateSubProgram() {
     await this.page.click(this.subProgramTab);
     await this.page.waitForSelector(this.createSubProgramBtn, {state: "visible"});
     await this.page.waitForTimeout(1000);

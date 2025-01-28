@@ -43,6 +43,7 @@ export class LoginPage {
     await this.page.click(this.loginButton);
     var homePage = new HomePage(this.page);
     var avatarVisible = await homePage.checkAvatarIsExist();
+
     return avatarVisible;
   }
 

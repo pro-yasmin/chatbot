@@ -77,7 +77,8 @@ test("Add Inside New Main Program", async () => {
       await test.step("Navigate to StreamManagement page", async () => {
       await homePage.navigateToStreamsManagement();
       console.log("Click on Define New Main Program from Stream Details Page.");
-      await streamDetailsPage.InsideCreateMainProgram(streamNumber[1]);
+      await streamManagementPage.openViewStreamDetailsPage(streamNumber[1]);
+      await streamDetailsPage.InsideCreateMainProgram();
 
       });
 
@@ -115,7 +116,8 @@ test("Add Inside New Sub Program", async () => {
   await test.step("Navigate to MainProgramManagement page", async () => {
     await homePage.navigateToMainProgramManagement();
     console.log("Click on Define New Sub Program from Main Program Details Page.");
-    await mainProgramDetailsPage.InsideCreateSubProgram(mainProgramNumber);
+    await mainProgramManagementPage.openViewMainProgramDetailsPage(mainProgramNumber);
+    await mainProgramDetailsPage.InsideCreateSubProgram();
   });
 
   // Step2: Create Inside New Sub Program from Main Program Details Page.
@@ -152,7 +154,8 @@ test("Add Inside New Benefits", async () => {
   await test.step("Navigate to Sub Program Management page", async () => {
     await homePage.navigateToSubProgramsManagement();
     console.log("Click on Define New Benefits from Sub Program Details Page.");
-    await subProgramDetailsPage.insideCreateBenefits(subProgramNumber);
+    await subProgramsManagementPage.openViewSubProgramDetailsPage(subProgramNumber);
+    await subProgramDetailsPage.insideCreateBenefits();
   });
 
   // Step2: Create Inside New Benefits from Sub Program Details Page.
