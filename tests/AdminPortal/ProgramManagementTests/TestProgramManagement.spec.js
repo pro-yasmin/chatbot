@@ -60,7 +60,7 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
-test('Add and Approve New Stream', async () => {
+test.only('Add and Approve New Stream', async () => {
   // Step1: Navigate to streams list page
   await test.step("Navigate to StreamManagement page", async () => {
     await homePage.navigateToStreamsManagement();
@@ -86,7 +86,8 @@ test('Add and Approve New Stream', async () => {
     await homePage.navigateToTasks();
     await tasksPage.assignTaskToMe(streamNumber);
     var confirmMsg = global.testConfig.taskDetails.confirmStreamMsg
-    expect(await tasksPage.manageTask(Constants.STREAM, Constants.APPROVE,streamNumber,confirmMsg)).toBe(true);
+    var taskManage =await tasksPage.manageTask(Constants.STREAM, Constants.APPROVE,streamNumber,confirmMsg);
+    expect(taskManage).toBe(true);
     console.log("New Stream Approved Successfully with id= " + streamNumber);
   });
 });
