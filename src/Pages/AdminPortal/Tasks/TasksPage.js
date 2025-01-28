@@ -150,7 +150,7 @@ async manageTask(taskType, actionType ,taskNumber,confirmMsg) {
   var initialTaskStatus = global.testConfig.taskDetails.enableStatusHidden;
   status = await this.taskDetailsPage.checkEnablementStatus(taskType, initialTaskStatus);
  
-  if(actionType=Constants.REJECT)
+  if(actionType === Constants.REJECT)
    addNote = await this.taskDetailsPage.addNoteOnTask();
   else  addNote = true;
 
