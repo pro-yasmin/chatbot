@@ -94,18 +94,18 @@ export class LoginPage {
    * Handles the "Back to App" button if it exists.
    * @returns {Promise<void>} - Completes the navigation back to the application.
    */
-  async clickBackToAppButton() {
-    var backToAppButtonExists = await this.page
-      .locator(this.backToAppButton)
-      .isVisible({ timeout: 3000 });
-    if (backToAppButtonExists) {
-      await this.page.click(this.backToAppButton);
-      await this.page
-        .locator(this.backToAppButton)
-        .isVisible({ timeout: 3000 });
-      await this.page.click(this.backToAppButton);
-      await this.page.waitForNavigation({ waitUntil: "domcontentloaded" });
-    }
-  }
+  // async clickBackToAppButton() {
+  //   var backToAppButtonExists = await this.page
+  //     .locator(this.backToAppButton)
+  //     .isVisible({ timeout: 3000 });
+  //   if (backToAppButtonExists) {
+  //     await this.page.click(this.backToAppButton);
+  //     await this.page
+  //       .locator(this.backToAppButton)
+  //       .isVisible({ timeout: 3000 });
+  //     await this.page.click(this.backToAppButton);
+  //     await this.page.waitForNavigation({ waitUntil: "domcontentloaded" });
+  //   }
+  // }
 }
 module.exports = { LoginPage };
