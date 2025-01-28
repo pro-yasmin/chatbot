@@ -10,12 +10,11 @@ export class PopUpPage {
   }
 
   async popUpMessage(actionButton, partialMessage) {
-    const fullMessage = await this.page.textContent(this.messageLocator);
+    await this.page.locator(actionButton).waitFor({ state: "visible", timeout: 30000 });
+    var fullMessage = await this.page.textContent(this.messageLocator);
     if (fullMessage.includes(partialMessage)) {
       await this.page.click(actionButton);
-      await this.page
-        .locator(actionButton)
-        .waitFor({ state: "detached", timeout: 30000 });
+      await this.page.locator(actionButton).waitFor({ state: "detached" });
     }
     return true;
   }
@@ -31,9 +30,7 @@ export class PopUpPage {
     const textAreaLocator = this.page.locator(inputMsgLocator);
     await textAreaLocator.fill(inputMsg);
     await this.page.click(actionButton);
-    await this.page
-      .locator(actionButton)
-      .waitFor({ state: "visible", timeout: 30000 });
-  }//detached
+    // await this.page.locator(actionButton).waitFor({ state: "detached", timeout: 30000 });
+  }
 }
 module.exports = { PopUpPage };

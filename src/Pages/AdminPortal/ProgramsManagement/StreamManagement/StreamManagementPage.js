@@ -47,10 +47,7 @@ export class StreamManagementPage {
    */
   async searchOnSpecificStream(streamName) {
     let streamRow = [];
-    streamRow = await new SearchPage(this.page).searchOnUniqueRow(
-      this.searchInput,
-      streamName,
-      );
+    streamRow = await new SearchPage(this.page).searchOnUniqueRow(this.searchInput,streamName );
     if (!streamRow || streamRow.length === 0) {
       return null;
     }
@@ -114,9 +111,7 @@ export class StreamManagementPage {
     let englishName;
     let streamRow = [];
 
-    streamRow = await this.searchOnSpecificStream(
-      streamData.getstreamArabicName()
-    );
+    streamRow = await this.searchOnSpecificStream(streamData.getstreamArabicName());
 
     if (streamRow && streamRow.length > 0) {
       arabicTd = streamRow[1].tdLocator;

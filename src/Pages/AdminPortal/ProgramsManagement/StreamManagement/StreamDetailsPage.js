@@ -19,10 +19,7 @@ export class StreamDetailsPage {
  * Navigates to the "Main Program" tab and clicks the "Create Main Program" button.
  * @returns {Promise<void>} - Completes the action of initiating main program creation.
  */
-  async InsideCreateMainProgram(streamNumber) {
-    
-     var streamManagementPage = new StreamManagementPage(this.page);
-      await streamManagementPage.openViewStreamDetailsPage(streamNumber);
+  async InsideCreateMainProgram() {
       await this.page.click(this.mainProgramTab);
       await this.page.waitForSelector(this.createMainProgramBtn, {state: "visible"});
       await this.page.waitForTimeout(1000);

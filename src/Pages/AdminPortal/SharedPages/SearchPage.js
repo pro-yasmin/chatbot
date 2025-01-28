@@ -27,7 +27,7 @@ export class SearchPage {
      rows = await  this.page.locator(`${this.tableSelector}//tr`).filter({ has: this.page.locator('td') });
     // Step 4: Ensure only one row is visible
      rowCount = await rows.count();
-     await  this.page.waitForTimeout(2000); 
+     await  this.page.waitForTimeout(5000); 
     if (rowCount !== 1) {
       throw new Error(`Expected 1 row to be displayed, but found ${rowCount}`);
     }
