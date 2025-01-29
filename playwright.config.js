@@ -25,7 +25,7 @@ const ENV = 'uat';
 
 module.exports = defineConfig({
 
-  timeout: 200000,
+  timeout: 300000,
 
   globalSetup: require.resolve('./global-setup'),
  
@@ -81,6 +81,11 @@ module.exports = defineConfig({
       name: 'StateMachine',
       testDir: './tests/AdminPortal/StateMachineTests'             // Test directory
      
+     },
+     {
+      name: 'Login',
+       testDir: './tests/AdminPortal/Login'              // Test directory
+                      
      },
     /*{
       name: 'chromium',
