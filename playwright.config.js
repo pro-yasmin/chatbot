@@ -84,7 +84,7 @@ module.exports = defineConfig({
      },
      {
       name: 'Login',
-       testDir: './tests/AdminPortal/Login'              // Test directory
+      testDir: './tests/AdminPortal/Login'              // Test directory
                       
      },
     /*{
