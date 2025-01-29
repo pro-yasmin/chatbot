@@ -62,6 +62,12 @@ module.exports = defineConfig({
   }, 
    /* Configure projects for major browsers */
   projects: [
+
+    {
+      name: 'Login',
+      testDir: './tests/Login'              // Test directory
+                      
+     },
     {
        name: 'All',
         testDir: './tests/AdminPortal'              // Test directory
@@ -82,11 +88,7 @@ module.exports = defineConfig({
       testDir: './tests/AdminPortal/StateMachineTests'             // Test directory
      
      },
-     {
-      name: 'Login',
-      testDir: './tests/AdminPortal/Login'              // Test directory
-                      
-     },
+   
     /*{
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
