@@ -9,10 +9,12 @@ const { MainProgramPage } = require("./MainProgramPage");
 export class MainProgramManagementPage {
   constructor(page) {
     this.page = page;
+    this.search = new SearchPage(this.page);
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
     this.mainProgramsTable = "//table//tbody";
-    this.createSubProgramOption = '//ul[@role="menu"]//li[1]';
-    this.dotsLocator;
+    this.tableActions='table-actions';
+    this.tableThreeDots='three-dots-menu';
+    this.createSubProgramOption = '//*[@data-testid="three-dots-menu-option-0"]';
   }
 
     /**
@@ -57,15 +59,13 @@ export class MainProgramManagementPage {
    * @returns {Promise<void>} - Completes the action of clicking "Create Sub Program".
    */
   async clickOnCreateSubProgram(mainProgramName,backUpProgram) {
-    let lastTd;
     let mainProgramRow = [];
     if(mainProgramName== null)
       mainProgramRow= await this.searchOnSpecificMainProgram(backUpProgram);
     else mainProgramRow = await this.searchOnSpecificMainProgram(mainProgramName);
     if (mainProgramRow && mainProgramRow.length > 0) {
-      lastTd = mainProgramRow[mainProgramRow.length - 1].tdLocator;
-      this.dotsLocator = lastTd.locator("div >> button");
-      await this.dotsLocator.click();
+      var threeDotsButton = "button:nth-of-type(1)";
+      await this.search.clickRowAction(mainProgramRow,this.tableThreeDots ,threeDotsButton);
       await this.page.waitForTimeout(5000);
       await this.page.waitForSelector(this.createSubProgramOption, {
         state: "visible",
@@ -87,9 +87,8 @@ async openViewMainProgramDetailsPage(mainProgramNumber) {
   let mainProgramRow = [];
   mainProgramRow = await this.searchOnSpecificMainProgram(mainProgramNumber);
   if (mainProgramRow && mainProgramRow.length > 0) {
-    viewTd = mainProgramRow[mainProgramRow.length - 2].tdLocator;
-    var viewBtn = viewTd.locator('div >> div >> button:nth-of-type(1)');
-    await viewBtn.click();
+    var viewBtn = "button:nth-of-type(1)";
+    await this.search.clickRowAction(mainProgramRow,this.tableActions ,viewBtn);
     console.log("View Main Program Details Page Opened.");
   }
 }

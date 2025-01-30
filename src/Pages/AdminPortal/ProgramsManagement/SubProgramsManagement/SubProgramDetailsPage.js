@@ -21,10 +21,12 @@ export class SubProgramDetailsPage {
    */
   async insideCreateBenefits() {
     await this.page.click(this.detailsTab);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
     await this.page.waitForSelector(this.createBenefitBtn, {state: "visible"});
-    await this.page.waitForTimeout(5000);
+    //await this.page.waitForTimeout(5000);
     await this.page.click(this.createBenefitBtn);
-    await this.page.waitForTimeout(1000);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    //await this.page.waitForTimeout(1000);
     console.log("Clicked the Create Benefits button");  
   }
 }

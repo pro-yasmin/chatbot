@@ -9,11 +9,15 @@ const { StreamPage } = require("./StreamPage");
 export class StreamManagementPage {
   constructor(page) {
     this.page = page;
+    this.search = new SearchPage(this.page);
     this.createNewStreamButton = '//button[contains(text(),"تعريف مسار")]';
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
     this.streamsTable = "//table//tbody";
-    this.createMainProgramOption = '//ul[@role="menu"]//li[1]';
-    this.viewBtn;
+    this.tableActions='table-actions';
+    this.tableThreeDots='three-dots-menu';
+    this.createMainProgramOption = '//*[@data-testid="three-dots-menu-option-0"]';
+   
+    
   }
 
   /**
@@ -21,6 +25,7 @@ export class StreamManagementPage {
    * @returns {Promise<void>} - Completes the action of opening the stream form.
    */
   async clickOnNewStream() {
+    await this.page.waitForTimeout(2000);
     await this.page.waitForSelector(this.streamsTable, {
       state: "visible",
       timeout: 5000,
@@ -61,15 +66,14 @@ export class StreamManagementPage {
    * @returns {Promise<void>} - Completes the action of clicking the "Create Main Program" option.
    */
   async clickOnCreateMainProgram(streamName, backUpStream) {
-    let lastTd;
     let streamRow = [];
     if (streamName == null)
       streamRow = await this.searchOnSpecificStream(backUpStream);
     else streamRow = await this.searchOnSpecificStream(streamName);
+
     if (streamRow && streamRow.length > 0) {
-      lastTd = streamRow[streamRow.length - 1].tdLocator;
-      this.viewBtn = lastTd.locator("div >> button");
-      await this.viewBtn.click();
+      var threeDotsButton = "button:nth-of-type(1)";
+      await this.search.clickRowAction(streamRow,this.tableThreeDots ,threeDotsButton);
       await this.page.waitForTimeout(5000);
       await this.page.waitForSelector(this.createMainProgramOption, {
         state: "visible",
@@ -92,9 +96,11 @@ export class StreamManagementPage {
     let streamRow = [];
      streamRow = await this.searchOnSpecificStream(streamNumber);
     if (streamRow && streamRow.length > 0) {
-      viewTd = streamRow[streamRow.length - 2].tdLocator;
+      var viewBtn = "button:nth-of-type(1)";
+      await this.search.clickRowAction(streamRow,this.tableActions ,viewBtn);
+     /* viewTd = streamRow[streamRow.length - 2].tdLocator;
       var viewBtn = viewTd.locator('div >> div >> button:nth-of-type(1)');
-      await viewBtn.click();
+      await viewBtn.click();*/
       console.log("View Stream Details Page Opened.");
      }
   }

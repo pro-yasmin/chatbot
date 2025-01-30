@@ -1,5 +1,5 @@
 const { SearchPage } = require("../../SharedPages/SearchPage");
-const { SubProgramsPage } = require("./SubProgramsPage");
+
 
 /**
  * Manages subprogram-related actions like searching for specific subprograms,
@@ -9,10 +9,11 @@ const { SubProgramsPage } = require("./SubProgramsPage");
 export class SubProgramsManagementPage {
   constructor(page) {
     this.page = page;
+    this.search = new SearchPage(this.page);
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
-    //this.subProgramsTable = "//table//tbody";
-    this.createBenefitOption = '//ul[@role="menu"]//li[1]';
-    this.dotsLocator;
+    this.tableActions='table-actions';
+    this.tableThreeDots='three-dots-menu';
+    this.createBenefitOption = '//*[@data-testid="three-dots-menu-option-0"]';
   }
 
   /**
@@ -45,9 +46,8 @@ async openViewSubProgramDetailsPage(subProgramNumber) {
   let subProgramRow = [];
   subProgramRow = await this.searchOnSpecificSubProgram(subProgramNumber);
   if (subProgramRow && subProgramRow.length > 0) {
-    viewTd = subProgramRow[subProgramRow.length - 2].tdLocator;
-    var viewBtn = viewTd.locator('div >> div >> button:nth-of-type(1)');
-    await viewBtn.click();
+    var viewBtn = "button:nth-of-type(1)";
+    await this.search.clickRowAction(subProgramRow,this.tableActions ,viewBtn);
     console.log("View Sub Program Details Page Opened.");
   }
 }
@@ -67,9 +67,8 @@ async openViewSubProgramDetailsPage(subProgramNumber) {
       subProgramRow = await this.searchOnSpecificSubProgram(backUpSubrogram);
     else subProgramRow = await this.searchOnSpecificSubProgram(subProgramName);
     if (subProgramRow && subProgramRow.length > 0) {
-      lastTd = subProgramRow[subProgramRow.length - 1].tdLocator;
-      this.dotsLocator = lastTd.locator("div >> button");
-      await this.dotsLocator.click();
+      var threeDotsButton = "button";
+      await this.search.clickRowAction(subProgramRow,this.tableThreeDots ,threeDotsButton);
       await this.page.waitForSelector(this.createBenefitOption, {
         state: "visible",
         timeout: 60000,

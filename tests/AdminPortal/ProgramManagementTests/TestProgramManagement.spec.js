@@ -121,7 +121,7 @@ test("Add and Approve New Main Program", async () => {
     console.log("Navigate to MyTasks page to approve Program Request");
     await homePage.navigateToTasks();
     await tasksPage.assignTaskToMe(programNumber);
-    var confirmMsg = global.testConfig.taskDetails.confirmMainProgramsMsg;
+    var confirmMsg = global.testConfig.taskDetails.confirmMainProgramMsg;
     expect(await tasksPage.manageTask(Constants.MAIN_PROGRAM, Constants.APPROVE,programNumber,confirmMsg)).toBe(true);
     console.log("New Main Program Approved Successfully with id= " + programNumber);
   });

@@ -1,41 +1,27 @@
 const { test, expect } = require("@playwright/test");
-// const  Constants  = require("../../../src/Utils/Constants");
 import Constants from '../../../src/Utils/Constants.js';
 
-const { LoginPage } = require("../../../src/Pages/AdminPortal/LoginPage");
-const { HomePage } = require("../../../src/Pages/AdminPortal/HomePage");
-const { StreamDetailsPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/StreamManagement/StreamDetailsPage");
-const { StreamData } = require("../../../src/Models/AdminPortal/StreamData");
-const { StreamManagementPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/StreamManagement/StreamManagementPage");
-const { MainProgramPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/MainProgramManagement/MainProgramPage");
-const { MainProgramData } = require("../../../src/Models/AdminPortal/MainProgramData");
-const { MainProgramDetailsPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/MainProgramManagement/MainProgramDetailsPage");
-const { MainProgramManagementPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/MainProgramManagement/MainProgramManagementPage");
-const { SubProgramsManagementPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/SubProgramsManagement/SubProgramsManagmentPage");
-const { SubProgramDetailsPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/SubProgramsManagement/SubProgramDetailsPage");
-const { SubProgramsData } = require("../../../src/Models/AdminPortal/SubProgramsData");
-const { SubProgramsPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/SubProgramsManagement/SubProgramsPage");
-const { BenefitsPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/BenefitsManagement/BenefitsPage");
-const { BenefitsManagmentPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/BenefitsManagement/BenefitsManagementPage");
-const { BenefitsData } = require("../../../src/Models/AdminPortal/BenefitsData");
-const { Programs } = require("../../../src/Apis/Business/Programs");
-const { TaskDetailsPage} = require("../../../src/Pages/AdminPortal/Tasks/TaskDetailsPage");
-const { TasksPage } = require("../../../src/Pages/AdminPortal/Tasks/TasksPage");
+const { LoginPage } = require("../../../src/Pages/AdminPortal/LoginPage.js");
+const { HomePage } = require("../../../src/Pages/AdminPortal/HomePage.js");
+const { StreamData } = require("../../../src/Models/AdminPortal/StreamData.js");
+const { MainProgramPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/MainProgramManagement/MainProgramPage.js");
+const { MainProgramData } = require("../../../src/Models/AdminPortal/MainProgramData.js");
+const { MainProgramManagementPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/MainProgramManagement/MainProgramManagementPage.js");
+const { SubProgramsData } = require("../../../src/Models/AdminPortal/SubProgramsData.js");
+const { BenefitsData } = require("../../../src/Models/AdminPortal/BenefitsData.js");
+const { Programs } = require("../../../src/Apis/Business/Programs.js");
+const { TasksPage } = require("../../../src/Pages/AdminPortal/Tasks/TasksPage.js");
 
 
 let loginPage,homePage,adminusername ,adminpassword , programs;
-let streamManagementPage,streamData,streamDetailsPage;
-let mainProgramPage, mainProgramManagementPage, mainProgramData ,mainProgramDetailsPage;
-let subProgramsManagementPage, subProgramsData, subProgramsPage,subProgramDetailsPage;
-let benefitsPage, benefitsManagmentPage, benefitsData;
-let streamNumber, mainProgramNumber, subProgramNumber, benefitNumber ;
-let mainProgramTask , subProgramTask,benefitTask;
-let tasksPage,taskDetailsPage ;
-
+let mainProgramData,subProgramsData,streamData,benefitsData;
+let mainProgramPage, mainProgramManagementPage  ;
+let streamNumber ;
+let tasksPage ;
 let stream ;
 let mainProgram ;
-let subProgram, subProgramData;
-let Benefit   ;
+let subProgram, a;
+let Benefit;
 
 
 
@@ -47,23 +33,15 @@ test.beforeEach(async ({ page }) => {
 
   loginPage = new LoginPage(page);
   homePage = new HomePage(page);
-  streamManagementPage = new StreamManagementPage(page);
   streamData = new StreamData(page);
-  streamDetailsPage = new StreamDetailsPage(page);
   mainProgramPage = new MainProgramPage(page);
   mainProgramManagementPage = new MainProgramManagementPage(page);
   mainProgramData = new MainProgramData(page);
-  mainProgramDetailsPage= new  MainProgramDetailsPage(page);
-  subProgramsManagementPage = new SubProgramsManagementPage(page);
-  subProgramsPage = new SubProgramsPage(page);
   subProgramsData = new SubProgramsData(page);
-  subProgramDetailsPage= new SubProgramDetailsPage(page);
-  benefitsPage = new BenefitsPage(page);
-  benefitsManagmentPage = new BenefitsManagmentPage(page);
   benefitsData = new BenefitsData(page);
   programs = new Programs();
   tasksPage = new TasksPage(page);
-  taskDetailsPage = new TaskDetailsPage(page);
+  
 
   var baseUrl = global.testConfig.BASE_URL;
   adminusername = global.testConfig.ADMIN_USER;
@@ -153,7 +131,7 @@ test("Create and Reject Sub Program", async () => {
 /**
  * Test case: Create and Reject Benefits
  */
-test.only("Create and Reject Benefits", async () => {
+test("Create and Reject Benefits", async () => {
   // Step1: Create and approve stream ,Main Program , SubProgram and create New Benefit.
   await test.step("Create and approve stream ,Main Program , SubProgram and create New Benefit from API", async () => {
   stream = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 

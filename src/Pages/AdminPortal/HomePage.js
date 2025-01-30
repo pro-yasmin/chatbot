@@ -63,6 +63,7 @@ export class HomePage {
       timeout: 20000,
     });
     await this.page.click(this.streamsManagementButton);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
 
   }
 

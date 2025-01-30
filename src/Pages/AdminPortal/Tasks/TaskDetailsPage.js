@@ -65,11 +65,11 @@ export class TaskDetailsPage {
    */
   async checkEnablementStatus(taskType, expectedStatus) {
   // Wait for the status element to be visible
+  await this.page.waitForTimeout(7000);
   var statusElement = this.page.locator(await this.getstatusLocator(taskType));
   await statusElement.waitFor({ state: "visible", timeout: 5000  });
   var actualStatus = await statusElement.textContent();
-    await this.page.waitForTimeout(2000);
-    if (actualStatus.trim() === expectedStatus.trim()) {
+   if (actualStatus.trim() === expectedStatus.trim()) {
          console.log(`Enablement Status is as expected: "${actualStatus.trim()}".`);
          return true;
       }
@@ -139,9 +139,9 @@ async completeTask(actionType, taskType , confirmMsg) {
 
   actionBtn = actionType === Constants.APPROVE ? this.acceptTaskBtn : this.rejectTaskBtn;
   await this.page.click(actionBtn);
+  //await this.page.waitForTimeout(2000);
   var popUpMsg = new PopUpPage(this.page);
   await popUpMsg.inputPopUpMessage(this.ensureTaskNotesField,this.ensureTaskNotesBtn,global.testConfig.taskDetails.addCompleteTaskNote);
-  await this.page.waitForTimeout(2000);
   var result = await popUpMsg.popUpMessage(this.backToTasksBtn, confirmMsg);
 
   if (result) {
