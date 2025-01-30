@@ -172,7 +172,7 @@ export class BenefitsData {
 
       getBenefitType() {
         if (this.benefitType == null) {
-          this.benefitType =  global.testConfig.createBenefits.benefitDetails.benefitType;
+          this.benefitType =  global.testConfig.createBenefits.benefitDetails.benefitTypeCash;
          }
         return this.benefitType;
       }
@@ -428,7 +428,7 @@ export class BenefitsData {
 
       getApplicationEnablement() {
         if (this.applicationEnablement == null) {
-          this.applicationEnablement =  global.testConfig.createBenefits.applicationEnablement;
+          this.applicationEnablement =  global.testConfig.createBenefits.applicationEnablementPerm;
          }
         return this.applicationEnablement;
       }

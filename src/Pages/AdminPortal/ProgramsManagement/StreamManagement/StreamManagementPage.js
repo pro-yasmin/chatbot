@@ -50,7 +50,7 @@ export class StreamManagementPage {
     streamRow = await new SearchPage(this.page).searchOnUniqueRow(
       this.searchInput,
       streamName,
-      );
+    );
     if (!streamRow || streamRow.length === 0) {
       return null;
     }
@@ -84,22 +84,22 @@ export class StreamManagementPage {
   }
 
 
-/**
- * Opens the details page of a specific stream by its identifier.
- * 
- * @param {string} streamNumber - The unique identifier of the stream to view.
- * @returns {Promise<void>} - Completes the action of opening the stream details page.
- */
+  /**
+   * Opens the details page of a specific stream by its identifier.
+   * 
+   * @param {string} streamNumber - The unique identifier of the stream to view.
+   * @returns {Promise<void>} - Completes the action of opening the stream details page.
+   */
   async openViewStreamDetailsPage(streamNumber) {
     let viewTd;
     let streamRow = [];
-     streamRow = await this.searchOnSpecificStream(streamNumber);
+    streamRow = await this.searchOnSpecificStream(streamNumber);
     if (streamRow && streamRow.length > 0) {
       viewTd = streamRow[streamRow.length - 2].tdLocator;
       var viewBtn = viewTd.locator('div >> div >> button:nth-of-type(1)');
       await viewBtn.click();
       console.log("View Stream Details Page Opened.");
-     }
+    }
   }
 
   /**
@@ -142,6 +142,7 @@ export class StreamManagementPage {
     }
     return false;
   }
+  
 }
 
 module.exports = { StreamManagementPage };

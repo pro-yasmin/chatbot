@@ -14,6 +14,7 @@ export class HomePage {
     this.streamsManagementButton = '//a[@data-testid="submenu-streams-management"]';
     this.mainProgramManagementButton = '//a[@data-testid="submenu-main-program-management"]';
     this.subProgramsManagementButton = '//a[@data-testid="submenu-sub-program-management"]';
+    this.benefitsManagementButton = '//a[@data-testid="submenu-benefits-management"]';
     this.createNewStreamButton = '//button[contains(text(),"تعريف مسار")]';
     this.tasksButton = '//a[@href="/my-tasks"]';
     this.generalSettingsButton = '//span[contains(text(),"الإعدادات العامة")]';
@@ -78,6 +79,12 @@ export class HomePage {
     await this.page.waitForSelector(this.subProgramsManagementButton, { state: "visible", timeout: 20000 });
     await this.page.click(this.subProgramsManagementButton);
 
+  }
+
+  async navigateToBenefitsManagement() {
+    await this.navigateToProgramManagement();
+    await this.page.waitForSelector(this.benefitsManagementButton, { state: "visible", timeout: 20000 });
+    await this.page.click(this.benefitsManagementButton);
   }
 
 
