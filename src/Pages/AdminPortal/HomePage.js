@@ -36,9 +36,9 @@ export class HomePage {
 
 
   async logout() {
-    await this.page.locator(this.userMenu).waitFor({ state: 'visible', timeout: 2000 });
+    await this.page.locator(this.userMenu).waitFor({ state: 'visible', timeout: 5000 });
     await this.page.click(this.userMenu);
-    await this.page.locator(this.logoutButton).waitFor({ state: 'visible', timeout: 2000 });
+    await this.page.locator(this.logoutButton).waitFor({ state: 'visible', timeout: 5000 });
     await this.page.click(this.logoutButton);
     
 
@@ -64,6 +64,7 @@ export class HomePage {
       timeout: 20000,
     });
     await this.page.click(this.streamsManagementButton);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
 
   }
 

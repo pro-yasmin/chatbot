@@ -27,7 +27,8 @@ export class LoginPage {
    */
   async gotoAdminPortal(baseUrl) {
     await this.page.goto(baseUrl, { waitUntil: "networkidle" });
-    await this.page.waitForTimeout(2000);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+   // await this.page.waitForTimeout(2000);
     await this.ensureArabicLanguage();
   }
 
@@ -43,6 +44,7 @@ export class LoginPage {
     await this.page.click(this.loginButton);
     var homePage = new HomePage(this.page);
     var avatarVisible = await homePage.checkAvatarIsExist();
+
     return avatarVisible;
   }
 
@@ -93,18 +95,18 @@ export class LoginPage {
    * Handles the "Back to App" button if it exists.
    * @returns {Promise<void>} - Completes the navigation back to the application.
    */
-  async clickBackToAppButton() {
-    var backToAppButtonExists = await this.page
-      .locator(this.backToAppButton)
-      .isVisible({ timeout: 3000 });
-    if (backToAppButtonExists) {
-      await this.page.click(this.backToAppButton);
-      await this.page
-        .locator(this.backToAppButton)
-        .isVisible({ timeout: 3000 });
-      await this.page.click(this.backToAppButton);
-      await this.page.waitForNavigation({ waitUntil: "domcontentloaded" });
-    }
-  }
+  // async clickBackToAppButton() {
+  //   var backToAppButtonExists = await this.page
+  //     .locator(this.backToAppButton)
+  //     .isVisible({ timeout: 3000 });
+  //   if (backToAppButtonExists) {
+  //     await this.page.click(this.backToAppButton);
+  //     await this.page
+  //       .locator(this.backToAppButton)
+  //       .isVisible({ timeout: 3000 });
+  //     await this.page.click(this.backToAppButton);
+  //     await this.page.waitForNavigation({ waitUntil: "domcontentloaded" });
+  //   }
+  // }
 }
 module.exports = { LoginPage };

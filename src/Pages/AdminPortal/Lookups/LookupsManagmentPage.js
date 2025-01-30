@@ -71,8 +71,8 @@ export class LookupsManagmentPage {
     async clickViewLookUpButton(lookupData) {
         let lookupRow = [];
         lookupRow = await this.search.getRowInTableWithSpecificText(lookupData.getCreatedLookupId());
-        var actionlocator = "div >> button:nth-of-type(1)";
-        await this.search.clickRowAction(lookupRow, actionlocator);
+        var actionlocator = "view-lookup";
+        await this.search.clickRowAction(lookupRow, actionlocator,null);
     }
 
     /**
@@ -83,8 +83,8 @@ export class LookupsManagmentPage {
     async clickEditLookupButton(lookupData) {
         let lookupRow = [];
         lookupRow = await this.search.getRowInTableWithSpecificText(lookupData.getCreatedLookupId());
-        var actionlocator = "div >> button:nth-of-type(2)";
-        await this.search.clickRowAction(lookupRow, actionlocator);
+        var actionlocator = "edit-lookup";
+        await this.search.clickRowAction(lookupRow, actionlocator,null);
     }
 
     /**

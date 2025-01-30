@@ -27,14 +27,18 @@ export class BenefitsPage {
     // Selectors for benefit features section
     this.assessmentNeedinput ='//input[@name="assessmentNeed" and @value="false"]';
     this.meritRecurrencePattern ='//div[@id="mui-component-select-entitlementPeriod.pattern"]';
-    this.meritRecurrenceStartDate = '//button[@aria-label="Choose date"][1]';
-    this.meritRecurrenceEndDate = '//button[@aria-label="Choose date"][1]';
+    // this.meritRecurrenceStartDate = '//button[@aria-label="Choose date"][1]';
+    // this.meritRecurrenceEndDate = '//button[@aria-label="Choose date"][1]'; 
+    this.meritRecurrenceStartDate = '//button[@aria-label="picker-button-entitlementPeriod.startDate"]';
+    this.meritRecurrenceEndDate = '//button[@aria-label="picker-button-entitlementPeriod.endDate"]';
     this.selectDateBtn = '//button[contains(text(),"تحديد")]';
     this.benefitRecurrenceRate = '//div[@id="mui-component-select-pace.value"]';
     this.benefitLimitationRate ='//input[@name="pace.children.0" and @value="ongoing"]';
     this.aidRecurrencePattern ='//div[@id="mui-component-select-frequencyOfPeriodic.pattern"]';
-    this.aidRecurrenceStartDate = '//button[@aria-label="Choose date"][1]';
-    this.aidRecurrenceEndDate = '//button[@aria-label="Choose date"][1]';
+    // this.aidRecurrenceStartDate = '//button[@aria-label="Choose date"][1]';
+    // this.aidRecurrenceEndDate = '//button[@aria-label="Choose date"][1]';
+     this.aidRecurrenceStartDate = '//button[@aria-label="picker-button-frequencyOfPeriodic.startDate"][1]';
+    this.aidRecurrenceEndDate = '//button[@aria-label="picker-button-frequencyOfPeriodic.endDate"][1]';
     this.mechanismBenefitamount ='//div[@id="mui-component-select-calculation.benefitCalculationMechanism"]';
     this.benefitReceivingEntity ='//div[@id="mui-component-select-receivingEntity"]';
     this.entity = '//input[@name="entity"]';
@@ -128,9 +132,7 @@ export class BenefitsPage {
   async selectTodayDate(dateLocator) {
     await this.page.click(dateLocator);
     await this.page.waitForTimeout(2000);
-    await this.page.waitForSelector('//div[@role="grid"]', {
-      state: "visible",
-    });
+    await this.page.waitForSelector('//div[@role="grid"]', {state: "visible",});
     await this.page.click(
       '//button[@role="gridcell" and not(contains(@class, "Mui-disabled"))]'
     );
@@ -144,12 +146,8 @@ export class BenefitsPage {
   async selectTodayDateWithBtn(dateLocator) {
     await this.page.click(dateLocator);
     await this.page.waitForTimeout(2000);
-    await this.page.waitForSelector('//div[@role="grid"]', {
-      state: "visible",
-    });
-    await this.page.click(
-      '//button[@role="gridcell" and @aria-current="date"]'
-    );
+    await this.page.waitForSelector('//div[@role="grid"]', { state: "visible",});
+    await this.page.click('//button[@role="gridcell" and @aria-current="date"]' );
     await this.page.click(this.selectDateBtn);
   }
 

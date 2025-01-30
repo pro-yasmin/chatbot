@@ -17,16 +17,17 @@
     "enableStatusHidden": "محجوب",
     "enableStatusActive": "متاح",
     "note": "تم إضافة ملاحظة جديدة",
-    "ensureNoteMsg": "هل انت متأكد من إضافة الملاحظة؟",
+    "ensureNoteMsg": "هل أنت متأكد من إضافة الملاحظة؟",
     "confirmNoteMsg": "تم إضافة الملاحظة بنجاح",
-    "addAcceptNote": "ملاحظة لقبول المسار",
-    "addAcceptMainProgramNote": "ملاحظة لقبول البرنامج الرئيسي",
-    "addAcceptSubProgramSNote": "ملاحظة لقبول البرنامج الفرعى",
-    "addAcceptBenefitsNote": "ملاحظة لقبول الاعانة ",
     "confirmStreamMsg": "تم قبول تعريف المسار بنجاح",
+    "confirmRejectStreamMsg": "تم رفض تعريف المسار بنجاح.",
     "confirmMainProgramMsg": "تم قبول تعريف البرنامج الرئيسي بنجاح",
+    "confirmRejectMainProgramMsg" :"تم رفض تعريف البرنامج الرئيسي بنجاح.",
+    "confirmRejectSubProgramMsg" :"تم رفض تعريف البرنامج الفرعي بنجاح.",
+    "confirmRejectBenefitMsg" :"تم رفض تعريف الإعانة بنجاح.",
     "confirmSubProgramsMsg": "تم قبول تعريف البرنامج الفرعي بنجاح",
-    "confirmBenefitsMsg": "تم قبول تعريف الإعانة بنجاح"
+    "confirmBenefitsMsg": "تم قبول تعريف الإعانة بنجاح",
+    "addCompleteTaskNote":"ملاحظةلاكمال المهمة"
   },
   "createMainProgram": {
     "backUpStreamNumber": "PRG_StrSt_296",

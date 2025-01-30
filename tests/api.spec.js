@@ -39,7 +39,7 @@ test.beforeEach(async () => {
 
 
 
-  test.only('API Test - Create Main Program', async () => {
+  test('API Test - Create Main Program', async () => {
 
   stream = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 
   mainProgram = await programs.createMainProgramAPI(adminusername, adminpassword, mainProgramData, stream[0]);
@@ -48,7 +48,7 @@ test.beforeEach(async () => {
 
   });
 
-  test('API Test - Create Sub Program', async () => {
+  test.only('API Test - Create Sub Program', async () => {
 
     stream = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 
     mainProgram = await programs.createMainProgramAndApproveAPI(adminusername, adminpassword, mainProgramData, stream[0]);
@@ -59,7 +59,7 @@ test.beforeEach(async () => {
   });
 
   
-  test('API Test - Create sub Program', async () => {
+  test.only('API Test - Create sub Program', async () => {
 
     stream = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 
     mainProgram = await programs.createMainProgramAndApproveAPI(adminusername, adminpassword, mainProgramData, stream[0]);
@@ -77,13 +77,13 @@ test.beforeEach(async () => {
     console.log('mainProgram', mainProgram);
     subProgram = await programs.createSubProgramAndApproveAPI(adminusername, adminpassword, subProgramData, mainProgram[0]);
     console.log('subProgram', subProgram);
-    // createBenefit = await programs.createBenefitAPI(adminusername, adminpassword, benefitsData,subProgram[0]) 
-    // expect(Benefit).not.toBeNull();
-    // console.log('Benefit', createBenefit);
+    createBenefit = await programs.createBenefitAPI(adminusername, adminpassword, benefitsData,subProgram[0]) 
+    expect(createBenefit).not.toBeNull();
+    console.log('Benefit', createBenefit);
 
     
-    createApproveBenefit = await programs.createBenefitAndApproveAPI(adminusername, adminpassword, benefitsData,subProgram[0]);
-    console.log('Benefit', createApproveBenefit);
+    // createApproveBenefit = await programs.createBenefitAndApproveAPI(adminusername, adminpassword, benefitsData,subProgram[0]);
+    // console.log('Benefit', createApproveBenefit);
 
 
    });

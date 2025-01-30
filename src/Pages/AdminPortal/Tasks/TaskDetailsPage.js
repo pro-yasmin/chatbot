@@ -1,3 +1,4 @@
+import Constants from '../../../Utils/Constants.js';
 const { PopUpPage } = require("../SharedPages/PopUpPage");
 
 /**
@@ -12,39 +13,32 @@ export class TaskDetailsPage {
     this.myDataTab = '//button[@id="tab-0"]';
     this.myNotesTab = '//button[@id="tab-1"]';
 
-    // Selectors for task details and actions
-    this.enablementStatus =
-      '(//label[contains(text(),"حالة الإتاحة")]//following::span)[1]';
+    // Selectors for task details and actions  
+    this.streamEnablementStatus ='//span[@data-testid="value_streams-management-stream-enablement-status"]';
+    this.mainProgramEnablementStatus ='//span[@data-testid="value_main-program-enablement-status"]';
+    this.subProgramEnablementStatus ='//span[@data-testid="value_enablement-status"]';
+    this.benefitEnablementStatus ='//span[@data-testid="value_benefit_enablement_status"]';
+
     this.addNoteBtn = '//button[contains(text(),"إضافة ملاحظة")]';
     this.noteOnTaskField = '//textarea[@name="message"]';
-    this.acceptNoteOnTaskBtn =
-      '//button[contains(@class, "MuiButton-containedPrimary") and contains(@class, "MuiButton-sizeMedium")]';
-    this.ensureNoteMsgTitle =
-      '//span[@id="modal-modal-title" and contains(text(), "إضافة الملاحظة")]';
-    this.acceptEnsureNoteMsgBtn =
-      '//button[contains(@class, "MuiButtonBase-root") and contains(text(), "نعم، أضافة")]';
-    this.confirmNoteMsgTitle =
-      '//div[@class="MuiStack-root muirtl-zwd3xv"]/span[@id="modal-modal-title"]';
-    this.acceptConfirmNoteMsgBtn =
-      '//button[contains(@class, "MuiButtonBase-root") and text()="العودة"]';
-    this.addedNoteLocator =
-      "div.MuiStack-root.muirtl-1ofqig9 > span:nth-child(3)";
+    this.acceptNoteOnTaskBtn ='//button[contains(@class, "MuiButton-containedPrimary") and contains(@class, "MuiButton-sizeMedium")]';
+    this.ensureNoteMsgTitle ='//span[@id="modal-modal-title" and contains(text(), "إضافة الملاحظة")]';
+    this.acceptEnsureNoteMsgBtn ='//button[contains(text(),"نعم، إضافة!")]';
+    this.confirmNoteMsgTitle ='//div[@class="MuiStack-root muirtl-zwd3xv"]/span[@id="modal-modal-title"]';
+    this.acceptConfirmNoteMsgBtn = '//button[contains(@class, "MuiButtonBase-root") and text()="العودة"]';
+    this.addedNoteLocator ="div.MuiStack-root.muirtl-1ofqig9 > span:nth-child(3)";
 
     // Selectors for accepting tasks
-    this.acceptStreamBtn =
-      '//button[contains(@class, "MuiButton-containedPrimary") and contains(., "قبول المسار")]';
-    this.acceptMainProgramBtn =
-      '//button[contains(text(),"قبول البرنامج الرئيسي")]';
-    this.acceptSubProgramsBtn =
-      '//button[contains(text(),"قبول البرنامج الفرعي")]';
-    this.acceptBenefitBtn = '//button[contains(text(),"قبول الإعانة")]';
+    this.acceptTaskBtn = '//button[@data-testid="accept-request"]';
+
+    // Selectors for accepting tasks
+    this.rejectTaskBtn = '//button[@data-testid="reject-request"]';
 
     // Selectors for task notes and confirmations
-    this.ensureAcceptTaskNotesField = '//textarea[@name="description"]';
-    this.ensureAcceptTaskNotesBtn = '//button[@type="submit"]';
+    this.ensureTaskNotesField = '//textarea[@data-testid="description-text-field"]';
+    this.ensureTaskNotesBtn = '//button[@data-testid="process-action-modal-primary-button"]';
     this.confirmTaskMsgTitle = '//span[@id="modal-modal-title"]';
-    this.backToTasksBtn =
-      '//div[contains(@class,"MuiDialogActions")]//button[@type="button"]';
+    this.backToTasksBtn = '//button[@data-testid="modal-primary-button"]';
   }
 
   /**
@@ -53,7 +47,7 @@ export class TaskDetailsPage {
    */
   async openTaskDataTab() {
     await this.page.click(this.myDataTab);
-    await this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(5000);
   }
 
   /**
@@ -69,18 +63,38 @@ export class TaskDetailsPage {
    * @param {string} expectedStatus - The expected enablement status.
    * @returns {Promise<boolean>} - Returns true if the status matches; otherwise, false.
    */
-  async checkEnablementStatus(expectedStatus) {
-    //await this.openNotesTab();
-   /* await this.openTaskDataTab();
-    const statusElement = this.page.locator(this.enablementStatus);
-    await statusElement.waitFor({ state: "visible" });
-    const actualStatus = await statusElement.textContent();
-    if (actualStatus.trim() === expectedStatus.trim()) {
+  async checkEnablementStatus(taskType, expectedStatus) {
+  // Wait for the status element to be visible
+  await this.page.waitForTimeout(7000);
+  var statusElement = this.page.locator(await this.getstatusLocator(taskType));
+  await statusElement.waitFor({ state: "visible", timeout: 5000  });
+  var actualStatus = await statusElement.textContent();
+   if (actualStatus.trim() === expectedStatus.trim()) {
          console.log(`Enablement Status is as expected: "${actualStatus.trim()}".`);
          return true;
       }
-      return false;*/
-      return true;
+      return false
+      // return true;
+  }
+
+  // Determine the locator for the status based on taskType
+  async getstatusLocator (taskType)
+  { var statusLocator;
+    switch (taskType) {
+      case Constants.STREAM :statusLocator = this.streamEnablementStatus; 
+        break;
+      case Constants.MAIN_PROGRAM :statusLocator = this.mainProgramEnablementStatus;
+        break;
+      case Constants.SUB_PROGRAM: statusLocator = this.subProgramEnablementStatus;
+        break;
+      case Constants.BENEFIT: statusLocator = this.benefitEnablementStatus;
+        break;
+      default:
+        console.log("Invalid task type provided");
+        return false;
+    }
+    return statusLocator;
+
   }
 
   /**
@@ -89,9 +103,7 @@ export class TaskDetailsPage {
    * @returns {Promise<boolean>} - Returns true if the note is found; otherwise, false.
    */
   async checkNoteIsAdded(addedNote) {
-    var displayedNote = this.page.locator(
-      '//*[contains(text(),"' + addedNote + '")]'
-    );
+    var displayedNote = this.page.locator('//*[contains(text(),"' + addedNote + '")]');
     await displayedNote.waitFor({ state: "visible" });
     console.log(`The Note : "${addedNote}" is added Successfully`);
     return true;
@@ -102,8 +114,9 @@ export class TaskDetailsPage {
    * @returns {Promise<boolean>} - Returns true if the note is added successfully.
    */
   async addNoteOnTask() {
+    await this.page.waitForTimeout(7000);
     await this.openNotesTab();
-    await this.page.waitForTimeout(2000);
+    await this.page.waitForSelector(this.addNoteBtn,{ state: 'visible', timeout: 5000 });
     await this.page.click(this.addNoteBtn);
     var popUpMsg = new PopUpPage(this.page);
     await popUpMsg.inputPopUpMessage(this.noteOnTaskField, this.acceptNoteOnTaskBtn,global.testConfig.taskDetails.note);
@@ -113,88 +126,30 @@ export class TaskDetailsPage {
     return result;
   }
 
-  /**
-   * Accepts a stream task.
-   * @returns {Promise<boolean>} - Returns true if the stream is accepted successfully.
-   */
-  async acceptStream() {
-    //await this.openTaskDataTab();
-    await this.page.waitForSelector(this.acceptStreamBtn, { state: "visible" });
-    await this.page.click(this.acceptStreamBtn);
-    var popUpMsg = new PopUpPage(this.page);
-    await popUpMsg.inputPopUpMessage(
-      this.ensureAcceptTaskNotesField,
-      this.ensureAcceptTaskNotesBtn,
-      global.testConfig.taskDetails.addAcceptNote
-    );
-    // await this.page.waitForTimeout(2000);
-    var result = await popUpMsg.popUpMessage(this.backToTasksBtn,global.testConfig.taskDetails.confirmStreamMsg);
-    if (result)
-      console.log("The Stream Accepted Successfully.");
-    return result;
+
+
+ /**
+ * Accepts or rejects a task based on the task type and action type.
+ * @param {string} actionType - The action to perform ('approve' or 'reject').
+ * @param {string} taskType - The type of the task ('stream', 'mainProgram', 'subProgram', 'benefits').
+ * @returns {Promise<boolean>} - Returns true if the task is accepted or rejected successfully.
+ */
+async completeTask(actionType, taskType , confirmMsg) {
+  let actionBtn ;
+
+  actionBtn = actionType === Constants.APPROVE ? this.acceptTaskBtn : this.rejectTaskBtn;
+  await this.page.click(actionBtn);
+  //await this.page.waitForTimeout(2000);
+  var popUpMsg = new PopUpPage(this.page);
+  await popUpMsg.inputPopUpMessage(this.ensureTaskNotesField,this.ensureTaskNotesBtn,global.testConfig.taskDetails.addCompleteTaskNote);
+  var result = await popUpMsg.popUpMessage(this.backToTasksBtn, confirmMsg);
+
+  if (result) {
+      console.log(`The ${taskType} ${actionType === Constants.APPROVE ? 'Accepted' : 'Rejected'} Successfully.`);
   }
 
-  /**
-   * Accepts a main program task.
-   * @returns {Promise<boolean>} - Returns true if the main program is accepted successfully.
-   */
-  async acceptMainProgram() {
-    //check if will need to change or not
-    await this.openTaskDataTab();
-    await this.page.click(this.acceptMainProgramBtn);
-    var popUpMsg = new PopUpPage(this.page);
-    await popUpMsg.inputPopUpMessage(
-      this.ensureAcceptTaskNotesField,
-      this.ensureAcceptTaskNotesBtn,
-      global.testConfig.taskDetails.addAcceptMainProgramNote
-    );
-    // await this.page.waitForTimeout(2000);
-    var result = await popUpMsg.popUpMessage(this.backToTasksBtn ,global.testConfig.taskDetails.confirmMainProgramMsg);
-    if (result)
-      console.log("The Main Program Accepted Successfully.");
-    return result;
-  }
+  return result;
+}
 
-  /**
-   * Accepts a subprogram task.
-   * @returns {Promise<boolean>} - Returns true if the subprogram is accepted successfully.
-   */
-  async acceptSubPrograms() {
-    //check if will need to change or not
-    await this.openTaskDataTab();
-    await this.page.click(this.acceptSubProgramsBtn);
-    var popUpMsg = new PopUpPage(this.page);
-    await popUpMsg.inputPopUpMessage(
-      this.ensureAcceptTaskNotesField,
-      this.ensureAcceptTaskNotesBtn,
-      global.testConfig.taskDetails.addAcceptSubProgramSNote
-    );
-    // await this.page.waitForTimeout(2000);
-    var result = await popUpMsg.popUpMessage(this.backToTasksBtn ,global.testConfig.taskDetails.confirmSubProgramsMsg);
-    if (result)
-      console.log("The Sub Program Accepted Successfully.");
-    return result;
-  }
-
-  /**
-   * Accepts a benefits task.
-   * @returns {Promise<boolean>} - Returns true if the benefits are accepted successfully.
-   */
-  async acceptBenefits() {
-    //check if will need to change or not
-    await this.openTaskDataTab();
-    await this.page.click(this.acceptBenefitBtn);
-    var popUpMsg = new PopUpPage(this.page);
-    await popUpMsg.inputPopUpMessage(
-      this.ensureAcceptTaskNotesField,
-      this.ensureAcceptTaskNotesBtn,
-      global.testConfig.taskDetails.addAcceptBenefitsNote
-    );
-    // await this.page.waitForTimeout(2000);
-    var result = await popUpMsg.popUpMessage(this.backToTasksBtn ,global.testConfig.taskDetails.confirmBenefitsMsg);
-    if (result)
-      console.log("The Benefits Accepted Successfully.");
-    return result;
-  }
 }
 module.exports = { TaskDetailsPage };

@@ -39,9 +39,9 @@ export class LookupPage {
     this.visibleToggle = '//label[@class="form-check-label"]';
     this.addItemToLookupButton = '//button[contains(text(),"أضِف عنصراً إلى القائمة المرجعية")]';
     this.makeLookupButton = '//button[contains(text(),"إتاحة القائمة المرجعية")]';
-    this.viewLookUpButton = '(//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium muirtl-rrlqo"])[1]';
+    this.viewLookUpItemButton = '(//*[@data-testid="table-actions"])[1]//button';
     this.lookupDetailsPage = '//span[text()="بيانات العنصر"]';
-    this.lookupDetailsPageCloseButton = '//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium muirtl-k2cbku"]';
+    this.lookupDetailsPageCloseButton = '//h2//button[contains(@class,"MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium")]';
 
     //view lookup
     this.headlinePage = '//span[contains(text(),"المعلومات الرئيسية")]';
@@ -166,6 +166,7 @@ export class LookupPage {
       lookupDescriptionEnglishNameFieldText === lookupData.getLookupDescriptionEnglishName(),
       lookupStatusFieldText === global.testConfig.lookUps.listStatus
     ];
+    
 
     // Check if all validations are true
     const allValid = validations.every(Boolean);
@@ -231,7 +232,7 @@ export class LookupPage {
    */
   async viewNewLookupItemDetails() {
     var validateNewLookupItemDetails = await this.validateNewLookupItemAdded();
-    await this.page.click(this.viewLookUpButton);
+    await this.page.click(this.viewLookUpItemButton);
     await this.page.waitForTimeout(2000);
     await this.page.click(this.lookupDetailsPageCloseButton);
     return validateNewLookupItemDetails;

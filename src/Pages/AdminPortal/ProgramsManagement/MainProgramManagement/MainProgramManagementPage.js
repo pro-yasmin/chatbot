@@ -10,9 +10,12 @@ const { FilterPrograms } = require("../FilterPrograms");
 export class MainProgramManagementPage {
   constructor(page) {
     this.page = page;
+    this.search = new SearchPage(this.page);
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
     this.mainProgramsTable = "//table//tbody";
-    this.createSubProgramOption = '//ul[@role="menu"]//li[1]';
+    this.tableActions='table-actions';
+    this.tableThreeDots='three-dots-menu';
+    this.createSubProgramOption = '//*[@data-testid="three-dots-menu-option-0"]';
     this.subProgramTab = '//button[@data-testid="tab-2"]';
     this.benefitsTab = '//button[@data-testid="tab-3"]';
     this.filterButton = '//button[@data-testid="toolbar-filter-button"]';
@@ -20,7 +23,6 @@ export class MainProgramManagementPage {
     this.risksFilter = '//div[@id="mui-component-select-risk"]';
     this.responsibleEntityFilter = '//div[@id="mui-component-select-responsible"]';
     this.searchButton = '//button[@type="submit"]';
-    this.dotsLocator;
   }
 
   /**
@@ -58,22 +60,20 @@ export class MainProgramManagementPage {
     return mainProgramRow;
   }
 
-  /**
- * Clicks on the "Create Sub Program" option for a specific main program.
- * @param {string|null} mainProgramName - The name of the main program for which to create a subprogram.
- * @param {string} backUpProgram - A backup program name to use if `mainProgramName` is null.
- * @returns {Promise<void>} - Completes the action of clicking "Create Sub Program".
- */
-  async clickOnCreateSubProgram(mainProgramName, backUpProgram) {
-    let lastTd;
+    /**
+   * Clicks on the "Create Sub Program" option for a specific main program.
+   * @param {string|null} mainProgramName - The name of the main program for which to create a subprogram.
+   * @param {string} backUpProgram - A backup program name to use if `mainProgramName` is null.
+   * @returns {Promise<void>} - Completes the action of clicking "Create Sub Program".
+   */
+  async clickOnCreateSubProgram(mainProgramName,backUpProgram) {
     let mainProgramRow = [];
     if (mainProgramName == null)
       mainProgramRow = await this.searchOnSpecificMainProgram(backUpProgram);
     else mainProgramRow = await this.searchOnSpecificMainProgram(mainProgramName);
     if (mainProgramRow && mainProgramRow.length > 0) {
-      lastTd = mainProgramRow[mainProgramRow.length - 1].tdLocator;
-      this.dotsLocator = lastTd.locator("div >> button");
-      await this.dotsLocator.click();
+      var threeDotsButton = "button:nth-of-type(1)";
+      await this.search.clickRowAction(mainProgramRow,this.tableThreeDots ,threeDotsButton);
       await this.page.waitForTimeout(5000);
       await this.page.waitForSelector(this.createSubProgramOption, {
         state: "visible",
@@ -84,23 +84,22 @@ export class MainProgramManagementPage {
     }
   }
 
-  /**
-   * Opens the details page of a specific main program by its identifier.
-   * 
-   * @param {string} mainProgramNumber - The unique identifier of the main program to view.
-   * @returns {Promise<void>} - Completes the action of opening the main program details page.
-   */
-  async openViewMainProgramDetailsPage(mainProgramNumber) {
-    let viewTd;
-    let mainProgramRow = [];
-    mainProgramRow = await this.searchOnSpecificMainProgram(mainProgramNumber);
-    if (mainProgramRow && mainProgramRow.length > 0) {
-      viewTd = mainProgramRow[mainProgramRow.length - 2].tdLocator;
-      var viewBtn = viewTd.locator('div >> div >> button:nth-of-type(1)');
-      await viewBtn.click();
-      console.log("View Main Program Details Page Opened.");
-    }
+/**
+ * Opens the details page of a specific main program by its identifier.
+ * 
+ * @param {string} mainProgramNumber - The unique identifier of the main program to view.
+ * @returns {Promise<void>} - Completes the action of opening the main program details page.
+ */
+async openViewMainProgramDetailsPage(mainProgramNumber) {
+  let viewTd;
+  let mainProgramRow = [];
+  mainProgramRow = await this.searchOnSpecificMainProgram(mainProgramNumber);
+  if (mainProgramRow && mainProgramRow.length > 0) {
+    var viewBtn = "button:nth-of-type(1)";
+    await this.search.clickRowAction(mainProgramRow,this.tableActions ,viewBtn);
+    console.log("View Main Program Details Page Opened.");
   }
+}
 
   /**
  * Validates that the main program details match the expected data.
@@ -177,6 +176,40 @@ export class MainProgramManagementPage {
     await this.page.click(viewBtn);
     console.log("View Main Program Details Page Opened.");
   }
+    /**
+ * Filter main programs using provided data.
+ * @param {object} mainProgramData - The data object containing main program details.
+ * @returns {Promise<boolean>} - Returns true if the main program filtered successfully.
+ */
+    async filterMainProgram(location, data, type, streamData, mainProgramData) {
+      await this.page.waitForSelector(this.mainProgramsTable, {
+        state: "visible",
+        timeout: 5000,
+      });
+      var filterPrograms = new FilterPrograms(this.page);
+      const filterResult = await filterPrograms.filterMainProgram(location, data, type, streamData, mainProgramData);
+      return filterResult;
+    }
+  
+    async navigateToSubProgramTab() {
+      await this.page.click(this.subProgramTab);
+    }
+    async navigateToBenefitsTab() {
+      await this.page.click(this.benefitsTab);
+    }
+  
+    /**
+     * Opens the details page of a specific main program by its identifier.
+     * 
+     * @param {string} mainProgramNumber - The unique identifier of the main program to view.
+     * @returns {Promise<void>} - Completes the action of opening the main program details page.
+     */
+    async viewMainProgramDetailsPage() {
+      console.log("View Main Program Details Page.");
+      var viewBtn = "td >> div >> div >> button:nth-of-type(1)";
+      await this.page.click(viewBtn);
+      console.log("View Main Program Details Page Opened.");
+    }
 }
 
 module.exports = { MainProgramManagementPage };

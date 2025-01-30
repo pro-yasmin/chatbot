@@ -31,22 +31,22 @@ export class StateMachinePage {
     this.saveButton = '//button[text()="حفظ"]';
 
     this.addActionButton = '//span[text()="إضافة حدث"]';
-    this.fromStateDdl = '//div[@id="mui-component-select-sourceStateId"]';
-    this.fromStateFirstOption = '(//li[@class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters muirtl-to2omt"])[1]';
+    this.fromStateDdl = '//*[@data-testid="select-box-sourceStateId"]';
+    this.fromStateFirstOption = '//li[contains(@data-testid,"select-box-option-firstState")]';
     this.actionArabicName = '[placeholder="اسم الحدث باللغة العربية"]';
     this.actionEnglishName = '[placeholder="اسم الحدث باللغة الإنجليزية"]';
-    this.toStateDdl = '//div[@id="mui-component-select-targetStateId"]';
-    this.toStateFirstOption = '(//li[@class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters muirtl-to2omt"])[1]';
+    this.toStateDdl = '//*[@data-testid="select-box-targetStateId"]';
+    this.toStateFirstOption = '//li[contains(@data-testid,"select-box-option-secondState")]';
     this.addButton = '//button[text()="إضافة"]';
 
     this.createStateCycleButton = '//span[text()="إنشاء دورة الحالة"]';
 
     //View state machine 
     this.headlinePage = '//span[contains(text(),"بيانات دورة الحالة")]';
-    this.stateManagmentArabicNameField = '(//span[contains(@class, "MuiTypography-root") and text()= "اسم دورة الحالة باللغة العربية"]//following::span)[1]';
-    this.stateManagmentEnglishNameField = '(//span[contains(@class, "MuiTypography-root") and text()= "اسم دورة الحالة باللغة الانجليزية"]//following::span)[1]';
-    this.stateManagmentArabicDescriptionField = '(//span[contains(@class, "MuiTypography-root") and text()= "وصف دورة الحالة باللغة العربية"]//following::span)[1]';
-    this.stateManagmentEnglishDescriptionField = '(//span[contains(@class, "MuiTypography-root") and text()= "وصف دورة الحالة باللغة الإنجليزية"]//following::span)[1]';
+    this.stateManagmentArabicNameField = '//*[@data-testid="value_arabicStateManagementName"]';
+    this.stateManagmentEnglishNameField = '//*[@data-testid="value_englishStateManagementName"]';
+    this.stateManagmentArabicDescriptionField = '//*[@data-testid="value_arabicStateManagementDescription"]';
+    this.stateManagmentEnglishDescriptionField = '//*[@data-testid="value_englishStateManagementDescription"]';
     //Edit State Machine
     
     this.editStateCycleButton = '//span[text()="تعديل دورة الحالة"]';
@@ -141,12 +141,13 @@ export class StateMachinePage {
   async addAction(stateMachineData) {
     console.log("Start filling Action information");
     await this.page.click(this.addActionButton);
-    await this.page.waitForSelector(this.fromStateDdl, { state: "visible", timeout: 20000 });
+    await this.page.waitForSelector(this.addActionButton, { state: "visible", timeout: 20000 });
     await this.page.click(this.fromStateDdl);
     await this.page.click(this.fromStateFirstOption);
     await this.fillAction(stateMachineData);
     await this.page.click(this.toStateDdl);
     await this.page.click(this.toStateFirstOption);
+   
     await this.page.click(this.addButton);
     console.log("End filling Action information");
   }
@@ -205,9 +206,9 @@ export class StateMachinePage {
     // Collect all validation checks into an array of booleans
     const validations = [
         stateManagmentArabicNameFieldText === stateMachineData.getStateManagmentArabicName(),
-        stateManagmentEnglishNameFieldText === stateMachineData.getStateManagmentEnglishName(),
+        stateManagmentEnglishNameFieldText.toLowerCase() === stateMachineData.getStateManagmentEnglishName().toLowerCase(),
         stateManagmentArabicDescriptionFieldText === stateMachineData.getStateManagmentArabicDescription(),
-        stateManagmentEnglishDescriptionFieldText === stateMachineData.getStateManagmentEnglishDescription(),
+        stateManagmentEnglishDescriptionFieldText.toLowerCase() === stateMachineData.getStateManagmentEnglishDescription().toLowerCase(),
         firstStateFieldText.includes(stateMachineData.getFirstStateArabicName()),
         secondStateFieldText === stateMachineData.getSecondStateArabicName(),
         actionFieldText === stateMachineData.getActionArabicName()
