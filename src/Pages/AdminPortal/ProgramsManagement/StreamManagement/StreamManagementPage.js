@@ -52,14 +52,10 @@ export class StreamManagementPage {
    */
   async searchOnSpecificStream(streamName) {
     let streamRow = [];
-<<<<<<< HEAD
     streamRow = await new SearchPage(this.page).searchOnUniqueRow(
       this.searchInput,
       streamName,
-    );
-=======
-    streamRow = await new SearchPage(this.page).searchOnUniqueRow(this.searchInput,streamName );
->>>>>>> 3c08c66d8c877ce693d840dc63777743f3623287
+      );
     if (!streamRow || streamRow.length === 0) {
       return null;
     }
