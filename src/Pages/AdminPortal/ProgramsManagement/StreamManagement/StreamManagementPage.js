@@ -55,7 +55,7 @@ export class StreamManagementPage {
     streamRow = await new SearchPage(this.page).searchOnUniqueRow(
       this.searchInput,
       streamName,
-      );
+    );
     if (!streamRow || streamRow.length === 0) {
       return null;
     }
