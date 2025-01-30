@@ -1,4 +1,7 @@
 const { SearchPage } = require("../../SharedPages/SearchPage");
+const { SubProgramsPage } = require("./SubProgramsPage");
+const { FilterPrograms } = require("../FilterPrograms");
+
 
 
 /**
@@ -14,6 +17,12 @@ export class SubProgramsManagementPage {
     this.tableActions='table-actions';
     this.tableThreeDots='three-dots-menu';
     this.createBenefitOption = '//*[@data-testid="three-dots-menu-option-0"]';
+    this.subProgramsTable = "//table//tbody";
+    this.benefitsTab = '//button[@data-testid="tab-4"]';
+    this.filterButton = '//button[@data-testid="toolbar-filter-button"]';;
+    this.designResponsibleEntityFilter = '//div[@id="mui-component-select-designResponsibleGovernance"]';
+    this.responsibleEntityItem = '//li[@data-value="Responsible"]';
+    this.searchButton = '//button[@type="submit"]';
   }
 
   /**
@@ -26,7 +35,7 @@ export class SubProgramsManagementPage {
     subProgramRow = await new SearchPage(this.page).searchOnUniqueRow(
       this.searchInput,
       subProgramsName,
-      );
+    );
     if (!subProgramRow || subProgramRow.length === 0) {
       return null;
     }
@@ -119,16 +128,37 @@ async openViewSubProgramDetailsPage(subProgramNumber) {
     return false;
   }
 
-  // async clickOnNewSubProgram(subProgramsData) {
-  //   await this.page.waitForSelector(this.subProgramsTable, {
-  //     state: "visible",
-  //     timeout: 5000,
-  //   });
-  //   await this.page.click(this.createNewSubProgramButton);
-  //   var subProgramsPage = new SubProgramsPage(this.page);
-  //   const result = await subProgramsPage.createNewSubPrograms(subProgramsData);
-  //   return result;
-  // }
+  /**
+   * Filter main programs using provided data.
+   * @param {object} subProgramData - The data object containing sub program details.
+   * @returns {Promise<boolean>} - Returns true if the sub program filtered successfully.
+   */
+  async filterSubProgram(location, data, type, streamData, mainProgramData, subProgramsData) {
+    await this.page.waitForSelector(this.subProgramsTable, {
+      state: "visible",
+      timeout: 5000,
+    });
+    var filterPrograms = new FilterPrograms(this.page);
+    const filterResult = await filterPrograms.filterSubProgram(location, data, type, streamData, mainProgramData, subProgramsData);
+    return filterResult;
+  }
+
+  async navigateToBenefitsTab() {
+    await this.page.click(this.benefitsTab);
+  }
+
+  /**
+ * Opens the details page of a specific subprogram by its identifier.
+ * 
+ * @param {string} subProgramNumber - The unique identifier of the subprogram to view.
+ * @returns {Promise<void>} - Completes the action of opening the subprogram details page.
+ */
+  async viewSubProgramDetailsPage() {
+    console.log("View Subprogram Details Page.");
+    var viewBtn = "td >> div >> div >> button:nth-of-type(1)";
+    await this.page.click(viewBtn);
+    console.log("View SubProgram Details Page Opened.");
+  }
 }
 
 module.exports = { SubProgramsManagementPage };

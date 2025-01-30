@@ -220,7 +220,7 @@ const { Utils } = require("../../Utils/utils.js");
    //Getter and Setter for API
   getRiskCategoryAPI() {
     if (this.riskCategoryAPI == null) {
-      this.riskCategoryAPI = global.testConfig.createMainProgram.riskCategoryAPI;
+      this.riskCategoryAPI = global.testConfig.createMainProgram.riskCategoryAPIChildhood;
     }
     return this.riskCategoryAPI;
   }
