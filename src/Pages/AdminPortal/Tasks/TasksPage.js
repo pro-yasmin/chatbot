@@ -46,7 +46,7 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToMyCompletedTasksTab() {
-    await  this.page.waitForTimeout(8000);
+    await  this.page.waitForTimeout(10000);
     await this.page.waitForSelector(this.myCompletedTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myCompletedTasksTab);
     console.log("Navigate to My completed tasks tab");
