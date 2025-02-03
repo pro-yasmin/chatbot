@@ -32,37 +32,23 @@ let benefit1, benefit2, benefitsData, benefitsData1, benefitsData2, benefit1Id;
 let baseUrl, adminusername, adminpassword;
 let filterPrograms;
 
-
-test.beforeEach(async ({ page }) => {
-
+test.beforeAll(async () => {
   baseUrl = global.testConfig.BASE_URL;
   adminusername = global.testConfig.ADMIN_USER;
   adminpassword = global.testConfig.ADMIN_PASS;
 
-  streamData = new StreamData(page);
-  loginPage = new LoginPage(page);
-  homePage = new HomePage(page);
-  streamDetailsPage = new StreamDetailsPage(page);
-  streamManagementPage = new StreamManagementPage(page);
-  mainProgramPage = new MainProgramPage(page);
-  mainProgramManagementPage = new MainProgramManagementPage(page);
-  subProgramsManagementPage = new SubProgramsManagementPage(page);
-  subProgramDetailsPage = new SubProgramDetailsPage(page);
-  subProgramsPage = new SubProgramsPage(page);
-  benefitsPage = new BenefitsPage(page);
-  benefitsManagmentPage = new BenefitsManagmentPage(page);
-  mainProgramDetailsPage = new MainProgramDetailsPage(page);
-  mainProgramData = new MainProgramData(page);
-  mainProgramData1 = new MainProgramData(page);
-  mainProgramData2 = new MainProgramData(page);
-  subProgramData = new SubProgramsData(page);
-  subProgramData1 = new SubProgramsData(page);
-  subProgramData2 = new SubProgramsData(page);
-  benefitsData = new BenefitsData(page);
-  benefitsData1 = new BenefitsData(page);
-  benefitsData2 = new BenefitsData(page);
-  programs = new Programs(page);
-  filterPrograms = new FilterPrograms(page);
+  streamData = new StreamData(null);
+  mainProgramData = new MainProgramData(null);
+  mainProgramData1 = new MainProgramData(null);
+  mainProgramData2 = new MainProgramData(null);
+  subProgramData = new SubProgramsData(null);
+  subProgramData1 = new SubProgramsData(null);
+  subProgramData2 = new SubProgramsData(null);
+  benefitsData = new BenefitsData(null);
+  benefitsData1 = new BenefitsData(null);
+  benefitsData2 = new BenefitsData(null);
+  programs = new Programs(null);
+
 
   mainProgramData2.setRiskCategoryAPI(global.testConfig.createMainProgram.riskCategoryAPIYouth);
   subProgramData2.setApplicationEnablement(global.testConfig.createSubPrograms.applicationEnablementTemp);
@@ -93,14 +79,30 @@ test.beforeEach(async ({ page }) => {
 
   benefit2 = await programs.createBenefitAndApproveAPI(adminusername, adminpassword, benefitsData2, subProgram1[0]);
   console.log('Benefit 2 ID:', benefit2[1]);
-
 });
 
-test('Filter Main Programs', async ({ page }) => {
+
+test.beforeEach(async ({ page }) => {
+  loginPage = new LoginPage(page);
+  homePage = new HomePage(page);
+  streamDetailsPage = new StreamDetailsPage(page);
+  streamManagementPage = new StreamManagementPage(page);
+  mainProgramPage = new MainProgramPage(page);
+  mainProgramManagementPage = new MainProgramManagementPage(page);
+  subProgramsManagementPage = new SubProgramsManagementPage(page);
+  subProgramDetailsPage = new SubProgramDetailsPage(page);
+  subProgramsPage = new SubProgramsPage(page);
+  benefitsPage = new BenefitsPage(page);
+  benefitsManagmentPage = new BenefitsManagmentPage(page);
+  mainProgramDetailsPage = new MainProgramDetailsPage(page);
+  filterPrograms = new FilterPrograms(page);
+});
+
+test('Filter MainProgram, SubProgram, Benefits in Stream Details', async ({ page }) => {
   // Step0: Login 
   await test.step('Login to Admin Portal', async () => {
     await loginPage.gotoAdminPortal(baseUrl);
-    var loginSuccess = await loginPage.login(adminusername, adminpassword);
+    var loginSuccess = await loginPage.login(global.testConfig.BUSINESS_DELIVERY_ADMIN, global.testConfig.BUSINESS_DELIVERY_ADMIN_PASS);
     expect(loginSuccess).toBe(true);
     console.log('login done successfully');
   });
@@ -136,6 +138,16 @@ test('Filter Main Programs', async ({ page }) => {
     await filterPrograms.delete_FilterCriteria();
     console.log("New Benefit Details Checked Successfully");
   });
+});
+
+test('Filter MainProgram, SubProgram, Benefits in Main Program Details', async ({ page }) => {
+  // Step0: Login 
+  await test.step('Login to Admin Portal', async () => {
+    await loginPage.gotoAdminPortal(baseUrl);
+    var loginSuccess = await loginPage.login(global.testConfig.PLATFORM_MANAGER, global.testConfig.PLATFORM_MANAGER_PASS);
+    expect(loginSuccess).toBe(true);
+    console.log('login done successfully');
+  });
   // Step1: Navigate to Main Programs page
   await test.step("Navigate to Main Programs  page", async () => {
     await homePage.navigateToMainProgramManagement();
@@ -167,6 +179,16 @@ test('Filter Main Programs', async ({ page }) => {
     await filterPrograms.delete_FilterCriteria();
     console.log("New Benefit Details Checked Successfully");
   });
+});
+
+test('Filter SubProgram, Benefits in SubProgram Details', async ({ page }) => {
+  // Step0: Login 
+  await test.step('Login to Admin Portal', async () => {
+    await loginPage.gotoAdminPortal(baseUrl);
+    var loginSuccess = await loginPage.login(global.testConfig.GENERAL_SETTING_USER, global.testConfig.GENERAL_SETTING_PASS);
+    expect(loginSuccess).toBe(true);
+    console.log('login done successfully');
+  });
   // Step1: Navigate to Sub Programs page
   await test.step("Navigate to Sub Programs  page", async () => {
     await homePage.navigateToSubProgramsManagement();
@@ -190,6 +212,16 @@ test('Filter Main Programs', async ({ page }) => {
     expect(await subProgramDetailsPage.filterBenefit(Constants.FILTER_BENEFITS_INSIDE_SUB_PROGRAM, benefitsData1, "benefit", null, null, null, benefitsData1)).toBe(true);
     await filterPrograms.delete_FilterCriteria();
     console.log("New Benefit Details Checked Successfully");
+  });
+});
+
+test('Filter Benefits in Benefits Details', async ({ page }) => {
+  // Step0: Login 
+  await test.step('Login to Admin Portal', async () => {
+    await loginPage.gotoAdminPortal(baseUrl);
+    var loginSuccess = await loginPage.login(global.testConfig.GENERAL_SETTING_USER, global.testConfig.GENERAL_SETTING_PASS);
+    expect(loginSuccess).toBe(true);
+    console.log('login done successfully');
   });
   // Step1: Navigate to Benefits page
   await test.step("Navigate to Benefits  page", async () => {
