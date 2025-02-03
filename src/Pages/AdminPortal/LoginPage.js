@@ -27,7 +27,8 @@ export class LoginPage {
    */
   async gotoAdminPortal(baseUrl) {
     await this.page.goto(baseUrl, { waitUntil: "networkidle" });
-    await this.page.waitForTimeout(2000);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+   // await this.page.waitForTimeout(2000);
     await this.ensureArabicLanguage();
   }
 

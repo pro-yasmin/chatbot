@@ -1,5 +1,8 @@
 const { SearchPage } = require("../../SharedPages/SearchPage");
 const { SubProgramsPage } = require("./SubProgramsPage");
+const { FilterPrograms } = require("../FilterPrograms");
+
+
 
 /**
  * Manages subprogram-related actions like searching for specific subprograms,
@@ -9,10 +12,17 @@ const { SubProgramsPage } = require("./SubProgramsPage");
 export class SubProgramsManagementPage {
   constructor(page) {
     this.page = page;
+    this.search = new SearchPage(this.page);
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
-    //this.subProgramsTable = "//table//tbody";
-    this.createBenefitOption = '//ul[@role="menu"]//li[1]';
-    this.dotsLocator;
+    this.tableActions='table-actions';
+    this.tableThreeDots='three-dots-menu';
+    this.createBenefitOption = '//*[@data-testid="three-dots-menu-option-0"]';
+    this.subProgramsTable = "//table//tbody";
+    this.benefitsTab = '//button[@data-testid="tab-4"]';
+    this.filterButton = '//button[@data-testid="toolbar-filter-button"]';;
+    this.designResponsibleEntityFilter = '//div[@id="mui-component-select-designResponsibleGovernance"]';
+    this.responsibleEntityItem = '//li[@data-value="Responsible"]';
+    this.searchButton = '//button[@type="submit"]';
   }
 
   /**
@@ -25,7 +35,7 @@ export class SubProgramsManagementPage {
     subProgramRow = await new SearchPage(this.page).searchOnUniqueRow(
       this.searchInput,
       subProgramsName,
-      );
+    );
     if (!subProgramRow || subProgramRow.length === 0) {
       return null;
     }
@@ -45,9 +55,8 @@ async openViewSubProgramDetailsPage(subProgramNumber) {
   let subProgramRow = [];
   subProgramRow = await this.searchOnSpecificSubProgram(subProgramNumber);
   if (subProgramRow && subProgramRow.length > 0) {
-    viewTd = subProgramRow[subProgramRow.length - 2].tdLocator;
-    var viewBtn = viewTd.locator('div >> div >> button:nth-of-type(1)');
-    await viewBtn.click();
+    var viewBtn = "button:nth-of-type(1)";
+    await this.search.clickRowAction(subProgramRow,this.tableActions ,viewBtn);
     console.log("View Sub Program Details Page Opened.");
   }
 }
@@ -67,9 +76,8 @@ async openViewSubProgramDetailsPage(subProgramNumber) {
       subProgramRow = await this.searchOnSpecificSubProgram(backUpSubrogram);
     else subProgramRow = await this.searchOnSpecificSubProgram(subProgramName);
     if (subProgramRow && subProgramRow.length > 0) {
-      lastTd = subProgramRow[subProgramRow.length - 1].tdLocator;
-      this.dotsLocator = lastTd.locator("div >> button");
-      await this.dotsLocator.click();
+      var threeDotsButton = "button";
+      await this.search.clickRowAction(subProgramRow,this.tableThreeDots ,threeDotsButton);
       await this.page.waitForSelector(this.createBenefitOption, {
         state: "visible",
         timeout: 60000,
@@ -120,16 +128,37 @@ async openViewSubProgramDetailsPage(subProgramNumber) {
     return false;
   }
 
-  // async clickOnNewSubProgram(subProgramsData) {
-  //   await this.page.waitForSelector(this.subProgramsTable, {
-  //     state: "visible",
-  //     timeout: 5000,
-  //   });
-  //   await this.page.click(this.createNewSubProgramButton);
-  //   var subProgramsPage = new SubProgramsPage(this.page);
-  //   const result = await subProgramsPage.createNewSubPrograms(subProgramsData);
-  //   return result;
-  // }
+  /**
+   * Filter main programs using provided data.
+   * @param {object} subProgramData - The data object containing sub program details.
+   * @returns {Promise<boolean>} - Returns true if the sub program filtered successfully.
+   */
+  async filterSubProgram(location, data, type, streamData, mainProgramData, subProgramsData) {
+    await this.page.waitForSelector(this.subProgramsTable, {
+      state: "visible",
+      timeout: 5000,
+    });
+    var filterPrograms = new FilterPrograms(this.page);
+    const filterResult = await filterPrograms.filterSubProgram(location, data, type, streamData, mainProgramData, subProgramsData);
+    return filterResult;
+  }
+
+  async navigateToBenefitsTab() {
+    await this.page.click(this.benefitsTab);
+  }
+
+  /**
+ * Opens the details page of a specific subprogram by its identifier.
+ * 
+ * @param {string} subProgramNumber - The unique identifier of the subprogram to view.
+ * @returns {Promise<void>} - Completes the action of opening the subprogram details page.
+ */
+  async viewSubProgramDetailsPage() {
+    console.log("View Subprogram Details Page.");
+    var viewBtn = "td >> div >> div >> button:nth-of-type(1)";
+    await this.page.click(viewBtn);
+    console.log("View SubProgram Details Page Opened.");
+  }
 }
 
 module.exports = { SubProgramsManagementPage };

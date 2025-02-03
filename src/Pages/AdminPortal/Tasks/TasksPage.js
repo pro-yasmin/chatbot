@@ -21,7 +21,9 @@ export class TasksPage {
     this.groupTasksTab = '//button[@id="tab-2"]';
     this.searchInput = '//input[@placeholder="ادخل رقم الطلب"]';
     this.tasksTable = "//table//tbody";
-    this.assignToMyselfBtn = '//ul[@role="menu"]//li[1]';
+    this.tableActions='table-actions';
+    this.tableThreeDots='three-dots-menu';
+    this.assignToMyselfBtn = '//*[@data-testid="three-dots-menu-option-0"]';
     this.assignPopUpMsgTitle = '//span[@id="modal-modal-title"]';
     this.acceptAssignBtn = '//button[contains(text(),"نعم، إسناد!")]';
     this.cancelAssignBtn = '//button[contains(text(),"إلغاء")]';
@@ -73,8 +75,8 @@ export class TasksPage {
     await this.page.waitForTimeout(5000);
     let taskRow = [];
     taskRow = await this.search.getRowInTableWithSpecificText(taskNumber);
-    var actionlocator = "div >> div:nth-of-type(2)>> button:nth-of-type(1)";
-    await this.search.clickRowAction(taskRow, actionlocator);
+    var actionlocator = "button:nth-of-type(1)";
+    await this.search.clickRowAction(taskRow,this.tableThreeDots, actionlocator);
     await this.page.click(this.assignToMyselfBtn);
     console.log("clicked on assign to myself Btn");
     var popUpMsg = new PopUpPage(this.page);
@@ -96,9 +98,9 @@ async ensureTaskStatus(taskType, actionType , taskNumber) {
 
   // Find the task row in the table
   let taskRow = await this.search.getRowInTableWithSpecificText(taskNumber);
-  var actionLocator = "div >> button";
+  var actionLocator = "button";
   await this.page.waitForTimeout(10000);
-  await this.search.clickRowAction(taskRow, actionLocator);
+  await this.search.clickRowAction(taskRow, this.tableActions,actionLocator);
 
   // Define expected status based on action
   if (actionType === Constants.APPROVE) {
@@ -143,8 +145,8 @@ async manageTask(taskType, actionType ,taskNumber,confirmMsg) {
   await this.navigateToMyTasksTab();
   
   let taskRow = await this.search.getRowInTableWithSpecificText(taskNumber);
-  var actionLocator = "div >> button";
-  await this.search.clickRowAction(taskRow, actionLocator);
+  var actionLocator =  "button";
+  await this.search.clickRowAction(taskRow,this.tableActions, actionLocator);
   console.log(`Navigate To ${taskType} Details Page Successfully`);
 
   var initialTaskStatus = global.testConfig.taskDetails.enableStatusHidden;

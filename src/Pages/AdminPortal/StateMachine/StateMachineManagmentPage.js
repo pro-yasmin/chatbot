@@ -10,6 +10,7 @@ export class StateMachineManagmentPage {
         this.search = new SearchPage(this.page);
         this.addButton = '[data-testid="toolbar-add-button"]';
         this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
+        this.tableActions='table-actions'
     }
 
     /**
@@ -62,8 +63,8 @@ export class StateMachineManagmentPage {
     async clickViewstateMachineButton(stateMachineData) {
         let stateMachineTableRow = [];
         stateMachineTableRow = await this.search.getRowInTableWithSpecificText(stateMachineData.getCreatedStateMachineId());
-        var actionlocator = "div >> button:nth-of-type(1)";
-        await this.search.clickRowAction(stateMachineTableRow, actionlocator);
+        var actionlocator = "button:nth-of-type(1)";
+        await this.search.clickRowAction(stateMachineTableRow,this.tableActions ,actionlocator);
     }
 
     /**
@@ -74,8 +75,8 @@ export class StateMachineManagmentPage {
     async clickEditstateMachineDataButton(stateMachineData) {
         let stateMachineTableRow = [];
         stateMachineTableRow = await this.search.getRowInTableWithSpecificText(stateMachineData.getCreatedStateMachineId());
-        var actionlocator = "div >> button:nth-of-type(2)";
-        await this.search.clickRowAction(stateMachineTableRow, actionlocator);
+        var actionlocator = "button:nth-of-type(2)";
+        await this.search.clickRowAction(stateMachineTableRow,this.tableActions, actionlocator);
     }
 
     /**

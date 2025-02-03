@@ -241,7 +241,7 @@ export class SubProgramsData {
   }
   getApplicationEnablement() {
     if (this.applicationEnablement == null) {
-      this.applicationEnablement =  global.testConfig.createSubPrograms.applicationEnablement;
+      this.applicationEnablement =  global.testConfig.createSubPrograms.applicationEnablementPerm;
      }
     return this.applicationEnablement;
   }
