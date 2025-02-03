@@ -34,19 +34,19 @@ test.beforeEach(async ({ page }) => {
   loginPage = new LoginPage(page);
   homePage = new HomePage(page);
   streamManagementPage = new StreamManagementPage(page);
-  streamData = new StreamData(page);
+  streamData = new StreamData();
   streamDetailsPage = new StreamDetailsPage(page);
   mainProgramPage = new MainProgramPage(page);
   mainProgramManagementPage = new MainProgramManagementPage(page);
-  mainProgramData = new MainProgramData(page);
+  mainProgramData = new MainProgramData();
   mainProgramDetailsPage= new  MainProgramDetailsPage(page);
   subProgramsManagementPage = new SubProgramsManagementPage(page);
   subProgramsPage = new SubProgramsPage(page);
-  subProgramsData = new SubProgramsData(page);
+  subProgramsData = new SubProgramsData();
   subProgramDetailsPage= new SubProgramDetailsPage(page);
   benefitsPage = new BenefitsPage(page);
   benefitsManagmentPage = new BenefitsManagmentPage(page);
-  benefitsData = new BenefitsData(page);
+  benefitsData = new BenefitsData();
   programs = new Programs();
 
   var baseUrl = global.testConfig.BASE_URL;
@@ -65,7 +65,7 @@ test.beforeEach(async ({ page }) => {
 /**
  * Test case: Add Inside a new main program.
 */
-test("Add Inside New Main Program", async () => {
+test.only("Add Inside New Main Program", async () => {
       // Step1: Create And Appove Stream From API
       await test.step("Create And Appove Stream From API", async () => {
       streamNumber = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 

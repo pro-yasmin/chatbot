@@ -27,7 +27,7 @@ export class StreamsService {
     //console.log('Access Token:', accessToken);
     if (response.ok()) {
       streamId = responseBody.result.streamId;
-      console.log("Response Body:", responseBody);
+      // console.log("Response Body:", responseBody);
       console.log("streamId:", streamId);
     } else {
       var errorBody = await response.text();

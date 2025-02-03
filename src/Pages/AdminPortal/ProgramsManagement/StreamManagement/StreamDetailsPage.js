@@ -17,11 +17,9 @@ export class StreamDetailsPage {
     this.subProgramTab = '//button[@data-testid="tab-3"]';
     this.benefitsTab = '//button[@data-testid="tab-4"]';
     this.createMainProgramBtn = '//button[@type="button" and contains(text(),"تعريف برنامج رئيسي")]';
-
   }
 
-
-  /**
+ /**
  * Navigates to the "Main Program" tab and clicks the "Create Main Program" button.
  * @returns {Promise<void>} - Completes the action of initiating main program creation.
  */
@@ -81,6 +79,8 @@ export class StreamDetailsPage {
     const filterResult = await benefitsManagmentPage.filterBenefit(location, data, type, streamData, mainProgramData, subProgramData, benefitsData);
     return filterResult;
   }
+
+  
 
 }
 

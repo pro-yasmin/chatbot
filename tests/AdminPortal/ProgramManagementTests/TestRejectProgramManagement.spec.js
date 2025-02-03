@@ -33,12 +33,12 @@ test.beforeEach(async ({ page }) => {
 
   loginPage = new LoginPage(page);
   homePage = new HomePage(page);
-  streamData = new StreamData(page);
+  streamData = new StreamData();
   mainProgramPage = new MainProgramPage(page);
   mainProgramManagementPage = new MainProgramManagementPage(page);
-  mainProgramData = new MainProgramData(page);
-  subProgramsData = new SubProgramsData(page);
-  benefitsData = new BenefitsData(page);
+  mainProgramData = new MainProgramData();
+  subProgramsData = new SubProgramsData();
+  benefitsData = new BenefitsData();
   programs = new Programs();
   tasksPage = new TasksPage(page);
   

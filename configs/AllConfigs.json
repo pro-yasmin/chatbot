@@ -9,7 +9,7 @@
   "BASE_URL_API": "https://uat-gw-ext-lb.iis-ssb.com:8243",
   "BUSSINESS_ADMIN_PASS": "P@$sw0rd",
   "BUSSINESS_ADMIN_USER": "auto_uat_business_administration_manager",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_10024_TBEEJEXQDWSUMRGB",
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_15964_OULUKAUVLYCNNTZT",
   "COLOR": "1",
   "COLORTERM": "truecolor",
   "CommonProgramFiles": "C:\\Program Files\\Common Files",
@@ -110,7 +110,11 @@
     "streamSuccessMsg": "تم حفظ المسار للمراجعة بنجاح"
   },
   "tasks": {
-    "assignTaskMsg": "هل أنت متأكد من إسناد مهمة"
+    "assignTaskMsg": "هل أنت متأكد من إسناد مهمة",
+    "expectStreamTaskType": "اعتماد مسار",
+    "expectMainProgramTaskType": "اعتماد برنامج رئيسي",
+    "expectSubProgramTaskType": "اعتماد برنامج فرعي",
+    "expectBenefitTaskType": "اعتماد إعانة"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",
@@ -142,7 +146,8 @@
     "calculationMethodAPI": "caluction caluction caluction",
     "calculationMethod": "طريقة الحساب طريقة الحس طريقة الحساب طريقة الحسابطريقة الحساب طريقة الحساب",
     "riskCategory": "فترة الحمل والطفولة المبكرة",
-    "riskCategoryAPI": "Childhood",
+    "riskCategoryAPIChildhood": "Childhood",
+    "riskCategoryAPIYouth": "youth",
     "risks": "ضعف صحة الأمهات",
     "risksAPI": "lowEducationalOutcomes",
     "riskArabicDescription": "تعزيز تمكين وسالمة الفئات الهشة من خلال برامج التوعي المجتمعي والدعم الشامل",
@@ -189,7 +194,9 @@
     "geographicalTargeting": [],
     "activationStartDate": "2025-12-22T22:00:00.000Z",
     "activationEndDate": "2025-12-25T22:00:00.000Z",
-    "applicationEnablement": "PERMANENT",
+    "applicationEnablementPerm": "PERMANENT",
+    "applicationEnablementPermAr": "دائم",
+    "applicationEnablementTemp": "TEMPORARY",
     "requireRegisterApplication": true,
     "applicationChannelCodes": [
       "14"
@@ -227,12 +234,15 @@
     "benefitDetails": {
       "mechanism": "FULL",
       "budget": "رمز التكلفة الخاص بالإعانة",
-      "benefitType": "CASH",
+      "benefitTypeCash": "CASH",
+      "benefitTypeCashAr": "نقدي",
+      "benefitTypeNonCash": "NON_CASH",
       "natureValue": "test2",
       "natureValueType": "cashBenefitNature",
       "providerCodes": [
         "camp"
       ],
+      "providerCodesAr": "كامب",
       "estimatedValue": "القيمة التقديرية للإعانة"
     },
     "relatedPastBenefits": [],

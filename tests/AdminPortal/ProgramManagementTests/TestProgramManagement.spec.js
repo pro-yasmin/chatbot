@@ -34,22 +34,22 @@ test.beforeEach(async ({ page }) => {
   homePage = new HomePage(page);
   streamPage = new StreamPage(page);
   streamManagementPage = new StreamManagementPage(page);
-  streamData = new StreamData(page);
+  streamData = new StreamData();
   tasksPage = new TasksPage(page);
   taskDetailsPage = new TaskDetailsPage(page);
   mainProgramPage = new MainProgramPage(page);
   mainProgramManagementPage = new MainProgramManagementPage(page);
-  mainProgramData = new MainProgramData(page);
+  mainProgramData = new MainProgramData();
   subProgramsManagementPage = new SubProgramsManagementPage(page);
   subProgramsPage = new SubProgramsPage(page);
-  subProgramsData = new SubProgramsData(page);
+  subProgramsData = new SubProgramsData();
   benefitsPage = new BenefitsPage(page);
   benefitsManagmentPage = new BenefitsManagmentPage(page);
-  benefitsData = new BenefitsData(page);
+  benefitsData = new BenefitsData();
 
   var baseUrl = global.testConfig.BASE_URL;
-  var adminusername = global.testConfig.ADMIN_USER;
-  var adminpassword = global.testConfig.ADMIN_PASS;
+  var adminusername = global.testConfig.GENERAL_SETTING_USER;
+  var adminpassword = global.testConfig.GENERAL_SETTING_PASS;
 
   await test.step("Login to Admin Portal", async () => {
     await loginPage.gotoAdminPortal(baseUrl);
