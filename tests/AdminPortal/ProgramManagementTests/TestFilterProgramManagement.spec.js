@@ -39,7 +39,7 @@ test.beforeEach(async ({ page }) => {
   adminusername = global.testConfig.ADMIN_USER;
   adminpassword = global.testConfig.ADMIN_PASS;
 
-  streamData = new StreamData(page);
+  streamData = new StreamData();
   loginPage = new LoginPage(page);
   homePage = new HomePage(page);
   streamDetailsPage = new StreamDetailsPage(page);
