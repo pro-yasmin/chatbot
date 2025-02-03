@@ -2,8 +2,7 @@ const { Utils } = require('../../Utils/utils.js');
 
 export class LookupData {
 
-    constructor(page) {
-        this.page = page;
+    constructor() {
         this.utils = Utils;
         this.lookupArabicName = null;
         this.lookupEnglishName = null;

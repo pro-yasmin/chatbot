@@ -5,8 +5,7 @@ const { Utils } = require("../../Utils/utils.js");
  * risks, and goals. Provides getter and setter methods for each attribute.
  * @class
  */ export class MainProgramData {
-   constructor(page) {
-     this.page = page;
+   constructor() {
      this.utils = Utils;
      this.arabicMainProgramName = null;
      this.englishMainProgramName = null;
