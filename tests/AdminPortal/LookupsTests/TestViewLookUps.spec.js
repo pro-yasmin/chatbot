@@ -20,7 +20,7 @@ test('View Lookup', async ({ page }) => {
     homePage = new HomePage(page);
     lookupsManagmentPage = new LookupsManagmentPage(page);
     lookupPage = new LookupPage(page);
-    lookupData = new LookupData(page);
+    lookupData = new LookupData();
 
 
     var baseUrl = global.testConfig.BASE_URL;

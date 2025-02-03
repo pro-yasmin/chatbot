@@ -6,8 +6,7 @@ const { Utils } = require("../../Utils/utils.js");
  * @class
  */
 export class BenefitsData {
-  constructor(page) {
-    this.page = page;
+  constructor() {
     this.utils = Utils;
     this.arabicBenefitName = null;
     this.englishBenefitName = null;
