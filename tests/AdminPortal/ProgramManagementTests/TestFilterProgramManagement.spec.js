@@ -37,17 +37,17 @@ test.beforeAll(async () => {
   adminusername = global.testConfig.ADMIN_USER;
   adminpassword = global.testConfig.ADMIN_PASS;
 
-  streamData = new StreamData(null);
-  mainProgramData = new MainProgramData(null);
-  mainProgramData1 = new MainProgramData(null);
-  mainProgramData2 = new MainProgramData(null);
-  subProgramData = new SubProgramsData(null);
-  subProgramData1 = new SubProgramsData(null);
-  subProgramData2 = new SubProgramsData(null);
-  benefitsData = new BenefitsData(null);
-  benefitsData1 = new BenefitsData(null);
-  benefitsData2 = new BenefitsData(null);
-  programs = new Programs(null);
+  streamData = new StreamData();
+  mainProgramData = new MainProgramData();
+  mainProgramData1 = new MainProgramData();
+  mainProgramData2 = new MainProgramData();
+  subProgramData = new SubProgramsData();
+  subProgramData1 = new SubProgramsData();
+  subProgramData2 = new SubProgramsData();
+  benefitsData = new BenefitsData();
+  benefitsData1 = new BenefitsData();
+  benefitsData2 = new BenefitsData();
+  programs = new Programs();
 
 
   mainProgramData2.setRiskCategoryAPI(global.testConfig.createMainProgram.riskCategoryAPIYouth);
