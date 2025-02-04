@@ -48,7 +48,7 @@ test.beforeEach(async () => {
 
   });
 
-  test.only('API Test - Create Sub Program', async () => {
+  test('API Test - Create Sub Program', async () => {
 
     stream = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 
     mainProgram = await programs.createMainProgramAndApproveAPI(adminusername, adminpassword, mainProgramData, stream[0]);
