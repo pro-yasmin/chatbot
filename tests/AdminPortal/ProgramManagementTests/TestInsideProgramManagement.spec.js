@@ -50,8 +50,8 @@ test.beforeEach(async ({ page }) => {
   programs = new Programs();
 
   var baseUrl = global.testConfig.BASE_URL;
-  adminusername = global.testConfig.ADMIN_USER;
-  adminpassword = global.testConfig.ADMIN_PASS;
+   adminusername = global.testConfig.GENERAL_SETTING_USER;
+   adminpassword = global.testConfig.GENERAL_SETTING_PASS;
 
   await test.step("Login to Admin Portal", async () => {
   await loginPage.gotoAdminPortal(baseUrl);
@@ -65,7 +65,7 @@ test.beforeEach(async ({ page }) => {
 /**
  * Test case: Add Inside a new main program.
 */
-test.only("Add Inside New Main Program", async () => {
+test("Add Inside New Main Program", async () => {
       // Step1: Create And Appove Stream From API
       await test.step("Create And Appove Stream From API", async () => {
       streamNumber = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 
@@ -142,7 +142,7 @@ test("Add Inside New Sub Program", async () => {
   subProgramTask = await programs.approveTaskAPI(adminusername, adminpassword,subProgramNumber); 
   expect(subProgramTask).not.toBeNull(); 
   console.log("New Inside Sub Program Created Successfully");
-  });
+  })
 
 });
 

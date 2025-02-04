@@ -78,7 +78,7 @@ test.only("Add Inside New Main Program", async () => {
       await homePage.navigateToStreamsManagement();
       console.log("Click on Define New Main Program from Stream Details Page.");
       await streamManagementPage.openViewStreamDetailsPage(streamNumber[1]);
-      await streamDetailsPage.InsideCreateMainProgram();
+      await streamDetailsPage.checkStreamDetials(streamNumber[1]);
 
       });
 

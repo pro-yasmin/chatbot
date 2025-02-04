@@ -17,6 +17,19 @@ export class StreamDetailsPage {
     this.subProgramTab = '//button[@data-testid="tab-3"]';
     this.benefitsTab = '//button[@data-testid="tab-4"]';
     this.createMainProgramBtn = '//button[@type="button" and contains(text(),"تعريف برنامج رئيسي")]';
+
+    this.streamId = '//span[@data-testid="value_stream-serial-number"]';
+    this.streamArabicName = '//span[@data-testid="value_stream-arabic-name"]';
+    this.streamEnglishName = '//span[@data-testid="value_stream-english-name"]';
+    this.streamArabicDescription = '//span[@data-testid="value_stream-arabic-description"]';
+    this.streamEnglishDescription = '//span[@data-testid="value_stream-english-description"]';
+    this.streamArabicGoal = '//span[@data-testid="value_stream-goal-ar"]';
+    this.streamEnglishGoal = '//span[@data-testid="value_stream-goal-en"]';
+    this.streamGoalsEnglish = '//span[@data-testid="value_stream-serial-number"]';
+    this.streamGoalsArabic ='//span[@data-testid="value_stream-serial-number"]' ;
+    this.createdBy = '//span[@data-testid="value_stream-creator-name"]';
+    this.enablementStatus = '//span[@data-testid="value_streams-management-stream-enablement-status"]';
+  
   }
 
  /**
