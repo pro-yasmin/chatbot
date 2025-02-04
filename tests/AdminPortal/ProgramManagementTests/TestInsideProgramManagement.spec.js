@@ -50,8 +50,8 @@ test.beforeEach(async ({ page }) => {
   programs = new Programs();
 
   var baseUrl = global.testConfig.BASE_URL;
-   adminusername = global.testConfig.GENERAL_SETTING_USER;
-   adminpassword = global.testConfig.GENERAL_SETTING_PASS;
+   adminusername = global.testConfig.ADMIN_USER;
+   adminpassword = global.testConfig.ADMIN_PASS;
 
   await test.step("Login to Admin Portal", async () => {
   await loginPage.gotoAdminPortal(baseUrl);

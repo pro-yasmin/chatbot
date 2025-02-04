@@ -35,7 +35,7 @@ module.exports = defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: 0,
+  retries: 1,
   /* Opt out of parallel tests on CI. */
   workers: 1,
   //workers: process.env.CI ? 1 : undefined,
@@ -61,7 +61,7 @@ module.exports = defineConfig({
 
   }, 
    /* Configure projects for major browsers */
-    projects: [
+ projects: [
 
     {
        name: 'Login',
@@ -124,7 +124,8 @@ module.exports = defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ],
+ //
+ ],
 
 });
 module.exports.ENV = ENV;
