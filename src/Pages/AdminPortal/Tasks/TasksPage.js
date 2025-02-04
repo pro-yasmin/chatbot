@@ -48,7 +48,7 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToMyCompletedTasksTab() {
-    await  this.page.waitForTimeout(8000);
+    await  this.page.waitForTimeout(10000);
     await this.page.waitForSelector(this.myCompletedTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myCompletedTasksTab);
     console.log("Navigate to My completed tasks tab");
@@ -72,7 +72,7 @@ export class TasksPage {
    */
   async assignTaskToMe(taskNumber) {
     await this.navigateToGroupTasksTab();
-    await this.page.waitForTimeout(5000);
+    await this.page.waitForTimeout(10000);
     let taskRow = [];
     taskRow = await this.search.getRowInTableWithSpecificText(taskNumber);
     var actionlocator = "button:nth-of-type(1)";
@@ -140,11 +140,19 @@ async manageTask(taskType, actionType ,taskNumber,confirmMsg) {
   let taskStatus;
   let ensureStatus;
   let addNote;
+  let requestType;
 
   await this.navigateToMyCompletedTasksTab();
   await this.navigateToMyTasksTab();
   
   let taskRow = await this.search.getRowInTableWithSpecificText(taskNumber);
+
+  if(actionType === Constants.REJECT){
+    requestType = await this.checkTaskRequestType(taskType, taskRow);
+   }
+    else {
+     requestType = true;} 
+
   var actionLocator =  "button";
   await this.search.clickRowAction(taskRow,this.tableActions, actionLocator);
   console.log(`Navigate To ${taskType} Details Page Successfully`);
@@ -152,21 +160,56 @@ async manageTask(taskType, actionType ,taskNumber,confirmMsg) {
   var initialTaskStatus = global.testConfig.taskDetails.enableStatusHidden;
   status = await this.taskDetailsPage.checkEnablementStatus(taskType, initialTaskStatus);
  
-  if(actionType === Constants.REJECT)
+  if(actionType === Constants.REJECT){
    addNote = await this.taskDetailsPage.addNoteOnTask();
-  else  addNote = true;
+  }
+   else {
+    addNote = true;
+ } 
 
   // Call the completeTask method with the corresponding task type and action
   taskStatus = await this.taskDetailsPage.completeTask(actionType, taskType,confirmMsg);
   ensureStatus = await this.ensureTaskStatus(taskType, actionType ,taskNumber);
 
   // If all steps are successful, return true
-  if (addNote && status && taskStatus && ensureStatus) return true;
+  if (addNote && status && taskStatus && ensureStatus && requestType) return true;
 
   return false;
 }
 
 
+async checkTaskRequestType(taskType, taskRow)
+{
+  await this.page.waitForTimeout(7000);
+  let expectedMsg = await this.getExpectedTaskType(taskType);
+  let actionLocator = taskRow[3].tdLocator; 
+  let actualType = await actionLocator.textContent();
+
+  if (actualType.trim() === expectedMsg.trim()) {
+    console.log(`Task Request Type is ${actualType}`);
+    return true;
+ }
+ return false
+
+}
+
+async getExpectedTaskType (taskType){
+  let expectedType;
+  switch (taskType) {
+    case Constants.STREAM: expectedType = global.testConfig.tasks.expectStreamTaskType
+      break;
+    case Constants.MAIN_PROGRAM: expectedType = global.testConfig.tasks.expectMainProgramTaskType
+      break;
+    case Constants.SUB_PROGRAM: expectedType = global.testConfig.tasks.expectSubProgramTaskType
+      break;
+    case Constants.BENEFIT: expectedType = global.testConfig.tasks.expectBenefitTaskType
+      break;
+    default:
+      console.log("Unknown task type");
+      return false;
+    }
+    return expectedType;
+    }
 
 }
 module.exports = { TasksPage };

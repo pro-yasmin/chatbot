@@ -34,8 +34,8 @@ let filterPrograms;
 
 test.beforeAll(async () => {
   baseUrl = global.testConfig.BASE_URL;
-  adminusername = global.testConfig.ADMIN_USER;
-  adminpassword = global.testConfig.ADMIN_PASS;
+   adminusername = global.testConfig.GENERAL_SETTING_USER;
+   adminpassword = global.testConfig.GENERAL_SETTING_PASS;
 
   streamData = new StreamData();
   mainProgramData = new MainProgramData();

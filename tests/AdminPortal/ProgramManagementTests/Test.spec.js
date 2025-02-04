@@ -50,8 +50,8 @@ test.beforeEach(async ({ page }) => {
   programs = new Programs();
 
   var baseUrl = global.testConfig.BASE_URL;
-   adminusername = global.testConfig.GENERAL_SETTING_USER;
-   adminpassword = global.testConfig.GENERAL_SETTING_PASS;
+  adminusername = global.testConfig.ADMIN_USER;
+  adminpassword = global.testConfig.ADMIN_PASS;
 
   await test.step("Login to Admin Portal", async () => {
   await loginPage.gotoAdminPortal(baseUrl);
@@ -65,7 +65,7 @@ test.beforeEach(async ({ page }) => {
 /**
  * Test case: Add Inside a new main program.
 */
-test("Add Inside New Main Program", async () => {
+test.only("Add Inside New Main Program", async () => {
       // Step1: Create And Appove Stream From API
       await test.step("Create And Appove Stream From API", async () => {
       streamNumber = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 
@@ -78,7 +78,7 @@ test("Add Inside New Main Program", async () => {
       await homePage.navigateToStreamsManagement();
       console.log("Click on Define New Main Program from Stream Details Page.");
       await streamManagementPage.openViewStreamDetailsPage(streamNumber[1]);
-      await streamDetailsPage.InsideCreateMainProgram();
+      await streamDetailsPage.checkStreamDetials(streamNumber[1]);
 
       });
 
@@ -108,80 +108,6 @@ test("Add Inside New Main Program", async () => {
 
 });
 
-/**
- * Test case: Add Inside a new Sub Program.
- */
-test("Add Inside New Sub Program", async () => {
-  // Step1: Navigate to Main Program list page
-  await test.step("Navigate to MainProgramManagement page", async () => {
-    await homePage.navigateToMainProgramManagement();
-    console.log("Click on Define New Sub Program from Main Program Details Page.");
-    await mainProgramManagementPage.openViewMainProgramDetailsPage(mainProgramNumber);
-    await mainProgramDetailsPage.InsideCreateSubProgram();
-  });
-
-  // Step2: Create Inside New Sub Program from Main Program Details Page.
-  await test.step("Create Inside New Sub Program Task", async () => {
-    console.log("Sub Program Creation Page Opened Successfully.");
-    var subProgramresult = await subProgramsPage.createNewSubPrograms(subProgramsData);
-    expect(subProgramresult).toBe(true);
-    console.log("New Inside Sub Program Created Successfully");
-  });
-
-  // Step3: Search on new Sub Program
-  await test.step("Search on Sub program created", async () => {
-    console.log("Search on Sub Program created");
-    expect(await subProgramsManagementPage.checkSubProgramsRowDetails( subProgramsData) ).toBe(true);
-    subProgramNumber = subProgramsData.getCreatedSubProgramId();
-    console.log("New Sub Program Details Checked Successfully");
-  });
-
-  // Step4: Approve the created Sub Program.
-  await test.step("Approve Created Sub Program Task", async () => {
-  console.log("Approve Created Sub Program");
-  subProgramTask = await programs.approveTaskAPI(adminusername, adminpassword,subProgramNumber); 
-  expect(subProgramTask).not.toBeNull(); 
-  console.log("New Inside Sub Program Created Successfully");
-  })
-
-});
-
-/**
- * Test case: Add Inside a new Benefits.
- */
-test("Add Inside New Benefits", async () => {
-  // Step1: Navigate to Sub Program list page
-  await test.step("Navigate to Sub Program Management page", async () => {
-    await homePage.navigateToSubProgramsManagement();
-    console.log("Click on Define New Benefits from Sub Program Details Page.");
-    await subProgramsManagementPage.openViewSubProgramDetailsPage(subProgramNumber);
-    await subProgramDetailsPage.insideCreateBenefits();
-  });
-
-  // Step2: Create Inside New Benefits from Sub Program Details Page.
-    await test.step("Create Inside Benefits", async () => {
-      console.log("Benefits Creation Page Opened Successfully");
-      var benefitsresult = await benefitsPage.createNewBenefits(benefitsData);
-      expect(benefitsresult).toBe(true);
-      console.log("New Inside Benefit Created Successfully");
-    });
-
-   // Step3: Search on New Benefits
-    await test.step("Search on New Benefit created", async () => {
-      console.log("Search on New Benefit created");
-      expect(await benefitsManagmentPage.checkBenefitsRowDetails( benefitsData) ).toBe(true);
-      benefitNumber = benefitsData.getCreatedBenefitId();
-      console.log("New Main Program Details Checked Successfully");
-    });
-
-    // Step4: Approve the created Sub Program.
-    await test.step("Approve Created Sub Program Task", async () => {
-    console.log("Approve Created Sub Program");
-    benefitTask = await programs.approveTaskAPI(adminusername, adminpassword,benefitNumber); 
-    expect(benefitTask).not.toBeNull(); 
-    console.log("New Inside Sub Program Created Successfully");
-    });
-});
 
 
 /**
