@@ -97,9 +97,10 @@ async ensureTaskStatus(taskType, actionType , taskNumber) {
   await this.navigateToMyCompletedTasksTab();
 
   // Find the task row in the table
+  //await this.page.waitForTimeout(2000);
   let taskRow = await this.search.getRowInTableWithSpecificText(taskNumber);
   var actionLocator = "button";
-  //await this.page.waitForTimeout(10000);
+ 
   await this.search.clickRowAction(taskRow, this.tableActions,actionLocator);
 
   // Define expected status based on action
