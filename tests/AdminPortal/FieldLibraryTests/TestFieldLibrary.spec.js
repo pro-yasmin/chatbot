@@ -12,8 +12,8 @@ test.beforeEach(async ({ page }) => {
     homePage = new HomePage(page);
     fieldLibraryManagement = new FieldLibraryManagementPage(page);
     var baseUrl = global.testConfig.BASE_URL;
-    var adminusername = global.testConfig.ADMIN_USER;
-    var adminpassword = global.testConfig.ADMIN_PASS;
+    var adminusername = global.testConfig.FIELD_MANAGEMENT_SPECIALIST;
+    var adminpassword = global.testConfig.FIELD_MANAGEMENT_SPECIALIST_PASS;
 
 
     // Step0: Login 
