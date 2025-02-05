@@ -11,7 +11,11 @@
     "streamSuccessMsg": "تم حفظ المسار للمراجعة بنجاح"
   },
   "tasks": {
-    "assignTaskMsg": "هل أنت متأكد من إسناد مهمة"
+    "assignTaskMsg": "هل أنت متأكد من إسناد مهمة",
+    "expectStreamTaskType":"اعتماد مسار",
+    "expectMainProgramTaskType":"اعتماد برنامج رئيسي",
+    "expectSubProgramTaskType": "اعتماد برنامج فرعي",
+    "expectBenefitTaskType":"اعتماد إعانة"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",

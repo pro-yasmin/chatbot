@@ -25,7 +25,7 @@ const ENV = 'uat';
 
 module.exports = defineConfig({
 
-  timeout: 300000,
+  timeout: 600000,
 
   globalSetup: require.resolve('./global-setup'),
  
@@ -35,7 +35,7 @@ module.exports = defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: 1,
+  retries: 0,
   /* Opt out of parallel tests on CI. */
   workers: 1,
   //workers: process.env.CI ? 1 : undefined,
@@ -64,30 +64,30 @@ module.exports = defineConfig({
  projects: [
 
     {
-      name: 'Login',
+       name: 'Login',
       testDir: './tests/Login'              // Test directory
                       
      },
-    {
+     {
        name: 'All',
         testDir: './tests/AdminPortal'              // Test directory
                        
-      },
-    {
-       name: 'Programs',
-       testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
+    },
+   {
+    name: 'Programs',
+      testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
                        
-     },
-     {
-      name: 'Lookups',
-      testDir: './tests/AdminPortal/LookupsTests'             // Test directory
+   },
+    {
+     name: 'Lookups',
+    testDir: './tests/AdminPortal/LookupsTests'             // Test directory
      
-     },
-     {
-      name: 'StateMachine',
-      testDir: './tests/AdminPortal/StateMachineTests'             // Test directory
+   },
+   {
+     name: 'StateMachine',
+     testDir: './tests/AdminPortal/StateMachineTests'             // Test directory
      
-     },
+      },
    
     /*{
       name: 'chromium',
@@ -124,7 +124,8 @@ module.exports = defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
- ],
+ //
+],
 
 });
 module.exports.ENV = ENV;

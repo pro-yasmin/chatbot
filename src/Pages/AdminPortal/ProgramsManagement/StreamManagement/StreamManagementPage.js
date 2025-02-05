@@ -147,6 +147,20 @@ export class StreamManagementPage {
     return false;
   }
   
+  async checkStreamDetials(streamNumber,streamData)
+  {
+
+    if (
+      actualArabicName === streamData.getstreamArabicName() &&
+      actualEnglishName === streamData.getstreamEnglishName()
+    ) {
+      console.log("Stream detials names matched successfully.");
+      let streamId = await streamRow[0].tdLocator.textContent();
+      streamData.setCreatedStreamId(streamId);
+      return true;}
+  }
+
+
 }
 
 module.exports = { StreamManagementPage };

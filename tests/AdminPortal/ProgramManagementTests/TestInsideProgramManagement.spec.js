@@ -50,8 +50,8 @@ test.beforeEach(async ({ page }) => {
   programs = new Programs();
 
   var baseUrl = global.testConfig.BASE_URL;
-  adminusername = global.testConfig.ADMIN_USER;
-  adminpassword = global.testConfig.ADMIN_PASS;
+   adminusername = global.testConfig.ADMIN_USER;
+   adminpassword = global.testConfig.ADMIN_PASS;
 
   await test.step("Login to Admin Portal", async () => {
   await loginPage.gotoAdminPortal(baseUrl);
@@ -142,7 +142,7 @@ test("Add Inside New Sub Program", async () => {
   subProgramTask = await programs.approveTaskAPI(adminusername, adminpassword,subProgramNumber); 
   expect(subProgramTask).not.toBeNull(); 
   console.log("New Inside Sub Program Created Successfully");
-  });
+  })
 
 });
 
