@@ -25,7 +25,7 @@ const ENV = 'uat';
 
 module.exports = defineConfig({
 
-  timeout: 300000,
+  timeout: 600000,
 
   globalSetup: require.resolve('./global-setup'),
  
@@ -37,7 +37,7 @@ module.exports = defineConfig({
   /* Retry on CI only */
   retries: 0,
   /* Opt out of parallel tests on CI. */
-  workers: 4,
+  workers: 1,
   //workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
@@ -61,33 +61,33 @@ module.exports = defineConfig({
 
   }, 
    /* Configure projects for major browsers */
-//  projects: [
+ projects: [
 
-//     {
-//       name: 'Login',
-//       testDir: './tests/Login'              // Test directory
+    {
+       name: 'Login',
+      testDir: './tests/Login'              // Test directory
                       
-//      },
-//     {
-//        name: 'All',
-//         testDir: './tests/AdminPortal'              // Test directory
+     },
+     {
+       name: 'All',
+        testDir: './tests/AdminPortal'              // Test directory
                        
-//   //     },
-//   //   {
-//   //      name: 'Programs',
-//   //      testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
+    },
+   {
+    name: 'Programs',
+      testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
                        
-//   //    },
-//   //    {
-//   //     name: 'Lookups',
-//   //     testDir: './tests/AdminPortal/LookupsTests'             // Test directory
+   },
+    {
+     name: 'Lookups',
+    testDir: './tests/AdminPortal/LookupsTests'             // Test directory
      
-//   //    },
-//   //    {
-//   //     name: 'StateMachine',
-//   //     testDir: './tests/AdminPortal/StateMachineTests'             // Test directory
+   },
+   {
+     name: 'StateMachine',
+     testDir: './tests/AdminPortal/StateMachineTests'             // Test directory
      
-//      },
+      },
    
     /*{
       name: 'chromium',
@@ -124,7 +124,8 @@ module.exports = defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-//  ],
+ //
+],
 
 });
 module.exports.ENV = ENV;
