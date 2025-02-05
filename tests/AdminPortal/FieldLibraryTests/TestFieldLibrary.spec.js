@@ -25,7 +25,7 @@ test.beforeEach(async ({ page }) => {
     });
 });
 
-test('Check that user can Activate & Deactivate Field without link to ISR schema & calculation field', async ({ page }) => {
+test('Activate & Deactivate Field without link to ISR schema & calculation field', async ({ page }) => {
     // Step1: Navigate to Field Library Managment page
     await test.step('Navigate to Field Library Managment page', async () => {
         await homePage.navigateToFieldLibrary();
@@ -45,7 +45,7 @@ test('Check that user can Activate & Deactivate Field without link to ISR schema
     });
 });
 
-test('check the impact on both "ISR schema & calculated field" Deactivate Field', async ({ page }) => {
+test('Deactivate Field calculated field', async ({ page }) => {
     // Step1: Navigate to Field Library Managment page
     await test.step('Navigate to Field Library Managment page', async () => {
         await homePage.navigateToFieldLibrary();
