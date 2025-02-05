@@ -117,7 +117,7 @@ test('Filter MainProgram, SubProgram, Benefits in Stream Details', async ({ page
   // Step3: Search for Main Program
   await test.step("Search on Main program created", async () => {
     console.log("Search on Main Program created");
-    expect(await streamDetailsPage.filterMainProgram(null, mainProgramData1, "mainProgram", null, mainProgramData1)).toBe(true);
+    expect(await streamDetailsPage.filterMainProgram(null, mainProgramData1, Constants.MAIN_PROGRAM, null, mainProgramData1)).toBe(true);
     console.log("New Main Program Details Checked Successfully");
   });
   // Step4: Search for Sub Program
