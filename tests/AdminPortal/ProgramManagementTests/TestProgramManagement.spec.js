@@ -48,12 +48,16 @@ test.beforeEach(async ({ page }) => {
   benefitsData = new BenefitsData();
 
   var baseUrl = global.testConfig.BASE_URL;
-  var adminusername = global.testConfig.GENERAL_SETTING_USER;
-  var adminpassword = global.testConfig.GENERAL_SETTING_PASS;
+  var generalManagerusername = global.testConfig.ADMIN_USER;
+  var generalManagerpassword = global.testConfig.ADMIN_PASS;
+
+  // var generalManagerusername = global.testConfig.GENERAL_SETTING_USER;
+  // var generalManagerpassword = global.testConfig.GENERAL_SETTING_PASS;
+ 
 
   await test.step("Login to Admin Portal", async () => {
     await loginPage.gotoAdminPortal(baseUrl);
-    var loginSuccess = await loginPage.login(adminusername, adminpassword);
+    var loginSuccess = await loginPage.login(generalManagerusername, generalManagerpassword);
     expect(loginSuccess).toBe(true);
 
     console.log("login done successfully");
@@ -166,7 +170,7 @@ test("Add and Approve Test Sub Programs", async () => {
 /**
  * Test case: Adds and approves a new benefit.
  */
-test.only("Add and Approve Test Benefits", async () => {
+test("Add and Approve Test Benefits", async () => {
   // Step1: Navigate to Main Programs page
   await test.step("Navigate to Sub Programs page", async () => {
     console.log("Navigate to Sub Program page");

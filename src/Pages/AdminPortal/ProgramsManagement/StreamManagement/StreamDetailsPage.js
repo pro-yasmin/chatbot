@@ -25,8 +25,6 @@ export class StreamDetailsPage {
     this.streamEnglishDescription = '//span[@data-testid="value_stream-english-description"]';
     this.streamArabicGoal = '//span[@data-testid="value_stream-goal-ar"]';
     this.streamEnglishGoal = '//span[@data-testid="value_stream-goal-en"]';
-    this.streamGoalsEnglish = '//span[@data-testid="value_stream-serial-number"]';
-    this.streamGoalsArabic ='//span[@data-testid="value_stream-serial-number"]' ;
     this.createdBy = '//span[@data-testid="value_stream-creator-name"]';
     this.enablementStatus = '//span[@data-testid="value_streams-management-stream-enablement-status"]';
   
@@ -93,6 +91,54 @@ export class StreamDetailsPage {
     return filterResult;
   }
 
+
+  /**
+   * Retrieves all stream details displayed on the UI dynamically.
+   * @returns {Promise<object>} - Object containing all stream details.
+   */
+  async getUiStreamDetails() {
+    var streamId = (await this.page.locator(this.streamId).textContent()).trim();
+    var streamArabicName = (await this.page.locator(this.streamArabicName).textContent()).trim();
+    var streamEnglishName = (await this.page.locator(this.streamEnglishName).textContent()).trim();
+    var streamArabicDescription = (await this.page.locator(this.streamArabicDescription).textContent()).trim();
+    var streamEnglishDescription = (await this.page.locator(this.streamEnglishDescription).textContent()).trim();
+    var streamArabicGoal = (await this.page.locator(this.streamArabicGoal).textContent()).trim();
+    var streamEnglishGoal = (await this.page.locator(this.streamEnglishGoal).textContent()).trim();
+    var createdBy = (await this.page.locator(this.createdBy).textContent()).trim();
+    var enablementStatus = (await this.page.locator(this.enablementStatus).textContent()).trim();
+
+    return {
+      streamId,streamArabicName,streamEnglishName,streamArabicDescription,streamEnglishDescription,
+      streamArabicGoal,streamEnglishGoal,createdBy,enablementStatus
+    };
+  }
+
+  /**
+   * Compares stream details from the UI with expected data from `StreamData.js`.
+   * @param {object} createdData - The expected stream details from `StreamData.js`.
+   * @returns {boolean} - Returns true if all details match, otherwise false.
+   */
+  async compareStreamDetails(createdData , streamNumber) {
+    var uiDetails = await this.getUiStreamDetails();
+
+    var streamId = streamNumber;
+    var streamArabicName = createdData.getstreamArabicName();
+    var streamEnglishName = createdData.getstreamEnglishName();
+    var streamArabicDescription = createdData.getstreamArabicDescription();
+    var streamEnglishDescription = createdData.getstreamEnglishDescription();
+    var streamArabicGoal = createdData.getarabicGoal();
+    var streamEnglishGoal = createdData.getenglishGoal();
+
+    var result =  uiDetails.streamId === streamId &&
+                  uiDetails.streamArabicName === streamArabicName &&
+                  uiDetails.streamEnglishName === streamEnglishName &&
+                  uiDetails.streamArabicDescription === streamArabicDescription &&
+                  uiDetails.streamEnglishDescription === streamEnglishDescription &&
+                  uiDetails.streamArabicGoal === streamArabicGoal &&
+                  uiDetails.streamEnglishGoal === streamEnglishGoal 
+
+    return result;
+  }
   
 
 }

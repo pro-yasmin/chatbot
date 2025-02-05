@@ -12,7 +12,6 @@ const { BenefitsData } = require("../../../src/Models/AdminPortal/BenefitsData.j
 const { Programs } = require("../../../src/Apis/Business/Programs.js");
 const { TasksPage } = require("../../../src/Pages/AdminPortal/Tasks/TasksPage.js");
 
-
 let loginPage,homePage,adminusername ,adminpassword , programs;
 let mainProgramData,subProgramsData,streamData,benefitsData;
 let mainProgramPage, mainProgramManagementPage  ;
@@ -20,11 +19,8 @@ let streamNumber ;
 let tasksPage ;
 let stream ;
 let mainProgram ;
-let subProgram, a;
+let subProgram;
 let Benefit;
-
-
-
 
 /**
  * Test setup: Initializes all required page objects and logs into the admin portal.
@@ -41,15 +37,20 @@ test.beforeEach(async ({ page }) => {
   benefitsData = new BenefitsData();
   programs = new Programs();
   tasksPage = new TasksPage(page);
-  
 
   var baseUrl = global.testConfig.BASE_URL;
-   adminusername = global.testConfig.GENERAL_SETTING_USER;
-   adminpassword = global.testConfig.GENERAL_SETTING_PASS;
+  var generalManagerusername = global.testConfig.ADMIN_USER;
+  var generalManagerpassword = global.testConfig.ADMIN_PASS;
+
+  // var generalManagerusername = global.testConfig.GENERAL_SETTING_USER;
+  // var generalManagerpassword = global.testConfig.GENERAL_SETTING_PASS;
+
+  adminusername = global.testConfig.ADMIN_USER;
+  adminpassword = global.testConfig.ADMIN_PASS; 
 
   await test.step("Login to Admin Portal", async () => {
   await loginPage.gotoAdminPortal(baseUrl);
-  var loginSuccess = await loginPage.login(adminusername, adminpassword);
+  var loginSuccess = await loginPage.login(generalManagerusername, generalManagerpassword);
   expect(loginSuccess).toBe(true);
   console.log("login done successfully");
   });
@@ -131,7 +132,7 @@ test("Create and Reject Sub Program", async () => {
 /**
  * Test case: Create and Reject Benefits
  */
-test("Create and Reject Benefits", async () => {
+test.only("Create and Reject Benefits", async () => {
   // Step1: Create and approve stream ,Main Program , SubProgram and create New Benefit.
   await test.step("Create and approve stream ,Main Program , SubProgram and create New Benefit from API", async () => {
   stream = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 
@@ -147,9 +148,8 @@ test("Create and Reject Benefits", async () => {
     await homePage.navigateToTasks();
     await tasksPage.assignTaskToMe(Benefit[1]);
     var confirmMsg = global.testConfig.taskDetails.confirmRejectBenefitMsg;
-    var taskManage =await tasksPage.manageTask(Constants.BENEFIT, Constants.REJECT,Benefit[1],confirmMsg);
-    expect(taskManage).toBe(true);
-    console.log("New Benefit Rejected Successfully with id= " + Benefit[1]);
+    expect(await tasksPage.manageTask(Constants.BENEFIT, Constants.REJECT,Benefit[1],confirmMsg)).toBe(true);
+   console.log("New Benefit Rejected Successfully with id= " + Benefit[1]);
   });
 
 });
