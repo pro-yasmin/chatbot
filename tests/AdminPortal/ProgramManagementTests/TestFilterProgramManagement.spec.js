@@ -123,13 +123,13 @@ test('Filter MainProgram, SubProgram, Benefits in Stream Details', async ({ page
   // Step4: Search for Sub Program
   await test.step("Search on Sub program created", async () => {
     console.log("Search on Sub Program created");
-    expect(await streamDetailsPage.filterSubProgram(Constants.FILTER_SUB_PROGRAMS_INSIDE_STREAM, subProgramData1, "subProgram", null, mainProgramData1, subProgramData1)).toBe(true);
+    expect(await streamDetailsPage.filterSubProgram(Constants.FILTER_SUB_PROGRAMS_INSIDE_STREAM, subProgramData1, Constants.SUB_PROGRAM, null, mainProgramData1, subProgramData1)).toBe(true);
     console.log("New Sub Program Details Checked Successfully");
   });
   // Step5: Search for Benefits
   await test.step("Search on Benefit created", async () => {
     console.log("Search on Benefit created");
-    expect(await streamDetailsPage.filterBenefit(Constants.FILTER_BENEFITS_INSIDE_STREAM, benefitsData1, "benefit", null, mainProgramData1, subProgramData1, benefitsData1)).toBe(true);
+    expect(await streamDetailsPage.filterBenefit(Constants.FILTER_BENEFITS_INSIDE_STREAM, benefitsData1, Constants.BENEFIT, null, mainProgramData1, subProgramData1, benefitsData1)).toBe(true);
     console.log("New Benefit Details Checked Successfully");
   });
 });
@@ -162,13 +162,13 @@ test('Filter MainProgram, SubProgram, Benefits in Main Program Details', async (
   // Step4: Search for Sub Program
   await test.step("Search on Sub program created", async () => {
     console.log("Search on Sub Program created");
-    expect(await mainProgramDetailsPage.filterSubProgram(Constants.FILTER_SUB_PROGRAMS_INSIDE_MAINPROGRAM, subProgramData1, "subProgram", null, null, subProgramData1)).toBe(true);
+    expect(await mainProgramDetailsPage.filterSubProgram(Constants.FILTER_SUB_PROGRAMS_INSIDE_MAINPROGRAM, subProgramData1, Constants.SUB_PROGRAM, null, null, subProgramData1)).toBe(true);
     console.log("New Sub Program Details Checked Successfully");
   });
   // Step5: Search for Benefits
   await test.step("Search on Benefit created", async () => {
     console.log("Search on Benefit created");
-    expect(await mainProgramDetailsPage.filterBenefit(Constants.FILTER_BENEFITS_INSIDE_MAINPROGRAM, benefitsData1, "benefit", null, null, subProgramData1, benefitsData1)).toBe(true);
+    expect(await mainProgramDetailsPage.filterBenefit(Constants.FILTER_BENEFITS_INSIDE_MAINPROGRAM, benefitsData1, Constants.BENEFIT, null, null, subProgramData1, benefitsData1)).toBe(true);
     console.log("New Benefit Details Checked Successfully");
   });
 });
@@ -201,7 +201,7 @@ test('Filter SubProgram, Benefits in SubProgram Details', async ({ page }) => {
   // Step4: Search for Benefits
   await test.step("Search on Benefit created", async () => {
     console.log("Search on Benefit created");
-    expect(await subProgramDetailsPage.filterBenefit(Constants.FILTER_BENEFITS_INSIDE_SUB_PROGRAM, benefitsData1, "benefit", null, null, null, benefitsData1)).toBe(true);
+    expect(await subProgramDetailsPage.filterBenefit(Constants.FILTER_BENEFITS_INSIDE_SUB_PROGRAM, benefitsData1, Constants.BENEFIT, null, null, null, benefitsData1)).toBe(true);
     console.log("New Benefit Details Checked Successfully");
   });
 });
