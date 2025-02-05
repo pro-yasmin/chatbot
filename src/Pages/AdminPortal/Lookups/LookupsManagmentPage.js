@@ -7,10 +7,7 @@ export class LookupsManagmentPage {
         this.page = page;
         this.lookupPage = new LookupPage(this.page);
         this.search = new SearchPage(this.page);
-        this.addButton = '//button[contains(text(),"إنشاء قائمة مرجعية")]';
-        this.viewLookUpButton = '(//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium muirtl-rrlqo"])[1]';
-        this.lookupStatus = '(//span[@class="MuiChip-label MuiChip-labelMedium muirtl-11lqbxm"])[1]';
-        this.editLookupButton = '(//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium muirtl-rrlqo"])[2]';
+        this.addButton = '//button[@data-testid="add-new-lookup"]';
 
     }
 

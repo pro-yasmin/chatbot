@@ -6,7 +6,7 @@
 export class PopUpPage {
   constructor(page) {
     this.page = page;
-    this.messageLocator = '//span[@id="modal-modal-title"]';
+    this.messageLocator = '//span[@data-testid="modal-title"]';
   }
 
   async popUpMessage(actionButton, partialMessage) {
