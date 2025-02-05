@@ -9,7 +9,7 @@ export class LookupPage {
     this.popUpMsg = new PopUpPage(this.page);
     this.search = new SearchPage(this.page);
     //locators
-    this.successPopupTitle = '//span[@id="modal-modal-title"]';
+    this.successPopupTitle = '//span[@data-testid="modal-title"]';
     //Lookup Definition - first tab
     this.lookupArabicName = '//input[@name="data[nameAr]"]';
     this.lookupEnglishName = '//input[@name="data[nameEn]"]';
@@ -21,14 +21,14 @@ export class LookupPage {
     this.parentLookupFirstOption = '(//div[@class="form-control ui fluid selection dropdown"])[3]/..//div[@data-id="1"]';
     this.lookupDescriptionArabicName = '//textarea[@name="data[descriptionAr]"]';
     this.lookupDescriptionEnglishName = '//textarea[@name="data[descriptionEn]"]';
-    this.defineLookupButton = '[data-testid="next-button"]';
+    this.defineLookupButton = '//button[@data-testid="next-button"]';
 
     //Lookup Design - second tab
     this.nameInArabic = '//input[@name="data[nameAr]"]';
     this.nameInEnglish = '//input[@name="data[nameEn]"]';
     this.code = '//input[@name="data[code]"]';
-    this.createLookupButton = '[data-testid="next-button"]';
-    this.popUpDismissButton = '//button[contains(text(),"تم")]';
+    this.createLookupButton = '//button[@data-testid="next-button"]';
+    this.popUpDismissButton = '//button[@data-testid="modal-primary-button"]';
 
     //Lookup Item management - third tab
     this.nameArabic = '//input[@name="data[nameAr]"]';
@@ -37,10 +37,9 @@ export class LookupPage {
     this.mainList = '//div[@class="choices form-group formio-choices"]';
     this.mainListFirstOption = '//div[@class="form-control ui fluid selection dropdown"]/..//div[@data-id="1"]';
     this.visibleToggle = '//label[@class="form-check-label"]';
-    this.addItemToLookupButton = '//button[contains(text(),"أضِف عنصراً إلى القائمة المرجعية")]';
-    this.makeLookupButton = '//button[contains(text(),"إتاحة القائمة المرجعية")]';
+    this.addItemToLookupButton = '//button[@data-testid="add-element-to-lookup"]';
+    this.makeLookupButton = '//button[@data-testid="next-button"]';
     this.viewLookUpItemButton = '(//*[@data-testid="table-actions"])[1]//button';
-    this.lookupDetailsPage = '//span[text()="بيانات العنصر"]';
     this.lookupDetailsPageCloseButton = '//h2//button[contains(@class,"MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium")]';
 
     //view lookup

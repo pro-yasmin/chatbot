@@ -27,7 +27,7 @@ export class StateMachinePage {
     this.addStateButton = '//span[text()="إضافة حالة"]';
     this.stateArabicName = '[placeholder="اسم الحالة باللغة العربية"]';
     this.stateEnglishName = '[placeholder="اسم الحالة باللغة الإنجليزية"]';
-    this.setDefaultToggle = '[data-testid="switch"]';
+    this.setDefaultToggle = '//span[@data-testid="switch"]';
     this.saveButton = '//button[text()="حفظ"]';
 
     this.addActionButton = '//span[text()="إضافة حدث"]';
