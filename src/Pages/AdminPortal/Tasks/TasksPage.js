@@ -34,7 +34,7 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToMyTasksTab() {
-    await  this.page.waitForTimeout(5000);
+    await  this.page.waitForTimeout(8000);
     // await this.page.waitForSelector(this.myTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myTasksTab);
     console.log("Navigate to My tasks tab");
@@ -48,7 +48,7 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToMyCompletedTasksTab() {
-    await  this.page.waitForTimeout(5000);
+    await  this.page.waitForTimeout(10000);
     await this.page.waitForSelector(this.myCompletedTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myCompletedTasksTab);
     console.log("Navigate to My completed tasks tab");
@@ -59,7 +59,7 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToGroupTasksTab() {
-    await  this.page.waitForTimeout(8000);
+    await  this.page.waitForTimeout(10000);
     await this.page.waitForSelector(this.groupTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.groupTasksTab);
     console.log("Navigate to group tasks tab");
@@ -99,7 +99,7 @@ async ensureTaskStatus(taskType, actionType , taskNumber) {
   // Find the task row in the table
   let taskRow = await this.search.getRowInTableWithSpecificText(taskNumber);
   var actionLocator = "button";
-  await this.page.waitForTimeout(10000);
+  //await this.page.waitForTimeout(10000);
   await this.search.clickRowAction(taskRow, this.tableActions,actionLocator);
 
   // Define expected status based on action
