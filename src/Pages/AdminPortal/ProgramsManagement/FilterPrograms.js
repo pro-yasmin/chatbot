@@ -173,106 +173,7 @@ export class FilterPrograms {
         }
     }
 
-    //     /**
-    // * Checks whether the Arabic and English names of a main program match the expected values.
-    // * @param {object} mainProgramData - The data object containing the expected main program details.
-    // * @returns {Promise<boolean>} - Returns true if the main program details match; otherwise, false.
-    // */
-    //     async checkMainProgramRowDetails(mainProgramData) {
-    //         var arabicName;
-    //         var englishName;
-
-    //         arabicName = "td:nth-of-type(2) >> span";
-    //         await this.page.waitForSelector(arabicName, { visible: true });
-    //         var actualArabicName = await this.page.$eval(arabicName, element => element.textContent);
-
-    //         englishName = "td:nth-of-type(3) >> span";
-    //         await this.page.waitForSelector(englishName, { visible: true });
-    //         var actualEnglishName = await this.page.$eval(englishName, element => element.textContent);
-
-    //         if (
-    //             actualArabicName === mainProgramData.getArabicMainProgramName() &&
-    //             actualEnglishName === mainProgramData.getEnglishMainProgramName()
-    //         ) {
-    //             console.log("Main Program Data matched successfully.");
-    //             return true;
-    //         }
-    //         return false;
-    //     }
-
-    //     /**
-    //    * Checks whether the Arabic, English names and Application Enablement of a subprogram match the expected values.
-    //    * @param {object} subProgramsData - The subprogram data object containing expected names.
-    //    * @returns {Promise<boolean>} - Returns true if the names match; otherwise, false.
-    //    */
-    //     async checkSubProgramsRowDetails(location, subProgramsData) {
-    //         let arabicName;
-    //         let englishName;
-    //         let applicationEnablement;
-
-
-    //         arabicName = "td:nth-of-type(2) >> span";
-    //         await this.page.waitForSelector(arabicName, { visible: true });
-    //         var actualArabicName = await this.page.$eval(arabicName, element => element.textContent);
-
-    //         englishName = "td:nth-of-type(3) >> span";
-    //         await this.page.waitForSelector(englishName, { visible: true });
-    //         var actualEnglishName = await this.page.$eval(englishName, element => element.textContent);
-
-    //         applicationEnablement = await this.getApplicationEnablementLocator(location);
-    //         await this.page.waitForSelector(applicationEnablement, { visible: true });
-    //         var actualApplicationEnablement = await this.page.$eval(applicationEnablement, element => element.textContent);
-
-    //         if (
-    //             actualArabicName === subProgramsData.getArabicSubProgramName() &&
-    //             actualEnglishName === subProgramsData.getEnglishSubProgramName() &&
-    //             actualApplicationEnablement === global.testConfig.createSubPrograms.applicationEnablementPermAr
-    //         ) {
-    //             console.log("Sub Program Data matched successfully.");
-    //             return true;
-    //         }
-    //         return false;
-    //     }
-
-    //     /**
-    // * Checks whether the Arabic and English names of a benefit match the expected values.
-    // * @param {object} benefitsData - The benefits data object containing expected names.
-    // * @returns {Promise<boolean>} - Returns true if the names match; otherwise, false.
-    // */
-    //     async checkBenefitsRowDetails(location, benefitsData) {
-    //         let arabicName;
-    //         let englishName;
-    //         let benefitType;
-    //         let benefitProvidingEntity;
-
-    //         arabicName = "td:nth-of-type(2) >> span";
-    //         await this.page.waitForSelector(arabicName, { visible: true });
-    //         var actualArabicName = await this.page.$eval(arabicName, element => element.textContent);
-
-    //         englishName = "td:nth-of-type(3) >> span";
-    //         await this.page.waitForSelector(englishName, { visible: true });
-    //         var actualEnglishName = await this.page.$eval(englishName, element => element.textContent);
-
-    //         [benefitType, benefitProvidingEntity] = await this.getBenefitsRowValuesLocators(location);
-
-    //         await this.page.waitForSelector(benefitType, { visible: true });
-    //         var actualBenefitType = await this.page.$eval(benefitType, element => element.textContent);
-
-    //         await this.page.waitForSelector(benefitProvidingEntity, { visible: true });
-    //         var actualBenefitProvidingEntity = await this.page.$eval(benefitProvidingEntity, element => element.textContent);
-
-    //         if (
-    //             actualArabicName === benefitsData.getArabicBenefitName() &&
-    //             actualEnglishName === benefitsData.getEnglishBenefitName() &&
-    //             actualBenefitType === global.testConfig.createBenefits.benefitDetails.benefitTypeCashAr &&
-    //             actualBenefitProvidingEntity === global.testConfig.createBenefits.benefitDetails.providerCodesAr
-    //         ) {
-    //             console.log("Benefits Data matched successfully.");
-    //             return true;
-    //         }
-    //         return false;
-    //     }
-
+    
     /**
      * Retrieves the CSS locator for the application enablement element based on the specified location.
      * @param {string} location - The location constant to determine the appropriate locator.
@@ -334,11 +235,11 @@ export class FilterPrograms {
         const validations = [];
 
 
-        if (type === "mainProgram") {
+        if (type === Constants.MAIN_PROGRAM) {
             expectedArabicName = data.getArabicMainProgramName();
             expectedEnglishName = data.getEnglishMainProgramName();
         }
-        else if (type === "subProgram") {
+        else if (type === Constants.SUB_PROGRAM) {
             let applicationEnablement;
             expectedArabicName = data.getArabicSubProgramName();
             expectedEnglishName = data.getEnglishSubProgramName();
@@ -349,7 +250,7 @@ export class FilterPrograms {
             var actualApplicationEnablement = await this.page.$eval(applicationEnablement, element => element.textContent);
             validations.push(actualApplicationEnablement === expectedApplicationEnablement);
         }
-        else if (type === "benefit") {
+        else if (type === Constants.BENEFIT) {
             let benefitType;
             let benefitProvidingEntity;
             expectedArabicName = data.getArabicBenefitName();
