@@ -65,7 +65,7 @@ export class TaskDetailsPage {
    */
   async checkEnablementStatus(taskType, expectedStatus) {
   // Wait for the status element to be visible
- // await this.page.waitForTimeout(7000);
+  await this.page.waitForTimeout(3000);
   var statusElement = this.page.locator(await this.getstatusLocator(taskType));
   await statusElement.waitFor({ state: "visible", timeout: 5000  });
   var actualStatus = await statusElement.textContent();
