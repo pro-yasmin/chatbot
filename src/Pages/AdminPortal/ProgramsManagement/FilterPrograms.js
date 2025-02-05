@@ -14,15 +14,10 @@ export class FilterPrograms {
         this.responsibleEntityItem = '//li[@data-value="Responsible"]';
         this.benefitTypeFilter = '//div[@id="mui-component-select-benefitType"]';
         this.benefitProvidingEntityFilter = '//div[@id="mui-component-select-responsibleCode"]';
-        this.deleteFilterCriteria = '//button[@class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary muirtl-1led5u6"]';
         this.searchButton = '//button[@type="submit"]';
         this.table = "//table//tbody";
     }
 
-
-    async delete_FilterCriteria() {
-        await this.page.click(this.deleteFilterCriteria);
-    }
     /**
    * Filter the main program based on predefined criteria.
    * 
