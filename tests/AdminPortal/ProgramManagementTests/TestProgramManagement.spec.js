@@ -24,6 +24,7 @@ let mainProgramPage, mainProgramManagementPage, mainProgramData;
 let subProgramsManagementPage, subProgramsData, subProgramsPage;
 let streamNumber, programNumber, subProgramNumber, benefitNumber;
 let benefitsPage, benefitsManagmentPage, benefitsData;
+let adminusername,adminpassword;
 
 /**
  * Test setup: Initializes all required page objects and logs into the admin portal.
@@ -48,16 +49,14 @@ test.beforeEach(async ({ page }) => {
   benefitsData = new BenefitsData();
 
   var baseUrl = global.testConfig.BASE_URL;
-  var generalManagerusername = global.testConfig.ADMIN_USER;
-  var generalManagerpassword = global.testConfig.ADMIN_PASS;
-
-  // var generalManagerusername = global.testConfig.GENERAL_SETTING_USER;
-  // var generalManagerpassword = global.testConfig.GENERAL_SETTING_PASS;
- 
+   adminusername = global.testConfig.ADMIN_USER;
+   adminpassword = global.testConfig.ADMIN_PASS;  ;
+  var generalSettingUser = global.testConfig.GENERAL_SETTING_USER;
+  var generalSettingPass = global.testConfig.GENERAL_SETTING_PASS;
 
   await test.step("Login to Admin Portal", async () => {
     await loginPage.gotoAdminPortal(baseUrl);
-    var loginSuccess = await loginPage.login(generalManagerusername, generalManagerpassword);
+    var loginSuccess = await loginPage.login(generalSettingUser, generalSettingPass);
     expect(loginSuccess).toBe(true);
 
     console.log("login done successfully");
@@ -83,9 +82,14 @@ test('Add and Approve New Stream', async () => {
     expect(await streamManagementPage.checkStreamRowDetails(streamData)).toBe(true);
     streamNumber = streamData.getCreatedStreamId();
     console.log("New Stream Details Checked Successfully");
+    await homePage.logout();
+    console.log("Logout  from admin portal");
   });
   // Step4: Approve new created
   await test.step("Approve Stream Task", async () => {
+    var loginSuccess = await loginPage.login(adminusername, adminpassword);
+    expect(loginSuccess).toBe(true);
+    console.log("login to admin portal by admin user");
     console.log("Navigate to MyTasks page to approve stream Request");
     await homePage.navigateToTasks();
     await tasksPage.assignTaskToMe(streamNumber);
@@ -112,6 +116,7 @@ test("Add and Approve New Main Program", async () => {
     var result = await mainProgramPage.createNewMainProgram(mainProgramData);
     expect(result).toBe(true);
     console.log("New Main Program Created Successfully");
+    
   });
   // Step3: Search on new Program
   await test.step("Search on program created", async () => {
@@ -119,9 +124,13 @@ test("Add and Approve New Main Program", async () => {
     expect(await mainProgramManagementPage.checkMainProgramRowDetails( mainProgramData) ).toBe(true);
     programNumber = mainProgramData.getCreatedMainProgramId();
     console.log("New Main Program Details Checked Successfully");
+    await homePage.logout();
+    console.log("Logout  from admin portal");
   });
   // Step4: Approve new Program
   await test.step("Approve Program Task", async () => {
+    var loginSuccess = await loginPage.login(adminusername, adminpassword);
+    expect(loginSuccess).toBe(true);
     console.log("Navigate to MyTasks page to approve Program Request");
     await homePage.navigateToTasks();
     await tasksPage.assignTaskToMe(programNumber);
@@ -155,9 +164,13 @@ test("Add and Approve Test Sub Programs", async () => {
     expect(await subProgramsManagementPage.checkSubProgramsRowDetails(subProgramsData)).toBe(true);
     subProgramNumber = subProgramsData.getCreatedSubProgramId();
     console.log("New SubProgram Details Checked Successfully");
+    await homePage.logout();
+    console.log("Logout  from admin portal");
   });
   // Step4: Approve Sub program
   await test.step("Approve  Sub Program Task", async () => {
+    var loginSuccess = await loginPage.login(adminusername, adminpassword);
+    expect(loginSuccess).toBe(true);
     console.log("Navigate to MyTasks page to approve SubProgram Request");
     await homePage.navigateToTasks();
     await tasksPage.assignTaskToMe(subProgramNumber);
@@ -193,10 +206,14 @@ test("Add and Approve Test Benefits", async () => {
     expect( await benefitsManagmentPage.checkBenefitsRowDetails(benefitsData)).toBe(true);
     benefitNumber = benefitsData.getCreatedBenefitId();
     console.log("New Benefit Details Checked Successfully");
+    await homePage.logout();
+    console.log("Logout  from admin portal");
   });
 
   // Step4: Approve Benefit
   await test.step("Approve Benefit Task", async () => {
+    var loginSuccess = await loginPage.login(adminusername, adminpassword);
+    expect(loginSuccess).toBe(true);
     console.log("Navigate to MyTasks page to approve Benefit Request");
     await homePage.navigateToTasks();
     await tasksPage.assignTaskToMe(benefitNumber);

@@ -39,14 +39,8 @@ test.beforeEach(async ({ page }) => {
   tasksPage = new TasksPage(page);
 
   var baseUrl = global.testConfig.BASE_URL;
-  var generalManagerusername = global.testConfig.ADMIN_USER;
-  var generalManagerpassword = global.testConfig.ADMIN_PASS;
-
-  // var generalManagerusername = global.testConfig.GENERAL_SETTING_USER;
-  // var generalManagerpassword = global.testConfig.GENERAL_SETTING_PASS;
-
-  adminusername = global.testConfig.ADMIN_USER;
-  adminpassword = global.testConfig.ADMIN_PASS; 
+   adminusername = global.testConfig.ADMIN_USER;
+   adminpassword = global.testConfig.ADMIN_PASS;
 
   await test.step("Login to Admin Portal", async () => {
   await loginPage.gotoAdminPortal(baseUrl);
