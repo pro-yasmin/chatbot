@@ -71,7 +71,7 @@ export class TasksService {
     }
 
 
-      /**
+  /**
    * Completes a task based on its ID with an approval action.
    * @param {string} taskID - The ID of the task to complete.
    * @returns {Promise<boolean>} - Returns true if the task is successfully completed; otherwise, false.

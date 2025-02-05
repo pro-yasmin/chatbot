@@ -67,7 +67,7 @@ test.beforeEach(async ({ page }) => {
 /**
  * Test case: Check Created Stream Data Detials.
 */
-test.only("Check Created Stream Data Detials", async () => {
+test("Check Created Stream Data Detials", async () => {
       // Step1: Create And Appove Stream From API
       await test.step("Create And Appove Stream From API", async () => {
       streamNumber = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 
@@ -84,7 +84,7 @@ test.only("Check Created Stream Data Detials", async () => {
 
       // Step3: Compare UI Data with Expected Data
       await test.step("Compare Data with Expected Data", async () => {
-      var streamMatch = await streamDetailsPage.compareStreamDetails(streamData , streamNumber[1]);
+      var streamMatch = await streamDetailsPage.validateStreamDetails(streamData , streamNumber[1]);
       if (streamMatch) {
         console.log("Stream details match successfully");} 
         else {
@@ -101,6 +101,7 @@ test.only("Check Created Main Program Data Details", async () => {
    // Step1: Create and approve stream and create New Main Program.
      await test.step("Create and Approve stream and create New Main Program from API", async () => {
         stream = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 
+        console.log(streamData.getstreamArabicName());
         mainProgram = await programs.createMainProgramAPI(adminusername, adminpassword, mainProgramData, stream[0]);
         expect(mainProgram).not.toBeNull();
         console.log('API Main Program', mainProgram);

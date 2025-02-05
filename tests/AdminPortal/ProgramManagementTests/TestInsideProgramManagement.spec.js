@@ -55,7 +55,7 @@ test.beforeEach(async ({ page }) => {
 
   await test.step("Login to Admin Portal", async () => {
   await loginPage.gotoAdminPortal(baseUrl);
-  var loginSuccess = await loginPage.login(generalManagerusername, generalManagerpassword);
+  var loginSuccess = await loginPage.login(adminusername, adminpassword);
   expect(loginSuccess).toBe(true);
   console.log("login done successfully");
   });

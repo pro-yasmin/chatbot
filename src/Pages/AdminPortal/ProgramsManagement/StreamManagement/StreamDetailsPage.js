@@ -92,54 +92,54 @@ export class StreamDetailsPage {
   }
 
 
-  /**
-   * Retrieves all stream details displayed on the UI dynamically.
-   * @returns {Promise<object>} - Object containing all stream details.
-   */
-  async getUiStreamDetails() {
-    var streamId = (await this.page.locator(this.streamId).textContent()).trim();
-    var streamArabicName = (await this.page.locator(this.streamArabicName).textContent()).trim();
-    var streamEnglishName = (await this.page.locator(this.streamEnglishName).textContent()).trim();
-    var streamArabicDescription = (await this.page.locator(this.streamArabicDescription).textContent()).trim();
-    var streamEnglishDescription = (await this.page.locator(this.streamEnglishDescription).textContent()).trim();
-    var streamArabicGoal = (await this.page.locator(this.streamArabicGoal).textContent()).trim();
-    var streamEnglishGoal = (await this.page.locator(this.streamEnglishGoal).textContent()).trim();
-    var createdBy = (await this.page.locator(this.createdBy).textContent()).trim();
-    var enablementStatus = (await this.page.locator(this.enablementStatus).textContent()).trim();
+/**
+ * Retrieves all stream details displayed on the UI dynamically and compares them with the expected data.
+ * @param {object} createdData - The expected stream details from `StreamData.js`.
+ * @param {string} streamNumber - The expected stream ID.
+ * @returns {Promise<boolean>} - Returns true if all details match, otherwise false.
+ */
+async validateStreamDetails(createdData, streamNumber) {
 
-    return {
-      streamId,streamArabicName,streamEnglishName,streamArabicDescription,streamEnglishDescription,
-      streamArabicGoal,streamEnglishGoal,createdBy,enablementStatus
+    // Retrieve all stream details from the UI
+    const uiDetails = {
+      streamId: (await this.page.locator(this.streamId).textContent()).trim(),
+      streamArabicName: (await this.page.locator(this.streamArabicName).textContent()).trim(),
+      streamEnglishName: (await this.page.locator(this.streamEnglishName).textContent()).trim(),
+      streamArabicDescription: (await this.page.locator(this.streamArabicDescription).textContent()).trim(),
+      streamEnglishDescription: (await this.page.locator(this.streamEnglishDescription).textContent()).trim(),
+      streamArabicGoal: (await this.page.locator(this.streamArabicGoal).textContent()).trim(),
+      streamEnglishGoal: (await this.page.locator(this.streamEnglishGoal).textContent()).trim(),
+      createdBy: (await this.page.locator(this.createdBy).textContent()).trim(),
+      enablementStatus: (await this.page.locator(this.enablementStatus).textContent()).trim(),
     };
-  }
 
-  /**
-   * Compares stream details from the UI with expected data from `StreamData.js`.
-   * @param {object} createdData - The expected stream details from `StreamData.js`.
-   * @returns {boolean} - Returns true if all details match, otherwise false.
-   */
-  async compareStreamDetails(createdData , streamNumber) {
-    var uiDetails = await this.getUiStreamDetails();
+    // Expected data
+    const expectedDetails = {
+      streamId: streamNumber,
+      streamArabicName: createdData.getstreamArabicName(),
+      streamEnglishName: createdData.getstreamEnglishName(),
+      streamArabicDescription: createdData.getstreamArabicDescription(),
+      streamEnglishDescription: createdData.getstreamEnglishDescription(),
+      streamArabicGoal: createdData.getarabicGoal(),
+      streamEnglishGoal: createdData.getenglishGoal(),
+    };
 
-    var streamId = streamNumber;
-    var streamArabicName = createdData.getstreamArabicName();
-    var streamEnglishName = createdData.getstreamEnglishName();
-    var streamArabicDescription = createdData.getstreamArabicDescription();
-    var streamEnglishDescription = createdData.getstreamEnglishDescription();
-    var streamArabicGoal = createdData.getarabicGoal();
-    var streamEnglishGoal = createdData.getenglishGoal();
+    // Collect all validation checks into an array of booleans
+    const validations = [
+      uiDetails.streamId === expectedDetails.streamId,
+      uiDetails.streamArabicName === expectedDetails.streamArabicName,
+      uiDetails.streamEnglishName === expectedDetails.streamEnglishName,
+      uiDetails.streamArabicDescription === expectedDetails.streamArabicDescription,
+      uiDetails.streamEnglishDescription === expectedDetails.streamEnglishDescription,
+      uiDetails.streamArabicGoal === expectedDetails.streamArabicGoal,
+      uiDetails.streamEnglishGoal === expectedDetails.streamEnglishGoal,
+    ];
 
-    var result =  uiDetails.streamId === streamId &&
-                  uiDetails.streamArabicName === streamArabicName &&
-                  uiDetails.streamEnglishName === streamEnglishName &&
-                  uiDetails.streamArabicDescription === streamArabicDescription &&
-                  uiDetails.streamEnglishDescription === streamEnglishDescription &&
-                  uiDetails.streamArabicGoal === streamArabicGoal &&
-                  uiDetails.streamEnglishGoal === streamEnglishGoal 
+    // Check if all validations are true
+    const allValid = validations.every(Boolean);
 
-    return result;
-  }
-  
+    return allValid;
+}
 
 }
 

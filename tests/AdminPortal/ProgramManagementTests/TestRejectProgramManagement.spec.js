@@ -44,7 +44,7 @@ test.beforeEach(async ({ page }) => {
 
   await test.step("Login to Admin Portal", async () => {
   await loginPage.gotoAdminPortal(baseUrl);
-  var loginSuccess = await loginPage.login(generalManagerusername, generalManagerpassword);
+  var loginSuccess = await loginPage.login(adminusername, adminpassword);
   expect(loginSuccess).toBe(true);
   console.log("login done successfully");
   });
@@ -126,7 +126,7 @@ test("Create and Reject Sub Program", async () => {
 /**
  * Test case: Create and Reject Benefits
  */
-test.only("Create and Reject Benefits", async () => {
+test("Create and Reject Benefits", async () => {
   // Step1: Create and approve stream ,Main Program , SubProgram and create New Benefit.
   await test.step("Create and approve stream ,Main Program , SubProgram and create New Benefit from API", async () => {
   stream = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 
