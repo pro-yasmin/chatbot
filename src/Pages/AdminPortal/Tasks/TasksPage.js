@@ -59,7 +59,7 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToGroupTasksTab() {
-    await  this.page.waitForTimeout(5000);
+    await  this.page.waitForTimeout(8000);
     await this.page.waitForSelector(this.groupTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.groupTasksTab);
     console.log("Navigate to group tasks tab");
