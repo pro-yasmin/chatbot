@@ -89,7 +89,15 @@
     "requireRegisterApplication": true,
     "applicationChannelCodes": ["14"],
     "periodAfterExistCode": "",
-    "reApplyAfterExistCode": ""
+    "reApplyAfterExistCode": "",
+    "viewSubProgramType" : "برنامج قائم دون أي تغيير",
+    "viewapplicationEnablementPerm": "دائم",
+    "viewEnablementStatus" :"محجوب",
+    "viewApprovalStatus":"معالجة",
+    "viewActivationStatus":"خامل",
+    "viewAassistanceUnit" :"مجموعة مخصصة",
+    "viewTtargetingApproach" :"شامل",
+    "viewApplicationChannels":"تطبيق جوال المتقدم"
   },
   "lookUps": {
     "firstTabArabicName": "قائمه مرجعيه اولى",
@@ -129,7 +137,7 @@
       "providerCodes": ["camp"],
       "providerCodesAr": "كامب",
       "estimatedValue": "القيمة التقديرية للإعانة"
-    },
+    },    
     "relatedPastBenefits": [],
     "subProgramId": "awarenessProgramsAndTrainingsRegardingDrugAddictionmidjyAuto",
     "incomeCategoryCodes": [],
@@ -161,7 +169,12 @@
     "temporaryFrom": null,
     "temporaryTo": null,
     "requireRegisterApplication": true,
-    "applicationChannelCodes": ["14"]
+    "applicationChannelCodes": ["14"],
+    "viewbenefitResponsibleEntity" : "جهة مسؤولة عن التنفيذ جديده",
+    "viewTargetApproach":"شامل",
+    "viewEnablementStatus" :"محجوب",
+    "viewApprovalStatus":"معالجة",
+    "viewActivationStatus":"خامل"
   },
   "stateMachine": {
     "stateManagmentArabicName": "إدارة الحالة باللغة العربية",
