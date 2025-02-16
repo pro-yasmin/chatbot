@@ -1,5 +1,6 @@
 const { SearchPage } = require("../../SharedPages/SearchPage");
 const { StreamPage } = require("./StreamPage");
+const { StreamDetailsPage } = require("./StreamDetailsPage");
 
 /**
  * Manages stream-related actions, such as creating new streams, searching for streams,
@@ -7,6 +8,7 @@ const { StreamPage } = require("./StreamPage");
  * @class
  */
 export class StreamManagementPage {
+
   constructor(page) {
     this.page = page;
     this.search = new SearchPage(this.page);
@@ -16,7 +18,6 @@ export class StreamManagementPage {
     this.tableActions='table-actions';
     this.tableThreeDots='three-dots-menu';
     this.createMainProgramOption = '//*[@data-testid="three-dots-menu-option-0"]';
-   
     
   }
 
@@ -87,7 +88,6 @@ export class StreamManagementPage {
     }
   }
 
-
   /**
    * Opens the details page of a specific stream by its identifier.
    * 
@@ -149,7 +149,6 @@ export class StreamManagementPage {
   
   async checkStreamDetials(streamNumber,streamData)
   {
-
     if (
       actualArabicName === streamData.getstreamArabicName() &&
       actualEnglishName === streamData.getstreamEnglishName()
@@ -160,6 +159,22 @@ export class StreamManagementPage {
       return true;}
   }
 
+  async validateStreamDetails(streamData, streamNumber) {
+ 
+    await this.openViewStreamDetailsPage(streamNumber);
+    var streamDetailsPage = new StreamDetailsPage(this.page);
+    var streamDetails = await streamDetailsPage.compareStreamDetails(streamData, streamNumber);
+
+    if (streamDetails) {
+        // Navigate to relevant tabs if they exist
+        var mainProgramTab = await streamDetailsPage.navigateToMainProgramTab();
+        var subProgramTab = await streamDetailsPage.navigateToSubProgramTab();
+        var benefitTab = await streamDetailsPage.navigateToBenefitsTab();
+        // If all steps are successful, return true
+        if (mainProgramTab && subProgramTab && benefitTab) return true;
+      }
+    return false;
+  }
 
 }
 

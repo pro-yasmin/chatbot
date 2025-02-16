@@ -1,4 +1,3 @@
-const { MainProgramManagementPage } = require("./MainProgramManagementPage");
 const { SubProgramsManagementPage } = require("../../ProgramsManagement/SubProgramsManagement/SubProgramsManagmentPage");
 const { BenefitsManagmentPage } = require("../../ProgramsManagement/BenefitsManagement/BenefitsManagementPage");
 
@@ -16,7 +15,8 @@ export class MainProgramDetailsPage {
     this.subProgramTab = '//button[@data-testid="tab-2"]';
     this.benefitsTab = '//button[@data-testid="tab-3"]';
     this.createSubProgramBtn = '//button[@type="button" and contains(text(),"تعريف برنامج فرعي")]'; 
-
+    this.searchInput = '//form[@data-testid="search-input"]';
+   
     this.programId = '//span[@data-testid="value_main-program-serialNumber"]'
     this.streamName = '//span[@data-testid="value_main-program-stream"]'
     this.arabicProgramName = '//span[@data-testid="value_main-program-name-ar"]'
@@ -31,7 +31,6 @@ export class MainProgramDetailsPage {
     this.risks= '//span[@data-testid="value_main-program-risk-0"]'
     this.arabicRiskDescription= '//span[@data-testid="value_main-program-risk-description-ar"]'
     this.englishRiskDescription= '//span[@data-testid="value_main-program-risk-description-en"]'
-
 
   }
 
@@ -50,14 +49,19 @@ export class MainProgramDetailsPage {
     console.log("Clicked the Create Sub program button");  
     }
 
-  async navigateToSubProgramTab() {
-    await this.page.click(this.subProgramTab);
-  }
-  async navigateToBenefitsTab() {
-    await this.page.click(this.benefitsTab);
-  }
-
-  /**
+    async navigateToSubProgramTab() {
+      await this.page.click(this.subProgramTab);
+      var searchField = await this.page.locator(this.searchInput).isVisible();
+      return searchField
+    }
+  
+    async navigateToBenefitsTab() {
+      await this.page.click(this.benefitsTab);
+      var searchField = await this.page.locator(this.searchInput).isVisible();
+      return searchField
+    }
+  
+/**
 * Filter main programs using provided data.
 * @param {object} subProgramData - The data object containing sub program details.
 * @returns {Promise<boolean>} - Returns true if the sub program filtered successfully.
@@ -69,7 +73,7 @@ export class MainProgramDetailsPage {
     return filterResult;
   }
 
-  /**
+/**
 * Filter Benefits using provided data.
 * @param {object} benefitsData - The data object containing benefits details.
 * @returns {Promise<boolean>} - Returns true if the benefits filtered successfully.
@@ -86,76 +90,52 @@ export class MainProgramDetailsPage {
  * @returns {Promise<object>} - Object containing all main program details.
  */
 async getUiMainProgramDetails() {
-  var programId = await this.page.locator(this.programId).textContent();
-  // var streamName = await this.page.locator(this.streamName).textContent(); streamName
-  var arabicProgramName = await this.page.locator(this.arabicProgramName).textContent();
-  var englishProgramName = await this.page.locator(this.englishProgramName).textContent();
-  var arabicProgramDescription = await this.page.locator(this.arabicProgramDescription).textContent();
-  var englishProgramDescription = await this.page.locator(this.englishProgramDescription).textContent();
-  var responsibleEntity = await this.page.locator(this.responsibleEntity).textContent();
-  var estimatedBudget = await this.page.locator(this.estimatedBudget).textContent();
-  var year = await this.page.locator(this.year).textContent();
-  var calculationMethod = await this.page.locator(this.calculationMethod).textContent();
-  var riskCategory = await this.page.locator(this.riskCategory).textContent();
-  var risks = await this.page.locator(this.risks).textContent();
-  var arabicRiskDescription = await this.page.locator(this.arabicRiskDescription).textContent();
-  var englishRiskDescription = await this.page.locator(this.englishRiskDescription).textContent();
-  
+
   return {
-      programId,arabicProgramName,englishProgramName,arabicProgramDescription,englishProgramDescription,
-      responsibleEntity,estimatedBudget,year,calculationMethod,riskCategory,risks,
-      arabicRiskDescription,englishRiskDescription
+    programId: (await this.page.locator(this.programId).textContent()).trim(),
+    streamName :(await this.page.locator(this.streamName).textContent()).trim(), 
+    arabicProgramName: (await this.page.locator(this.arabicProgramName).textContent()).trim(),
+    englishProgramName: (await this.page.locator(this.englishProgramName).textContent()).trim(),
+    arabicProgramDescription: (await this.page.locator(this.arabicProgramDescription).textContent()).trim(),
+    englishProgramDescription: (await this.page.locator(this.englishProgramDescription).textContent()).trim(),
+    responsibleEntity: (await this.page.locator(this.responsibleEntity).textContent()).trim(),
+    estimatedBudget: (await this.page.locator(this.estimatedBudget).textContent()).trim(),
+    calculationMethod: (await this.page.locator(this.calculationMethod).textContent()).trim(),
+    arabicRiskDescription: (await this.page.locator(this.arabicRiskDescription).textContent()).trim(),
+    englishRiskDescription: (await this.page.locator(this.englishRiskDescription).textContent()).trim(),
   };
 }
 
 /**
  * Compares main program details from the UI with expected data.
  * @param {object} createdData - The expected main program details.
- * @returns {boolean} - Returns true if all details match, otherwise false.
+ * @param {string} mainProgramNumber - The expected main program ID.
+ * @returns {Promise<boolean>} - Returns true if all details match, otherwise false.
  */
-async compareMainProgramDetails(createdData , mainProgramNumber) {
-  var uiDetails = await this.getUiMainProgramDetails();
+async compareMainProgramDetails(createdData, mainProgramNumber ,streamNameUI) {
+  
+  const uiDetails = await this.getUiMainProgramDetails();
 
-  var programId = mainProgramNumber;
-  // var streamName = createdData.getStreamName();
-  var arabicProgramName = createdData.getArabicMainProgramName();
-  var englishProgramName = createdData.getEnglishMainProgramName();
-  var arabicProgramDescription = createdData.getArabicMainProgramDescription();
-  var englishProgramDescription = createdData.getEnglishMainProgramDescription();
-  var responsibleEntity = createdData.getResponsibleEntity();
-  var estimatedBudget = createdData.getEstimatedBudget();
-  var year = createdData.getYear();
-  var calculationMethod = createdData.getCalculationMethod();
-  var riskCategory = createdData.getRiskCategory();
-  var risks = createdData.getRisks();
-  var arabicRiskDescription = createdData.getRiskArabicDescription();
-  var englishRiskDescription = createdData.getRiskEnglishDescription();
-//       uiDetails.streamName === streamName &&
-  var result =  uiDetails.programId === programId &&
-                uiDetails.arabicProgramName === arabicProgramName &&
-                uiDetails.englishProgramName === englishProgramName &&
-                uiDetails.arabicProgramDescription === arabicProgramDescription &&
-                uiDetails.englishProgramDescription === englishProgramDescription &&
-                uiDetails.responsibleEntity === responsibleEntity &&
-                uiDetails.estimatedBudget === estimatedBudget &&
-                uiDetails.year === year &&
-                uiDetails.calculationMethod === calculationMethod &&
-                uiDetails.riskCategory === riskCategory &&
-                uiDetails.risks === risks &&
-                uiDetails.arabicRiskDescription === arabicRiskDescription &&
-                uiDetails.englishRiskDescription === englishRiskDescription 
-      
-  if (result) {
-      console.log("All Main Program Details Match");
-  } else {
-      console.log("Main Program Details Mismatch Found");
-  }
+  const expectedDetails = {
+    programId: mainProgramNumber,
+    streamName : streamNameUI,
+    arabicProgramName: createdData.getArabicMainProgramName(),
+    englishProgramName: createdData.getEnglishMainProgramName(),
+    arabicProgramDescription: createdData.getArabicMainProgramDescription(),
+    englishProgramDescription: createdData.getEnglishMainProgramDescription(),
+    responsibleEntity: createdData.getResponsibleEntity(),
+    estimatedBudget: createdData.getEstimatedBudget(),
+    calculationMethod: createdData.getcalculationMethodAPI(),
+    arabicRiskDescription: createdData.getRiskArabicDescription(),
+    englishRiskDescription: createdData.getRiskEnglishDescription(),
+  };
 
-  return result;
+  const allValid = Object.keys(expectedDetails).every(key => uiDetails[key] === expectedDetails[key]);
+
+  return allValid;
 }
 
 
-  
 }
 
 module.exports = { MainProgramDetailsPage };
