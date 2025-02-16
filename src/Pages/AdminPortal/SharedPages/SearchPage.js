@@ -128,7 +128,7 @@ export class SearchPage {
     let tds;
     let tdDetails = [];
 
-    await  this.page.waitForTimeout(7000);
+    await  this.page.waitForTimeout(10000);
     table = this.page.locator(this.tableSelector);
     
   

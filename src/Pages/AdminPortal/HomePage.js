@@ -15,11 +15,13 @@ export class HomePage {
     this.mainProgramManagementButton = '//a[@data-testid="submenu-main-program-management"]';
     this.subProgramsManagementButton = '//a[@data-testid="submenu-sub-program-management"]';
     this.benefitsManagementButton = '//a[@data-testid="submenu-benefits-management"]';
-    this.createNewStreamButton = '//button[contains(text(),"تعريف مسار")]';
-    this.tasksButton = '//a[@href="/my-tasks"]';
-    this.generalSettingsButton = '//span[contains(text(),"الإعدادات العامة")]';
-    this.lookupsManagmentButton = '//span[contains(text(),"إدارة القوائم المرجعية")]';
-    this.stateMachineManagmentButton = '[data-testid="submenu-state-machine-management"]';
+    this.createNewStreamButton = '//button[@data-testid="create-new-stream"]';
+    this.tasksButton = '//a[@data-testid="menu-tasks"]';
+    this.generalSettingsButton = '//a[@data-testid="menu-general-settings"]';
+    this.lookupsManagmentButton = '//a[@data-testid="submenu-lookups-management"]';
+    this.stateMachineManagmentButton = '//a[@data-testid="submenu-state-machine-management"]';
+    this.socialRegistryServices= '//a[@data-testid="menu-social-registry-services"]';
+    this.FieldLibraryTab = '//a[@data-testid="submenu-fields-library"]';
   }
 
   /**
@@ -112,6 +114,17 @@ export class HomePage {
     await this.navigateToGeneralSettings();
     await this.page.waitForSelector(this.stateMachineManagmentButton, { state: "visible", timeout: 20000 });
     await this.page.click(this.stateMachineManagmentButton);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+  }
+
+  async navigateToSocialRegistryServices() {
+    await this.page.waitForSelector(this.socialRegistryServices, { state: "visible", timeout: 20000 });
+    await this.page.click(this.socialRegistryServices);
+  }
+  async navigateToFieldLibrary() {
+    await this.navigateToSocialRegistryServices();
+    await this.page.waitForSelector(this.FieldLibraryTab, { state: "visible", timeout: 20000 });
+    await this.page.click(this.FieldLibraryTab);
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 

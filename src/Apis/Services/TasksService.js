@@ -43,7 +43,7 @@ export class TasksService {
       console.error("Error Response Body:", errorBody);
       console.error("Failed to retrieve Task:",response.status(),response.statusText());
       }
-    await requestContext.dispose();
+    //await requestContext.dispose();
     return taskID;
   }
 

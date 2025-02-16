@@ -1,4 +1,3 @@
-const { expect } = require('@playwright/test');
 const { SearchPage } = require("../SharedPages/SearchPage");
 const { StateMachinePage } = require("../../AdminPortal/StateMachine/StateMachinePage");
 
@@ -8,9 +7,9 @@ export class StateMachineManagmentPage {
         this.page = page;
         this.stateMachinePage = new StateMachinePage(this.page);
         this.search = new SearchPage(this.page);
-        this.addButton = '[data-testid="toolbar-add-button"]';
+        this.addButton = '//button[@data-testid="toolbar-add-button"]';
         this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
-        this.tableActions='table-actions'
+        this.tableActions="table-actions";
     }
 
     /**

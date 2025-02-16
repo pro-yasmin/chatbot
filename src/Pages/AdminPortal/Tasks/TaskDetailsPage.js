@@ -23,7 +23,7 @@ export class TaskDetailsPage {
     this.noteOnTaskField = '//textarea[@name="message"]';
     this.acceptNoteOnTaskBtn ='//button[contains(@class, "MuiButton-containedPrimary") and contains(@class, "MuiButton-sizeMedium")]';
     this.ensureNoteMsgTitle ='//span[@id="modal-modal-title" and contains(text(), "إضافة الملاحظة")]';
-    this.acceptEnsureNoteMsgBtn ='//button[contains(text(),"نعم، إضافة!")]';
+    this.acceptEnsureNoteMsgBtn ='//button[@data-testid="confirmation-modal-primary-button"]';//confirmation-modal-primary-button
     this.confirmNoteMsgTitle ='//div[@class="MuiStack-root muirtl-zwd3xv"]/span[@id="modal-modal-title"]';
     this.acceptConfirmNoteMsgBtn = '//button[contains(@class, "MuiButtonBase-root") and text()="العودة"]';
     this.addedNoteLocator ="div.MuiStack-root.muirtl-1ofqig9 > span:nth-child(3)";
@@ -65,9 +65,9 @@ export class TaskDetailsPage {
    */
   async checkEnablementStatus(taskType, expectedStatus) {
   // Wait for the status element to be visible
-  await this.page.waitForTimeout(7000);
+  await this.page.waitForTimeout(6000);
   var statusElement = this.page.locator(await this.getstatusLocator(taskType));
-  await statusElement.waitFor({ state: "visible", timeout: 5000  });
+  await statusElement.waitFor({ state: "visible", timeout: 30000  });
   var actualStatus = await statusElement.textContent();
    if (actualStatus.trim() === expectedStatus.trim()) {
          console.log(`Enablement Status is as expected: "${actualStatus.trim()}".`);
