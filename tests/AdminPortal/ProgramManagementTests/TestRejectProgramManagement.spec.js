@@ -12,7 +12,6 @@ const { BenefitsData } = require("../../../src/Models/AdminPortal/BenefitsData.j
 const { Programs } = require("../../../src/Apis/Business/Programs.js");
 const { TasksPage } = require("../../../src/Pages/AdminPortal/Tasks/TasksPage.js");
 
-
 let loginPage,homePage,adminusername ,adminpassword , programs;
 let mainProgramData,subProgramsData,streamData,benefitsData;
 let mainProgramPage, mainProgramManagementPage  ;
@@ -20,11 +19,8 @@ let streamNumber ;
 let tasksPage ;
 let stream ;
 let mainProgram ;
-let subProgram, a;
+let subProgram;
 let Benefit;
-
-
-
 
 /**
  * Test setup: Initializes all required page objects and logs into the admin portal.
@@ -41,7 +37,6 @@ test.beforeEach(async ({ page }) => {
   benefitsData = new BenefitsData();
   programs = new Programs();
   tasksPage = new TasksPage(page);
-  
 
   var baseUrl = global.testConfig.BASE_URL;
    adminusername = global.testConfig.ADMIN_USER;
@@ -147,9 +142,8 @@ test("Create and Reject Benefits", async () => {
     await homePage.navigateToTasks();
     await tasksPage.assignTaskToMe(Benefit[1]);
     var confirmMsg = global.testConfig.taskDetails.confirmRejectBenefitMsg;
-    var taskManage =await tasksPage.manageTask(Constants.BENEFIT, Constants.REJECT,Benefit[1],confirmMsg);
-    expect(taskManage).toBe(true);
-    console.log("New Benefit Rejected Successfully with id= " + Benefit[1]);
+    expect(await tasksPage.manageTask(Constants.BENEFIT, Constants.REJECT,Benefit[1],confirmMsg)).toBe(true);
+   console.log("New Benefit Rejected Successfully with id= " + Benefit[1]);
   });
 
 });

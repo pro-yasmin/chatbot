@@ -1,6 +1,7 @@
 const { SearchPage } = require("../../SharedPages/SearchPage");
-const { SubProgramsPage } = require("../SubProgramsManagement/SubProgramsPage");
 const { FilterPrograms } = require("../FilterPrograms");
+const { BenefitsDetailsPage } = require("./BenefitsDetailsPage");
+
 
 /**
  * Represents the Benefits Management page and provides methods for searching,
@@ -10,7 +11,10 @@ const { FilterPrograms } = require("../FilterPrograms");
 export class BenefitsManagmentPage {
   constructor(page) {
     this.page = page;
+    this.search = new SearchPage(this.page);
     this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
+    this.tableActions='table-actions';
+    this.tableThreeDots='three-dots-menu';
     this.benefitsTable = "//table//tbody";
     this.filterButton = '//button[@data-testid="toolbar-filter-button"]';;
     this.benefitTypeFilter = '//div[@id="mui-component-select-benefitType"]';
@@ -92,6 +96,56 @@ export class BenefitsManagmentPage {
     const filterResult = await filterPrograms.filterBenefit(location, data, type, streamData, mainProgramData, subProgramData, benefitsData);
     return filterResult;
   }
+
+  /**
+ * Opens the details page of a specific benefit by its identifier.
+ * 
+ * @param {string} benefitNumber - The unique identifier of the benefit to view.
+ * @returns {Promise<void>} - Completes the action of opening the benefit details page.
+ */
+async openViewBenefitDetailsPage(benefitNumber) {
+  let benefitRow = [];
+  benefitRow = await this.searchOnSpecificBenefit(benefitNumber);
+  if (benefitRow && benefitRow.length > 0) {
+    var viewBtn = "button:nth-of-type(1)";
+    await this.search.clickRowAction(benefitRow, this.tableActions, viewBtn);
+    console.log("View Benefit Details Page Opened.");
+  } else {
+    console.error("Benefit not found: Unable to open Benefit Details Page.");
+  }
+}
+
+/**
+ * Searches for a specific benefit by name.
+ * @param {string} benefitName - The name of the benefit to search for.
+ * @returns {Promise<Array|null>} - An array containing row details if found, or null if not found.
+ */
+async searchOnSpecificBenefit(benefitName) {
+  let benefitRow = [];
+  benefitRow = await new SearchPage(this.page).searchOnUniqueRow(this.searchInput, benefitName);
+  if (!benefitRow || benefitRow.length === 0) {
+    return null;
+  }
+  return benefitRow;
+}
+
+
+  /**
+ * Validates the benefit details by comparing UI and expected data, then navigates to the Benefits tab.
+ * @param {object} benefitData - The expected benefit details.
+ * @param {string} createdStreamName - The expected stream name.
+ * @param {string} createdMainProgramName - The expected main program name.
+ * @param {string} createdSubProgramName - The expected Sub program name.
+ * @returns {Promise<boolean>} - Returns true if all details match and navigation to Benefits tab is successful.
+ */
+async validateBenefitDetails(benefitData,benefitNumber, createdStreamName, createdMainProgramName , createdSubProgramName) {
+  await this.openViewBenefitDetailsPage(benefitNumber);
+  var benefitsDetailsPage = new BenefitsDetailsPage(this.page);
+  var benefitDetails = await benefitsDetailsPage.compareBenefitDetails(benefitData, createdStreamName, createdMainProgramName,createdSubProgramName);
+  if (benefitDetails)  return true;
+}
+
+  
 }
 
 module.exports = { BenefitsManagmentPage };

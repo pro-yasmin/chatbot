@@ -34,7 +34,7 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToMyTasksTab() {
-    await  this.page.waitForTimeout(8000);
+    //await  this.page.waitForTimeout(8000);
     // await this.page.waitForSelector(this.myTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myTasksTab);
     console.log("Navigate to My tasks tab");
@@ -93,7 +93,7 @@ export class TasksPage {
  */
 async ensureTaskStatus(taskType, actionType , taskNumber) {
   let expectedStatus;
-  await this.navigateToGroupTasksTab();
+ // await this.navigateToGroupTasksTab();
   await this.navigateToMyCompletedTasksTab();
 
   // Find the task row in the table
@@ -143,7 +143,7 @@ async manageTask(taskType, actionType ,taskNumber,confirmMsg) {
   let addNote;
   let requestType;
 
-  await this.navigateToMyCompletedTasksTab();
+  //await this.navigateToMyCompletedTasksTab();
   await this.navigateToMyTasksTab();
   
   let taskRow = await this.search.getRowInTableWithSpecificText(taskNumber);
@@ -181,7 +181,7 @@ async manageTask(taskType, actionType ,taskNumber,confirmMsg) {
 
 async checkTaskRequestType(taskType, taskRow)
 {
-  await this.page.waitForTimeout(7000);
+  //await this.page.waitForTimeout(7000);
   let expectedMsg = await this.getExpectedTaskType(taskType);
   let actionLocator = taskRow[3].tdLocator; 
   let actualType = await actionLocator.textContent();

@@ -6,17 +6,17 @@
 export class PopUpPage {
   constructor(page) {
     this.page = page;
-    this.messageLocator = '//span[@data-testid="modal-title"]';
+    this.messageLocator = '//span[@id="modal-modal-title"]';//data-testid="modal-title"
   }
 
   async popUpMessage(actionButton, partialMessage) {
-    await this.page.waitForSelector(actionButton, { visible: true });
+    await this.page.waitForSelector(actionButton, { visible: true, timeout: 50000 });//shimaa
    // await this.page.locator(actionButton).waitFor({ state: "visible", timeout: 30000 });
     var fullMessage = await this.page.textContent(this.messageLocator);
     if (fullMessage.includes(partialMessage)) {
       await this.page.click(actionButton);
      // await this.page.waitForSelector(actionButton, { visible: false });
-    await this.page.locator(actionButton).waitFor({ state: "detached" , timeout: 30000});
+    await this.page.locator(actionButton).waitFor({ state: "detached" , timeout: 50000});//shimaa
       
     }
     return true;

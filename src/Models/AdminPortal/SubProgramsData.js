@@ -35,7 +35,13 @@ export class SubProgramsData {
     this.requireRegisterApplication = null;
     this.applicationChannelCodes = [];
     this.periodAfterExistCode = null;
-    this.reApplyAfterExistCode = null;  
+    this.reApplyAfterExistCode = null; 
+    
+    this.viewapplicationEnablementPerm = null;
+    this.viewEnablementStatus = null;
+    this.viewApprovalStatus = null;
+    this.viewActivationStatus = null;
+
   }
 
   // Getter and Setter for Arabic Sub Program Name
@@ -265,6 +271,7 @@ export class SubProgramsData {
   setApplicationChannelCodes(value) {
     this.applicationChannelCodes = value;
   }
+
   getPeriodAfterExistCode() {
     if (this.periodAfterExistCode == null) {
       this.periodAfterExistCode =  global.testConfig.createSubPrograms.periodAfterExistCode;
@@ -283,6 +290,47 @@ export class SubProgramsData {
   setReApplyAfterExistCode(value) {
     this.reApplyAfterExistCode = value;
   }
+
+  getViewEnablementStatus() {
+    if (this.viewEnablementStatus == null) {
+      this.viewEnablementStatus =  global.testConfig.createSubPrograms.viewEnablementStatus;
+     }
+    return this.viewEnablementStatus;
+  }
+  setViewEnablementStatus(value) {
+    this.viewEnablementStatus = value;
+  }
+
+  getViewApprovalStatus() {
+    if (this.viewApprovalStatus == null) {
+      this.viewApprovalStatus =  global.testConfig.createSubPrograms.viewApprovalStatus;
+     }
+    return this.viewApprovalStatus;
+  }
+  setViewApprovalStatus(value) {
+    this.viewApprovalStatus = value;
+  }
+
+  getViewActivationStatus() {
+    if (this.viewActivationStatus == null) {
+      this.viewActivationStatus =  global.testConfig.createSubPrograms.viewActivationStatus;
+     }
+    return this.viewActivationStatus;
+  }
+  setViewActivationStatus(value) {
+    this.viewActivationStatus = value;
+  }
+
+  getViewapplicationEnablementPerm() {
+    if (this.viewapplicationEnablementPerm == null) {
+      this.viewapplicationEnablementPerm =  global.testConfig.createSubPrograms.viewapplicationEnablementPerm;
+     }
+    return this.viewapplicationEnablementPerm;
+  }
+  setViewapplicationEnablementPerm(value) {
+    this.viewapplicationEnablementPerm = value;
+  }
+
 
     // toJSON Method
     toJSON(mainProgramID = null) {

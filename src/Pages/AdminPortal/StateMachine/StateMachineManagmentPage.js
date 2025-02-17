@@ -9,7 +9,7 @@ export class StateMachineManagmentPage {
         this.search = new SearchPage(this.page);
         this.addButton = '//button[@data-testid="toolbar-add-button"]';
         this.searchInput = '//form[@data-testid="search-input"]//descendant::input';
-        this.tableActions='//div[@data-testid="table-actions"]'
+        this.tableActions="table-actions";
     }
 
     /**

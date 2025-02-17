@@ -94,7 +94,11 @@
     "requireRegisterApplication": true,
     "applicationChannelCodes": ["15"],
     "periodAfterExistCode": "",
-    "reApplyAfterExistCode": ""
+    "reApplyAfterExistCode": "",
+    "viewapplicationEnablementPerm": "دائم",
+    "viewEnablementStatus" :"محجوب",
+    "viewApprovalStatus":"معالجة",
+    "viewActivationStatus":"خامل"
   },
   "lookUps": {
     "firstTabArabicName": "قائمه مرجعيه اولى",
@@ -166,7 +170,11 @@
     "temporaryFrom": null,
     "temporaryTo": null,
     "requireRegisterApplication": true,
-    "applicationChannelCodes": ["15"]
+    "applicationChannelCodes": ["15"],
+    "viewTargetApproach":"شامل",
+    "viewEnablementStatus" :"محجوب",
+    "viewApprovalStatus":"معالجة",
+    "viewActivationStatus":"خامل"
   },
   "stateMachine": {
     "stateManagmentArabicName": "إدارة الحالة باللغة العربية",
