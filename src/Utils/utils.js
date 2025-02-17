@@ -12,7 +12,7 @@ const Utils = {
     for (let i = 0; i < num; i++) {
       const randomChar = String.fromCharCode(
         Math.floor(Math.random() * (asciirange2 - asciirange1 + 1)) +
-          asciirange1
+        asciirange1
       );
       result += randomChar;
     }
@@ -34,7 +34,7 @@ const Utils = {
       do {
         randomChar = String.fromCharCode(
           Math.floor(Math.random() * (asciirange2 - asciirange1 + 1)) +
-            asciirange1
+          asciirange1
         );
       } while (!/[a-zA-Z]/.test(randomChar)); // Ensure the character is a valid letter
       result += randomChar;
@@ -53,6 +53,28 @@ const Utils = {
       ""
     );
   },
+
+  /**
+     *  Gets the current date in YYYY-MM-DD format.
+     *
+     * @returns {string} - The current date as a formatted string.
+     */
+  getCurrentDate: function () {
+    return new Date().toISOString().split('T')[0];
+  },
+
+  /**
+   * Gets the date after a specified number of days from today.
+   *
+   * @param {number} days - The number of days to add.
+   * @returns {string} - The calculated future date in YYYY-MM-DD format.
+   */
+  getDateAfterDays: function (days) {
+    const date = new Date();
+    date.setDate(date.getDate() + days);
+    return date.toISOString().split('T')[0];
+  }
+
 };
 
 module.exports = { Utils };
