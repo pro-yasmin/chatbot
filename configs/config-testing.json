@@ -202,5 +202,19 @@
     "fieldDeactivatedSuccessMsg": "تم حجب الحقل بنجاح ولا يمكن استخدامه في المنصة.",
     "fieldActivationErrorMsg": "لا يمكن حجب الحقل حيث إنه مرتبط بمكونات أخرى في النظام.",
     "deactivateConfirmationMsgForLockedField": "هل أنت متأكد أنك تريد حجب تجربة اكسون مجموعة؟"
+  },
+  "SocialRecordCopies":{
+    "socialRecordActiveCopy": "ISR_ISRVR_00000345",
+    "socialRecordActiveStatus": "مفعلة",
+    "socialRecordDraftStatus": "مسودة",
+    "socialRecordUnderReviewStatus": "تحت المراجعة",
+    "existingDraftCopyIsAlreadyExistMsg": "لديك بالفعل مسودة من النسخة المفعلة.",
+    "ArVersionName": "النسخة العربية",
+    "EnVersionName": "English Version",
+    "deleteDraftSocialRecordCopyMsg": "هل أنت متأكد من حذف نسخة المسودة من قائمة نسخ السجل الاجتماعي؟",
+    "deleteDraftSocialRecordCopyConfirmationMsg": "تم حذف النسخة المسودة بنجاح من نسخ السجل الاجتماعي.",
+    "ISRaddNewFieldSuccessMsg": "تم إضافة الحقل بنجاح.",
+    "schemaUpdateSuccessMsg": "تم إرسال تحديث النسخة للموافقة بنجاح.",
+    "newAddedFieldTag": "مضاف حديثًا"
   }
 }

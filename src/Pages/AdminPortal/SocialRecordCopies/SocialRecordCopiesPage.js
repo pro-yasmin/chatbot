@@ -1,0 +1,98 @@
+const { PopUpPage } = require('../SharedPages/PopUpPage');
+
+export class SocialRecordCopiesPage {
+    constructor(page) {
+        this.page = page;
+        this.popUpMsg = new PopUpPage(this.page);
+        this.createdArVersionName = null;
+        this.createdEnVersionName = null;
+        this.createdActivationDate = null;
+        this.createdactivationDateForApplicant = null;
+        this.createdactivationDateForPrograms = null;
+
+        this.ArVersionNameField = '//input[@name="data[schemaNameAr]"]';
+        this.EnVersionNameField = '//input[@name="data[schemaNameEn]"]';
+        this.activationDateForApplicant = '//input[@class="form-control form-control input"]';
+        this.activationDateForPrograms = '//input[@class="form-control form-control input"]';
+        this.activationDate = '//input[@class="form-control form-control input"]';
+        this.saveSchemeDataButton = '//button[contains(@class, "MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary")]';
+        this.addNewRegistryFieldsButton = '//div[contains(@class, "MuiGrid-root MuiGrid-item MuiGrid")]//button';
+        this.attachmentsAndJustificationsRecordTab = '//button[@data-testid="tab-2"]';
+        this.justificationDdl = '//div[@class="choices form-group formio-choices"]';
+        this.justificationFirstOption = '//div[@data-id="1"]';
+        this.sendUpdatesForApprovalButton = '(//button[contains(@class, "MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary")])[2]';
+        this.addedFieldArName = '//div[contains(@class, "uiGrid-root MuiGrid-container MuiGrid-spacing")]//span[contains(@class, "MuiTypography-root MuiTypography-p-md-bold")]';
+        this.addedFieldTag = '//div[contains(@class, "uiGrid-root MuiGrid-container MuiGrid-spacing")]//span[contains(@class, "MuiTypography-root MuiTypography-p-sm muirtl")]';
+
+        //popup
+        this.popUpOkButton = '//button[@data-testid="modal-primary-button"]';
+
+    }
+
+    /**
+   * Fills the New Schema Data with the information provided in the socialRecordCopiesData object.
+   * @param {Object} socialRecordCopiesData - The data object containing New Schema information.
+   * @returns {Promise<void>} A promise that resolves when the social Record Copies Data definition information has been filled.
+   */
+    async fillNewSchemaData(socialRecordCopiesData) {
+        console.log("Start filling New Schema Data");
+        await this.page.waitForSelector(this.ArVersionNameField, { state: "visible", timeout: 20000 });
+        this.createdArVersionName = socialRecordCopiesData.getVersionArabicName();
+        this.createdEnVersionName = socialRecordCopiesData.getVersionEnglishName();
+        this.createdActivationDate = socialRecordCopiesData.getActivationDate();
+        this.createdactivationDateForApplicant = socialRecordCopiesData.getActivationDateForApplicant();
+        this.createdactivationDateForPrograms = socialRecordCopiesData.getActivationDateForPrograms();
+
+        await this.page.fill(this.ArVersionNameField, this.createdArVersionName);
+        await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
+        await this.page.fill(this.activationDateForApplicant, this.createdactivationDateForApplicant);
+        await this.page.fill(this.activationDateForPrograms, this.createdactivationDateForPrograms);
+        await this.page.fill(this.activationDate, this.createdActivationDate);
+        
+
+        socialRecordCopiesData.setVersionArabicName(this.createdArVersionName);
+        socialRecordCopiesData.setVersionEnglishName(this.createdEnVersionName);
+        socialRecordCopiesData.setActivationDate(this.createdActivationDate);
+        await this.page.click(this.saveSchemeDataButton);
+        console.log("End filling New Schema Data");
+    }
+
+    async clickAddNewRegistryFieldsButton() {
+        await this.page.waitForSelector(this.addNewRegistryFieldsButton, { state: "visible", timeout: 60000 });
+        await this.page.click(this.addNewRegistryFieldsButton);
+    }
+    async validateNewFieldAdded(socialRecordCopiesData) {
+        var expectedFieldArName = socialRecordCopiesData.getFieldArName();
+        var expectedFieldTag = global.testConfig.SocialRecordCopies.newAddedFieldTag;
+        await this.page.waitForTimeout(1000);
+        var actualFieldArName = await this.page.$eval(this.addedFieldArName, element => element.textContent);
+        var actualFieldTag = await this.page.$eval(this.addedFieldTag, element => element.textContent);
+
+        if (actualFieldArName === expectedFieldArName &&
+            actualFieldTag === expectedFieldTag) {
+                console.log("New Field data matched expectations Successfully");
+                return true;
+        }
+        return false;
+    }
+    async navigateToAttachmentsAndJustificationsRecordTab() {
+        await this.page.waitForSelector(this.attachmentsAndJustificationsRecordTab, { state: "visible", timeout: 60000 });
+        await this.page.click(this.attachmentsAndJustificationsRecordTab);
+    }
+    async addJustification() {
+        await this.navigateToAttachmentsAndJustificationsRecordTab();
+        await this.page.waitForSelector(this.justificationDdl, { state: "visible", timeout: 60000 });
+        await this.page.click(this.justificationDdl);
+        await this.page.waitForSelector(this.justificationFirstOption, { state: "visible", timeout: 60000 });
+        await this.page.click(this.justificationFirstOption);
+        await this.page.waitForSelector(this.sendUpdatesForApprovalButton, { state: "visible", timeout: 60000 });
+        await this.page.click(this.sendUpdatesForApprovalButton);
+        var popUpResult = await this.popUpMsg.popUpMessage(this.popUpOkButton, global.testConfig.SocialRecordCopies.schemaUpdateSuccessMsg);
+        return popUpResult;
+    }
+
+
+
+
+}
+module.exports = { SocialRecordCopiesPage };
