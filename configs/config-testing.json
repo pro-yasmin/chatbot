@@ -1,4 +1,7 @@
 {
+  "Login": {
+    "invalidLoginDataErrorMsg": "عذراً! رقم الهوية الوطنية أو كلمة المرور غير صحيحة.فضلاً تأكد من صحة المعلومات المدخلة."
+  },
   "createStream": {
     "streamArabicName": "مسار دعم الأسر والرعاية الاجتماعية",
     "streamEnglishName": "Family Support and Social Care Stream",
