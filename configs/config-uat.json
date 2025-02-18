@@ -216,5 +216,14 @@
     "ISRaddNewFieldSuccessMsg": "تم إضافة الحقل بنجاح.",
     "schemaUpdateSuccessMsg": "تم إرسال تحديث النسخة للموافقة بنجاح.",
     "newAddedFieldTag": "مضاف حديثًا"
+  },
+  "SimulationModels":{
+    "simulationModelArName": "اسم المحاكاه",
+    "simulationModelEnName": "Simulation",
+    "simulationModelDescription": "وصف المحاكاه",
+    "variableArName": "اسم المتغير",
+    "variableEnName": "Variable",
+    "variableDescription": "وصف المتغير",
+    "defaultValue": "قيمة"
   }
 }
