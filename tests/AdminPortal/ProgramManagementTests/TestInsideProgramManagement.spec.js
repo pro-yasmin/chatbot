@@ -1,5 +1,5 @@
 const { test, expect } = require("@playwright/test");
-const { LoginPage } = require("../../../src/Pages/AdminPortal/LoginPage");
+const { LoginPage } = require('../../../src/Pages/LoginPage');
 const { HomePage } = require("../../../src/Pages/AdminPortal/HomePage");
 const { StreamDetailsPage } = require("../../../src/Pages/AdminPortal/ProgramsManagement/StreamManagement/StreamDetailsPage");
 const { StreamData } = require("../../../src/Models/AdminPortal/StreamData");
