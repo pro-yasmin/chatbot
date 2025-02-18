@@ -1,4 +1,4 @@
-const { HomePage } = require("./HomePage");
+const { HomePage } = require("./AdminPortal/HomePage");
 
 /**
  * Manages login-related actions, including navigating to the admin portal,
@@ -14,6 +14,7 @@ export class LoginPage {
     (this.passwordField = '[id="password"]'),
       (this.remeberCheckbox = '//img[@class="check--icon"]');
     this.loginButton = '//input[@id="kc-login"]';
+    this.invalidCredentialsErrorMsg = '//span[@id="input-error"]';
 
     // Selectors for language settings
     this.changeLangageMenu = '//button[@id="locale--button"]';
@@ -28,7 +29,19 @@ export class LoginPage {
   async gotoAdminPortal(baseUrl) {
     await this.page.goto(baseUrl, { waitUntil: "networkidle" });
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
-   await this.page.waitForTimeout(1000);
+    await this.page.waitForTimeout(1000);
+    await this.ensureArabicLanguage();
+  }
+
+  /**
+   * Navigates to the admin portal .
+   * @param {string} baseUrl - The URL of the admin portal.
+   * @returns {Promise<void>} - Completes the navigation and language setup.
+   */
+  async gotoOperationPortal(baseUrl) {
+    await this.page.goto(baseUrl, { waitUntil: "networkidle" });
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    await this.page.waitForTimeout(1000);
     await this.ensureArabicLanguage();
   }
 
@@ -47,6 +60,24 @@ export class LoginPage {
 
     return avatarVisible;
   }
+  /**
+   * Performs user login with the provided credentials.
+   * @param {string} userName - The username for login.
+   * @param {string} password - The password for login.
+   * @returns {Promise<boolean>} - Returns true if the user successfully logs in.
+   */
+  async loginWithInvalidCredentials(userName, password) {
+    await this.page.fill(this.userNameField, userName);
+    await this.page.fill(this.passwordField, password);
+    await this.page.click(this.loginButton);
+    var actuaLoginErrorMsg = await this.page.$eval(this.invalidCredentialsErrorMsg, element => element.textContent);
+    console.log("Actual Login Error Message: ", actuaLoginErrorMsg);
+    var expectedLoginErrorMsg = global.testConfig.Login.invalidLoginDataErrorMsg;
+    if (actuaLoginErrorMsg.includes(expectedLoginErrorMsg)) {
+      return true;
+    }
+  }
+
 
   /**
    * Ensures the Arabic language is selected on the portal.

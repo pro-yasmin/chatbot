@@ -2,7 +2,7 @@ const { test, expect } = require("@playwright/test");
 // const  Constants  = require("../../../src/Utils/Constants");
 import Constants from '../../../src/Utils/Constants.js';
 
-const { LoginPage } = require("../../../src/Pages/AdminPortal/LoginPage");
+const { LoginPage } = require('../../../src/Pages/LoginPage');
 const { HomePage } = require("../../../src/Pages/AdminPortal/HomePage");
 const { StreamPage} = require("../../../src/Pages/AdminPortal/ProgramsManagement/StreamManagement/StreamPage");
 const { StreamData } = require("../../../src/Models/AdminPortal/StreamData");
