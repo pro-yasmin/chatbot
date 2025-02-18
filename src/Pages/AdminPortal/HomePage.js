@@ -21,7 +21,12 @@ export class HomePage {
     this.lookupsManagmentButton = '//a[@data-testid="submenu-lookups-management"]';
     this.stateMachineManagmentButton = '//a[@data-testid="submenu-state-machine-management"]';
     this.socialRegistryServices= '//a[@data-testid="menu-social-registry-services"]';
-    this.FieldLibraryTab = '//a[@data-testid="submenu-fields-library"]';
+    this.subDomainsLibraryTab = '//a[@data-testid="menu-sub-domain-request"]';
+    this.fieldLibraryTab = '//a[@data-testid="submenu-fields-library"]';
+    this.fieldTreeTab = '//a[@data-testid="submenu-fields-tree"]';
+    this.fieldLibraryUpdateRequestsTab = '//a[@data-testid="submenu-field-library-update-requests"]';
+    this.socialRecordCopiesTab = '//a[@data-testid="submenu-social-log-copies"]';
+    this.requestUpdateSocialRecordCopiesTab = '//a[@data-testid="submenu-social-record-copies-requests"]';
   }
 
   /**
@@ -121,10 +126,44 @@ export class HomePage {
     await this.page.waitForSelector(this.socialRegistryServices, { state: "visible", timeout: 20000 });
     await this.page.click(this.socialRegistryServices);
   }
-  async navigateToFieldLibrary() {
+  async navigateToSubDomainsLibrary() {
     await this.navigateToSocialRegistryServices();
-    await this.page.waitForSelector(this.FieldLibraryTab, { state: "visible", timeout: 20000 });
-    await this.page.click(this.FieldLibraryTab);
+    await this.page.waitForSelector(this.subDomainsLibraryTab, { state: "visible", timeout: 20000 });
+    await this.page.click(this.subDomainsLibraryTab);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+  }
+  async navigateToFieldLibraryPage() {
+    await this.navigateToSocialRegistryServices();
+    await this.page.waitForSelector(this.fieldLibraryTab, { state: "visible", timeout: 20000 });
+    await this.page.click(this.fieldLibraryTab);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+  }
+
+  async navigateToFieldTreePage() {
+    await this.navigateToSocialRegistryServices();
+    await this.page.waitForSelector(this.fieldTreeTab, { state: "visible", timeout: 20000 });
+    await this.page.click(this.fieldTreeTab);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+  }
+
+  async navigateToFieldLibraryRequestsPage() {
+    await this.navigateToSocialRegistryServices();
+    await this.page.waitForSelector(this.fieldLibraryUpdateRequestsTab, { state: "visible", timeout: 20000 });
+    await this.page.click(this.fieldLibraryUpdateRequestsTab);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+  }
+
+  async navigateToSocialRecordCopiesPage() {
+    await this.navigateToSocialRegistryServices();
+    await this.page.waitForSelector(this.socialRecordCopiesTab, { state: "visible", timeout: 20000 });
+    await this.page.click(this.socialRecordCopiesTab);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+  }
+  
+  async navigateToRequestUpdateSocialRecordCopiesPage() {
+    await this.navigateToSocialRegistryServices();
+    await this.page.waitForSelector(this.requestUpdateSocialRecordCopiesTab, { state: "visible", timeout: 20000 });
+    await this.page.click(this.requestUpdateSocialRecordCopiesTab);
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 

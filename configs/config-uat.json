@@ -189,5 +189,12 @@
     "fieldDeactivatedSuccessMsg": "تم حجب الحقل بنجاح ولا يمكن استخدامه في المنصة.",
     "fieldActivationErrorMsg": "لا يمكن حجب الحقل حيث إنه مرتبط بمكونات أخرى في النظام.",
     "deactivateConfirmationMsgForLockedField": "هل أنت متأكد أنك تريد حجب اوتو حقل؟"
+  },
+  "createField":{
+    "fieldArabicName": "حقل جديد",
+    "fieldEnglishName": "New filed",
+    "arabicFieldDescription": "وصف حقل جديد",
+    "englishFieldDescription": "New field Description"
   }
+
 }
