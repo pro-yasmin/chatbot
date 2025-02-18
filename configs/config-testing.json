@@ -1,4 +1,7 @@
 {
+  "Login": {
+    "invalidLoginDataErrorMsg": "عذراً! رقم الهوية الوطنية أو كلمة المرور غير صحيحة.فضلاً تأكد من صحة المعلومات المدخلة."
+  },
   "createStream": {
     "streamArabicName": "مسار دعم الأسر والرعاية الاجتماعية",
     "streamEnglishName": "Family Support and Social Care Stream",
@@ -94,7 +97,11 @@
     "requireRegisterApplication": true,
     "applicationChannelCodes": ["15"],
     "periodAfterExistCode": "",
-    "reApplyAfterExistCode": ""
+    "reApplyAfterExistCode": "",
+    "viewapplicationEnablementPerm": "دائم",
+    "viewEnablementStatus" :"محجوب",
+    "viewApprovalStatus":"معالجة",
+    "viewActivationStatus":"خامل"
   },
   "lookUps": {
     "firstTabArabicName": "قائمه مرجعيه اولى",
@@ -166,7 +173,11 @@
     "temporaryFrom": null,
     "temporaryTo": null,
     "requireRegisterApplication": true,
-    "applicationChannelCodes": ["15"]
+    "applicationChannelCodes": ["15"],
+    "viewTargetApproach":"شامل",
+    "viewEnablementStatus" :"محجوب",
+    "viewApprovalStatus":"معالجة",
+    "viewActivationStatus":"خامل"
   },
   "stateMachine": {
     "stateManagmentArabicName": "إدارة الحالة باللغة العربية",
@@ -194,5 +205,19 @@
     "fieldDeactivatedSuccessMsg": "تم حجب الحقل بنجاح ولا يمكن استخدامه في المنصة.",
     "fieldActivationErrorMsg": "لا يمكن حجب الحقل حيث إنه مرتبط بمكونات أخرى في النظام.",
     "deactivateConfirmationMsgForLockedField": "هل أنت متأكد أنك تريد حجب تجربة اكسون مجموعة؟"
+  },
+  "SocialRecordCopies":{
+    "socialRecordActiveCopy": "ISR_ISRVR_00000345",
+    "socialRecordActiveStatus": "مفعلة",
+    "socialRecordDraftStatus": "مسودة",
+    "socialRecordUnderReviewStatus": "تحت المراجعة",
+    "existingDraftCopyIsAlreadyExistMsg": "لديك بالفعل مسودة من النسخة المفعلة.",
+    "ArVersionName": "النسخة العربية",
+    "EnVersionName": "English Version",
+    "deleteDraftSocialRecordCopyMsg": "هل أنت متأكد من حذف نسخة المسودة من قائمة نسخ السجل الاجتماعي؟",
+    "deleteDraftSocialRecordCopyConfirmationMsg": "تم حذف النسخة المسودة بنجاح من نسخ السجل الاجتماعي.",
+    "ISRaddNewFieldSuccessMsg": "تم إضافة الحقل بنجاح.",
+    "schemaUpdateSuccessMsg": "تم إرسال تحديث النسخة للموافقة بنجاح.",
+    "newAddedFieldTag": "مضاف حديثًا"
   }
 }

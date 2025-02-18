@@ -1,4 +1,7 @@
 {
+  "Login": {
+    "invalidLoginDataErrorMsg": "عذراً! رقم الهوية الوطنية أو كلمة المرور غير صحيحة.فضلاً تأكد من صحة المعلومات المدخلة."
+  },
   "createStream": {
     "streamArabicName": "مسار دعم الأسر والرعاية الاجتماعية",
     "streamEnglishName": "Family Support and Social Care Stream",
@@ -89,7 +92,15 @@
     "requireRegisterApplication": true,
     "applicationChannelCodes": ["14"],
     "periodAfterExistCode": "",
-    "reApplyAfterExistCode": ""
+    "reApplyAfterExistCode": "",
+    "viewSubProgramType" : "برنامج قائم دون أي تغيير",
+    "viewapplicationEnablementPerm": "دائم",
+    "viewEnablementStatus" :"محجوب",
+    "viewApprovalStatus":"معالجة",
+    "viewActivationStatus":"خامل",
+    "viewAassistanceUnit" :"مجموعة مخصصة",
+    "viewTtargetingApproach" :"شامل",
+    "viewApplicationChannels":"تطبيق جوال المتقدم"
   },
   "lookUps": {
     "firstTabArabicName": "قائمه مرجعيه اولى",
@@ -129,7 +140,7 @@
       "providerCodes": ["camp"],
       "providerCodesAr": "كامب",
       "estimatedValue": "القيمة التقديرية للإعانة"
-    },
+    },    
     "relatedPastBenefits": [],
     "subProgramId": "awarenessProgramsAndTrainingsRegardingDrugAddictionmidjyAuto",
     "incomeCategoryCodes": [],
@@ -161,7 +172,12 @@
     "temporaryFrom": null,
     "temporaryTo": null,
     "requireRegisterApplication": true,
-    "applicationChannelCodes": ["14"]
+    "applicationChannelCodes": ["14"],
+    "viewbenefitResponsibleEntity" : "جهة مسؤولة عن التنفيذ جديده",
+    "viewTargetApproach":"شامل",
+    "viewEnablementStatus" :"محجوب",
+    "viewApprovalStatus":"معالجة",
+    "viewActivationStatus":"خامل"
   },
   "stateMachine": {
     "stateManagmentArabicName": "إدارة الحالة باللغة العربية",
@@ -190,11 +206,24 @@
     "fieldActivationErrorMsg": "لا يمكن حجب الحقل حيث إنه مرتبط بمكونات أخرى في النظام.",
     "deactivateConfirmationMsgForLockedField": "هل أنت متأكد أنك تريد حجب اوتو حقل؟"
   },
+  "SocialRecordCopies":{
+    "socialRecordActiveCopy": "ISR_ISRVR_00000021",
+    "socialRecordActiveStatus": "مفعلة",
+    "socialRecordDraftStatus": "مسودة",
+    "socialRecordUnderReviewStatus": "تحت المراجعة",
+    "existingDraftCopyIsAlreadyExistMsg": "لديك بالفعل مسودة من النسخة المفعلة.",
+    "ArVersionName": "النسخة العربية",
+    "EnVersionName": "English Version",
+    "deleteDraftSocialRecordCopyMsg": "هل أنت متأكد من حذف نسخة المسودة من قائمة نسخ السجل الاجتماعي؟",
+    "deleteDraftSocialRecordCopyConfirmationMsg": "تم حذف النسخة المسودة بنجاح من نسخ السجل الاجتماعي.",
+    "ISRaddNewFieldSuccessMsg": "تم إضافة الحقل بنجاح.",
+    "schemaUpdateSuccessMsg": "تم إرسال تحديث النسخة للموافقة بنجاح.",
+    "newAddedFieldTag": "مضاف حديثًا"
+  },
   "createField":{
     "fieldArabicName": "حقل جديد",
     "fieldEnglishName": "New filed",
     "arabicFieldDescription": "وصف حقل جديد",
     "englishFieldDescription": "New field Description"
   }
-
 }

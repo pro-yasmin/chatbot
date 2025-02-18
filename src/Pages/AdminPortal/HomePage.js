@@ -132,40 +132,35 @@ export class HomePage {
     await this.page.click(this.subDomainsLibraryTab);
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
-  async navigateToFieldLibraryPage() {
+  async navigateToFieldLibrary() {
     await this.navigateToSocialRegistryServices();
     await this.page.waitForSelector(this.fieldLibraryTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.fieldLibraryTab);
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 
-  async navigateToFieldTreePage() {
+  async navigateToFieldTree() {
     await this.navigateToSocialRegistryServices();
     await this.page.waitForSelector(this.fieldTreeTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.fieldTreeTab);
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 
-  async navigateToFieldLibraryRequestsPage() {
+  async navigateToFieldLibraryRequests() {
     await this.navigateToSocialRegistryServices();
     await this.page.waitForSelector(this.fieldLibraryUpdateRequestsTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.fieldLibraryUpdateRequestsTab);
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 
-  async navigateToSocialRecordCopiesPage() {
+  async navigateToSocialRecordCopies() {
     await this.navigateToSocialRegistryServices();
     await this.page.waitForSelector(this.socialRecordCopiesTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.socialRecordCopiesTab);
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
   
-  async navigateToRequestUpdateSocialRecordCopiesPage() {
-    await this.navigateToSocialRegistryServices();
-    await this.page.waitForSelector(this.requestUpdateSocialRecordCopiesTab, { state: "visible", timeout: 20000 });
-    await this.page.click(this.requestUpdateSocialRecordCopiesTab);
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
-  }
+ 
 
 }
 

@@ -77,9 +77,7 @@ export class BenefitsData {
     if (this.englishBenefitName == null) {
       this.englishBenefitName =
         global.testConfig.createBenefits.englishBenefitName +
-        this.utils.generateRandomEnglishString(5) +
-        " " +
-        "Auto";
+        this.utils.generateRandomEnglishString(5) + " " + "Auto";
     }
     return this.englishBenefitName;
   }
@@ -486,8 +484,8 @@ export class BenefitsData {
       }
 
 
+
  // toJSON Method
- 
  
  toJSON(subProgramID= null) {
   return {

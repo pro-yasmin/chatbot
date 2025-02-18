@@ -1,5 +1,5 @@
 const { SearchPage } = require("../../SharedPages/SearchPage");
-const { SubProgramsPage } = require("./SubProgramsPage");
+const { SubProgramDetailsPage } = require("./SubProgramDetailsPage");
 const { FilterPrograms } = require("../FilterPrograms");
 
 
@@ -147,7 +147,7 @@ async openViewSubProgramDetailsPage(subProgramNumber) {
     await this.page.click(this.benefitsTab);
   }
 
-  /**
+/**
  * Opens the details page of a specific subprogram by its identifier.
  * 
  * @param {string} subProgramNumber - The unique identifier of the subprogram to view.
@@ -159,6 +159,21 @@ async openViewSubProgramDetailsPage(subProgramNumber) {
     await this.page.click(viewBtn);
     console.log("View SubProgram Details Page Opened.");
   }
+
+  async validateSubProgramDetails(subProgramData,subProgramNumber,createdStreamName ,createdMainProgramName)
+  {
+    await this.openViewSubProgramDetailsPage(subProgramNumber);
+      var subProgramDetailsPage = new SubProgramDetailsPage(this.page);
+      var subProgramDetails = await subProgramDetailsPage.compareSubProgramDetails(subProgramData, subProgramNumber, createdStreamName,createdMainProgramName);
+  
+      if (subProgramDetails) {
+          var benefitsTab = await subProgramDetailsPage.navigateToBenefitsTab();
+          // If all steps are successful, return true
+          if (benefitsTab) return true;
+      }
+      return false;
+  }
+
 }
 
 module.exports = { SubProgramsManagementPage };
