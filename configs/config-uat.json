@@ -219,5 +219,28 @@
     "ISRaddNewFieldSuccessMsg": "تم إضافة الحقل بنجاح.",
     "schemaUpdateSuccessMsg": "تم إرسال تحديث النسخة للموافقة بنجاح.",
     "newAddedFieldTag": "مضاف حديثًا"
+  },
+  "SimulationModels":{
+    "simulationModelArName": "اسم المحاكاه",
+    "simulationModelEnName": "Simulation",
+    "simulationModelDescription": "وصف المحاكاه",
+    "variableOneArName": "المتغير أ",
+    "variableOneEnName": "Variable A",
+    "variableOneDescription": "وصف المتغير",
+    "defaultValueText": "قيمة",
+    "variableTwoArName": "المتغير ب",
+    "variableTwoEnName": "Variable B",
+    "variableTwoDescription": "وصف المتغير",
+    "defaultValueNumeric": "123456789",
+    "variableThreeArName": "المتغير ج",
+    "variableThreeEnName": "Variable C",
+    "variableThreeDescription": "وصف المتغير",
+    "defineSimulationConfirmationMsg": "هل أنت متأكد من تعريف نموذج محاكاة ؟",
+    "defineSimulationSuccessMsg": "تم حفظ نموذج المحاكاة بنجاح سيقوم النظام بتعريف مهمة تقنية للنموذج",
+    "simulationModelStatusCreated": "معرف",
+    "acivationStatusDisabled": "خامل",
+    "simulationModelPDF": "test.pdf",
+    "simulationModelCSV": "test.csv"
+    
   }
 }
