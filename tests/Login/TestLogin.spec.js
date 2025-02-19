@@ -48,8 +48,8 @@ test("Login to Operational Portal with valid credential", async ({ browser }) =>
 
   // Retrieve credentials and base URL from global configuration
   var baseUrl = global.testConfig.OPERATION_BASE_URL;
-  var adminusername = global.testConfig.BUSSINESS_ADMIN_USER;
-  var adminpassword = global.testConfig.BUSSINESS_ADMIN_PASS;
+  var adminusername = global.testConfig.PROGRAMS_AND_POLICIES_SPECIALIST;
+  var adminpassword = global.testConfig.PROGRAMS_AND_POLICIES_SPECIALIST_PASS;
 
   // Navigate to the admin portal and perform login
   await loginPage.gotoOperationPortal(baseUrl);

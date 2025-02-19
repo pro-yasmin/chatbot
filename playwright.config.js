@@ -35,7 +35,7 @@ module.exports = defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: 0,
+  retries: 1,
   /* Opt out of parallel tests on CI. */
   workers: 1,
   //workers: process.env.CI ? 1 : undefined,
@@ -67,15 +67,25 @@ module.exports = defineConfig({
 //         name: 'Login',
 //         testDir: './tests/Login'              // Test directory
                       
-//       },
-//      {
-//        name: 'All',
-//         testDir: './tests/AdminPortal'              // Test directory
+      },
+     {
+       name: 'All',
+        testDir: './tests'              // Test directory
                        
-//     },
-//     {
-//     name: 'Programs',
-//      testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
+    },
+    {
+      name: 'All Admin portals Tests',
+       testDir: './tests/AdminPortal'              // Test directory
+                      
+   },
+  /* {
+    name: 'All Operational  portals Tests',
+     testDir: './tests/OperationalPortal'              // Test directory
+                    
+ },*/
+    {
+    name: 'Programs',
+     testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
                        
 //   },
 //  {
@@ -125,7 +135,7 @@ module.exports = defineConfig({
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
  //
-//  ],
+],
 
 });
 module.exports.ENV = ENV;

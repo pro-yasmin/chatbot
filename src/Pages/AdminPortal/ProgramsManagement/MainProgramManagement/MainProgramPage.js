@@ -28,8 +28,8 @@ export class MainProgramPage {
 
     // Selectors for pop-ups and navigation
     this.successPopupTitle = '//span[@id="modal-modal-title"]';
-    this.backToMainProgramList =
-      '//button[contains(text(),"العودة إلى قائمة البرامج الرئيسية")]';
+    this.backToMainProgramList ='//button[@data-testid="confirmation-modal-primary-button"]';
+    
   }
 
   /**
