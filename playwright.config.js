@@ -74,7 +74,7 @@ projects: [
                        
     },
     {
-      name: 'All Admin portals Tests',
+      name: 'Admin',
        testDir: './tests/AdminPortal'              // Test directory
                       
    }, 
@@ -94,7 +94,7 @@ projects: [
   },
 
    {
-     name: 'All Operation  portals Tests',
+     name: 'Operation',
      testDir: './tests/OperationPortal'              // Test directory
                     
  },

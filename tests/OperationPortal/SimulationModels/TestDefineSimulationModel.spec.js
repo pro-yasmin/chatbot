@@ -52,8 +52,7 @@ test('Define New Simulation Model', async ({ page }) => {
     await test.step('View Simulation Model Details After adding', async () => {
         expect(await simulationModelManagementPage.viewSimulationModelDetails(simulationModelData)).toBe(true);
         console.log('View Simulation Model Details validated Successfully');
-        await page.pause();
-    });
+      });
 });
 
 
