@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../../../src/Pages/AdminPortal/LoginPage');
+const { LoginPage } = require('../../../src/Pages/LoginPage');
 const { HomeOperationPage } = require('../../../src/Pages/OperationPortal/HomeOperationPage');
 const { SimulationModelData } = require('../../../src/Models/OperationPortal/SimulationModelData');
 const { SimulationModelManagementPage } = require('../../../src/Pages/OperationPortal/SimualtionModel/SimulationModelManagementPage');
@@ -22,7 +22,7 @@ test.beforeEach(async ({ page }) => {
 
     // Step0: Login 
     await test.step('Login to Operation Portal', async () => {
-        await loginPage.gotoAdminPortal(baseUrl);
+        await loginPage.gotoOperationPortal(baseUrl);
         var loginSuccess = await loginPage.login(adminusername, adminpassword);
         expect(loginSuccess).toBe(true);
         console.log('login done successfully');
@@ -31,36 +31,28 @@ test.beforeEach(async ({ page }) => {
 
 test('Define New Simulation Model', async ({ page }) => {
     // Step1: Navigate to Simulation Models Managment page
-    await test.step('Navigate to Simulation Models Managment page', async () => {
+    await test.step('Navigate to Simulation Models Management page', async () => {
         await homeOperationPage.navigateToSimulationModels();
-        console.log('Navigate to Simulation Models Managment page');
+        console.log('Navigate to Simulation Models Management page');
     });
 
     // Step2: Fill Simulation Model Information
     await test.step('Fill Simulation Model Information', async () => {
-        await simulationModelManagementPage.defineSimulationModel(simulationModelData);
+        expect (await simulationModelManagementPage.defineSimulationModel(simulationModelData)).toBe(true);
         console.log('Simulation Model Information filled Successfully');
-        await page.pause();
-    });    
-
-    // Step3: Deactivate Field Library
-    // await test.step('Deactivate Field Library', async () => {
-    //     expect(await fieldLibraryManagement.deactivateFieldLibrary()).toBe(true);
-    //     console.log('Field Library Deactivated Successfully');
-    // });
-});
-
-test('Deactivate Field calculated field', async ({ page }) => {
-    // Step1: Navigate to Field Library Managment page
-    await test.step('Navigate to Field Library Managment page', async () => {
-        await homeOperationPage.navigateToFieldLibrary();
-        console.log('Navigate to Field Library Managment page');
     });
 
-    // Step2: Deactivate Field Library
-    await test.step('Deactivate Blocked Field Library', async () => {
-        expect(await fieldLibraryManagement.deactivateFieldLibraryForBlockedFieldLibrary()).toBe(true);
-        console.log('Field Library Deactivation Prevented Successfully');
+    // Step3: Search & Verify Simulation Model Information
+    await test.step('Search on Simulation Model created', async () => {
+        expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData)).toBe(true);
+        console.log('New Simulation Model Details Checked Successfully');
+    });
+
+    //Step4: View Simulation Model page After adding
+    await test.step('View Simulation Model Details After adding', async () => {
+        expect(await simulationModelManagementPage.viewSimulationModelDetails(simulationModelData)).toBe(true);
+        console.log('View Simulation Model Details validated Successfully');
+        await page.pause();
     });
 });
 

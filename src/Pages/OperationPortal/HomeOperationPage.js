@@ -38,6 +38,7 @@ export class HomeOperationPage {
   async navigateToSimulationModels() {
     await this.page.waitForSelector(this.simulationModelsButton, { state: "visible", timeout: 20000 });
     await this.page.click(this.simulationModelsButton);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 
 }

@@ -61,33 +61,33 @@ module.exports = defineConfig({
 
   }, 
    /* Configure projects for major browsers */
- projects: [
+//  projects: [
 
-   {
-        name: 'Login',
-        testDir: './tests/Login'              // Test directory
+//    {
+//         name: 'Login',
+//         testDir: './tests/Login'              // Test directory
                       
-      },
-     {
-       name: 'All',
-        testDir: './tests/AdminPortal'              // Test directory
+//       },
+//      {
+//        name: 'All',
+//         testDir: './tests/AdminPortal'              // Test directory
                        
-    },
-    {
-    name: 'Programs',
-     testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
+//     },
+//     {
+//     name: 'Programs',
+//      testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
                        
-  },
- {
-     name: 'Lookups',
-     testDir: './tests/AdminPortal/LookupsTests'             // Test directory
+//   },
+//  {
+//      name: 'Lookups',
+//      testDir: './tests/AdminPortal/LookupsTests'             // Test directory
      
-    },
-   {
-     name: 'StateMachine',
-    testDir: './tests/AdminPortal/StateMachineTests'             // Test directory
+//     },
+//    {
+//      name: 'StateMachine',
+//     testDir: './tests/AdminPortal/StateMachineTests'             // Test directory
      
-      },
+//       },
    
     /*{
       name: 'chromium',
@@ -125,7 +125,7 @@ module.exports = defineConfig({
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
  //
- ],
+//  ],
 
 });
 module.exports.ENV = ENV;

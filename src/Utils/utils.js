@@ -73,21 +73,6 @@ const Utils = {
     const date = new Date();
     date.setDate(date.getDate() + days);
     return date.toISOString().split('T')[0];
-  },
-
-  /**
- * Uploads a file using a specified file input locator.
- *
- * @param {import('@playwright/test').Page} page - The Playwright page instance.
- * @param {string} fileInputLocator - The locator for the file input element.
- * @param {string} filePath - The full path to the file to be uploaded.
- */
-  uploadFile: async function (page, filePath) {
-    var uploaderLocator = '//input[@data-testid="file-input"]';
-    var attachButton = '//button[@type="button" and contains(text(),"إضافة الملف")]';
-    await page.setInputFiles(uploaderLocator, filePath);
-    await page.waitForSelector(attachButton, { visible: true });
-    await page.click(attachButton);
   }
 
 };

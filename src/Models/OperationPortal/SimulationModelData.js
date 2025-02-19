@@ -8,10 +8,20 @@ export class SimulationModelData {
         this.simulationModelArName = null;
         this.simulationModelEnName = null;
         this.simulationModelDescription = null;
-        this.variableArName = null;
-        this.variableEnName = null;
-        this.variableDescription = null;
-        this.defaultValue = null;
+        this.variableOneArName = null;
+        this.variableOneEnName = null;
+        this.variableOneDescription = null;
+        this.defaultValueOne = null;
+
+        this.variableTwoArName = null;
+        this.variableTwoEnName = null;
+        this.variableTwoDescription = null;
+        this.defaultValueTwo = null;
+
+        this.variableThreeArName = null;
+        this.variableThreeEnName = null;
+        this.variableThreeDescription = null;
+        this.simulationModelId = null;
     }
 
     // Getter and Setter for Simulation Model Arabic Name
@@ -48,47 +58,119 @@ export class SimulationModelData {
     }
 
     // Getter and Setter for variable Arabic Name
-    getVariableArName() {
-        if (this.variableArName == null) {
-            this.variableArName = global.testConfig.SimulationModels.variableArName;
+    getVariableOneArName() {
+        if (this.variableOneArName == null) {
+            this.variableOneArName = global.testConfig.SimulationModels.variableOneArName;
         }
-        return this.variableArName;
+        return this.variableOneArName;
     }
-    setVariableArName(value) {
-        this.variableArName = value;
+    setVariableOneArName(value) {
+        this.variableOneArName = value;
+    }
+    getVariableTwoArName() {
+        if (this.variableTwoArName == null) {
+            this.variableTwoArName = global.testConfig.SimulationModels.variableTwoArName;
+        }
+        return this.variableTwoArName;
+    }
+    setVariableTwoArName(value) {
+        this.variableTwoArName = value;
+    }
+    getVariableThreeArName() {
+        if (this.variableThreeArName == null) {
+            this.variableThreeArName = global.testConfig.SimulationModels.variableThreeArName;
+        }
+        return this.variableThreeArName;
+    }
+    setVariableThreeArName(value) {
+        this.variableThreeArName = value;
     }
 
     // Getter and Setter for variable English Name
-    getVariableEnName() {
-        if (this.variableEnName == null) {
-            this.variableEnName = global.testConfig.SimulationModels.variableEnName;
+    getVariableOneEnName() {
+        if (this.variableOneEnName == null) {
+            this.variableOneEnName = global.testConfig.SimulationModels.variableOneEnName;
         }
-        return this.variableEnName;
+        return this.variableOneEnName;
     }
-    setVariableEnName(value) {
-        this.variableEnName = value;
+    setVariableOneEnName(value) {
+        this.variableOneEnName = value;
+    }
+    getVariableTwoEnName() {
+        if (this.variableTwoEnName == null) {
+            this.variableTwoEnName = global.testConfig.SimulationModels.variableTwoEnName;
+        }
+        return this.variableTwoEnName;
+    }
+    setVariableTwoEnName(value) {
+        this.variableTwoEnName = value;
+    }
+    getVariableThreeEnName() {
+        if (this.variableThreeEnName == null) {
+            this.variableThreeEnName = global.testConfig.SimulationModels.variableThreeEnName;
+        }
+        return this.variableThreeEnName;
+    }
+    setVariableThreeEnName(value) {
+        this.variableThreeEnName = value;
     }
 
     // Getter and Setter for variable Description
-    getVariableDescription() {
-        if (this.variableDescription == null) {
-            this.variableDescription = global.testConfig.SimulationModels.variableDescription + " " + this.utils.generateRandomArabicString(3) + " " + "أوتو";
+    getVariableOneDescription() {
+        if (this.variableOneDescription == null) {
+            this.variableOneDescription = global.testConfig.SimulationModels.variableOneDescription + " " + this.utils.generateRandomArabicString(3) + " " + "أوتو";
         }
-        return this.variableDescription;
+        return this.variableOneDescription;
     }
-    setVariableDescription(value) {
-        this.variableDescription = value;
+    setVariableOneDescription(value) {
+        this.variableOneDescription = value;
+    }
+    getVariableTwoDescription() {
+        if (this.variableTwoDescription == null) {
+            this.variableTwoDescription = global.testConfig.SimulationModels.variableTwoDescription + " " + this.utils.generateRandomArabicString(3) + " " + "أوتو";
+        }
+        return this.variableTwoDescription;
+    }
+    setVariableTwoDescription(value) {
+        this.variableTwoDescription = value;
+    }
+    getVariableThreeDescription() {
+        if (this.variableThreeDescription == null) {
+            this.variableThreeDescription = global.testConfig.SimulationModels.variableThreeDescription + " " + this.utils.generateRandomArabicString(3) + " " + "أوتو";
+        }
+        return this.variableThreeDescription;
+    }
+    setVariableThreeDescription(value) {
+        this.variableThreeDescription = value;
     }
 
     // Getter and Setter for default Value
-    getDefaultValue() {
-        if (this.defaultValue == null) {
-            this.defaultValue = global.testConfig.SimulationModels.defaultValue;
+    getDefaultValueOne() {
+        if (this.defaultValueOne == null) {
+            this.defaultValueOne = global.testConfig.SimulationModels.defaultValueText;
         }
-        return this.defaultValue;
+        return this.defaultValueOne;
     }
-    setDefaultValue(value) {
-        this.defaultValue = value;
+    setDefaultValueOne(value) {
+        this.defaultValueOne = value;
+    }
+    getDefaultValueTwo() {
+        if (this.defaultValueTwo == null) {
+            this.defaultValueTwo = global.testConfig.SimulationModels.defaultValueNumeric;
+        }
+        return this.defaultValueTwo;
+    }
+    setDefaultValueTwo(value) {
+        this.defaultValueTwo = value;
+    }
+
+    // Getter and Setter for Simulation Model ID Number
+    getCreatedSimulationModelId() {
+        return this.simulationModelId;
+    }
+
+    setCreatedSimulationModelId(Value) {
+        this.simulationModelId = Value;
     }
 
 }
