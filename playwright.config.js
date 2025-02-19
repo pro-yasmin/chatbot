@@ -61,11 +61,11 @@ module.exports = defineConfig({
 
   }, 
    /* Configure projects for major browsers */
-//  projects: [
+projects: [
 
-//    {
-//         name: 'Login',
-//         testDir: './tests/Login'              // Test directory
+ {
+         name: 'Login',
+       testDir: './tests/Login'         // Test directory
                       
       },
      {
@@ -77,27 +77,27 @@ module.exports = defineConfig({
       name: 'All Admin portals Tests',
        testDir: './tests/AdminPortal'              // Test directory
                       
-   },
-  /* {
-    name: 'All Operational  portals Tests',
-     testDir: './tests/OperationalPortal'              // Test directory
-                    
- },*/
+   }, 
     {
     name: 'Programs',
      testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
                        
-//   },
-//  {
-//      name: 'Lookups',
-//      testDir: './tests/AdminPortal/LookupsTests'             // Test directory
+   },
+ {
+   name: 'Lookups',
+  testDir: './tests/AdminPortal/LookupsTests'             // Test directory
      
-//     },
-//    {
-//      name: 'StateMachine',
-//     testDir: './tests/AdminPortal/StateMachineTests'             // Test directory
-     
-//       },
+    },
+   {
+     name: 'StateMachine',
+     testDir: './tests/AdminPortal/StateMachineTests'             // Test directory
+  },
+
+   {
+     name: 'All Operation  portals Tests',
+     testDir: './tests/OperationPortal'              // Test directory
+                    
+ },
    
     /*{
       name: 'chromium',
