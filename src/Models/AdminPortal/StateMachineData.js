@@ -20,7 +20,7 @@ export class StateMachineData {
     // Getter and Setter for State Managment Arabic Name
     getStateManagmentArabicName() {
         if (this.stateManagmentArabicName == null) {
-            this.stateManagmentArabicName = global.testConfig.stateMachine.stateManagmentArabicName + this.utils.generateRandomArabicString(3) + " " + "أوتو";
+            this.stateManagmentArabicName = global.testConfig.stateMachine.stateManagmentArabicName + this.utils.generateRandomArabicString(4) + " " + "أوتو";
         }
         return this.stateManagmentArabicName;
     }
@@ -31,7 +31,7 @@ export class StateMachineData {
     // Getter and Setter for State Managment English Name
     getStateManagmentEnglishName() {
         if (this.stateManagmentEnglishName == null) {
-            this.stateManagmentEnglishName = global.testConfig.stateMachine.stateManagmentEnglishName  + " " +this.utils.generateRandomEnglishString(3) + " " + "Auto";
+            this.stateManagmentEnglishName = global.testConfig.stateMachine.stateManagmentEnglishName  + " " +this.utils.generateRandomEnglishString(4) + " " + "Auto";
         }
         return this.stateManagmentEnglishName;
     }
