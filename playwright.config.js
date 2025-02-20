@@ -63,6 +63,12 @@ module.exports = defineConfig({
    /* Configure projects for major browsers */
 projects: [
 
+  {
+    name: 'Admin',
+     testDir: './tests/AdminPortal'              // Test directory
+                    
+ },
+
  {
          name: 'Login',
        testDir: './tests/Login'         // Test directory
@@ -73,11 +79,6 @@ projects: [
         testDir: './tests'              // Test directory
                        
     },
-    {
-      name: 'Admin',
-       testDir: './tests/AdminPortal'              // Test directory
-                      
-   }, 
     {
     name: 'Programs',
      testDir: './tests/AdminPortal/ProgramManagementTests'              // Test directory
