@@ -28,7 +28,7 @@ export class MainProgramPage {
 
     // Selectors for pop-ups and navigation
     this.successPopupTitle = '//span[@id="modal-modal-title"]';
-    this.backToMainProgramList ='//button[@data-testid="confirmation-modal-primary-button"]';
+    this.backToMainProgramList ='//button[@data-testid="modal-primary-button"]';
     
   }
 

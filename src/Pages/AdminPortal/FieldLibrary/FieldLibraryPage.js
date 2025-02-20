@@ -20,10 +20,12 @@ export class FieldLibraryPage {
      * @returns {Promise<boolean>} - A promise that resolves to true if the action is successful, otherwise false.
      */
     async toggleFieldLibraryEntry(confirmationMessage, successMessage, expectedAlertMessage) {
+        await this.page.waitForSelector(this.activate_deactivateFieldLibraryAlertMsg, {state: "detached"});
         await this.page.click(this.fieldEnablementToggle);
         var popUpMsgResult = await this.popUpMsg.popUpMessage(this.popUpYesButton, confirmationMessage);
         if (popUpMsgResult === true) {
             console.log("Toggle button is now " + (successMessage === global.testConfig.FieldLibrary.fieldActivatedSuccessMsg ? "Activated" : "Deactivated"));
+            await this.page.waitForSelector(this.activate_deactivateFieldLibraryAlertMsg, {state: "visible"});
             var actualSuccessMsg = await (await this.page.$(this.activate_deactivateFieldLibraryAlertMsg)).textContent();
             if (actualSuccessMsg === expectedAlertMessage) {
                 return true;
