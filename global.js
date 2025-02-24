@@ -13,5 +13,3 @@ if (fs.existsSync(configPath)) {
  // console.error('Global configuration file not found. Ensure global-setup.js has been executed.');
   global.testConfig = {};
 }
-
-

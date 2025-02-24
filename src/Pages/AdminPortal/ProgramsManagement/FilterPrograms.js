@@ -53,7 +53,7 @@ export class FilterPrograms {
         await this.page.waitForSelector(responsibleEntityItem, { visible: true });
         await this.page.click(responsibleEntityItem);
         await this.page.click(this.searchButton);
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(5000);
         const rowCount = await this.page.$$eval(`${this.table}//tr`, rows => rows.length);
         if (rowCount !== 1) {
             throw new Error(`Expected 1 row, but found ${rowCount}`);
@@ -100,7 +100,7 @@ export class FilterPrograms {
         await this.page.waitForSelector(ProgramApplicationEnablementItem, { visible: true });
         await this.page.click(ProgramApplicationEnablementItem);
         await this.page.click(this.searchButton);
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(5000);
         const rowCount = await this.page.$$eval(`${this.table}//tr`, rows => rows.length);
         if (rowCount !== 1) {
             throw new Error(`Expected 1 row, but found ${rowCount}`);
@@ -158,7 +158,7 @@ export class FilterPrograms {
         await this.page.waitForSelector(benefitProvidingEntityLocator, { visible: true });
         await this.page.click(benefitProvidingEntityLocator);
         await this.page.click(this.searchButton);
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(5000);
         const rowCount = await this.page.$$eval(`${this.table}//tr`, rows => rows.length);
         if (rowCount !== 1) {
             throw new Error(`Expected 1 row, but found ${rowCount}`);

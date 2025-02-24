@@ -12,56 +12,27 @@ export class FieldLibraryPage {
         this.popUpYesButton = '//button[@data-testid="confirmation-modal-primary-button"]';
     }
 
-    /**
-     * Activates a field library entry if it is currently deactivated.
+        /**
+     * Toggles the activation status of a field library entry.
+     * @param {string} confirmationMessage - The confirmation message to expect.
+     * @param {string} successMessage - The success message to expect.
+     * @param {string} expectedAlertMessage - The expected alert message.
      * @returns {Promise<boolean>} - A promise that resolves to true if the action is successful, otherwise false.
      */
-    async activateToggle() {
+    async toggleFieldLibraryEntry(confirmationMessage, successMessage, expectedAlertMessage) {
+        await this.page.waitForSelector(this.activate_deactivateFieldLibraryAlertMsg, {state: "detached"});
         await this.page.click(this.fieldEnablementToggle);
-        var popUpMsgResult = await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.FieldLibrary.activateConfirmationMsg);
+        var popUpMsgResult = await this.popUpMsg.popUpMessage(this.popUpYesButton, confirmationMessage);
         if (popUpMsgResult === true) {
-            console.log("Toggle button is now activated");
+            console.log("Toggle button is now " + (successMessage === global.testConfig.FieldLibrary.fieldActivatedSuccessMsg ? "Activated" : "Deactivated"));
+            await this.page.waitForSelector(this.activate_deactivateFieldLibraryAlertMsg, {state: "visible"});
             var actualSuccessMsg = await (await this.page.$(this.activate_deactivateFieldLibraryAlertMsg)).textContent();
-            if (actualSuccessMsg === global.testConfig.FieldLibrary.fieldActivatedSuccessMsg) {
+            if (actualSuccessMsg === expectedAlertMessage) {
                 return true;
             }
             return false;
         }
     }
-
-    /**
-     * Deactivates a field library entry if it is currently activated.
-     * @returns {Promise<void>} - A promise that resolves when the action is completed.
-     */
-    async deactivateToggle() {
-        await this.page.click(this.fieldEnablementToggle);
-        var popUpMsgResult = await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.FieldLibrary.deactivateConfirmationMsg);
-        if (popUpMsgResult === true) {
-            console.log("Toggle button is now activated");
-            var actualSuccessMsg = await (await this.page.$(this.activate_deactivateFieldLibraryAlertMsg)).textContent();
-            if (actualSuccessMsg === global.testConfig.FieldLibrary.fieldDeactivatedSuccessMsg) {
-                return true;
-            }
-            return false;
-        }
-    }
-
-    /**
-     * Deactivates a field library entry if it is currently activated.
-     * @returns {Promise<void>} - A promise that resolves when the action is completed.
-     */
-    async deactivateToggleForBlockedFieldLibrary() {
-        await this.page.click(this.fieldEnablementToggle);
-        var popUpMsgResult = await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.FieldLibrary.deactivateConfirmationMsgForLockedField);
-        if (popUpMsgResult === true) {
-            var actualSuccessMsg = await (await this.page.$(this.activate_deactivateFieldLibraryAlertMsg)).textContent();
-            if (actualSuccessMsg === global.testConfig.FieldLibrary.fieldActivationErrorMsg) {
-                return true;
-            }
-            return false;
-        }
-    }
-
 
 }
 module.exports = { FieldLibraryPage };

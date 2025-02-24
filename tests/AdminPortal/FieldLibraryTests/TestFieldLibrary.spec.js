@@ -34,13 +34,14 @@ test('Activate & Deactivate Field without link to ISR schema & calculation field
 
     // Step2: Activate Field Library
     await test.step('Activate Field Library', async () => {
-        expect(await fieldLibraryManagement.activateFieldLibrary()).toBe(true);
+        await fieldLibraryManagement.navigateToApprovedFieldsTab();
+        expect(await fieldLibraryManagement.toggleFieldLibraryEntry(global.testConfig.FieldLibrary.unlockedField, false)).toBe(true);
         console.log('Field Library Activated Successfully');
     });
 
     // Step3: Deactivate Field Library
     await test.step('Deactivate Field Library', async () => {
-        expect(await fieldLibraryManagement.deactivateFieldLibrary()).toBe(true);
+        expect(await fieldLibraryManagement.toggleFieldLibraryEntry(global.testConfig.FieldLibrary.unlockedField, false)).toBe(true);
         console.log('Field Library Deactivated Successfully');
     });
 });
@@ -54,7 +55,7 @@ test('Deactivate Field calculated field', async ({ page }) => {
 
     // Step2: Deactivate Field Library
     await test.step('Deactivate Blocked Field Library', async () => {
-        expect(await fieldLibraryManagement.deactivateFieldLibraryForBlockedFieldLibrary()).toBe(true);
+        expect(await fieldLibraryManagement.toggleFieldLibraryEntry(global.testConfig.FieldLibrary.lockedField, true)).toBe(true);
         console.log('Field Library Deactivation Prevented Successfully');
     });
 });
