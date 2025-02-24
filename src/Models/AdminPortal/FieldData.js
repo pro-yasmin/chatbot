@@ -1,3 +1,5 @@
+import Constants from '../../Utils/Constants.js';
+
 const {Utils }= require('../../Utils/utils.js');
 
 export class FieldData {
@@ -8,9 +10,22 @@ export class FieldData {
     this.fieldEnglishName = null;
     this.arabicFieldDescription = null;
     this.englishFieldDescription = null;
-   
+    this.fieldType = null;
+    this.fieldId = null;   
 
   }
+
+// Getter and Setter for FieldType
+getFieldType() {
+    if (this.fieldType == null) {
+        this.fieldType =Constants.COMPLEX_FIELD
+        // global.testConfig.createField.fieldArabicName +" "+ this.utils.generateRandomArabicString(5)+" "+"أوتو";
+    }
+    return this.fieldType;
+    }
+setFieldType(value) {
+      this.fieldType = value;
+    }
 
   // Getter and Setter for FieldArabicName
   getArabicFieldName() {
@@ -56,6 +71,15 @@ export class FieldData {
         this.englishFieldDescription = value;
         }
 
+    // Getter and Setter for Field ID Number
+    getCreatedFieldId() {
+        return this.fieldId;
+    }
+
+    // Setter for FieldID
+    setCreatedFieldId(Value) {
+        this.fieldId = Value;
+    }
 
 
 

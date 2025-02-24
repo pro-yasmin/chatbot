@@ -1,5 +1,7 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../../src/Pages/AdminPortal/LoginPage');
+import Constants from '../../src/Utils/Constants';
+
+const { LoginPage } = require('../../src/Pages/LoginPage');
 const { HomePage } = require('../../src/Pages/AdminPortal/HomePage');
 const { FieldLibraryUpdateRequestsPage } = require('../../src/Pages/AdminPortal/FieldLibraryUpdateRequests/FieldLibraryUpdateRequestsPage');
 const { FieldRequestsPage } = require('../../src/Pages/AdminPortal/FieldLibraryUpdateRequests/FieldRequestsPage');
@@ -10,7 +12,7 @@ const { FieldData } = require("../../src/Models/AdminPortal/FieldData");
 let loginPage;
 let homePage;
 let fieldLibraryUpdateRequestsPage , fieldRequestsPage;
-let fieldPage ,fieldData;
+let fieldPage ,complexFieldData ,InputFieldData;
 
 test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
@@ -18,7 +20,11 @@ test.beforeEach(async ({ page }) => {
     fieldLibraryUpdateRequestsPage = new FieldLibraryUpdateRequestsPage(page);
     fieldRequestsPage = new FieldRequestsPage(page);
     fieldPage = new FieldPage(page);
-    fieldData = new FieldData(page);
+    complexFieldData = new FieldData(page);
+    InputFieldData = new FieldData(page);
+
+    complexFieldData.setFieldType(Constants.COMPLEX_FIELD) ;
+    InputFieldData.setFieldType(Constants.INPUT_FIELD) ;
 
     var baseUrl = global.testConfig.BASE_URL;
     var adminusername = global.testConfig.FIELD_MANAGEMENT_SPECIALIST;
@@ -36,18 +42,20 @@ test.beforeEach(async ({ page }) => {
 
 test('complex field', async ({ page }) => {
     
-        await homePage.navigateToSocialRegistryServices();
-        await homePage.navigateToFieldLibraryRequestsPage();
+        await homePage.navigateToFieldLibraryRequests();
         console.log('Navigate to Field Library Update Requests page');
         await fieldLibraryUpdateRequestsPage.navigateToFieldRequestsPage();
         console.log('Navigate to Request Update Field Library Page');
-        await fieldRequestsPage.navigateToFieldPage();
+        await fieldRequestsPage.createField(complexFieldData );
+        await fieldRequestsPage.createField(InputFieldData );
+        await fieldRequestsPage.checkFieldRowDetails(complexFieldData)
+        await fieldRequestsPage.checkFieldRowDetails(InputFieldData)
+        var sendFieldsToApprove = await fieldRequestsPage.sendRequestToApproval();
         console.log('Navigate to Complex Field Page');
-        await fieldPage.fillFieldDataDefinition(fieldData);
-
+        expect(sendFieldsToApprove).toBe(true);
+        // 
 
 });
-
 
 /**
  * Test teardown: Logs out of the admin portal after each test.

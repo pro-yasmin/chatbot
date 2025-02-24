@@ -224,6 +224,11 @@
     "fieldArabicName": "حقل جديد",
     "fieldEnglishName": "New filed",
     "arabicFieldDescription": "وصف حقل جديد",
-    "englishFieldDescription": "New field Description"
+    "englishFieldDescription": "New field Description",
+    "createAnotherFieldMsg" : "هل ترغب بإضافة حقول فرعية جديدة",
+    "confirmaCreateFieldMsg" : "تم تعريف الحقل بنجاح.",
+    "sendRequestBtnTxt":"إرسال الطلب للموافقة",
+    "sendFieldMsg" :"تم إرسال طلبك"
+    
   }
 }

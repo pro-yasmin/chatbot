@@ -1,5 +1,6 @@
+import Constants from '../../../Utils/Constants.js';
 
-// const { PopUpPage } = require("../../SharedPages/PopUpPage");
+const { PopUpPage } = require("../../AdminPortal/SharedPages/PopUpPage.js");
 
 /**
  * Represents the Field page and manages the creation of new Field,
@@ -10,50 +11,35 @@ export class FieldPage {
   constructor(page) {
     this.page = page;
 
-    // Selectors for metadata section
+    // Selectors for field data defination section
     this.arabicFieldName = '//input[@name="data[arabicFieldName]"]';
     this.englishFieldName = '//input[@name="data[englishFieldName]"]';
-    this.fieldType ='//div[contains(@class, "ui fluid selection dropdown")][.//select[@name="data[fieldType]"]]';
+    this.dataMenuOptionsLocator='.choices__list.is-active .choices__item.choices__item--selectable';
+    this.fieldTypeMenu ='//div[contains(@class, "ui fluid selection dropdown")][.//select[@name="data[fieldType]"]]';
     this.parentLocator ='//input[@data-testid="assigned-domain"]';
     this.fieldNature ='//div[contains(@class, "ui fluid selection dropdown")][.//select[@name="data[fieldNature]"]]';
     this.arabicFieldDescription = '//textarea[@name="data[arabicFieldDescription]"]';
     this.englishFieldDescription = '//textarea[@name="data[englishFieldDescription]"]';
     this.fieldDataDefinitionBtn ='//button[@data-testid="next-button"]';
-    // Selectors for targeting data section
-    this.defineTargetingDataBtn ='//button[contains(text(),"تعريف بيانات الاستهداف")]';
-    // Selectors for Field features section
-    this.assessmentNeedinput ='//input[@name="assessmentNeed" and @value="false"]';
-    this.meritRecurrencePattern ='//div[@id="mui-component-select-entitlementPeriod.pattern"]';
-    // this.meritRecurrenceStartDate = '//button[@aria-label="Choose date"][1]';
-    // this.meritRecurrenceEndDate = '//button[@aria-label="Choose date"][1]'; 
-    this.meritRecurrenceStartDate = '//button[@aria-label="picker-button-entitlementPeriod.startDate"]';
-    this.meritRecurrenceEndDate = '//button[@aria-label="picker-button-entitlementPeriod.endDate"]';
-    this.selectDateBtn = '//button[contains(text(),"تحديد")]';
-    this.FieldRecurrenceRate = '//div[@id="mui-component-select-pace.value"]';
-    this.FieldLimitationRate ='//input[@name="pace.children.0" and @value="ongoing"]';
-    this.aidRecurrencePattern ='//div[@id="mui-component-select-frequencyOfPeriodic.pattern"]';
-    // this.aidRecurrenceStartDate = '//button[@aria-label="Choose date"][1]';
-    // this.aidRecurrenceEndDate = '//button[@aria-label="Choose date"][1]';
-     this.aidRecurrenceStartDate = '//button[@aria-label="picker-button-frequencyOfPeriodic.startDate"][1]';
-    this.aidRecurrenceEndDate = '//button[@aria-label="picker-button-frequencyOfPeriodic.endDate"][1]';
-    this.mechanismFieldamount ='//div[@id="mui-component-select-calculation.FieldCalculationMechanism"]';
-    this.FieldReceivingEntity ='//div[@id="mui-component-select-receivingEntity"]';
-    this.entity = '//input[@name="entity"]';
-    this.featuresActivationDate = '//button[@aria-label="Choose date"][1]';
-    this.featuresEndDate = '//button[@aria-label="Choose date"][1]';
-    this.applicationEnablement ='//input[@name="applicationEnablement"and @value="PERMANENT"]';
-    this.requireRegistrarApplication ='//input[@name="requireRegisterApplication"and @value="true"]';
-    this.applicationChannels ='//div[@id="mui-component-select-applicationChannelCodes"]';
-    this.defineFieldFeaturesBtn = '//button[@data-testid="next-button"]';
+    // Selectors for field settings
+    this.classification ='//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[classification]"]]';
+    this.settingMenuOptionsLocator = '.choices__list[role="listbox"] .choices__item.choices__item--selectable';
+    this.requierdOptionBtn ='//span[contains(text(),"إجباري")]';
+    this.multipleFieldBtn ='(//span[contains(text(),"نعم")])[1]';  
+    this.periodicDataUpdate = '//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[periodicDataUpdate]"]]';
+    this.dataMenuSettings ='.choices__list.is-active .choices__item.choices__item--selectable[role="option"]'
+    this.privacy ='//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[privacy]"]]';
+    this.impactDegree = '//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[impactDegree]"]]'
+    this.DataMenuesettingsSeverity  ='//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[severity]"]]';
+    this.fieldSettingDefinationBtn='//button[@data-testid="next-button"]';
+    // Selectors for field Display
+    this.fieldDisplyBtn ='//button[@data-testid="next-button"]';
 
-    // Selectors for review and submission
-    this.createFieldBtn = '//button[@data-testid="next-button"]';
-    this.successPopupTitle = '//span[@id="modal-modal-title"]';
-    this.backToFieldList ='//button[contains(text(),"العودة لقائمة الإعانات")]';
+    this.addAnotherField ='//button[@data-testid="confirmation-modal-primary-button"]';
+    this.backToFieldRequestPage ='//button[@data-testid="confirmation-modal-secondary-button"]';
+    this.doneButton = '//button[@data-testid="modal-primary-button"]';
+  
   }
-
-  //     var popUpMsg = new PopUpPage(this.page);
-
 
   /**
    * fill Field Data Definition using the provided data.
@@ -65,108 +51,78 @@ export class FieldPage {
     // Retrieve Field names from the provided data
     var createdFieldArName = fieldData.getArabicFieldName();
     var createdFieldEnName = fieldData.getEnglishFieldName();
+    var fieldType = fieldData.getFieldType();
 
-    // Fill metadata section
+
+    // Fill Field Data Definition section
     await this.page.fill(this.arabicFieldName, createdFieldArName);
     await this.page.fill(this.englishFieldName, createdFieldEnName);
-    await this.selectDropdownOption(this.fieldType);
-    await this.selectParentOption(this.parentLocator);
-    await this.selectDropdownOption(this.fieldNature);
+    await this.selectDropdownOption(this.fieldTypeMenu , this.dataMenuOptionsLocator);
+    if (fieldType === Constants.COMPLEX_FIELD ) {
+        await this.selectParentOption(this.parentLocator);}
+    await this.selectDropdownOption(this.fieldNature,this.dataMenuOptionsLocator);
     await this.page.fill(this.arabicFieldDescription, fieldData.getArabicFieldDescription());
     await this.page.fill(this.englishFieldDescription, fieldData.getEnglishFieldDescription());
     await this.page.click(this.fieldDataDefinitionBtn);
-    
+    await this.page.waitForTimeout(1000);
+
     fieldData.setArabicFieldName(createdFieldArName);
     fieldData.setEnglishFieldName(createdFieldEnName);
-  }
-  //   // Fill targeting data section
-  //   await this.page.waitForTimeout(3000);
-  //   await this.page.waitForSelector(this.defineTargetingDataBtn, {state: "visible"});
-  //   await this.page.click(this.defineTargetingDataBtn);
-  //   await this.page.waitForTimeout(3000);
-
-  //   // Fill Field features section
-  //   await this.page.waitForSelector(this.assessmentNeedinput, { state: "visible"});
-  //   await this.page.click(this.assessmentNeedinput);
-  //   await this.selectDropdownOption(this.meritRecurrencePattern);
-  //   await this.page.waitForSelector(this.meritRecurrenceStartDate, {state: "visible" });
-  //   await this.selectTodayDateWithBtn(this.meritRecurrenceStartDate);
-  //   await this.selectTodayDateWithBtn(this.meritRecurrenceEndDate);
-  //   await this.selectDropdownOption(this.FieldRecurrenceRate);
-  //   await this.page.click(this.FieldLimitationRate);
-  //   await this.selectDropdownOption(this.aidRecurrencePattern);
-  //   await this.page.waitForSelector(this.aidRecurrenceStartDate, { state: "visible"});
-  //   await this.selectTodayDateWithBtn(this.aidRecurrenceStartDate);
-  //   await this.selectTodayDateWithBtn(this.aidRecurrenceEndDate);
-  //   await this.selectDropdownOption(this.mechanismFieldamount);
-  //   await this.selectDropdownOption(this.FieldReceivingEntity);
-  //   await this.page.waitForSelector(this.entity, { state: "visible" });
-  //   await this.page.fill(this.entity, FieldData.getentity());
-  //   await this.selectTodayDate(this.featuresActivationDate);
-  //   await this.selectTodayDate(this.featuresEndDate);
-  //   await this.page.click(this.applicationEnablement);
-  //   await this.page.click(this.requireRegistrarApplication);
-  //   await this.selectDropdownOption(this.applicationChannels);
-  //   await this.page.keyboard.press("Tab");
-  //   await this.page.click(this.defineFieldFeaturesBtn);
-  //   await this.page.waitForTimeout(5000);
-
-  //   // Submit and review data
-  //   await this.page.click(this.defineFieldFeaturesBtn);
-  //   await this.page.waitForTimeout(5000);
-
-  //   FieldData.setArabicFieldName(createdFieldArName);
-  //   FieldData.setEnglishFieldName(createdFieldEnName);
-
-  //   var result = await popUpMsg.popUpMessage(this.backToFieldList,global.testConfig.createField.FieldSuccessMsg);
-  //   return result;
-  // }
-
-  /**
-   * Selects today's date in a date picker.
-   * @param {string} dateLocator - The selector for the date picker button.
-   * @returns {Promise<void>} - Completes the date selection.
-   */
-  async selectTodayDate(dateLocator) {
-    await this.page.click(dateLocator);
-    await this.page.waitForTimeout(2000);
-    await this.page.waitForSelector('//div[@role="grid"]', {state: "visible",});
-    await this.page.click(
-      '//button[@role="gridcell" and not(contains(@class, "Mui-disabled"))]'
-    );
+    console.log("Filling Data Definition Ending ")
   }
 
   /**
-   * Selects today's date in a date picker and confirms the selection.
-   * @param {string} dateLocator - The selector for the date picker button.
-   * @returns {Promise<void>} - Completes the date selection and confirmation.
+   * fill Field Settings using the provided data.
+   * @returns {Promise<boolean>} - Returns true if the filed data is created successfully.
    */
-  async selectTodayDateWithBtn(dateLocator) {
-    await this.page.click(dateLocator);
-    await this.page.waitForTimeout(2000);
-    await this.page.waitForSelector('//div[@role="grid"]', { state: "visible",});
-    await this.page.click('//button[@role="gridcell" and @aria-current="date"]' );
-    await this.page.click(this.selectDateBtn);
-  }
+  async fillFieldSettings() {
 
+    // Fill Field Data Definition section
+    await this.selectDropdownOption(this.classification , this.settingMenuOptionsLocator);
+    await this.page.click(this.requierdOptionBtn);
+    await this.page.click(this.multipleFieldBtn);
+    await this.selectDropdownOption(this.periodicDataUpdate ,this.dataMenuSettings);
+    await this.selectDropdownOption(this.privacy ,this.dataMenuSettings );
+    await this.selectDropdownOption(this.impactDegree  ,this.dataMenuSettings );
+    await this.selectDropdownOption(this.DataMenuesettingsSeverity ,this.dataMenuSettings);
+    await this.page.click(this.fieldSettingDefinationBtn);
+    console.log("Filling Field Settings Ending ");
+  }
+  
+  /**
+   * fill Field Settings using the provided data.
+   * @returns {Promise<boolean>} - Returns true if the filed data is created successfully.
+   */
+  async fieldDisplay(fieldData) {
+    let fieldType = fieldData.getFieldType();
+
+    await this.page.waitForTimeout(2000); 
+    await this.page.click(this.fieldDisplyBtn);
+    console.log("Field Display Ending ");
+    await this.page.waitForTimeout(2000); 
+    var popUpMsg = new PopUpPage(this.page);
+
+    if (fieldType === Constants.COMPLEX_FIELD ) {
+      var result = await popUpMsg.popUpMessage( this.addAnotherField,global.testConfig.createField.createAnotherFieldMsg);  }
+    else if (fieldType === Constants.INPUT_FIELD ){
+    var result = await popUpMsg.popUpMessage(this.doneButton,global.testConfig.createField.confirmaCreateFieldMsg);}
+    // var result = await popUpMsg.popUpMessage(this.backToFieldRequestPage,global.testConfig.createField.createAnotherFieldMsg);}
+    return result;
+  }
+  
   /**
    * Selects the first available option from a dropdown menu.
    * @param {string} dropdownLocator - The selector for the dropdown element.
    * @returns {Promise<void>} - Completes the dropdown selection.
    */
-  async selectDropdownOption(dropdownLocator) {
+  async selectDropdownOption(dropdownLocator ,menuOptionsLocator) {
     await this.page.click(dropdownLocator);
-    await this.page.waitForTimeout(2000);
-    var optionsLocator = `//div[contains(@class, "choices__item") and contains(@class, "choices__item--selectable")and (@role="option")]`;
-   var print = optionsLocator.textcontent 
-    console.log()
-    await this.page.waitForSelector(optionsLocator, { state: "visible" });
-    const firstOption = await this.page.locator(optionsLocator).first();
-    await firstOption.click();  }
-    
-    
-    
-    
+    await this.page.waitForTimeout(1000); 
+    var optionsLocator = this.page.locator(menuOptionsLocator);
+    await optionsLocator.first().waitFor({ state: "visible", timeout: 5000 });
+    await optionsLocator.first().click({ force: true });
+    await this.page.waitForTimeout(500);
+}
 
   /**
    * Selects the value option from a fields tree.
@@ -184,7 +140,42 @@ export class FieldPage {
     await personalDataItem.waitFor({ state: 'visible', timeout: 5000 });
     await personalDataItem.click();
     await this.page.waitForTimeout(1000);
-    await this.page.locator('//button[contains(text(),"اختيار")]').click();
+    await this.page.locator('//div[contains(@class,"MuiDialogAction")]//button[1]').click();
   }
+
+  /**
+   * Creates a new lookup entry by filling in the necessary information.
+   * @param {Object} lookupData - The data required to create the lookup.
+   * @returns {Promise<boolean>} - Returns true if the lookup design and item creation were successful, otherwise false.
+   */
+  async creationField(fieldData, fieldType) {
+    var fieldDataDefinition, fieldSettings, fieldDisplay, fieldList, addFields, integrationData;
+
+    
+    // Common steps for all applicable field types
+    if (
+        fieldType === Constants.INTEGRATION_FIELD ||
+        fieldType === Constants.INPUT_FIELD ||
+        fieldType === Constants.CALCULATION_FIELD ||
+        fieldType === Constants.COMPLEX_FIELD ||
+        fieldType === Constants.GROUP_FIELD
+    ) {
+        fieldDataDefinition = await this.fillFieldDataDefinition(fieldData);
+        fieldSettings = await this.fillFieldSettings();
+        fieldDisplay = await this.fieldDisplay(fieldData);
+
+        if (fieldDisplay) return true 
+         
+    }
+
+    
+    // Handle additional fields for complex and group types
+    // if (fieldType === Constants.COMPLEX_FIELD || fieldType === Constants.GROUP_FIELD) {
+    // if (fieldType === Constants.COMPLEX_FIELD ) {
+    //     addFields = await this.addFields();
+    // }
+
+    // return result;
+}
 
 }
