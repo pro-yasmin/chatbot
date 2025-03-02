@@ -50,7 +50,7 @@ export class FieldRequestsPage {
                 break;
         }
         // Click on the field Btn
-        await this.page.waitForSelector(this.defineNewFieldButton, {state: "visible",timeout: 2000});
+        await this.page.waitForSelector(this.defineNewFieldButton, {state: "visible",timeout: 5000});
         await this.page.click(this.defineNewFieldButton);
         await this.page.waitForSelector(fieldLocator, { state: "visible", timeout: 5000 });
         await this.page.click(fieldLocator);
@@ -59,16 +59,19 @@ export class FieldRequestsPage {
 
     async createField(fieldData ) {
         let fieldType = fieldData.getFieldType();
+        await this.page.waitForTimeout(2000);
         await this.navigateToFieldPage(fieldData);
         
         if ([Constants.GROUP_FIELD,Constants.INPUT_FIELD, Constants.COMPLEX_FIELD].includes(fieldType)) {
             var fieldPage = new FieldPage(this.page);
-            await fieldPage.creationField(fieldData, fieldType);
+           return result = await fieldPage.creationField(fieldData, fieldType);
+     
         } 
         else if ([Constants.INTEGRATION_FIELD, Constants.CALCULATION_FIELD].includes(fieldType)) {
             // Redirect to the list of available fields page if calculation
             // Redirect to Integration data list page if integrated
             //
+            return true
         }  
     }
 
@@ -100,7 +103,7 @@ export class FieldRequestsPage {
             fieldData.setCreatedFieldId(fieldId.trim());
             
             console.log(`Created Field ID set in FieldData: ${fieldId.trim()}`);
-            return true;
+            return fieldId;
         }
 
         console.log("Field name verification failed.");
@@ -118,8 +121,8 @@ export class FieldRequestsPage {
         var getRequestNumber = await this.getRequestNumber(this.fullFinalMegLocator);
         var popUpMsg = new PopUpPage(this.page);
         if (getRequestNumber)
-            {var result = await popUpMsg.popUpMessage( this.confirmSendMeg,global.testConfig.createField.sendFieldMsg); 
-            return result}
+            {await popUpMsg.popUpMessage( this.confirmSendMeg,global.testConfig.createField.sendFieldMsg); 
+            return getRequestNumber}
         else return false;
     }
 

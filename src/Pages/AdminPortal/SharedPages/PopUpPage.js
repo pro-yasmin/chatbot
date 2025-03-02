@@ -32,10 +32,28 @@ export class PopUpPage {
   async inputPopUpMessage(inputMsgLocator, actionButton, inputMsg) {
     await this.page.waitForTimeout(2000);
     const textAreaLocator = this.page.locator(inputMsgLocator);
-    await textAreaLocator.waitFor({ state: "visible", timeout: 30000 });
+    await textAreaLocator.waitFor({ state: "visible", timeout: 50000 });
     await textAreaLocator.fill(inputMsg);
     await this.page.click(actionButton);
     await this.page.waitForTimeout(3000);
   }
+
+  async fieldPopUpMessage() {
+
+    const popupTabs = this.page.locator('[role="dialog"] [role="tablist"] button');
+
+    await popupTabs.first().waitFor({ state: 'visible', timeout: 5000 });
+
+    const tabCount = await popupTabs.count();
+
+    for (let i = 0; i < tabCount; i++) {
+        const tab = popupTabs.nth(i);
+        await tab.scrollIntoViewIfNeeded();
+        await tab.click();
+        await this.page.waitForTimeout(500); // Small wait after each click
+    }
+
+  }
+
 }
 module.exports = { PopUpPage };

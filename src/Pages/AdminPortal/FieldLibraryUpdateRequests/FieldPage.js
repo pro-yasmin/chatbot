@@ -117,7 +117,7 @@ export class FieldPage {
    */
   async selectDropdownOption(dropdownLocator ,menuOptionsLocator) {
     await this.page.click(dropdownLocator);
-    await this.page.waitForTimeout(1000); 
+    await this.page.waitForTimeout(3000); 
     var optionsLocator = this.page.locator(menuOptionsLocator);
     await optionsLocator.first().waitFor({ state: "visible", timeout: 5000 });
     await optionsLocator.first().click({ force: true });

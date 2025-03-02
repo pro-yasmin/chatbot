@@ -212,5 +212,88 @@ async getExpectedTaskType (taskType){
     return expectedType;
     }
 
+
+
+
+     /**
+ * Ensures that a task is either accepted or rejected and its status is updated accordingly.
+ * @param {string} fieldType - The type of the task (Complex , Input).
+ * @param {string} fieldNumber - The unique identifier of the task.
+ * @param {string} actionType - The action to perform ('approve' or 'reject').
+ * @returns {Promise<boolean>} - Returns true if the task is processed successfully.
+ */
+async ensureFieldTaskStatus(taskType, actionType , fieldNumber) {
+  let expectedStatus;
+ // await this.navigateToGroupTasksTab();
+  await this.navigateToMyCompletedTasksTab();
+
+  // Find the task row in the table
+  //await this.page.waitForTimeout(2000);
+  let fieldRow = await this.search.getRowInTableWithSpecificText(fieldNumber);
+  var actionLocator = "button";
+ 
+  await this.search.clickRowAction(fieldRow, this.tableActions,actionLocator);
+
+  // Check if the status is updated accordingly
+  expectedStatus = global.testConfig.creteField.requestStatusComplete;
+  var result = await this.taskDetailsPage.checkFieldRequesttStatus(expectedStatus);
+
+  // Check if the status is updated accordingly
+  var result = await this.taskDetailsPage.checkFieldDecisionStatus(taskType,fieldType);
+  // Log the result based on the action
+  if (result) {
+    if (actionType === Constants.APPROVE) {
+      console.log("Task is accepted, Enablement Status is Active now");
+    } else if (actionType === Constants.REJECT) {
+      console.log(
+        `Task is rejected, Enablement Status is still ${expectedStatus}`
+      );
+    }
+  }
+
+  return result;
+}
+
+/**
+ * Handles task approval or rejection.
+ * @param {string} taskType - The type of the task (stream, mainProgram, subProgram, benefit).
+ * @param {string} taskNumber - The unique identifier of the task.
+ * @param {string} actionType - The action to perform ('approve' or 'reject').
+ * @returns {Promise<boolean>} - Returns true if the task is processed successfully.
+ */
+
+// take map and pass it to 282
+async manageRequestField(requestNumber ,fieldsMap) {
+  let status;
+  let taskStatus;
+  
+
+  //await this.navigateToMyCompletedTasksTab();
+  await this.navigateToMyTasksTab();
+  
+  let taskRow = await this.search.getRowInTableWithSpecificText(requestNumber);
+
+  var actionLocator =  "button";
+  await this.search.clickRowAction(taskRow,this.tableActions, actionLocator);
+  console.log(`Navigate To Task Details Page Successfully`);
+
+  var initialTaskStatus = global.testConfig.createField.requestStatusProcessing;
+  status = await this.taskDetailsPage.checkFieldRequesttStatus(initialTaskStatus);
+  fieldsMap 
+  // Call the completeTask method with the corresponding task type and action
+  taskStatus = await this.taskDetailsPage.processFields(fieldID1, taskType1);
+  taskStatus = await this.taskDetailsPage.processFields( fieldID2,taskType2);
+
+  // ensureStatus = await this.ensureFieldTaskStatus(taskType, actionType ,taskNumber);
+
+  // If all steps are successful, return true && ensureStatus && requestType
+  if (status && taskStatus ) {return true;}
+
+  return false;
+}
+
+
+    
+
 }
 module.exports = { TasksPage };
