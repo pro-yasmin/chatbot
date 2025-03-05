@@ -43,7 +43,7 @@ export class TaskDetailsPage {
 
     //selectors for fields Tasks
     this.fieldRequestStatusIcon = '//span[@data-testid="status-processing"]';
-    this.fieldRequestStatus = '//span[@class="MuiTypography-root MuiTypography-p-md-bold muirtl-17ykn84"][contains(text(),"معالجة")]';
+    this.fieldRequestStatus = '(//span[@class="MuiTypography-root MuiTypography-p-md-bold muirtl-17ykn84"])[6]';
     this.tableActions='tag';
     this.acceptFieldTaskBtn ='//button[contains(text(),"قبول الحقل")]';
     this.rejectFieldTaskBtn='//button[contains(text(),"رفض الحقل")]';
@@ -171,18 +171,16 @@ async completeTask(actionType, taskType , confirmMsg) {
    * @param {string} expectedStatus - The expected Request status.
    * @returns {Promise<boolean>} - Returns true if the status matches; otherwise, false.
    */
-  async checkFieldRequesttStatus( expectedStatus) {
+  async checkFieldRequestStatus( expectedStatus) {
   // Wait for the status element to be visible
   await this.page.waitForTimeout(6000);
-  // var statusElement = this.page.locator(await this.getstatusLocator(taskType));
-  var fieldStatusIcon = this.page.locator(this.fieldRequestStatusIcon);
+
   var fieldStatus = this.page.locator(this.fieldRequestStatus);
-  var fieldStatusIcon = this.page.locator(this.fieldRequestStatusIcon);
+
   await fieldStatus.waitFor({ state: "visible", timeout: 30000  });
-  var actualStatusIcon = await fieldStatusIcon.textContent();
   var actualStatus = await fieldStatus.textContent();
-   if (actualStatus.trim() === expectedStatus.trim() && actualStatusIcon.trim() === expectedStatus.trim()) {
-         console.log(`Enablement Status is as expected: "${actualStatus.trim()}".`);
+   if (actualStatus.trim() === expectedStatus.trim()) {
+         console.log(`Request Status is as expected: "${actualStatus.trim()}".`);
          return true;
       }
       return false
@@ -218,66 +216,61 @@ async completeFieldTask(actionType) {
 }
 
 
-async processFields(fieldID1, fieldID2, actionType1,actionType2) {
-  // Array of field IDs to process
-  const fieldIDs = [fieldID1, fieldID2];
-  const actions = [ actionType1, actionType2 ];
-    
-    let index = 0;
-    for (const fieldID of fieldIDs) {
-        console.log(`Searching for field: ${fieldID}`);
+async processFields(fieldID,actionType) {
 
-        // Search for the field and get its row
-        let fieldRow = await this.search.getRowInTableWithSpecificText(fieldID);
-        if (!fieldRow) {
-            console.error(`Field ${fieldID} not found.`);
-            continue; // Skip to the next field if not found
-        }
-        console.log(`Found row for field: ${fieldID}`);
+  let fieldRow = await this.search.getRowInTableWithSpecificText(fieldID);
+ var lastTd  = fieldRow[fieldRow.length - 1].tdLocator;
+  // Click the button inside the last <td>
+  const actionButton = lastTd.locator('button');
+  await actionButton.waitFor({ state: 'visible', timeout: 5000 });
+  await actionButton.click();
 
-        let lastTd = fieldRow[fieldRow.length - 1].tdLocator;
-        // var makeDecision = "button.MuiButtonBase-root";
-            // var makeDecision = "td:last-of-type button"; // More reliable selector
-            let makeDecision = lastTd.locator("button");
-            await makeDecision.waitFor({ state: "visible", timeout: 5000 });
-            await makeDecision.click();
-            console.log(`Clicked action button for field: ${fieldID}`);
+  console.log(`Clicked action button for field: ${fieldID}`);
+
+  // Complete the task (either APPROVE or REJECT)
+  var result =   await this.completeFieldTask(actionType);
+  return result;
+}
 
 
-        // Execute different tasks based on iteration index
-        await this.completeFieldTask(actions[index]);
+ 
+ async clickOnProcessRequrstBtn() {
+  await this.page.waitForSelector(this.processingRequestBtn,{ state: 'visible', timeout: 5000 });
+  await this.page.click(this.processingRequestBtn);
+  return true;
+}
 
-        console.log(`Task completed for field: ${fieldID}`);
+async checkFieldsDecisionStatus(fieldsMap ) {
+let fieldsMatched = true ;
+   // Process each field from the map
+   for (const [fieldID, actionType] of fieldsMap.entries()) {
 
-        index++; // Increment index for the next iteration
+    var expectedStatus = actionType === Constants.APPROVE
+    ? global.testConfig.createField.desitionStatusAccepted
+    : global.testConfig.createField.desitionStatusRejected;
+
+      // Retrieve details for both rows using their row IDs
+    let rowDetails = await this.search.getRowInTableWithSpecificText(fieldID);
+      // Assuming the enablement status
+    let rowStatus = await rowDetails[5].tdLocator.textContent();
+    console.log(`Row Field Status (ID:  ${fieldID} ) is ${rowStatus}`);
+
+      if (rowStatus.trim() === expectedStatus.trim()) {
+        console.log(`Desition Status for Field ID ${fieldID} is as expected: "${expectedStatus}"`);
+      } else {
+        console.error(`Desition Status mismatch for Field ID ${fieldID}. Expected: "${expectedStatus}", Found: "${rowStatus.trim()}"`);
+        fieldsMatched = false;
+      }
     }
-    await this.page.waitForSelector(this.processingRequestBtn,{ state: 'visible', timeout: 5000 });
-    await this.page.click(this.processingRequestBtn);
-}
 
+    if (fieldsMatched) {
+      console.log("All fields have the correct decision status.");
+    } else {
+      console.error("One or more fields have incorrect decision status.");
+    }
 
-async checkFieldDecisionStatus(rowId1, rowId2, fieldType ) {
-  // Retrieve details for both rows using their row IDs
-  let row1Details = await this.search.getRowInTableWithSpecificText(rowId1);
-  let row2Details = await this.search.getRowInTableWithSpecificText(rowId2);
-
-  // Assuming the enablement status
-  let row1Status = await row1Details[5].tdLocator.textContent();
-  let row2Status = await row2Details[5].tdLocator.textContent();
-
-  // Log the status for fields
-  console.log(`Row 1 Status (ID: ${rowId1}): ${row1Status}`);
-  console.log(`Row 2 Status (ID: ${rowId2}): ${row2Status}`);
-
-  // Compare the extracted values with the expected status
-  // if fieldType complex -->ApprovedDecisionStatus
-  // if fieldType input -->rejectedDecisionStatus
- {
-      return true;
+    return fieldsMatched;
   }
-  return false;
-}
-
 
 }
 module.exports = { TaskDetailsPage };

@@ -1,8 +1,14 @@
 const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage.js");
+const { FieldRequestsPage } = require("./FieldRequestsPage");
+const { FieldRequestDetialsPage } = require("./FieldRequestDetialsPage");
 
 export class FieldLibraryUpdateRequestsPage {
     constructor(page) {
         this.page = page;
+        this.search = new SearchPage(this.page);
+        this.fieldRequestsPage = new FieldRequestsPage(this.page);
+        this.fieldRequestDetialsPage = new FieldRequestDetialsPage(this.page);
+        
         this.fieldLibraryUpdateRequestButton = '//button[contains(text(),"طلب تحديث مكتبة الحقول")]';
         this.tableActions='table-actions';
 
@@ -10,18 +16,16 @@ export class FieldLibraryUpdateRequestsPage {
     }
 
     async navigateToFieldRequestsPage() {
-        
-            await this.page.waitForSelector(this.fieldLibraryUpdateRequestButton, { state: "visible", timeout: 5000 });
+            await this.page.waitForSelector(this.fieldLibraryUpdateRequestButton, { state: "visible", timeout: 7000 });
             await this.page.click(this.fieldLibraryUpdateRequestButton, { force: true });
-            console.log("Field Requests Page Opened successfully.");
-       
+            console.log("Field Requests Page Opened successfully.");   
     }
     
 
     async checkFieldRowRequestStatus(ExpectedFieldStatus) {
         let requestTd ,requestType;
         let fieldRow = [];
-        fieldRow = await new SearchPage(this.page).getFirstRow();
+        fieldRow = await this.search.getFirstRow();
 
         if (fieldRow && fieldRow.length > 0) {
             requestTd = fieldRow[5].tdLocator;
@@ -29,7 +33,7 @@ export class FieldLibraryUpdateRequestsPage {
             await requestType.waitFor({ state: "visible" });
             var actualRequestStatus = await requestType.textContent();
         }
-        console.log("The Request Type for created field is: ", actualRequestStatus);
+        console.log("The Request status for created field is: ", actualRequestStatus);
         if (actualRequestStatus === ExpectedFieldStatus) {
             return true;
           }
@@ -48,7 +52,7 @@ export class FieldLibraryUpdateRequestsPage {
 
         fieldRow = await this.search.getRowInTableWithSpecificText(requestNumber);
         var actionlocator = "button";
-        await new SearchPage(this.page).clickRowAction(fieldRow,this.tableActions, actionlocator);
+        await this.search.clickRowAction(fieldRow,this.tableActions, actionlocator);
 
         if (fieldRow && fieldRow.length > 0) {
             actionsTd = fieldRow[6].tdLocator;
@@ -65,7 +69,7 @@ export class FieldLibraryUpdateRequestsPage {
      * Creates Complex and Input fields.
      */// rename it to comple 
      async createComplexFieldRequest(complexFieldData, inputFieldData) {
-        await this.page.navigateToFieldRequestsPage();
+        await this.navigateToFieldRequestsPage();
         var complexFieldCreated = await this.fieldRequestsPage.createField(complexFieldData);
         var inputFieldCreated =await this.fieldRequestsPage.createField(inputFieldData);
         if ( complexFieldCreated && inputFieldCreated )
@@ -74,7 +78,7 @@ export class FieldLibraryUpdateRequestsPage {
             var inputFieldID = await this.fieldRequestsPage.checkFieldRowDetails(inputFieldData);
             var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval();
             console.log('Fields created successfully');
-            return [complexFieldID ,inputFieldID , RequestNumber]
+            return [RequestNumber ,complexFieldID ,inputFieldID]
         }
 
     }
@@ -82,23 +86,17 @@ export class FieldLibraryUpdateRequestsPage {
   /**
      * Validates field details and makes a decision.
      */
-  async validateFieldDetailsAndMakeDecision(complexFieldID, inputFieldID ,expectedRequestStatus ,expectedEnablementStatus) {
+  async validateFieldDetailsAndMakeDecision(requestChecks ,expectedRequestStatus ,expectedEnablementStatus) {
     
-    await this.page.openViewFieldDetailsPage();
-    
+    await this.openViewRequestDetailsPage(requestChecks[0]);
+
     await this.fieldRequestDetialsPage.checkInsideRequestStatus(expectedRequestStatus);
 
-    await this.fieldRequestDetialsPage.checkFieldEnablmentStatus(complexFieldID, inputFieldID, expectedEnablementStatus);
-    
-    await this.fieldRequestDetialsPage.openFieldDetailsPage(complexFieldID);
-    await this.fieldDetialsPage.checkInsideFieldStatus(expectedEnablementStatus);
-    await this.fieldDetialsPage.backtoRequestDetialsPage();
-    await this.fieldRequestDetialsPage.openFieldDetailsPage(inputFieldID);
-    await this.fieldDetialsPage.checkInsideFieldStatus(expectedEnablementStatus);
-
-    var sendRequest = await this.fieldDetialsPage.clickOnMakeDecisionNow();
-    if (sendRequest) {return true;}
-        return false;
+    var sendRequest = await this.fieldRequestDetialsPage.verifyFieldEnablementStatusesAndMakeDecision(requestChecks, expectedEnablementStatus);
+    if (sendRequest) {
+        return true;
+    }
+    return false;
 }
 
 }

@@ -15,10 +15,10 @@
   },
   "tasks": {
     "assignTaskMsg": "هل أنت متأكد من إسناد مهمة",
-    "expectStreamTaskType":"اعتماد مسار",
-    "expectMainProgramTaskType":"اعتماد برنامج رئيسي",
+    "expectStreamTaskType": "اعتماد مسار",
+    "expectMainProgramTaskType": "اعتماد برنامج رئيسي",
     "expectSubProgramTaskType": "اعتماد برنامج فرعي",
-    "expectBenefitTaskType":"اعتماد إعانة"
+    "expectBenefitTaskType": "اعتماد إعانة"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",
@@ -29,12 +29,12 @@
     "confirmStreamMsg": "تم قبول تعريف المسار بنجاح",
     "confirmRejectStreamMsg": "تم رفض تعريف المسار بنجاح.",
     "confirmMainProgramMsg": "تم قبول تعريف البرنامج الرئيسي بنجاح",
-    "confirmRejectMainProgramMsg" :"تم رفض تعريف البرنامج الرئيسي بنجاح.",
-    "confirmRejectSubProgramMsg" :"تم رفض تعريف البرنامج الفرعي بنجاح.",
-    "confirmRejectBenefitMsg" :"تم رفض تعريف الإعانة بنجاح.",
+    "confirmRejectMainProgramMsg": "تم رفض تعريف البرنامج الرئيسي بنجاح.",
+    "confirmRejectSubProgramMsg": "تم رفض تعريف البرنامج الفرعي بنجاح.",
+    "confirmRejectBenefitMsg": "تم رفض تعريف الإعانة بنجاح.",
     "confirmSubProgramsMsg": "تم قبول تعريف البرنامج الفرعي بنجاح",
     "confirmBenefitsMsg": "تم قبول تعريف الإعانة بنجاح",
-    "addCompleteTaskNote":"ملاحظةلاكمال المهمة"
+    "addCompleteTaskNote": "ملاحظةلاكمال المهمة"
   },
   "createMainProgram": {
     "backUpStreamNumber": "PRG_StrSt_296",
@@ -93,14 +93,14 @@
     "applicationChannelCodes": ["14"],
     "periodAfterExistCode": "",
     "reApplyAfterExistCode": "",
-    "viewSubProgramType" : "برنامج قائم دون أي تغيير",
+    "viewSubProgramType": "برنامج قائم دون أي تغيير",
     "viewapplicationEnablementPerm": "دائم",
-    "viewEnablementStatus" :"محجوب",
-    "viewApprovalStatus":"معالجة",
-    "viewActivationStatus":"خامل",
-    "viewAassistanceUnit" :"مجموعة مخصصة",
-    "viewTtargetingApproach" :"شامل",
-    "viewApplicationChannels":"تطبيق جوال المتقدم"
+    "viewEnablementStatus": "محجوب",
+    "viewApprovalStatus": "معالجة",
+    "viewActivationStatus": "خامل",
+    "viewAassistanceUnit": "مجموعة مخصصة",
+    "viewTtargetingApproach": "شامل",
+    "viewApplicationChannels": "تطبيق جوال المتقدم"
   },
   "lookUps": {
     "firstTabArabicName": "قائمه مرجعيه اولى",
@@ -140,7 +140,7 @@
       "providerCodes": ["camp"],
       "providerCodesAr": "كامب",
       "estimatedValue": "القيمة التقديرية للإعانة"
-    },    
+    },
     "relatedPastBenefits": [],
     "subProgramId": "awarenessProgramsAndTrainingsRegardingDrugAddictionmidjyAuto",
     "incomeCategoryCodes": [],
@@ -173,11 +173,11 @@
     "temporaryTo": null,
     "requireRegisterApplication": true,
     "applicationChannelCodes": ["14"],
-    "viewbenefitResponsibleEntity" : "جهة مسؤولة عن التنفيذ جديده",
-    "viewTargetApproach":"شامل",
-    "viewEnablementStatus" :"محجوب",
-    "viewApprovalStatus":"معالجة",
-    "viewActivationStatus":"خامل"
+    "viewbenefitResponsibleEntity": "جهة مسؤولة عن التنفيذ جديده",
+    "viewTargetApproach": "شامل",
+    "viewEnablementStatus": "محجوب",
+    "viewApprovalStatus": "معالجة",
+    "viewActivationStatus": "خامل"
   },
   "stateMachine": {
     "stateManagmentArabicName": "إدارة الحالة باللغة العربية",
@@ -194,7 +194,7 @@
     "stateMachineStatusAvailable": "متاح",
     "stateMachineEditedSuccessMsg": "تم تعديل دورة الحالة بنجاح."
   },
-  "FieldLibrary":{
+  "FieldLibrary": {
     "unlockedField": "ISR_FLib_00000200",
     "lockedField": "ISR_FLib_00000195",
     "fieldEnablementStatusDeactivated": "محجوب",
@@ -206,7 +206,7 @@
     "fieldActivationErrorMsg": "لا يمكن حجب الحقل حيث إنه مرتبط بمكونات أخرى في النظام.",
     "deactivateConfirmationMsgForLockedField": "هل أنت متأكد أنك تريد حجب اوتو حقل؟"
   },
-  "SocialRecordCopies":{
+  "SocialRecordCopies": {
     "socialRecordActiveCopy": "ISR_ISRVR_00000021",
     "socialRecordActiveStatus": "مفعلة",
     "socialRecordDraftStatus": "مسودة",
@@ -220,7 +220,7 @@
     "schemaUpdateSuccessMsg": "تم إرسال تحديث النسخة للموافقة بنجاح.",
     "newAddedFieldTag": "مضاف حديثًا"
   },
-  "SimulationModels":{
+  "SimulationModels": {
     "simulationModelArName": "اسم المحاكاه",
     "simulationModelEnName": "Simulation",
     "simulationModelDescription": "وصف المحاكاه",
@@ -242,20 +242,23 @@
     "simulationModelPDF": "test.pdf",
     "simulationModelCSV": "test.csv"
   },
-  "createField":{
+  "createField": {
     "fieldArabicName": "حقل جديد",
     "fieldEnglishName": "New filed",
     "arabicFieldDescription": "وصف حقل جديد",
     "englishFieldDescription": "New field Description",
-    "createAnotherFieldMsg" : "هل ترغب بإضافة حقول فرعية جديدة",
-    "confirmaCreateFieldMsg" : "تم تعريف الحقل بنجاح.",
-    "sendRequestBtnTxt":"إرسال الطلب للموافقة",
-    "sendFieldMsg" :"تم إرسال طلبك",
-    "requestStatusProcessing":"معالجة",
-    "enableStatusHidden" :"محجوب",
-    "fieldRequestView" :"/social-registry-services/field-requests/67bf860a89b26c12cb68ddad",
-    "addCompleteTaskNote" :"ملاحظةلاكمال المهمة",
-    "confirmApproveMsg":"تم قبول حقل",
-    "confirmRejectMsg":"تم رفض حقل"
+    "createAnotherFieldMsg": "هل ترغب بإضافة حقول فرعية جديدة",
+    "confirmaCreateFieldMsg": "تم تعريف الحقل بنجاح.",
+    "sendRequestBtnTxt": "إرسال الطلب للموافقة",
+    "sendFieldMsg": "تم إرسال طلبك",
+    "requestStatusProcessing": "معالجة",
+    "enableStatusHidden": "محجوب",
+    "fieldRequestView": "/social-registry-services/field-requests/67bf860a89b26c12cb68ddad",
+    "addCompleteTaskNote": "ملاحظةلاكمال المهمة",
+    "confirmApproveMsg": "تم قبول حقل",
+    "confirmRejectMsg": "تم رفض حقل",
+    "requestStatusComplete": "مكتمل",
+    "desitionStatusAccepted": "مقبول",
+    "desitionStatusRejected": "مرفوض"
   }
 }

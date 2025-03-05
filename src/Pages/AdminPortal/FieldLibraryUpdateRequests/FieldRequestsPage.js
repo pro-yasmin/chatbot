@@ -64,8 +64,9 @@ export class FieldRequestsPage {
         
         if ([Constants.GROUP_FIELD,Constants.INPUT_FIELD, Constants.COMPLEX_FIELD].includes(fieldType)) {
             var fieldPage = new FieldPage(this.page);
-           return result = await fieldPage.creationField(fieldData, fieldType);
-     
+            var result = await fieldPage.creationField(fieldData, fieldType);
+            return result ;
+              
         } 
         else if ([Constants.INTEGRATION_FIELD, Constants.CALCULATION_FIELD].includes(fieldType)) {
             // Redirect to the list of available fields page if calculation

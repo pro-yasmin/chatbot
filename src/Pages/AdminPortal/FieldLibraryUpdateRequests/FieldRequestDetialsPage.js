@@ -1,9 +1,12 @@
 const { SearchPage } = require("../SharedPages/SearchPage.js");
+const { FieldDetialsPage } = require("./FieldDetialsPage");
+
 
 export class FieldRequestDetialsPage {
     constructor(page) {
         this.page = page;
         this.search = new SearchPage(this.page);
+        this.fieldDetialsPage =new FieldDetialsPage(this.page);
         this.requestStatusIcon = '//span[@data-testid="status-processing"]'; 
         this.RequestStatusData = '//span[contains(text(),"معالجة")]'; 
     }   
@@ -52,6 +55,28 @@ export class FieldRequestDetialsPage {
         await fieldRow[8].tdLocator.click();
         console.log("Field Detial Page Openned Successfully")
 
+    }
+
+
+    async verifyFieldEnablementStatusesAndMakeDecision(requestChecks, expectedEnablementStatus) {
+        // Check field enablement status on the request details page
+        await this.checkFieldEnablmentStatus(requestChecks[1], requestChecks[2], expectedEnablementStatus);
+    
+        // Check first field's status inside details page
+        await this.openFieldDetailsPage(requestChecks[1]);
+        await this.fieldDetialsPage.checkInsideFieldStatus(expectedEnablementStatus);
+        await this.fieldDetialsPage.backtoRequestDetialsPage();
+    
+        // Check second field's status inside details page
+        await this.openFieldDetailsPage(requestChecks[2]);
+        await this.fieldDetialsPage.checkInsideFieldStatus(expectedEnablementStatus);
+
+        // Navigate to make a decision
+        var sendRequest = await this.fieldDetialsPage.clickOnMakeDecisionNow();
+        if (sendRequest) {
+        return true;
+        }
+        return false;
     }
 
 }

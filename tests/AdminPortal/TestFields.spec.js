@@ -10,7 +10,7 @@ const { TasksPage } = require("../../src/Pages/AdminPortal/Tasks/TasksPage");
 let loginPage, homePage, fieldLibraryUpdateRequestsPage, tasksPage;
 let complexFieldData, inputFieldData;
 let adminUsername, adminPassword;
-let requestChecks , fieldRequestNumber;
+let requestChecks ;
 
 test.beforeEach(async ({ page }) => {
 
@@ -25,6 +25,9 @@ test.beforeEach(async ({ page }) => {
     inputFieldData.setFieldType(Constants.INPUT_FIELD);
 
     const baseUrl = global.testConfig.BASE_URL;
+    // adminUsername = global.testConfig.FIELD_MANAGEMENT_SPECIALIST;
+    // adminPassword = global.testConfig.FIELD_MANAGEMENT_SPECIALIST_PASS;
+ 
     adminUsername = global.testConfig.ADMIN_USER;
     adminPassword = global.testConfig.ADMIN_PASS;
 
@@ -42,7 +45,7 @@ test('Complex and Input Fields Request Flow', async () => {
     await test.step("Navigate to Field Library Requests and Create Fields", async () => {
         await homePage.navigateToFieldLibraryRequests();
         requestChecks = await fieldLibraryUpdateRequestsPage.createComplexFieldRequest(complexFieldData, inputFieldData);
-        expect(requestChecks[2]).not.toBeNull(); 
+        expect(requestChecks[0]).not.toBeNull(); 
     });
 
     await test.step("Validate Field Request Status, Details and Make a Decision ", async () => {
@@ -50,23 +53,30 @@ test('Complex and Input Fields Request Flow', async () => {
         var expectedRequestStatus = global.testConfig.createField.requestStatusProcessing;
         var expectedEnablementStatus = global.testConfig.createField.enableStatusHidden;
         await fieldLibraryUpdateRequestsPage.checkFieldRowRequestStatus(processingStatus);
-        var sendRequest = await fieldLibraryUpdateRequestsPage.validateFieldDetailsAndMakeDecision(requestChecks[0], requestChecks[1] ,expectedRequestStatus ,expectedEnablementStatus);
+        var sendRequest = await fieldLibraryUpdateRequestsPage.validateFieldDetailsAndMakeDecision(requestChecks,expectedRequestStatus ,expectedEnablementStatus);
         expect(sendRequest).toBe(true);
     });
 
     await test.step("Tasks approve and reject", async () => {
         await homePage.navigateToTasks();
-        await tasksPage.assignTaskToMe(requestChecks[2]); 
-       
-      
+        await tasksPage.assignTaskToMe(requestChecks[0]); 
         
-        // var fieldRequestNumber ='ISR_Freq_000001320';
-        // var fieldsID =['ISR_FLib_00000553','ISR_FLib_00000554'];
-        // const myMap = new Map(); myMap.set(requestChecks[1],Constants.APPROVE); myMap.set(requestChecks[0], Constants.REJECT);
+        // var requestChecks =['ISR_Freq_000001320','ISR_FLib_00000553','ISR_FLib_00000554'];
+        const myMap = new Map(); myMap.set(requestChecks[1],Constants.APPROVE); myMap.set(requestChecks[2], Constants.REJECT);
+        var taskManage = await tasksPage.manageRequestField(requestChecks[0],myMap );
+        expect(taskManage).toBe(true);
+        console.log("Field Request Done Successfully");
+    });
 
-        // var taskManage = await tasksPage.manageRequestField(requestChecks[2],myMap );
-        // expect(taskManage).toBe(true);
-        // console.log("Field Request Done Successfully");
+    await test.step("Check fields in field Library and fields Trees", async () => {
+        await homePage.navigateToFieldTree();
+        await tasksPage.assignTaskToMe(requestChecks[0]); 
+        
+        // var requestChecks =['ISR_Freq_000001320','ISR_FLib_00000553','ISR_FLib_00000554'];
+        const myMap = new Map(); myMap.set(requestChecks[1],Constants.APPROVE); myMap.set(requestChecks[2], Constants.REJECT);
+        var taskManage = await tasksPage.manageRequestField(requestChecks[0],myMap );
+        expect(taskManage).toBe(true);
+        console.log("Field Request Done Successfully");
     });
 
 });

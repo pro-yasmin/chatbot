@@ -12,6 +12,7 @@ export class FieldDetialsPage {
 
     async checkInsideFieldStatus(ExpectedFieldStatus) {
         await this.page.click(this.fieldRecordTab);
+        await this.page.waitForTimeout(1000);
 
         var fieldStatusData = await this.page.textContent( this.fieldStatusData);
         console.log(`Request Status Data: ${fieldStatusData.trim()}`);
@@ -22,14 +23,6 @@ export class FieldDetialsPage {
           return false;
     }
     
-    // async clickLinkByHref(hrefValue) {
-
-    //     var linkSelector = `a[href='${hrefValue}']`;
-    //     await this.page.waitForSelector(linkSelector, { state: "visible", timeout: 5000 });
-    //     await this.page.click(linkSelector, { force: true });
-
-    // }
-    // 
     async backtoRequestDetialsPage() {
         
         await this.page.waitForSelector(this.backToRequestDetialsPage, { state: "visible", timeout: 5000 });
