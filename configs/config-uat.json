@@ -23,6 +23,7 @@
   "taskDetails": {
     "enableStatusHidden": "محجوب",
     "enableStatusActive": "متاح",
+    "ReadyForExecution": "جاهز للتنفيذ",
     "note": "تم إضافة ملاحظة جديدة",
     "ensureNoteMsg": "هل أنت متأكد من إضافة الملاحظة؟",
     "confirmNoteMsg": "تم إضافة الملاحظة بنجاح",
@@ -234,13 +235,23 @@
     "defaultValueNumeric": "123456789",
     "variableThreeArName": "المتغير ج",
     "variableThreeEnName": "Variable C",
+    "variableFourArName": "المتغير د",
+    "variableFourEnName": "Variable D",
     "variableThreeDescription": "وصف المتغير",
     "defineSimulationConfirmationMsg": "هل أنت متأكد من تعريف نموذج محاكاة ؟",
     "defineSimulationSuccessMsg": "تم حفظ نموذج المحاكاة بنجاح سيقوم النظام بتعريف مهمة تقنية للنموذج",
     "simulationModelStatusCreated": "معرف",
     "acivationStatusDisabled": "خامل",
+    "simulationModelStatusReady": "جاهز للتنفيذ",
+    "acivationStatusEnabled": "مفعل",
     "simulationModelPDF": "test.pdf",
-    "simulationModelCSV": "test.csv"
+    "simulationModelCSV": "test.csv",
+    "simulationModelSecondCSV": "test2.csv",
+    "assignTaskMsg": "هل انت متأكد من إسناد مهمة",
+    "assignSuccessMsg": "تم إسناد المهمة بنجاح",
+    "descriptionCompleteTaskText": "ملاحظة لإكمال المهمة",
+    "confirmCompleteSimulationBtnSuccessMsgText": "تم إكمال نموذج المحاكاة بنجاح, النموذج الان جاهز للتنفيذ",
+    "editSimulationConfirmationMsg": "هل انت متأكد من تعديل نموذج المحاكاة؟"
     
   }
 }
