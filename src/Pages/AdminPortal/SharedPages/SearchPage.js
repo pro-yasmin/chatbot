@@ -17,11 +17,12 @@ export class SearchPage {
     let tds;
     let tdDetails = [];
     // Step 1: Enter the search value in the input field
-    await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' });
+    await  this.page.waitForTimeout(2000); 
+    await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' , timeout: 10000});
     await this.page.waitForSelector(searchInputSelector, { state: 'visible' }); 
     await this.page.fill(searchInputSelector, searchValue);
     // Step 2: Wait for the table rows to update (assuming the table is dynamically updated)
-    await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' });
+    await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible', timeout: 10000 });
     await  this.page.waitForTimeout(3000); 
      // Step 3: Get all visible rows in the table
      rows = await  this.page.locator(`${this.tableSelector}//tr`).filter({ has: this.page.locator('td') });
