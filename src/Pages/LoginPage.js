@@ -39,9 +39,9 @@ export class LoginPage {
    * @returns {Promise<void>} - Completes the navigation and language setup.
    */
   async gotoOperationPortal(baseUrl) {
-    await this.page.goto(baseUrl, { waitUntil: "networkidle" });
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
-    await this.page.waitForTimeout(1000);
+    await this.page.goto(baseUrl, { waitUntil: "networkidle",timeout:50000 });
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' ,timeout:50000});
+    await this.page.waitForTimeout(3000);
     await this.ensureArabicLanguage();
   }
 
