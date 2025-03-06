@@ -27,8 +27,8 @@ export class LoginPage {
    * @returns {Promise<void>} - Completes the navigation and language setup.
    */
   async gotoAdminPortal(baseUrl) {
-    await this.page.goto(baseUrl, { waitUntil: "networkidle" });
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    await this.page.goto(baseUrl);
+   // await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
     await this.page.waitForTimeout(1000);
     await this.ensureArabicLanguage();
   }
