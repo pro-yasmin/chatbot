@@ -18,7 +18,8 @@ export class SimualtionModelPage {
         this.simulationModelArNameField = '//input[@name="modelData.nameAr"]';
         this.simulationModelEnNameField = '//input[@name="modelData.nameEn"]';
         this.beneficiaryPartyDdl = '//div[@id="mui-component-select-modelData.beneficiaryParty"]';
-        this.beneficiaryPartyDdlFirstValue = '//li[@tabindex="0"]';
+        this.beneficiaryPartyDdlFirstValue = '//li[@data-value="a2"]';
+        this.beneficiaryPartyDdlSecondValue = '//li[@data-value="a1"]';
         this.simulationModelDescriptionField = '//textarea[@name="modelData.description"]';
         this.uploadedFileName = '//td[1]//span';
         this.nextTabButton = '//button[@data-testid="next-button"]';
@@ -167,6 +168,43 @@ export class SimualtionModelPage {
         console.log("End filling Simulation Model information Tab five");
         await this.page.click(this.nextTabButton);
         await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.defineSimulationConfirmationMsg);
+        var result = await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.defineSimulationSuccessMsg);
+        return result;
+    }
+
+    async editSimulationModel(simulationModelData) {
+        await this.page.click(this.beneficiaryPartyDdl);
+        await this.page.waitForSelector(this.beneficiaryPartyDdlFirstValue, { visible: true });
+        await this.page.click(this.beneficiaryPartyDdlSecondValue);
+        console.log("Beneficiary Party changed to second value");
+        await this.page.fill(this.simulationModelDescriptionField, simulationModelData.getEditedSimulationModelDescription());
+        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelPDF, this.attachButton);
+        await this.page.click(this.nextTabButton);
+        console.log("Navigate to Second tab");
+        await this.page.waitForTimeout(3000);
+        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelSecondCSV, this.attachButton);
+        await this.page.click(this.nextTabButton);
+        console.log("Navigate to Third tab");
+        await this.page.waitForTimeout(3000);
+        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelPDF, this.attachButton);
+        await this.page.click(this.nextTabButton);
+        console.log("Navigate to Fourth tab");
+        this.createdVariableOneArName = simulationModelData.getVariableFourArName();
+        this.createdVariableOneEnName = simulationModelData.getVariableFourEnName();
+        this.createdVariableOneDescription = simulationModelData.getVariableOneDescription();
+        this.createdDefaultValueOne = simulationModelData.getDefaultValueOne();
+        await this.page.fill(this.variableArNameField, this.createdVariableOneArName);
+        await this.page.fill(this.variableEnNameField, this.createdVariableOneEnName);
+        await this.page.fill(this.variableDescriptionField, this.createdVariableOneDescription);
+        await this.page.click(this.variableTypeDdl);
+        await this.page.waitForSelector(this.variableTypeDdlTextValue, { visible: true });
+        await this.page.click(this.variableTypeDdlTextValue);
+        await this.page.fill(this.defaultValueField, this.createdDefaultValueOne);
+        await this.page.click(this.addVariableButton);
+        await this.page.click(this.nextTabButton);
+        console.log("Navigate to Fifth tab");
+        await this.page.click(this.nextTabButton);
+        await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.editSimulationConfirmationMsg);
         var result = await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.defineSimulationSuccessMsg);
         return result;
     }
