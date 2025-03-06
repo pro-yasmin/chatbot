@@ -27,7 +27,7 @@ export class LoginPage {
    * @returns {Promise<void>} - Completes the navigation and language setup.
    */
   async gotoAdminPortal(baseUrl) {
-    await this.page.goto(baseUrl, { waitUntil: "networkidle" });
+    await this.page.goto(baseUrl);
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
     await this.page.waitForTimeout(1000);
     await this.ensureArabicLanguage();
@@ -39,9 +39,9 @@ export class LoginPage {
    * @returns {Promise<void>} - Completes the navigation and language setup.
    */
   async gotoOperationPortal(baseUrl) {
-    await this.page.goto(baseUrl, { waitUntil: "networkidle" });
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
-    await this.page.waitForTimeout(1000);
+    await this.page.goto(baseUrl);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' ,timeout:50000});
+    await this.page.waitForTimeout(5000);
     await this.ensureArabicLanguage();
   }
 
@@ -87,7 +87,7 @@ export class LoginPage {
    */
   async ensureArabicLanguage() {
     try {
-      await this.page.waitForLoadState("load");
+      //await this.page.waitForLoadState("load");
       // console.log("Clicking on language menu...");
       await this.page
         .locator(this.changeLangageMenu)

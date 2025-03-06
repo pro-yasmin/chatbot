@@ -22,6 +22,9 @@ export class SimulationModelData {
         this.variableThreeEnName = null;
         this.variableThreeDescription = null;
         this.simulationModelId = null;
+
+        this.variableFourArName = null;
+        this.variableFourEnName = null;
     }
 
     // Getter and Setter for Simulation Model Arabic Name
@@ -57,6 +60,17 @@ export class SimulationModelData {
         this.simulationModelDescription = value;
     }
 
+    // Getter and Setter for Edited Simulation Model Description
+    getEditedSimulationModelDescription() {
+        if (this.simulationModelDescription == null) {
+            this.simulationModelDescription = global.testConfig.SimulationModels.simulationModelDescription + " " + this.utils.generateRandomArabicString(3) + " " + "أوتو";
+        }
+        return this.simulationModelDescription;
+    }
+    setEditedSimulationModelDescription(value) {
+        this.simulationModelDescription = value;
+    }
+
     // Getter and Setter for variable Arabic Name
     getVariableOneArName() {
         if (this.variableOneArName == null) {
@@ -86,6 +100,16 @@ export class SimulationModelData {
         this.variableThreeArName = value;
     }
 
+    getVariableFourArName() {
+        if (this.variableFourArName == null) {
+            this.variableFourArName = global.testConfig.SimulationModels.variableFourArName;
+        }
+        return this.variableFourArName;
+    }
+    setVariableFourArName(value) {
+        this.variableFourArName = value;
+    }
+
     // Getter and Setter for variable English Name
     getVariableOneEnName() {
         if (this.variableOneEnName == null) {
@@ -113,6 +137,15 @@ export class SimulationModelData {
     }
     setVariableThreeEnName(value) {
         this.variableThreeEnName = value;
+    }
+    getVariableFourEnName() {
+        if (this.variableFourEnName == null) {
+            this.variableFourEnName = global.testConfig.SimulationModels.variableFourEnName;
+        }
+        return this.variableFourEnName;
+    }
+    setVariableFourEnName(value) {
+        this.variableFourEnName = value;
     }
 
     // Getter and Setter for variable Description

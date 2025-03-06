@@ -17,13 +17,14 @@ export class SearchPage {
     let tds;
     let tdDetails = [];
     // Step 1: Enter the search value in the input field
+    await  this.page.waitForTimeout(2000); 
     await this.page.fill(searchInputSelector, '');
-    await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' });
+    await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' , timeout: 10000});
     await this.page.waitForSelector(searchInputSelector, { state: 'visible' }); 
     await this.page.fill(searchInputSelector, searchValue);
     // Step 2: Wait for the table rows to update (assuming the table is dynamically updated)
-    await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' });
-    await  this.page.waitForTimeout(5000); //shimaa
+    await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible', timeout: 10000 });
+    await  this.page.waitForTimeout(3000); 
      // Step 3: Get all visible rows in the table
      rows = await  this.page.locator(`${this.tableSelector}//tr`).filter({ has: this.page.locator('td') });
     // Step 4: Ensure only one row is visible
@@ -168,6 +169,41 @@ export class SearchPage {
       });
     }
     return tdDetails;
+  }
+
+
+  /**
+   * Clicks on a specific action within a row.
+   * @param {Array} row - An array containing details of the row's `<td>` elements.
+   * @param {string} parentActionTestId - Data test id for element needs to be clicked or the parent element.
+   * @param {string} subActionLocator - Element needs to be clicked.
+   *  @returns {Promise<void>} - Performs the action without returning a value.
+   */
+  async clickRowActionTemp(row, parentActionTestId ,subActionLocator) {
+    let parentElement;
+    let targetElement;
+    if (!row || row.length === 0) {
+      throw new Error("Row is empty or not found.");
+    }
+  
+    // Loop through the row's <td> elements to find the correct child
+    for (let tdDetail of row) {
+       parentElement = tdDetail.tdLocator.locator(parentActionTestId);
+      
+      if (await parentElement.count() > 0) {
+        if(subActionLocator != null)
+        {
+          targetElement=parentElement.locator(subActionLocator);
+          await targetElement.click();
+        }
+           
+        else
+        await parentElement.click();
+        return; // Exit after clicking the first matching element
+      }
+    }
+  
+    throw new Error(`No child element found with data-testid="${parentActionTestId}" in the row.`);
   }
 }
 module.exports = { SearchPage };

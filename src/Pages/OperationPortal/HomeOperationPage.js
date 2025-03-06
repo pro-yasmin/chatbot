@@ -11,6 +11,7 @@ export class HomeOperationPage {
     this.logoutButton = '//div[@data-testid="logout-btn"]';
     this.avatar = '//button[@data-testid="user-menu"]';
     this.simulationModelsButton = '//a[@data-testid="menu-simulation-models"]';
+    this.tasksButton = '//a[@data-testid="menu-tasks"]';
   }
 
   /**
@@ -38,7 +39,13 @@ export class HomeOperationPage {
   async navigateToSimulationModels() {
     await this.page.waitForSelector(this.simulationModelsButton, { state: "visible", timeout: 20000 });
     await this.page.click(this.simulationModelsButton);
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    //await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+  }
+
+  async navigateToTasksTab() {
+    await this.page.waitForSelector(this.tasksButton, { state: "visible", timeout: 20000 });
+    await this.page.click(this.tasksButton);
+    //await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 
 }
