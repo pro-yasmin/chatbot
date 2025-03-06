@@ -10,6 +10,11 @@ export class FieldLibraryPage {
         //popup
         this.successPopupTitle = '//span[@data-testid="modal-title"]';
         this.popUpYesButton = '//button[@data-testid="confirmation-modal-primary-button"]';
+
+        this.fieldRecordTab = '//button[@data-testid="tab-4"]';
+        // this.fieldEnablmentStatus ='//div[contains(@class,"formio-component-status") and contains(@class,"formio-component-textfield")]//div[@ref="value"]';
+        this.fieldEnablmentStatus ='//div[@id="ea3r9jf"]';
+
     }
 
         /**
@@ -33,6 +38,21 @@ export class FieldLibraryPage {
             return false;
         }
     }
+
+    async checkInsideFieldStatus(ExpectedFieldStatus) {
+        await this.page.click(this.fieldRecordTab);
+        await this.page.waitForTimeout(2000);
+        var fieldStatus = this.page.locator(this.fieldEnablmentStatus);
+        await fieldStatus.waitFor({ state: "visible", timeout: 30000  });
+        var actualStatus = await fieldStatus.textContent();
+        if (actualStatus.trim() === ExpectedFieldStatus.trim()) {
+                console.log(`Enablment Status is as expected: "${actualStatus.trim()}".`);
+                return true;
+            }
+            return false
+    }
+
+    
 
 }
 module.exports = { FieldLibraryPage };

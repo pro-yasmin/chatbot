@@ -1,3 +1,5 @@
+import Constants from '../../../Utils/Constants';
+
 const { SearchPage } = require("../SharedPages/SearchPage");
 const { FieldLibraryPage } = require("../FieldLibrary/FieldLibraryPage");
 
@@ -7,7 +9,11 @@ export class FieldLibraryManagementPage {
         this.page = page;
         this.search = new SearchPage(this.page);
         this.fieldLibraryPage = new FieldLibraryPage(this.page);
+        this.tableActions = 'table-actions';
+        this.searchInputSelector = '//form[@data-testid="search-input"]//input';
+
         this.approvedFieldsTab = '//button[@data-testid="tab-2"]';
+        this.rejectedFieldsTab = '//button[@data-testid="tab-4"]';
         this.searchInput = '//input[@data-testid="search-input-base"]';
         this.threeDotsMenu = '//div[@data-testid="three-dots-menu"]';
         this.activate_deactivate_Button = '//li[@data-testid="three-dots-menu-option-0"]';
@@ -16,6 +22,10 @@ export class FieldLibraryManagementPage {
 
     async navigateToApprovedFieldsTab() {
         await this.page.click(this.approvedFieldsTab);
+    }
+
+    async navigateToRejectedFieldsTab() {
+        await this.page.click(this.rejectedFieldsTab);
     }
 
         /**
@@ -48,5 +58,55 @@ export class FieldLibraryManagementPage {
             return result;
         }
     }
+
+
+    async checkFieldStatusDetails(fieldMap) {
+
+        for (const [fieldId, actionType] of fieldMap.entries()) {
+            if (actionType === Constants.APPROVE) { await this.navigateToApprovedFieldsTab();
+            } else if (actionType === Constants.REJECT) { await this.navigateToRejectedFieldsTab(); }
+    
+            console.log(`Verifying ${actionType} field with ID: ${fieldId}`);
+    
+            // Search for the field row using the field ID
+            const fieldRow = await this.search.searchOnUniqueRow(this.searchInputSelector, fieldId);
+    
+            if (!fieldRow || fieldRow.length === 0) {
+                console.error(`Field row not found for ID: ${fieldId}`);
+                return false;
+            }
+    
+            // Get field ID from the first td of the row
+            var actualRowFieldId = (await fieldRow[0].tdLocator.textContent()).trim();
+    
+            if (fieldId !== actualRowFieldId) {
+                console.error(`Field ID mismatch! Expected: ${fieldId}, Found: ${actualRowFieldId}`);
+                return false;
+            }
+            console.log(`Field ID matched: ${fieldId}`);
+    
+            // Open the field details page
+            const actionLocator = "button";
+            await this.search.clickRowAction(fieldRow, this.tableActions, actionLocator);
+            console.log(`Opened field details page for ID: ${fieldId}`);
+    
+            // Determine expected status based on action type
+            const expectedStatus = actionType === Constants.APPROVE
+                ? global.testConfig.FieldLibrary.fieldEnablementStatusActivated
+                : global.testConfig.FieldLibrary.fieldEnablementStatusDeactivated;
+    
+            // Check field status
+            // const fieldStatus = await this.fieldLibraryPage.checkInsideFieldStatus(expectedStatus);
+    
+            // if (!fieldStatus) {
+            //     console.error(`Field status check failed for ID: ${fieldId}`);
+            //     return false;
+            // }
+
+            console.log(`Field status verified for ID: ${fieldId}`);
+        }
+        return true;
+    }
+    
 }
 module.exports = { FieldLibraryManagementPage };

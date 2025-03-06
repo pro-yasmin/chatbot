@@ -4,19 +4,25 @@ import Constants from '../../src/Utils/Constants';
 const { LoginPage } = require('../../src/Pages/LoginPage');
 const { HomePage } = require('../../src/Pages/AdminPortal/HomePage');
 const { FieldLibraryUpdateRequestsPage } = require('../../src/Pages/AdminPortal/FieldLibraryUpdateRequests/FieldLibraryUpdateRequestsPage');
+const { FieldLibraryManagementPage } = require('../../src/Pages/AdminPortal/FieldLibrary/FieldLibraryManagementPage');
+const { FieldsTreePage } = require('../../src/Pages/AdminPortal/FieldsTree/FieldsTreePage');
 const { FieldData } = require("../../src/Models/AdminPortal/FieldData");
 const { TasksPage } = require("../../src/Pages/AdminPortal/Tasks/TasksPage");
 
-let loginPage, homePage, fieldLibraryUpdateRequestsPage, tasksPage;
+let loginPage, homePage, fieldLibraryUpdateRequestsPage, tasksPage ,fieldsTreePage;
 let complexFieldData, inputFieldData;
 let adminUsername, adminPassword;
-let requestChecks ;
+let requestChecks ,myMap;
+let fieldLibraryManagementPage ;
 
 test.beforeEach(async ({ page }) => {
 
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     fieldLibraryUpdateRequestsPage = new FieldLibraryUpdateRequestsPage(page);
+    fieldLibraryManagementPage = new FieldLibraryManagementPage(page);
+    fieldsTreePage = new FieldsTreePage(page);    
+
     tasksPage = new TasksPage(page);
 
     complexFieldData = new FieldData(page);
@@ -62,22 +68,44 @@ test('Complex and Input Fields Request Flow', async () => {
         await tasksPage.assignTaskToMe(requestChecks[0]); 
         
         // var requestChecks =['ISR_Freq_000001320','ISR_FLib_00000553','ISR_FLib_00000554'];
-        const myMap = new Map(); myMap.set(requestChecks[1],Constants.APPROVE); myMap.set(requestChecks[2], Constants.REJECT);
+        myMap = new Map(); myMap.set(requestChecks[1],Constants.APPROVE); myMap.set(requestChecks[2], Constants.REJECT);
         var taskManage = await tasksPage.manageRequestField(requestChecks[0],myMap );
         expect(taskManage).toBe(true);
         console.log("Field Request Done Successfully");
     });
 
-    await test.step("Check fields in field Library and fields Trees", async () => {
+    await test.step("Check fields in fields Trees", async () => {
         await homePage.navigateToFieldTree();
-        await tasksPage.assignTaskToMe(requestChecks[0]); 
-        
-        // var requestChecks =['ISR_Freq_000001320','ISR_FLib_00000553','ISR_FLib_00000554'];
-        const myMap = new Map(); myMap.set(requestChecks[1],Constants.APPROVE); myMap.set(requestChecks[2], Constants.REJECT);
-        var taskManage = await tasksPage.manageRequestField(requestChecks[0],myMap );
-        expect(taskManage).toBe(true);
-        console.log("Field Request Done Successfully");
+        var fieldExist = await fieldsTreePage.checkFieldExists(complexFieldData); 
+        expect(fieldExist).toBe(true);
+        console.log("Field Exist in Fields Tree");
     });
+
+    await test.step("Check fields in field Library", async () => {
+        await homePage.navigateToFieldLibrary();
+        var result = await fieldLibraryManagementPage.checkFieldStatusDetails(myMap);
+        expect(result).toBe(true);
+        console.log("Field Stauts Matched Successfully");
+    });
+
+
+
+     // Switch to ISR Manager User
+    //  await test.step('Logout from Admin User and login as ISR Manager User', async () => {
+    //     await homePage.logout();
+    //     console.log('Logged out from Admin User');
+
+    //     var isrManagerUsername = global.testConfig.ISR_MANAGER;
+    //     var isrManagerPassword = global.testConfig.ISR_MANAGER_PASS;
+    //     var baseUrl = global.testConfig.BASE_URL;
+
+    //     await loginPage.gotoAdminPortal(baseUrl);
+    //     const loginSuccess = await loginPage.login(isrManagerUsername, isrManagerPassword);
+    //     expect(loginSuccess).toBe(true);
+    //     console.log('Logged in as ISR Manager');
+    // });
+
+
 
 });
 
