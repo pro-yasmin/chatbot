@@ -6,6 +6,7 @@ require('./global.js'); // Load the global configuration
  */
 
 
+
 const ENV = 'uat';
 
 module.exports = defineConfig({
