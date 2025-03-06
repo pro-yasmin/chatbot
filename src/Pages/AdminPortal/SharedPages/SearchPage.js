@@ -18,6 +18,7 @@ export class SearchPage {
     let tdDetails = [];
     // Step 1: Enter the search value in the input field
     await  this.page.waitForTimeout(2000); 
+    await this.page.fill(searchInputSelector, '');
     await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' , timeout: 10000});
     await this.page.waitForSelector(searchInputSelector, { state: 'visible' }); 
     await this.page.fill(searchInputSelector, searchValue);

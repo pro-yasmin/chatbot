@@ -12,4 +12,9 @@ export default {
     FILTER_BENEFITS_INSIDE_MAINPROGRAM:"filter_Benefits_Inside_MainProgram",
     FILTER_BENEFITS_INSIDE_SUB_PROGRAM: "filter_Benefits_Inside_Subprogram",
     FILTER_BENEFITS_OUTSIDE: "filter_Benefits_Outside",
+    INTEGRATION_FIELD : "Integration",
+    INPUT_FIELD : "Insert",
+    CALCULATION_FIELD : "Calculation",
+    COMPLEX_FIELD :"Complex",
+    GROUP_FIELD : "Group"
 };

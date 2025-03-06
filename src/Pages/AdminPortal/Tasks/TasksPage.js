@@ -1,6 +1,5 @@
 import Constants from '../../../Utils/Constants.js';
-// const { Constants } = require("../../../src/Utils/Constants");
-// const  Constants  = require("../../../src/Utils/Constants");
+
 
 const { SearchPage } = require("../SharedPages/SearchPage");
 const { PopUpPage } = require("../SharedPages/PopUpPage");
@@ -211,6 +210,83 @@ async getExpectedTaskType (taskType){
     }
     return expectedType;
     }
+
+
+
+
+     /**
+ * Ensures that a task is either accepted or rejected and its status is updated accordingly.
+ * @param {string} fieldType - The type of the task (Complex , Input).
+ * @param {string} fieldNumber - The unique identifier of the task.
+ * @param {string} actionType - The action to perform ('approve' or 'reject').
+ * @returns {Promise<boolean>} - Returns true if the task is processed successfully.
+ */
+async ensureFieldTaskStatus(requestNumber ,fieldsMap) {
+  let expectedStatus;
+ // await this.navigateToGroupTasksTab();
+  await this.navigateToMyCompletedTasksTab();
+
+  // Find the task row in the table
+  //await this.page.waitForTimeout(2000);
+  let fieldRow = await this.search.getRowInTableWithSpecificText(requestNumber);
+  var actionLocator = "button";
+  await this.search.clickRowAction(fieldRow, this.tableActions,actionLocator);
+
+  // Check if the status is updated accordingly
+  expectedStatus = global.testConfig.createField.requestStatusComplete;
+  var result = await this.taskDetailsPage.checkFieldRequestStatus(expectedStatus);
+
+  // Check if the status is updated accordingly
+  var result = await this.taskDetailsPage.checkFieldsDecisionStatus(fieldsMap);
+  // Log the result based on the action
+  if (result) { return true } 
+  return false
+}
+  
+
+/**
+ * Handles task approval or rejection.
+ * @param {string} taskType - The type of the task (stream, mainProgram, subProgram, benefit).
+ * @param {string} taskNumber - The unique identifier of the task.
+ * @param {string} actionType - The action to perform ('approve' or 'reject').
+ * @returns {Promise<boolean>} - Returns true if the task is processed successfully.
+ */
+
+// take map and pass it to 282
+async manageRequestField(requestNumber ,fieldsMap) {
+  let status;
+  let allFieldsProcessed = true;
+
+  
+  //await this.navigateToMyCompletedTasksTab();
+  await this.navigateToMyTasksTab();
+  
+  let taskRow = await this.search.getRowInTableWithSpecificText(requestNumber);
+  var actionLocator =  "button";
+  await this.search.clickRowAction(taskRow,this.tableActions, actionLocator);
+  console.log(`Navigate To Task Details Page Successfully`);
+
+  var initialTaskStatus = global.testConfig.createField.requestStatusProcessing;
+  status = await this.taskDetailsPage.checkFieldRequestStatus(initialTaskStatus);
+   
+   // Process each field from the map
+   for (const [fieldID, actionType] of fieldsMap.entries()) {
+    console.log(`Processing Field: ${fieldID} with Action: ${actionType}`);
+    var processResult = await this.taskDetailsPage.processFields(fieldID, actionType);
+    if (!processResult) {
+      allFieldsProcessed = false;
+    }
+   }
+    var sendRequest = await this.taskDetailsPage.clickOnProcessRequrstBtn();
+  
+    var ensureStatus = await this.ensureFieldTaskStatus(requestNumber ,fieldsMap);
+
+    // If all steps are successful, return true && ensureStatus && requestType
+    if (status  && allFieldsProcessed  && ensureStatus &&sendRequest) {return true;}
+
+    return false;
+  }
+
 
 }
 module.exports = { TasksPage };
