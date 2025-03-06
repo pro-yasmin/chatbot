@@ -16,6 +16,7 @@ export class FieldLibraryUpdateRequestsPage {
     }
 
     async navigateToFieldRequestsPage() {
+            await this.page.waitForTimeout(5000);
             await this.page.waitForSelector(this.fieldLibraryUpdateRequestButton, { state: "visible", timeout: 7000 });
             await this.page.click(this.fieldLibraryUpdateRequestButton, { force: true });
             console.log("Field Requests Page Opened successfully.");   

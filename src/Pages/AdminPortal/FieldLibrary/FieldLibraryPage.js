@@ -1,3 +1,5 @@
+import Constants from '../../../Utils/Constants';
+
 const { PopUpPage } = require('../SharedPages/PopUpPage');
 
 export class FieldLibraryPage {
@@ -11,9 +13,10 @@ export class FieldLibraryPage {
         this.successPopupTitle = '//span[@data-testid="modal-title"]';
         this.popUpYesButton = '//button[@data-testid="confirmation-modal-primary-button"]';
 
-        this.fieldRecordTab = '//button[@data-testid="tab-4"]';
+        this.approvedFieldRecordTab = '//button[@data-testid="tab-4"]';
+        this.rejectedFieldRecordTab = '//button[@data-testid="tab-3"]';
         // this.fieldEnablmentStatus ='//div[contains(@class,"formio-component-status") and contains(@class,"formio-component-textfield")]//div[@ref="value"]';
-        this.fieldEnablmentStatus ='//div[@id="ea3r9jf"]';
+        this.fieldEnablmentStatus ='//*[contains(@class,"status")][2]';
 
     }
 
@@ -39,8 +42,13 @@ export class FieldLibraryPage {
         }
     }
 
-    async checkInsideFieldStatus(ExpectedFieldStatus) {
-        await this.page.click(this.fieldRecordTab);
+    async checkInsideFieldStatus(ExpectedFieldStatus , actionType) {
+
+        var FieldTabLocator = actionType === Constants.APPROVE
+                        ? this.approvedFieldRecordTab
+                        : this.rejectedFieldRecordTab;
+
+        await this.page.click(FieldTabLocator);
         await this.page.waitForTimeout(2000);
         var fieldStatus = this.page.locator(this.fieldEnablmentStatus);
         await fieldStatus.waitFor({ state: "visible", timeout: 30000  });

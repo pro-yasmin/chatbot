@@ -83,6 +83,8 @@ test('Complex and Input Fields Request Flow', async () => {
 
     await test.step("Check fields in field Library", async () => {
         await homePage.navigateToFieldLibrary();
+        // var requestChecks =['ISR_Freq_000001320','ISR_FLib_00000553','ISR_FLib_00000554'];
+        myMap = new Map(); myMap.set('ISR_FLib_00000830',Constants.APPROVE); myMap.set('ISR_FLib_00000831', Constants.REJECT);
         var result = await fieldLibraryManagementPage.checkFieldStatusDetails(myMap);
         expect(result).toBe(true);
         console.log("Field Stauts Matched Successfully");
