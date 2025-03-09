@@ -43,39 +43,19 @@ export class StreamPage {
     var createdStreamArName = streamData.getstreamArabicName();
 
     // Fill stream metadata fields
-    await this.page.waitForSelector(this.streamArabicName, {
-      state: "visible",
-      timeout: 5000,
-    });
+    await this.page.waitForSelector(this.streamArabicName, {state: "visible",timeout: 5000});
     await this.page.fill(this.streamArabicName, createdStreamArName);
     await this.page.fill(this.streamEnglishName, createdStreamEnName);
-    await this.page.fill(
-      this.streamEnglishName,
-      streamData.getstreamEnglishName()
-    );
-    await this.page.fill(
-      this.streamArabicDescription,
-      streamData.getstreamArabicDescription()
-    );
-    await this.page.fill(
-      this.streamEnglishDescription,
-      streamData.getstreamEnglishDescription()
-    );
-    await this.page.fill(
-      this.arabicStreamGoal,
-      streamData.getarabicStreamGoal()
-    );
-    await this.page.fill(
-      this.englishStreamGoal,
-      streamData.getenglishStreamGoal()
-    );
+    await this.page.fill(this.streamEnglishName, streamData.getstreamEnglishName());
+    await this.page.fill(this.streamArabicDescription,streamData.getstreamArabicDescription());
+    await this.page.fill(this.streamEnglishDescription,streamData.getstreamEnglishDescription());
+    await this.page.fill(this.arabicStreamGoal,streamData.getarabicStreamGoal());
+    await this.page.fill(this.englishStreamGoal,streamData.getenglishStreamGoal());
     await this.page.fill(this.arabicGoal, streamData.getarabicGoal());
     await this.page.fill(this.englishGoal, streamData.getenglishGoal());
 
     // Submit the stream form
-    await this.page.waitForSelector(this.streamDefinitionButton, {
-      state: "visible",
-    });
+    await this.page.waitForSelector(this.streamDefinitionButton, {state: "visible"});
     await this.page.click(this.streamDefinitionButton);
 
     // Update the stream data with the provided names
