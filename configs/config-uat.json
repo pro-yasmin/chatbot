@@ -251,7 +251,10 @@
     "assignSuccessMsg": "تم إسناد المهمة بنجاح",
     "descriptionCompleteTaskText": "ملاحظة لإكمال المهمة",
     "confirmCompleteSimulationBtnSuccessMsgText": "تم إكمال نموذج المحاكاة بنجاح, النموذج الان جاهز للتنفيذ",
-    "editSimulationConfirmationMsg": "هل انت متأكد من تعديل نموذج المحاكاة؟"
+    "editSimulationConfirmationMsg": "هل انت متأكد من تعديل نموذج المحاكاة؟",
+    "APIbeneficiaryParty": "a2",
+    "APIsimulationModelPDFSize": 0.0126495361328125,
+    "APIsimulationModelCSVSize": 0.0000209808349609375
   },
   "createField": {
     "fieldArabicName": "حقل جديد",
