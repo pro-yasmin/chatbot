@@ -35,7 +35,7 @@ test.beforeEach(async ({ page }) => {
     });
 });
 
-test('Edit New Simulation Model', async ({ page }) => {
+test('Edit Simulation Model Variables', async ({ page }) => {
     // Step1: Navigate to Simulation Models Managment page
     await test.step('Navigate to Simulation Models Management page', async () => {
         await homeOperationPage.navigateToSimulationModels();
@@ -107,79 +107,9 @@ test('Edit New Simulation Model', async ({ page }) => {
     });
 
     // Step8: Edit Simulation Model
-    await test.step('Edit Simulation Model', async () => {
-        expect(await simulationModelManagementPage.editSimulationModel(simulationModelData)).toBe(true);
-        console.log('Simulation Model edited Successfully');
-    });
-
-    // Step9: Search & Verify Simulation Model 
-    await test.step('Search on Edited Simulation Model', async () => {
-        expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData, null, true)).toBe(true);
-        console.log('Edited Simulation Model Found Successfully');
-    });
-
-
-    // Step10: Search & Verify Simulation Models Active and Edited
-    await test.step('Search on Active and Edited Simulation Models', async () => {
-        expect(await simulationModelManagementPage.verifySimualtionModelsActiveAndEdited(simulationModelData, true, true)).toBe(true);
-        console.log('Active and Edited Simulation Models Found Successfully');
-    });
-
-    // Step11: Verify Simulation Model Versions
-    await test.step('Verify Simulation Model Versions', async () => {
-        expect(await simulationModelManagementPage.VerifySimulationModelVersionsDetails(simulationModelData, true, true)).toBe(true);
-        console.log('Active and Edited Simulation Models Version Verified Successfully');
-    });
-
-    //logout
-    await test.step("Logout from Operation Portal", async () => {
-        await homeOperationPage.logout();
-        console.log("User Logout Successfully");
-    });
-
-    //login with another user
-    await test.step('Login to Operation Portal', async () => {
-        var loginSuccess = await loginPage.login(adminusername2, adminpassword2);
-        expect(loginSuccess).toBe(true);
-        console.log('login done successfully');
-    });
-
-    // Step12: Navigate to Tasks Managment page
-    await test.step('Navigate to Tasks Management page', async () => {
-        await homeOperationPage.navigateToTasksTab();
-        console.log('Navigate to Tasks Management page');
-    });
-
-    // Step13: Approve Task
-    await test.step('Approve Task', async () => {
-        expect(await tasksPage.approveTask(simulationModelData)).toBe(true);
-        console.log('Task approved successfully');
-    });
-
-    //logout
-    await test.step("Logout from Operation Portal", async () => {
-        await homeOperationPage.logout();
-        console.log("User Logout Successfully");
-    });
-
-    //login with another user
-    await test.step('Login to Operation Portal', async () => {
-        var loginSuccess = await loginPage.login(adminusername, adminpassword);
-        expect(loginSuccess).toBe(true);
-        console.log('login done successfully');
-    });
-
-    // Step14: Navigate to Simulation Models Managment page
-    await test.step('Navigate to Simulation Models Management page', async () => {
-        await page.waitForTimeout(10000);
-        await homeOperationPage.navigateToSimulationModels();
-        console.log('Navigate to Simulation Models Management page');
-    });
-
-    // Step15: Search & Verify Simulation Model Status changed to active
-    await test.step('Search on Simulation Model Status changed to active', async () => {
-        expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData, true, null)).toBe(true);
-        console.log('New Simulation Model Status changed to active Successfully');
+    await test.step('Edit Simulation Model Variables', async () => {
+        expect(await simulationModelManagementPage.editSimulationModelVariables(simulationModelData)).toBe(true);
+        console.log('Simulation Model Variables edited Successfully');
     });
 });
 

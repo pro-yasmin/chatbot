@@ -83,7 +83,7 @@ export class TasksPage {
   async assignTaskToMe(simulationModelData) {
     await this.navigateToGroupTasksTab();
     let taskRow = [];
-    taskRow = await this.search.getRowInTableWithSpecificText(simulationModelData.getCreatedSimulationModelId());
+    taskRow = await this.search.getRowInTableWithSpecificText(simulationModelData.getCreatedSimulationModelEditedId());
     await this.search.clickRowActionTemp(taskRow, this.tableThreeDots, null);
     await this.page.click(this.assignToMyselfBtn);
     console.log("clicked on assign to myself Btn");
@@ -104,7 +104,7 @@ export class TasksPage {
     //to be deleted after fixing the issue of navigation to tasks tab
     await this.navigateToMyTasksTab();
     let taskRow = [];
-    taskRow = await this.search.getRowInTableWithSpecificText(simulationModelData.getCreatedSimulationModelId());
+    taskRow = await this.search.getRowInTableWithSpecificText(simulationModelData.getCreatedSimulationModelEditedId());
     await this.search.clickRowActionTemp(taskRow, this.actionsBtn, null);
     await this.page.click(this.completeSimulationModelBtn);
     await this.page.fill(this.completeSimulationTextBox, global.testConfig.SimulationModels.descriptionCompleteTaskText);
@@ -130,7 +130,7 @@ export class TasksPage {
     let expectedStatus;
     await this.navigateToMyCompletedTasksTab();
     // Find the task row in the table
-    let taskRow = await this.search.getRowInTableWithSpecificText(simulationModelData.getCreatedSimulationModelId());
+    let taskRow = await this.search.getRowInTableWithSpecificText(simulationModelData.getCreatedSimulationModelEditedId());
     await this.search.clickRowActionTemp(taskRow, this.actionsBtn, null);
     expectedStatus = global.testConfig.taskDetails.ReadyForExecution;
     // Check if the status is updated accordingly

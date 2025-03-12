@@ -12,19 +12,17 @@ let simulationModelData;
 let simulationModelManagementPage;
 let tasksPage;
 
-var baseUrl = global.testConfig.OPERATION_BASE_URL;
-var adminusername = global.testConfig.PROGRAMS_AND_POLICIES_SPECIALIST;
-var adminpassword = global.testConfig.PROGRAMS_AND_POLICIES_SPECIALIST_PASS;
-
-var adminusername2 = global.testConfig.BUSSINESS_RULES_SPECIALIST;
-var adminpassword2 = global.testConfig.BUSSINESS_RULES_SPECIALIST_PASS;
-
 test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
     homeOperationPage = new HomeOperationPage(page);
     simulationModelData = new SimulationModelData();
     simulationModelManagementPage = new SimulationModelManagementPage(page);
     tasksPage = new TasksPage(page);
+
+
+    var baseUrl = global.testConfig.OPERATION_BASE_URL;
+    var adminusername = global.testConfig.PROGRAMS_AND_POLICIES_SPECIALIST;
+    var adminpassword = global.testConfig.PROGRAMS_AND_POLICIES_SPECIALIST_PASS;
 
     // Step0: Login 
     await test.step('Login to Operation Portal', async () => {
@@ -49,31 +47,6 @@ test('Define New Simulation Model', async ({ page }) => {
     });
 
     // Step3: Search & Verify Simulation Model Information
-    await test.step('Search on Simulation Model created', async () => {
-        expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData, null, null)).toBe(true);
-        console.log('New Simulation Model Details Checked Successfully');
-    });
-
-    //logout
-    await test.step("Logout from Operation Portal", async () => {
-        await homeOperationPage.logout();
-        console.log("User Logout Successfully");
-    });
-
-    //login with another user
-    await test.step('Login to Operation Portal', async () => {
-        var loginSuccess = await loginPage.login(adminusername2, adminpassword2);
-        expect(loginSuccess).toBe(true);
-        console.log('login done successfully');
-    });
-
-    // Step4: Navigate to Simulation Models Managment page
-    await test.step('Navigate to Simulation Models Management page', async () => {
-        await homeOperationPage.navigateToSimulationModels();
-        console.log('Navigate to Simulation Models Management page');
-    });
-
-    // Step5: Search & Verify Simulation Model Information
     await test.step('Search on Simulation Model created', async () => {
         expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData, null, null)).toBe(true);
         console.log('New Simulation Model Details Checked Successfully');

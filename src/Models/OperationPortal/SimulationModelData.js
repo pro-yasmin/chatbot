@@ -22,9 +22,13 @@ export class SimulationModelData {
         this.variableThreeEnName = null;
         this.variableThreeDescription = null;
         this.simulationModelId = null;
+        this.simulationModelEditedId = null;
 
         this.variableFourArName = null;
         this.variableFourEnName = null;
+
+        this.defaultValueOneEdited = null;
+        
     }
 
     // Getter and Setter for Simulation Model Arabic Name
@@ -204,6 +208,26 @@ export class SimulationModelData {
 
     setCreatedSimulationModelId(Value) {
         this.simulationModelId = Value;
+    }
+
+    // Getter and Setter for Simulation Model Edited ID Number
+    getCreatedSimulationModelEditedId() {
+        return this.simulationModelEditedId;
+    }
+
+    setCreatedSimulationModelEditedId(Value) {
+        this.simulationModelEditedId = Value;
+    }
+
+    // Getter and Setter for default Value Edited
+    getSimulationModelDefaultValueOneEdited() {
+        if (this.defaultValueOneEdited == null) {
+            this.defaultValueOneEdited = global.testConfig.SimulationModels.defaultValueEditedText;
+        }
+        return this.defaultValueOneEdited;
+    }
+    setSimulationModelDefaultValueOneEdited(value) {
+        this.defaultValueOneEdited = value;
     }
 
 }
