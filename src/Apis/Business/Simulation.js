@@ -36,49 +36,6 @@ export class Simulation {
 
 
 /**
- * Creates a new stream using API and retrieves its ID and number.
- * @param {string} adminusername - The admin username.
- * @param {string} adminpassword - The admin password.
- * @param {object} streamData - Data for creating the stream.
- * @returns {Promise<[string, string]>} - The stream ID and stream number.
- */
-async createStreamAPI(adminusername, adminpassword, streamData) 
-  {
-    var Token = await this.getToken(adminusername, adminpassword);
-    var streamService =new StreamsService(Token);
-    var streamId = await streamService.createStreamAPI(streamData);
-    expect(streamId).not.toBeNull();
-    
-    var streamNumber = await streamService.getStreamNumberAPI(streamId);
-    expect(streamNumber).not.toBeNull();
-
-    return [streamId, streamNumber];
-  }
-
-
-    /**
-   * Creates and approves a stream.
-   * @param {string} adminusername - The admin username.
-   * @param {string} adminpassword - The admin password.
-   * @param {object} streamData - Data for creating the stream.
-   * @returns {Promise<[string, string]>} - The stream ID and stream number.
-   */
-  async createStreamAndApproveAPI(adminusername, adminpassword, streamData) 
-  {
-  
-    var streamCreation = await this.createStreamAPI(adminusername, adminpassword, streamData);
-    expect(streamCreation).not.toBeNull();
-    // console.log('Stream ID:', streamCreation[0]);
-    // console.log('Stream Number:', streamCreation[1]);
-
-    var approveStream = await this.approveTaskAPI(adminusername, adminpassword,streamCreation[1]);
-    expect(approveStream).not.toBeNull(); 
-
-    return [streamCreation[0],streamCreation[1]];
-  }
-
-
-  /**
  * Creates a new Simulation model using API and retrieves its ID and number.
  * @param {string} username - The admin username.
  * @param {string} password - The admin password.
