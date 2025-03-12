@@ -31,7 +31,7 @@ export class SimulationModelData {
     this.simulationModelDraftId = null;
     this.decisionModelAttachmentId = null;
     this.ruleSetAttachmentId = null;
-    this.fileDataSourceAttachmentsId=null;
+    this.fileDataSourceAttachmentsId = null;
   }
 
   // Getter and Setter for Simulation Model Arabic Name
@@ -256,25 +256,25 @@ export class SimulationModelData {
   setCreatedSimulationModelId(Value) {
     this.simulationModelId = Value;
   }
-// Getter and Setter for Simulation Model Edited ID Number
-getCreatedSimulationModelEditedId() {
-  return this.simulationModelEditedId;
-}
-
-setCreatedSimulationModelEditedId(Value) {
-  this.simulationModelEditedId = Value;
-}
-
-// Getter and Setter for default Value Edited
-getSimulationModelDefaultValueOneEdited() {
-  if (this.defaultValueOneEdited == null) {
-      this.defaultValueOneEdited = global.testConfig.SimulationModels.defaultValueEditedText;
+  // Getter and Setter for Simulation Model Edited ID Number
+  getCreatedSimulationModelEditedId() {
+    return this.simulationModelEditedId;
   }
-  return this.defaultValueOneEdited;
-}
-setSimulationModelDefaultValueOneEdited(value) {
-  this.defaultValueOneEdited = value;
-}
+
+  setCreatedSimulationModelEditedId(Value) {
+    this.simulationModelEditedId = Value;
+  }
+
+  // Getter and Setter for default Value Edited
+  getSimulationModelDefaultValueOneEdited() {
+    if (this.defaultValueOneEdited == null) {
+      this.defaultValueOneEdited = global.testConfig.SimulationModels.defaultValueEditedText;
+    }
+    return this.defaultValueOneEdited;
+  }
+  setSimulationModelDefaultValueOneEdited(value) {
+    this.defaultValueOneEdited = value;
+  }
 
 
   //API setters & getters
@@ -305,8 +305,8 @@ setSimulationModelDefaultValueOneEdited(value) {
     this.ruleSetAttachmentId = Value;
   }
 
-   // Getter and Setter for Simulation Model  ruleSetAttachments ID
-   getFileDataSourceAttachmentsId() {
+  // Getter and Setter for Simulation Model  ruleSetAttachments ID
+  getFileDataSourceAttachmentsId() {
     return this.fileDataSourceAttachmentsId;
   }
 
@@ -398,7 +398,7 @@ setSimulationModelDefaultValueOneEdited(value) {
             fileName: global.testConfig.SimulationModels.simulationModelCSV,
             fileSize:
               global.testConfig.SimulationModels.APIsimulationModelCSVSize,
-            fileId:this.getFileDataSourceAttachmentsId(),
+            fileId: this.getFileDataSourceAttachmentsId(),
             fileType: "text/csv",
             description: null,
           },

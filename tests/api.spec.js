@@ -88,9 +88,6 @@ test.beforeEach(async () => {
    test('API Test -Create & Approve simulation model', async () => {
     simulationData= new SimulationModelData();
     await simulation.createsimulationModelAndApproveAPI(adminusername, adminpassword,simulationData) ;
-    
-    
-
    });
 
    
