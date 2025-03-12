@@ -4,6 +4,8 @@ const { MainProgramData } = require('../src/Models/AdminPortal/MainProgramData')
 const { SubProgramsData } = require('../src/Models/AdminPortal/SubProgramsData');
 const { Programs } = require("../src/Apis/Business/Programs");
 const { BenefitsData } = require('../src/Models/AdminPortal/BenefitsData');
+const { Simulation } = require("../src/Apis/Business/Simulation");
+const { SimulationData, SimulationModelData } = require("../src/Models/OperationPortal/SimulationModelData");
 
 
 let stream,streamData;
@@ -12,6 +14,7 @@ let subProgram, subProgramData;
 let programs ;
 let createBenefit ,createApproveBenefit , benefitsData;
 let adminusername ,adminpassword;
+let simulation,simulationData;
 
 
 test.beforeEach(async () => {
@@ -24,6 +27,9 @@ test.beforeEach(async () => {
   subProgramData = new SubProgramsData();
   benefitsData = new BenefitsData();
   programs = new Programs();
+  simulation = new Simulation();
+ 
+
 
 
 });
@@ -76,6 +82,14 @@ test.beforeEach(async () => {
 
     // createApproveBenefit = await programs.createBenefitAndApproveAPI(adminusername, adminpassword, benefitsData,subProgram[0]);
     // console.log('Benefit', createApproveBenefit);
+
+   });
+
+   test('API Test -Create & Approve simulation model', async () => {
+    simulationData= new SimulationModelData();
+    await simulation.createsimulationModelAndApproveAPI(adminusername, adminpassword,simulationData) ;
+    
+    
 
    });
 

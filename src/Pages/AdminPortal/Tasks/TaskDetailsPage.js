@@ -1,5 +1,6 @@
 import Constants from '../../../Utils/Constants.js';
 const { PopUpPage } = require("../SharedPages/PopUpPage");
+const { SearchPage } = require("../SharedPages/SearchPage");
 
 /**
  * Manages task details, including opening tabs, adding notes, and accepting various task types.
@@ -8,7 +9,7 @@ const { PopUpPage } = require("../SharedPages/PopUpPage");
 export class TaskDetailsPage {
   constructor(page) {
     this.page = page;
-
+    this.search = new SearchPage(this.page);
     // Selectors for tabs
     this.myDataTab = '//button[@id="tab-0"]';
     this.myNotesTab = '//button[@id="tab-1"]';
@@ -39,6 +40,18 @@ export class TaskDetailsPage {
     this.ensureTaskNotesBtn = '//button[@data-testid="process-action-modal-primary-button"]';
     this.confirmTaskMsgTitle = '//span[@id="modal-modal-title"]';
     this.backToTasksBtn = '//button[@data-testid="modal-primary-button"]';
+
+    //selectors for fields Tasks
+    this.fieldRequestStatusIcon = '//span[@data-testid="status-processing"]';
+    this.fieldRequestStatus = '(//span[@class="MuiTypography-root MuiTypography-p-md-bold muirtl-17ykn84"])[6]';
+    this.tableActions='tag';
+    this.acceptFieldTaskBtn ='//button[contains(text(),"قبول الحقل")]';
+    this.rejectFieldTaskBtn='//button[contains(text(),"رفض الحقل")]';
+    this.ensureFieldTaskNotesField ='//textarea[@data-testid="description-text-field"]'
+    this.ensureFieldTaskNotesFieldApprove='//button[contains(text(),"نعم، قبول!")]',
+    this.ensureFieldTaskNotesFieldReject='//button[contains(text(),"نعم، رفض!")]',
+    this.backToTasksBtn = '//button[@data-testid="modal-primary-button"]',
+    this.processingRequestBtn='//button[contains(text(),"معالجة طلب تحديث مكتبة الحقول")]'
   }
 
   /**
@@ -150,6 +163,114 @@ async completeTask(actionType, taskType , confirmMsg) {
 
   return result;
 }
+
+
+
+/**
+   * Checks whether the field task's Request status matches the expected status.
+   * @param {string} expectedStatus - The expected Request status.
+   * @returns {Promise<boolean>} - Returns true if the status matches; otherwise, false.
+   */
+  async checkFieldRequestStatus( expectedStatus) {
+  // Wait for the status element to be visible
+  await this.page.waitForTimeout(6000);
+
+  var fieldStatus = this.page.locator(this.fieldRequestStatus);
+
+  await fieldStatus.waitFor({ state: "visible", timeout: 30000  });
+  var actualStatus = await fieldStatus.textContent();
+   if (actualStatus.trim() === expectedStatus.trim()) {
+         console.log(`Request Status is as expected: "${actualStatus.trim()}".`);
+         return true;
+      }
+      return false
+  }
+
+  
+ /**
+ * Accepts or rejects a field task based on the field task type and action type.
+ * @param {string} actionType - The action to perform ('approve' or 'reject').
+ * @returns {Promise<boolean>} - Returns true if the task is accepted or rejected successfully.
+ */
+async completeFieldTask(actionType) {
+  let actionBtn ,notesFieldLocator ,confirmFieldMsg;
+  var popUpMsg = new PopUpPage(this.page);
+
+  await popUpMsg.fieldPopUpMessage();
+
+  actionBtn = actionType === Constants.APPROVE ? this.acceptFieldTaskBtn : this.rejectFieldTaskBtn;
+  notesFieldLocator = actionType === Constants.APPROVE ? this.ensureFieldTaskNotesFieldApprove : this.ensureFieldTaskNotesFieldReject;
+  confirmFieldMsg = actionType === Constants.APPROVE ? global.testConfig.createField.confirmApproveMsg : global.testConfig.createField.confirmRejectMsg;
+
+  await this.page.click(actionBtn);
+
+  //await this.page.waitForTimeout(2000);
+  await popUpMsg.inputPopUpMessage(this.ensureFieldTaskNotesField,notesFieldLocator,global.testConfig.createField.addCompleteTaskNote);
+  var result = await popUpMsg.popUpMessage(this.backToTasksBtn, confirmFieldMsg);
+
+  if (result) {
+      console.log(`The Field ${actionType === Constants.APPROVE ? 'Accepted' : 'Rejected'} Successfully.`);
+  }
+
+  return result;
+}
+
+
+async processFields(fieldID,actionType) {
+
+  let fieldRow = await this.search.getRowInTableWithSpecificText(fieldID);
+ var lastTd  = fieldRow[fieldRow.length - 1].tdLocator;
+  // Click the button inside the last <td>
+  const actionButton = lastTd.locator('button');
+  await actionButton.waitFor({ state: 'visible', timeout: 5000 });
+  await actionButton.click();
+
+  console.log(`Clicked action button for field: ${fieldID}`);
+
+  // Complete the task (either APPROVE or REJECT)
+  var result =   await this.completeFieldTask(actionType);
+  return result;
+}
+
+
+ 
+ async clickOnProcessRequrstBtn() {
+  await this.page.waitForSelector(this.processingRequestBtn,{ state: 'visible', timeout: 5000 });
+  await this.page.click(this.processingRequestBtn);
+  return true;
+}
+
+async checkFieldsDecisionStatus(fieldsMap ) {
+let fieldsMatched = true ;
+   // Process each field from the map
+   for (const [fieldID, actionType] of fieldsMap.entries()) {
+
+    var expectedStatus = actionType === Constants.APPROVE
+    ? global.testConfig.createField.desitionStatusAccepted
+    : global.testConfig.createField.desitionStatusRejected;
+
+      // Retrieve details for both rows using their row IDs
+    let rowDetails = await this.search.getRowInTableWithSpecificText(fieldID);
+      // Assuming the enablement status
+    let rowStatus = await rowDetails[5].tdLocator.textContent();
+    console.log(`Row Field Status (ID:  ${fieldID} ) is ${rowStatus}`);
+
+      if (rowStatus.trim() === expectedStatus.trim()) {
+        console.log(`Desition Status for Field ID ${fieldID} is as expected: "${expectedStatus}"`);
+      } else {
+        console.error(`Desition Status mismatch for Field ID ${fieldID}. Expected: "${expectedStatus}", Found: "${rowStatus.trim()}"`);
+        fieldsMatched = false;
+      }
+    }
+
+    if (fieldsMatched) {
+      console.log("All fields have the correct decision status.");
+    } else {
+      console.error("One or more fields have incorrect decision status.");
+    }
+
+    return fieldsMatched;
+  }
 
 }
 module.exports = { TaskDetailsPage };
