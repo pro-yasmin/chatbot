@@ -250,7 +250,26 @@
     "assignTaskMsg": "هل انت متأكد من إسناد مهمة",
     "assignSuccessMsg": "تم إسناد المهمة بنجاح",
     "descriptionCompleteTaskText": "ملاحظة لإكمال المهمة",
-    "confirmCompleteSimulationBtnSuccessMsgText": "تم إكمال نموذج المحاكاة بنجاح, النموذج الان جاهز للتنفيذ"
-
+    "confirmCompleteSimulationBtnSuccessMsgText": "تم إكمال نموذج المحاكاة بنجاح, النموذج الان جاهز للتنفيذ",
+    "editSimulationConfirmationMsg": "هل انت متأكد من تعديل نموذج المحاكاة؟"
+  },
+  "createField": {
+    "fieldArabicName": "حقل جديد",
+    "fieldEnglishName": "New filed",
+    "arabicFieldDescription": "وصف حقل جديد",
+    "englishFieldDescription": "New field Description",
+    "createAnotherFieldMsg": "هل ترغب بإضافة حقول فرعية جديدة",
+    "confirmaCreateFieldMsg": "تم تعريف الحقل بنجاح.",
+    "sendRequestBtnTxt": "إرسال الطلب للموافقة",
+    "sendFieldMsg": "تم إرسال طلبك",
+    "requestStatusProcessing": "معالجة",
+    "enableStatusHidden": "محجوب",
+    "fieldRequestView": "/social-registry-services/field-requests/67bf860a89b26c12cb68ddad",
+    "addCompleteTaskNote": "ملاحظةلاكمال المهمة",
+    "confirmApproveMsg": "تم قبول حقل",
+    "confirmRejectMsg": "تم رفض حقل",
+    "requestStatusComplete": "مكتمل",
+    "desitionStatusAccepted": "مقبول",
+    "desitionStatusRejected": "مرفوض"
   }
 }

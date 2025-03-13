@@ -113,9 +113,9 @@ export class FieldRequestsPage {
 
     async sendRequestToApproval( ) {
         await this.page.click(this.justification);
-        await this.page.waitForTimeout(1000); 
+        await this.page.waitForTimeout(5000); //testing env edit
         var optionsLocator = this.page.locator(this.justificationList);
-        await optionsLocator.first().waitFor({ state: "visible", timeout: 1000 });
+        await optionsLocator.first().waitFor({ state: "visible", timeout: 5000 });//testing env edit
         await optionsLocator.first().click({ force: true });
         await this.page.keyboard.press("Tab");
         await this.page.click(this.sendRequestBtn);
