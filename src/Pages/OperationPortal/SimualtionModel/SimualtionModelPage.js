@@ -10,9 +10,11 @@ export class SimualtionModelPage {
 
         this.fieldEnablementToggle = '//label[@class="form-check-label label-position-right"]';
         this.activate_deactivateFieldLibraryAlertMsg = '//div[@role="presentation"]//span';
+        this.attachButton = '//button[@type="button" and contains(text(),"إضافة الملف")]';
+        
         //popup
         this.popUpYesButton = '(//div[contains(@class, "MuiDialogActions-root")]//button[@tabindex="0"])[1]';
-        this.attachButton = '//button[@type="button" and contains(text(),"إضافة الملف")]';
+        
 
         //tab1
         this.simulationModelArNameField = '//input[@name="modelData.nameAr"]';

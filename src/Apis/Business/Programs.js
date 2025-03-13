@@ -25,7 +25,7 @@ export class Programs {
    */
   async getToken(adminusername, adminpassword) {
 
-    var tokenUrl = global.testConfig.GENERATE_TOKEN_URL_ADMIN_PORTAL;
+    var tokenUrl = global.testConfig.GENERATE_TOKEN_URL_PORTAL;
     var loginService = new LoginService(tokenUrl);
     var token = await loginService.loginAdminPortal(adminusername, adminpassword);
     expect(token).not.toBeNull(); 

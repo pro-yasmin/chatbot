@@ -7,6 +7,7 @@
   "APPDATA": "C:\\Users\\VEGA Laptop\\AppData\\Roaming",
   "BASE_URL": "https://adminportal-uat.iis-ssb.com/auth/login",
   "BASE_URL_API": "https://uat-gw-ext-lb.iis-ssb.com:8243",
+  "BROWSERSLIST_IGNORE_OLD_DATA": "true",
   "BUSINESS_DELIVERY_ADMIN": "auto_uat_business_delivery_admin",
   "BUSINESS_DELIVERY_ADMIN_PASS": "P@$sw0rd",
   "BUSSINESS_ADMIN_PASS": "P@$sw0rd",

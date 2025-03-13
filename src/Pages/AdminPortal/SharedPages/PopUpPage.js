@@ -16,7 +16,7 @@ export class PopUpPage {
     if (fullMessage.includes(partialMessage)) {
       await this.page.click(actionButton);
      // await this.page.waitForSelector(actionButton, { visible: false });
-    await this.page.locator(actionButton).waitFor({ state: "detached" , timeout: 50000});
+    //await this.page.locator(actionButton).waitFor({ state: "detached" , timeout: 50000});
       
     }
     return true;

@@ -40,7 +40,8 @@ export class MainProgramDetailsPage {
   */
   async InsideCreateSubProgram() {
     await this.page.click(this.subProgramTab);
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    //await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    await this.page.waitForTimeout(1000);
     await this.page.waitForSelector(this.createSubProgramBtn, {state: "visible"});
     //await this.page.waitForTimeout(1000);
     await this.page.click(this.createSubProgramBtn);
