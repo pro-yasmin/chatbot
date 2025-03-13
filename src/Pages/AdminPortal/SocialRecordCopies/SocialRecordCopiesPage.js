@@ -12,9 +12,9 @@ export class SocialRecordCopiesPage {
 
         this.ArVersionNameField = '//input[@name="data[schemaNameAr]"]';
         this.EnVersionNameField = '//input[@name="data[schemaNameEn]"]';
-        this.activationDateForApplicant = '//input[@class="form-control form-control input"]';
-        this.activationDateForPrograms = '//input[@class="form-control form-control input"]';
-        this.activationDate = '//input[@class="form-control form-control input"]';
+        this.activationDateForApplicant = '//input[@name="data[activatedAtForApplicant]"]//following::input[1]';
+        this.activationDateForPrograms = '//input[@name="data[activatedAtForProgram]"]//following::input[1]';
+        this.activationDate = '//input[@name="data[activatedAt]"]//following::input[1]';
         this.saveSchemeDataButton = '//button[contains(@class, "MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary")]';
         this.addNewRegistryFieldsButton = '//div[contains(@class, "MuiGrid-root MuiGrid-item MuiGrid")]//button';
         this.attachmentsAndJustificationsRecordTab = '//button[@data-testid="tab-2"]';
@@ -36,20 +36,24 @@ export class SocialRecordCopiesPage {
    */
     async fillNewSchemaData(socialRecordCopiesData) {
         console.log("Start filling New Schema Data");
+        
         await this.page.waitForSelector(this.ArVersionNameField, { state: "visible", timeout: 20000 });
         this.createdArVersionName = socialRecordCopiesData.getVersionArabicName();
         this.createdEnVersionName = socialRecordCopiesData.getVersionEnglishName();
         this.createdActivationDate = socialRecordCopiesData.getActivationDate();
-        console.log("Activation date is " +this.createdActivationDate);
         this.createdactivationDateForApplicant = socialRecordCopiesData.getActivationDateForApplicant();
         this.createdactivationDateForPrograms = socialRecordCopiesData.getActivationDateForPrograms();
 
         await this.page.fill(this.ArVersionNameField, this.createdArVersionName);
         await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
+        await this.page.waitForTimeout(2000);
         await this.page.fill(this.activationDateForApplicant, this.createdactivationDateForApplicant);
+        await this.page.waitForTimeout(2000);
         await this.page.fill(this.activationDateForPrograms, this.createdactivationDateForPrograms);
-        await this.page.waitForSelector(this.activationDate, { state: "visible", timeout: 60000 });
+        await this.page.waitForTimeout(2000);
         await this.page.fill(this.activationDate, this.createdActivationDate);
+        await this.page.locator(this.activationDate).press('Enter');
+        
         
 
         socialRecordCopiesData.setVersionArabicName(this.createdArVersionName);
