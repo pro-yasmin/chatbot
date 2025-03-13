@@ -253,7 +253,12 @@
     "descriptionCompleteTaskText": "ملاحظة لإكمال المهمة",
     "confirmCompleteSimulationBtnSuccessMsgText": "تم إكمال نموذج المحاكاة بنجاح, النموذج الان جاهز للتنفيذ",
     "editSimulationModeVariablesConfirmationMsg": "هل أنت متأكد من تعديل المتغيرات لنموذج المحاكاة رقم",
-    "editSimulationModeVariablesSuccessMsg": "تم تعديل المتغيرات بنجاح"
+    "editSimulationModeVariablesSuccessMsg": "تم تعديل المتغيرات بنجاح",
+    "executeSimulationModelConfirmationMsg": "هل أنت متأكد من تنفيذ نموذج المحاكاة ؟",
+    "executeSimulationModelSuccessMsg": "تم بدء تنفيذ النموذج بنجاح",
+    "executionRecordStatusCompleted": "مكتمل",
+    "executionRecordStatusInProgress": "جاري التنفيذ",
+    "simulationModelStatusExecuted": "منفذ"
 
   }
 }

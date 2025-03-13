@@ -47,7 +47,7 @@ test('View New Simulation Model Details', async ({ page }) => {
 
     // Step3: Search & Verify Simulation Model Information
     await test.step('Search on Simulation Model created', async () => {
-        expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData, null, null)).toBe(true);
+        expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData, null, null, null)).toBe(true);
         console.log('New Simulation Model Details Checked Successfully');
     });
 

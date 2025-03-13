@@ -1,18 +1,25 @@
 const { SearchPage } = require("../../../Pages/AdminPortal/SharedPages/SearchPage");
+const { PopUpPage } = require('../../AdminPortal/SharedPages/PopUpPage');
 const { SimualtionModelPage } = require("../SimualtionModel/SimualtionModelPage");
 const { SimualtionModelDetailsPage } = require("../SimualtionModel/SimualtionModelDetailsPage");
 const { SimulationModelVersionsViewPage } = require("../SimualtionModel/SimulationModelVersionsViewPage");
 const { SimulationModelEditVariablesPage } = require("../SimualtionModel/SimulationModelEditVariablesPage");
+const { SimulationModelExecutionRecordsPage } = require("../SimualtionModel/SimulationModelExecutionRecordsPage");
 
 
 export class SimulationModelManagementPage {
     constructor(page) {
         this.page = page;
         this.search = new SearchPage(this.page);
+        this.popUpMsg = new PopUpPage(this.page);
         this.simualtionModelPage = new SimualtionModelPage(this.page);
         this.simualtionModelDetailsPage = new SimualtionModelDetailsPage(this.page);
         this.simulationModelVersionsViewPage = new SimulationModelVersionsViewPage(this.page);
         this.simulationModelEditVariablesPage = new SimulationModelEditVariablesPage(this.page);
+        this.simulationModelExecutionRecordsPage = new SimulationModelExecutionRecordsPage(this.page);
+
+        //popup
+        this.popUpYesButton = '(//div[contains(@class, "MuiDialogActions-root")]//button[@tabindex="0"])[1]';
 
         this.defineSimulationModelButton = '//button[contains(@class, "MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-colorPrimary")]';
         this.searchInput = '//form[@data-testid="search-input"]//input';
@@ -27,6 +34,7 @@ export class SimulationModelManagementPage {
         this.ThreeDotsActionsButton = '((//div[contains(@class, "MuiStack-root")])[33]//button)[3]';
         this.ModelVersionsButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[4]';
         this.editVariablesButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[2]';
+        this.executeSimulationModelButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[1]';
     }
 
     async clickDefineSimulationModel() {
@@ -37,7 +45,7 @@ export class SimulationModelManagementPage {
         return await this.simualtionModelPage.fillSimulationModelInfo(simulationModelData);
 
     }
-    async checkNewSimulationModelAdded(simulationModelData, simulationModelstatusActive, editedSimulationModel) {
+    async checkNewSimulationModelAdded(simulationModelData, simulationModelstatusActive, editedSimulationModel, simulationModelstatusExecuted) {
         let arabicTd;
         let englishTd;
         let statusTd;
@@ -100,6 +108,18 @@ export class SimulationModelManagementPage {
                 let simulationModelId = await simulationModelRow[0].tdLocator.textContent();
                 simulationModelData.setCreatedSimulationModelId(simulationModelId);
                 console.log("Created simulation Model ID set in simulationModelData: " + simulationModelData.getCreatedSimulationModelId());
+                return true;
+            }
+            return false;
+        }
+        else if (simulationModelstatusExecuted) {
+            if (
+                actualSimulationModelArabicName === simulationModelData.getSimulationModelArName() &&
+                actualSimulationModelEnglishName === simulationModelData.getSimulationModelEnName() &&
+                actualSimulationModelStatus === global.testConfig.SimulationModels.simulationModelStatusExecuted &&
+                actualSimulationModelActivationStatus === global.testConfig.SimulationModels.acivationStatusEnabled
+            ) {
+                console.log("Simulation Model Status changed to Executed");
                 return true;
             }
             return false;
@@ -315,6 +335,22 @@ export class SimulationModelManagementPage {
         await this.page.click(this.editVariablesButton);
         console.log('Edit Variables Button Clicked');
         return await this.simulationModelEditVariablesPage.editVariable(simulationModelData);
+    }
+
+    /**
+     * Validates that the simulation Model page is opened.
+     * @param {Object} simulationModelData - The data required to identify the simulation Model.
+     * @returns {Promise<void>} - Resolves when the validation is complete.
+     */
+    async executeSimulationModel(simulationModelData, executionRecordNewAdded) {
+        await this.click3DotsActionsButton(simulationModelData);
+        console.log('Actions Simulaion Model Button Clicked');
+        await this.page.click(this.executeSimulationModelButton);
+        console.log('Execute Simulaion Model Button Clicked');
+        await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.executeSimulationModelConfirmationMsg);
+        await this.page.waitForTimeout(2000);
+        await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.executeSimulationModelSuccessMsg);
+        return await this.simulationModelExecutionRecordsPage.verifySimualtionModelExecutionRecord(executionRecordNewAdded);
     }
 }
 module.exports = { SimulationModelManagementPage };

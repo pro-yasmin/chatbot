@@ -257,7 +257,12 @@
     "editSimulationModeVariablesSuccessMsg": "تم تعديل المتغيرات بنجاح",
     "APIbeneficiaryParty": "a2",
     "APIsimulationModelPDFSize": 0.0126495361328125,
-    "APIsimulationModelCSVSize": 0.0000209808349609375
+    "APIsimulationModelCSVSize": 0.0000209808349609375,
+    "executeSimulationModelConfirmationMsg": "هل أنت متأكد من تنفيذ نموذج المحاكاة ؟",
+    "executeSimulationModelSuccessMsg": "تم بدء تنفيذ النموذج بنجاح",
+    "executionRecordStatusCompleted": "مكتمل",
+    "executionRecordStatusInProgress": "جاري التنفيذ",
+    "simulationModelStatusExecuted": "منفذ"
   },
   "createField": {
     "fieldArabicName": "حقل جديد",
