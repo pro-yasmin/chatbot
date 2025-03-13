@@ -52,8 +52,7 @@ export class SocialRecordCopiesPage {
         await this.page.fill(this.activationDateForPrograms, this.createdactivationDateForPrograms);
         await this.page.waitForTimeout(2000);
         await this.page.fill(this.activationDate, this.createdActivationDate);
-        await this.page.locator(this.activationDate).press('Enter');
-        
+        await this.page.waitForTimeout(2000);
         
 
         socialRecordCopiesData.setVersionArabicName(this.createdArVersionName);
