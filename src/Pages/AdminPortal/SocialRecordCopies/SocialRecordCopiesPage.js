@@ -47,6 +47,7 @@ export class SocialRecordCopiesPage {
         await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
         await this.page.fill(this.activationDateForApplicant, this.createdactivationDateForApplicant);
         await this.page.fill(this.activationDateForPrograms, this.createdactivationDateForPrograms);
+        await this.page.waitForSelector(this.activationDate, { state: "visible", timeout: 60000 });
         await this.page.fill(this.activationDate, this.createdActivationDate);
         
 
@@ -81,7 +82,7 @@ export class SocialRecordCopiesPage {
     }
     async addJustification() {
         await this.navigateToAttachmentsAndJustificationsRecordTab();
-        await this.page.waitForSelector(this.justificationDdl, { state: "visible", timeout: 60000 });
+        
         await this.page.click(this.justificationDdl);
         await this.page.waitForSelector(this.justificationFirstOption, { state: "visible", timeout: 60000 });
         await this.page.click(this.justificationFirstOption);
