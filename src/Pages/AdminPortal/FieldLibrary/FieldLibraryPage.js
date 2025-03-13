@@ -42,24 +42,28 @@ export class FieldLibraryPage {
         }
     }
 
-    async checkInsideFieldStatus(ExpectedFieldStatus , actionType) {
+    async checkInsideFieldStatus(expectedFieldStatus, actionType) {
 
-        var FieldTabLocator = actionType === Constants.APPROVE
-                        ? this.approvedFieldRecordTab
-                        : this.rejectedFieldRecordTab;
-
-        await this.page.click(FieldTabLocator);
-        await this.page.waitForTimeout(2000);
-        var fieldStatus = this.page.locator(this.fieldEnablmentStatus);
-        await fieldStatus.waitFor({ state: "visible", timeout: 30000  });
-        var actualStatus = await fieldStatus.textContent();
-        if (actualStatus.trim() === ExpectedFieldStatus.trim()) {
-                console.log(`Enablment Status is as expected: "${actualStatus.trim()}".`);
-                return true;
-            }
-            return false
+        const fieldTabLocator = actionType === Constants.APPROVE
+            ? this.approvedFieldRecordTab
+            : this.rejectedFieldRecordTab;
+    
+        await this.page.waitForSelector(fieldTabLocator, { state: 'visible', timeout: 30000 });
+        await this.page.click(fieldTabLocator);
+    
+        const fieldStatus = this.page.locator(this.fieldEnablmentStatus);
+        await fieldStatus.waitFor({ state: 'visible', timeout: 30000 });
+    
+        const actualStatus = (await fieldStatus.textContent()).trim();
+    
+        if (actualStatus === expectedFieldStatus.trim()) {
+            console.log(`Enablement status is as expected: "${actualStatus}".`);
+            return true;
+        } else {
+            console.error(`Enablement status mismatch. Expected: "${expectedFieldStatus}", Found: "${actualStatus}".`);
+            return false;
+        }
     }
-
     
 
 }

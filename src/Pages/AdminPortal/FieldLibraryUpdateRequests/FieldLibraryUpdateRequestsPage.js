@@ -67,8 +67,7 @@ export class FieldLibraryUpdateRequestsPage {
 
 
       /**
-     * Creates Complex and Input fields.
-     */// rename it to comple 
+     * Creates Complex and Input fields.*/
      async createComplexFieldRequest(complexFieldData, inputFieldData) {
         await this.navigateToFieldRequestsPage();
         var complexFieldCreated = await this.fieldRequestsPage.createField(complexFieldData);
