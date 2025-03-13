@@ -229,6 +229,7 @@
     "variableOneEnName": "Variable A",
     "variableOneDescription": "وصف المتغير",
     "defaultValueText": "قيمة",
+    "defaultValueEditedText": "قيمة معدلة",
     "variableTwoArName": "المتغير ب",
     "variableTwoEnName": "Variable B",
     "variableTwoDescription": "وصف المتغير",
@@ -252,9 +253,16 @@
     "descriptionCompleteTaskText": "ملاحظة لإكمال المهمة",
     "confirmCompleteSimulationBtnSuccessMsgText": "تم إكمال نموذج المحاكاة بنجاح, النموذج الان جاهز للتنفيذ",
     "editSimulationConfirmationMsg": "هل انت متأكد من تعديل نموذج المحاكاة؟",
+    "editSimulationModeVariablesConfirmationMsg": "هل أنت متأكد من تعديل المتغيرات لنموذج المحاكاة رقم",
+    "editSimulationModeVariablesSuccessMsg": "تم تعديل المتغيرات بنجاح",
     "APIbeneficiaryParty": "a2",
     "APIsimulationModelPDFSize": 0.0126495361328125,
-    "APIsimulationModelCSVSize": 0.0000209808349609375
+    "APIsimulationModelCSVSize": 0.0000209808349609375,
+    "executeSimulationModelConfirmationMsg": "هل أنت متأكد من تنفيذ نموذج المحاكاة ؟",
+    "executeSimulationModelSuccessMsg": "تم بدء تنفيذ النموذج بنجاح",
+    "executionRecordStatusCompleted": "مكتمل",
+    "executionRecordStatusInProgress": "جاري التنفيذ",
+    "simulationModelStatusExecuted": "منفذ"
   },
   "createField": {
     "fieldArabicName": "حقل جديد",

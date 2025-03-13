@@ -21,15 +21,17 @@ export class SimulationModelData {
     this.variableThreeEnName = null;
     this.variableThreeDescription = null;
     this.simulationModelId = null;
+    this.simulationModelEditedId = null;
 
     this.variableFourArName = null;
     this.variableFourEnName = null;
+    this.defaultValueOneEdited = null;
 
     //API
     this.simulationModelDraftId = null;
     this.decisionModelAttachmentId = null;
     this.ruleSetAttachmentId = null;
-    this.fileDataSourceAttachmentsId=null;
+    this.fileDataSourceAttachmentsId = null;
   }
 
   // Getter and Setter for Simulation Model Arabic Name
@@ -254,6 +256,26 @@ export class SimulationModelData {
   setCreatedSimulationModelId(Value) {
     this.simulationModelId = Value;
   }
+  // Getter and Setter for Simulation Model Edited ID Number
+  getCreatedSimulationModelEditedId() {
+    return this.simulationModelEditedId;
+  }
+
+  setCreatedSimulationModelEditedId(Value) {
+    this.simulationModelEditedId = Value;
+  }
+
+  // Getter and Setter for default Value Edited
+  getSimulationModelDefaultValueOneEdited() {
+    if (this.defaultValueOneEdited == null) {
+      this.defaultValueOneEdited = global.testConfig.SimulationModels.defaultValueEditedText;
+    }
+    return this.defaultValueOneEdited;
+  }
+  setSimulationModelDefaultValueOneEdited(value) {
+    this.defaultValueOneEdited = value;
+  }
+
 
   //API setters & getters
   // Getter and Setter for Simulation Model  Draft ID Number
@@ -283,8 +305,8 @@ export class SimulationModelData {
     this.ruleSetAttachmentId = Value;
   }
 
-   // Getter and Setter for Simulation Model  ruleSetAttachments ID
-   getFileDataSourceAttachmentsId() {
+  // Getter and Setter for Simulation Model  ruleSetAttachments ID
+  getFileDataSourceAttachmentsId() {
     return this.fileDataSourceAttachmentsId;
   }
 
@@ -376,7 +398,7 @@ export class SimulationModelData {
             fileName: global.testConfig.SimulationModels.simulationModelCSV,
             fileSize:
               global.testConfig.SimulationModels.APIsimulationModelCSVSize,
-            fileId:this.getFileDataSourceAttachmentsId(),
+            fileId: this.getFileDataSourceAttachmentsId(),
             fileType: "text/csv",
             description: null,
           },

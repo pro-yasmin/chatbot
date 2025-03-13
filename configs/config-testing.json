@@ -229,6 +229,7 @@
     "variableOneEnName": "Variable A",
     "variableOneDescription": "وصف المتغير",
     "defaultValueText": "قيمة",
+    "defaultValueEditedText": "قيمة معدلة",
     "variableTwoArName": "المتغير ب",
     "variableTwoEnName": "Variable B",
     "variableTwoDescription": "وصف المتغير",
@@ -250,7 +251,14 @@
     "assignTaskMsg": "هل انت متأكد من إسناد مهمة",
     "assignSuccessMsg": "تم إسناد المهمة بنجاح",
     "descriptionCompleteTaskText": "ملاحظة لإكمال المهمة",
-    "confirmCompleteSimulationBtnSuccessMsgText": "تم إكمال نموذج المحاكاة بنجاح, النموذج الان جاهز للتنفيذ"
+    "confirmCompleteSimulationBtnSuccessMsgText": "تم إكمال نموذج المحاكاة بنجاح, النموذج الان جاهز للتنفيذ",
+    "editSimulationModeVariablesConfirmationMsg": "هل أنت متأكد من تعديل المتغيرات لنموذج المحاكاة رقم",
+    "editSimulationModeVariablesSuccessMsg": "تم تعديل المتغيرات بنجاح",
+    "executeSimulationModelConfirmationMsg": "هل أنت متأكد من تنفيذ نموذج المحاكاة ؟",
+    "executeSimulationModelSuccessMsg": "تم بدء تنفيذ النموذج بنجاح",
+    "executionRecordStatusCompleted": "مكتمل",
+    "executionRecordStatusInProgress": "جاري التنفيذ",
+    "simulationModelStatusExecuted": "منفذ"
 
   }
 }
