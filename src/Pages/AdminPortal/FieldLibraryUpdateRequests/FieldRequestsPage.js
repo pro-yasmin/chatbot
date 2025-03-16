@@ -85,7 +85,7 @@ export class FieldRequestsPage {
         // Search for the specific field using its Arabic name
         let fieldRow = [];
         let fieldName = fieldData.getArabicFieldName()
-        await this.page.waitForTimeout(5000); 
+        //await this.page.waitForTimeout(5000); 
         fieldRow = await new SearchPage(this.page).searchOnUniqueRow( this.searchInput, fieldName);
 
         // Extract Arabic and English names
@@ -113,9 +113,9 @@ export class FieldRequestsPage {
 
     async sendRequestToApproval( ) {
         await this.page.click(this.justification);
-        await this.page.waitForTimeout(5000); //testing env edit
+        await this.page.waitForTimeout(1000);
         var optionsLocator = this.page.locator(this.justificationList);
-        await optionsLocator.first().waitFor({ state: "visible", timeout: 5000 });//testing env edit
+        await optionsLocator.first().waitFor({ state: "visible", timeout: 5000 });
         await optionsLocator.first().click({ force: true });
         await this.page.keyboard.press("Tab");
         await this.page.click(this.sendRequestBtn);

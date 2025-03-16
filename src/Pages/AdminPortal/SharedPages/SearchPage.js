@@ -130,7 +130,7 @@ export class SearchPage {
     let tds;
     let tdDetails = [];
 
-    await  this.page.waitForTimeout(15000);//shimaa
+    await  this.page.waitForTimeout(5000);//shimaa
     table = this.page.locator(this.tableSelector);
     
   
