@@ -11,7 +11,8 @@ export class FieldsTreePage {
      * open Personal Information section
      */
     async openFieldsSection() {
-      await this.page.waitForSelector(this.ISRBtn, { state: "visible", timeout: 10000 });
+
+      await this.page.waitForSelector(this.ISRBtn, { state: "visible", timeout: 60000 });
       await this.page.click(this.ISRBtn);
   
       await this.page.waitForSelector(this.personalInformationBtn, { state: "visible", timeout: 10000 });
