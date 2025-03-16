@@ -58,7 +58,7 @@ export class FieldPage {
     await this.page.fill(this.arabicFieldName, createdFieldArName);
     await this.page.fill(this.englishFieldName, createdFieldEnName);
     await this.selectDropdownOption(this.fieldTypeMenu , this.dataMenuOptionsLocator);
-    if (fieldType === Constants.COMPLEX_FIELD ) {
+    if (fieldType === Constants.COMPLEX_FIELD || fieldType === Constants.GROUP_FIELD ) {
         await this.selectParentOption(this.parentLocator);}
     await this.selectDropdownOption(this.fieldNature,this.dataMenuOptionsLocator);
     await this.page.fill(this.arabicFieldDescription, fieldData.getArabicFieldDescription());
@@ -102,7 +102,7 @@ export class FieldPage {
     await this.page.waitForTimeout(2000); 
     var popUpMsg = new PopUpPage(this.page);
 
-    if (fieldType === Constants.COMPLEX_FIELD ) {
+    if (fieldType === Constants.COMPLEX_FIELD || fieldType === Constants.GROUP_FIELD) {
       var result = await popUpMsg.popUpMessage( this.addAnotherField,global.testConfig.createField.createAnotherFieldMsg);  }
     else if (fieldType === Constants.INPUT_FIELD ){
     var result = await popUpMsg.popUpMessage(this.doneButton,global.testConfig.createField.confirmaCreateFieldMsg);}
