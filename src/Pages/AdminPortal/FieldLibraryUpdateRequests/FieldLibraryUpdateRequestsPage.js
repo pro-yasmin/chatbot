@@ -53,15 +53,19 @@ export class FieldLibraryUpdateRequestsPage {
 
         fieldRow = await this.search.getRowInTableWithSpecificText(requestNumber);
         var actionlocator = "button";
-        await this.search.clickRowAction(fieldRow,this.tableActions, actionlocator);
-
         if (fieldRow && fieldRow.length > 0) {
+            await this.search.clickRowAction(fieldRow,this.tableActions, actionlocator);
+            console.log("Request Details Page is opened successfully.");
+        }
+       
+
+       /* if (fieldRow && fieldRow.length > 0) {
             actionsTd = fieldRow[6].tdLocator;
             const viewButton = actionsTd.locator('div[data-testid="table-actions"] button');
             await viewButton.waitFor({ state: "visible", timeout: 5000 });
             await viewButton.click();    
-            console.log("Request Details Page is opened successfully.");
-        }
+           
+        }*/
     
     }
 

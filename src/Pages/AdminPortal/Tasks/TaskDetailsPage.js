@@ -43,13 +43,13 @@ export class TaskDetailsPage {
 
     //selectors for fields Tasks
     this.fieldRequestStatusIcon = '//span[@data-testid="status-processing"]';
-    this.fieldRequestStatus = '(//span[@class="MuiTypography-root MuiTypography-p-md-bold muirtl-17ykn84"])[6]';
+    this.fieldRequestStatus = "//label[text()='حالة الطلب']//following::span[1]";
     this.tableActions='tag';
-    this.acceptFieldTaskBtn ='//button[contains(text(),"قبول الحقل")]';
-    this.rejectFieldTaskBtn='//button[contains(text(),"رفض الحقل")]';
+    this.acceptFieldTaskBtn ="//div[contains(@class,'MuiDialogActions-root')]//button[2]";
+    this.rejectFieldTaskBtn="//div[contains(@class,'MuiDialogActions-root')]//button[1]";
     this.ensureFieldTaskNotesField ='//textarea[@data-testid="description-text-field"]'
-    this.ensureFieldTaskNotesFieldApprove='//button[contains(text(),"نعم، قبول!")]',
-    this.ensureFieldTaskNotesFieldReject='//button[contains(text(),"نعم، رفض!")]',
+    this.ensureFieldTaskNotesFieldApprove="//button[@type='submit']",
+    this.ensureFieldTaskNotesFieldReject="//button[@type='submit']",
     this.backToTasksBtn = '//button[@data-testid="modal-primary-button"]',
     this.processingRequestBtn='//button[contains(text(),"معالجة طلب تحديث مكتبة الحقول")]'
   }
@@ -173,10 +173,9 @@ async completeTask(actionType, taskType , confirmMsg) {
    */
   async checkFieldRequestStatus( expectedStatus) {
   // Wait for the status element to be visible
-  await this.page.waitForTimeout(6000);
-
-  var fieldStatus = this.page.locator(this.fieldRequestStatus);
-
+  await this.page.waitForTimeout(2000);
+  
+  var fieldStatus = this.page.locator(this.fieldRequestStatus);  
   await fieldStatus.waitFor({ state: "visible", timeout: 30000  });
   var actualStatus = await fieldStatus.textContent();
    if (actualStatus.trim() === expectedStatus.trim()) {

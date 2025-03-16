@@ -24,9 +24,9 @@ export class FieldPage {
     // Selectors for field settings
     this.classification ='//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[classification]"]]';
     this.settingMenuOptionsLocator = '.choices__list[role="listbox"] .choices__item.choices__item--selectable';
-    this.requierdOptionBtn ='//span[contains(text(),"إجباري")]';
-    this.multipleFieldBtn ='(//span[contains(text(),"نعم")])[1]';  
-    this.periodicDataUpdate = '//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[periodicDataUpdate]"]]';
+    this.requierdOptionBtn ='//input[@value="mandatory"]';
+    this.multipleFieldBtn ='//input[contains(@name,"data[multipleField]") and @value="yes"]';  
+    this.periodicDataUpdate = "//select[@name='data[periodicDataUpdate]']//parent::div";
     this.dataMenuSettings ='.choices__list.is-active .choices__item.choices__item--selectable[role="option"]'
     this.privacy ='//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[privacy]"]]';
     this.impactDegree = '//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[impactDegree]"]]'
@@ -141,6 +141,7 @@ export class FieldPage {
     await personalDataItem.click();
     await this.page.waitForTimeout(1000);
     await this.page.locator('//div[contains(@class,"MuiDialogAction")]//button[1]').click();
+    await this.page.waitForTimeout(1000);
   }
 
   /**
@@ -149,33 +150,13 @@ export class FieldPage {
    * @returns {Promise<boolean>} - Returns true if the lookup design and item creation were successful, otherwise false.
    */
   async creationField(fieldData, fieldType) {
-    var fieldDataDefinition, fieldSettings, fieldDisplay, fieldList, addFields, integrationData;
-
-    
+    var fieldDataDefinition, fieldSettings, fieldDisplay;
     // Common steps for all applicable field types
-    if (
-        fieldType === Constants.INTEGRATION_FIELD ||
-        fieldType === Constants.INPUT_FIELD ||
-        fieldType === Constants.CALCULATION_FIELD ||
-        fieldType === Constants.COMPLEX_FIELD ||
-        fieldType === Constants.GROUP_FIELD
-    ) {
         fieldDataDefinition = await this.fillFieldDataDefinition(fieldData);
         fieldSettings = await this.fillFieldSettings();
         fieldDisplay = await this.fieldDisplay(fieldData);
-
-        if (fieldDisplay) return true 
-         
-    }
-
-    
-    // Handle additional fields for complex and group types
-    // if (fieldType === Constants.COMPLEX_FIELD || fieldType === Constants.GROUP_FIELD) {
-    // if (fieldType === Constants.COMPLEX_FIELD ) {
-    //     addFields = await this.addFields();
-    // }
-
-    // return result;
+        return fieldDisplay; 
+  
 }
 
 }
