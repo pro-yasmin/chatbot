@@ -99,5 +99,22 @@ export class FieldLibraryUpdateRequestsPage {
     return false;
 }
 
+    /**
+     * Creates Group and Input fields.*/
+    async createGroupFieldRequest(groupFieldData, inputFieldData) {
+        await this.navigateToFieldRequestsPage();
+        var groupFieldCreated = await this.fieldRequestsPage.createField(groupFieldData);
+        var inputFieldCreated =await this.fieldRequestsPage.createField(inputFieldData);
+        if ( groupFieldCreated && inputFieldCreated )
+        {
+            var groupFieldID = await this.fieldRequestsPage.checkFieldRowDetails(groupFieldData);
+            var inputFieldID = await this.fieldRequestsPage.checkFieldRowDetails(inputFieldData);
+            var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval();
+            console.log('Fields created successfully');
+            return [RequestNumber ,groupFieldID ,inputFieldID]
+        }
+
+    }
+
 }
 module.exports = { FieldLibraryUpdateRequestsPage };

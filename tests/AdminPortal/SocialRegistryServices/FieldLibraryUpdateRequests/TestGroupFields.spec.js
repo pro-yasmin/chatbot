@@ -50,7 +50,7 @@ test('Group and Input Fields Request Flow', async () => {
 
     await test.step("Navigate to Field Library Requests and Create Fields", async () => {
         await homePage.navigateToFieldLibraryRequests();
-        requestChecks = await fieldLibraryUpdateRequestsPage.createComplexFieldRequest(groupFieldData, inputFieldData);
+        requestChecks = await fieldLibraryUpdateRequestsPage.createGroupFieldRequest(groupFieldData, inputFieldData);
         expect(requestChecks[0]).not.toBeNull(); 
     });
 
@@ -58,8 +58,8 @@ test('Group and Input Fields Request Flow', async () => {
         var processingStatus = global.testConfig.createField.requestStatusProcessing;
         var expectedRequestStatus = global.testConfig.createField.requestStatusProcessing;
         var expectedEnablementStatus = global.testConfig.createField.enableStatusHidden;
-        var sendRequest = await fieldLibraryUpdateRequestsPage.checkFieldRowRequestStatus(processingStatus);
-        // var sendRequest = await fieldLibraryUpdateRequestsPage.validateFieldDetailsAndMakeDecision(requestChecks,expectedRequestStatus ,expectedEnablementStatus);
+        await fieldLibraryUpdateRequestsPage.checkFieldRowRequestStatus(processingStatus);
+        var sendRequest = await fieldLibraryUpdateRequestsPage.validateFieldDetailsAndMakeDecision(requestChecks,expectedRequestStatus ,expectedEnablementStatus);
         expect(sendRequest).toBe(true);
     });
 
