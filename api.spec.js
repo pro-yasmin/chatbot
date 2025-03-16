@@ -1,11 +1,11 @@
 const { test, expect } = require('@playwright/test');
-const { StreamData } = require('../src/Models/AdminPortal/StreamData');
-const { MainProgramData } = require('../src/Models/AdminPortal/MainProgramData');
-const { SubProgramsData } = require('../src/Models/AdminPortal/SubProgramsData');
-const { Programs } = require("../src/Apis/Business/Programs");
-const { BenefitsData } = require('../src/Models/AdminPortal/BenefitsData');
-const { Simulation } = require("../src/Apis/Business/Simulation");
-const { SimulationData, SimulationModelData } = require("../src/Models/OperationPortal/SimulationModelData");
+const { StreamData } = require('./src/Models/AdminPortal/StreamData');
+const { MainProgramData } = require('./src/Models/AdminPortal/MainProgramData');
+const { SubProgramsData } = require('./src/Models/AdminPortal/SubProgramsData');
+const { Programs } = require("./src/Apis/Business/Programs");
+const { BenefitsData } = require('./src/Models/AdminPortal/BenefitsData');
+const { Simulation } = require("./src/Apis/Business/Simulation");
+const { SimulationData, SimulationModelData } = require("./src/Models/OperationPortal/SimulationModelData");
 
 
 let stream,streamData;

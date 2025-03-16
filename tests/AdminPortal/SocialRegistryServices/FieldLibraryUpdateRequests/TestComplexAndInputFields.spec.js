@@ -1,13 +1,13 @@
 const { test, expect } = require('@playwright/test');
-import Constants from '../../src/Utils/Constants';
+import Constants from '../../../../src/Utils/Constants';
 
-const { LoginPage } = require('../../src/Pages/LoginPage');
-const { HomePage } = require('../../src/Pages/AdminPortal/HomePage');
-const { FieldLibraryUpdateRequestsPage } = require('../../src/Pages/AdminPortal/FieldLibraryUpdateRequests/FieldLibraryUpdateRequestsPage');
-const { FieldLibraryManagementPage } = require('../../src/Pages/AdminPortal/FieldLibrary/FieldLibraryManagementPage');
-const { FieldsTreePage } = require('../../src/Pages/AdminPortal/FieldsTree/FieldsTreePage');
-const { FieldData } = require("../../src/Models/AdminPortal/FieldData");
-const { TasksPage } = require("../../src/Pages/AdminPortal/Tasks/TasksPage");
+const { LoginPage } = require('../../../../src/Pages/LoginPage');
+const { HomePage } = require('../../../../src/Pages/AdminPortal/HomePage');
+const { FieldLibraryUpdateRequestsPage } = require('../../../../src/Pages/AdminPortal/FieldLibraryUpdateRequests/FieldLibraryUpdateRequestsPage');
+const { FieldLibraryManagementPage } = require('../../../../src/Pages/AdminPortal/FieldLibrary/FieldLibraryManagementPage');
+const { FieldsTreePage } = require('../../../../src/Pages/AdminPortal/FieldsTree/FieldsTreePage');
+const { FieldData } = require("../../../../src/Models/AdminPortal/FieldData");
+const { TasksPage } = require("../../../../src/Pages/AdminPortal/Tasks/TasksPage");
 
 let loginPage, homePage, fieldLibraryUpdateRequestsPage, tasksPage ,fieldsTreePage;
 let complexFieldData, inputFieldData;

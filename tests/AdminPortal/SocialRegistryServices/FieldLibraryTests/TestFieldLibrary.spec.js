@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../../../src/Pages/LoginPage');
-const { HomePage } = require('../../../src/Pages/AdminPortal/HomePage');
-const { FieldLibraryManagementPage } = require('../../../src/Pages/AdminPortal/FieldLibrary/FieldLibraryManagementPage');
+const { LoginPage } = require('../../../../src/Pages/LoginPage');
+const { HomePage } = require('../../../../src/Pages/AdminPortal/HomePage');
+const { FieldLibraryManagementPage } = require('../../../../src/Pages/AdminPortal/FieldLibrary/FieldLibraryManagementPage');
 
 let loginPage;
 let homePage;

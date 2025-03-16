@@ -45,8 +45,8 @@ export class MainProgramDetailsPage {
     await this.page.waitForSelector(this.createSubProgramBtn, {state: "visible"});
     //await this.page.waitForTimeout(1000);
     await this.page.click(this.createSubProgramBtn);
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
-    //await this.page.waitForTimeout(1000);
+    //await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    await this.page.waitForTimeout(3000);
     console.log("Clicked the Create Sub program button");  
     }
 
