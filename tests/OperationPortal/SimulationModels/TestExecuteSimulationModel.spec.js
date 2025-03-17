@@ -77,6 +77,24 @@ test('Execute Simulation Model', async ({ page }) => {
         expect(await simulationModelManagementPage.executeSimulationModel(simulationModelData, true)).toBe(true);
         console.log('Simulation Model Re-executed Successfully');
     });
+
+    // Step8: Navigate to Simulation Models Managment page
+    await test.step('Navigate to Simulation Models Management page', async () => {
+        await homeOperationPage.navigateToSimulationModels();
+        console.log('Navigate to Simulation Models Management page');
+    });
+
+    // Step9: Check Simulation Model Number of Executions in Managment Page
+    await test.step('Check Simulation Model Number of Executions in Managment Page', async () => {
+        expect(await simulationModelManagementPage.checkNumberOfExecutionsInManagmentPage(simulationModelData.getSimulationModelArName())).toBe(true);
+        console.log('Simulation Model Number of Executions checked Successfully');
+    });
+
+    // Step10: Check Simulation Model Number of Executions in Simulation Model Versions Page
+    await test.step('Check Simulation Model Number of Executions in Simulation Model Versions Page', async () => {
+        expect(await simulationModelManagementPage.checkNumberOfExecutionsInModelVersionsPage(simulationModelData)).toBe(true);
+        console.log('Simulation Model Number of Executions checked Successfully'); 
+    });
 });
 
 /**

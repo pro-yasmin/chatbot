@@ -142,7 +142,7 @@ export class SearchPage {
 
     // Locate the row containing a <td> with a <span> that has the specific text inside the table
     row=await this.page.locator(`${this.tableSelector}//tr`).filter({
-      has: this.page.locator(`td span:text-is("${text}")`),
+      has: this.page.locator(`td span:has-text("${text}")`),
     });
 
     // Check if the matching row exists

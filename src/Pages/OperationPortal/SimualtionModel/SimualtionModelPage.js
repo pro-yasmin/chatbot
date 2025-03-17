@@ -207,6 +207,7 @@ export class SimualtionModelPage {
         console.log("Navigate to Fifth tab");
         await this.page.click(this.nextTabButton);
         await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.editSimulationConfirmationMsg);
+        await this.page.waitForTimeout(2000);
         var result = await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.defineSimulationSuccessMsg);
         return result;
     }

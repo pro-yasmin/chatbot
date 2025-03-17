@@ -24,6 +24,7 @@
     "enableStatusHidden": "محجوب",
     "enableStatusActive": "متاح",
     "ReadyForExecution": "جاهز للتنفيذ",
+    "Approved": "معتمد",
     "note": "تم إضافة ملاحظة جديدة",
     "ensureNoteMsg": "هل أنت متأكد من إضافة الملاحظة؟",
     "confirmNoteMsg": "تم إضافة الملاحظة بنجاح",
@@ -258,7 +259,11 @@
     "executeSimulationModelSuccessMsg": "تم بدء تنفيذ النموذج بنجاح",
     "executionRecordStatusCompleted": "مكتمل",
     "executionRecordStatusInProgress": "جاري التنفيذ",
-    "simulationModelStatusExecuted": "منفذ"
+    "simulationModelStatusExecuted": "منفذ",
+    "SendForApprovalConfirmationMsg": "هل انت متأكد من إرسال سجل التنفيذ رقم 1 المرتبط بإصدار النموذج رقم 1 للاعتماد؟",
+    "SendForApprovalSuccessMsg": "تم إرسال سجل التنفيذ للاعتماد بنجاح",
+    "sentForApprovalTask": "ELG_EXEC",
+    "approveExecutionSimulationBtnSuccessMsgText": "تم قبول اعتماد سجل تنفيذ"
 
   }
 }
