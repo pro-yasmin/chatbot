@@ -16,5 +16,7 @@ export default {
     INPUT_FIELD : "Insert",
     CALCULATION_FIELD : "Calculation",
     COMPLEX_FIELD :"Complex",
-    GROUP_FIELD : "Group"
+    GROUP_FIELD : "Group",
+    SUBDOMAIN_CHILD_FIELD: "Field",
+    SUBDOMAIN_CHILD_DOMAIN:"Domain"
 };
