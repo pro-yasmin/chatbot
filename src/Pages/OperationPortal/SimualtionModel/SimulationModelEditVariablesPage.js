@@ -12,7 +12,7 @@ export class SimulationModelEditVariablesPage {
 
         //popup
         this.popUpYesButton = '(//div[contains(@class, "MuiDialogActions-root")]//button[@tabindex="0"])[1]';
-        this.confirmEditButton = '//button[contains(text(), "نعم تعديل")]';
+        this.confirmEditButton = '//button[contains(text(), "نعم تعديل")]'; //check locator
     }
 
     /**
@@ -30,11 +30,8 @@ export class SimulationModelEditVariablesPage {
         await this.page.click(this.editVariablesButton);
         console.log("Edit Variables Button Clicked");
         await this.page.click(this.saveChangesButton);
-        console.log("1");
         await this.popUpMsg.popUpMessage(this.confirmEditButton, global.testConfig.SimulationModels.editSimulationModeVariablesConfirmationMsg);
-        console.log("2");
         var result = await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.editSimulationModeVariablesSuccessMsg);
-        console.log("3");
         return result;
     }
 }

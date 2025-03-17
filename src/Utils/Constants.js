@@ -5,6 +5,7 @@ export default {
     BENEFIT: "Benefit",
     APPROVE: "Approve",
     REJECT: "Reject",
+    READY_FOR_EXECUION: "Ready",
     FILTER_SUB_PROGRAMS_INSIDE_STREAM: "filter_Subprograms_Inside_Stream",
     FILTER_SUB_PROGRAMS_INSIDE_MAINPROGRAM: "filter_Subprograms_Inside_MainProgram",
     FILTER_SUB_PROGRAMS_OUTSIDE: "filter_Subprograms_Outside",

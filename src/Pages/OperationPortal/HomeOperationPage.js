@@ -12,6 +12,8 @@ export class HomeOperationPage {
     this.avatar = '//button[@data-testid="user-menu"]';
     this.simulationModelsButton = '//a[@data-testid="menu-simulation-models"]';
     this.tasksButton = '//a[@data-testid="menu-tasks"]';
+    this.viewExecutionLogsRequestsButton = '//a[@data-testid="View-Execution-Logs-Requests"]';
+    this.approvedExecutionLogsButton = '//a[@data-testid="menu-approved-execution-logs"]';
   }
 
   /**
@@ -46,6 +48,16 @@ export class HomeOperationPage {
     await this.page.waitForSelector(this.tasksButton, { state: "visible", timeout: 20000 });
     await this.page.click(this.tasksButton);
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+  }
+
+  async navigateToViewExecutionLogsRequestsTab() {
+    await this.page.waitForSelector(this.viewExecutionLogsRequestsButton, { state: "visible", timeout: 20000 });
+    await this.page.click(this.viewExecutionLogsRequestsButton);
+  }
+
+  async navigateToApprovedExecutionLogsTab() {
+    await this.page.waitForSelector(this.approvedExecutionLogsButton, { state: "visible", timeout: 20000 });
+    await this.page.click(this.approvedExecutionLogsButton);
   }
 
 }

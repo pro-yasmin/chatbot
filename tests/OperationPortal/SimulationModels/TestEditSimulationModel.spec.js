@@ -5,6 +5,7 @@ const { SimulationModelData } = require('../../../src/Models/OperationPortal/Sim
 const { SimulationModelManagementPage } = require('../../../src/Pages/OperationPortal/SimualtionModel/SimulationModelManagementPage');
 const { TasksPage } = require('../../../src/Pages/OperationPortal/Tasks/TasksPage');
 const { Simulation } = require("../../../src/Apis/Business/Simulation");
+import Constants from '../../../src/Utils/Constants.js';
 
 
 let loginPage;
@@ -102,7 +103,7 @@ test('Edit New Simulation Model', async ({ page }) => {
 
     // Step9: Approve Task
     await test.step('Approve Task', async () => {
-        expect(await tasksPage.approveTask(simulationModelData)).toBe(true);
+        expect(await tasksPage.approveTask(simulationModelData.getCreatedSimulationModelEditedId(), Constants.READY_FOR_EXECUION)).toBe(true);
         console.log('Task approved successfully');
     });
 
