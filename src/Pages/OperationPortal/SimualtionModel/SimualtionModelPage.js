@@ -63,7 +63,7 @@ export class SimualtionModelPage {
 
     async fillModelDataTab(simulationModelData) {
         console.log("Start filling Simulation Model Information Tab one");
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForTimeout(2000);
         this.createdSimulationModelArName = simulationModelData.getSimulationModelArName();
         this.createdSimulationModelEnName = simulationModelData.getSimulationModelEnName();
         this.createdSimulationModelDescription = simulationModelData.getSimulationModelDescription();
@@ -83,7 +83,7 @@ export class SimualtionModelPage {
     }
     async fillDataSourceTab() {
         console.log("Start filling Simulation Model Information Tab two");
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForTimeout(2000);
         await this.page.click(this.dataSourceCheckbox);
         await this.page.click(this.auCheckbox);
         await this.page.click(this.ibrCheckbox);
@@ -94,14 +94,14 @@ export class SimualtionModelPage {
     }
     async fillDefineConditionsTab() {
         console.log("Start filling Simulation Model Information Tab three");
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForTimeout(2000);
         await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelPDF, this.attachButton);
         console.log("End filling Simulation Model information Tab three");
         await this.page.click(this.nextTabButton);
     }
     async fillDefineVariablesTab(simulationModelData) {
         console.log("Start filling Simulation Model Information Tab four");
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(2000);
         //var1
         this.createdVariableOneArName = simulationModelData.getVariableOneArName();
         this.createdVariableOneEnName = simulationModelData.getVariableOneEnName();
@@ -166,7 +166,7 @@ export class SimualtionModelPage {
 
     async fillDefineSimulationModelTab() {
         console.log("Start filling Simulation Model Information Tab five");
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForTimeout(2000);
         console.log("End filling Simulation Model information Tab five");
         await this.page.click(this.nextTabButton);
         await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.defineSimulationConfirmationMsg);
