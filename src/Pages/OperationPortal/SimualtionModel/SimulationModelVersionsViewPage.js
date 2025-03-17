@@ -1,12 +1,18 @@
 const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage");
+const { PopUpPage } = require('../../AdminPortal/SharedPages/PopUpPage');
 
 
 export class SimulationModelVersionsViewPage {
     constructor(page) {
         this.page = page;
         this.search = new SearchPage(this.page);
+        this.popUpMsg = new PopUpPage(this.page);
+
+        //popup
+        this.popUpYesButton = '(//div[contains(@class, "MuiDialogActions-root")]//button[@tabindex="0"])[1]';
 
         this.searchInput = '//form[@data-testid="search-input"]//input';
+        this.sendForApprovalButton = '(//td[5]//button[contains(@class, "MuiButtonBase-root MuiIconButton-root")])[2]';
     }
 
     /**
@@ -120,6 +126,40 @@ export class SimulationModelVersionsViewPage {
                 console.log("Simulation Model Row length = " + simulationModelRow.length);
             }
         }
+    }
+
+    async checkNumberOfExecutions(simulationModelData) {
+        let numberOfExecutionsTd;
+
+        let numberOfExecutions;
+        let simulationModelRow = [];
+        await this.page.waitForTimeout(5000);
+        simulationModelRow = await this.search.getRowInTableWithSpecificText(simulationModelData.getSimulationModelArName());
+
+        if (simulationModelRow && simulationModelRow.length > 0) {
+            numberOfExecutionsTd = simulationModelRow[7].tdLocator;
+            numberOfExecutions = numberOfExecutionsTd.locator("span");
+            await numberOfExecutions.waitFor({ state: "visible" });
+            var actualNumberOfExecutions = await numberOfExecutions.textContent();
+            var expectedNumberOfExecutions = "2";
+
+            console.log("Actual Number Of Executions: ", actualNumberOfExecutions);
+            console.log("Expected Number Of Executions: ", expectedNumberOfExecutions);
+        }
+        if (actualNumberOfExecutions === expectedNumberOfExecutions) {
+            console.log("Number of Executions for Simulation Model matched successfully.");
+            return true;
+        }
+        return false;
+    }
+
+    async clickSendForApprovalButton(){
+        await this.page.click(this.sendForApprovalButton);
+        console.log('Simulaion Model Execution Send For Approval Button Clicked');
+        await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.SendForApprovalConfirmationMsg);
+        await this.page.waitForTimeout(2000);
+        var popupResult = await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.SendForApprovalSuccessMsg);
+        return popupResult;
     }
 }
 module.exports = { SimulationModelVersionsViewPage };

@@ -5,6 +5,8 @@ const { SimualtionModelDetailsPage } = require("../SimualtionModel/SimualtionMod
 const { SimulationModelVersionsViewPage } = require("../SimualtionModel/SimulationModelVersionsViewPage");
 const { SimulationModelEditVariablesPage } = require("../SimualtionModel/SimulationModelEditVariablesPage");
 const { SimulationModelExecutionRecordsPage } = require("../SimualtionModel/SimulationModelExecutionRecordsPage");
+const { ViewExecutionLogsRequestsPage } = require("../SimualtionModel/ViewExecutionLogsRequestsPage");
+const { ApprovedExecutionLogsPage } = require("../SimualtionModel/ApprovedExecutionLogsPage");
 
 
 export class SimulationModelManagementPage {
@@ -17,10 +19,12 @@ export class SimulationModelManagementPage {
         this.simulationModelVersionsViewPage = new SimulationModelVersionsViewPage(this.page);
         this.simulationModelEditVariablesPage = new SimulationModelEditVariablesPage(this.page);
         this.simulationModelExecutionRecordsPage = new SimulationModelExecutionRecordsPage(this.page);
+        this.viewExecutionLogsRequestsPage = new ViewExecutionLogsRequestsPage(this.page);
+        this.approvedExecutionLogsPage = new ApprovedExecutionLogsPage(this.page);
 
-        //popup
-        this.popUpYesButton = '(//div[contains(@class, "MuiDialogActions-root")]//button[@tabindex="0"])[1]';
-
+        //Execution Popups buttons
+        this.popUpExecuteRexecuteButton = "//button[contains(text(),'تنفيذ النموذج')]";
+        this.popUpGotoExecutions = "//button[contains(text(),'استعراض سجلات التنفيذ')]";
         this.defineSimulationModelButton = '//button[contains(@class, "MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-colorPrimary")]';
         this.searchInput = '//form[@data-testid="search-input"]//input';
         this.threeDotsMenu = '//div[@data-testid="three-dots-menu"]';
@@ -57,11 +61,11 @@ export class SimulationModelManagementPage {
         let simulationModelActivationStatus;
         let simulationModelRow = [];
         if (editedSimulationModel) {
-            await this.page.waitForTimeout(5000);
+            //await this.page.waitForTimeout(5000);
             simulationModelRow = await this.search.getRowInTableWithSpecificText(simulationModelData.getSimulationModelArName());
         }
         else {
-            await this.page.waitForTimeout(5000);
+            //await this.page.waitForTimeout(5000);
             simulationModelRow = await this.search.searchOnUniqueRow(this.searchInput, simulationModelData.getSimulationModelArName());
         }
 
@@ -243,7 +247,7 @@ export class SimulationModelManagementPage {
                     actualSimulationModelEnglishName === simulationModelData.getSimulationModelEnName() &&
                     actualSimulationModelStatus === global.testConfig.SimulationModels.simulationModelStatusReady &&
                     actualSimulationModelActivationStatus === global.testConfig.SimulationModels.acivationStatusEnabled
-                    
+
                 ) {
                     console.log("Simulation Model Information matched successfully.");
                     return true;
@@ -347,10 +351,55 @@ export class SimulationModelManagementPage {
         console.log('Actions Simulaion Model Button Clicked');
         await this.page.click(this.executeSimulationModelButton);
         console.log('Execute Simulaion Model Button Clicked');
-        await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.executeSimulationModelConfirmationMsg);
-        await this.page.waitForTimeout(2000);
-        await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.executeSimulationModelSuccessMsg);
+        await this.popUpMsg.popUpMessage(this.popUpExecuteRexecuteButton, global.testConfig.SimulationModels.executeSimulationModelConfirmationMsg);
+        await this.popUpMsg.popUpMessage(this.popUpGotoExecutions, global.testConfig.SimulationModels.executeSimulationModelSuccessMsg);
         return await this.simulationModelExecutionRecordsPage.verifySimualtionModelExecutionRecord(executionRecordNewAdded);
     }
+
+    async checkNumberOfExecutionsInManagmentPage(simulationModelRequest) {
+        let numberOfExecutionsTd;
+
+        let numberOfExecutions;
+        let simulationModelRow = [];
+        await this.page.waitForTimeout(5000);
+        simulationModelRow = await this.search.getRowInTableWithSpecificText(simulationModelRequest);
+
+        if (simulationModelRow && simulationModelRow.length > 0) {
+            numberOfExecutionsTd = simulationModelRow[6].tdLocator;
+            numberOfExecutions = numberOfExecutionsTd.locator("span");
+            await numberOfExecutions.waitFor({ state: "visible" });
+            var actualNumberOfExecutions = await numberOfExecutions.textContent();
+            var expectedNumberOfExecutions = "2";
+
+            console.log("Actual Number Of Executions: ", actualNumberOfExecutions);
+            console.log("Expected Number Of Executions: ", expectedNumberOfExecutions);
+        }
+        if (actualNumberOfExecutions === expectedNumberOfExecutions) {
+            console.log("Number of Executions for Simulation Model matched successfully.");
+            return true;
+        }
+        return false;
+    }
+
+    async checkNumberOfExecutionsInModelVersionsPage(simulationModelData) {
+        await this.click3DotsActionsButton(simulationModelData);
+        console.log('Actions Simulaion Model Button Clicked');
+        await this.page.click(this.ModelVersionsButton);
+        console.log('Simulaion Model Versions Button Clicked');
+        return await this.simulationModelVersionsViewPage.checkNumberOfExecutions(simulationModelData);
+    }
+
+    async sendSimulationModelExecutionForApproval(){
+        return await this.simulationModelVersionsViewPage.clickSendForApprovalButton();
+    }
+
+    async verifySimulationModelExecutionStatusInLogs(request){
+        return await this.viewExecutionLogsRequestsPage.verifyExecutionLog(request);
+    }
+
+    async verifySimulationModelExecutionExistInApprovedLogs(request){
+        return await this.approvedExecutionLogsPage.verifyExecutionRequestInApprovedLogs(request);
+    }
+
 }
 module.exports = { SimulationModelManagementPage };
