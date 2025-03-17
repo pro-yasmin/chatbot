@@ -11,11 +11,14 @@ export class FieldsTreePage {
      * open Personal Information section
      */
     async openFieldsSection() {
-      await this.page.waitForSelector(this.ISRBtn, { state: "visible", timeout: 10000 });
-      await this.page.click(this.ISRBtn);
-  
+
+      await this.page.waitForTimeout(5000);
+     //await this.page.waitForSelector(this.ISRBtn, { state: "visible", timeout: 60000 });
+      await this.page.locator(this.ISRBtn).click({ timeout: 5000 });
+      //await this.page.click(this.ISRBtn);  
       await this.page.waitForSelector(this.personalInformationBtn, { state: "visible", timeout: 10000 });
-      await this.page.click(this.personalInformationBtn);
+      await this.page.locator(this.personalInformationBtn).click({ timeout: 5000 });
+     // await this.page.click(this.personalInformationBtn);
       console.log("Fields Personal Information opened successfully");
     }
   

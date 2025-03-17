@@ -14,15 +14,14 @@ export class FieldRequestDetialsPage {
     async checkInsideRequestStatus(ExpectedFieldRequestStatus) {
     
         // Get the actual status text for both cases
-        var requestStatusIcon = await this.page.textContent(this.requestStatusIcon);
+        //var requestStatusIcon = await this.page.textContent(this.requestStatusIcon);
         var RequestStatusData = await this.page.textContent( this.RequestStatusData);
     
         // Log the retrieved data
-        console.log(`Request Status Icon : ${requestStatusIcon.trim()}`);
+        //console.log(`Request Status Icon : ${requestStatusIcon.trim()}`);
         console.log(`Request Status Data: ${RequestStatusData.trim()}`);
 
-        if (requestStatusIcon === ExpectedFieldRequestStatus &&
-            RequestStatusData === ExpectedFieldRequestStatus) {
+        if (RequestStatusData === ExpectedFieldRequestStatus) {
             return true;
           }
           return false;

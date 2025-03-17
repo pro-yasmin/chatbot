@@ -1,8 +1,8 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../../../src/Pages/LoginPage');
-const { HomePage } = require('../../../src/Pages/AdminPortal/HomePage');
-const { SocialRecordCopiesManagementPage } = require('../../../src/Pages/AdminPortal/SocialRecordCopies/SocialRecordCopiesManagementPage');
-const { SocialRecordCopiesData } = require('../../../src/Models/AdminPortal/SocialRecordCopiesData');
+const { LoginPage } = require('../../../../src/Pages/LoginPage');
+const { HomePage } = require('../../../../src/Pages/AdminPortal/HomePage');
+const { SocialRecordCopiesManagementPage } = require('../../../../src/Pages/AdminPortal/SocialRecordCopies/SocialRecordCopiesManagementPage');
+const { SocialRecordCopiesData } = require('../../../../src/Models/AdminPortal/SocialRecordCopiesData');
 
 let loginPage;
 let homePage;

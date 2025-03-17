@@ -41,13 +41,13 @@ export class HomeOperationPage {
   async navigateToSimulationModels() {
     await this.page.waitForSelector(this.simulationModelsButton, { state: "visible", timeout: 20000 });
     await this.page.click(this.simulationModelsButton);
-    //await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 
   async navigateToTasksTab() {
     await this.page.waitForSelector(this.tasksButton, { state: "visible", timeout: 20000 });
     await this.page.click(this.tasksButton);
-    //await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 
   async navigateToViewExecutionLogsRequestsTab() {

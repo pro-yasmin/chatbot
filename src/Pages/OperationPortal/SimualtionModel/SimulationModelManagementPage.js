@@ -61,11 +61,11 @@ export class SimulationModelManagementPage {
         let simulationModelActivationStatus;
         let simulationModelRow = [];
         if (editedSimulationModel) {
-            await this.page.waitForTimeout(5000);
+            //await this.page.waitForTimeout(5000);
             simulationModelRow = await this.search.getRowInTableWithSpecificText(simulationModelData.getSimulationModelArName());
         }
         else {
-            await this.page.waitForTimeout(5000);
+            //await this.page.waitForTimeout(5000);
             simulationModelRow = await this.search.searchOnUniqueRow(this.searchInput, simulationModelData.getSimulationModelArName());
         }
 

@@ -59,42 +59,64 @@ export class FieldLibraryManagementPage {
         }
     }
 
-
     async checkFieldStatusDetails(fieldMap) {
 
-        await this.page.waitForTimeout(5000);
-
         for (const [fieldId, actionType] of fieldMap.entries()) {
-
-            if (actionType === Constants.APPROVE) 
-                { await this.navigateToApprovedFieldsTab();} 
-            else if (actionType === Constants.REJECT) 
-                { await this.navigateToRejectedFieldsTab(); }
     
-            console.log(`Verifying ${actionType} field with ID: ${fieldId}`);
-            await this.page.waitForTimeout(5000);
-            // Search for the field row using the field ID
-            var fieldRow = await this.search.searchOnUniqueRow(this.searchInputSelector, fieldId);
-            await this.page.waitForTimeout(5000);
-            // Open the field details page
-            var actionLocator = "button";
-            await this.search.clickRowAction(fieldRow, this.tableActions, actionLocator);
-            console.log(`Opened field details page for ID: ${fieldId}`);
+            console.log(`Starting verification for ${actionType} field with ID: ${fieldId}`);
     
-            // Determine expected status based on action type
+            if (actionType === Constants.APPROVE) {
+                await this.navigateToApprovedFieldsTab();
+            } else if (actionType === Constants.REJECT) {
+                await this.navigateToRejectedFieldsTab();
+            }
+    
+            await this.page.waitForSelector(this.searchInputSelector, { state: 'visible', timeout: 30000 });
+    
+            // Search for the field row
+            const fieldRow = await this.search.searchOnUniqueRow(this.searchInputSelector, fieldId);
+    
+            console.log(`Field row found for ID: ${fieldId}`);
+    
+            const actionCell = fieldRow[fieldRow.length - 1].tdLocator;
+            const actionButton = actionCell.locator('[data-testid="table-actions"]');
+    
+            await actionButton.waitFor({ state: 'visible', timeout: 30000 });
+    
+            console.log(`Clicking action button for field ID: ${fieldId}`);
+    
+            // Get current URL before clicking
+            const currentUrl = this.page.url();
+    
+            await actionButton.click();
+    
+            await this.page.waitForFunction(
+                (oldUrl) => window.location.href !== oldUrl,
+                currentUrl,
+                { timeout: 10000 }
+            ).catch(() => {
+                throw new Error(`Field details page did NOT load for field ID: ${fieldId}. Aborting.`);
+            });
+    
+            console.log(`URL changed. Field details page loaded for ID: ${fieldId}`);
+    
             const expectedStatus = actionType === Constants.APPROVE
                 ? global.testConfig.FieldLibrary.fieldEnablementStatusActivated
                 : global.testConfig.FieldLibrary.fieldEnablementStatusDeactivated;
     
-            // var fieldStatus = await this.fieldLibraryPage.checkInsideFieldStatus(expectedStatus , actionType);
-
-            console.log(`Field status verified for ID: ${fieldId}`);
-
-            // await this.page.goBack();
-            // await this.page.waitForLoadState('domcontentloaded');
+            await this.fieldLibraryPage.checkInsideFieldStatus(expectedStatus, actionType);
+    
+            console.log(`Field status checked for ID: ${fieldId}`);
+    
+            await this.page.goBack();
+            await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    
+            console.log(`Returned from details page for field ID: ${fieldId}`);
         }
-        return fieldStatus;
+    
+        return true;
     }
+    
     
 }
 module.exports = { FieldLibraryManagementPage };
