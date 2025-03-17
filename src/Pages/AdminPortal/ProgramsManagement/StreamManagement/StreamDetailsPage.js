@@ -38,12 +38,12 @@ export class StreamDetailsPage {
  */
   async InsideCreateMainProgram() {
     await this.page.click(this.mainProgramTab);
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    await this.page.waitForTimeout(2000);
+    //await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
     await this.page.waitForSelector(this.createMainProgramBtn, {state: "visible"});
-   // await this.page.waitForTimeout(1000);
     await this.page.click(this.createMainProgramBtn);
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
-   // await this.page.waitForTimeout(1000);
+    //await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    await this.page.waitForTimeout(3000);
     console.log("Clicked the Create Main program button");  
     }
 

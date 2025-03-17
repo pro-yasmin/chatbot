@@ -4,6 +4,7 @@ const { HomeOperationPage } = require('../../../src/Pages/OperationPortal/HomeOp
 const { SimulationModelData } = require('../../../src/Models/OperationPortal/SimulationModelData');
 const { SimulationModelManagementPage } = require('../../../src/Pages/OperationPortal/SimualtionModel/SimulationModelManagementPage');
 const { TasksPage } = require('../../../src/Pages/OperationPortal/Tasks/TasksPage');
+const { Simulation } = require("../../../src/Apis/Business/Simulation");
 
 
 let loginPage;
@@ -11,6 +12,9 @@ let homeOperationPage;
 let simulationModelData;
 let simulationModelManagementPage;
 let tasksPage;
+let simulation;
+
+
 
 test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
@@ -18,7 +22,7 @@ test.beforeEach(async ({ page }) => {
     simulationModelData = new SimulationModelData();
     simulationModelManagementPage = new SimulationModelManagementPage(page);
     tasksPage = new TasksPage(page);
-
+    simulation = new Simulation(page);
 
     var baseUrl = global.testConfig.OPERATION_BASE_URL;
     var adminusername = global.testConfig.PROGRAMS_AND_POLICIES_SPECIALIST;
@@ -33,23 +37,29 @@ test.beforeEach(async ({ page }) => {
     });
 });
 
-test('Define New Simulation Model', async ({ page }) => {
-    // Step1: Navigate to Simulation Models Managment page
+test('Edit Simulation Model Variables', async ({ page }) => {
+    // Step1: Create & Approve simulation model using API
+    await test.step('API Create & Approve simulation model', async () => {
+        await simulation.createsimulationModelAndApproveAPI(global.testConfig.ADMIN_USER, global.testConfig.ADMIN_PASS, simulationModelData);
+        //await simulation.createsimulationModelAndApproveAPI(adminusername, adminpassword, simulationModelData);
+    });
+
+    // Step6: Navigate to Simulation Models Managment page
     await test.step('Navigate to Simulation Models Management page', async () => {
         await homeOperationPage.navigateToSimulationModels();
         console.log('Navigate to Simulation Models Management page');
     });
 
-    // Step2: Fill Simulation Model Information
-    await test.step('Fill Simulation Model Information', async () => {
-        expect(await simulationModelManagementPage.defineSimulationModel(simulationModelData)).toBe(true);
-        console.log('Simulation Model Information filled Successfully');
+    // Step7: Search & Verify Simulation Model Status changed to active
+    await test.step('Search on Simulation Model Status changed to active', async () => {
+        expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData, true, null, null)).toBe(true);
+        console.log('New Simulation Model Status changed to active Successfully');
     });
 
-    // Step3: Search & Verify Simulation Model Information
-    await test.step('Search on Simulation Model created', async () => {
-        expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData, null, null, null)).toBe(true);
-        console.log('New Simulation Model Details Checked Successfully');
+    // Step8: Edit Simulation Model
+    await test.step('Edit Simulation Model Variables', async () => {
+        expect(await simulationModelManagementPage.editSimulationModelVariables(simulationModelData)).toBe(true);
+        console.log('Simulation Model Variables edited Successfully');
     });
 });
 

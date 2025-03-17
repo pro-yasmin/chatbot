@@ -10,15 +10,18 @@ export class SimualtionModelPage {
 
         this.fieldEnablementToggle = '//label[@class="form-check-label label-position-right"]';
         this.activate_deactivateFieldLibraryAlertMsg = '//div[@role="presentation"]//span';
+        this.attachButton = '//button[@type="button" and contains(text(),"إضافة الملف")]';
+        
         //popup
         this.popUpYesButton = '(//div[contains(@class, "MuiDialogActions-root")]//button[@tabindex="0"])[1]';
-        this.attachButton = '//button[@type="button" and contains(text(),"إضافة الملف")]';
+        
 
         //tab1
         this.simulationModelArNameField = '//input[@name="modelData.nameAr"]';
         this.simulationModelEnNameField = '//input[@name="modelData.nameEn"]';
         this.beneficiaryPartyDdl = '//div[@id="mui-component-select-modelData.beneficiaryParty"]';
-        this.beneficiaryPartyDdlFirstValue = '//li[@tabindex="0"]';
+        this.beneficiaryPartyDdlFirstValue = '//li[@data-value="a2"]';
+        this.beneficiaryPartyDdlSecondValue = '//li[@data-value="a1"]';
         this.simulationModelDescriptionField = '//textarea[@name="modelData.description"]';
         this.uploadedFileName = '//td[1]//span';
         this.nextTabButton = '//button[@data-testid="next-button"]';
@@ -60,7 +63,7 @@ export class SimualtionModelPage {
 
     async fillModelDataTab(simulationModelData) {
         console.log("Start filling Simulation Model Information Tab one");
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(2000);
         this.createdSimulationModelArName = simulationModelData.getSimulationModelArName();
         this.createdSimulationModelEnName = simulationModelData.getSimulationModelEnName();
         this.createdSimulationModelDescription = simulationModelData.getSimulationModelDescription();
@@ -80,7 +83,7 @@ export class SimualtionModelPage {
     }
     async fillDataSourceTab() {
         console.log("Start filling Simulation Model Information Tab two");
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(2000);
         await this.page.click(this.dataSourceCheckbox);
         await this.page.click(this.auCheckbox);
         await this.page.click(this.ibrCheckbox);
@@ -91,14 +94,14 @@ export class SimualtionModelPage {
     }
     async fillDefineConditionsTab() {
         console.log("Start filling Simulation Model Information Tab three");
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(2000);
         await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelPDF, this.attachButton);
         console.log("End filling Simulation Model information Tab three");
         await this.page.click(this.nextTabButton);
     }
     async fillDefineVariablesTab(simulationModelData) {
         console.log("Start filling Simulation Model Information Tab four");
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(2000);
         //var1
         this.createdVariableOneArName = simulationModelData.getVariableOneArName();
         this.createdVariableOneEnName = simulationModelData.getVariableOneEnName();
@@ -163,10 +166,48 @@ export class SimualtionModelPage {
 
     async fillDefineSimulationModelTab() {
         console.log("Start filling Simulation Model Information Tab five");
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(2000);
         console.log("End filling Simulation Model information Tab five");
         await this.page.click(this.nextTabButton);
         await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.defineSimulationConfirmationMsg);
+        var result = await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.defineSimulationSuccessMsg);
+        return result;
+    }
+
+    async editSimulationModel(simulationModelData) {
+        await this.page.click(this.beneficiaryPartyDdl);
+        await this.page.waitForSelector(this.beneficiaryPartyDdlFirstValue, { visible: true });
+        await this.page.click(this.beneficiaryPartyDdlSecondValue);
+        console.log("Beneficiary Party changed to second value");
+        await this.page.fill(this.simulationModelDescriptionField, simulationModelData.getEditedSimulationModelDescription());
+        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelPDF, this.attachButton);
+        await this.page.click(this.nextTabButton);
+        console.log("Navigate to Second tab");
+        await this.page.waitForTimeout(5000);
+        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelSecondCSV, this.attachButton);
+        await this.page.click(this.nextTabButton);
+        console.log("Navigate to Third tab");
+        await this.page.waitForTimeout(5000);
+        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelPDF, this.attachButton);
+        await this.page.click(this.nextTabButton);
+        console.log("Navigate to Fourth tab");
+        this.createdVariableOneArName = simulationModelData.getVariableFourArName();
+        this.createdVariableOneEnName = simulationModelData.getVariableFourEnName();
+        this.createdVariableOneDescription = simulationModelData.getVariableOneDescription();
+        this.createdDefaultValueOne = simulationModelData.getDefaultValueOne();
+        await this.page.fill(this.variableArNameField, this.createdVariableOneArName);
+        await this.page.fill(this.variableEnNameField, this.createdVariableOneEnName);
+        await this.page.fill(this.variableDescriptionField, this.createdVariableOneDescription);
+        await this.page.click(this.variableTypeDdl);
+        await this.page.waitForSelector(this.variableTypeDdlTextValue, { visible: true });
+        await this.page.click(this.variableTypeDdlTextValue);
+        await this.page.fill(this.defaultValueField, this.createdDefaultValueOne);
+        await this.page.click(this.addVariableButton);
+        await this.page.click(this.nextTabButton);
+        console.log("Navigate to Fifth tab");
+        await this.page.click(this.nextTabButton);
+        await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.editSimulationConfirmationMsg);
+        await this.page.waitForTimeout(2000);
         var result = await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.defineSimulationSuccessMsg);
         return result;
     }

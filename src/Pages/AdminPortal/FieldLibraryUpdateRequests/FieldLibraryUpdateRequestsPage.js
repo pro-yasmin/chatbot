@@ -16,6 +16,7 @@ export class FieldLibraryUpdateRequestsPage {
     }
 
     async navigateToFieldRequestsPage() {
+            await this.page.waitForTimeout(5000);
             await this.page.waitForSelector(this.fieldLibraryUpdateRequestButton, { state: "visible", timeout: 7000 });
             await this.page.click(this.fieldLibraryUpdateRequestButton, { force: true });
             console.log("Field Requests Page Opened successfully.");   
@@ -52,22 +53,25 @@ export class FieldLibraryUpdateRequestsPage {
 
         fieldRow = await this.search.getRowInTableWithSpecificText(requestNumber);
         var actionlocator = "button";
-        await this.search.clickRowAction(fieldRow,this.tableActions, actionlocator);
-
         if (fieldRow && fieldRow.length > 0) {
+            await this.search.clickRowAction(fieldRow,this.tableActions, actionlocator);
+            console.log("Request Details Page is opened successfully.");
+        }
+       
+
+       /* if (fieldRow && fieldRow.length > 0) {
             actionsTd = fieldRow[6].tdLocator;
             const viewButton = actionsTd.locator('div[data-testid="table-actions"] button');
             await viewButton.waitFor({ state: "visible", timeout: 5000 });
             await viewButton.click();    
-            console.log("Request Details Page is opened successfully.");
-        }
+           
+        }*/
     
     }
 
 
       /**
-     * Creates Complex and Input fields.
-     */// rename it to comple 
+     * Creates Complex and Input fields.*/
      async createComplexFieldRequest(complexFieldData, inputFieldData) {
         await this.navigateToFieldRequestsPage();
         var complexFieldCreated = await this.fieldRequestsPage.createField(complexFieldData);
@@ -98,6 +102,23 @@ export class FieldLibraryUpdateRequestsPage {
     }
     return false;
 }
+
+    /**
+     * Creates Group and Input fields.*/
+    async createGroupFieldRequest(groupFieldData, inputFieldData) {
+        await this.navigateToFieldRequestsPage();
+        var groupFieldCreated = await this.fieldRequestsPage.createField(groupFieldData);
+        var inputFieldCreated =await this.fieldRequestsPage.createField(inputFieldData);
+        if ( groupFieldCreated && inputFieldCreated )
+        {
+            var groupFieldID = await this.fieldRequestsPage.checkFieldRowDetails(groupFieldData);
+            var inputFieldID = await this.fieldRequestsPage.checkFieldRowDetails(inputFieldData);
+            var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval();
+            console.log('Fields created successfully');
+            return [RequestNumber ,groupFieldID ,inputFieldID]
+        }
+
+    }
 
 }
 module.exports = { FieldLibraryUpdateRequestsPage };

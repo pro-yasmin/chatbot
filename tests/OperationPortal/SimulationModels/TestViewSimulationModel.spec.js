@@ -18,11 +18,10 @@ test.beforeEach(async ({ page }) => {
     simulationModelData = new SimulationModelData();
     simulationModelManagementPage = new SimulationModelManagementPage(page);
     tasksPage = new TasksPage(page);
-
-
     var baseUrl = global.testConfig.OPERATION_BASE_URL;
     var adminusername = global.testConfig.PROGRAMS_AND_POLICIES_SPECIALIST;
     var adminpassword = global.testConfig.PROGRAMS_AND_POLICIES_SPECIALIST_PASS;
+
 
     // Step0: Login 
     await test.step('Login to Operation Portal', async () => {
@@ -33,7 +32,7 @@ test.beforeEach(async ({ page }) => {
     });
 });
 
-test('Define New Simulation Model', async ({ page }) => {
+test('View New Simulation Model Details', async ({ page }) => {
     // Step1: Navigate to Simulation Models Managment page
     await test.step('Navigate to Simulation Models Management page', async () => {
         await homeOperationPage.navigateToSimulationModels();
@@ -50,6 +49,12 @@ test('Define New Simulation Model', async ({ page }) => {
     await test.step('Search on Simulation Model created', async () => {
         expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData, null, null, null)).toBe(true);
         console.log('New Simulation Model Details Checked Successfully');
+    });
+
+    // Step4: View Simulation Model page After adding
+    await test.step('View Simulation Model Details After adding', async () => {
+        expect(await simulationModelManagementPage.viewSimulationModelDetails(simulationModelData)).toBe(true);
+        console.log('View Simulation Model Details validated Successfully');
     });
 });
 

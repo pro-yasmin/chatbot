@@ -1,3 +1,5 @@
+import Constants from '../../../Utils/Constants';
+
 const { PopUpPage } = require('../SharedPages/PopUpPage');
 
 export class FieldLibraryPage {
@@ -10,6 +12,12 @@ export class FieldLibraryPage {
         //popup
         this.successPopupTitle = '//span[@data-testid="modal-title"]';
         this.popUpYesButton = '//button[@data-testid="confirmation-modal-primary-button"]';
+
+        this.approvedFieldRecordTab = '//button[@data-testid="tab-4"]';
+        this.rejectedFieldRecordTab = '//button[@data-testid="tab-3"]';
+        // this.fieldEnablmentStatus ='//div[contains(@class,"formio-component-status") and contains(@class,"formio-component-textfield")]//div[@ref="value"]';
+        this.fieldEnablmentStatus ='//*[contains(@class,"status")][2]';
+
     }
 
         /**
@@ -33,6 +41,30 @@ export class FieldLibraryPage {
             return false;
         }
     }
+
+    async checkInsideFieldStatus(expectedFieldStatus, actionType) {
+
+        const fieldTabLocator = actionType === Constants.APPROVE
+            ? this.approvedFieldRecordTab
+            : this.rejectedFieldRecordTab;
+    
+        await this.page.waitForSelector(fieldTabLocator, { state: 'visible', timeout: 30000 });
+        await this.page.click(fieldTabLocator);
+    
+        const fieldStatus = this.page.locator(this.fieldEnablmentStatus);
+        await fieldStatus.waitFor({ state: 'visible', timeout: 30000 });
+    
+        const actualStatus = (await fieldStatus.textContent()).trim();
+    
+        if (actualStatus === expectedFieldStatus.trim()) {
+            console.log(`Enablement status is as expected: "${actualStatus}".`);
+            return true;
+        } else {
+            console.error(`Enablement status mismatch. Expected: "${expectedFieldStatus}", Found: "${actualStatus}".`);
+            return false;
+        }
+    }
+    
 
 }
 module.exports = { FieldLibraryPage };

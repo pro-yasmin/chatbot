@@ -144,7 +144,7 @@ export class HomePage {
     await this.navigateToSocialRegistryServices();
     await this.page.waitForSelector(this.fieldTreeTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.fieldTreeTab);
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    //await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 
   async navigateToFieldLibraryRequests() {
@@ -158,7 +158,8 @@ export class HomePage {
     await this.navigateToSocialRegistryServices();
     await this.page.waitForSelector(this.socialRecordCopiesTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.socialRecordCopiesTab);
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    await this.page.waitForTimeout(2000);
+    //await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
   
   async navigateToSubDomainLibraryRequests() {

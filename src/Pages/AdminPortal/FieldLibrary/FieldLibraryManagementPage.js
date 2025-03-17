@@ -1,3 +1,5 @@
+import Constants from '../../../Utils/Constants';
+
 const { SearchPage } = require("../SharedPages/SearchPage");
 const { FieldLibraryPage } = require("../FieldLibrary/FieldLibraryPage");
 
@@ -7,7 +9,11 @@ export class FieldLibraryManagementPage {
         this.page = page;
         this.search = new SearchPage(this.page);
         this.fieldLibraryPage = new FieldLibraryPage(this.page);
+        this.tableActions = 'table-actions';
+        this.searchInputSelector = '//form[@data-testid="search-input"]//input';
+
         this.approvedFieldsTab = '//button[@data-testid="tab-2"]';
+        this.rejectedFieldsTab = '//button[@data-testid="tab-4"]';
         this.searchInput = '//input[@data-testid="search-input-base"]';
         this.threeDotsMenu = '//div[@data-testid="three-dots-menu"]';
         this.activate_deactivate_Button = '//li[@data-testid="three-dots-menu-option-0"]';
@@ -16,6 +22,10 @@ export class FieldLibraryManagementPage {
 
     async navigateToApprovedFieldsTab() {
         await this.page.click(this.approvedFieldsTab);
+    }
+
+    async navigateToRejectedFieldsTab() {
+        await this.page.click(this.rejectedFieldsTab);
     }
 
         /**
@@ -48,5 +58,65 @@ export class FieldLibraryManagementPage {
             return result;
         }
     }
+
+    async checkFieldStatusDetails(fieldMap) {
+
+        for (const [fieldId, actionType] of fieldMap.entries()) {
+    
+            console.log(`Starting verification for ${actionType} field with ID: ${fieldId}`);
+    
+            if (actionType === Constants.APPROVE) {
+                await this.navigateToApprovedFieldsTab();
+            } else if (actionType === Constants.REJECT) {
+                await this.navigateToRejectedFieldsTab();
+            }
+    
+            await this.page.waitForSelector(this.searchInputSelector, { state: 'visible', timeout: 30000 });
+    
+            // Search for the field row
+            const fieldRow = await this.search.searchOnUniqueRow(this.searchInputSelector, fieldId);
+    
+            console.log(`Field row found for ID: ${fieldId}`);
+    
+            const actionCell = fieldRow[fieldRow.length - 1].tdLocator;
+            const actionButton = actionCell.locator('[data-testid="table-actions"]');
+    
+            await actionButton.waitFor({ state: 'visible', timeout: 30000 });
+    
+            console.log(`Clicking action button for field ID: ${fieldId}`);
+    
+            // Get current URL before clicking
+            const currentUrl = this.page.url();
+    
+            await actionButton.click();
+    
+            await this.page.waitForFunction(
+                (oldUrl) => window.location.href !== oldUrl,
+                currentUrl,
+                { timeout: 10000 }
+            ).catch(() => {
+                throw new Error(`Field details page did NOT load for field ID: ${fieldId}. Aborting.`);
+            });
+    
+            console.log(`URL changed. Field details page loaded for ID: ${fieldId}`);
+    
+            const expectedStatus = actionType === Constants.APPROVE
+                ? global.testConfig.FieldLibrary.fieldEnablementStatusActivated
+                : global.testConfig.FieldLibrary.fieldEnablementStatusDeactivated;
+    
+            await this.fieldLibraryPage.checkInsideFieldStatus(expectedStatus, actionType);
+    
+            console.log(`Field status checked for ID: ${fieldId}`);
+    
+            await this.page.goBack();
+            await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    
+            console.log(`Returned from details page for field ID: ${fieldId}`);
+        }
+    
+        return true;
+    }
+    
+    
 }
 module.exports = { FieldLibraryManagementPage };

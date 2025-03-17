@@ -36,6 +36,7 @@ export class PopUpPage {
     await textAreaLocator.fill(inputMsg);
     await this.page.click(actionButton);
     await this.page.waitForTimeout(3000);
+    //await this.page.locator(actionButton).waitFor({ state: "detached" , timeout: 50000});
   }
 
   async fieldPopUpMessage() {
