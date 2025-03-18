@@ -51,6 +51,9 @@ export class DecisionModelService {
    * @returns {Promise<string|null>} - Returns the serial number of the simulationModel, or null if not found.
    */
    async getsimulationModelAPI(businessKey) {
+    console.log(
+      `simulationModelName :${ businessKey}`
+    );
     var simulationModelNumber = null;
     var simulationRecord=null;
     var requestContext = await request.newContext({ ignoreHTTPSErrors: true });
@@ -60,12 +63,12 @@ export class DecisionModelService {
       headers: {"Content-Type": "application/json",Authorization: this.token,Accept: "application/json"},
       timeout: 30000,
     });
-
+ 
     var responseBody = await response.json();
     // Find the simulation model matching the provided ID
     if (response.ok() && responseBody.result && responseBody.result.records) {
       simulationRecord = responseBody.result.records.find(
-        (record) => record.businessKey === record.businessKey);
+        (record) => record.businessKey === businessKey);
       if (simulationRecord) {
        // Retrieve the serial number
        simulationModelNumber = simulationRecord.serialNumber;
