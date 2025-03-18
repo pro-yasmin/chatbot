@@ -54,6 +54,7 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToMyTasksTab() {
+    await  this.page.waitForTimeout(2000);
     await this.page.click(this.myTasksTab);
     console.log("Navigate to My tasks tab");
   }
@@ -63,9 +64,10 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToMyCompletedTasksTab() {
-    await this.page.waitForTimeout(12000);
-    await this.page.waitForSelector(this.myCompletedTasksTab, { state: "visible", timeout: 20000 });
+    await  this.page.waitForTimeout(12000);
+    await this.page.waitForSelector(this.myCompletedTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myCompletedTasksTab);
+    await  this.page.waitForTimeout(5000);
     console.log("Navigate to My completed tasks tab");
   }
 
@@ -74,9 +76,10 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToGroupTasksTab() {
-    await this.page.waitForTimeout(10000);
-    await this.page.waitForSelector(this.groupTasksTab, { state: "visible", timeout: 20000 });
+    await  this.page.waitForTimeout(10000);
+    await this.page.waitForSelector(this.groupTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.groupTasksTab);
+    await  this.page.waitForTimeout(5000);
     console.log("Navigate to group tasks tab");
   }
 
