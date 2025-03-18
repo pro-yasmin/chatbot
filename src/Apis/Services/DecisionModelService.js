@@ -9,7 +9,7 @@ export class DecisionModelService {
   }
 
   async createSimulationModelAPI(DecisionModelBody) {
-    var simulationModelCreated;
+    var simulationModelCreated=null;
     var requestContext = await request.newContext({ ignoreHTTPSErrors: true }); // Ignore SSL errors for UAT environment
     // Serialize the object to JSON
     var jsonpayload = DecisionModelBody.toJSON();
@@ -65,7 +65,7 @@ export class DecisionModelService {
     // Find the simulation model matching the provided ID
     if (response.ok() && responseBody.result && responseBody.result.records) {
       simulationRecord = responseBody.result.records.find(
-        (record) => record.businessKey === businessKey.trim());
+        (record) => record.businessKey === record.businessKey);
       if (simulationRecord) {
        // Retrieve the serial number
        simulationModelNumber = simulationRecord.serialNumber;
