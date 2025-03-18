@@ -32,7 +32,7 @@ export class SimulationModelExecutionRecordsPage {
             if (actualExecutionRecordStatus === global.testConfig.SimulationModels.executionRecordStatusInProgress) {
                 console.log("Simulation Model Execution Record Status is In Progress");
                 console.log("Start waiting for status to change to Completed");
-                await this.page.waitForTimeout(60000);
+                await this.page.waitForTimeout(900000);
                 console.log("End Waiting");
                 await this.page.reload();
             }
