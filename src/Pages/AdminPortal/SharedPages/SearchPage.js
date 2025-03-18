@@ -22,14 +22,14 @@ export class SearchPage {
     await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' , timeout: 10000});
     await this.page.waitForSelector(searchInputSelector, { state: 'visible' }); 
     await this.page.fill(searchInputSelector, searchValue);
+    await  this.page.waitForTimeout(3000)
     // Step 2: Wait for the table rows to update (assuming the table is dynamically updated)
     await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible', timeout: 10000 });
-    await  this.page.waitForTimeout(8000); //shimaa //testing env edit
-     // Step 3: Get all visible rows in the table
+    // Step 3: Get all visible rows in the table
      rows = await  this.page.locator(`${this.tableSelector}//tr`).filter({ has: this.page.locator('td') });
     // Step 4: Ensure only one row is visible
      rowCount = await rows.count();
-    await  this.page.waitForTimeout(10000); //shimaa //testing env edit
+    await  this.page.waitForTimeout(1000);
     if (rowCount !== 1) {
       throw new Error(`Expected 1 row to be displayed, but found ${rowCount}`);
     }
@@ -130,7 +130,7 @@ export class SearchPage {
     let tds;
     let tdDetails = [];
 
-    await  this.page.waitForTimeout(5000);//shimaa
+    await  this.page.waitForTimeout(10000);
     table = this.page.locator(this.tableSelector);
     
   
@@ -142,7 +142,8 @@ export class SearchPage {
 
     // Locate the row containing a <td> with a <span> that has the specific text inside the table
     row=await this.page.locator(`${this.tableSelector}//tr`).filter({
-      has: this.page.locator(`td span:has-text("${text}")`),
+      has: this.page.locator(`td span:text-is("${text}")`),
+      //has: this.page.locator(`td span:has-text("${text}")`),
     });
 
     // Check if the matching row exists

@@ -22,10 +22,9 @@ export class SimulationModelManagementPage {
         this.viewExecutionLogsRequestsPage = new ViewExecutionLogsRequestsPage(this.page);
         this.approvedExecutionLogsPage = new ApprovedExecutionLogsPage(this.page);
 
-        //popup
-        this.popUpYesButton = '(//div[contains(@class, "MuiDialogActions-root")]//button[@tabindex="0"])[1]';
-        this.popUpYesButton2 = '//button[contains(text(),"استعراض سجلات التنفيذ")]';
-
+        //Execution Popups buttons
+        this.popUpExecuteRexecuteButton = "//button[contains(text(),'تنفيذ النموذج')]";
+        this.popUpGotoExecutions = "//button[contains(text(),'استعراض سجلات التنفيذ')]";
         this.defineSimulationModelButton = '//button[contains(@class, "MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-colorPrimary")]';
         this.searchInput = '//form[@data-testid="search-input"]//input';
         this.threeDotsMenu = '//div[@data-testid="three-dots-menu"]';
@@ -352,8 +351,8 @@ export class SimulationModelManagementPage {
         console.log('Actions Simulaion Model Button Clicked');
         await this.page.click(this.executeSimulationModelButton);
         console.log('Execute Simulaion Model Button Clicked');
-        await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.executeSimulationModelConfirmationMsg);
-        await this.popUpMsg.popUpMessage(this.popUpYesButton2, global.testConfig.SimulationModels.executeSimulationModelSuccessMsg);
+        await this.popUpMsg.popUpMessage(this.popUpExecuteRexecuteButton, global.testConfig.SimulationModels.executeSimulationModelConfirmationMsg);
+        await this.popUpMsg.popUpMessage(this.popUpGotoExecutions, global.testConfig.SimulationModels.executeSimulationModelSuccessMsg);
         return await this.simulationModelExecutionRecordsPage.verifySimualtionModelExecutionRecord(executionRecordNewAdded);
     }
 

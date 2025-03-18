@@ -12,7 +12,7 @@ export class FieldsTreePage {
      */
     async openFieldsSection() {
 
-      await this.page.waitForTimeout(5000);
+     // await this.page.waitForTimeout(5000);
      //await this.page.waitForSelector(this.ISRBtn, { state: "visible", timeout: 60000 });
       await this.page.locator(this.ISRBtn).click({ timeout: 5000 });
       //await this.page.click(this.ISRBtn);  
