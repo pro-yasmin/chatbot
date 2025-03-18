@@ -24,6 +24,7 @@ export class SimulationModelManagementPage {
 
         //popup
         this.popUpYesButton = '(//div[contains(@class, "MuiDialogActions-root")]//button[@tabindex="0"])[1]';
+        this.popUpYesButton2 = '//button[contains(text(),"استعراض سجلات التنفيذ")]';
 
         this.defineSimulationModelButton = '//button[contains(@class, "MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-colorPrimary")]';
         this.searchInput = '//form[@data-testid="search-input"]//input';
@@ -352,8 +353,7 @@ export class SimulationModelManagementPage {
         await this.page.click(this.executeSimulationModelButton);
         console.log('Execute Simulaion Model Button Clicked');
         await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.executeSimulationModelConfirmationMsg);
-        await this.page.waitForTimeout(2000);
-        await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.executeSimulationModelSuccessMsg);
+        await this.popUpMsg.popUpMessage(this.popUpYesButton2, global.testConfig.SimulationModels.executeSimulationModelSuccessMsg);
         return await this.simulationModelExecutionRecordsPage.verifySimualtionModelExecutionRecord(executionRecordNewAdded);
     }
 

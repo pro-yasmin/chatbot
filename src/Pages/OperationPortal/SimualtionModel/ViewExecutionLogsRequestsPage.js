@@ -4,6 +4,9 @@ export class ViewExecutionLogsRequestsPage {
     constructor(page) {
         this.page = page;
         this.search = new SearchPage(this.page);
+
+        this.viewButton = '//td//button[contains(@class, "MuiButtonBase-root MuiIconButton-root MuiIconButton")]';
+        this.requestStatus = `(//span[contains(text(),"${global.testConfig.taskDetails.Approved}")])[3]`;
     }
 
     async verifyExecutionLog(request) {
@@ -25,6 +28,11 @@ export class ViewExecutionLogsRequestsPage {
         }
         if (actualExecutionStatus === global.testConfig.taskDetails.Approved) {
             console.log("Simulation Model Execution is Approved and Checked in the Execution Logs successfully.");
+            await this.page.click(this.viewButton);
+            console.log("View Button is Clicked");
+            await this.page.waitForTimeout(3000);
+            await this.page.waitForSelector(this.requestStatus, { state: "visible" });
+            console.log("Request Details Viewed Successfully");
             return true;
         }
         return false;

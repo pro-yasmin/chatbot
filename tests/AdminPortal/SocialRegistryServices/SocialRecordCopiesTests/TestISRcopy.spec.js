@@ -61,6 +61,12 @@ test('Add ISR copy with status under Review', async ({ page }) => {
         expect(await socialRecordCopiesManagementPage.addNewFieldsToISRCopy(socialRecordCopiesData)).toBe(true);
         console.log('New Fields added To New ISR Copy Successfully');
     });
+
+    // Step3: Verify ISR Copy Details
+    await test.step('Verify ISR Copy Details', async () => {
+        expect(await socialRecordCopiesManagementPage.verifyIsrDetails(socialRecordCopiesData)).toBe(true);
+        console.log('ISR Copy Details Successfully');
+    });
 });
 
 /**
