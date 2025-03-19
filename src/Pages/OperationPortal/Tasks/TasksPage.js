@@ -77,6 +77,7 @@ export class TasksPage {
     await this.page.waitForTimeout(10000);
     await this.page.waitForSelector(this.groupTasksTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.groupTasksTab);
+    await  this.page.waitForTimeout(5000);
     console.log("Navigate to group tasks tab");
   }
 

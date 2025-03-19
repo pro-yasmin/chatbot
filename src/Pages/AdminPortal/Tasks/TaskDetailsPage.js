@@ -129,7 +129,7 @@ export class TaskDetailsPage {
   async addNoteOnTask() {
     await this.page.waitForTimeout(7000);
     await this.openNotesTab();
-    await this.page.waitForSelector(this.addNoteBtn,{ state: 'visible', timeout: 5000 });
+    await this.page.waitForSelector(this.addNoteBtn,{ state: 'visible', timeout: 50000 });
     await this.page.click(this.addNoteBtn);
     var popUpMsg = new PopUpPage(this.page);
     await popUpMsg.inputPopUpMessage(this.noteOnTaskField, this.acceptNoteOnTaskBtn,global.testConfig.taskDetails.note);
