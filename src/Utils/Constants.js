@@ -5,7 +5,6 @@ export default {
     BENEFIT: "Benefit",
     APPROVE: "Approve",
     REJECT: "Reject",
-    READY_FOR_EXECUION: "Ready",
     FILTER_SUB_PROGRAMS_INSIDE_STREAM: "filter_Subprograms_Inside_Stream",
     FILTER_SUB_PROGRAMS_INSIDE_MAINPROGRAM: "filter_Subprograms_Inside_MainProgram",
     FILTER_SUB_PROGRAMS_OUTSIDE: "filter_Subprograms_Outside",
@@ -17,5 +16,7 @@ export default {
     INPUT_FIELD : "Insert",
     CALCULATION_FIELD : "Calculation",
     COMPLEX_FIELD :"Complex",
-    GROUP_FIELD : "Group"
+    GROUP_FIELD : "Group",
+    EDIT_SIMULATION_MODEL : "Edit_Simulation_Model",
+    EXECUTE_SIMULATION_MODEL : "Execute_Simulation_Model"
 };

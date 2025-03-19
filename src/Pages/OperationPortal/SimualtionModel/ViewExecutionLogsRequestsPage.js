@@ -37,6 +37,27 @@ export class ViewExecutionLogsRequestsPage {
         }
         return false;
     }
+
+    async getExecutionNumber(request, simulationModelData){
+        let executionNumberTd;
+
+        let executionNumber;
+        let simulationModelRow = [];
+        await this.page.waitForTimeout(5000);
+        simulationModelRow = await this.search.getRowInTableWithSpecificText(request);
+
+        if (simulationModelRow && simulationModelRow.length > 0) {
+            executionNumberTd = simulationModelRow[0].tdLocator;
+            executionNumber = executionNumberTd.locator("span");
+            await executionNumber.waitFor({ state: "visible" });
+            var simulationModelExecutionNumber = await executionNumber.textContent();
+            console.log("Execution Number for Simulation Model: ", simulationModelExecutionNumber);
+            simulationModelData.setSimulationModelExecutionNumber(simulationModelExecutionNumber);
+            return true;
+        }
+        return false;
+
+    }
 }
 
 
