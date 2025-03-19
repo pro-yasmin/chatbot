@@ -14,6 +14,8 @@ export class FieldPage {
     // Selectors for field data defination section
     this.arabicFieldName = '//input[@name="data[arabicFieldName]"]';
     this.englishFieldName = '//input[@name="data[englishFieldName]"]';
+    this.MenuLocators = "//*[@role='listbox']//*[contains(@id,'item-choice-1')]";
+
     this.dataMenuOptionsLocator='.choices__list.is-active .choices__item.choices__item--selectable';
     this.fieldTypeMenu ='//div[contains(@class, "ui fluid selection dropdown")][.//select[@name="data[fieldType]"]]';
     this.parentLocator ='//input[@data-testid="assigned-domain"]';
@@ -22,7 +24,7 @@ export class FieldPage {
     this.englishFieldDescription = '//textarea[@name="data[englishFieldDescription]"]';
     this.fieldDataDefinitionBtn ='//button[@data-testid="next-button"]';
     // Selectors for field settings
-    this.classification ='//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[classification]"]]';
+    this.classification ="//div[@class='form-control ui fluid selection dropdown'][//select[@name='data[classification]']]";
     this.settingMenuOptionsLocator = '.choices__list[role="listbox"] .choices__item.choices__item--selectable';
     this.requierdOptionBtn ='//input[@value="mandatory"]';
     this.multipleFieldBtn ='//input[contains(@name,"data[multipleField]") and @value="yes"]';  
@@ -57,10 +59,12 @@ export class FieldPage {
     // Fill Field Data Definition section
     await this.page.fill(this.arabicFieldName, createdFieldArName);
     await this.page.fill(this.englishFieldName, createdFieldEnName);
-    await this.selectDropdownOption(this.fieldTypeMenu , this.dataMenuOptionsLocator);
+    // await this.selectDropdownOption(this.fieldTypeMenu , this.dataMenuOptionsLocator);
+    await this.selectDropdownOption(this.fieldTypeMenu , 1);
     if (fieldType === Constants.COMPLEX_FIELD || fieldType === Constants.GROUP_FIELD ) {
         await this.selectParentOption(this.parentLocator);}
-    await this.selectDropdownOption(this.fieldNature,this.dataMenuOptionsLocator);
+    // await this.selectDropdownOption(this.fieldNature,this.dataMenuOptionsLocator);
+    await this.selectDropdownOption(this.fieldNature,2);
     await this.page.fill(this.arabicFieldDescription, fieldData.getArabicFieldDescription());
     await this.page.fill(this.englishFieldDescription, fieldData.getEnglishFieldDescription());
     await this.page.click(this.fieldDataDefinitionBtn);
@@ -78,13 +82,18 @@ export class FieldPage {
   async fillFieldSettings() {
 
     // Fill Field Data Definition section
-    await this.selectDropdownOption(this.classification , this.settingMenuOptionsLocator);
+    // await this.selectDropdownOption(this.classification , this.settingMenuOptionsLocator);
+    await this.selectDropdownOption(this.classification , 1);
     await this.page.click(this.requierdOptionBtn);
     await this.page.click(this.multipleFieldBtn);
-    await this.selectDropdownOption(this.periodicDataUpdate ,this.dataMenuSettings);
-    await this.selectDropdownOption(this.privacy ,this.dataMenuSettings );
-    await this.selectDropdownOption(this.impactDegree  ,this.dataMenuSettings );
-    await this.selectDropdownOption(this.DataMenuesettingsSeverity ,this.dataMenuSettings);
+    await this.selectDropdownOption(this.periodicDataUpdate ,3);
+    await this.selectDropdownOption(this.privacy ,4 );
+    await this.selectDropdownOption(this.impactDegree  ,5 );
+    await this.selectDropdownOption(this.DataMenuesettingsSeverity ,6);
+    // await this.selectDropdownOption(this.periodicDataUpdate ,this.dataMenuSettings);
+    // await this.selectDropdownOption(this.privacy ,this.dataMenuSettings );
+    // await this.selectDropdownOption(this.impactDegree  ,this.dataMenuSettings );
+    // await this.selectDropdownOption(this.DataMenuesettingsSeverity ,this.dataMenuSettings);
     await this.page.click(this.fieldSettingDefinationBtn);
     console.log("Filling Field Settings Ending ");
   }
@@ -111,13 +120,15 @@ export class FieldPage {
   }
   
   /**
-   * Selects the first available option from a dropdown menu.
-   * @param {string} dropdownLocator - The selector for the dropdown element.
-   * @returns {Promise<void>} - Completes the dropdown selection.
-   */
-  async selectDropdownOption(dropdownLocator ,menuOptionsLocator) {
+ * Selects an option from a dropdown menu based on the provided index.
+ * @param {string} dropdownLocator - The selector for the dropdown element.
+ * @param {number} menuOptionsIndex - The index of the option to select (1-based).
+ * @returns {Promise<void>} - Completes the dropdown selection.
+ */
+  async selectDropdownOption(dropdownLocator, menuOptionsIndex) {
     await this.page.click(dropdownLocator);
-    await this.page.waitForTimeout(3000); 
+    await this.page.waitForTimeout(2000); 
+    let menuOptionsLocator = `(${this.MenuLocators})[${menuOptionsIndex}]`;
     var optionsLocator = this.page.locator(menuOptionsLocator);
     await optionsLocator.first().waitFor({ state: "visible", timeout: 5000 });
     await optionsLocator.first().click({ force: true });

@@ -17,7 +17,6 @@ export class FieldLibraryPage {
         this.rejectedFieldRecordTab = '//button[@data-testid="tab-3"]';
         // this.fieldEnablmentStatus ='//div[contains(@class,"formio-component-status") and contains(@class,"formio-component-textfield")]//div[@ref="value"]';
         this.fieldEnablmentStatus ='//*[contains(@class,"status")][2]';
-
     }
 
         /**

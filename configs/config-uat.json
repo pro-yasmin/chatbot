@@ -18,7 +18,8 @@
     "expectStreamTaskType": "اعتماد مسار",
     "expectMainProgramTaskType": "اعتماد برنامج رئيسي",
     "expectSubProgramTaskType": "اعتماد برنامج فرعي",
-    "expectBenefitTaskType": "اعتماد إعانة"
+    "expectBenefitTaskType": "اعتماد إعانة",
+    "expectFieldTaskType" : "تحديث مكتبة الحقول"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",
@@ -202,11 +203,11 @@
     "fieldEnablementStatusDeactivated": "محجوب",
     "fieldEnablementStatusActivated": "متاح",
     "activateConfirmationMsg": "هل أنت متأكد أنك تريد إتاحة اوتو حقل حسابى؟",
-    "deactivateConfirmationMsg": "هل أنت متأكد أنك تريد حجب اوتو حقل حسابى؟",
+    "deactivateConfirmationMsg": "هل أنت متأكد أنك تريد حجب",
     "fieldActivatedSuccessMsg": "تم إتاحة الحقل بنجاح ويمكن استخدامه في المنصة.",
     "fieldDeactivatedSuccessMsg": "تم حجب الحقل بنجاح ولا يمكن استخدامه في المنصة.",
     "fieldActivationErrorMsg": "لا يمكن حجب الحقل حيث إنه مرتبط بمكونات أخرى في النظام.",
-    "deactivateConfirmationMsgForLockedField": "هل أنت متأكد أنك تريد حجب اوتو حقل؟"
+    "deactivateConfirmationMsgForLockedField": "هل أنت متأكد أنك تريد حجب"
   },
   "SocialRecordCopies": {
     "socialRecordActiveCopy": "ISR_ISRVR_00000021",

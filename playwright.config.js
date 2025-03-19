@@ -18,9 +18,9 @@ module.exports = defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: 1,
+  retries: 0,
   /* Opt out of parallel tests on CI. */
-  workers: 3,
+  workers: 1,
   //workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
@@ -45,42 +45,42 @@ module.exports = defineConfig({
     navigationTimeout: 600000, // Timeout for page navigation (60 seconds)
   },
   /* Configure projects for major browsers */
-  projects: [
-    {
-      name: "Admin",
-      testDir: "./tests/AdminPortal", // Test directory
-    },
+  // projects: [
+  //   {
+  //     name: "Admin",
+  //     testDir: "./tests/AdminPortal", // Test directory
+  //   },
 
-    {
-      name: "Login",
-      testDir: "./tests/Login", // Test directory
-    },
-    {
-      name: "All",
-      testDir: "./tests", // Test directory
-    },
-    {
-      name: "Programs",
-      testDir: "./tests/AdminPortal/ProgramManagementTests", // Test directory
-    },
-    {
-      name: "Lookups",
-      testDir: "./tests/AdminPortal/LookupsTests", // Test directory
-    },
-    {
-      name: "StateMachine",
-      testDir: "./tests/AdminPortal/StateMachineTests", // Test directory
-    },
+  //   {
+  //     name: "Login",
+  //     testDir: "./tests/Login", // Test directory
+  //   },
+  //   {
+  //     name: "All",
+  //     testDir: "./tests", // Test directory
+  //   },
+  //   {
+  //     name: "Programs",
+  //     testDir: "./tests/AdminPortal/ProgramManagementTests", // Test directory
+  //   },
+  //   {
+  //     name: "Lookups",
+  //     testDir: "./tests/AdminPortal/LookupsTests", // Test directory
+  //   },
+  //   {
+  //     name: "StateMachine",
+  //     testDir: "./tests/AdminPortal/StateMachineTests", // Test directory
+  //   },
 
-    {
-      name: "SocialRegistryServices",
-      testDir: "./tests/AdminPortal/SocialRegistryServices", // Test directory
-    },
+  //   {
+  //     name: "SocialRegistryServices",
+  //     testDir: "./tests/AdminPortal/SocialRegistryServices", // Test directory
+  //   },
 
-    {
-      name: "Operation",
-      testDir: "./tests/OperationPortal", // Test directory
-    },
+  //   {
+  //     name: "Operation",
+  //     testDir: "./tests/OperationPortal", // Test directory
+  //   },
 
     //     /*{
     //       name: 'chromium',
@@ -117,6 +117,6 @@ module.exports = defineConfig({
     //     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     //     // },
     //  //
-  ],
+  // ],
 });
 module.exports.ENV = ENV;

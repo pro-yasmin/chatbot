@@ -28,26 +28,44 @@ export class FieldRequestDetialsPage {
     }
     
     
-    async checkFieldEnablmentStatus(rowId1, rowId2, ExpectedEnablmentStatus) {
-        // Retrieve details for both rows using their row IDs
-        let row1Details = await this.search.getRowInTableWithSpecificText(rowId1);
-        let row2Details = await this.search.getRowInTableWithSpecificText(rowId2);
+    // async checkFieldEnablmentStatus(rowId1, rowId2, ExpectedEnablmentStatus) {
+    //     // Retrieve details for both rows using their row IDs
+    //     let row1Details = await this.search.getRowInTableWithSpecificText(rowId1);
+    //     let row2Details = await this.search.getRowInTableWithSpecificText(rowId2);
     
-        // Assuming the enablement status
-        let row1Status = await row1Details[7].tdLocator.textContent();
-        let row2Status = await row2Details[7].tdLocator.textContent();
+    //     // Assuming the enablement status
+    //     let row1Status = await row1Details[7].tdLocator.textContent();
+    //     let row2Status = await row2Details[7].tdLocator.textContent();
     
-        // Log the status for fields
-        console.log(`Row 1 Status (ID: ${rowId1}): ${row1Status}`);
-        console.log(`Row 2 Status (ID: ${rowId2}): ${row2Status}`);
+    //     // Log the status for fields
+    //     console.log(`Row 1 Status (ID: ${rowId1}): ${row1Status}`);
+    //     console.log(`Row 2 Status (ID: ${rowId2}): ${row2Status}`);
     
-        // Compare the extracted values with the expected status
-        if (row1Status === ExpectedEnablmentStatus && row2Status === ExpectedEnablmentStatus) {
-            return true;
+    //     // Compare the extracted values with the expected status
+    //     if (row1Status === ExpectedEnablmentStatus && row2Status === ExpectedEnablmentStatus) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
+    
+    async checkFieldEnablmentStatus(requestChecks, expectedEnablementStatus) {
+        let rowIds = requestChecks.slice(1); // Ignore the first element
+    
+        for (let rowId of rowIds) {
+            let rowDetails = await this.search.getRowInTableWithSpecificText(rowId);
+            let rowStatus = await rowDetails[7].tdLocator.textContent();
+    
+            console.log(`Row Status (ID: ${rowId}): ${rowStatus}`);
+    
+            if (rowStatus !== expectedEnablementStatus) {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
-    
+
+
+
     async openFieldDetailsPage(fieldData) {
 
         let fieldRow = await this.search.getRowInTableWithSpecificText(fieldData);
@@ -59,16 +77,19 @@ export class FieldRequestDetialsPage {
 
     async verifyFieldEnablementStatusesAndMakeDecision(requestChecks, expectedEnablementStatus) {
         // Check field enablement status on the request details page
-        await this.checkFieldEnablmentStatus(requestChecks[1], requestChecks[2], expectedEnablementStatus);
+        await this.checkFieldEnablmentStatus(requestChecks, expectedEnablementStatus);
     
-        // Check first field's status inside details page
-        await this.openFieldDetailsPage(requestChecks[1]);
-        await this.fieldDetialsPage.checkInsideFieldStatus(expectedEnablementStatus);
-        await this.fieldDetialsPage.backtoRequestDetialsPage();
+        let rowIds = requestChecks.slice(1); // Ignore the first element
+
+        for (let i = 0; i < rowIds.length; i++) {
+            await this.openFieldDetailsPage(rowIds[i]);
+            await this.fieldDetialsPage.checkInsideFieldStatus(expectedEnablementStatus);
     
-        // Check second field's status inside details page
-        await this.openFieldDetailsPage(requestChecks[2]);
-        await this.fieldDetialsPage.checkInsideFieldStatus(expectedEnablementStatus);
+            // Skip back navigation for the last field
+            if (i < rowIds.length - 1) {
+                await this.fieldDetialsPage.backtoRequestDetialsPage();
+            }
+        }
 
         // Navigate to make a decision
         var sendRequest = await this.fieldDetialsPage.clickOnMakeDecisionNow();

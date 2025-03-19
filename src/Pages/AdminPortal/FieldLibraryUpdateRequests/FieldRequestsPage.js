@@ -9,7 +9,7 @@ const { PopUpPage } = require("../../AdminPortal/SharedPages/PopUpPage.js");
 export class FieldRequestsPage {
     constructor(page) {
         this.page = page;
-        
+        this.search = new SearchPage(this.page);
         this.defineNewFieldButton = '//button[contains(text(),"تعريف حقل جديد")]';
         // '//button[contains(@class,"MuiButton-containedPrimary") and contains(@class,"MuiButton-sizeLarge")]';
         
@@ -25,6 +25,10 @@ export class FieldRequestsPage {
         this.sendRequestBtn = `//button[contains(text(),"${global.testConfig.createField.sendRequestBtnTxt}")]`;
         this.fullFinalMegLocator = '//span[@data-testid="modal-title"]';
         this.confirmSendMeg = '//button[@data-testid="confirmation-modal-primary-button"]';
+
+        //addinng field Inside 
+        this.tableActions='table-actions';
+
     }
     async navigateToFieldPage(fieldData) {
         // Get the field type
@@ -86,7 +90,7 @@ export class FieldRequestsPage {
         let fieldRow = [];
         let fieldName = fieldData.getArabicFieldName()
         //await this.page.waitForTimeout(5000); 
-        fieldRow = await new SearchPage(this.page).searchOnUniqueRow( this.searchInput, fieldName);
+        fieldRow = await this.search.searchOnUniqueRow( this.searchInput, fieldName);
 
         // Extract Arabic and English names
         let actualArabicName = await fieldRow[1].tdLocator.locator("span").textContent();
@@ -144,6 +148,17 @@ async getRequestNumber(messageLocator) {
             return match[0]; // Return the request number
         }
     }
+
+}
+
+
+async addFieldFromInside(fieldID ) {
+
+    let taskRow = [];
+    taskRow = await this.search.getRowInTableWithSpecificText(fieldID);
+    var actionlocator = "button:nth-of-type(2)";
+    await this.search.clickRowAction(taskRow,this.tableActions, actionlocator);
+    console.log(`Add button (+) clicked sucessfully` );
 
 }
 
