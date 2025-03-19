@@ -69,6 +69,19 @@ test('Approve Simulation Model Execution', async ({ page }) => {
         console.log('Simulation Model Execution sent for approval Successfully');
     });
 
+    // Step6: Navigate to View Execution Logs Requests
+    await test.step('Navigate to View Execution Logs Requests page', async () => {
+        await homeOperationPage.navigateToViewExecutionLogsRequestsTab();
+        console.log('Navigate to View Execution Logs Requests page');
+    });
+
+    // Step7: get Simulation Model Execution Number
+    await test.step('Get Simulation Model Execution Number', async () => {
+        expect(await simulationModelManagementPage.getSimulationModelExecutionNumber(simulationModelData.getSimulationModelArName(), simulationModelData)).toBe(true);
+        console.log('Simulation Model Execution Number saved Successfully');
+    });
+
+
     //logout
     await test.step("Logout from Operation Portal", async () => {
         await homeOperationPage.logout();
@@ -83,40 +96,40 @@ test('Approve Simulation Model Execution', async ({ page }) => {
         console.log('login done successfully');
     });
 
-    // Step6: Navigate to Tasks Managment page
+    // Step8: Navigate to Tasks Managment page
     await test.step('Navigate to Tasks Management page', async () => {
         await homeOperationPage.navigateToTasksTab();
         console.log('Navigate to Tasks Management page');
     });
 
-    // Step7: Approve Task
+    // Step9: Approve Task
     await test.step('Approve Task', async () => {
-        expect(await tasksPage.approveTask(global.testConfig.SimulationModels.sentForApprovalTask, Constants.APPROVE)).toBe(true);
+        expect(await tasksPage.approveTask(simulationModelData.getSimulationModelExecutionNumber(), Constants.EXECUTE_SIMULATION_MODEL)).toBe(true);
         console.log('Task approved successfully');
     });
 
-    // Step8: Navigate to View Execution Logs Requests
+    // Step10: Navigate to View Execution Logs Requests
     await test.step('Navigate to View Execution Logs Requests page', async () => {
         await homeOperationPage.navigateToViewExecutionLogsRequestsTab();
         console.log('Navigate to View Execution Logs Requests page');
     });
 
-    // Step9: Verify Simulation Model Execution Status in Logs Requests Page
+    // Step11: Verify Simulation Model Execution Status in Logs Requests Page
     await test.step('Verify Simulation Model Execution Status in Logs Requests Page', async () => {
         expect(await simulationModelManagementPage.verifySimulationModelExecutionStatusInLogs(simulationModelData.getSimulationModelArName())).toBe(true);
-        console.log('Simulation Model Execution Status in Logs Requests Page verifed successfully'); //check view details
+        console.log('Simulation Model Execution Status in Logs Requests Page verifed successfully'); 
     });
 
-    // Step10: Navigate to Approved Execution Logs Page
+    // Step12: Navigate to Approved Execution Logs Page
     await test.step('Navigate to Approved Execution Logs Page', async () => {
         await homeOperationPage.navigateToApprovedExecutionLogsTab();
         console.log('Navigate to Approved Execution Logs Page');
     });
 
-    // Step11: Verify Simulation Model Execution Exist in Approved Logs Page
+    // Step13: Verify Simulation Model Execution Exist in Approved Logs Page
     await test.step('Verify Simulation Model Execution Exist in Approved Logs Page', async () => {
         expect(await simulationModelManagementPage.verifySimulationModelExecutionExistInApprovedLogs(simulationModelData.getSimulationModelArName())).toBe(true);
-        console.log('Simulation Model Execution Exists in Approved Logs Page successfully');//check view details
+        console.log('Simulation Model Execution Exists in Approved Logs Page successfully');
     });
 
 });

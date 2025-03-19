@@ -18,6 +18,11 @@ export class SocialRecordCopiesManagementPage {
 
         this.editButton = '//div[@data-testid="table-actions"]//button[2]';
         this.deleteButton = '//div[@data-testid="table-actions"]//button[2]';
+        this.viewButton = '//div[@data-testid="table-actions"]//button[1]';
+
+        this.recordCopyDataTab = '//button[@data-testid="tab-1"]';
+        this.recordCopyTab = '//button[@data-testid="tab-2"]';
+
         //popup
         this.successPopupTitle = '//span[@data-testid="modal-title"]';
         this.popUpYesButton = '//button[@data-testid="confirmation-modal-primary-button"]';
@@ -105,6 +110,24 @@ export class SocialRecordCopiesManagementPage {
         ) {
             console.log("Social Record Copy is Draft");
             return true;
+        }
+        return false;
+    }
+
+    async verifyIsrDetails(socialRecordCopiesData){
+        await this.page.click(this.viewButton);
+        await this.page.waitForSelector(this.recordCopyDataTab, { state: "visible", timeout: 20000 });
+        var actualRecordCopyArName = `(//span[contains(text(),"${socialRecordCopiesData.getVersionArabicName()}")])[2]`;
+        if (await this.page.waitForSelector(actualRecordCopyArName, { state: "visible", timeout: 20000 })) {
+            console.log('Record Copy Arabic Name Matched');
+            console.log('Record Copy Data Verified Successfully');
+            await this.page.click(this.recordCopyTab);
+            var actualRecordCopyStatus = `//span[contains(text(),"${global.testConfig.SocialRecordCopies.socialRecordUnderReviewStatus}")]`;
+            if (await this.page.waitForSelector(actualRecordCopyStatus, { state: "visible", timeout: 20000 })){
+                console.log('Record Copy Status is '+ global.testConfig.SocialRecordCopies.socialRecordUnderReviewStatus);
+                console.log('Record Copy Data Verified Successfully');
+                return true;
+            }
         }
         return false;
     }

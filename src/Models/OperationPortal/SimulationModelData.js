@@ -27,6 +27,8 @@ export class SimulationModelData {
     this.variableFourEnName = null;
     this.defaultValueOneEdited = null;
 
+    this.executionNumber = null;
+
     //API
     this.simulationModelDraftId = null;
     this.decisionModelAttachmentId = null;
@@ -263,6 +265,15 @@ export class SimulationModelData {
 
   setCreatedSimulationModelEditedId(Value) {
     this.simulationModelEditedId = Value;
+  }
+
+  // Getter and Setter for Simulation Model Execution Number
+  getSimulationModelExecutionNumber() {
+    return this.executionNumber;
+  }
+
+  setSimulationModelExecutionNumber(Value) {
+    this.executionNumber = Value;
   }
 
   // Getter and Setter for default Value Edited

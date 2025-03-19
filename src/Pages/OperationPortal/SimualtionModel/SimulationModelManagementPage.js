@@ -401,5 +401,9 @@ export class SimulationModelManagementPage {
         return await this.approvedExecutionLogsPage.verifyExecutionRequestInApprovedLogs(request);
     }
 
+    async getSimulationModelExecutionNumber(request, simulationModelData){
+        return await this.viewExecutionLogsRequestsPage.getExecutionNumber(request, simulationModelData);
+    }
+
 }
 module.exports = { SimulationModelManagementPage };
