@@ -103,7 +103,7 @@ test('Edit New Simulation Model', async ({ page }) => {
 
     // Step9: Approve Task
     await test.step('Approve Task', async () => {
-        expect(await tasksPage.approveTask(simulationModelData.getCreatedSimulationModelEditedId(), Constants.READY_FOR_EXECUION)).toBe(true);
+        expect(await tasksPage.approveTask(simulationModelData.getCreatedSimulationModelEditedId(), Constants.EDIT_SIMULATION_MODEL)).toBe(true);
         console.log('Task approved successfully');
     });
 

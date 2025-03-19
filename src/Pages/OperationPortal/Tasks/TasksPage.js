@@ -77,6 +77,7 @@ export class TasksPage {
     await this.page.waitForTimeout(10000);
     await this.page.waitForSelector(this.groupTasksTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.groupTasksTab);
+    await  this.page.waitForTimeout(5000);
     console.log("Navigate to group tasks tab");
   }
 
@@ -104,7 +105,7 @@ export class TasksPage {
    * @param {string} taskNumber - The unique identifier of the task to assign.
    * @returns {Promise<void>} - Completes the assignment process.
    */
-  async approveTask(taskNumber, actionType) {
+  async approveTask(taskNumber, taskType) {
     await this.assignTaskToMe(taskNumber)
     //to be deleted after fixing the issue of navigation to tasks tab
     await this.navigateToMyTasksTab();
@@ -116,24 +117,24 @@ export class TasksPage {
     await this.page.fill(this.completeSimulationTextBox, global.testConfig.SimulationModels.descriptionCompleteTaskText);
     await this.page.click(this.confirmCompleteSimulationBtn);
 
-    if (actionType === Constants.READY_FOR_EXECUION) {
+    if (taskType === Constants.EDIT_SIMULATION_MODEL) {
       await this.page.waitForSelector(this.filterButton, { state: "visible", timeout: 20000 });
       await this.page.waitForSelector(this.confirmCompleteSimulationBtnSuccessMsg, { state: "visible", timeout: 20000 });
       const successMessage = await this.page.textContent(this.confirmCompleteSimulationBtnSuccessMsg);
       console.log("success Message:" + successMessage);
       if (successMessage.includes(global.testConfig.SimulationModels.confirmCompleteSimulationBtnSuccessMsgText)) {
-        await this.ensureTaskStatus(taskNumber, actionType);
+        await this.ensureTaskStatus(taskNumber, taskType);
         return true;
       }
       else
         return false;
     }
-    else if (actionType === Constants.APPROVE) {
+    else if (taskType === Constants.EXECUTE_SIMULATION_MODEL) {
       await this.page.waitForTimeout(1000);
       //await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.approveExecutionSimulationBtnSuccessMsgText);
       await this.page.waitForTimeout(1000);
       await this.page.click(this.popUpYesButton);
-      return await this.ensureTaskStatus(taskNumber, actionType);
+      return await this.ensureTaskStatus(taskNumber, taskType);
     }
 
   }
@@ -158,7 +159,7 @@ export class TasksPage {
   //   return false;
   // }
 
-  async ensureTaskStatus(taskNumber, actionType) {
+  async ensureTaskStatus(taskNumber, taskType) {
     let expectedStatus;
     await this.navigateToMyCompletedTasksTab();
 
@@ -167,9 +168,9 @@ export class TasksPage {
     await this.search.clickRowActionTemp(taskRow, this.actionsBtn, null);
 
     // Define expected status based on action
-    if (actionType === Constants.APPROVE) {
+    if (taskType === Constants.EXECUTE_SIMULATION_MODEL) {
       expectedStatus = global.testConfig.taskDetails.Approved;
-    } else if (actionType === Constants.READY_FOR_EXECUION) {
+    } else if (taskType === Constants.EDIT_SIMULATION_MODEL) {
       expectedStatus = global.testConfig.taskDetails.ReadyForExecution;
     } else {
       console.log("Invalid action provided");
@@ -179,9 +180,9 @@ export class TasksPage {
     var result = await this.taskDetailsPage.checkEnablementStatus(expectedStatus);
     // Log the result based on the action
     if (result) {
-      if (actionType === Constants.APPROVE) {
+      if (taskType === Constants.EXECUTE_SIMULATION_MODEL) {
         console.log("Task is Approved");
-      } else if (actionType === Constants.READY_FOR_EXECUION) {
+      } else if (taskType === Constants.EDIT_SIMULATION_MODEL) {
         console.log("Task is Ready for Execution");
       }
     }

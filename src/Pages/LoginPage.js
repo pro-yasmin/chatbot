@@ -29,7 +29,7 @@ export class LoginPage {
   async gotoAdminPortal(baseUrl) {
     await this.page.goto(baseUrl);
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
-    await this.page.waitForTimeout(1000);
+    await this.page.waitForTimeout(3000);
     await this.ensureArabicLanguage();
   }
 
