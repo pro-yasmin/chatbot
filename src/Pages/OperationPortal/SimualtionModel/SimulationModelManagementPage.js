@@ -42,6 +42,7 @@ export class SimulationModelManagementPage {
     }
 
     async clickDefineSimulationModel() {
+        await this.page.waitForTimeout(2000);
         await this.page.click(this.defineSimulationModelButton);
     }
     async defineSimulationModel(simulationModelData) {
