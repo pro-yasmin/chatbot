@@ -45,6 +45,11 @@ test('Create and View New Lookup', async ({ page }) => {
         expect(await lookupsManagmentPage.checkNewLookupAdded(lookupData)).toBe(true);
         console.log('New lookup Details Checked Successfully');
     });
+    // Step4: Upload Lookup items 
+    await test.step('Upload Lookup Items', async () => {
+        expect(await lookupsManagmentPage.uploadLookUpItems(lookupData)).toBe(true);
+        console.log('Lookup Items Uploaded Successfully');
+    });
     //Step4: Logout From Admin portal
     await test.step('Logout from Admin Portal', async () => {
         await homePage.logout();

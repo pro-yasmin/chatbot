@@ -94,6 +94,7 @@ export class SocialRecordCopiesManagementPage {
             await this.socialRecordCopiesPage.fillNewSchemaData(socialRecordCopiesData);
             await this.iSRNewFieldsPage.addNewRegistryFields(socialRecordCopiesData);
             await this.socialRecordCopiesPage.validateNewFieldAdded(socialRecordCopiesData);
+            await this.socialRecordCopiesPage.getExistingFieldsData(socialRecordCopiesData);
             await this.socialRecordCopiesPage.addJustification();
         }
         //let socialRecordCopiesTableRow = [];
@@ -114,7 +115,7 @@ export class SocialRecordCopiesManagementPage {
         return false;
     }
 
-    async verifyIsrDetails(socialRecordCopiesData){
+    async verifyIsrDetails(socialRecordCopiesData) {
         await this.page.click(this.viewButton);
         await this.page.waitForSelector(this.recordCopyDataTab, { state: "visible", timeout: 20000 });
         var actualRecordCopyArName = `(//span[contains(text(),"${socialRecordCopiesData.getVersionArabicName()}")])[2]`;
@@ -123,13 +124,29 @@ export class SocialRecordCopiesManagementPage {
             console.log('Record Copy Data Verified Successfully');
             await this.page.click(this.recordCopyTab);
             var actualRecordCopyStatus = `//span[contains(text(),"${global.testConfig.SocialRecordCopies.socialRecordUnderReviewStatus}")]`;
-            if (await this.page.waitForSelector(actualRecordCopyStatus, { state: "visible", timeout: 20000 })){
-                console.log('Record Copy Status is '+ global.testConfig.SocialRecordCopies.socialRecordUnderReviewStatus);
+            if (await this.page.waitForSelector(actualRecordCopyStatus, { state: "visible", timeout: 20000 })) {
+                console.log('Record Copy Status is ' + global.testConfig.SocialRecordCopies.socialRecordUnderReviewStatus);
                 console.log('Record Copy Data Verified Successfully');
+                await this.verifyRecordFieldsExist(socialRecordCopiesData);
                 return true;
             }
         }
         return false;
+    }
+
+    async verifyRecordFieldsExist(socialRecordCopiesData) {
+        let socialRecordFieldsTableRow = [];
+        socialRecordFieldsTableRow = await this.search.searchOnUniqueRow(this.searchInput, socialRecordCopiesData.getFieldArName());
+        if (socialRecordFieldsTableRow && socialRecordFieldsTableRow.length > 0) {
+            console.log(`New Added Record Field ${socialRecordCopiesData.getFieldArName()} exist`);
+        }
+        for (const value of socialRecordCopiesData.getExistingFieldsArName()) {
+            socialRecordFieldsTableRow = await this.search.searchOnUniqueRow(this.searchInput, value);
+            if (socialRecordFieldsTableRow && socialRecordFieldsTableRow.length > 0) {
+                console.log(`Old Added Record Fields ${value} exist`);
+            }
+        }
+
     }
 
 }

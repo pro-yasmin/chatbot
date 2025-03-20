@@ -10,6 +10,7 @@ export class SocialRecordCopiesData {
         this.activationDateForApplicant = null;
         this.activationDateForPrograms = null;
         this.fieldArName = null;
+        this.existFieldsArNames = [];
     }
 
     // Getter and Setter for Version Arabic Name
@@ -78,6 +79,15 @@ export class SocialRecordCopiesData {
         this.fieldArName = value;
     }
 
+    // Getter for Existing Fields Arabic Name text Values
+    getExistingFieldsArName() {
+        return this.existFieldsArNames;
+    }
+
+    // Setter for Existing Fields Arabic Name text Values
+    setExistingFieldsArName(values) {
+        this.existFieldsArNames = values;
+    }
 }
 
 module.exports = { SocialRecordCopiesData };
