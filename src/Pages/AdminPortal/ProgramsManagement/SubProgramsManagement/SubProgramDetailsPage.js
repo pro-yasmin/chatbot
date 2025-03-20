@@ -100,6 +100,7 @@ async getUiSubProgramDetails() {
   };
 
   await this.page.click(this.targetDataTab);
+  await this.page.waitForTimeout(1000);
   subProgramDetails = {
     ...subProgramDetails, 
     assistanceUnit: (await this.page.locator(this.assistanceUnit).textContent()).trim(),
@@ -107,6 +108,7 @@ async getUiSubProgramDetails() {
   };
 
   await this.page.click(this.programFeaturesTab);
+  await this.page.waitForTimeout(1000);
   subProgramDetails = {
     ...subProgramDetails, 
     programApplicationEnablement  : (await this.page.locator(this.programApplicationEnablement).textContent()).trim(),
@@ -114,6 +116,7 @@ async getUiSubProgramDetails() {
      };
 
   await this.page.click(this.programLogTab);
+  await this.page.waitForTimeout(1000);
   subProgramDetails = {
     ...subProgramDetails, 
     enablementStatus: (await this.page.locator(this.enablementStatus).textContent()).trim(),
