@@ -48,7 +48,6 @@ export class FieldLibraryUpdateRequestsPage {
      * @returns {Promise<void>} - Completes the action of opening the field details page.
      */
     async openViewRequestDetailsPage(requestNumber) {
-        let actionsTd ;
         let fieldRow = [];
 
         fieldRow = await this.search.getRowInTableWithSpecificText(requestNumber);
@@ -57,16 +56,6 @@ export class FieldLibraryUpdateRequestsPage {
             await this.search.clickRowAction(fieldRow,this.tableActions, actionlocator);
             console.log("Request Details Page is opened successfully.");
         }
-       
-
-       /* if (fieldRow && fieldRow.length > 0) {
-            actionsTd = fieldRow[6].tdLocator;
-            const viewButton = actionsTd.locator('div[data-testid="table-actions"] button');
-            await viewButton.waitFor({ state: "visible", timeout: 5000 });
-            await viewButton.click();    
-           
-        }*/
-    
     }
 
 
@@ -122,8 +111,21 @@ export class FieldLibraryUpdateRequestsPage {
             console.log('Fields created successfully');
             return [RequestNumber ,groupFieldID ,inputFieldID1 ,inputFieldID2]
         }
-
     }
+
+ /**
+     * Creates Calculated field.*/
+ async createCalculatedFieldRequest(calculatedFieldData) {
+    await this.navigateToFieldRequestsPage();
+    var calculatedFieldCreated = await this.fieldRequestsPage.createField(calculatedFieldData);
+    if ( calculatedFieldCreated )
+    {
+        var calculatedFieldID = await this.fieldRequestsPage.checkFieldRowDetails(calculatedFieldData);
+        var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval();
+        console.log('calculated Field created successfully');
+        return [RequestNumber ,calculatedFieldID ]
+    }
+}
 
 }
 module.exports = { FieldLibraryUpdateRequestsPage };

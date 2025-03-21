@@ -10,7 +10,7 @@ const { FieldData } = require("../../../../src/Models/AdminPortal/FieldData");
 const { TasksPage } = require("../../../../src/Pages/AdminPortal/Tasks/TasksPage");
 
 let loginPage, homePage, fieldLibraryUpdateRequestsPage, tasksPage ,fieldsTreePage;
-let groupFieldData, inputFieldData1 ,inputFieldData2;
+let calculatedFieldData;
 let adminUsername, adminPassword ,isrManagerUsername , isrManagerPassword;
 let requestChecks ,myMap;
 let fieldLibraryManagementPage ;
@@ -22,24 +22,15 @@ test.beforeEach(async ({ page }) => {
     fieldLibraryUpdateRequestsPage = new FieldLibraryUpdateRequestsPage(page);
     fieldLibraryManagementPage = new FieldLibraryManagementPage(page);
     fieldsTreePage = new FieldsTreePage(page);    
-
     tasksPage = new TasksPage(page);
 
-    groupFieldData = new FieldData(page);
-    inputFieldData1 = new FieldData(page);
-    inputFieldData2 = new FieldData(page);
-
-    groupFieldData.setFieldType(Constants.GROUP_FIELD);
-    inputFieldData1.setFieldType(Constants.INPUT_FIELD);
-    inputFieldData2.setFieldType(Constants.INPUT_FIELD);
-
+    calculatedFieldData = new FieldData(page);
+    calculatedFieldData.setFieldType(Constants.CALCULATION_FIELD);
+    
     const baseUrl = global.testConfig.BASE_URL;
     adminUsername = global.testConfig.FIELD_MANAGEMENT_SPECIALIST;
     adminPassword = global.testConfig.FIELD_MANAGEMENT_SPECIALIST_PASS;
  
-    // adminUsername = global.testConfig.ADMIN_USER;
-    // adminPassword = global.testConfig.ADMIN_PASS;
-
     await test.step('Login to Admin Portal', async () => {
         await loginPage.gotoAdminPortal(baseUrl);
         const loginSuccess = await loginPage.login(adminUsername, adminPassword);
@@ -52,7 +43,7 @@ test('Group and Input Fields Request Flow', async () => {
 
         await test.step("Navigate to Field Library Requests and Create Fields", async () => {
             await homePage.navigateToFieldLibraryRequests();
-            requestChecks = await fieldLibraryUpdateRequestsPage.createGroupFieldRequest(groupFieldData, inputFieldData1 ,inputFieldData2);
+            requestChecks = await fieldLibraryUpdateRequestsPage.createCalculatedFieldRequest(calculatedFieldData);
             expect(requestChecks[0]).not.toBeNull(); 
         });
 
@@ -81,9 +72,6 @@ test('Group and Input Fields Request Flow', async () => {
             await tasksPage.assignTaskToMe(requestChecks[0]); 
             myMap = new Map(); 
             myMap.set(requestChecks[1], Constants.APPROVE);
-            myMap.set(requestChecks[2], Constants.REJECT); 
-            myMap.set(requestChecks[3], Constants.REJECT);
-        
             var taskManage = await tasksPage.manageRequestField(requestChecks[0],myMap );
             expect(taskManage).toBe(true);
             console.log("Field Request Done Successfully");
@@ -91,7 +79,7 @@ test('Group and Input Fields Request Flow', async () => {
 
         await test.step("Check fields in fields Trees", async () => {
             await homePage.navigateToFieldTree();
-            var fieldExist = await fieldsTreePage.checkFieldExists(groupFieldData); 
+            var fieldExist = await fieldsTreePage.checkFieldExists(calculatedFieldData); 
             expect(fieldExist).toBe(true);
             console.log("Field Exist in Fields Tree");
         });
@@ -99,7 +87,7 @@ test('Group and Input Fields Request Flow', async () => {
         await test.step("Check fields in field Library", async () => {
             await homePage.navigateToFieldLibrary();
             // var myMap = new Map();
-            // myMap.set('ISR_FLib_00001144',Constants.APPROVE); myMap.set('ISR_FLib_00001145', Constants.REJECT);myMap.set('ISR_FLib_00001146', Constants.REJECT);
+            // myMap.set('ISR_FLib_00001206',Constants.APPROVE); 
             var result = await fieldLibraryManagementPage.checkFieldStatusDetails(myMap);
             expect(result).toBe(true);
             console.log("Field Stauts Matched Successfully");

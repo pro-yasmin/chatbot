@@ -344,12 +344,17 @@
     "lockedField": "ISR_FLib_00000195",
     "fieldEnablementStatusDeactivated": "محجوب",
     "fieldEnablementStatusActivated": "متاح",
-    "activateConfirmationMsg": "هل أنت متأكد أنك تريد إتاحة اوتو حقل حسابى؟",
+    "activateConfirmationMsg": "هل أنت متأكد أنك تريد إتاحة",
     "deactivateConfirmationMsg": "هل أنت متأكد أنك تريد حجب",
     "fieldActivatedSuccessMsg": "تم إتاحة الحقل بنجاح ويمكن استخدامه في المنصة.",
     "fieldDeactivatedSuccessMsg": "تم حجب الحقل بنجاح ولا يمكن استخدامه في المنصة.",
     "fieldActivationErrorMsg": "لا يمكن حجب الحقل حيث إنه مرتبط بمكونات أخرى في النظام.",
-    "deactivateConfirmationMsgForLockedField": "هل أنت متأكد أنك تريد حجب"
+    "deactivateConfirmationMsgForLockedField": "هل أنت متأكد أنك تريد حجب",
+    "calculated": "حسابي",
+    "group": "مجموعة",
+    "complex": "مركب",
+    "input": "إدخال",
+    "integration": "تكامل"
   },
   "SocialRecordCopies": {
     "socialRecordActiveCopy": "ISR_ISRVR_00000021",
@@ -429,6 +434,9 @@
     "confirmRejectMsg": "تم رفض حقل",
     "requestStatusComplete": "مكتمل",
     "desitionStatusAccepted": "مقبول",
-    "desitionStatusRejected": "مرفوض"
+    "desitionStatusRejected": "مرفوض",
+    "availableField1": "الاسم الأول",
+    "availableField2": "الاسم الثانى",
+    "descriptionCalculatedField": "وصف العملية الحسابية"
   }
 }

@@ -1,5 +1,6 @@
 import Constants from '../../../Utils/Constants.js';
 
+const { SearchPage } = require("../SharedPages/SearchPage.js");
 const { PopUpPage } = require("../../AdminPortal/SharedPages/PopUpPage.js");
 
 /**
@@ -10,7 +11,11 @@ const { PopUpPage } = require("../../AdminPortal/SharedPages/PopUpPage.js");
 export class FieldPage {
   constructor(page) {
     this.page = page;
+    this.search = new SearchPage(this.page);
 
+    //Selectors for List of available fields section
+    this.searchInput ='//input[@data-testid="search-input-base"]';
+   
     // Selectors for field data defination section
     this.arabicFieldName = '//input[@name="data[arabicFieldName]"]';
     this.englishFieldName = '//input[@name="data[englishFieldName]"]';
@@ -34,6 +39,10 @@ export class FieldPage {
     this.impactDegree = '//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[impactDegree]"]]'
     this.DataMenuesettingsSeverity  ='//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[severity]"]]';
     this.fieldSettingDefinationBtn='//button[@data-testid="next-button"]';
+    this.descriptionCalculatedField ='//input[@name="data[calculationProcessDescription]"]';;  
+
+
+
     // Selectors for field Display
     this.fieldDisplyBtn ='//button[@data-testid="next-button"]';
 
@@ -59,11 +68,11 @@ export class FieldPage {
     // Fill Field Data Definition section
     await this.page.fill(this.arabicFieldName, createdFieldArName);
     await this.page.fill(this.englishFieldName, createdFieldEnName);
-    // await this.selectDropdownOption(this.fieldTypeMenu , this.dataMenuOptionsLocator);
     await this.selectDropdownOption(this.fieldTypeMenu , 1);
-    if (fieldType === Constants.COMPLEX_FIELD || fieldType === Constants.GROUP_FIELD ) {
-        await this.selectParentOption(this.parentLocator);}
-    // await this.selectDropdownOption(this.fieldNature,this.dataMenuOptionsLocator);
+
+    if ([Constants.COMPLEX_FIELD, Constants.GROUP_FIELD, Constants.CALCULATION_FIELD].includes(fieldType)) {
+      await this.selectParentOption(this.parentLocator);
+    }
     await this.selectDropdownOption(this.fieldNature,2);
     await this.page.fill(this.arabicFieldDescription, fieldData.getArabicFieldDescription());
     await this.page.fill(this.englishFieldDescription, fieldData.getEnglishFieldDescription());
@@ -79,10 +88,11 @@ export class FieldPage {
    * fill Field Settings using the provided data.
    * @returns {Promise<boolean>} - Returns true if the filed data is created successfully.
    */
-  async fillFieldSettings() {
+  async fillFieldSettings(fieldData) {
+
+    var fieldType = fieldData.getFieldType();
 
     // Fill Field Data Definition section
-    // await this.selectDropdownOption(this.classification , this.settingMenuOptionsLocator);
     await this.selectDropdownOption(this.classification , 1);
     await this.page.click(this.requierdOptionBtn);
     await this.page.click(this.multipleFieldBtn);
@@ -90,10 +100,11 @@ export class FieldPage {
     await this.selectDropdownOption(this.privacy ,4 );
     await this.selectDropdownOption(this.impactDegree  ,5 );
     await this.selectDropdownOption(this.DataMenuesettingsSeverity ,6);
-    // await this.selectDropdownOption(this.periodicDataUpdate ,this.dataMenuSettings);
-    // await this.selectDropdownOption(this.privacy ,this.dataMenuSettings );
-    // await this.selectDropdownOption(this.impactDegree  ,this.dataMenuSettings );
-    // await this.selectDropdownOption(this.DataMenuesettingsSeverity ,this.dataMenuSettings);
+
+    if ([Constants.CALCULATION_FIELD].includes(fieldType)) {
+      await this.page.fill(this.descriptionCalculatedField, global.testConfig.createField.descriptionCalculatedField);
+    }
+
     await this.page.click(this.fieldSettingDefinationBtn);
     console.log("Filling Field Settings Ending ");
   }
@@ -111,11 +122,11 @@ export class FieldPage {
     await this.page.waitForTimeout(2000); 
     var popUpMsg = new PopUpPage(this.page);
 
-    if (fieldType === Constants.COMPLEX_FIELD || fieldType === Constants.GROUP_FIELD) {
-      var result = await popUpMsg.popUpMessage( this.addAnotherField,global.testConfig.createField.createAnotherFieldMsg);  }
-    else if (fieldType === Constants.INPUT_FIELD ){
-    var result = await popUpMsg.popUpMessage(this.doneButton,global.testConfig.createField.confirmaCreateFieldMsg);}
-    // var result = await popUpMsg.popUpMessage(this.backToFieldRequestPage,global.testConfig.createField.createAnotherFieldMsg);}
+    if ([Constants.COMPLEX_FIELD ,Constants.GROUP_FIELD].includes(fieldType)) {
+      var result = await popUpMsg.popUpMessage( this.addAnotherField , global.testConfig.createField.createAnotherFieldMsg);  }
+    else 
+      if ([Constants.INPUT_FIELD ,Constants.CALCULATION_FIELD].includes(fieldType)) {
+    var result = await popUpMsg.popUpMessage(this.doneButton , global.testConfig.createField.confirmaCreateFieldMsg);}
     return result;
   }
   
@@ -164,10 +175,35 @@ export class FieldPage {
     var fieldDataDefinition, fieldSettings, fieldDisplay;
     // Common steps for all applicable field types
         fieldDataDefinition = await this.fillFieldDataDefinition(fieldData);
-        fieldSettings = await this.fillFieldSettings();
+        fieldSettings = await this.fillFieldSettings(fieldData);
         fieldDisplay = await this.fieldDisplay(fieldData);
         return fieldDisplay; 
-  
+    }
+
+    async listOfAvailableFields () {
+      const fields = [
+        global.testConfig.createField.availableField1,
+        global.testConfig.createField.availableField2 ];
+      for (const field of fields) {
+          await this.search.searchOnUniqueRow(this.searchInput ,field);
+          var checkbox = await this.page.locator('//input[@type="checkbox"]');
+          await checkbox.click();
+        }
+        var selectField = await this.page.locator('//button[@data-testid="next-button"]').click();
+        return selectField; 
+      }
+
+
+/**
+   * Creates a new lookup entry by filling in the necessary information.
+   * @param {Object} lookupData - The data required to create the lookup.
+   * @returns {Promise<boolean>} - Returns true if the lookup design and item creation were successful, otherwise false.
+   */
+async calculationField(fieldData, fieldType) {
+  // Common steps for all applicable field types
+    await this.listOfAvailableFields();
+    var fieldCreated =await this.creationField(fieldData, fieldType); 
+    return fieldCreated ; 
 }
 
 }

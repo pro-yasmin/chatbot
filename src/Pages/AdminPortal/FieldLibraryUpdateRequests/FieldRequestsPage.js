@@ -70,9 +70,13 @@ export class FieldRequestsPage {
             var fieldPage = new FieldPage(this.page);
             var result = await fieldPage.creationField(fieldData, fieldType);
             return result ;
-              
         } 
-        else if ([Constants.INTEGRATION_FIELD, Constants.CALCULATION_FIELD].includes(fieldType)) {
+        else if ([Constants.CALCULATION_FIELD].includes(fieldType)) {
+            var fieldPage = new FieldPage(this.page);
+            var result = await fieldPage.calculationField(fieldData, fieldType);
+            return result ;
+        }   
+        else if ([Constants.INTEGRATION_FIELD].includes(fieldType)) {
             // Redirect to the list of available fields page if calculation
             // Redirect to Integration data list page if integrated
             //
@@ -102,15 +106,12 @@ export class FieldRequestsPage {
             actualEnglishName.trim() === fieldData.getEnglishFieldName().trim()
         ) {
             console.log("Field names matched successfully.");
-            
             // Store the created field ID
             let fieldId = await fieldRow[0].tdLocator.textContent();
             fieldData.setCreatedFieldId(fieldId.trim());
-            
             console.log(`Created Field ID set in FieldData: ${fieldId.trim()}`);
             return fieldId;
         }
-
         console.log("Field name verification failed.");
         return false;
     }
@@ -137,9 +138,7 @@ export class FieldRequestsPage {
  * @returns {Promise<string|null>} - Returns the full extracted request number (e.g., "ISR_Freq_000001015") or null if not found.
  */
 async getRequestNumber(messageLocator) {
-
     const messageText = await this.page.locator(messageLocator).textContent();
-
     if (messageText) {
         // Extract the full request number using regex
         const match = messageText.match(/ISR_Freq_\d{9}/); 
@@ -148,32 +147,16 @@ async getRequestNumber(messageLocator) {
             return match[0]; // Return the request number
         }
     }
-
 }
 
-
 async addFieldFromInside(fieldID ) {
-
     let taskRow = [];
     taskRow = await this.search.getRowInTableWithSpecificText(fieldID);
     var actionlocator = "button:nth-of-type(2)";
     await this.search.clickRowAction(taskRow,this.tableActions, actionlocator);
     console.log(`Add button (+) clicked sucessfully` );
-
 }
 
-
-
-    
 }
 module.exports = {  FieldRequestsPage };
 
-// // Handle First Step on intgration field
-//     if (fieldType === Constants.INTEGRATION_FIELD) {
-//         // integrationData = await this.fillIntegrationDataList(fieldData);
-//     }
-
-//     // Handle First Step on calculation field
-//     if (fieldType === Constants.CALCULATION_FIELD) {
-//         // fieldList = await this.fillListOfAvailableFields(fieldData);
-//     }
