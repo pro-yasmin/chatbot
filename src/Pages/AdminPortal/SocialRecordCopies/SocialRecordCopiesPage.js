@@ -48,11 +48,11 @@ export class SocialRecordCopiesPage {
         await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
         await this.page.waitForTimeout(1000);
         await this.page.fill(this.activationDateForApplicant, this.createdactivationDateForApplicant);
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(5000);
         await this.page.fill(this.activationDateForPrograms, this.createdactivationDateForPrograms);
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(5000);
         await this.page.fill(this.activationDate, this.createdActivationDate);
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(5000);
         
 
         socialRecordCopiesData.setVersionArabicName(this.createdArVersionName);
