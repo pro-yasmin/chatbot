@@ -18,5 +18,6 @@ export default {
     COMPLEX_FIELD :"Complex",
     GROUP_FIELD : "Group",
     EDIT_SIMULATION_MODEL : "Edit_Simulation_Model",
-    EXECUTE_SIMULATION_MODEL : "Execute_Simulation_Model"
+    EXECUTE_SIMULATION_MODEL : "Execute_Simulation_Model",
+    VERIFY_FILE_UPLOADED : "verifyFileUploaded"
 };

@@ -1,6 +1,7 @@
 const { expect } = require('@playwright/test');
 const { SearchPage } = require("../SharedPages/SearchPage");
 const { LookupPage } = require("../../AdminPortal/Lookups/LookupPage");
+const { UploadLookupItemsPage } = require("../../AdminPortal/Lookups/UploadLookupItemsPage");
 const { UploadFilePage } = require('../../AdminPortal/SharedPages/UploadFilePage.js');
 
 export class LookupsManagmentPage {
@@ -8,6 +9,7 @@ export class LookupsManagmentPage {
         this.page = page;
         this.lookupPage = new LookupPage(this.page);
         this.search = new SearchPage(this.page);
+        this.uploadLookupItemsPage = new UploadLookupItemsPage(this.page);
         this.uploadFilePage = new UploadFilePage(this.page);
 
         this.addButton = '//button[@data-testid="add-new-lookup"]';
@@ -149,6 +151,18 @@ export class LookupsManagmentPage {
         return false;
     }
 
+    async uploadInvalidLookUpItems(lookupData) {
+        await this.clickEditLookupButton(lookupData);
+        await this.page.waitForTimeout(2000);
+        return await this.uploadLookupItemsPage.uploadInvalidLookUpItems();
+    }
+
+    async uploadValidLookUpItems(lookupData) {
+        await this.clickEditLookupButton(lookupData);
+        await this.page.waitForTimeout(2000);
+        return await this.uploadLookupItemsPage.uploadValidLookUpItems();
+    }
+
     async uploadLookUpItems(lookupData) {
         await this.clickEditLookupButton(lookupData);
         await this.page.waitForTimeout(2000);
@@ -173,17 +187,6 @@ export class LookupsManagmentPage {
             }
         }
         return false;
-    }
-
-    /**
- * Extracts text from the <span> inside the second <td> of each row in a table.
- *
- * @param {string} tableLocator - The locator for the table body.
- * @returns {Promise<string[]>} - An array of extracted text values.
- */
-    async getExistingFieldsData() {
-        const rowsCountBeforeUpload = await this.page.locator(`${this.existFieldsTable}//tr`).count();
-        const rowsCountAfterUpload = await this.page.locator(`${this.existFieldsTable}//tr`).count();
     }
 }
 module.exports = { LookupsManagmentPage };

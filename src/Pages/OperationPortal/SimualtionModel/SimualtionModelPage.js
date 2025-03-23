@@ -1,6 +1,7 @@
 import filesPaths from '../../../../configs/paths.js';
 const { PopUpPage } = require('../../AdminPortal/SharedPages/PopUpPage');
 const { UploadFilePage } = require('../../AdminPortal/SharedPages/UploadFilePage.js');
+import Constants from "../../../Utils/Constants";
 
 export class SimualtionModelPage {
     constructor(page) {
@@ -73,7 +74,7 @@ export class SimualtionModelPage {
         await this.page.waitForSelector(this.beneficiaryPartyDdlFirstValue, { visible: true });
         await this.page.click(this.beneficiaryPartyDdlFirstValue);
         await this.page.fill(this.simulationModelDescriptionField, this.createdSimulationModelDescription);
-        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelPDF, this.attachButton);
+        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelPDF, this.attachButton, Constants.VERIFY_FILE_UPLOADED);
 
         simulationModelData.setSimulationModelArName(this.createdSimulationModelArName);
         simulationModelData.setSimulationModelEnName(this.createdSimulationModelEnName);
@@ -88,14 +89,14 @@ export class SimualtionModelPage {
         await this.page.click(this.auCheckbox);
         await this.page.click(this.ibrCheckbox);
         await this.page.click(this.isrCheckbox);
-        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelCSV, this.attachButton);
+        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelCSV, this.attachButton, Constants.VERIFY_FILE_UPLOADED);
         console.log("End filling Simulation Model information Tab two");
         await this.page.click(this.nextTabButton);
     }
     async fillDefineConditionsTab() {
         console.log("Start filling Simulation Model Information Tab three");
         await this.page.waitForTimeout(2000);
-        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelPDF, this.attachButton);
+        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelPDF, this.attachButton, Constants.VERIFY_FILE_UPLOADED);
         console.log("End filling Simulation Model information Tab three");
         await this.page.click(this.nextTabButton);
     }
@@ -180,15 +181,15 @@ export class SimualtionModelPage {
         await this.page.click(this.beneficiaryPartyDdlSecondValue);
         console.log("Beneficiary Party changed to second value");
         await this.page.fill(this.simulationModelDescriptionField, simulationModelData.getEditedSimulationModelDescription());
-        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelPDF, this.attachButton);
+        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelPDF, this.attachButton, Constants.VERIFY_FILE_UPLOADED);
         await this.page.click(this.nextTabButton);
         console.log("Navigate to Second tab");
         await this.page.waitForTimeout(5000);
-        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelSecondCSV, this.attachButton);
+        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelSecondCSV, this.attachButton, Constants.VERIFY_FILE_UPLOADED);
         await this.page.click(this.nextTabButton);
         console.log("Navigate to Third tab");
         await this.page.waitForTimeout(5000);
-        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelPDF, this.attachButton);
+        await this.uploadFilePage.uploadFile(global.testConfig.SimulationModels.simulationModelPDF, this.attachButton, Constants.VERIFY_FILE_UPLOADED);
         await this.page.click(this.nextTabButton);
         console.log("Navigate to Fourth tab");
         this.createdVariableOneArName = simulationModelData.getVariableFourArName();

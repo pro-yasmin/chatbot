@@ -12,15 +12,13 @@ let lookupsManagmentPage;
 let lookupData;
 
 
-test('Create and View New Lookup', async ({ page }) => {
+test('Upload Lookup Items', async ({ page }) => {
 
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     lookupsManagmentPage = new LookupsManagmentPage(page);
     lookupData = new LookupData();
     var baseUrl = global.testConfig.BASE_URL;
-    //var adminusername = global.testConfig.ADMIN_USER;
-    //var adminpassword = global.testConfig.ADMIN_PASS;
     var adminusername = global.testConfig.GENERAL_SETTING_USER;
     var adminpassword = global.testConfig.GENERAL_SETTING_PASS;
     // Step0: Login 
@@ -45,7 +43,22 @@ test('Create and View New Lookup', async ({ page }) => {
         expect(await lookupsManagmentPage.checkNewLookupAdded(lookupData)).toBe(true);
         console.log('New lookup Details Checked Successfully');
     });
-    //Step4: Logout From Admin portal
+    // Step4: Upload Invalid Lookup items 
+    await test.step('Upload Invalid Lookup Items', async () => {
+        expect(await lookupsManagmentPage.uploadInvalidLookUpItems(lookupData)).toBe(true);
+        console.log('Invalid Lookup Items not uploaded');
+    });
+    // Step5: Navigate to Lookup list page
+    await test.step('Navigate to Lookup page', async () => {
+        await homePage.navigateToLookupsManagment();
+        console.log('Navigate to LookUps Managment page');
+    });
+    // Step6: Upload Valid Lookup items 
+    await test.step('Upload Valid Lookup Items', async () => {
+        expect(await lookupsManagmentPage.uploadValidLookUpItems(lookupData)).toBe(true);
+        console.log('Valid Lookup Items Uploaded Successfully');
+    });
+    //Step7: Logout From Admin portal
     await test.step('Logout from Admin Portal', async () => {
         await homePage.logout();
         console.log('Logout done Successfully');
