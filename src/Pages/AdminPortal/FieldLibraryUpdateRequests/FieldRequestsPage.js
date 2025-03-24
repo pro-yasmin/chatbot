@@ -125,7 +125,7 @@ export class FieldRequestsPage {
         let fieldType = fieldData.getFieldType();
         if ([Constants.CALCULATION_FIELD].includes(fieldType)) {
             var fileName = 'test.pdf';
-            await this.uploadFilePage.uploadFile(fileName, this.uploadBtnXPath);
+            await this.uploadFilePage.uploadFile(fileName, this.uploadBtnXPath , Constants.VERIFY_FILE_UPLOADED);
             console.log('File upload competed');
         }           
 

@@ -94,22 +94,20 @@ export class FieldLibraryUpdateRequestsPage {
 
     /**
      * Creates Group and Input fields.*/
-    async createGroupFieldRequest(groupFieldData, inputFieldData1 ,inputFieldData2) {
+    async createGroupFieldRequest(groupFieldData ,inputFieldData) {
         await this.navigateToFieldRequestsPage();
         var groupFieldCreated = await this.fieldRequestsPage.createField(groupFieldData);
-        var inputFieldCreated1 =await this.fieldRequestsPage.createField(inputFieldData1);
-        if ( groupFieldCreated && inputFieldCreated1 )
+        if ( groupFieldCreated )
         {
-            var inputFieldID1 = await this.fieldRequestsPage.checkFieldRowDetails(inputFieldData1);
             var groupFieldID = await this.fieldRequestsPage.checkFieldRowDetails(groupFieldData);
             await this.fieldRequestsPage.addFieldFromInside(groupFieldID) ;
             await this.page.waitForTimeout(1000);
-            var inputFieldCreated2 =await this.fieldRequestsPage.createField(inputFieldData2);
-            if ( inputFieldCreated2  )
-                {  var inputFieldID2 = await this.fieldRequestsPage.checkFieldRowDetails(inputFieldData2);}
+            var inputFieldCreated =await this.fieldRequestsPage.createField(inputFieldData);
+            if ( inputFieldCreated  )
+                {  var inputFieldID = await this.fieldRequestsPage.checkFieldRowDetails(inputFieldData);}
             var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval(groupFieldData);
             console.log('Fields created successfully');
-            return [RequestNumber ,groupFieldID ,inputFieldID1 ,inputFieldID2]
+            return [RequestNumber ,groupFieldID ,inputFieldID]
         }
     }
 

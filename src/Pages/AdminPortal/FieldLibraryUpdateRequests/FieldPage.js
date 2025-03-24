@@ -122,8 +122,11 @@ export class FieldPage {
     await this.page.waitForTimeout(2000); 
     var popUpMsg = new PopUpPage(this.page);
 
-    if ([Constants.COMPLEX_FIELD ,Constants.GROUP_FIELD].includes(fieldType)) {
+    if ([Constants.COMPLEX_FIELD].includes(fieldType)) {
       var result = await popUpMsg.popUpMessage( this.addAnotherField , global.testConfig.createField.createAnotherFieldMsg);  }
+    else  
+    if ([Constants.GROUP_FIELD].includes(fieldType)) {
+      var result = await popUpMsg.popUpMessage( this.backToFieldRequestPage , global.testConfig.createField.createAnotherFieldMsg);  }
     else 
       if ([Constants.INPUT_FIELD ,Constants.CALCULATION_FIELD].includes(fieldType)) {
     var result = await popUpMsg.popUpMessage(this.doneButton , global.testConfig.createField.confirmaCreateFieldMsg);}
@@ -171,12 +174,12 @@ export class FieldPage {
    * @param {Object} lookupData - The data required to create the lookup.
    * @returns {Promise<boolean>} - Returns true if the lookup design and item creation were successful, otherwise false.
    */
-  async creationField(fieldData, fieldType) {
+  async creationField(fieldData) {
     var fieldDataDefinition, fieldSettings, fieldDisplay;
     // Common steps for all applicable field types
         fieldDataDefinition = await this.fillFieldDataDefinition(fieldData);
         fieldSettings = await this.fillFieldSettings(fieldData);
-        fieldDisplay = await this.fieldDisplay(fieldData);
+        fieldDisplay = await this.fieldDisplay(fieldData );
         return fieldDisplay; 
     }
 

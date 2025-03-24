@@ -10,7 +10,7 @@ const { FieldData } = require("../../../../src/Models/AdminPortal/FieldData");
 const { TasksPage } = require("../../../../src/Pages/AdminPortal/Tasks/TasksPage");
 
 let loginPage, homePage, fieldLibraryUpdateRequestsPage, tasksPage ,fieldsTreePage;
-let groupFieldData, inputFieldData1 ,inputFieldData2;
+let groupFieldData, inputFieldData ,inputFieldData2;
 let adminUsername, adminPassword ,isrManagerUsername , isrManagerPassword;
 let requestChecks ,myMap;
 let fieldLibraryManagementPage ;
@@ -26,11 +26,11 @@ test.beforeEach(async ({ page }) => {
     tasksPage = new TasksPage(page);
 
     groupFieldData = new FieldData(page);
-    inputFieldData1 = new FieldData(page);
+    inputFieldData = new FieldData(page);
     inputFieldData2 = new FieldData(page);
 
     groupFieldData.setFieldType(Constants.GROUP_FIELD);
-    inputFieldData1.setFieldType(Constants.INPUT_FIELD);
+    inputFieldData.setFieldType(Constants.INPUT_FIELD);
     inputFieldData2.setFieldType(Constants.INPUT_FIELD);
 
     const baseUrl = global.testConfig.BASE_URL;
@@ -52,7 +52,7 @@ test('Group and Input Fields Request Flow', async () => {
 
         await test.step("Navigate to Field Library Requests and Create Fields", async () => {
             await homePage.navigateToFieldLibraryRequests();
-            requestChecks = await fieldLibraryUpdateRequestsPage.createGroupFieldRequest(groupFieldData, inputFieldData1 ,inputFieldData2);
+            requestChecks = await fieldLibraryUpdateRequestsPage.createGroupFieldRequest(groupFieldData, inputFieldData);
             expect(requestChecks[0]).not.toBeNull(); 
         });
 
@@ -82,7 +82,6 @@ test('Group and Input Fields Request Flow', async () => {
             myMap = new Map(); 
             myMap.set(requestChecks[1], Constants.APPROVE);
             myMap.set(requestChecks[2], Constants.REJECT); 
-            myMap.set(requestChecks[3], Constants.REJECT);
         
             var taskManage = await tasksPage.manageRequestField(requestChecks[0],myMap );
             expect(taskManage).toBe(true);
