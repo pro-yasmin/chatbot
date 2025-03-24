@@ -1,13 +1,25 @@
 const { expect } = require('@playwright/test');
 const { SearchPage } = require("../SharedPages/SearchPage");
 const { LookupPage } = require("../../AdminPortal/Lookups/LookupPage");
+const { UploadLookupItemsPage } = require("../../AdminPortal/Lookups/UploadLookupItemsPage");
+const { UploadFilePage } = require('../../AdminPortal/SharedPages/UploadFilePage.js');
 
 export class LookupsManagmentPage {
     constructor(page) {
         this.page = page;
         this.lookupPage = new LookupPage(this.page);
         this.search = new SearchPage(this.page);
+        this.uploadLookupItemsPage = new UploadLookupItemsPage(this.page);
+        this.uploadFilePage = new UploadFilePage(this.page);
+
         this.addButton = '//button[@data-testid="add-new-lookup"]';
+        this.addLookupItemTab = '//button[@id="simple-tab-0"]';
+        this.lookupItemsUploadTab = '//button[@id="simple-tab-1"]';
+        this.attachButton = '//button[@data-testid="tooltip-button"]';
+        this.invalidUploadErrorMsg = '//span[contains(text(),"تحميل ملف الاخطاء")]';
+        this.validUploadSuccessMsg = '//span[contains(text(),"تم اضافه عنصر ")]';
+        this.existFieldsTable = '//tbody[@data-testid="table-body"]';
+
 
     }
 
@@ -69,7 +81,7 @@ export class LookupsManagmentPage {
         let lookupRow = [];
         lookupRow = await this.search.getRowInTableWithSpecificText(lookupData.getCreatedLookupId());
         var actionlocator = "view-lookup";
-        await this.search.clickRowAction(lookupRow, actionlocator,null);
+        await this.search.clickRowAction(lookupRow, actionlocator, null);
     }
 
     /**
@@ -81,7 +93,7 @@ export class LookupsManagmentPage {
         let lookupRow = [];
         lookupRow = await this.search.getRowInTableWithSpecificText(lookupData.getCreatedLookupId());
         var actionlocator = "edit-lookup";
-        await this.search.clickRowAction(lookupRow, actionlocator,null);
+        await this.search.clickRowAction(lookupRow, actionlocator, null);
     }
 
     /**
@@ -137,7 +149,44 @@ export class LookupsManagmentPage {
             return true;
         }
         return false;
+    }
 
+    async uploadInvalidLookUpItems(lookupData) {
+        await this.clickEditLookupButton(lookupData);
+        await this.page.waitForTimeout(2000);
+        return await this.uploadLookupItemsPage.uploadInvalidLookUpItems();
+    }
+
+    async uploadValidLookUpItems(lookupData) {
+        await this.clickEditLookupButton(lookupData);
+        await this.page.waitForTimeout(2000);
+        return await this.uploadLookupItemsPage.uploadValidLookUpItems();
+    }
+
+    async uploadLookUpItems(lookupData) {
+        await this.clickEditLookupButton(lookupData);
+        await this.page.waitForTimeout(2000);
+        await this.page.click(this.lookupItemsUploadTab)
+        if (await this.page.waitForSelector(this.attachButton, { state: "visible", timeout: 20000 })) {
+            const rowsCountBeforeUpload = await this.page.locator(`${this.existFieldsTable}//tr`).count();
+            await this.uploadFilePage.uploadFile(global.testConfig.lookUps.invalidLookupItemsCSV, this.attachButton);
+            await this.page.waitForSelector(this.invalidUploadErrorMsg, { state: "visible", timeout: 20000 });
+            console.log('Invalid Lookup Items error message shown');
+            await this.page.click(this.addLookupItemTab);
+            await this.page.click(this.lookupItemsUploadTab);
+            await this.page.waitForSelector(this.attachButton, { state: "visible", timeout: 20000 });
+            await this.uploadFilePage.uploadFile(global.testConfig.lookUps.validLookupItemsCSV, this.attachButton);
+            await this.page.waitForSelector(this.validUploadSuccessMsg, { state: "visible", timeout: 20000 });
+            console.log('valid Lookup Items success message shown');
+            await this.page.waitForTimeout(2000);
+            const rowsCountAfterUpload = await this.page.locator(`${this.existFieldsTable}//tr`).count();
+            console.log(`Lookup Items before upload: ${rowsCountBeforeUpload}`);
+            console.log(`Lookup Items after upload: ${rowsCountAfterUpload}`);
+            if (rowsCountAfterUpload > rowsCountBeforeUpload) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 module.exports = { LookupsManagmentPage };
