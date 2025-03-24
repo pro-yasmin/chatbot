@@ -122,7 +122,9 @@
     "arabicName": "الأعمال والأملاك",
     "englishName": "Business and property",
     "code": "2323",
-    "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟"
+    "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟",
+    "validLookupItemsCSV": "lookups/valid_LookupItems.csv",
+    "invalidLookupItemsCSV": "lookups/invalid_LookupItems.csv"
   },
   "createBenefits": {
     "backUpSubProgramNumber": "PRG_SPRG_147",

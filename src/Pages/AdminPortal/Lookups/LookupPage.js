@@ -116,7 +116,7 @@ export class LookupPage {
     await this.page.fill(this.codeLookup, lookupData.getCodeLookup());
     //await this.page.click(this.mainList);
     //await this.page.waitForSelector(this.mainListFirstOption, { visible: true });
-   // await this.page.click(this.mainListFirstOption);
+    // await this.page.click(this.mainListFirstOption);
     await this.page.click(this.visibleToggle);
     await this.page.click(this.addItemToLookupButton);
     var result = await this.popUpMsg.popUpMessage(this.popUpDismissButton, global.testConfig.lookUps.successMsgTabThree);
@@ -165,7 +165,7 @@ export class LookupPage {
       lookupDescriptionEnglishNameFieldText === lookupData.getLookupDescriptionEnglishName(),
       lookupStatusFieldText === global.testConfig.lookUps.listStatus
     ];
-    
+
 
     // Check if all validations are true
     const allValid = validations.every(Boolean);
@@ -196,7 +196,7 @@ export class LookupPage {
    */
   async validateNewLookupItemAdded() {
     let lookUpCodeValue;
-    let lookupArNameValue; 
+    let lookupArNameValue;
     let lookupEnNameValue;
     let lookupStatusValue;
     let lookupNewItemRow = [];
@@ -214,10 +214,10 @@ export class LookupPage {
     console.log("Lookup Arabic Name Value: ", lookupArNameValue);
     console.log("Lookup English Name Value: ", lookupEnNameValue);
     console.log("Lookup Status Value: ", lookupStatusValue);
-  
-    if (lookUpCodeValue === global.testConfig.lookUps.code && 
-      lookupArNameValue === global.testConfig.lookUps.arabicName && 
-      lookupEnNameValue === global.testConfig.lookUps.englishName && 
+
+    if (lookUpCodeValue === global.testConfig.lookUps.code &&
+      lookupArNameValue === global.testConfig.lookUps.arabicName &&
+      lookupEnNameValue === global.testConfig.lookUps.englishName &&
       lookupStatusValue === global.testConfig.lookUps.newLookupItemAddedStatus) {
       return true;
     }

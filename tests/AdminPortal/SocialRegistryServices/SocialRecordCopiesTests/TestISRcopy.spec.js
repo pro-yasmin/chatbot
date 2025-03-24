@@ -61,11 +61,26 @@ test('Add ISR copy with status under Review', async ({ page }) => {
         expect(await socialRecordCopiesManagementPage.addNewFieldsToISRCopy(socialRecordCopiesData)).toBe(true);
         console.log('New Fields added To New ISR Copy Successfully');
     });
+});
+
+
+test('Add ISR copy And Verify ISR copy details', async ({ page }) => {
+    // Step1: Navigate to Social Record Managment page
+    await test.step('Navigate to Social Record Managment page', async () => {
+        await homePage.navigateToSocialRecordCopies();
+        console.log('Navigate to Social Record Managment page');
+    });
+
+    // Step2: Add New Fields To New ISR Copy
+    await test.step('Add New Fields To New ISR Copy', async () => {
+        expect(await socialRecordCopiesManagementPage.addNewFieldsToISRCopy(socialRecordCopiesData)).toBe(true);
+        console.log('New Fields added To New ISR Copy Successfully');
+    });
 
     // Step3: Verify ISR Copy Details
     await test.step('Verify ISR Copy Details', async () => {
         expect(await socialRecordCopiesManagementPage.verifyIsrDetails(socialRecordCopiesData)).toBe(true);
-        console.log('ISR Copy Details Successfully');
+        console.log('ISR Copy Details Verified Successfully');
     });
 });
 
