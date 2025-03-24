@@ -69,7 +69,7 @@ export class FieldLibraryUpdateRequestsPage {
         {
             var complexFieldID = await this.fieldRequestsPage.checkFieldRowDetails(complexFieldData);
             var inputFieldID = await this.fieldRequestsPage.checkFieldRowDetails(inputFieldData);
-            var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval();
+            var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval(complexFieldData);
             console.log('Fields created successfully');
             return [RequestNumber ,complexFieldID ,inputFieldID]
         }
@@ -107,7 +107,7 @@ export class FieldLibraryUpdateRequestsPage {
             var inputFieldCreated2 =await this.fieldRequestsPage.createField(inputFieldData2);
             if ( inputFieldCreated2  )
                 {  var inputFieldID2 = await this.fieldRequestsPage.checkFieldRowDetails(inputFieldData2);}
-            var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval();
+            var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval(groupFieldData);
             console.log('Fields created successfully');
             return [RequestNumber ,groupFieldID ,inputFieldID1 ,inputFieldID2]
         }
@@ -121,7 +121,7 @@ export class FieldLibraryUpdateRequestsPage {
     if ( calculatedFieldCreated )
     {
         var calculatedFieldID = await this.fieldRequestsPage.checkFieldRowDetails(calculatedFieldData);
-        var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval();
+        var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval(calculatedFieldData);
         console.log('calculated Field created successfully');
         return [RequestNumber ,calculatedFieldID ]
     }

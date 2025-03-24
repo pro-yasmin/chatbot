@@ -2,14 +2,15 @@ import Constants from '../../../Utils/Constants.js';
 const { FieldPage } = require("./FieldPage");
 const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage.js");
 const { PopUpPage } = require("../../AdminPortal/SharedPages/PopUpPage.js");
-
-
+const { UploadFilePage } = require('../../../Pages/AdminPortal/SharedPages/UploadFilePage.js');
 
 
 export class FieldRequestsPage {
     constructor(page) {
         this.page = page;
         this.search = new SearchPage(this.page);
+        this.uploadFilePage = new UploadFilePage(page);
+
         this.defineNewFieldButton = '//button[contains(text(),"تعريف حقل جديد")]';
         // '//button[contains(@class,"MuiButton-containedPrimary") and contains(@class,"MuiButton-sizeLarge")]';
         
@@ -28,6 +29,9 @@ export class FieldRequestsPage {
 
         //addinng field Inside 
         this.tableActions='table-actions';
+
+        this.uploadBtnXPath = '//div[@data-testid="dropzone"]';
+
 
     }
     async navigateToFieldPage(fieldData) {
@@ -116,7 +120,15 @@ export class FieldRequestsPage {
         return false;
     }
 
-    async sendRequestToApproval( ) {
+    async sendRequestToApproval(fieldData) {
+
+        let fieldType = fieldData.getFieldType();
+        if ([Constants.CALCULATION_FIELD].includes(fieldType)) {
+            var fileName = 'test.pdf';
+            await this.uploadFilePage.uploadFile(fileName, this.uploadBtnXPath);
+            console.log('File upload competed');
+        }           
+
         await this.page.click(this.justification);
         await this.page.waitForTimeout(1000);
         var optionsLocator = this.page.locator(this.justificationList);
