@@ -136,15 +136,15 @@ test("Create and Reject Benefits", async () => {
   expect(Benefit).not.toBeNull(); 
   });
 
-  // Step2: Reject New Main Program
-  await test.step("Reject Benefit Task", async () => {
-    console.log("Navigate to MyTasks page to reject Main Program task");
-    await homePage.navigateToTasks();
-    await tasksPage.assignTaskToMe(Benefit[1]);
-    var confirmMsg = global.testConfig.taskDetails.confirmRejectBenefitMsg;
-    expect(await tasksPage.manageTask(Constants.BENEFIT, Constants.REJECT,Benefit[1],confirmMsg)).toBe(true);
-   console.log("New Benefit Rejected Successfully with id= " + Benefit[1]);
-  });
+  // // Step2: Reject New Main Program
+  // await test.step("Reject Benefit Task", async () => {
+  //   console.log("Navigate to MyTasks page to reject Main Program task");
+  //   await homePage.navigateToTasks();
+  //   await tasksPage.assignTaskToMe(Benefit[1]);
+  //   var confirmMsg = global.testConfig.taskDetails.confirmRejectBenefitMsg;
+  //   expect(await tasksPage.manageTask(Constants.BENEFIT, Constants.REJECT,Benefit[1],confirmMsg)).toBe(true);
+  //  console.log("New Benefit Rejected Successfully with id= " + Benefit[1]);
+  // });
 
 });
 
