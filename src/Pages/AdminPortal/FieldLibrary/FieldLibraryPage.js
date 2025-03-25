@@ -13,11 +13,10 @@ export class FieldLibraryPage {
         this.successPopupTitle = '//span[@data-testid="modal-title"]';
         this.popUpYesButton = '//button[@data-testid="confirmation-modal-primary-button"]';
 
-        this.approvedFieldRecordTab = '//button[@data-testid="tab-4"]';
-        this.rejectedFieldRecordTab = '//button[@data-testid="tab-3"]';
+        this.fieldRecordFourthTab = '//button[@data-testid="tab-4"]';
+        this.fieldRecordThirdTab = '//button[@data-testid="tab-3"]';
         // this.fieldEnablmentStatus ='//div[contains(@class,"formio-component-status") and contains(@class,"formio-component-textfield")]//div[@ref="value"]';
         this.fieldEnablmentStatus ='//*[contains(@class,"status")][2]';
-
     }
 
         /**
@@ -42,14 +41,19 @@ export class FieldLibraryPage {
         }
     }
 
-    async checkInsideFieldStatus(expectedFieldStatus, actionType) {
+    async checkInsideFieldStatus(expectedFieldStatus ,fieldType ) {
 
-        const fieldTabLocator = actionType === Constants.APPROVE
-            ? this.approvedFieldRecordTab
-            : this.rejectedFieldRecordTab;
-    
-        await this.page.waitForSelector(fieldTabLocator, { state: 'visible', timeout: 30000 });
-        await this.page.click(fieldTabLocator);
+        let fieldTabLocator;
+
+        if ([Constants.INPUT_FIELD ,Constants.CALCULATION_FIELD,Constants.INTEGRATION_FIELD].includes(fieldType)) {
+            fieldTabLocator = this.page.locator(this.fieldRecordThirdTab);
+        } else  if ([ Constants.GROUP_FIELD ,Constants.COMPLEX_FIELD].includes(fieldType)) {
+                fieldTabLocator = this.page.locator(this.fieldRecordFourthTab);
+        }
+
+        
+        await fieldTabLocator.waitFor({ state: 'visible', timeout: 30000 });
+        await fieldTabLocator.click();
     
         const fieldStatus = this.page.locator(this.fieldEnablmentStatus);
         await fieldStatus.waitFor({ state: 'visible', timeout: 30000 });

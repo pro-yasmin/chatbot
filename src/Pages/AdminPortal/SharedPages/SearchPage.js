@@ -17,7 +17,7 @@ export class SearchPage {
     let tds;
     let tdDetails = [];
     // Step 1: Enter the search value in the input field
-    await  this.page.waitForTimeout(2000); 
+    await  this.page.waitForTimeout(10000); //shimaa
     await this.page.fill(searchInputSelector, '');
     await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' , timeout: 10000});
     await this.page.waitForSelector(searchInputSelector, { state: 'visible' }); 
@@ -29,7 +29,7 @@ export class SearchPage {
      rows = await  this.page.locator(`${this.tableSelector}//tr`).filter({ has: this.page.locator('td') });
     // Step 4: Ensure only one row is visible
      rowCount = await rows.count();
-    await  this.page.waitForTimeout(1000);
+    await  this.page.waitForTimeout(3000);
     if (rowCount !== 1) {
       throw new Error(`Expected 1 row to be displayed, but found ${rowCount}`);
     }

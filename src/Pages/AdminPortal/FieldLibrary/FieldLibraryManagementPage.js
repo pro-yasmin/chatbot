@@ -12,6 +12,7 @@ export class FieldLibraryManagementPage {
         this.tableActions = 'table-actions';
         this.searchInputSelector = '//form[@data-testid="search-input"]//input';
 
+        this.allFieldsTab = '//button[@data-testid="tab-1"]';
         this.approvedFieldsTab = '//button[@data-testid="tab-2"]';
         this.rejectedFieldsTab = '//button[@data-testid="tab-4"]';
         this.searchInput = '//input[@data-testid="search-input-base"]';
@@ -26,6 +27,10 @@ export class FieldLibraryManagementPage {
 
     async navigateToRejectedFieldsTab() {
         await this.page.click(this.rejectedFieldsTab);
+    }
+
+    async navigateToAllFieldsTab() {
+        await this.page.click(this.allFieldsTab);
     }
 
         /**
@@ -60,40 +65,52 @@ export class FieldLibraryManagementPage {
     }
 
     async checkFieldStatusDetails(fieldMap) {
+        let lastTab = null;
 
-        for (const [fieldId, actionType] of fieldMap.entries()) {
-    
-            console.log(`Starting verification for ${actionType} field with ID: ${fieldId}`);
-    
+        const FIELD_TYPE_MAPPING = {
+            [global.testConfig.FieldLibrary.calculated] : Constants.CALCULATION_FIELD,  
+            [global.testConfig.FieldLibrary.input] : Constants.INPUT_FIELD,               
+            [global.testConfig.FieldLibrary.group] : Constants.GROUP_FIELD,          
+            [global.testConfig.FieldLibrary.complex] : Constants.COMPLEX_FIELD ,   
+            [global.testConfig.FieldLibrary.integration] : Constants.INTEGRATION_FIELD 
+        };
+
+        for (const [fieldId, actionType] of fieldMap.entries()) {    
+             // Check if we need to switch tabs
+            if (lastTab && lastTab !== actionType) {
+                console.log("Switching tab detected, navigating to All Fields tab first...");
+                await this.navigateToAllFieldsTab(); // Ensure a reset before switching tabs
+                }
+
             if (actionType === Constants.APPROVE) {
                 await this.navigateToApprovedFieldsTab();
             } else if (actionType === Constants.REJECT) {
-                await this.navigateToRejectedFieldsTab();
-            }
+                await this.navigateToRejectedFieldsTab();}
     
+            lastTab = actionType; // Update last visited tab
+
             await this.page.waitForSelector(this.searchInputSelector, { state: 'visible', timeout: 30000 });
     
             // Search for the field row
             const fieldRow = await this.search.searchOnUniqueRow(this.searchInputSelector, fieldId);
-    
             console.log(`Field row found for ID: ${fieldId}`);
     
+            var actualFieldType = (await fieldRow[6].tdLocator.textContent()).trim();
+            let fieldType = FIELD_TYPE_MAPPING[actualFieldType];
+            console.log(`The Field Type for field ID: ${fieldId} is ${fieldType}`);
+
             const actionCell = fieldRow[fieldRow.length - 1].tdLocator;
             const actionButton = actionCell.locator('[data-testid="table-actions"]');
     
             await actionButton.waitFor({ state: 'visible', timeout: 30000 });
-    
             console.log(`Clicking action button for field ID: ${fieldId}`);
     
             // Get current URL before clicking
             const currentUrl = this.page.url();
-    
             await actionButton.click();
     
-            await this.page.waitForFunction(
-                (oldUrl) => window.location.href !== oldUrl,
-                currentUrl,
-                { timeout: 10000 }
+            await this.page.waitForFunction((oldUrl) => window.location.href !== oldUrl,
+                currentUrl, { timeout: 10000 }
             ).catch(() => {
                 throw new Error(`Field details page did NOT load for field ID: ${fieldId}. Aborting.`);
             });
@@ -104,8 +121,7 @@ export class FieldLibraryManagementPage {
                 ? global.testConfig.FieldLibrary.fieldEnablementStatusActivated
                 : global.testConfig.FieldLibrary.fieldEnablementStatusDeactivated;
     
-            await this.fieldLibraryPage.checkInsideFieldStatus(expectedStatus, actionType);
-    
+            await this.fieldLibraryPage.checkInsideFieldStatus(expectedStatus ,fieldType);
             console.log(`Field status checked for ID: ${fieldId}`);
     
             await this.page.goBack();
