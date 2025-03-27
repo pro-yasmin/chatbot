@@ -1,16 +1,21 @@
 const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage.js");
 const{SubDomainCreationPage} = require('./SubDomainCreationPage');
-const{ManageSubDomainUpdateRequestsPage} = require ('./ManageSubDomainUpdateRequestsPage.js')
+const{ManageSubDomainUpdateRequestsPage} = require ('./ManageSubDomainUpdateRequestsPage.js');
+const {Utils}= require('../../../Utils/utils.js');
 
 
 export class SubDomainLibraryUpdateReqPage {
     constructor(page) {
         this.page = page;
+        this.utils = Utils;
         this.search = new SearchPage(this.page);
     
       
         
         this.subdomainLibraryUpdateRequest = '//button[contains(@class,"MuiButton-containedSizeLarge")]';
+        this.searchField= '//input[@data-testid="search-input-base"]';
+        this.tableActions='table-actions';
+
     }
 /**
    * fill Field Data Definition using the provided data.
@@ -19,22 +24,46 @@ export class SubDomainLibraryUpdateReqPage {
 **/
     async clickOnSubDomainUpdateLibraryReqBtn() {
         await this.page.waitForSelector(this.subdomainLibraryUpdateRequest, { state: "visible", timeout: 5000 });
+        await this.page.waitForTimeout(3000);
         await this.page.click(this.subdomainLibraryUpdateRequest);
         await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
         console.log("Sub domain Requests management Page Opened successfully.");   
 }
 
-    async submitSubDomainCreateRequest(SubDomainData){
-        var subDomainPage = new SubDomainCreationPage(this.page);
+    async sendSubDomainRequest(SubDomainData,NumOfDomains){
         var subDomainRequestManagement= new ManageSubDomainUpdateRequestsPage(this.page);
-
+    
        await this.clickOnSubDomainUpdateLibraryReqBtn();
-       await subDomainRequestManagement.clickOnCreateSubDomainBtn();
-
-        var result = await subDomainPage.createSubDomain(SubDomainData);
-
-
+       return await subDomainRequestManagement.submitSubDomainCreateRequest(SubDomainData,NumOfDomains);
     }
+
+    async checkSubDomainReqStatus(expectedStatus, requestID){
+        let requestRowInfo=[];
+        let status;
+        let requestStatus;
+
+        requestRowInfo = await this.search.searchOnUniqueRow(this.searchField, requestID);
+        if (requestRowInfo && requestRowInfo.length > 0) {
+            status = requestRowInfo[4].tdLocator;
+            requestStatus = status.locator("span");
+            await requestStatus.waitFor({ state: "visible" });
+            var actual = await requestStatus.textContent();
+        }
+        if(actual==expectedStatus){
+            return true;
+        }
+    }
+
+    async checkSubDomainRequestDetails(requestID,subDomainsArName){
+        var actionlocator = "button";
+        let subDomainRow = [];
+
+        if (subDomainRow && subDomainRow.length > 0) {
+            await this.search.clickRowAction(subDomainRow,this.tableActions, actionlocator);
+            console.log("Request Details Page is opened successfully.");
+        }
+    }
+
 
 
 

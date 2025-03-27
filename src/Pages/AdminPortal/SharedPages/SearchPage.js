@@ -171,8 +171,8 @@ export class SearchPage {
     return tdDetails;
   }
 
-
-  /**
+ 
+  /*
    * Clicks on a specific action within a row.
    * @param {Array} row - An array containing details of the row's `<td>` elements.
    * @param {string} parentActionTestId - Data test id for element needs to be clicked or the parent element.

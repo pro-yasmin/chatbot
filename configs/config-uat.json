@@ -292,6 +292,9 @@
     "subDomainArabicName": "فئة جديدة",
     "subDomainEnglishName": "subDomain New",
     "assignedDomain":"السجل الاجتماعي  الموحد",
-    "subDomainDescription": "وصف الفئة الجديدة للتجربة"
+    "subDomainDescription": "وصف الفئة الجديدة للتجربة",
+    "subDomainFile":"test.pdf",
+    "createSubDomainSuccessMsg":"تم إرسال طلبك رقم",
+    "subDomainProcessingStatus" : "معالجة"
   }
 }

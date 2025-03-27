@@ -24,18 +24,30 @@ this.createDomainBtn='//button[@data-testid="next-button"]';
    *
 **/
 
-async createSubDomain(SubDomainData) {
+async createSubDomain(SubDomainData,NumOfDomains) {
 
     // Retrieve domain names from the provided data
-    var subDomainAr = SubDomainData.getsubDomainArabicName();
+   // var subDomainAr = SubDomainData.getsubDomainArabicName();
+   if (!SubDomainData.arabicNames) {
+    // Generate arabic names only once.
+    SubDomainData.setsubDomainArabicName(NumOfDomains);
+    SubDomainData.arabicNames = SubDomainData.getsubDomainArabicName();
+    SubDomainData.currentIndex = 0;
+  }
+   const arabicNames = SubDomainData.getsubDomainArabicName();
     var subDomainEng = SubDomainData.getsubDomainEnglishName();
     var acceptedChildType = SubDomainData.getacceptChildType();
     var assignedDomain=SubDomainData.getassignedDomain();
     var subDomainDesc=SubDomainData.getsubDomainDescription();
+     
+    if (arabicNames && arabicNames.length > SubDomainData.currentIndex) {
+      await this.page.fill(this.subDomainArName, arabicNames[SubDomainData.currentIndex]); // Fill with the name at currentIndex.
+      SubDomainData.currentIndex++; // Increment the index for the next call.
+    } else {
+      console.error("No more arabic names available.");
+    }
 
-
-    await this.page.fill(this.subDomainArName,subDomainAr );
-    await this.page.fill(this.subDomainEngName, subDomainEng);
+      await this.page.fill(this.subDomainEngName,subDomainEng);
     if(acceptedChildType==Constants.acceptChildTypeField){
         await this.page.click(this.acceptChildTypeField);
     }else{
@@ -44,10 +56,9 @@ async createSubDomain(SubDomainData) {
     this.selectAssignedDomain(assignedDomain);
     await this.page.fill(this.subDomainDesc, subDomainDesc);
     await this.page.click(this.createDomainBtn);
+        
+
       }
-
-
-
 
 
       async selectAssignedDomain(domainName) {

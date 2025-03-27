@@ -6,22 +6,31 @@ export class SubDomainData {
 
     constructor() {
       this.utils = Utils;
-      this.subDomainArabicName= null;
-      this.subDomainEnglishName= null;
+      this.subDomainArabicName=[];
+      this.subDomainEnglishName;
       this.acceptChildType= null;
       this.assignedDomain= null;
       this.subDomainDescription= null;
+      this.file= null;
     }
 
  // Getter and Setter for subDomainArabicName
  getsubDomainArabicName() {
-    if (this.subDomainArabicName == null) {
-        this.subDomainArabicName =global.testConfig.createSubDomain.subDomainArabicName +" "+ this.utils.generateRandomArabicString(5)+" "+"أوتو";
+      return  this.subDomainArabicName;
     }
-    return this.subDomainArabicName;
-    }
-setsubDomainArabicName(value) {
-      this.subDomainArabicName = value;
+    
+
+setsubDomainArabicName(numberOfNames){
+     // this.subDomainArabicName = value;
+     if (typeof numberOfNames === "number" && numberOfNames > 0) {
+       // this.subDomainArabicName = []; // Clear the array before adding new values
+        for (let i = 0; i < numberOfNames; i++){
+          const randomName = global.testConfig.createSubDomain.subDomainArabicName + " " + this.utils.generateRandomArabicString(5) + " أوتو";
+          this.subDomainArabicName.push(randomName);
+        }
+      } else {
+        console.error("Invalid input: numberOfNames must be a positive number.");
+      }
     }
 
     // Getter and Setter for subDomainEnglishName
@@ -68,6 +77,17 @@ getsubDomainDescription() {
 setsubDomainDescription(value) {
       this.subDomainDescription = value;
     }
+
+   // Getter and Setter for file
+getfile() {
+    if (this.file == null) {
+        this.file =global.testConfig.createSubDomain.subDomainFile;
+    }
+    return this.file;
+    }
+setfile(value) {
+      this.file = value;
+    } 
 
 }
   

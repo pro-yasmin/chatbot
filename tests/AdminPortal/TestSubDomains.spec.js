@@ -11,6 +11,7 @@ const{SubDomainData} = require("../../src/Models/AdminPortal/SubDomainData");
 
 let loginPage,homePage,manageSubDomainUpdateRequestsPage,subDomainCreationPage,subDomainLibraryUpdateReqPage;
 let subDomainData;
+let RequestID, details;
 let adminUsername, adminPassword;
 
 test.beforeEach(async ({ page }) => {
@@ -44,9 +45,21 @@ test.beforeEach(async ({ page }) => {
         console.log("Navigate to Sub domains library update request page");
       });
 
-      await test.step("CreateSubDomain", async () => {
-        await subDomainLibraryUpdateReqPage.submitSubDomainCreateRequest(subDomainData);
+      await test.step("Create SubDomain request", async () => {
+        RequestID= await subDomainLibraryUpdateReqPage.sendSubDomainRequest(subDomainData,2)
+        expect(RequestID).not.toBeNull(); 
+        console.log("Sub domain request submitted " + RequestID);
       });
     
+      await test.step("check request status",async ()=> {
+        var expectedRequestStatus = global.testConfig.createSubDomain.subDomainProcessingStatus;
+        expect(await subDomainLibraryUpdateReqPage.checkSubDomainReqStatus(expectedRequestStatus,RequestID)).toBe(true);
+        console.log("request Status processing");
+    });
+
+    await test.step("check request details",async ()=> {
+      await subDomainLibraryUpdateReqPage.checkSubDomainRequestDetails(RequestID,)
+  
 
     });
+  });
