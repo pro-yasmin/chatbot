@@ -11,7 +11,14 @@ export class FieldData {
     this.arabicFieldDescription = null;
     this.englishFieldDescription = null;
     this.fieldType = null;
-    this.fieldId = null;   
+    this.fieldId = null;
+    
+    //API
+    this.requestId=null;
+    this.parentKey=null;
+    this.inputSource=null;
+    this.parentDomain=null;
+
 
   }
 
@@ -81,9 +88,192 @@ setFieldType(value) {
         this.fieldId = Value;
     }
 
+     // Getter and Setter for API Request field ID Number
+     getRequestId() {
+        
+        return this.requestId;
+    }
+
+    // Setter for FieldID
+    setRequestId(Value) {
+        this.requestId = Value;
+    }
+
+    // Getter and Setter for API parent Key
+    getParentKey() {
+        if(this.parentKey==null)
+        {
+            this.parentKey=global.testConfig.createField.API_Default_ParentKey;
+        }
+        return this.parentKey;
+    }
+
+    
+    setParentKey(Value) {
+        this.parentKey = Value;
+    }
+
+
+     // Getter and Setter for API parent domain
+     getParentDomain() {
+        if(this.parentDomain==null)
+        {
+            this.parentDomain=global.testConfig.createField.API_Default_ParentDomain;
+        }
+        return this.parentDomain;
+    }
+
+    
+    setParentDomain(Value) {
+        this.parentDomain = Value;
+    }
+
+
+
+     // Getter and Setter for API input source
+     getInputSource() {
+       
+        return this.inputSource;
+    }
+
+    
+    setInputSource(Value) {
+        this.inputSource = Value;
+    }
+
+
+
+    toJSON() {
+        return {
+            "dataSource": this.getFieldType(),
+            "isrRequestId":this.getRequestId(),
+            "parentKey": this.getParentKey(),
+            "parentType": this.getParentDomain(),
+            "metaData": {
+                "classification": {
+                    "id": global.testConfig.createField.API_Classification,
+                    "code": global.testConfig.createField.API_Classification,
+                    "nameEn": global.testConfig.createField.API_Classification,
+                    "nameAr": global.testConfig.createField.API_Classification_Ar
+                },
+                "required": true,
+                "multipleField": true,
+                "tags": null,
+                "periodicDataUpdate": {
+                    "id": global.testConfig.createField.API_PeriodicDataUpdate_id,
+                    "code": null,
+                    "nameEn": global.testConfig.createField.API_PeriodicDataUpdate_nameEn,
+                    "nameAr": global.testConfig.createField.API_PeriodicDataUpdate_nameAr
+                },
+                "privacy": global.testConfig.createField.API_Privacy,
+                "impactDegree": global.testConfig.createField.API_ImpactDegree,
+                "severity": {
+                    "id":global.testConfig.createField.API_Severity_id,
+                    "code": null,
+                    "nameEn": global.testConfig.createField.API_Severity_nameEn,
+                    "nameAr":global.testConfig.createField.API_Severity_nameAr
+                },
+                "encrypted": true,
+                "index": null,
+                "activationDate": null,
+                "expirationDate": null,
+                "alarmForUnAllowedValues1": [
+                    {
+                        "textField": "",
+                        "alarmForUnallowedValues": "",
+                        "dataQualityRules": ""
+                    }
+                ],
+                "alarmForUnAllowedValues": [],
+                "note": null,
+                "id": "",
+                "arabicFieldName": this.getArabicFieldName(),
+                "englishFieldName": this.getEnglishFieldName(),
+                "fieldType": "Text",
+                "assignedDomain": global.testConfig.createField.API_Assigned_Domain,
+                "inputSource": this.getInputSource(),
+                "fieldNature": {
+                    "id": global.testConfig.createField.API_FieldNature_id,
+                    "code": null,
+                    "nameEn":global.testConfig.createField.API_FieldNature_nameEn,
+                    "nameAr": global.testConfig.createField.API_FieldNature_nameAr
+                },
+                "arabicFieldDescription": null,
+                "englishFieldDescription": null,
+                "dataQualityRules": null
+            }
+      }
+
+
+
 
 
     }
+
+   /* toComplexJson()
+    { 
+        return {
+            "dataSource": this.getFieldType(),
+            "isrRequestId":this.getRequestId(),
+            "parentKey": this.getParentKey(),
+            "parentType": "DOMAIN",
+            "metaData": {
+         "classification": {
+            "id": "public",
+            "code": "public",
+            "nameEn": "public",
+            "nameAr": "عام"
+        },
+        "required": true,
+        "multipleField": true,
+        "tags": null,
+        "periodicDataUpdate": {
+            "id": "675edfc28d5d8a38173540aa",
+            "code": null,
+            "nameEn": "monthly",
+            "nameAr": "شهري"
+        },
+        "privacy": "Public",
+        "impactDegree": "High",
+        "severity": {
+            "id": "675edd7f270cc3ce790d2709",
+            "code": null,
+            "nameEn": "low",
+            "nameAr": "منخفض"
+        },
+        "encrypted": false,
+        "index": null,
+        "dataQualityRules": null,
+        "activationDate1": "",
+        "expirationDate1": "",
+        "alarmForUnAllowedValues2": [
+            {
+                "textField": "",
+                "alarmForUnallowedValues": ""
+            }
+        ],
+        "id": "",
+        "arabicFieldName": "حقل مركب مممم",
+        "englishFieldName": "complex field mmmmm",
+        "fieldType": "Text",
+        "assignedDomain": "البيانات الشخصية",
+        "inputSource": "مركب",
+        "fieldNature": {
+            "id": "675edd657215dc2057c65774",
+            "code": null,
+            "nameEn": "Health",
+            "nameAr": "صحي"
+        },
+        "arabicFieldDescription": null,
+        "englishFieldDescription": null,
+        "alarmForUnAllowedValues": [],
+        "note": null,
+        "expirationDate": null,
+        "activationDate": null
+    }
+      }
+    }*/
+}
 
 
 module.exports = { FieldData };
