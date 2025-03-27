@@ -23,6 +23,7 @@ export class SocialRecordCopiesPage {
         this.sendUpdatesForApprovalButton = '(//button[contains(@class, "MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary")])[2]';
         this.addedFieldArName = '//div[contains(@class, "uiGrid-root MuiGrid-container MuiGrid-spacing")]//span[contains(@class, "MuiTypography-root MuiTypography-p-md-bold")]';
         this.addedFieldTag = '//div[contains(@class, "uiGrid-root MuiGrid-container MuiGrid-spacing")]//span[contains(@class, "MuiTypography-root MuiTypography-p-sm muirtl")]';
+        this.existFieldsTable = '//tbody[@data-testid="table-body"]';
 
         //popup
         this.popUpOkButton = '//button[@data-testid="modal-primary-button"]';
@@ -36,7 +37,7 @@ export class SocialRecordCopiesPage {
    */
     async fillNewSchemaData(socialRecordCopiesData) {
         console.log("Start filling New Schema Data");
-        
+
         await this.page.waitForSelector(this.ArVersionNameField, { state: "visible", timeout: 20000 });
         this.createdArVersionName = socialRecordCopiesData.getVersionArabicName();
         this.createdEnVersionName = socialRecordCopiesData.getVersionEnglishName();
@@ -48,12 +49,12 @@ export class SocialRecordCopiesPage {
         await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
         await this.page.waitForTimeout(1000);
         await this.page.fill(this.activationDateForApplicant, this.createdactivationDateForApplicant);
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(5000);
         await this.page.fill(this.activationDateForPrograms, this.createdactivationDateForPrograms);
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(5000);
         await this.page.fill(this.activationDate, this.createdActivationDate);
         await this.page.waitForTimeout(2000);
-        
+
 
         socialRecordCopiesData.setVersionArabicName(this.createdArVersionName);
         socialRecordCopiesData.setVersionEnglishName(this.createdEnVersionName);
@@ -75,8 +76,8 @@ export class SocialRecordCopiesPage {
 
         if (actualFieldArName === expectedFieldArName &&
             actualFieldTag === expectedFieldTag) {
-                console.log("New Field data matched expectations Successfully");
-                return true;
+            console.log("New Field data matched expectations Successfully");
+            return true;
         }
         return false;
     }
@@ -86,7 +87,7 @@ export class SocialRecordCopiesPage {
     }
     async addJustification() {
         await this.navigateToAttachmentsAndJustificationsRecordTab();
-        
+
         await this.page.click(this.justificationDdl);
         await this.page.waitForSelector(this.justificationFirstOption, { state: "visible", timeout: 60000 });
         await this.page.click(this.justificationFirstOption);
@@ -94,6 +95,27 @@ export class SocialRecordCopiesPage {
         await this.page.click(this.sendUpdatesForApprovalButton);
         var popUpResult = await this.popUpMsg.popUpMessage(this.popUpOkButton, global.testConfig.SocialRecordCopies.schemaUpdateSuccessMsg);
         return popUpResult;
+    }
+
+    /**
+ * Extracts text from the <span> inside the second <td> of each row in a table.
+ *
+ * @param {string} tableLocator - The locator for the table body.
+ * @returns {Promise<string[]>} - An array of extracted text values.
+ */
+    async getExistingFieldsData(socialRecordCopiesData) {
+        const rows = await this.page.locator(`${this.existFieldsTable}//tr`);
+        const rowCount = await rows.count();
+        let textValues = [];
+
+        for (let i = 0; i < rowCount; i++) {
+            const text = await rows.nth(i).locator('td:nth-child(2) span').innerText();
+            console.log("Existing Fields Arabic Names:");
+            console.log(`Row ${i + 1}: ${text}`);
+            textValues.push(text);
+        }
+        socialRecordCopiesData.setExistingFieldsArName(textValues);
+        return true;
     }
 
 

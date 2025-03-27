@@ -50,6 +50,7 @@ export class TasksPage {
     await  this.page.waitForTimeout(12000);
     await this.page.waitForSelector(this.myCompletedTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myCompletedTasksTab);
+    await  this.page.waitForTimeout(5000);
     console.log("Navigate to My completed tasks tab");
   }
 
@@ -58,9 +59,10 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToGroupTasksTab() {
-    await  this.page.waitForTimeout(12000);
+    await  this.page.waitForTimeout(10000);
     await this.page.waitForSelector(this.groupTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.groupTasksTab);
+    await  this.page.waitForTimeout(5000);
     console.log("Navigate to group tasks tab");
   }
 
@@ -71,7 +73,7 @@ export class TasksPage {
    */
   async assignTaskToMe(taskNumber) {
     await this.navigateToGroupTasksTab();
-    //await this.page.waitForTimeout(5000);
+    await this.page.waitForTimeout(5000);
     let taskRow = [];
     taskRow = await this.search.getRowInTableWithSpecificText(taskNumber);
     var actionlocator = "button:nth-of-type(1)";
@@ -262,6 +264,7 @@ async manageRequestField(requestNumber ,fieldsMap) {
   await this.navigateToMyTasksTab();
   
   let taskRow = await this.search.getRowInTableWithSpecificText(requestNumber);
+  await this.checkFieldRequestType(taskRow);
   var actionLocator =  "button";
   await this.search.clickRowAction(taskRow,this.tableActions, actionLocator);
   console.log(`Navigate To Task Details Page Successfully`);
@@ -287,6 +290,23 @@ async manageRequestField(requestNumber ,fieldsMap) {
     return false;
   }
 
+
+
+  async checkFieldRequestType(taskRow)
+  {
+    //await this.page.waitForTimeout(7000);
+    let expectedMsg = global.testConfig.tasks.expectFieldTaskType;
+    let actionLocator = taskRow[3].tdLocator; 
+    let actualType = await actionLocator.textContent();
+
+    if (actualType.trim() === expectedMsg.trim()) {
+      console.log(`Task Request Type is ${actualType}`);
+      return true;
+   }
+   return false
+  
+  }
+  
 
 }
 module.exports = { TasksPage };

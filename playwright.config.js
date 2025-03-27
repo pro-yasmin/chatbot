@@ -45,41 +45,41 @@ module.exports = defineConfig({
     navigationTimeout: 600000, // Timeout for page navigation (60 seconds)
   },
   /* Configure projects for major browsers */
-  /*projects: [
-    {
-      name: "Admin",
-      testDir: "./tests/AdminPortal", // Test directory
-    },
+  projects: [
+   {
+     name: "Admin",
+     testDir: "./tests/AdminPortal", // Test directory
+     },
 
-    {
+   {
       name: "Login",
-      testDir: "./tests/Login", // Test directory
-    },
-    {
-      name: "All",
-      testDir: "./tests", // Test directory
-    },
+     testDir: "./tests/Login", // Test directory
+  },
+   {
+    name: "All",
+     testDir: "./tests", // Test directory
+   },
     {
       name: "Programs",
-      testDir: "./tests/AdminPortal/ProgramManagementTests", // Test directory
-    },
-    {
-      name: "Lookups",
-      testDir: "./tests/AdminPortal/LookupsTests", // Test directory
-    },
+     testDir: "./tests/AdminPortal/ProgramManagementTests", // Test directory
+     },
+   {
+    name: "Lookups",
+       testDir: "./tests/AdminPortal/LookupsTests", // Test directory
+     },
     {
       name: "StateMachine",
-      testDir: "./tests/AdminPortal/StateMachineTests", // Test directory
-    },
+     testDir: "./tests/AdminPortal/StateMachineTests", // Test directory
+   },
 
     {
       name: "SocialRegistryServices",
       testDir: "./tests/AdminPortal/SocialRegistryServices", // Test directory
-    },
+  },
 
-    {
+     {
       name: "Operation",
-      testDir: "./tests/OperationPortal", // Test directory
+       testDir: "./tests/OperationPortal", // Test directory
     },
 
     //     /*{
@@ -117,6 +117,6 @@ module.exports = defineConfig({
     //     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     //     // },
     //  //
-//  ],
+   ],
 });
 module.exports.ENV = ENV;

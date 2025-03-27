@@ -122,7 +122,9 @@
     "arabicName": "الأعمال والأملاك",
     "englishName": "Business and property",
     "code": "2323",
-    "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟"
+    "warningText": "هل تريد حفظ التعديلات قبل المغادرة؟",
+    "validLookupItemsCSV": "valid_LookupItems.csv",
+    "invalidLookupItemsCSV": "invalid_LookupItems.csv"
   },
   "createBenefits": {
     "backUpSubProgramNumber": "PRG_SPRG_259",
@@ -282,6 +284,25 @@
     "confirmRejectMsg": "تم رفض حقل",
     "requestStatusComplete": "مكتمل",
     "desitionStatusAccepted": "مقبول",
-    "desitionStatusRejected": "مرفوض"
+    "desitionStatusRejected": "مرفوض",
+    "availableField1" : "الاسم الأول",
+    "availableField2" : "الاسم الثانى",
+    "descriptionCalculatedField" : "وصف العملية الحسابية",
+    "API_Default_ParentKey":"personalInformation",
+    "API_Default_ParentDomain":"DOMAIN",
+    "API_Classification":"public",
+    "API_Classification_Ar":"عام",
+    "API_PeriodicDataUpdate_id":"67102c322999d72c9cdaee3c",
+    "API_PeriodicDataUpdate_nameEn":"monthly",
+    "API_PeriodicDataUpdate_nameAr":"شهري",
+    "API_Privacy":"Public",
+    "API_ImpactDegree":"High",
+    "API_Severity_id":"67102aecd4803a11ae9b0e35",
+    "API_Severity_nameEn":"low",
+    "API_Severity_nameAr":"منخفض",
+    "API_Assigned_Domain":"البيانات الشخصيه",
+    "API_FieldNature_id":"67102ab03925f78df65687c3",
+    "API_FieldNature_nameEn":"Health",
+    "API_FieldNature_nameAr":"صحي"
   }
 }

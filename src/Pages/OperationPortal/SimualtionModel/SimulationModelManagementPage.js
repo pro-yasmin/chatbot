@@ -42,6 +42,7 @@ export class SimulationModelManagementPage {
     }
 
     async clickDefineSimulationModel() {
+        await this.page.waitForTimeout(2000);
         await this.page.click(this.defineSimulationModelButton);
     }
     async defineSimulationModel(simulationModelData) {
@@ -399,6 +400,10 @@ export class SimulationModelManagementPage {
 
     async verifySimulationModelExecutionExistInApprovedLogs(request){
         return await this.approvedExecutionLogsPage.verifyExecutionRequestInApprovedLogs(request);
+    }
+
+    async getSimulationModelExecutionNumber(request, simulationModelData){
+        return await this.viewExecutionLogsRequestsPage.getExecutionNumber(request, simulationModelData);
     }
 
 }

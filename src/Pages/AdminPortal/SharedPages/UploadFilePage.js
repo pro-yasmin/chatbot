@@ -1,3 +1,5 @@
+import Constants from "../../../Utils/Constants";
+
 /**
  * Manages search-related actions for tables, including searching for rows by value or text,
  * retrieving row details, and performing actions on specific rows.
@@ -10,12 +12,15 @@ export class UploadFilePage {
     this.uploaderLocator = '//input[@type="file"]';
   }
 
-  async uploadFile(fileName, uploadButton) {
-    await this.page.setInputFiles(this.uploaderLocator, global.testConfig.UPLOAD_PATH+fileName);
+  async uploadFile(fileName, uploadButton, verifyFileUploaded) {
+    await this.page.setInputFiles(this.uploaderLocator, global.testConfig.UPLOAD_PATH + fileName);
     await this.page.waitForSelector(uploadButton, { visible: true });
     await this.page.click(uploadButton);
-    var expectedFileName = "//*[contains(text(), '" + fileName + "')]";
-    await this.page.waitForSelector(expectedFileName, { visible: true });
+    if (verifyFileUploaded === Constants.VERIFY_FILE_UPLOADED) {
+      var expectedFileName = "//*[contains(text(), '" + fileName + "')]";
+      await this.page.waitForSelector(expectedFileName, { visible: true });
+    }
+
   }
 }
 module.exports = { UploadFilePage };
