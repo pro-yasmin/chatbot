@@ -48,17 +48,12 @@ test('Upload Lookup Items', async ({ page }) => {
         expect(await lookupsManagmentPage.uploadInvalidLookUpItems(lookupData)).toBe(true);
         console.log('Invalid Lookup Items not uploaded');
     });
-    // Step5: Navigate to Lookup list page
-    await test.step('Navigate to Lookup page', async () => {
-        await homePage.navigateToLookupsManagment();
-        console.log('Navigate to LookUps Managment page');
-    });
-    // Step6: Upload Valid Lookup items 
+    // Step5: Upload Valid Lookup items 
     await test.step('Upload Valid Lookup Items', async () => {
         expect(await lookupsManagmentPage.uploadValidLookUpItems(lookupData)).toBe(true);
         console.log('Valid Lookup Items Uploaded Successfully');
     });
-    //Step7: Logout From Admin portal
+    //Step6: Logout From Admin portal
     await test.step('Logout from Admin Portal', async () => {
         await homePage.logout();
         console.log('Logout done Successfully');

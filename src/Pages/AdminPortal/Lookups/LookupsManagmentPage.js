@@ -154,11 +154,14 @@ export class LookupsManagmentPage {
     async uploadInvalidLookUpItems(lookupData) {
         await this.clickEditLookupButton(lookupData);
         await this.page.waitForTimeout(2000);
-        return await this.uploadLookupItemsPage.uploadInvalidLookUpItems();
+        let result= await this.uploadLookupItemsPage.uploadInvalidLookUpItems();
+        await this.page.click(this.addLookupItemTab);
+        await this.page.click(this.lookupItemsUploadTab);
+        return result;
     }
 
     async uploadValidLookUpItems(lookupData) {
-        await this.clickEditLookupButton(lookupData);
+        //await this.clickEditLookupButton(lookupData);
         await this.page.waitForTimeout(2000);
         return await this.uploadLookupItemsPage.uploadValidLookUpItems();
     }
