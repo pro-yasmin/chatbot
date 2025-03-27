@@ -1,12 +1,16 @@
-const { test, expect } = require('@playwright/test');
-const { StreamData } = require('./src/Models/AdminPortal/StreamData');
-const { MainProgramData } = require('./src/Models/AdminPortal/MainProgramData');
-const { SubProgramsData } = require('./src/Models/AdminPortal/SubProgramsData');
-const { Programs } = require("./src/Apis/Business/Programs");
-const { BenefitsData } = require('./src/Models/AdminPortal/BenefitsData');
-const { Simulation } = require("./src/Apis/Business/Simulation");
-const { SimulationData, SimulationModelData } = require("./src/Models/OperationPortal/SimulationModelData");
+import Constants from '../src/Utils/Constants.js';
 
+const { test, expect } = require('@playwright/test');
+const { StreamData } = require('../src/Models/AdminPortal/StreamData.js');
+const { MainProgramData } = require('../src/Models/AdminPortal/MainProgramData.js');
+const { SubProgramsData } = require('../src/Models/AdminPortal/SubProgramsData.js');
+const { Programs } = require("../src/Apis/Business/Programs.js");
+const { BenefitsData } = require('../src/Models/AdminPortal/BenefitsData.js');
+const { Simulation } = require("../src/Apis/Business/Simulation.js");
+const { SimulationModelData } = require("../src/Models/OperationPortal/SimulationModelData.js");
+const { FieldRequests } = require("../src/Apis/Business/FieldRequests.js");
+const { FieldRequestData } = require("../src/Models/AdminPortal/FieldRequestData.js");
+const { FieldData } = require("../src/Models/AdminPortal/FieldData.js");
 
 let stream,streamData;
 let mainProgram, mainProgramData;
@@ -15,6 +19,7 @@ let programs ;
 let createBenefit ,createApproveBenefit , benefitsData;
 let adminusername ,adminpassword;
 let simulation,simulationData;
+let complexFieldData,groupFieldData,inputFieldData,fieldRequestData,fieldRequests;
 
 
 test.beforeEach(async () => {
@@ -28,7 +33,7 @@ test.beforeEach(async () => {
   benefitsData = new BenefitsData();
   programs = new Programs();
   simulation = new Simulation();
- 
+  fieldRequests=new FieldRequests();
 
 
 
@@ -89,6 +94,31 @@ test.beforeEach(async () => {
     simulationData= new SimulationModelData();
     await simulation.createsimulationModelAndApproveAPI(adminusername, adminpassword,simulationData) ;
     console.log('Simulation Model ID = ' + simulationData.getCreatedSimulationModelId());
+   });
+
+   test.only('API Test -Create & Approve field Request', async ({context}) => {
+    var fields =[];
+    //create & approve input field
+    inputFieldData= new FieldData();
+    inputFieldData.setFieldType(Constants.INPUT_FIELD);
+    inputFieldData.setInputSource(Constants.API_Input_Source_Input);
+    fields.push(inputFieldData);
+    fieldRequestData=new FieldRequestData();
+    fieldRequestData.setFields(fields);
+    await fieldRequests.createFieldRequestAPI(adminusername, adminpassword,fieldRequestData)
+ 
+     //create & approve complex  field with input child field 
+     /*complexFieldData=new FieldData();
+     complexFieldData.setFieldType(Constants.COMPLEX_FIELD);
+     inputFieldData= new FieldData();
+     inputFieldData.setFieldType(Constants.INPUT_FIELD);
+     inputFieldData.setParentKey(complexFieldData.getEnglishFieldName());
+     fields.push(complexFieldData);
+     fields.push(inputFieldData);
+     fieldRequestData=new FieldRequestData();
+     fieldRequestData.setFields(fields);
+     await fieldRequests.createFieldRequestAPI(adminusername, adminpassword,fieldRequestData)
+*/
    });
 
    
