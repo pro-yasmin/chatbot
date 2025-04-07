@@ -18,13 +18,13 @@ export class SimualtionModelPage {
         
 
         //tab1
-        this.simulationModelArNameField = '//input[@name="modelData.nameAr"]';
-        this.simulationModelEnNameField = '//input[@name="modelData.nameEn"]';
-        this.beneficiaryPartyDdl = '//div[@id="mui-component-select-modelData.beneficiaryParty"]';
-        this.beneficiaryPartyDdlFirstValue = '//li[@data-value="a2"]';
-        this.beneficiaryPartyDdlSecondValue = '//li[@data-value="a1"]';
+        this.simulationModelArNameField = '//input[@data-testid="text-input-modelData.nameAr"]';
+        this.simulationModelEnNameField = '//input[@data-testid="text-input-modelData.nameEn"]';
+        this.beneficiaryPartyDdl = '//div[@data-testid="select-box-modelData.beneficiaryParty"]';
+        this.beneficiaryPartyDdlFirstValue = '//li[@data-testid="option-0"]';
+        this.beneficiaryPartyDdlSecondValue = '//li[@data-testid="option-1"]';
         this.simulationModelDescriptionField = '//textarea[@name="modelData.description"]';
-        this.uploadedFileName = '//td[1]//span';
+        this.uploadedFileName = '//td[@data-testid="table-row-element-0-0"]';
         this.nextTabButton = '//button[@data-testid="next-button"]';
 
 
@@ -35,17 +35,17 @@ export class SimualtionModelPage {
         this.isrCheckbox = '(//input[@type="checkbox"])[4]';
 
         //tab4
-        this.variableArNameField = '//input[@name="nameAr"]';
-        this.variableEnNameField = '//input[@name="nameEn"]';
+        this.variableArNameField = '//input[@data-testid="text-input-nameAr"]';
+        this.variableEnNameField = '//input[@data-testid="text-input-nameEn"]';
         this.variableDescriptionField = '//textarea[@name="description"]';
-        this.variableTypeDdl = '//div[@id="mui-component-select-type"]';
-        this.variableTypeDdlTextValue = '//li[@data-value="string"]';
-        this.variableTypeDdlNumericValue = '//li[@data-value="integer"]';
-        this.variableTypeDdlDateValue = '//li[@data-value="date"]';
-        this.defaultValueField = '//input[@name="defaultValue"]';
+        this.variableTypeDdl = '//div[@data-testid="select-box-type"]';
+        this.variableTypeDdlTextValue = '//li[@data-testid="option-0"]';
+        this.variableTypeDdlNumericValue = '//li[@data-testid="option-1"]';
+        this.variableTypeDdlDateValue = '//li[@data-testid="option-2"]';
+        this.defaultValueField = '//input[@data-testid="text-input-defaultValue"]';
         this.calendarDatePicker = '//div[contains(@class, "MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase")]//button[contains(@class, "MuiButtonBase-root MuiIconButton-root MuiIconButton")]';
         this.todayDate = '//button[contains(@class, "MuiButtonBase-root MuiPickersDay-root") and @tabindex="0"]';
-        this.addVariableButton = '//div[@data-testid="customized-step-content"]//button[contains(@class, "MuiButtonBase-root MuiButton-root MuiButton-contained")]';
+        this.addVariableButton = '//button[@data-testid="add-variable-button"]';
     }
 
     /**

@@ -11,22 +11,22 @@ export class SimualtionModelDetailsPage {
 
         //tab1
         this.headlinePage = '(//span[contains(text(),"بيانات نموذج المحاكاة")])[2]';
-        this.simulationModelArNameField = '(//span[contains(@class, "MuiTypography-root MuiTypography-p-md-bold")])[5]';
-        this.simulationModelEnNameField = '(//span[contains(@class, "MuiTypography-root MuiTypography-p-md-bold")])[6]';
-        this.tabOneAttachment = '(//span[contains(@class, "MuiTypography-root MuiTypography-p-md-bold")])[9]';
+        this.simulationModelArNameField = '//span[@data-testid="value_arabic-name"]';
+        this.simulationModelEnNameField = '//span[@data-testid="value_english-name"]';
+        this.tabOneAttachment = '(//button[@data-testid="download-btn"])[1]';
 
         //tab2
-        this.tabTwoAttachment = '(//span[contains(@class, "MuiTypography-root MuiTypography-p-md-bold")])[5]';
+        this.tabTwoAttachment = '(//button[@data-testid="download-btn"])[1]';
 
         //tab3
-        this.tabThreeAttachment = '(//span[contains(@class, "MuiTypography-root MuiTypography-p-md-bold")])[5]';
+        this.tabThreeAttachment = '(//button[@data-testid="download-btn"])[1]';
 
         //tab4
-        this.variablesGrid = '(//div[contains(@class, "MuiBox-root")])[15]';
+        this.variablesGrid = '//table[@data-testid="table"]';
 
         //tab5
-        this.statusField = '(//span[contains(@class, "MuiTypography-root MuiTypography-p-md-bold")])[9]';
-        this.activateStatusField = '(//span[contains(@class, "MuiTypography-root MuiTypography-p-md-bold")])[10]';
+        this.statusField = '//span[@data-testid="value_status"]';
+        this.activateStatusField = '//span[@data-testid="value_activation-status"]';
 
     }
 

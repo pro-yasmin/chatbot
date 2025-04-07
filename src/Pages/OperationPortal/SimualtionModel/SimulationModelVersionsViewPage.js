@@ -9,10 +9,11 @@ export class SimulationModelVersionsViewPage {
         this.popUpMsg = new PopUpPage(this.page);
 
         //popup
-        this.popUpYesButton = "//button[contains(text(),'نعم, إرسال')]"
-        this.popUpGotoExecutions = "//button[contains(text(),'العودة إلى سجلات التنفيذ')]";
+        //this.popUpYesButton = '//button[@data-testid="modal-primary-button"]';
+        this.popUpYesButton = '//button[contains(text(),"نعم, إرسال")]';
+        this.popUpGotoExecutions = '//button[contains(text(),"العودة إلى سجلات التنفيذ")]';
         this.searchInput = '//form[@data-testid="search-input"]//input';
-        this.sendForApprovalButton = '(//td[5]//button[contains(@class, "MuiButtonBase-root MuiIconButton-root")])[2]';
+        this.sendForApprovalButton = '//button[@data-testid="table-action-[object Object]"]';
     }
 
     /**

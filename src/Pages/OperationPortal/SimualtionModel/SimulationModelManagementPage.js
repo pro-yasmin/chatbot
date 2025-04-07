@@ -25,20 +25,26 @@ export class SimulationModelManagementPage {
         //Execution Popups buttons
         this.popUpExecuteRexecuteButton = "//button[contains(text(),'تنفيذ النموذج')]";
         this.popUpGotoExecutions = "//button[contains(text(),'استعراض سجلات التنفيذ')]";
-        this.defineSimulationModelButton = '//button[contains(@class, "MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-colorPrimary")]';
+        this.defineSimulationModelButton = '//button[@data-testid="define-simulation-model"]';
         this.searchInput = '//form[@data-testid="search-input"]//input';
         this.threeDotsMenu = '//div[@data-testid="three-dots-menu"]';
         this.activate_deactivate_Button = '//li[@data-testid="three-dots-menu-option-0"]';
         this.fieldEnablementStatus = '//div[@data-testid="tag"]';
         this.tableActions = '(//div[contains(@class, "MuiStack-root")])[38]';
 
-        //to be removed after adding data-testid
-        this.viewButton = '(//div[contains(@class, "MuiStack-root")])[34]//span//button[@tabindex="0"]';
-        this.editButton = '((//div[contains(@class, "MuiStack-root")])[34]//span//button[@tabindex="0"])[2]';
-        this.ThreeDotsActionsButton = '((//div[contains(@class, "MuiStack-root")])[33]//button)[3]';
-        this.ModelVersionsButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[4]';
-        this.editVariablesButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[2]';
-        this.executeSimulationModelButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[1]';
+        
+        //this.viewButton = '(//div[contains(@class, "MuiStack-root")])[34]//span//button[@tabindex="0"]';
+        this.viewButton = '(//button[@data-testid="table-action-Eye"])[1]';
+        //this.editButton = '((//div[contains(@class, "MuiStack-root")])[34]//span//button[@tabindex="0"])[2]';
+        this.editButton = '(//button[@data-testid="table-action-Edit2"])[1]';
+        //this.ThreeDotsActionsButton = '((//div[contains(@class, "MuiStack-root")])[33]//button)[3]';
+        this.ThreeDotsActionsButton = '(//button[@data-testid="three-dots-menu"])[1]';
+        //this.ModelVersionsButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[4]';
+        this.ModelVersionsButton = '//span[@data-testid="three-dots-menu-item-3"]';
+        //this.editVariablesButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[2]';
+        this.editVariablesButton = '//span[@data-testid="three-dots-menu-item-1"]';
+        //this.executeSimulationModelButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[1]';
+        this.executeSimulationModelButton = '//span[@data-testid="three-dots-menu-item-2"]';
     }
 
     async clickDefineSimulationModel() {

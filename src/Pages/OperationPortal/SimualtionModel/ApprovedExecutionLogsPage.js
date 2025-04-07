@@ -5,7 +5,7 @@ export class ApprovedExecutionLogsPage {
         this.page = page;
         this.search = new SearchPage(this.page);
 
-        this.viewButton = '(//td//button[contains(@class, "MuiButtonBase-root MuiIconButton-root MuiIconButton")])[1]';
+        this.viewButton = '(//button[@data-testid="table-action-Eye"])[1]';
     }
 
     async verifyExecutionRequestInApprovedLogs(request) {
