@@ -275,7 +275,8 @@
     "SendForApprovalConfirmationMsg": "هل انت متأكد من إرسال سجل التنفيذ رقم 1 المرتبط بإصدار النموذج رقم 1 للاعتماد؟",
     "SendForApprovalSuccessMsg": "تم إرسال سجل التنفيذ للاعتماد بنجاح",
     "sentForApprovalTask": "ELG_EXEC",
-    "approveExecutionSimulationBtnSuccessMsgText": "تم قبول اعتماد سجل تنفيذ"
+    "approveExecutionSimulationBtnSuccessMsgText": "تم قبول اعتماد سجل تنفيذ",
+    "saveAsDraftSuccessMsg": "تم حفظ تعريف بيانات نموذج المحاكاة كمسودة بنجاح"
   },
   "createField": {
     "fieldArabicName": "حقل جديد",

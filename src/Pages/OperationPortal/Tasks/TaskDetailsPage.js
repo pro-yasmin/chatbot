@@ -13,7 +13,7 @@ export class TaskDetailsPage {
     this.myDataTab = '//button[@id="tab-0"]';
     this.myNotesTab = '//button[@id="tab-1"]';
 
-    this.requestStatus = '(//div[contains(@class, "MuiGrid-root MuiGrid-item MuiGrid-grid")]//span)[4]';
+    this.requestStatus = '//span[@data-testid="value_request-requestStatus"]';
 
     // Selectors for task details and actions  
     this.streamEnablementStatus = '//span[@data-testid="value_streams-management-stream-enablement-status"]';

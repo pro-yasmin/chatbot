@@ -26,19 +26,19 @@ export class TasksPage {
     this.myTasksTab = '//button[@id="tab-0"]';
     this.myCompletedTasksTab = '//button[@id="tab-1"]';
     this.groupTasksTab = '//button[@id="tab-2"]';
-    this.searchInput = '//input[@placeholder="ادخل رقم الطلب"]';
-    this.tasksTable = "//table//tbody";
+    this.searchInput = '//form[@data-testid="search-input"]//input';
+    this.tasksTable = '//tbody[@data-testid="table-body"]';
     this.tableActions = 'table-actions';
-    this.tableThreeDots = '(//button[contains(@class, "MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium")])[2]';
-    this.assignToMyselfBtn = '//span[contains(text(),"إسناد المهمة لنفسي")]';
+    this.tableThreeDots = '(//button[@data-testid="three-dots-menu"])[1]';
+    this.assignToMyselfBtn = '//li[@role="menuitem"]';
     this.assignPopUpMsgTitle = '//span[@id="modal-modal-title"]';
     this.acceptAssignBtn = '//button[contains(text(),"نعم، إسناد")]';
     this.cancelAssignBtn = '//button[contains(text(),"إلغاء")]';
     this.backToTasksBtn = '//button[contains(text(),"العودة إلى المهام")]';
-    this.actionsBtn = '(//button[contains(@class, "MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium")])[1]';
-    this.completeSimulationModelBtn = '(//span[contains(@class, "MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium")])[1]/..';
+    this.actionsBtn = '(//button[@data-testid="table-action-Eye"])[1]';
+    this.completeSimulationModelBtn = '//button[@data-testid="confirm-action"]';
     this.completeSimulationTextBox = '//textarea[@name="description"]';
-    this.confirmCompleteSimulationBtn = '(//span[contains(@class, "MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium")])/ ../ ../button[@type="submit"]';
+    this.confirmCompleteSimulationBtn = '//button[@data-testid="submit-button"]';
     this.confirmCompleteSimulationBtnSuccessMsg = '//div[@role="presentation"]//span';
     this.filterButton = '//button[@data-testid="toolbar-filter-button"]';
 
