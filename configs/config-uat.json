@@ -61,7 +61,7 @@
     "riskEnglishDescription": "To promote the well-being and safety of vulnerable groups through support, awareness, and inclusion Programs",
     "arabicMainProgramGoal": "1. ضمان المساواة لذوي الدخل المحدود والفئات الهشة في حقوق الحصول على الموارد الاقتصادية والخدمات األساسية في الدولة 2. تمكين جودة الحياة للفئات ذوي الخاصة من النواحي الجسدية والعقلية (مثل الأشخاص ذوي الاعاقة ومقدمي الرعاية) 3. رفع مستوى منذ مراحل الطفولة المبكرة للوقاية من سوء المعاملة  5. تقديم الدعم النفس ي للفئات الهشة المحتاجة لضمان صحتها النفسية",
     "englishMainProgramGoal": "1. To ensure equal rights to economic resources and basic services to poor and economically vulnerable To provide psychological support to vulnerable",
-    "mainProgramSuccessMsg": "تم حفظ البرنامج الرئيسى بنجاح"
+    "mainProgramSuccessMsg": "تم حفظ البرنامج الرئيسى للمراجعة بنجاح"
   },
   "createSubPrograms": {
     "backUpProgramNumber": "PRG_MPRG_160",
@@ -179,7 +179,7 @@
     "requireRegisterApplication": true,
     "applicationChannelCodes": ["14"],
     "viewbenefitResponsibleEntity": "جهة مسؤولة عن التنفيذ جديده",
-    "viewTargetApproach": "شامل",
+    "viewTargetApproach": "COMPREHENSIVE",
     "viewEnablementStatus": "محجوب",
     "viewApprovalStatus": "معالجة",
     "viewActivationStatus": "خامل"
@@ -220,7 +220,7 @@
     "socialRecordActiveCopy": "ISR_ISRVR_00000021",
     "socialRecordActiveStatus": "مفعلة",
     "socialRecordDraftStatus": "مسودة",
-    "socialRecordUnderReviewStatus": "تحت المراجعة",
+    "socialRecordUnderReviewStatus": "تحت الاعتماد",
     "existingDraftCopyIsAlreadyExistMsg": "لديك بالفعل مسودة من النسخة المفعلة.",
     "ArVersionName": "النسخة العربية",
     "EnVersionName": "English Version",

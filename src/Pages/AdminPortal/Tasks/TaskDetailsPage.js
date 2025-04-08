@@ -45,8 +45,8 @@ export class TaskDetailsPage {
     this.fieldRequestStatusIcon = '//span[@data-testid="status-processing"]';
     this.fieldRequestStatus = "//label[text()='حالة الطلب']//following::span[1]";
     this.tableActions='tag';
-    this.acceptFieldTaskBtn ="//div[contains(@class,'MuiDialogActions-root')]//button[2]";
-    this.rejectFieldTaskBtn="//div[contains(@class,'MuiDialogActions-root')]//button[1]";
+    this.acceptFieldTaskBtn ="//div[contains(@class,'MuiDialogActions-root')]//button[1]";
+    this.rejectFieldTaskBtn="//div[contains(@class,'MuiDialogActions-root')]//button[2]";
     this.ensureFieldTaskNotesField ='//textarea[@data-testid="description-text-field"]'
     this.ensureFieldTaskNotesFieldApprove="//button[@type='submit']",
     this.ensureFieldTaskNotesFieldReject="//button[@type='submit']",
