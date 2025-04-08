@@ -27,8 +27,8 @@ export class StateMachinePage {
     this.addStateButton = '//span[text()="إضافة حالة"]';
     this.stateArabicName = '[placeholder="اسم الحالة باللغة العربية"]';
     this.stateEnglishName = '[placeholder="اسم الحالة باللغة الإنجليزية"]';
-    this.setDefaultToggle = '//span[@data-testid="switch"]';
-    this.saveButton = '//button[text()="حفظ"]';
+    this.setDefaultToggle = '//input[@data-testid="virtual-state-toggle"]';
+    this.saveButton = '//button[@data-testid="save-state-button"]';
 
     this.addActionButton = '//span[text()="إضافة حدث"]';
     this.fromStateDdl = '//*[@data-testid="select-box-sourceStateId"]';
@@ -96,7 +96,7 @@ export class StateMachinePage {
      await this.page.fill(this.stateEnglishName, stateMachineData.getFirstStateEnglishName());
      await this.page.waitForTimeout(300);
      if(toggle)
-     await this.page.locator(this.setDefaultToggle).nth(1).click();
+     await this.page.click(this.setDefaultToggle);
      await this.page.click(this.saveButton);
      stateMachineData.setFirstStateArabicName(this.createdFirstStateArName);
   }
