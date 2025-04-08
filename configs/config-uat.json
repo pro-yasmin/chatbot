@@ -220,7 +220,7 @@
     "socialRecordActiveCopy": "ISR_ISRVR_00000021",
     "socialRecordActiveStatus": "مفعلة",
     "socialRecordDraftStatus": "مسودة",
-    "socialRecordUnderReviewStatus": "تحت المراجعة",
+    "socialRecordUnderReviewStatus": "تحت الاعتماد",
     "existingDraftCopyIsAlreadyExistMsg": "لديك بالفعل مسودة من النسخة المفعلة.",
     "ArVersionName": "النسخة العربية",
     "EnVersionName": "English Version",
