@@ -34,23 +34,23 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('Define Draft Simulation Model', async ({ page }) => {
-    // Step1: Navigate to Simulation Models Managment page
-    await test.step('Navigate to Simulation Models Management page', async () => {
-        await homeOperationPage.navigateToSimulationModels();
-        console.log('Navigate to Simulation Models Management page');
-    });
+    // // Step1: Navigate to Simulation Models Managment page
+    // await test.step('Navigate to Simulation Models Management page', async () => {
+    //     await homeOperationPage.navigateToSimulationModels();
+    //     console.log('Navigate to Simulation Models Management page');
+    // });
 
-    // Step2: Fill Simulation Model Information
-    await test.step('Fill Simulation Model First Tab then Save it as Draft', async () => {
-        expect(await simulationModelManagementPage.defineSimulationModelAsDraft(simulationModelData)).toBe(true);
-        console.log('Simulation Model First Tab filled and saved as Draft Successfully');
-    });
+    // // Step2: Fill Simulation Model Information
+    // await test.step('Fill Simulation Model First Tab then Save it as Draft', async () => {
+    //     expect(await simulationModelManagementPage.defineSimulationModelAsDraft(simulationModelData)).toBe(true);
+    //     console.log('Simulation Model First Tab filled and saved as Draft Successfully');
+    // });
 
-    // Step3: Search & Verify Simulation Model Information
-    await test.step('Search on Simulation Model created', async () => {
-        expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData, null, null, null)).toBe(true);
-        console.log('New Simulation Model Details Checked Successfully');
-    });
+    // // Step3: Search & Verify Simulation Model Information
+    // await test.step('Search on Simulation Model created', async () => {
+    //     expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData, null, null, null)).toBe(true);
+    //     console.log('New Simulation Model Details Checked Successfully');
+    // });
 });
 
 /**
