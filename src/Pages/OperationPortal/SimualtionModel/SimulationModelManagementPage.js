@@ -32,29 +32,36 @@ export class SimulationModelManagementPage {
         this.fieldEnablementStatus = '//div[@data-testid="tag"]';
         this.tableActions = '(//div[contains(@class, "MuiStack-root")])[38]';
 
-        
-        //this.viewButton = '(//div[contains(@class, "MuiStack-root")])[34]//span//button[@tabindex="0"]';
+
         this.viewButton = '(//button[@data-testid="table-action-Eye"])[1]';
-        //this.editButton = '((//div[contains(@class, "MuiStack-root")])[34]//span//button[@tabindex="0"])[2]';
         this.editButton = '(//button[@data-testid="table-action-Edit2"])[1]';
-        //this.ThreeDotsActionsButton = '((//div[contains(@class, "MuiStack-root")])[33]//button)[3]';
         this.ThreeDotsActionsButton = '(//button[@data-testid="three-dots-menu"])[1]';
-        //this.ModelVersionsButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[4]';
         this.ModelVersionsButton = '//span[@data-testid="three-dots-menu-item-3"]';
-        //this.editVariablesButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[2]';
         this.editVariablesButton = '//span[@data-testid="three-dots-menu-item-1"]';
-        //this.executeSimulationModelButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[1]';
         this.executeSimulationModelButton = '//span[@data-testid="three-dots-menu-item-2"]';
+
+        //draft Simulation Model tab
+        this.draftSimulationModelTab = '//button[@data-testid="tab-1"]';
     }
 
     async clickDefineSimulationModel() {
         await this.page.waitForTimeout(2000);
         await this.page.click(this.defineSimulationModelButton);
     }
+    async clickDraftSimulationModelTab() {
+        await this.page.click(this.defineSimulationModelButton);
+        await this.page.waitForTimeout(1000);
+    }
     async defineSimulationModel(simulationModelData) {
         await this.clickDefineSimulationModel();
         return await this.simualtionModelPage.fillSimulationModelInfo(simulationModelData);
-
+    }
+    async defineSimulationModelAsDraft(simulationModelData) {
+        await this.clickDraftSimulationModelTab();
+        await this.clickDefineSimulationModel();
+        let result = await this.simualtionModelPage.fillModelDataTab(simulationModelData);
+        await this.simualtionModelPage.clickSaveAsDraftButton();
+        return result;
     }
     async checkNewSimulationModelAdded(simulationModelData, simulationModelstatusActive, editedSimulationModel, simulationModelstatusExecuted) {
         let arabicTd;
@@ -396,19 +403,19 @@ export class SimulationModelManagementPage {
         return await this.simulationModelVersionsViewPage.checkNumberOfExecutions(simulationModelData);
     }
 
-    async sendSimulationModelExecutionForApproval(){
+    async sendSimulationModelExecutionForApproval() {
         return await this.simulationModelVersionsViewPage.clickSendForApprovalButton();
     }
 
-    async verifySimulationModelExecutionStatusInLogs(request){
+    async verifySimulationModelExecutionStatusInLogs(request) {
         return await this.viewExecutionLogsRequestsPage.verifyExecutionLog(request);
     }
 
-    async verifySimulationModelExecutionExistInApprovedLogs(request){
+    async verifySimulationModelExecutionExistInApprovedLogs(request) {
         return await this.approvedExecutionLogsPage.verifyExecutionRequestInApprovedLogs(request);
     }
 
-    async getSimulationModelExecutionNumber(request, simulationModelData){
+    async getSimulationModelExecutionNumber(request, simulationModelData) {
         return await this.viewExecutionLogsRequestsPage.getExecutionNumber(request, simulationModelData);
     }
 

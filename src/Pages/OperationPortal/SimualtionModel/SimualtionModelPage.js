@@ -12,10 +12,10 @@ export class SimualtionModelPage {
         this.fieldEnablementToggle = '//label[@class="form-check-label label-position-right"]';
         this.activate_deactivateFieldLibraryAlertMsg = '//div[@role="presentation"]//span';
         this.attachButton = '//button[@type="button" and contains(text(),"إضافة الملف")]';
-        
+
         //popup
-        this.popUpYesButton = '(//div[contains(@class, "MuiDialogActions-root")]//button[@tabindex="0"])[1]';
-        
+        this.popUpYesButton = '//button[@data-testid="modal-primary-button"]';
+
 
         //tab1
         this.simulationModelArNameField = '//input[@data-testid="text-input-modelData.nameAr"]';
@@ -46,6 +46,14 @@ export class SimualtionModelPage {
         this.calendarDatePicker = '//div[contains(@class, "MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase")]//button[contains(@class, "MuiButtonBase-root MuiIconButton-root MuiIconButton")]';
         this.todayDate = '//button[contains(@class, "MuiButtonBase-root MuiPickersDay-root") and @tabindex="0"]';
         this.addVariableButton = '//button[@data-testid="add-variable-button"]';
+
+        //draft button
+        this.saveAsDraftButton = '//button[@data-testid="action-button"]';
+    }
+
+    async clickSaveAsDraftButton() {
+        await this.page.click(this.saveAsDraftButton);
+        return await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.saveAsDraftSuccessMsg);
     }
 
     /**
