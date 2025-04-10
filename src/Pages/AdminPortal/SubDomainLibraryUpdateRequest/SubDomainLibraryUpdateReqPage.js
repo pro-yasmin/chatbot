@@ -1,6 +1,7 @@
 const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage.js");
 const{SubDomainCreationPage} = require('./SubDomainCreationPage');
 const{ManageSubDomainUpdateRequestsPage} = require ('./ManageSubDomainUpdateRequestsPage.js');
+const{ViewSubDomainRequestPage} = require ('./ViewSubDomainRequestPage.js');
 const {Utils}= require('../../../Utils/utils.js');
 
 
@@ -54,14 +55,22 @@ export class SubDomainLibraryUpdateReqPage {
         }
     }
 
-    async checkSubDomainRequestDetails(requestID,subDomainsArName){
-        var actionlocator = "button";
+    async checkSubDomainRequestDetails(requestID,SubDomainData){
+        var viewSubDomainRequest = new ViewSubDomainRequestPage(this.page);
+
         let subDomainRow = [];
+        var actionlocator = "button";
+
+     console.log("search with text first "+ requestID);
+     subDomainRow=await this.search.getRowInTableWithSpecificText(requestID);
 
         if (subDomainRow && subDomainRow.length > 0) {
             await this.search.clickRowAction(subDomainRow,this.tableActions, actionlocator);
             console.log("Request Details Page is opened successfully.");
         }
+      //  await this.page.waitForTimeout(3000);
+      return  await viewSubDomainRequest.checkSubmittedSubDomains(SubDomainData);
+    
     }
 
 

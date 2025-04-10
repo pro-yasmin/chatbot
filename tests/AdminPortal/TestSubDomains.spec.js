@@ -6,13 +6,16 @@ const { HomePage } = require('../../src/Pages/AdminPortal/HomePage');
 const {ManageSubDomainUpdateRequestsPage} = require('../../src/Pages/AdminPortal/SubDomainLibraryUpdateRequest/ManageSubDomainUpdateRequestsPage');
 const{SubDomainCreationPage} = require('../../src/Pages/AdminPortal/SubDomainLibraryUpdateRequest/SubDomainCreationPage');
 const{SubDomainLibraryUpdateReqPage}= require('../../src/Pages/AdminPortal/SubDomainLibraryUpdateRequest/SubDomainLibraryUpdateReqPage');
+const {TasksPage} = require("../../src/Pages/AdminPortal/Tasks/TasksPage");
 const{SubDomainData} = require("../../src/Models/AdminPortal/SubDomainData");
+const{SubDomainLibraryManagementPage} = require("../../src/Pages/AdminPortal/SubDomainLibrary/SubDomainLibraryManagementPage");
 
 
-let loginPage,homePage,manageSubDomainUpdateRequestsPage,subDomainCreationPage,subDomainLibraryUpdateReqPage;
+
+let loginPage,homePage,manageSubDomainUpdateRequestsPage,subDomainCreationPage,subDomainLibraryUpdateReqPage,tasksPage,subDomainLibraryManagementPage;
 let subDomainData;
-let RequestID, details;
-let adminUsername, adminPassword;
+let RequestID,myMap;;
+let adminUsername, adminPassword, isrManagerUsername , isrManagerPassword;
 
 test.beforeEach(async ({ page }) => {
   
@@ -22,6 +25,9 @@ test.beforeEach(async ({ page }) => {
   subDomainCreationPage = new SubDomainCreationPage(page);
   subDomainLibraryUpdateReqPage = new SubDomainLibraryUpdateReqPage(page);
   subDomainData = new SubDomainData(page);
+  tasksPage = new TasksPage(page);
+  subDomainLibraryManagementPage= new SubDomainLibraryManagementPage(page);
+  
   
 
   const baseUrl = global.testConfig.BASE_URL;
@@ -38,9 +44,9 @@ test.beforeEach(async ({ page }) => {
     });
 });
 
-    test('Add Sub Domains', async () => {
+   test('Add Sub Domains', async () => {
       // Step1: Navigate to SubDomain library update requests list page
-      await test.step("Navigate to SubDomains library update request page", async () => {
+     await test.step("Navigate to SubDomains library update request page", async () => {
         await homePage.navigateToSubDomainLibraryRequests();
         console.log("Navigate to Sub domains library update request page");
       });
@@ -58,8 +64,43 @@ test.beforeEach(async ({ page }) => {
     });
 
     await test.step("check request details",async ()=> {
-      await subDomainLibraryUpdateReqPage.checkSubDomainRequestDetails(RequestID,)
-  
+      expect(await subDomainLibraryUpdateReqPage.checkSubDomainRequestDetails(RequestID,subDomainData)).toBe(true);
+      console.log("request details displayed successfully");
+    });
+
+    await test.step("check sub domains status at library", async ()=>{
+      await homePage.navigateToSubDomainLibrary();
+
+      expect(await subDomainLibraryManagementPage.checkSubDomainsListAtLibrary(subDomainData, Constants.SUBDOMAIN_LIB_UNDERREVIEW)).toBe(true);
+      console.log("created subDomains displayed at under-review tab successfully");
 
     });
+
+    // Switch to ISR Manager User
+         await test.step('Logout from FIELD MANAGEMENT User and login as ISR Manager User', async () => {
+            await homePage.logout();
+            console.log('Logged out from FIELD MANAGEMENT User');
+            isrManagerUsername = global.testConfig.ISR_MANAGER;
+            isrManagerPassword = global.testConfig.ISR_MANAGER_PASS;
+            const loginSuccess = await loginPage.login(isrManagerUsername, isrManagerPassword);
+            expect(loginSuccess).toBe(true);
+            console.log('Logged in as ISR Manager');
+        });
+
+         await test.step("Tasks approve and reject", async () => {
+                await homePage.navigateToTasks();
+                await tasksPage.assignTaskToMe(RequestID); 
+                myMap = new Map(); myMap.set(subDomainData.getsubDomainArabicName()[0],Constants.APPROVE); myMap.set(subDomainData.getsubDomainArabicName()[1], Constants.REJECT);
+                var taskManage = await tasksPage.manageRequestField(RequestID,myMap );
+                expect(taskManage).toBe(true);
+                console.log("Subdomain Request Done Successfully");
+            });
+
+            await test.step("check sub domains status at library", async ()=>{
+              await homePage.navigateToSubDomainLibrary();
+        
+              expect(await subDomainLibraryManagementPage.checkSubDomainsListAtLibrary(subDomainData.getsubDomainArabicName()[0]),Constants.SUBDOMAIN_LIB_APPROVED).toBe(true);
+              console.log("Approved subDomains displayed at approved sub-domains library tab successfully");
+        
+            });
   });

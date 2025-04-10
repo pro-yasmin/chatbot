@@ -108,6 +108,8 @@ export class SearchPage {
       if(subActionLocator != null)
       {
         targetElement=parentElement.locator(subActionLocator);
+        await  this.page.waitForTimeout(10000);
+
         await targetElement.click();
       }
          

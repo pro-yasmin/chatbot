@@ -21,7 +21,7 @@ export class HomePage {
     this.lookupsManagmentButton = '//a[@data-testid="submenu-lookups-management"]';
     this.stateMachineManagmentButton = '//a[@data-testid="submenu-state-machine-management"]';
     this.socialRegistryServices= '//a[@data-testid="menu-social-registry-services"]';
-    this.subDomainsLibraryTab = '//a[@data-testid="menu-sub-domain-request"]';
+    this.subDomainsLibraryTab = '//a[@data-testid="submenu-sub-domains-library"]';
     this.fieldLibraryTab = '//a[@data-testid="submenu-fields-library"]';
     this.fieldTreeTab = '//a[@data-testid="submenu-fields-tree"]';
     this.fieldLibraryUpdateRequestsTab = '//a[@data-testid="submenu-sub-domains-library"]';

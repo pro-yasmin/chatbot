@@ -45,7 +45,7 @@ module.exports = defineConfig({
     navigationTimeout: 600000, // Timeout for page navigation (60 seconds)
   },
   /* Configure projects for major browsers */
-  projects: [
+ /* projects: [
    {
      name: "Admin",
      testDir: "./tests/AdminPortal", // Test directory
@@ -117,6 +117,6 @@ module.exports = defineConfig({
     //     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     //     // },
     //  //
-   ],
+ //  ],
 });
 module.exports.ENV = ENV;

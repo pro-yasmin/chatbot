@@ -19,7 +19,8 @@
     "expectMainProgramTaskType": "اعتماد برنامج رئيسي",
     "expectSubProgramTaskType": "اعتماد برنامج فرعي",
     "expectBenefitTaskType": "اعتماد إعانة",
-    "expectFieldTaskType": "تحديث مكتبة الحقول"
+    "expectFieldTaskType": "تحديث مكتبة الحقول",
+    "expectedSubDomainTaskType": "طلب تحديث الفئات"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",
@@ -327,4 +328,6 @@
     "subDomainFile":"test.pdf",
     "createSubDomainSuccessMsg":"تم إرسال طلبك رقم",
     "subDomainProcessingStatus" : "معالجة"
+}
+
 }

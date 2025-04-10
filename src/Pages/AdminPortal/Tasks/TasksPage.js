@@ -263,9 +263,12 @@ async manageRequestField(requestNumber ,fieldsMap) {
   //await this.navigateToMyCompletedTasksTab();
   await this.navigateToMyTasksTab();
   
+  await this.page.waitForTimeout(3000);
+
   let taskRow = await this.search.getRowInTableWithSpecificText(requestNumber);
   await this.checkFieldRequestType(taskRow);
   var actionLocator =  "button";
+
   await this.search.clickRowAction(taskRow,this.tableActions, actionLocator);
   console.log(`Navigate To Task Details Page Successfully`);
 
