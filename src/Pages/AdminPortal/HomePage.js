@@ -35,6 +35,7 @@ export class HomePage {
    * @returns {Promise<boolean>} - Returns true if the avatar is visible.
    */
   async checkAvatarIsExist() {
+    await this.page.waitForTimeout(2000);
     await this.page.waitForSelector(this.avatar, {
       state: "visible",
       timeout: 300000,
@@ -135,7 +136,7 @@ export class HomePage {
   }
   async navigateToFieldLibrary() {
     await this.navigateToSocialRegistryServices();
-    await this.page.waitForSelector(this.fieldLibraryTab, { state: "visible", timeout: 20000 });
+    await this.page.waitForSelector(this.fieldLibraryTab, { state: "visible", timeout: 30000 });
     await this.page.click(this.fieldLibraryTab);
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }

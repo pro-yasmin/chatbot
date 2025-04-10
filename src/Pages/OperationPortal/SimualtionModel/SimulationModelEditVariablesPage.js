@@ -5,14 +5,14 @@ export class SimulationModelEditVariablesPage {
         this.page = page;
         this.popUpMsg = new PopUpPage(this.page);
 
-        this.editFirstVariable = '(//table//button[contains(@class, "MuiButtonBase-root MuiIconButton-root")])[1]';
-        this.defaultValueField = '//input[@name="defaultValue"]';
-        this.editVariablesButton = '//button[contains(@class, "MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary")]';
+        this.editFirstVariable = '//button[@data-testid="table-action-Edit2"]';
+        this.defaultValueField = '//input[@data-testid="text-input-defaultValue"]';
+        this.editVariablesButton = '//button[@data-testid="add-variable-button"]';
         this.saveChangesButton = '//button[@data-testid="next-button"]';
 
         //popup
-        this.popUpYesButton = '(//div[contains(@class, "MuiDialogActions-root")]//button[@tabindex="0"])[1]';
-        this.confirmEditButton = '//button[contains(text(), "نعم تعديل")]'; //check locator
+        this.popUpYesButton = '//button[@data-testid="modal-primary-button"]';
+        this.confirmEditButton = '//button[contains(text(), "نعم تعديل")]'; 
     }
 
     /**

@@ -5,7 +5,7 @@ export class ViewExecutionLogsRequestsPage {
         this.page = page;
         this.search = new SearchPage(this.page);
 
-        this.viewButton = '//td//button[contains(@class, "MuiButtonBase-root MuiIconButton-root MuiIconButton")]';
+        this.viewButton = '(//button[@data-testid="table-action-Eye"])[1]';
         this.requestStatus = `(//span[contains(text(),"${global.testConfig.taskDetails.Approved}")])[3]`;
     }
 
