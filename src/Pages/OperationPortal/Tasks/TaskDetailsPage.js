@@ -13,7 +13,8 @@ export class TaskDetailsPage {
     this.myDataTab = '//button[@id="tab-0"]';
     this.myNotesTab = '//button[@id="tab-1"]';
 
-    this.requestStatus = '//span[@data-testid="value_request-requestStatus"]';
+    this.requestStatus = '//span[@data-testid="value_execution-status"]';
+    this.requestStatus2 = '//span[@data-testid="value_request-requestStatus"]';
 
     // Selectors for task details and actions  
     this.streamEnablementStatus = '//span[@data-testid="value_streams-management-stream-enablement-status"]';
@@ -68,7 +69,7 @@ export class TaskDetailsPage {
   async checkEnablementStatus(expectedStatus) {
     // Wait for the status element to be visible
     await this.page.waitForTimeout(5000);
-    var actualStatus = await this.page.locator(this.requestStatus).textContent();
+    var actualStatus = await this.page.locator(this.requestStatus).or(this.page.locator(this.requestStatus2)).textContent();
     if (actualStatus.trim() === expectedStatus.trim()) {
       console.log(`Enablement Status is as expected: "${actualStatus.trim()}".`);
       return true;

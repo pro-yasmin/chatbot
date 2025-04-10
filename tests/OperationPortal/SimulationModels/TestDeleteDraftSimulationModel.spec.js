@@ -33,7 +33,7 @@ test.beforeEach(async ({ page }) => {
     });
 });
 
-test('Define Draft Simulation Model', async ({ page }) => {
+test('Delete Draft Simulation Model', async ({ page }) => {
     // Step1: Navigate to Simulation Models Managment page
     await test.step('Navigate to Simulation Models Management page', async () => {
         await homeOperationPage.navigateToSimulationModels();
@@ -50,6 +50,12 @@ test('Define Draft Simulation Model', async ({ page }) => {
     await test.step('Search on Draft Simulation Model created', async () => {
         expect(await simulationModelManagementPage.checkDraftSimulationModelCreated(simulationModelData, false)).toBe(true);
         console.log('Draft Simulation Model Details Checked Successfully');
+    });
+
+    // Step4: Delete Draft Simulation Model
+    await test.step('Delete Draft Simulation Model', async () => {
+        expect(await simulationModelManagementPage.deleteDraftSimulaionModel(simulationModelData)).toBe(true);
+        console.log('Draft Simulation Model Deleted Successfully');
     });
 });
 

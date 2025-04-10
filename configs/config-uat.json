@@ -19,13 +19,16 @@
     "expectMainProgramTaskType": "اعتماد برنامج رئيسي",
     "expectSubProgramTaskType": "اعتماد برنامج فرعي",
     "expectBenefitTaskType": "اعتماد إعانة",
-    "expectFieldTaskType": "تحديث مكتبة الحقول"
+    "expectFieldTaskType": "تحديث مكتبة الحقول",
+    "executionLogApproval": "اعتماد سجل تنفيذ",
+    "prepareSimulationModel": "تجهيز نموذج المحاكاة"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",
     "enableStatusActive": "متاح",
     "ReadyForExecution": "جاهز للتنفيذ",
     "Approved": "معتمد",
+    "Completed": "مكتمل",
     "note": "تم إضافة ملاحظة جديدة",
     "ensureNoteMsg": "هل أنت متأكد من إضافة الملاحظة؟",
     "confirmNoteMsg": "تم إضافة الملاحظة بنجاح",
@@ -276,7 +279,9 @@
     "SendForApprovalSuccessMsg": "تم إرسال سجل التنفيذ للاعتماد بنجاح",
     "sentForApprovalTask": "ELG_EXEC",
     "approveExecutionSimulationBtnSuccessMsgText": "تم قبول اعتماد سجل تنفيذ",
-    "saveAsDraftSuccessMsg": "تم حفظ تعريف بيانات نموذج المحاكاة كمسودة بنجاح"
+    "saveAsDraftSuccessMsg": "تم حفظ تعريف بيانات نموذج المحاكاة كمسودة بنجاح",
+    "deleteDraftSimulationModelConfirmationMsg": "هل انت متأكد من حذف نسخة المسودة؟",
+    "deleteDraftSimulationModelSuccessMsg": "تم حذف المسودة بنجاح"
   },
   "createField": {
     "fieldArabicName": "حقل جديد",

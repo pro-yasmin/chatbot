@@ -41,22 +41,21 @@ test('Edit Simulation Model Variables', async ({ page }) => {
     // Step1: Create & Approve simulation model using API
     await test.step('API Create & Approve simulation model', async () => {
         await simulation.createsimulationModelAndApproveAPI(global.testConfig.ADMIN_USER, global.testConfig.ADMIN_PASS, simulationModelData);
-        //await simulation.createsimulationModelAndApproveAPI(adminusername, adminpassword, simulationModelData);
     });
 
-    // Step6: Navigate to Simulation Models Managment page
+    // Step2: Navigate to Simulation Models Managment page
     await test.step('Navigate to Simulation Models Management page', async () => {
         await homeOperationPage.navigateToSimulationModels();
         console.log('Navigate to Simulation Models Management page');
     });
 
-    // Step7: Search & Verify Simulation Model Status changed to active
+    // Step3: Search & Verify Simulation Model Status changed to active
     await test.step('Search on Simulation Model Status changed to active', async () => {
         expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData, true, null, null)).toBe(true);
         console.log('New Simulation Model Status changed to active Successfully');
     });
 
-    // Step8: Edit Simulation Model
+    // Step4: Edit Simulation Model
     await test.step('Edit Simulation Model Variables', async () => {
         expect(await simulationModelManagementPage.editSimulationModelVariables(simulationModelData)).toBe(true);
         console.log('Simulation Model Variables edited Successfully');

@@ -33,7 +33,7 @@ test.beforeEach(async ({ page }) => {
     });
 });
 
-test('Define Draft Simulation Model', async ({ page }) => {
+test('Edit Draft Simulation Model', async ({ page }) => {
     // Step1: Navigate to Simulation Models Managment page
     await test.step('Navigate to Simulation Models Management page', async () => {
         await homeOperationPage.navigateToSimulationModels();
@@ -50,6 +50,18 @@ test('Define Draft Simulation Model', async ({ page }) => {
     await test.step('Search on Draft Simulation Model created', async () => {
         expect(await simulationModelManagementPage.checkDraftSimulationModelCreated(simulationModelData, false)).toBe(true);
         console.log('Draft Simulation Model Details Checked Successfully');
+    });
+
+    // Step4: Edit Draft Simulation Model
+    await test.step('Edit Draft Simulation Model', async () => {
+        expect(await simulationModelManagementPage.editDraftSimulaionModel(simulationModelData)).toBe(true);
+        console.log('Draft Simulation Model Edited Successfully');
+    });
+
+    // Step5: Search & Verify Draft Simulation Model Information after Edit
+    await test.step('Search on Draft Simulation Model edited', async () => {
+        expect(await simulationModelManagementPage.checkDraftSimulationModelCreated(simulationModelData, true)).toBe(true);
+        console.log('Draft Simulation Model Details after edit Checked Successfully');
     });
 });
 
