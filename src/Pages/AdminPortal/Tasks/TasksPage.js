@@ -290,9 +290,7 @@ async manageRequestField(requestNumber ,fieldsMap) {
     return false;
   }
 
-
-
-  async checkFieldRequestType(taskRow)
+  async checkFieldRequestType(taskRow )
   {
     //await this.page.waitForTimeout(7000);
     let expectedMsg = global.testConfig.tasks.expectFieldTaskType;
