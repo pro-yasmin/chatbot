@@ -29,8 +29,10 @@ let subProgram1, subProgram2, subProgramData, subProgramData1, subProgramData2, 
 let programs;
 let benefit1, benefit2, benefitsData, benefitsData1, benefitsData2, benefit1Id;
 let baseUrl, adminusername, adminpassword;
-
+let context;
+let page;
 test.beforeAll(async () => {
+  
   baseUrl = global.testConfig.BASE_URL;
    adminusername = global.testConfig.ADMIN_USER;
    adminpassword = global.testConfig.ADMIN_PASS;
@@ -80,7 +82,9 @@ test.beforeAll(async () => {
 });
 
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({browser }) => {
+  context = await browser.newContext();
+  page = await context.newPage();
   loginPage = new LoginPage(page);
   homePage = new HomePage(page);
   streamDetailsPage = new StreamDetailsPage(page);
@@ -95,7 +99,7 @@ test.beforeEach(async ({ page }) => {
   mainProgramDetailsPage = new MainProgramDetailsPage(page);
 });
 
-test('Filter MainProgram, SubProgram, Benefits in Stream Details', async ({ page }) => {
+test('Filter MainProgram, SubProgram, Benefits in Stream Details', async () => {
   // Step0: Login 
   await test.step('Login to Admin Portal', async () => {
     await loginPage.gotoAdminPortal(baseUrl);
@@ -134,7 +138,7 @@ test('Filter MainProgram, SubProgram, Benefits in Stream Details', async ({ page
   });
 });
 
-test('Filter MainProgram, SubProgram, Benefits in Main Program Details', async ({ page }) => {
+test('Filter MainProgram, SubProgram, Benefits in Main Program Details', async () => {
   // Step0: Login 
   await test.step('Login to Admin Portal', async () => {
     await loginPage.gotoAdminPortal(baseUrl);
@@ -173,7 +177,7 @@ test('Filter MainProgram, SubProgram, Benefits in Main Program Details', async (
   });
 });
 
-test('Filter SubProgram, Benefits in SubProgram Details', async ({ page }) => {
+test('Filter SubProgram, Benefits in SubProgram Details', async () => {
   // Step0: Login 
   await test.step('Login to Admin Portal', async () => {
     await loginPage.gotoAdminPortal(baseUrl);
@@ -206,7 +210,7 @@ test('Filter SubProgram, Benefits in SubProgram Details', async ({ page }) => {
   });
 });
 
-test('Filter Benefits in Benefits Details', async ({ page }) => {
+test('Filter Benefits in Benefits Details', async () => {
   // Step0: Login 
   await test.step('Login to Admin Portal', async () => {
     await loginPage.gotoAdminPortal(baseUrl);
@@ -236,6 +240,7 @@ test.afterEach(async () => {
   await test.step("Logout from Admin Portal", async () => {
     await homePage.logout();
     console.log("User Logout Successfully");
+    await context.close();
   });
 
 });

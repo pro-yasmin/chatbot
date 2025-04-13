@@ -14,9 +14,12 @@ let groupFieldData, inputFieldData ,inputFieldData2;
 let adminUsername, adminPassword ,isrManagerUsername , isrManagerPassword;
 let requestChecks ,myMap;
 let fieldLibraryManagementPage ;
+let context;
+let page;
 
-test.beforeEach(async ({ page }) => {
-
+test.beforeEach(async ({ browser }) => {
+    context = await browser.newContext();
+    page = await context.newPage();
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     fieldLibraryUpdateRequestsPage = new FieldLibraryUpdateRequestsPage(page);
@@ -129,5 +132,6 @@ test('Group and Input Fields Request Flow', async () => {
         await test.step('Logout from Admin Portal', async () => {
         await homePage.logout();
         console.log('User logged out successfully');
+        await context.close();
         });
 });

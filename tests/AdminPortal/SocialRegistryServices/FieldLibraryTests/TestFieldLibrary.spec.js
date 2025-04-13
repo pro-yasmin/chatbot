@@ -6,8 +6,12 @@ const { FieldLibraryManagementPage } = require('../../../../src/Pages/AdminPorta
 let loginPage;
 let homePage;
 let fieldLibraryManagementPage;
+let context;
+let page;
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ browser }) => {
+    context = await browser.newContext();
+    page = await context.newPage();
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     fieldLibraryManagementPage = new FieldLibraryManagementPage(page);
@@ -46,7 +50,7 @@ test('Activate & Deactivate Field without link to ISR schema & calculation field
     });
 });
 
-test('Deactivate Field calculated field', async ({ page }) => {
+test('Deactivate Field calculated field', async () => {
     // Step1: Navigate to Field Library Managment page
     await test.step('Navigate to Field Library Managment page', async () => {
         await homePage.navigateToFieldLibrary();
@@ -69,6 +73,7 @@ test.afterEach(async () => {
     await test.step("Logout from Admin Portal", async () => {
         await homePage.logout();
         console.log("User Logout Successfully");
+        await context.close();
     });
 
 });

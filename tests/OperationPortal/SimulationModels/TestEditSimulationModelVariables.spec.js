@@ -13,10 +13,13 @@ let simulationModelData;
 let simulationModelManagementPage;
 let tasksPage;
 let simulation;
+let context;
+let page;
 
 
-
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ browser }) => {
+    context = await browser.newContext();
+    page = await context.newPage();
     loginPage = new LoginPage(page);
     homeOperationPage = new HomeOperationPage(page);
     simulationModelData = new SimulationModelData();
@@ -37,7 +40,7 @@ test.beforeEach(async ({ page }) => {
     });
 });
 
-test('Edit Simulation Model Variables', async ({ page }) => {
+test('Edit Simulation Model Variables', async () => {
     // Step1: Create & Approve simulation model using API
     await test.step('API Create & Approve simulation model', async () => {
         await simulation.createsimulationModelAndApproveAPI(global.testConfig.ADMIN_USER, global.testConfig.ADMIN_PASS, simulationModelData);
@@ -70,6 +73,7 @@ test.afterEach(async () => {
     await test.step("Logout from Operation Portal", async () => {
         await homeOperationPage.logout();
         console.log("User Logout Successfully");
+        await context.close();
     });
 
 });

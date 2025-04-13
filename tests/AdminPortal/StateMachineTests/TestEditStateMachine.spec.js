@@ -11,9 +11,12 @@ let homePage;
 let stateMachineManagmentPage;
 let stateMachineData,editStateMachineData;
 
+let context;
+let page;
 
-test('Edit State Machine', async ({ page }) => {
-
+test('Edit State Machine', async ({ browser }) => {
+    context = await browser.newContext();
+    page = await context.newPage();
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     stateMachineManagmentPage = new StateMachineManagmentPage(page);
@@ -60,6 +63,7 @@ test('Edit State Machine', async ({ page }) => {
         await homePage.logout();
         await page.close();
         console.log('Logout done Successfully');
+        await context.close();
     });
 
 });
