@@ -45,6 +45,8 @@ export class HomePage {
 
   async logout() {
     await this.page.waitForTimeout(2000);
+    await this.page.locator(this.userMenu).waitFor({ state: 'visible', timeout: 5000 });
+    await this.page.click(this.userMenu);
     await this.page.locator(this.logoutButton).waitFor({ state: 'visible', timeout: 5000 });
     await this.page.click(this.logoutButton);
   }
@@ -148,7 +150,8 @@ export class HomePage {
     await this.navigateToSocialRegistryServices();
     await this.page.waitForSelector(this.fieldLibraryUpdateRequestsTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.fieldLibraryUpdateRequestsTab);
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    await this.page.waitForTimeout(2000);
+   // await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 
   async navigateToSocialRecordCopies() {

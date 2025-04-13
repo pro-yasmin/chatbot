@@ -90,9 +90,8 @@ test('Integration Field Request Flow With Axon integration', async ({ page }) =>
         expect(sendRequest).toBe(true);
 
         // homePage = new HomePage(adminTab);         
-        await homePage.checkAvatarIsExist();       
         await homePage.logout();
-        console.log('Logged out from FIELD MANAGEMENT User');
+         console.log('Logged out from FIELD MANAGEMENT User');
         var ISRlogin = await loginPage.login(isrManagerUsername, isrManagerPassword);
         expect(ISRlogin).toBe(true);
         console.log('Logged in as ISR Manager');
@@ -105,10 +104,12 @@ test('Integration Field Request Flow With Axon integration', async ({ page }) =>
         var taskManage = await tasksPage.manageRequestField(requestChecks[0],myMap );
         expect(taskManage).toBe(true);
         console.log("Field Request Done Successfully");
+        await homePage.logout();
+        console.log('Logged out from ISR Manager');
     });
 
     await test.step('Verify Glossary Field Reflected in Axon', async () => {
-        await adminTab.bringToFront();
+        await page.bringToFront();
         console.log('Back to Axon to Search on glossary Field');
 
         var navigation = await axonHomePage.navigateToSearchPage();
@@ -124,11 +125,9 @@ test('Integration Field Request Flow With Axon integration', async ({ page }) =>
     });
 
     await test.step('Deactivate Integration Field in Admin Portal', async () => {
-        await page.bringToFront();
+        await adminTab.bringToFront();
         console.log('Back to Admin Portal to Deactivate Integration Field');
-
-        await homePage.logout();
-        console.log('Logged out from ISR Manager');
+     
         var Managerlogin = await loginPage.login(fieldManagerUserName, fieldManagerPassword);
         expect(Managerlogin).toBe(true);
         console.log('Logged in as FIELD MANAGEMENT User');
@@ -138,13 +137,10 @@ test('Integration Field Request Flow With Axon integration', async ({ page }) =>
         var deactivation = await fieldLibraryManagementPage.toggleFieldLibraryEntry(requestChecks[1] , false);
         expect(deactivation).toBe(true);
         console.log('Field Deactivated Successfully');
+        await homePage.logout();
+        console.log('Logout from Admin Portal');
     });
 });
 
- test.afterEach(async () => {
-        // Step 6: Logout
-        await test.step('Logout from Admin Portal', async () => {
-        await homePage.logout();
-        console.log('Logout from Admin Portal');
-        });
-});
+ 
+
