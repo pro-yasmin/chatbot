@@ -1,16 +1,16 @@
-import Constants from '../src/Utils/Constants.js';
+import Constants from './src/Utils/Constants.js';
 
 const { test, expect } = require('@playwright/test');
-const { StreamData } = require('../src/Models/AdminPortal/StreamData.js');
-const { MainProgramData } = require('../src/Models/AdminPortal/MainProgramData.js');
-const { SubProgramsData } = require('../src/Models/AdminPortal/SubProgramsData.js');
-const { Programs } = require("../src/Apis/Business/Programs.js");
-const { BenefitsData } = require('../src/Models/AdminPortal/BenefitsData.js');
-const { Simulation } = require("../src/Apis/Business/Simulation.js");
-const { SimulationModelData } = require("../src/Models/OperationPortal/SimulationModelData.js");
-const { FieldRequests } = require("../src/Apis/Business/FieldRequests.js");
-const { FieldRequestData } = require("../src/Models/AdminPortal/FieldRequestData.js");
-const { FieldData } = require("../src/Models/AdminPortal/FieldData.js");
+const { StreamData } = require('./src/Models/AdminPortal/StreamData.js');
+const { MainProgramData } = require('./src/Models/AdminPortal/MainProgramData.js');
+const { SubProgramsData } = require('./src/Models/AdminPortal/SubProgramsData.js');
+const { Programs } = require("./src/Apis/Business/Programs.js");
+const { BenefitsData } = require('./src/Models/AdminPortal/BenefitsData.js');
+const { Simulation } = require("./src/Apis/Business/Simulation.js");
+const { SimulationModelData } = require("./src/Models/OperationPortal/SimulationModelData.js");
+const { FieldRequests } = require("./src/Apis/Business/FieldRequests.js");
+const { FieldRequestData } = require("./src/Models/AdminPortal/FieldRequestData.js");
+const { FieldData } = require("./src/Models/AdminPortal/FieldData.js");
 
 let stream,streamData;
 let mainProgram, mainProgramData;
