@@ -1,4 +1,6 @@
 const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage.js");
+import Constants from '../../../../src/Utils/Constants.js';
+
 
 
 export class SubDomainLibraryManagementPage {
@@ -41,11 +43,11 @@ async checkSubDomainsListAtLibrary(SubDomainData, tabName){
     let status =[];
     let nameAr;
     let subDomainName;
-   if (tabName==Constants.SUBDOMAIN_LIB_UNDERREVIEW){
+   if (tabName == Constants.SUBDOMAIN_LIB_UNDERREVIEW){
     await this.navigateToUnderReviewTab();
-   }else if(tabName==Constants.SUBDOMAIN_LIB_REJECTED){
+   }else if(tabName == Constants.SUBDOMAIN_LIB_REJECTED){
     await this.navigateToRejectedTab();
-   }else if(tabName==Constants.SUBDOMAIN_LIB_APPROVED){
+   }else if(tabName == Constants.SUBDOMAIN_LIB_APPROVED){
     await this.navigateToApprovedTab();
    }
 

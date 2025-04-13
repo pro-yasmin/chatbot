@@ -29,6 +29,8 @@ export default {
     SUBDOMAIN_LIB_ALLTABS:"All_Tabs",
     SUBDOMAIN_LIB_UNDERREVIEW:"subDomain_UnderReview",
     SUBDOMAIN_LIB_APPROVED:"subDomain_Approved",
-    SUBDOMAIN_LIB_REJECTED:"subDomain_Rejected"
+    SUBDOMAIN_LIB_REJECTED:"subDomain_Rejected",
+    FIELDS_REQUEST:"Field_Library_Update",
+    DOMAINS_REQUEST:"Domain_Library_Update"
 
 };

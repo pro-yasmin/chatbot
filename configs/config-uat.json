@@ -20,7 +20,8 @@
     "expectSubProgramTaskType": "اعتماد برنامج فرعي",
     "expectBenefitTaskType": "اعتماد إعانة",
     "expectFieldTaskType": "تحديث مكتبة الحقول",
-    "expectedSubDomainTaskType": "طلب تحديث الفئات"
+    "expectedSubDomainTaskTypetest": "طلب تحديث الفئات",
+    "expectedSubDomainTaskType":"DOMAIN_LIBRARY_UPDATE"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",

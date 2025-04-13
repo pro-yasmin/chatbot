@@ -91,7 +91,7 @@ test.beforeEach(async ({ page }) => {
                 await homePage.navigateToTasks();
                 await tasksPage.assignTaskToMe(RequestID); 
                 myMap = new Map(); myMap.set(subDomainData.getsubDomainArabicName()[0],Constants.APPROVE); myMap.set(subDomainData.getsubDomainArabicName()[1], Constants.REJECT);
-                var taskManage = await tasksPage.manageRequestField(RequestID,myMap );
+                var taskManage = await tasksPage.manageRequestField(RequestID,myMap,Constants.DOMAINS_REQUEST);
                 expect(taskManage).toBe(true);
                 console.log("Subdomain Request Done Successfully");
             });
