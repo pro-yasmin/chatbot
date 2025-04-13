@@ -256,7 +256,7 @@ let fieldsMatched = true ;
       // Retrieve details for both rows using their row IDs
     let rowDetails = await this.search.getRowInTableWithSpecificText(fieldID);
       // Assuming the enablement status
-    let rowStatus = await rowDetails[5].tdLocator.textContent();
+    let rowStatus = await rowDetails[4].tdLocator.textContent();
     console.log(`Row Field Status (ID:  ${fieldID} ) is ${rowStatus}`);
 
       if (rowStatus.trim() === expectedStatus.trim()) {

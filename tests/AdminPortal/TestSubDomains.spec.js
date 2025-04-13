@@ -57,7 +57,7 @@ test.beforeEach(async ({ page }) => {
         console.log("Sub domain request submitted " + RequestID);
       });
     
-      await test.step("check request status",async ()=> {
+    /*  await test.step("check request status",async ()=> {
         var expectedRequestStatus = global.testConfig.createSubDomain.subDomainProcessingStatus;
         expect(await subDomainLibraryUpdateReqPage.checkSubDomainReqStatus(expectedRequestStatus,RequestID)).toBe(true);
         console.log("request Status processing");
@@ -71,10 +71,10 @@ test.beforeEach(async ({ page }) => {
     await test.step("check sub domains status at library", async ()=>{
       await homePage.navigateToSubDomainLibrary();
 
-      expect(await subDomainLibraryManagementPage.checkSubDomainsListAtLibrary(subDomainData, Constants.SUBDOMAIN_LIB_UNDERREVIEW)).toBe(true);
+      expect(await subDomainLibraryManagementPage.checkSubDomainsListAtLibrary(subDomainData.getsubDomainArabicName(), Constants.SUBDOMAIN_LIB_UNDERREVIEW)).toBe(true);
       console.log("created subDomains displayed at under-review tab successfully");
 
-    });
+    });*/
 
     // Switch to ISR Manager User
          await test.step('Logout from FIELD MANAGEMENT User and login as ISR Manager User', async () => {

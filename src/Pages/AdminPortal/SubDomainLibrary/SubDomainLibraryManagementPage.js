@@ -38,28 +38,32 @@ async navigateToUnderReviewTab() {
     await this.page.click(this.underReviewsubDomainsTab);
 }
 
-async checkSubDomainsListAtLibrary(SubDomainData, tabName){
+async checkSubDomainsListAtLibrary(subDomainsName, tabName){
     let subDomainRowInfo=[];
     let status =[];
     let nameAr;
     let subDomainName;
    if (tabName == Constants.SUBDOMAIN_LIB_UNDERREVIEW){
     await this.navigateToUnderReviewTab();
-   }else if(tabName == Constants.SUBDOMAIN_LIB_REJECTED){
+   }
+   else if(tabName == Constants.SUBDOMAIN_LIB_REJECTED){
     await this.navigateToRejectedTab();
-   }else if(tabName == Constants.SUBDOMAIN_LIB_APPROVED){
+   }
+   else if(tabName == Constants.SUBDOMAIN_LIB_APPROVED){
     await this.navigateToApprovedTab();
+   }else{
+    await this.page.click(this.allSubDomainTab);
    }
 
-    for(let i=0;i<SubDomainData.getsubDomainArabicName().length;i++){
-   subDomainRowInfo = await this.search.searchOnUniqueRow(this.searchInput,SubDomainData.getsubDomainArabicName()[i] );
+    for(let i=0;i<subDomainsName.length;i++){
+   subDomainRowInfo = await this.search.searchOnUniqueRow(this.searchInput,subDomainsName[i] );
     if (subDomainRowInfo && subDomainRowInfo.length > 0) {
         nameAr = subDomainRowInfo[1].tdLocator;
         subDomainName = nameAr.locator("span");
         await subDomainName.waitFor({ state: "visible" });
         var actual = await subDomainName.textContent();
     }
-    if(SubDomainData.getsubDomainArabicName()[i]==actual){
+    if(subDomainsName[i]==actual){
         status.push(true);
         }  
       }
