@@ -25,31 +25,98 @@ export class SimulationModelManagementPage {
         //Execution Popups buttons
         this.popUpExecuteRexecuteButton = "//button[contains(text(),'تنفيذ النموذج')]";
         this.popUpGotoExecutions = "//button[contains(text(),'استعراض سجلات التنفيذ')]";
-        this.defineSimulationModelButton = '//button[contains(@class, "MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeSmall MuiButton-containedSizeSmall MuiButton-colorPrimary")]';
+        this.popUpYesButton = '//button[@data-testid="modal-primary-button"]';
+        this.defineSimulationModelButton = '//button[@data-testid="define-simulation-model"]';
         this.searchInput = '//form[@data-testid="search-input"]//input';
         this.threeDotsMenu = '//div[@data-testid="three-dots-menu"]';
         this.activate_deactivate_Button = '//li[@data-testid="three-dots-menu-option-0"]';
         this.fieldEnablementStatus = '//div[@data-testid="tag"]';
         this.tableActions = '(//div[contains(@class, "MuiStack-root")])[38]';
 
-        //to be removed after adding data-testid
-        this.viewButton = '(//div[contains(@class, "MuiStack-root")])[34]//span//button[@tabindex="0"]';
-        this.editButton = '((//div[contains(@class, "MuiStack-root")])[34]//span//button[@tabindex="0"])[2]';
-        this.ThreeDotsActionsButton = '((//div[contains(@class, "MuiStack-root")])[33]//button)[3]';
-        this.ModelVersionsButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[4]';
-        this.editVariablesButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[2]';
-        this.executeSimulationModelButton = '(//li[contains(@class, "MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root")])[1]';
+
+        this.viewButton = '(//button[@data-testid="table-action-Eye"])[1]';
+        this.editButton = '(//button[@data-testid="table-action-Edit2"])[1]';
+        this.ThreeDotsActionsButton = '(//button[@data-testid="three-dots-menu"])[1]';
+        this.ModelVersionsButton = '//span[@data-testid="three-dots-menu-item-3"]';
+        this.editVariablesButton = '//span[@data-testid="three-dots-menu-item-1"]';
+        this.executeSimulationModelButton = '//span[@data-testid="three-dots-menu-item-0"]';
+
+        //draft Simulation Model tab
+        this.draftSimulationModelTab = '//button[@data-testid="tab-1"]';
+        this.deleteDraftButton = '(//button[@data-testid="table-action-Trash"])[1]';
+        this.editDraftButton = '(//button[@data-testid="table-action-Edit2"])[1]';
+        this.deleteSuccessMsg = '//div[contains(@class, "MuiAlert-message")]//span';
     }
 
     async clickDefineSimulationModel() {
         await this.page.waitForTimeout(2000);
         await this.page.click(this.defineSimulationModelButton);
     }
+    async clickDraftSimulationModelTab() {
+        await this.page.click(this.draftSimulationModelTab);
+        await this.page.waitForTimeout(1000);
+    }
     async defineSimulationModel(simulationModelData) {
         await this.clickDefineSimulationModel();
         return await this.simualtionModelPage.fillSimulationModelInfo(simulationModelData);
-
     }
+    async defineSimulationModelAsDraft(simulationModelData) {
+        await this.clickDraftSimulationModelTab();
+        await this.clickDefineSimulationModel();
+        let firstTabFilling = await this.simualtionModelPage.fillModelDataTab(simulationModelData);
+        let saveAsDraftClicikng = await this.simualtionModelPage.clickSaveAsDraftButton();
+        return firstTabFilling, saveAsDraftClicikng;
+    }
+    async checkDraftSimulationModelCreated(simulationModelData, editedDraftSimulationModel) {
+        await this.clickDraftSimulationModelTab();
+        let arabicTd;
+        let englishTd;
+
+        let simulationModelArabicName;
+        let simulationModelEnglishName;
+        let simulationModelRow = [];
+        if (editedDraftSimulationModel) {
+            simulationModelRow = await this.search.searchOnUniqueRow(this.searchInput, simulationModelData.getEditedSimulationModelArName());
+        }
+        else
+            simulationModelRow = await this.search.searchOnUniqueRow(this.searchInput, simulationModelData.getSimulationModelArName());
+
+        if (simulationModelRow && simulationModelRow.length > 0) {
+            arabicTd = simulationModelRow[0].tdLocator;
+            simulationModelArabicName = arabicTd.locator("span");
+            await simulationModelArabicName.waitFor({ state: "visible" });
+            var actualSimulationModelArabicName = await simulationModelArabicName.textContent();
+
+            console.log("Actual Arabic Name: ", actualSimulationModelArabicName);
+
+            englishTd = simulationModelRow[1].tdLocator;
+            simulationModelEnglishName = englishTd.locator("span");
+            await simulationModelEnglishName.waitFor({ state: "visible" });
+            var actualSimulationModelEnglishName = await simulationModelEnglishName.textContent();
+
+            console.log("Actual English Name: ", actualSimulationModelEnglishName);
+        }
+        if (editedDraftSimulationModel) {
+            if (actualSimulationModelArabicName === simulationModelData.getEditedSimulationModelArName() &&
+                actualSimulationModelEnglishName === simulationModelData.getEditedSimulationModelEnName()
+            ) {
+                console.log("Draft Simulation Model Information after edit matched successfully.");
+                return true;
+            }
+            return false;
+        }
+        else {
+            if (
+                actualSimulationModelArabicName === simulationModelData.getSimulationModelArName() &&
+                actualSimulationModelEnglishName === simulationModelData.getSimulationModelEnName()
+            ) {
+                console.log("Draft Simulation Model Information matched successfully.");
+                return true;
+            }
+            return false;
+        }
+    }
+
     async checkNewSimulationModelAdded(simulationModelData, simulationModelstatusActive, editedSimulationModel, simulationModelstatusExecuted) {
         let arabicTd;
         let englishTd;
@@ -290,7 +357,6 @@ export class SimulationModelManagementPage {
      */
     async click3DotsActionsButton(simulationModelData) {
         await this.search.searchOnUniqueRow(this.searchInput, simulationModelData.getCreatedSimulationModelId());
-        //tobe removed after adding data-testid
         await this.page.click(this.ThreeDotsActionsButton);
     }
 
@@ -337,6 +403,7 @@ export class SimulationModelManagementPage {
     async editSimulationModelVariables(simulationModelData) {
         await this.click3DotsActionsButton(simulationModelData);
         console.log('Actions Simulaion Model Button Clicked');
+        await this.page.waitForTimeout(4000);
         await this.page.click(this.editVariablesButton);
         console.log('Edit Variables Button Clicked');
         return await this.simulationModelEditVariablesPage.editVariable(simulationModelData);
@@ -390,20 +457,51 @@ export class SimulationModelManagementPage {
         return await this.simulationModelVersionsViewPage.checkNumberOfExecutions(simulationModelData);
     }
 
-    async sendSimulationModelExecutionForApproval(){
+    async sendSimulationModelExecutionForApproval() {
         return await this.simulationModelVersionsViewPage.clickSendForApprovalButton();
     }
 
-    async verifySimulationModelExecutionStatusInLogs(request){
+    async verifySimulationModelExecutionStatusInLogs(request) {
         return await this.viewExecutionLogsRequestsPage.verifyExecutionLog(request);
     }
 
-    async verifySimulationModelExecutionExistInApprovedLogs(request){
+    async verifySimulationModelExecutionExistInApprovedLogs(request) {
         return await this.approvedExecutionLogsPage.verifyExecutionRequestInApprovedLogs(request);
     }
 
-    async getSimulationModelExecutionNumber(request, simulationModelData){
+    async getSimulationModelExecutionNumber(request, simulationModelData) {
         return await this.viewExecutionLogsRequestsPage.getExecutionNumber(request, simulationModelData);
+    }
+
+    async deleteDraftSimulaionModel(simulationModelData) {
+        await this.page.waitForTimeout(2000);
+        let simulationModelRow = [];
+        simulationModelRow = await this.search.searchOnUniqueRow(this.searchInput, simulationModelData.getSimulationModelArName());
+
+        if (simulationModelRow && simulationModelRow.length > 0) {
+            await this.page.click(this.deleteDraftButton);
+            await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.deleteDraftSimulationModelConfirmationMsg);
+            await this.page.waitForSelector(this.deleteSuccessMsg, { visible: true });
+            const successMessage = await this.page.textContent(this.deleteSuccessMsg);
+            if (successMessage === global.testConfig.SimulationModels.deleteDraftSimulationModelSuccessMsg) {
+                console.log("Delete Success Message: ", successMessage);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    async editDraftSimulaionModel(simulationModelData) {
+        await this.page.waitForTimeout(2000);
+        let simulationModelRow = [];
+        simulationModelRow = await this.search.searchOnUniqueRow(this.searchInput, simulationModelData.getSimulationModelArName());
+
+        if (simulationModelRow && simulationModelRow.length > 0) {
+            await this.page.click(this.editDraftButton);
+            let editResult = await this.simualtionModelPage.editDraftSimulationModel(simulationModelData);
+            return editResult;
+        }
+        return false;
     }
 
 }

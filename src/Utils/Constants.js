@@ -13,11 +13,15 @@ export default {
     FILTER_BENEFITS_INSIDE_SUB_PROGRAM: "filter_Benefits_Inside_Subprogram",
     FILTER_BENEFITS_OUTSIDE: "filter_Benefits_Outside",
     INTEGRATION_FIELD : "Integration",
-    INPUT_FIELD : "Input",
-    CALCULATION_FIELD : "Calculation",
-    COMPLEX_FIELD :"Complex",
-    GROUP_FIELD : "Group",
+    INPUT_FIELD : "INPUT",
+    CALCULATION_FIELD : "CALCULATION",
+    COMPLEX_FIELD :"COMPLEX",
+    GROUP_FIELD : "GROUP",
+    APPROVE_FIELD_API:"ACCEPT_FIELD",
+    SUBMIT_FIELDS_REQUESTS_API:"SUBMIT_FOR_APPROVAL",
+    COMPLETE_FIELDS_REQUESTS_API:"COMPLETE",
     EDIT_SIMULATION_MODEL : "Edit_Simulation_Model",
     EXECUTE_SIMULATION_MODEL : "Execute_Simulation_Model",
-    VERIFY_FILE_UPLOADED : "verifyFileUploaded"
+    VERIFY_FILE_UPLOADED : "verifyFileUploaded",
+    API_Input_Source_Input:"ادخال"
 };

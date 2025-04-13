@@ -10,9 +10,10 @@ export class HomeOperationPage {
     this.userMenu = '//button[@data-testid="user-menu"]';
     this.logoutButton = '//div[@data-testid="logout-btn"]';
     this.avatar = '//button[@data-testid="user-menu"]';
-    this.simulationModelsButton = '//a[@data-testid="menu-simulation-models"]';
+    this.simulationModelsTab = '(//a[@data-testid="menu-simulation-models"])[1]';
+    this.viewSimulationModelsButton = '(//a[@data-testid="menu-simulation-models"])[2]';
     this.tasksButton = '//a[@data-testid="menu-tasks"]';
-    this.viewExecutionLogsRequestsButton = '//a[@data-testid="View-Execution-Logs-Requests"]';
+    this.viewExecutionLogsRequestsButton = '//a[@data-testid="menu-view-execution-logs-requests"]';
     this.approvedExecutionLogsButton = '//a[@data-testid="menu-approved-execution-logs"]';
   }
 
@@ -39,9 +40,18 @@ export class HomeOperationPage {
   }
 
   async navigateToSimulationModels() {
-    await this.page.waitForSelector(this.simulationModelsButton, { state: "visible", timeout: 20000 });
-    await this.page.click(this.simulationModelsButton);
+    await this.navigateToSimulationModelsTab();
+    await this.navigateToViewSimulationModelsTab();
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+  }
+
+  async navigateToSimulationModelsTab() {
+    await this.page.waitForSelector(this.simulationModelsTab, { state: "visible", timeout: 20000 });
+    await this.page.click(this.simulationModelsTab);
+  }
+
+  async navigateToViewSimulationModelsTab(){
+    await this.page.click(this.viewSimulationModelsButton, { timeout: 20000 });
   }
 
   async navigateToTasksTab() {
@@ -51,6 +61,7 @@ export class HomeOperationPage {
   }
 
   async navigateToViewExecutionLogsRequestsTab() {
+    await this.navigateToSimulationModelsTab();
     await this.page.waitForSelector(this.viewExecutionLogsRequestsButton, { state: "visible", timeout: 20000 });
     await this.page.click(this.viewExecutionLogsRequestsButton);
   }

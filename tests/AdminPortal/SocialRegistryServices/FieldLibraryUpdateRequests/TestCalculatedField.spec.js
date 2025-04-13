@@ -54,12 +54,14 @@ test('Calculation Field Request Flow', async () => {
             await fieldLibraryUpdateRequestsPage.checkFieldRowRequestStatus(processingStatus);
             var sendRequest = await fieldLibraryUpdateRequestsPage.validateFieldDetailsAndMakeDecision(requestChecks,expectedRequestStatus ,expectedEnablementStatus);
             expect(sendRequest).toBe(true);
+            await homePage.logout();
+            console.log('Logged out from FIELD MANAGEMENT User');
+
         });
 
         // Switch to ISR Manager User
-        await test.step('Logout from FIELD MANAGEMENT User and login as ISR Manager User', async () => {
-            await homePage.logout();
-            console.log('Logged out from FIELD MANAGEMENT User');
+        await test.step(' login as ISR Manager User', async () => {
+         
             isrManagerUsername = global.testConfig.ISR_MANAGER;
             isrManagerPassword = global.testConfig.ISR_MANAGER_PASS;
             const loginSuccess = await loginPage.login(isrManagerUsername, isrManagerPassword);

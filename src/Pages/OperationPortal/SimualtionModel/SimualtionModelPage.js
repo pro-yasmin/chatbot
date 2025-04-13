@@ -12,19 +12,19 @@ export class SimualtionModelPage {
         this.fieldEnablementToggle = '//label[@class="form-check-label label-position-right"]';
         this.activate_deactivateFieldLibraryAlertMsg = '//div[@role="presentation"]//span';
         this.attachButton = '//button[@type="button" and contains(text(),"إضافة الملف")]';
-        
+
         //popup
-        this.popUpYesButton = '(//div[contains(@class, "MuiDialogActions-root")]//button[@tabindex="0"])[1]';
-        
+        this.popUpYesButton = '//button[@data-testid="modal-primary-button"]';
+
 
         //tab1
-        this.simulationModelArNameField = '//input[@name="modelData.nameAr"]';
-        this.simulationModelEnNameField = '//input[@name="modelData.nameEn"]';
-        this.beneficiaryPartyDdl = '//div[@id="mui-component-select-modelData.beneficiaryParty"]';
-        this.beneficiaryPartyDdlFirstValue = '//li[@data-value="a2"]';
-        this.beneficiaryPartyDdlSecondValue = '//li[@data-value="a1"]';
+        this.simulationModelArNameField = '//input[@data-testid="text-input-modelData.nameAr"]';
+        this.simulationModelEnNameField = '//input[@data-testid="text-input-modelData.nameEn"]';
+        this.beneficiaryPartyDdl = '//div[@data-testid="select-box-modelData.beneficiaryParty"]';
+        this.beneficiaryPartyDdlFirstValue = '//li[@data-testid="option-0"]';
+        this.beneficiaryPartyDdlSecondValue = '//li[@data-testid="option-1"]';
         this.simulationModelDescriptionField = '//textarea[@name="modelData.description"]';
-        this.uploadedFileName = '//td[1]//span';
+        this.uploadedFileName = '//td[@data-testid="table-row-element-0-0"]';
         this.nextTabButton = '//button[@data-testid="next-button"]';
 
 
@@ -35,17 +35,25 @@ export class SimualtionModelPage {
         this.isrCheckbox = '(//input[@type="checkbox"])[4]';
 
         //tab4
-        this.variableArNameField = '//input[@name="nameAr"]';
-        this.variableEnNameField = '//input[@name="nameEn"]';
+        this.variableArNameField = '//input[@data-testid="text-input-nameAr"]';
+        this.variableEnNameField = '//input[@data-testid="text-input-nameEn"]';
         this.variableDescriptionField = '//textarea[@name="description"]';
-        this.variableTypeDdl = '//div[@id="mui-component-select-type"]';
-        this.variableTypeDdlTextValue = '//li[@data-value="string"]';
-        this.variableTypeDdlNumericValue = '//li[@data-value="integer"]';
-        this.variableTypeDdlDateValue = '//li[@data-value="date"]';
-        this.defaultValueField = '//input[@name="defaultValue"]';
+        this.variableTypeDdl = '//div[@data-testid="select-box-type"]';
+        this.variableTypeDdlTextValue = '//li[@data-testid="option-0"]';
+        this.variableTypeDdlNumericValue = '//li[@data-testid="option-1"]';
+        this.variableTypeDdlDateValue = '//li[@data-testid="option-2"]';
+        this.defaultValueField = '//input[@data-testid="text-input-defaultValue"]';
         this.calendarDatePicker = '//div[contains(@class, "MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase")]//button[contains(@class, "MuiButtonBase-root MuiIconButton-root MuiIconButton")]';
         this.todayDate = '//button[contains(@class, "MuiButtonBase-root MuiPickersDay-root") and @tabindex="0"]';
-        this.addVariableButton = '//div[@data-testid="customized-step-content"]//button[contains(@class, "MuiButtonBase-root MuiButton-root MuiButton-contained")]';
+        this.addVariableButton = '//button[@data-testid="add-variable-button"]';
+
+        //draft button
+        this.saveAsDraftButton = '//button[@data-testid="action-button"]';
+    }
+
+    async clickSaveAsDraftButton() {
+        await this.page.click(this.saveAsDraftButton);
+        return await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.saveAsDraftSuccessMsg);
     }
 
     /**
@@ -211,6 +219,22 @@ export class SimualtionModelPage {
         await this.page.waitForTimeout(2000);
         var result = await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.defineSimulationSuccessMsg);
         return result;
+    }
+    async editDraftSimulationModel(simulationModelData) {
+        console.log("Start Editing Simulation Model information Tab one");
+        this.createdSimulationModelArName = simulationModelData.getEditedSimulationModelArName();
+        this.createdSimulationModelEnName = simulationModelData.getEditedSimulationModelEnName();
+        this.createdSimulationModelDescription = simulationModelData.getEditedSimulationModelDescription();
+        await this.page.fill(this.simulationModelArNameField, this.createdSimulationModelArName);
+        await this.page.fill(this.simulationModelEnNameField, this.createdSimulationModelEnName);
+        await this.page.click(this.beneficiaryPartyDdl);
+        await this.page.waitForSelector(this.beneficiaryPartyDdlFirstValue, { visible: true });
+        await this.page.click(this.beneficiaryPartyDdlSecondValue);
+        await this.page.fill(this.simulationModelDescriptionField, this.createdSimulationModelDescription);
+        simulationModelData.setEditedSimulationModelArName(this.createdSimulationModelArName);
+        simulationModelData.setEditedSimulationModelEnName(this.createdSimulationModelEnName);
+        console.log("End Editing Simulation Model information Tab one");
+        return await this.clickSaveAsDraftButton();
     }
 
 }

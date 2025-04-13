@@ -19,13 +19,16 @@
     "expectMainProgramTaskType": "اعتماد برنامج رئيسي",
     "expectSubProgramTaskType": "اعتماد برنامج فرعي",
     "expectBenefitTaskType": "اعتماد إعانة",
-    "expectFieldTaskType": "تحديث مكتبة الحقول"
+    "expectFieldTaskType": "تحديث مكتبة الحقول",
+    "executionLogApproval": "اعتماد سجل تنفيذ",
+    "prepareSimulationModel": "تجهيز نموذج المحاكاة"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",
     "enableStatusActive": "متاح",
     "ReadyForExecution": "جاهز للتنفيذ",
     "Approved": "معتمد",
+    "Completed": "مكتمل",
     "note": "تم إضافة ملاحظة جديدة",
     "ensureNoteMsg": "هل أنت متأكد من إضافة الملاحظة؟",
     "confirmNoteMsg": "تم إضافة الملاحظة بنجاح",
@@ -61,7 +64,7 @@
     "riskEnglishDescription": "To promote the well-being and safety of vulnerable groups through support, awareness, and inclusion Programs",
     "arabicMainProgramGoal": "1. ضمان المساواة لذوي الدخل المحدود والفئات الهشة في حقوق الحصول على الموارد الاقتصادية والخدمات األساسية في الدولة 2. تمكين جودة الحياة للفئات ذوي الخاصة من النواحي الجسدية والعقلية (مثل الأشخاص ذوي الاعاقة ومقدمي الرعاية) 3. رفع مستوى منذ مراحل الطفولة المبكرة للوقاية من سوء المعاملة  5. تقديم الدعم النفس ي للفئات الهشة المحتاجة لضمان صحتها النفسية",
     "englishMainProgramGoal": "1. To ensure equal rights to economic resources and basic services to poor and economically vulnerable To provide psychological support to vulnerable",
-    "mainProgramSuccessMsg": "تم حفظ البرنامج الرئيسى بنجاح"
+    "mainProgramSuccessMsg": "تم حفظ البرنامج الرئيسى للمراجعة بنجاح"
   },
   "createSubPrograms": {
     "backUpProgramNumber": "PRG_MPRG_160",
@@ -179,7 +182,7 @@
     "requireRegisterApplication": true,
     "applicationChannelCodes": ["14"],
     "viewbenefitResponsibleEntity": "جهة مسؤولة عن التنفيذ جديده",
-    "viewTargetApproach": "شامل",
+    "viewTargetApproach": "COMPREHENSIVE",
     "viewEnablementStatus": "محجوب",
     "viewApprovalStatus": "معالجة",
     "viewActivationStatus": "خامل"
@@ -220,7 +223,7 @@
     "socialRecordActiveCopy": "ISR_ISRVR_00000021",
     "socialRecordActiveStatus": "مفعلة",
     "socialRecordDraftStatus": "مسودة",
-    "socialRecordUnderReviewStatus": "تحت المراجعة",
+    "socialRecordUnderReviewStatus": "تحت الاعتماد",
     "existingDraftCopyIsAlreadyExistMsg": "لديك بالفعل مسودة من النسخة المفعلة.",
     "ArVersionName": "النسخة العربية",
     "EnVersionName": "English Version",
@@ -275,7 +278,10 @@
     "SendForApprovalConfirmationMsg": "هل انت متأكد من إرسال سجل التنفيذ رقم 1 المرتبط بإصدار النموذج رقم 1 للاعتماد؟",
     "SendForApprovalSuccessMsg": "تم إرسال سجل التنفيذ للاعتماد بنجاح",
     "sentForApprovalTask": "ELG_EXEC",
-    "approveExecutionSimulationBtnSuccessMsgText": "تم قبول اعتماد سجل تنفيذ"
+    "approveExecutionSimulationBtnSuccessMsgText": "تم قبول اعتماد سجل تنفيذ",
+    "saveAsDraftSuccessMsg": "تم حفظ تعريف بيانات نموذج المحاكاة كمسودة بنجاح",
+    "deleteDraftSimulationModelConfirmationMsg": "هل انت متأكد من حذف نسخة المسودة؟",
+    "deleteDraftSimulationModelSuccessMsg": "تم حذف المسودة بنجاح"
   },
   "createField": {
     "fieldArabicName": "حقل جديد",
@@ -303,6 +309,21 @@
     "glossaryFieldNature": "صحي",
     "glossaryFieldSource":"تكامل",
     "glossaryFieldAxsonStatus":"Active",
-    "glossaryFieldEmptyValue":"Not specified"
+    "glossaryFieldEmptyValue":"Not specified", "API_Default_ParentKey":"education",
+    "API_Default_ParentDomain":"DOMAIN",
+    "API_Classification":"public",
+    "API_Classification_Ar":"عام",
+    "API_PeriodicDataUpdate_id":"675edfc28d5d8a38173540aa",
+    "API_PeriodicDataUpdate_nameEn":"monthly",
+    "API_PeriodicDataUpdate_nameAr":"شهري",
+    "API_Privacy":"Top Secret",
+    "API_ImpactDegree":"Low",
+    "API_Severity_id":"675edd7f270cc3ce790d2709",
+    "API_Severity_nameEn":"low",
+    "API_Severity_nameAr":"منخفض",
+    "API_Assigned_Domain":"التعليم",
+    "API_FieldNature_id":"675edd657215dc2057c65774",
+    "API_FieldNature_nameEn":"Health",
+    "API_FieldNature_nameAr":"صحي"
   }
 }
