@@ -21,12 +21,15 @@ let stream ;
 let mainProgram ;
 let subProgram;
 let Benefit;
+let context;
+let page;
 
 /**
  * Test setup: Initializes all required page objects and logs into the admin portal.
  */
-test.beforeEach(async ({ page }) => {
-
+test.beforeEach(async ({ browser}) => {
+  context = await browser.newContext();
+  page = await context.newPage();
   loginPage = new LoginPage(page);
   homePage = new HomePage(page);
   streamData = new StreamData();
@@ -156,6 +159,7 @@ test.afterEach(async () => {
   await test.step("Logout from Admin Portal", async () => {
     await homePage.logout();
     console.log("User Logout Successfully");
+    await context.close();
   });
 
 });

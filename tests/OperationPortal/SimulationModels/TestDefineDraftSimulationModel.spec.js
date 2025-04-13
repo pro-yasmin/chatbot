@@ -11,8 +11,12 @@ let homeOperationPage;
 let simulationModelData;
 let simulationModelManagementPage;
 let tasksPage;
+let context;
+let page;
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({  browser }) => {
+    context = await browser.newContext();
+    page = await context.newPage();
     loginPage = new LoginPage(page);
     homeOperationPage = new HomeOperationPage(page);
     simulationModelData = new SimulationModelData();
@@ -61,6 +65,7 @@ test.afterEach(async () => {
     await test.step("Logout from Operation Portal", async () => {
         await homeOperationPage.logout();
         console.log("User Logout Successfully");
+        await context.close();
     });
 
 });

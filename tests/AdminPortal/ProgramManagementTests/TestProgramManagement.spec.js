@@ -25,12 +25,15 @@ let subProgramsManagementPage, subProgramsData, subProgramsPage;
 let streamNumber, programNumber, subProgramNumber, benefitNumber;
 let benefitsPage, benefitsManagmentPage, benefitsData;
 let adminusername,adminpassword;
+let context;
+let page;
 
 /**
  * Test setup: Initializes all required page objects and logs into the admin portal.
  */
-test.beforeEach(async ({ page }) => {
-  
+test.beforeEach(async ({ browser }) => {
+  context = await browser.newContext();
+  page = await context.newPage();
   loginPage = new LoginPage(page);
   homePage = new HomePage(page);
   streamPage = new StreamPage(page);
@@ -223,12 +226,13 @@ test("Add and Approve Test Benefits", async () => {
   });
 });
 
-test.afterEach(async ({ page }) => {
+test.afterEach(async () => {
   //logout
   await test.step('Logout from Admin Portal', async () => {
     await homePage.logout();
     await page.close();
     console.log('User Logout Successfully');
+    await context.close();
   });
 
 });

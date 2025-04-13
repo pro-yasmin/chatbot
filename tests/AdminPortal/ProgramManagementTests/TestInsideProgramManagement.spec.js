@@ -24,13 +24,15 @@ let subProgramsManagementPage, subProgramsData, subProgramsPage,subProgramDetail
 let benefitsPage, benefitsManagmentPage, benefitsData;
 let streamNumber, mainProgramNumber, subProgramNumber, benefitNumber ;
 let mainProgramTask , subProgramTask,benefitTask;
-
+let context;
+let page;
 
 /**
  * Test setup: Initializes all required page objects and logs into the admin portal.
  */
-test.beforeEach(async ({ page }) => {
-
+test.beforeEach(async ({ browser }) => {
+  context = await browser.newContext();
+  page = await context.newPage();
   loginPage = new LoginPage(page);
   homePage = new HomePage(page);
   streamManagementPage = new StreamManagementPage(page);
@@ -192,6 +194,7 @@ test.afterEach(async () => {
   await test.step("Logout from Admin Portal", async () => {
     await homePage.logout();
     console.log("User Logout Successfully");
+    await context.close();
   });
 
 });

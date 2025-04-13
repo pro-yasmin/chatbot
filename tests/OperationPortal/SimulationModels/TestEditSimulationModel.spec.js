@@ -14,6 +14,8 @@ let simulationModelData;
 let simulationModelManagementPage;
 let tasksPage;
 let simulation;
+let context;
+let page;
 
 var baseUrl = global.testConfig.OPERATION_BASE_URL;
 var programsAndPoliciesSpecialist_UserName = global.testConfig.PROGRAMS_AND_POLICIES_SPECIALIST;
@@ -22,7 +24,9 @@ var programsAndPoliciesSpecialist_Password = global.testConfig.PROGRAMS_AND_POLI
 var businessRules_Username = global.testConfig.BUSSINESS_RULES_SPECIALIST;
 var businessRules_Password = global.testConfig.BUSSINESS_RULES_SPECIALIST_PASS;
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ browser }) => {
+    context = await browser.newContext();
+    page = await context.newPage();
     loginPage = new LoginPage(page);
     homeOperationPage = new HomeOperationPage(page);
     simulationModelData = new SimulationModelData();
@@ -142,6 +146,7 @@ test.afterEach(async () => {
     await test.step("Logout from Operation Portal", async () => {
         await homeOperationPage.logout();
         console.log("User Logout Successfully");
+        await context.close();
     });
 
 });

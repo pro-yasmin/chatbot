@@ -213,11 +213,11 @@
     "fieldDeactivatedSuccessMsg": "تم حجب الحقل بنجاح ولا يمكن استخدامه في المنصة.",
     "fieldActivationErrorMsg": "لا يمكن حجب الحقل حيث إنه مرتبط بمكونات أخرى في النظام.",
     "deactivateConfirmationMsgForLockedField": "هل أنت متأكد أنك تريد حجب",
-    "calculated" :"حسابي",
-    "group" :"مجموعة",
-    "complex" :"مركب",
-    "input" :"إدخال",
-    "integration" :"تكامل"
+    "calculated": "حسابي",
+    "group": "مجموعة",
+    "complex": "مركب",
+    "input": "إدخال",
+    "integration": "تكامل"
   },
   "SocialRecordCopies": {
     "socialRecordActiveCopy": "ISR_ISRVR_00000021",
@@ -301,10 +301,15 @@
     "requestStatusComplete": "مكتمل",
     "desitionStatusAccepted": "مقبول",
     "desitionStatusRejected": "مرفوض",
-    "availableField1" : "الاسم الأول",
-    "availableField2" : "الاسم الثانى",
-    "descriptionCalculatedField" : "وصف العملية الحسابية",
-    "API_Default_ParentKey":"education",
+    "availableField1": "الاسم الأول",
+    "availableField2": "الاسم الثانى",
+    "descriptionCalculatedField": "وصف العملية الحسابية",
+    "glossaryParentBeforeApprove":"SP file",
+    "glossaryParentAfterApprove":"Personal Information",
+    "glossaryFieldNature": "صحي",
+    "glossaryFieldSource":"تكامل",
+    "glossaryFieldAxsonStatus":"Active",
+    "glossaryFieldEmptyValue":"Not specified", "API_Default_ParentKey":"education",
     "API_Default_ParentDomain":"DOMAIN",
     "API_Classification":"public",
     "API_Classification_Ar":"عام",
@@ -320,9 +325,5 @@
     "API_FieldNature_id":"675edd657215dc2057c65774",
     "API_FieldNature_nameEn":"Health",
     "API_FieldNature_nameAr":"صحي"
-
-
-
-  
   }
 }

@@ -10,9 +10,10 @@ export class FieldRequestsPage {
         this.page = page;
         this.search = new SearchPage(this.page);
         this.uploadFilePage = new UploadFilePage(page);
+        this.fieldPage = new FieldPage(this.page);
+
 
         this.defineNewFieldButton = '//button[contains(text(),"تعريف حقل جديد")]';
-        // '//button[contains(@class,"MuiButton-containedPrimary") and contains(@class,"MuiButton-sizeLarge")]';
         
         // Define locators for different field types
         this.integrationFieldBtn = '//ul[contains(@class,"MuiMenu-list")]//li[1]';
@@ -57,6 +58,7 @@ export class FieldRequestsPage {
                 fieldLocator = this.groupFieldBtn ;
                 break;
         }
+       // await this.page.waitForTimeout(10000);
         // Click on the field Btn
         await this.page.waitForSelector(this.defineNewFieldButton, {state: "visible",timeout: 5000});
         await this.page.click(this.defineNewFieldButton);
@@ -71,22 +73,20 @@ export class FieldRequestsPage {
         await this.navigateToFieldPage(fieldData);
         
         if ([Constants.GROUP_FIELD,Constants.INPUT_FIELD, Constants.COMPLEX_FIELD].includes(fieldType)) {
-            var fieldPage = new FieldPage(this.page);
-            var result = await fieldPage.creationField(fieldData, fieldType);
+            var result = await this.fieldPage.creationField(fieldData, fieldType);
             return result ;
         } 
         else if ([Constants.CALCULATION_FIELD].includes(fieldType)) {
-            var fieldPage = new FieldPage(this.page);
-            var result = await fieldPage.calculationField(fieldData, fieldType);
+            var result = await this.fieldPage.calculationField(fieldData, fieldType);
             return result ;
         }   
-        else if ([Constants.INTEGRATION_FIELD].includes(fieldType)) {
-            // Redirect to the list of available fields page if calculation
-            // Redirect to Integration data list page if integrated
-            //
-            return true
+        else if ([Constants.INTEGRATION_FIELD].includes(fieldType)) { 
+            var result = await this.fieldPage.integrationField(fieldData, fieldType);
+            return result ;
         }  
     }
+
+    
 
     /**
      * Verifies the details of a specific field, ensuring the Arabic and English names match the expected values.
