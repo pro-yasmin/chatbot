@@ -220,6 +220,22 @@ export class SimualtionModelPage {
         var result = await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.defineSimulationSuccessMsg);
         return result;
     }
+    async editDraftSimulationModel(simulationModelData) {
+        console.log("Start Editing Simulation Model information Tab one");
+        this.createdSimulationModelArName = simulationModelData.getEditedSimulationModelArName();
+        this.createdSimulationModelEnName = simulationModelData.getEditedSimulationModelEnName();
+        this.createdSimulationModelDescription = simulationModelData.getEditedSimulationModelDescription();
+        await this.page.fill(this.simulationModelArNameField, this.createdSimulationModelArName);
+        await this.page.fill(this.simulationModelEnNameField, this.createdSimulationModelEnName);
+        await this.page.click(this.beneficiaryPartyDdl);
+        await this.page.waitForSelector(this.beneficiaryPartyDdlFirstValue, { visible: true });
+        await this.page.click(this.beneficiaryPartyDdlSecondValue);
+        await this.page.fill(this.simulationModelDescriptionField, this.createdSimulationModelDescription);
+        simulationModelData.setEditedSimulationModelArName(this.createdSimulationModelArName);
+        simulationModelData.setEditedSimulationModelEnName(this.createdSimulationModelEnName);
+        console.log("End Editing Simulation Model information Tab one");
+        return await this.clickSaveAsDraftButton();
+    }
 
 }
 module.exports = { SimualtionModelPage };
