@@ -58,7 +58,7 @@ export class FieldRequestsPage {
                 fieldLocator = this.groupFieldBtn ;
                 break;
         }
-        await this.page.waitForTimeout(8000);
+        await this.page.waitForTimeout(10000);
         // Click on the field Btn
         await this.page.waitForSelector(this.defineNewFieldButton, {state: "visible",timeout: 5000});
         await this.page.click(this.defineNewFieldButton);

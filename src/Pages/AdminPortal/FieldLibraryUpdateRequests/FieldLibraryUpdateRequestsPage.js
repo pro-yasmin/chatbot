@@ -18,7 +18,7 @@ export class FieldLibraryUpdateRequestsPage {
     async navigateToFieldRequestsPage() {
         var button = this.page.locator(this.fieldLibraryUpdateRequestButton);
         await button.waitFor({ state: "visible", timeout: 15000 });
-        await button.click({ force: true });
+        await button.click();
         console.log("Field Requests Page Opened successfully.");   
     }
     

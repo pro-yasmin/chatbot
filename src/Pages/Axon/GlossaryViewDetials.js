@@ -53,7 +53,7 @@ async getGlossaryFieldUiDetails() {
 
     const actual = await this.getGlossaryFieldUiDetails();
 
-    console.log(actual,expected)
+    // console.log(actual,expected)
 
     const allMatch = Object.keys(expected).every(key => actual[key] === expected[key]);
   

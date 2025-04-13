@@ -44,12 +44,15 @@ export class HomePage {
 
 
   async logout() {
-    var userMenuBtn = this.page.locator(this.userMenu);
-    await userMenuBtn.waitFor({ state: 'visible', timeout: 5000 });
-    await userMenuBtn.click();
 
-    var logoutBtn = this.page.locator(this.logoutButton);
+    await this.page.locator(this.userMenu).waitFor({ state: 'visible', timeout: 5000 });
+    await this.page.click(this.userMenu);
+  
+    await this.page.waitForTimeout(2000);
+  
+    const logoutBtn = this.page.locator(this.logoutButton);
     await logoutBtn.waitFor({ state: 'visible', timeout: 5000 });
+  
     await logoutBtn.click();
   }
 

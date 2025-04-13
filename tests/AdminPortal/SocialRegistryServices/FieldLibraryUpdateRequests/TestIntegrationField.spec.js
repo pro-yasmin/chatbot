@@ -89,7 +89,7 @@ test('Integration Field Request Flow With Axon integration', async ({ page }) =>
         var sendRequest = await fieldLibraryUpdateRequestsPage.validateFieldDetailsAndMakeDecision(requestChecks,expectedRequestStatus ,expectedEnablementStatus);
         expect(sendRequest).toBe(true);
 
-        homePage = new HomePage(adminTab);         
+        // homePage = new HomePage(adminTab);         
         await homePage.checkAvatarIsExist();       
         await homePage.logout();
         console.log('Logged out from FIELD MANAGEMENT User');
@@ -108,7 +108,7 @@ test('Integration Field Request Flow With Axon integration', async ({ page }) =>
     });
 
     await test.step('Verify Glossary Field Reflected in Axon', async () => {
-        await page.bringToFront();
+        await adminTab.bringToFront();
         console.log('Back to Axon to Search on glossary Field');
 
         var navigation = await axonHomePage.navigateToSearchPage();
@@ -124,7 +124,7 @@ test('Integration Field Request Flow With Axon integration', async ({ page }) =>
     });
 
     await test.step('Deactivate Integration Field in Admin Portal', async () => {
-        await adminTab.bringToFront();
+        await page.bringToFront();
         console.log('Back to Admin Portal to Deactivate Integration Field');
 
         await homePage.logout();
