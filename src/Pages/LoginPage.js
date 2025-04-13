@@ -14,6 +14,7 @@ export class LoginPage {
     (this.passwordField = '[id="password"]'),
       (this.remeberCheckbox = '//img[@class="check--icon"]');
     this.loginButton = '//input[@id="kc-login"]';
+    this.axsonLoginButton= '[id="fullPageLogin"]'
     this.invalidCredentialsErrorMsg = '//span[@id="input-error"]';
 
     // Selectors for language settings
@@ -43,6 +44,30 @@ export class LoginPage {
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' ,timeout:50000});
     await this.page.waitForTimeout(5000);
     await this.ensureArabicLanguage();
+  }
+
+  /**
+   * Navigates to the admin portal .
+   * @param {string} baseUrl - The URL of the admin portal.
+   * @returns {Promise<void>} - Completes the navigation and language setup.
+   */
+  async gotoAxson(baseUrl) {
+    await this.page.goto(baseUrl);
+    // await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    await this.page.waitForTimeout(3000);
+  }
+
+   /**
+   * Performs user login with the provided credentials.
+   * @param {string} userName - The username for login.
+   * @param {string} password - The password for login.
+   * @returns {Promise<boolean>} - Returns true if the user successfully logs in.
+   */
+   async axsonLogin(userName, password) {
+    await this.page.fill(this.userNameField, userName);
+    await this.page.fill(this.passwordField, password);
+    await this.page.click(this.axsonLoginButton);
+    return true;
   }
 
   /**

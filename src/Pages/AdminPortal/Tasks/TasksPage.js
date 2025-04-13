@@ -33,7 +33,7 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToMyTasksTab() {
-    await  this.page.waitForTimeout(2000);
+    await  this.page.waitForTimeout(10000);
     // await this.page.waitForSelector(this.myTasksTab, { state: "visible",timeout: 20000});
     await this.page.click(this.myTasksTab);
     console.log("Navigate to My tasks tab");
@@ -73,7 +73,7 @@ export class TasksPage {
    */
   async assignTaskToMe(taskNumber) {
     await this.navigateToGroupTasksTab();
-    await this.page.waitForTimeout(5000);
+    await this.page.waitForTimeout(10000);
     let taskRow = [];
     taskRow = await this.search.getRowInTableWithSpecificText(taskNumber);
     var actionlocator = "button:nth-of-type(1)";
@@ -290,9 +290,7 @@ async manageRequestField(requestNumber ,fieldsMap) {
     return false;
   }
 
-
-
-  async checkFieldRequestType(taskRow)
+  async checkFieldRequestType(taskRow )
   {
     //await this.page.waitForTimeout(7000);
     let expectedMsg = global.testConfig.tasks.expectFieldTaskType;

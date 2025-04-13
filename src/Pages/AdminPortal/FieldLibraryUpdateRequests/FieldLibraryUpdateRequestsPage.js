@@ -16,10 +16,10 @@ export class FieldLibraryUpdateRequestsPage {
     }
 
     async navigateToFieldRequestsPage() {
-            await this.page.waitForTimeout(5000);
-            await this.page.waitForSelector(this.fieldLibraryUpdateRequestButton, { state: "visible", timeout: 7000 });
-            await this.page.click(this.fieldLibraryUpdateRequestButton, { force: true });
-            console.log("Field Requests Page Opened successfully.");   
+        var button = this.page.locator(this.fieldLibraryUpdateRequestButton);
+        await button.waitFor({ state: "visible", timeout: 15000 });
+        await button.click({ force: true });
+        console.log("Field Requests Page Opened successfully.");   
     }
     
 
@@ -82,9 +82,7 @@ export class FieldLibraryUpdateRequestsPage {
   async validateFieldDetailsAndMakeDecision(requestChecks ,expectedRequestStatus ,expectedEnablementStatus) {
     
     await this.openViewRequestDetailsPage(requestChecks[0]);
-
     await this.fieldRequestDetialsPage.checkInsideRequestStatus(expectedRequestStatus);
-
     var sendRequest = await this.fieldRequestDetialsPage.verifyFieldEnablementStatusesAndMakeDecision(requestChecks, expectedEnablementStatus);
     if (sendRequest) {
         return true;
@@ -111,17 +109,16 @@ export class FieldLibraryUpdateRequestsPage {
         }
     }
 
- /**
-     * Creates Calculated field.*/
- async createCalculatedFieldRequest(calculatedFieldData) {
+/**
+     * Creates Anther Fields (Calculated field And Integration field).*/
+async createOntherFieldRequest(FieldData ) {
     await this.navigateToFieldRequestsPage();
-    var calculatedFieldCreated = await this.fieldRequestsPage.createField(calculatedFieldData);
-    if ( calculatedFieldCreated )
+    var FieldCreated = await this.fieldRequestsPage.createField(FieldData);
+    if ( FieldCreated )
     {
-        var calculatedFieldID = await this.fieldRequestsPage.checkFieldRowDetails(calculatedFieldData);
-        var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval(calculatedFieldData);
-        console.log('calculated Field created successfully');
-        return [RequestNumber ,calculatedFieldID ]
+        var FieldID = await this.fieldRequestsPage.checkFieldRowDetails(FieldData);
+        var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval(FieldData);
+        return [RequestNumber ,FieldID ]
     }
 }
 

@@ -34,21 +34,19 @@ export class HomePage {
    * @returns {Promise<boolean>} - Returns true if the avatar is visible.
    */
   async checkAvatarIsExist() {
-    await this.page.waitForSelector(this.avatar, {
-      state: "visible",
-      timeout: 300000,
-    });
+    await this.page.waitForSelector(this.avatar, { state: "visible", timeout: 300000 });
     return await this.page.locator(this.avatar).isVisible();
   }
 
 
   async logout() {
-    await this.page.locator(this.userMenu).waitFor({ state: 'visible', timeout: 5000 });
-    await this.page.click(this.userMenu);
-    await this.page.locator(this.logoutButton).waitFor({ state: 'visible', timeout: 5000 });
-    await this.page.click(this.logoutButton);
-    
+    var userMenuBtn = this.page.locator(this.userMenu);
+    await userMenuBtn.waitFor({ state: 'visible', timeout: 5000 });
+    await userMenuBtn.click();
 
+    var logoutBtn = this.page.locator(this.logoutButton);
+    await logoutBtn.waitFor({ state: 'visible', timeout: 5000 });
+    await logoutBtn.click();
   }
 
   /**
@@ -143,7 +141,7 @@ export class HomePage {
     await this.navigateToSocialRegistryServices();
     await this.page.waitForSelector(this.fieldTreeTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.fieldTreeTab);
-    //await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 
   async navigateToFieldLibraryRequests() {
@@ -158,7 +156,6 @@ export class HomePage {
     await this.page.waitForSelector(this.socialRecordCopiesTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.socialRecordCopiesTab);
     await this.page.waitForTimeout(2000);
-    //await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
   
  

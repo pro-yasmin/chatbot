@@ -39,11 +39,11 @@ test.beforeEach(async ({ page }) => {
     });
 });
 
-test('Group and Input Fields Request Flow', async () => {
+test('Calculation Field Request Flow', async () => {
 
         await test.step("Navigate to Field Library Requests and Create Fields", async () => {
             await homePage.navigateToFieldLibraryRequests();
-            requestChecks = await fieldLibraryUpdateRequestsPage.createCalculatedFieldRequest(calculatedFieldData);
+            requestChecks = await fieldLibraryUpdateRequestsPage.createOntherFieldRequest(calculatedFieldData);
             expect(requestChecks[0]).not.toBeNull(); 
         });
 

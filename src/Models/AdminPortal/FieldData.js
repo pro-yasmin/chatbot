@@ -11,7 +11,11 @@ export class FieldData {
     this.arabicFieldDescription = null;
     this.englishFieldDescription = null;
     this.fieldType = null;
-    this.fieldId = null;   
+    this.fieldId = null;  
+    this.glossaryParentName = null ;
+    this.glossaryFieldNature = null;
+    this.glossaryFieldSource = null;
+    this.glossaryAxonStatus = null;
 
   }
 
@@ -75,15 +79,61 @@ setFieldType(value) {
     getCreatedFieldId() {
         return this.fieldId;
     }
-
     // Setter for FieldID
     setCreatedFieldId(Value) {
         this.fieldId = Value;
     }
 
-
-
+    // Getter and Setter for Glossary Parent Name
+     getGlossaryParentName() {
+        if (this.glossaryParentName == null) {
+            this.glossaryParentName =global.testConfig.createField.glossaryParentBeforeApprove;
+        }
+        return this.glossaryParentName;
     }
+    // Setter for Glossary Parent Name
+    setGlossaryParentName(Value) {
+        this.glossaryParentName = Value;
+    }
+    
+    // Getter and Setter for Glossary Field Nature
+     getGlossaryFieldNature() {
+        if (this.glossaryFieldNature == null) {
+            this.glossaryFieldNature =global.testConfig.createField.glossaryFieldEmptyValue;
+        }
+        return this.glossaryFieldNature;
+    }
+    // Setter for Glossary Field Nature
+    setGlossaryFieldNature(Value) {
+        this.glossaryFieldNature = Value;
+    }
+
+    // Getter and Setter for Glossary Field Source
+    getGlossaryFieldSource() {
+        if (this.glossaryFieldSource == null) {
+            this.glossaryFieldSource =global.testConfig.createField.glossaryFieldEmptyValue;
+        }
+        return this.glossaryFieldSource;
+    }
+    // Setter for Glossary Field Source
+    setGlossaryFieldSource(Value) {
+        this.glossaryFieldSource = Value;
+    }
+    
+    // Getter and Setter for Glossary Axon Status
+    getGlossaryAxonStatus() {
+        if (this.glossaryAxonStatus == null) {
+            this.glossaryAxonStatus =global.testConfig.createField.glossaryFieldAxsonStatus;
+        }
+        return this.glossaryAxonStatus;
+    }
+    // Setter for Glossary Axon Status
+    setGlossaryAxonStatus(Value) {
+        this.glossaryAxonStatus = Value;
+    }
+    
+
+}
 
 
 module.exports = { FieldData };
