@@ -5,6 +5,7 @@ require("./global.js"); // Load the global configuration
  * @see https://playwright.dev/docs/test-configuration
  */
 
+
 const ENV = "uat";
 
 module.exports = defineConfig({
