@@ -255,7 +255,7 @@ async ensureFieldTaskStatus(requestNumber ,fieldsMap) {
  */
 
 // take map and pass it to 282
-async manageRequestField(requestNumber ,fieldsMap) {
+async manageRequestField(requestNumber ,fieldsMap, reqType) {
   let status;
   let allFieldsProcessed = true;
 
@@ -263,9 +263,12 @@ async manageRequestField(requestNumber ,fieldsMap) {
   //await this.navigateToMyCompletedTasksTab();
   await this.navigateToMyTasksTab();
   
+  await this.page.waitForTimeout(3000);
+
   let taskRow = await this.search.getRowInTableWithSpecificText(requestNumber);
-  await this.checkFieldRequestType(taskRow);
+  await this.checkFieldRequestType(taskRow,reqType);
   var actionLocator =  "button";
+
   await this.search.clickRowAction(taskRow,this.tableActions, actionLocator);
   console.log(`Navigate To Task Details Page Successfully`);
 
@@ -290,21 +293,32 @@ async manageRequestField(requestNumber ,fieldsMap) {
     return false;
   }
 
-  async checkFieldRequestType(taskRow )
+
+
+  async checkFieldRequestType(taskRow, requestType)
   {
     //await this.page.waitForTimeout(7000);
-    let expectedMsg = global.testConfig.tasks.expectFieldTaskType;
+    let expectedFieldMsg = global.testConfig.tasks.expectFieldTaskType;
+    let expectedDomainMsg= global.testConfig.tasks.expectedSubDomainTaskType;
     let actionLocator = taskRow[3].tdLocator; 
     let actualType = await actionLocator.textContent();
-
-    if (actualType.trim() === expectedMsg.trim()) {
-      console.log(`Task Request Type is ${actualType}`);
-      return true;
-   }
-   return false
+    
+    if(requestType==Constants.FIELDS_REQUEST){
+      if (actualType.trim() === expectedFieldMsg.trim()) {
+        console.log(`Task Request Type is ${actualType}`);
+        return true;
+     }
+     return false
+    
+    }else {
+      if (actualType.trim() === expectedDomainMsg.trim()) {
+        console.log(`Task Request Type is ${actualType}`);
+        return true;
+     }
+     return false
+    }
+    }
+    
   
-  }
-  
-
 }
 module.exports = { TasksPage };

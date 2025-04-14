@@ -41,7 +41,7 @@ export class TaskDetailsPage {
     this.confirmTaskMsgTitle = '//span[@id="modal-modal-title"]';
     this.backToTasksBtn = '//button[@data-testid="modal-primary-button"]';
 
-    //selectors for fields Tasks
+    //selectors for fields and sub domains Tasks
     this.fieldRequestStatusIcon = '//span[@data-testid="status-processing"]';
     this.fieldRequestStatus = "//label[text()='حالة الطلب']//following::span[1]";
     this.tableActions='tag';
@@ -51,7 +51,8 @@ export class TaskDetailsPage {
     this.ensureFieldTaskNotesFieldApprove="//button[@type='submit']",
     this.ensureFieldTaskNotesFieldReject="//button[@type='submit']",
     this.backToTasksBtn = '//button[@data-testid="modal-primary-button"]',
-    this.processingRequestBtn='//button[contains(text(),"معالجة طلب تحديث مكتبة الحقول")]'
+    //this.processingRequestBtn='//button[contains(text(),"معالجة طلب تحديث مكتبة الحقول")]'
+    this.processingRequestBtn='//button[contains(@class,"iButton-containedPrimary")]' //yasmine
   }
 
   /**
@@ -135,7 +136,10 @@ export class TaskDetailsPage {
     await popUpMsg.inputPopUpMessage(this.noteOnTaskField, this.acceptNoteOnTaskBtn,global.testConfig.taskDetails.note);
     await popUpMsg.popUpMessage(this.acceptEnsureNoteMsgBtn ,global.testConfig.taskDetails.ensureNoteMsg);
     await popUpMsg.popUpMessage(this.acceptConfirmNoteMsgBtn,global.testConfig.taskDetails.confirmNoteMsg);
+   
+
     let result = await this.checkNoteIsAdded(global.testConfig.taskDetails.note);
+    await this.page.click(this.addNoteOnTask);
     return result;
   }
 
@@ -207,6 +211,7 @@ async completeFieldTask(actionType) {
   await popUpMsg.inputPopUpMessage(this.ensureFieldTaskNotesField,notesFieldLocator,global.testConfig.createField.addCompleteTaskNote);
   var result = await popUpMsg.popUpMessage(this.backToTasksBtn, confirmFieldMsg);
 
+  await this.page.click(this.backToTasksBtn); //yasmine
   if (result) {
       console.log(`The Field ${actionType === Constants.APPROVE ? 'Accepted' : 'Rejected'} Successfully.`);
   }
@@ -251,7 +256,7 @@ let fieldsMatched = true ;
       // Retrieve details for both rows using their row IDs
     let rowDetails = await this.search.getRowInTableWithSpecificText(fieldID);
       // Assuming the enablement status
-    let rowStatus = await rowDetails[5].tdLocator.textContent();
+    let rowStatus = await rowDetails[4].tdLocator.textContent();
     console.log(`Row Field Status (ID:  ${fieldID} ) is ${rowStatus}`);
 
       if (rowStatus.trim() === expectedStatus.trim()) {
