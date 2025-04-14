@@ -24,7 +24,7 @@ export class HomePage {
     this.subDomainsLibraryTab = '//a[@data-testid="submenu-sub-domains-library"]';
     this.fieldLibraryTab = '//a[@data-testid="submenu-fields-library"]';
     this.fieldTreeTab = '//a[@data-testid="submenu-fields-tree"]';
-    this.fieldLibraryUpdateRequestsTab = '//a[@data-testid="submenu-sub-domains-library"]';
+    this.fieldLibraryUpdateRequestsTab = '//a[@data-testid="submenu-field-library-update-requests"]';
     this.socialRecordCopiesTab = '//a[@data-testid="submenu-social-log-copies"]';
     this.requestUpdateSocialRecordCopiesTab = '//a[@data-testid="submenu-social-record-copies-requests"]';
     this.subDomainLibraryUpdateRequestTab='//a[@data-testid="menu-sub-domain-request"]';
@@ -134,10 +134,11 @@ export class HomePage {
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
   async navigateToFieldLibrary() {
-    await this.navigateToSocialRegistryServices();
+    await this.navigateToSocialRegistryServices(); 
     await this.page.waitForSelector(this.fieldLibraryTab, { state: "visible", timeout: 30000 });
     await this.page.click(this.fieldLibraryTab);
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+   // await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+   await this.page.waitForTimeout(5000);
   }
 
   async navigateToFieldTree() {
