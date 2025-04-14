@@ -11,9 +11,12 @@ let homePage;
 let stateMachineManagmentPage;
 let stateMachineData;
 
+let context;
+let page;
 
-test('Create and View New State Machine', async ({ page }) => {
-
+test('Create and View New State Machine', async ({ browser}) => {
+    context = await browser.newContext();
+    page = await context.newPage();
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     stateMachineManagmentPage = new StateMachineManagmentPage(page);
@@ -52,6 +55,7 @@ test('Create and View New State Machine', async ({ page }) => {
         await homePage.logout();
         await page.close();
         console.log('Logout done Successfully');
+        await context.close();
     });
 
 });

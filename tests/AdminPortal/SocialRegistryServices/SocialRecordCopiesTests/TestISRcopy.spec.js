@@ -9,7 +9,11 @@ let homePage;
 let socialRecordCopiesManagementPage;
 let socialRecordCopiesData;
 
-test.beforeEach(async ({ page }) => {
+let context;
+let page;
+test.beforeEach(async ({browser }) => {
+    context = await browser.newContext();
+    page = await context.newPage();
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     socialRecordCopiesManagementPage = new SocialRecordCopiesManagementPage(page);
@@ -28,7 +32,7 @@ test.beforeEach(async ({ page }) => {
     });
 });
 
-test('Remove ISR copy with status draft', async ({ page }) => {
+test('Remove ISR copy with status draft', async () => {
     // Step1: Navigate to Social Record Managment page
     await test.step('Navigate to Social Record Managment page', async () => {
         await homePage.navigateToSocialRecordCopies();
@@ -49,7 +53,7 @@ test('Remove ISR copy with status draft', async ({ page }) => {
     });
 });
 
-test('Add ISR copy with status under Review', async ({ page }) => {
+test('Add ISR copy with status under Review', async () => {
     // Step1: Navigate to Social Record Managment page
     await test.step('Navigate to Social Record Managment page', async () => {
         await homePage.navigateToSocialRecordCopies();
@@ -64,7 +68,7 @@ test('Add ISR copy with status under Review', async ({ page }) => {
 });
 
 
-test('Add ISR copy And Verify ISR copy details', async ({ page }) => {
+test('Add ISR copy And Verify ISR copy details', async () => {
     // Step1: Navigate to Social Record Managment page
     await test.step('Navigate to Social Record Managment page', async () => {
         await homePage.navigateToSocialRecordCopies();
@@ -92,6 +96,7 @@ test.afterEach(async () => {
     await test.step("Logout from Admin Portal", async () => {
         await homePage.logout();
         console.log("User Logout Successfully");
+        await context.close();
     });
 
 });

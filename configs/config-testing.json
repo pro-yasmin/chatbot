@@ -18,13 +18,16 @@
     "expectStreamTaskType": "اعتماد مسار",
     "expectMainProgramTaskType": "اعتماد برنامج رئيسي",
     "expectSubProgramTaskType": "اعتماد برنامج فرعي",
-    "expectBenefitTaskType": "اعتماد إعانة"
+    "expectBenefitTaskType": "اعتماد إعانة",
+     "executionLogApproval": "اعتماد سجل تنفيذ",
+    "prepareSimulationModel": "تجهيز نموذج المحاكاة"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",
     "enableStatusActive": "متاح",
     "ReadyForExecution": "جاهز للتنفيذ",
     "Approved": "معتمد",
+    "Completed": "مكتمل",
     "note": "تم إضافة ملاحظة جديدة",
     "ensureNoteMsg": "هل أنت متأكد من إضافة الملاحظة؟",
     "confirmNoteMsg": "تم إضافة الملاحظة بنجاح",
@@ -101,9 +104,9 @@
     "periodAfterExistCode": "",
     "reApplyAfterExistCode": "",
     "viewapplicationEnablementPerm": "دائم",
-    "viewEnablementStatus" :"محجوب",
-    "viewApprovalStatus":"معالجة",
-    "viewActivationStatus":"خامل"
+    "viewEnablementStatus": "محجوب",
+    "viewApprovalStatus": "معالجة",
+    "viewActivationStatus": "خامل"
   },
   "lookUps": {
     "firstTabArabicName": "قائمه مرجعيه اولى",
@@ -178,10 +181,10 @@
     "temporaryTo": null,
     "requireRegisterApplication": true,
     "applicationChannelCodes": ["15"],
-    "viewTargetApproach":"شامل",
-    "viewEnablementStatus" :"محجوب",
-    "viewApprovalStatus":"معالجة",
-    "viewActivationStatus":"خامل"
+    "viewTargetApproach": "شامل",
+    "viewEnablementStatus": "محجوب",
+    "viewApprovalStatus": "معالجة",
+    "viewActivationStatus": "خامل"
   },
   "stateMachine": {
     "stateManagmentArabicName": "إدارة الحالة باللغة العربية",
@@ -198,19 +201,24 @@
     "stateMachineStatusAvailable": "متاح",
     "stateMachineEditedSuccessMsg": "تم تعديل دورة الحالة بنجاح."
   },
-  "FieldLibrary":{
+  "FieldLibrary": {
     "unlockedField": "ISR_FLib_00001412",
     "lockedField": "ISR_FLib_00001394",
     "fieldEnablementStatusDeactivated": "محجوب",
     "fieldEnablementStatusActivated": "متاح",
-    "activateConfirmationMsg": "هل أنت متأكد أنك تريد إتاحة اوتو حقل؟",
-    "deactivateConfirmationMsg": "هل أنت متأكد أنك تريد حجب اوتو حقل؟",
+    "activateConfirmationMsg": "هل أنت متأكد أنك تريد إتاحة",
+    "deactivateConfirmationMsg": "هل أنت متأكد أنك تريد حجب",
     "fieldActivatedSuccessMsg": "تم إتاحة الحقل بنجاح ويمكن استخدامه في المنصة.",
     "fieldDeactivatedSuccessMsg": "تم حجب الحقل بنجاح ولا يمكن استخدامه في المنصة.",
     "fieldActivationErrorMsg": "لا يمكن حجب الحقل حيث إنه مرتبط بمكونات أخرى في النظام.",
-    "deactivateConfirmationMsgForLockedField": "هل أنت متأكد أنك تريد حجب تجربة اكسون مجموعة؟"
+    "deactivateConfirmationMsgForLockedField": "هل أنت متأكد أنك تريد حجب",
+    "calculated": "حسابي",
+    "group": "مجموعة",
+    "complex": "مركب",
+    "input": "إدخال",
+    "integration": "تكامل"
   },
-  "SocialRecordCopies":{
+  "SocialRecordCopies": {
     "socialRecordActiveCopy": "ISR_ISRVR_00000345",
     "socialRecordActiveStatus": "مفعلة",
     "socialRecordDraftStatus": "مسودة",
@@ -224,7 +232,7 @@
     "schemaUpdateSuccessMsg": "تم إرسال تحديث النسخة للموافقة بنجاح.",
     "newAddedFieldTag": "مضاف حديثًا"
   },
-  "SimulationModels":{
+  "SimulationModels": {
     "simulationModelArName": "اسم المحاكاه",
     "simulationModelEnName": "Simulation",
     "simulationModelDescription": "وصف المحاكاه",
@@ -266,7 +274,9 @@
     "SendForApprovalSuccessMsg": "تم إرسال سجل التنفيذ للاعتماد بنجاح",
     "sentForApprovalTask": "ELG_EXEC",
     "approveExecutionSimulationBtnSuccessMsgText": "تم قبول اعتماد سجل تنفيذ",
-    "saveAsDraftSuccessMsg": "تم حفظ تعريف بيانات نموذج المحاكاة كمسودة بنجاح"
+    "saveAsDraftSuccessMsg": "تم حفظ تعريف بيانات نموذج المحاكاة كمسودة بنجاح",
+    "deleteDraftSimulationModelConfirmationMsg": "هل انت متأكد من حذف نسخة المسودة؟",
+    "deleteDraftSimulationModelSuccessMsg": "تم حذف المسودة بنجاح"
   },
   "createField": {
     "fieldArabicName": "حقل جديد",
@@ -289,6 +299,7 @@
     "availableField1" : "الاسم الأول",
     "availableField2" : "الاسم الثانى",
     "descriptionCalculatedField" : "وصف العملية الحسابية",
+     "integrationDataList": "نص",
     "API_Default_ParentKey":"personalInformation",
     "API_Default_ParentDomain":"DOMAIN",
     "API_Classification":"public",

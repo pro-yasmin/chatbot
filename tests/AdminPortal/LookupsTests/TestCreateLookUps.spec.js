@@ -10,10 +10,13 @@ let loginPage;
 let homePage;
 let lookupsManagmentPage;
 let lookupData;
+let context;
+let page;
 
 
-test('Create and View New Lookup', async ({ page }) => {
-
+test('Create and View New Lookup', async ({browser}) => {
+    context = await browser.newContext();
+    page = await context.newPage();
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     lookupsManagmentPage = new LookupsManagmentPage(page);
@@ -49,6 +52,7 @@ test('Create and View New Lookup', async ({ page }) => {
     await test.step('Logout from Admin Portal', async () => {
         await homePage.logout();
         console.log('Logout done Successfully');
+        await context.close();
     });
 
 });

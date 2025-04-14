@@ -25,6 +25,7 @@ export class SimulationModelManagementPage {
         //Execution Popups buttons
         this.popUpExecuteRexecuteButton = "//button[contains(text(),'تنفيذ النموذج')]";
         this.popUpGotoExecutions = "//button[contains(text(),'استعراض سجلات التنفيذ')]";
+        this.popUpYesButton = '//button[@data-testid="modal-primary-button"]';
         this.defineSimulationModelButton = '//button[@data-testid="define-simulation-model"]';
         this.searchInput = '//form[@data-testid="search-input"]//input';
         this.threeDotsMenu = '//div[@data-testid="three-dots-menu"]';
@@ -32,16 +33,24 @@ export class SimulationModelManagementPage {
         this.fieldEnablementStatus = '//div[@data-testid="tag"]';
         this.tableActions = '(//div[contains(@class, "MuiStack-root")])[38]';
 
-
         this.viewButton = '(//button[@data-testid="table-action-Eye"])[1]';
         this.editButton = '(//button[@data-testid="table-action-Edit2"])[1]';
         this.ThreeDotsActionsButton = '(//button[@data-testid="three-dots-menu"])[1]';
         this.ModelVersionsButton = '//span[@data-testid="three-dots-menu-item-3"]';
         this.editVariablesButton = '//span[@data-testid="three-dots-menu-item-1"]';
-        this.executeSimulationModelButton = '//span[@data-testid="three-dots-menu-item-2"]';
+        this.executeSimulationModelButton = '//span[@data-testid="three-dots-menu-item-0"]';
+
+        //filter
+        this.filterButton = '//button[@data-testid="toolbar-filter-button"]';
+        this.beneficiaryPartyDdl = '//div[@id="mui-component-select-beneficiaryParty"]';
+        this.beneficiaryPartyOption2 = '//li[@data-value="a2"]';
+        this.showResultsButton = '//button[@data-testid="submit-button"]';
 
         //draft Simulation Model tab
         this.draftSimulationModelTab = '//button[@data-testid="tab-1"]';
+        this.deleteDraftButton = '(//button[@data-testid="table-action-Trash"])[1]';
+        this.editDraftButton = '(//button[@data-testid="table-action-Edit2"])[1]';
+        this.deleteSuccessMsg = '//div[contains(@class, "MuiAlert-message")]//span';
     }
 
     async clickDefineSimulationModel() {
@@ -49,7 +58,7 @@ export class SimulationModelManagementPage {
         await this.page.click(this.defineSimulationModelButton);
     }
     async clickDraftSimulationModelTab() {
-        await this.page.click(this.defineSimulationModelButton);
+        await this.page.click(this.draftSimulationModelTab);
         await this.page.waitForTimeout(1000);
     }
     async defineSimulationModel(simulationModelData) {
@@ -59,10 +68,60 @@ export class SimulationModelManagementPage {
     async defineSimulationModelAsDraft(simulationModelData) {
         await this.clickDraftSimulationModelTab();
         await this.clickDefineSimulationModel();
-        let result = await this.simualtionModelPage.fillModelDataTab(simulationModelData);
-        await this.simualtionModelPage.clickSaveAsDraftButton();
-        return result;
+        let firstTabFilling = await this.simualtionModelPage.fillModelDataTab(simulationModelData);
+        let saveAsDraftClicikng = await this.simualtionModelPage.clickSaveAsDraftButton();
+        return firstTabFilling, saveAsDraftClicikng;
     }
+    async checkDraftSimulationModelCreated(simulationModelData, editedDraftSimulationModel) {
+        await this.clickDraftSimulationModelTab();
+        let arabicTd;
+        let englishTd;
+
+        let simulationModelArabicName;
+        let simulationModelEnglishName;
+        let simulationModelRow = [];
+        if (editedDraftSimulationModel) {
+            simulationModelRow = await this.search.searchOnUniqueRow(this.searchInput, simulationModelData.getEditedSimulationModelArName());
+        }
+        else
+            simulationModelRow = await this.search.searchOnUniqueRow(this.searchInput, simulationModelData.getSimulationModelArName());
+
+        if (simulationModelRow && simulationModelRow.length > 0) {
+            arabicTd = simulationModelRow[0].tdLocator;
+            simulationModelArabicName = arabicTd.locator("span");
+            await simulationModelArabicName.waitFor({ state: "visible" });
+            var actualSimulationModelArabicName = await simulationModelArabicName.textContent();
+
+            console.log("Actual Arabic Name: ", actualSimulationModelArabicName);
+
+            englishTd = simulationModelRow[1].tdLocator;
+            simulationModelEnglishName = englishTd.locator("span");
+            await simulationModelEnglishName.waitFor({ state: "visible" });
+            var actualSimulationModelEnglishName = await simulationModelEnglishName.textContent();
+
+            console.log("Actual English Name: ", actualSimulationModelEnglishName);
+        }
+        if (editedDraftSimulationModel) {
+            if (actualSimulationModelArabicName === simulationModelData.getEditedSimulationModelArName() &&
+                actualSimulationModelEnglishName === simulationModelData.getEditedSimulationModelEnName()
+            ) {
+                console.log("Draft Simulation Model Information after edit matched successfully.");
+                return true;
+            }
+            return false;
+        }
+        else {
+            if (
+                actualSimulationModelArabicName === simulationModelData.getSimulationModelArName() &&
+                actualSimulationModelEnglishName === simulationModelData.getSimulationModelEnName()
+            ) {
+                console.log("Draft Simulation Model Information matched successfully.");
+                return true;
+            }
+            return false;
+        }
+    }
+
     async checkNewSimulationModelAdded(simulationModelData, simulationModelstatusActive, editedSimulationModel, simulationModelstatusExecuted) {
         let arabicTd;
         let englishTd;
@@ -303,7 +362,6 @@ export class SimulationModelManagementPage {
      */
     async click3DotsActionsButton(simulationModelData) {
         await this.search.searchOnUniqueRow(this.searchInput, simulationModelData.getCreatedSimulationModelId());
-        //tobe removed after adding data-testid
         await this.page.click(this.ThreeDotsActionsButton);
     }
 
@@ -350,6 +408,7 @@ export class SimulationModelManagementPage {
     async editSimulationModelVariables(simulationModelData) {
         await this.click3DotsActionsButton(simulationModelData);
         console.log('Actions Simulaion Model Button Clicked');
+        await this.page.waitForTimeout(4000);
         await this.page.click(this.editVariablesButton);
         console.log('Edit Variables Button Clicked');
         return await this.simulationModelEditVariablesPage.editVariable(simulationModelData);
@@ -417,6 +476,119 @@ export class SimulationModelManagementPage {
 
     async getSimulationModelExecutionNumber(request, simulationModelData) {
         return await this.viewExecutionLogsRequestsPage.getExecutionNumber(request, simulationModelData);
+    }
+
+    async deleteDraftSimulaionModel(simulationModelData) {
+        await this.page.waitForTimeout(2000);
+        let simulationModelRow = [];
+        simulationModelRow = await this.search.searchOnUniqueRow(this.searchInput, simulationModelData.getSimulationModelArName());
+
+        if (simulationModelRow && simulationModelRow.length > 0) {
+            await this.page.click(this.deleteDraftButton);
+            await this.popUpMsg.popUpMessage(this.popUpYesButton, global.testConfig.SimulationModels.deleteDraftSimulationModelConfirmationMsg);
+            await this.page.waitForSelector(this.deleteSuccessMsg, { visible: true });
+            const successMessage = await this.page.textContent(this.deleteSuccessMsg);
+            if (successMessage === global.testConfig.SimulationModels.deleteDraftSimulationModelSuccessMsg) {
+                console.log("Delete Success Message: ", successMessage);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    async editDraftSimulaionModel(simulationModelData) {
+        await this.page.waitForTimeout(2000);
+        let simulationModelRow = [];
+        simulationModelRow = await this.search.searchOnUniqueRow(this.searchInput, simulationModelData.getSimulationModelArName());
+
+        if (simulationModelRow && simulationModelRow.length > 0) {
+            await this.page.click(this.editDraftButton);
+            let editResult = await this.simualtionModelPage.editDraftSimulationModel(simulationModelData);
+            return editResult;
+        }
+        return false;
+    }
+
+    async filterNewSimulationModelAdded(simulationModelData) {
+        let arabicTd;
+        let englishTd;
+        let statusTd;
+        let activationStatusTd;
+
+        let simulationModelArabicName;
+        let simulationModelEnglishName;
+        let simulationModelStatus;
+        let simulationModelActivationStatus;
+        let simulationModelRow = [];
+
+        simulationModelRow = await this.search.searchOnUniqueRow(this.searchInput, simulationModelData.getSimulationModelArName());
+        await this.page.click(this.filterButton);
+        await this.page.waitForSelector(this.beneficiaryPartyDdl, { state: "visible", timeout: 5000 });
+        await this.page.click(this.beneficiaryPartyDdl);
+        await this.page.waitForSelector(this.beneficiaryPartyOption2, { state: "visible", timeout: 5000 });
+        await this.page.click(this.beneficiaryPartyOption2);
+        await this.page.click(this.showResultsButton);
+        await this.page.waitForTimeout(2000);
+
+
+        if (simulationModelRow && simulationModelRow.length > 0) {
+            arabicTd = simulationModelRow[1].tdLocator;
+            simulationModelArabicName = arabicTd.locator("span");
+            await simulationModelArabicName.waitFor({ state: "visible" });
+            var actualSimulationModelArabicName = await simulationModelArabicName.textContent();
+
+            console.log("Actual Arabic Name: ", actualSimulationModelArabicName);
+            console.log("Expected Arabic Name: ", simulationModelData.getSimulationModelArName());
+
+            englishTd = simulationModelRow[2].tdLocator;
+            simulationModelEnglishName = englishTd.locator("span");
+            await simulationModelEnglishName.waitFor({ state: "visible" });
+            var actualSimulationModelEnglishName = await simulationModelEnglishName.textContent();
+
+            console.log("Actual English Name: ", actualSimulationModelEnglishName);
+            console.log("Expected English Name: ", simulationModelData.getSimulationModelEnName());
+
+            statusTd = simulationModelRow[7].tdLocator;
+            simulationModelStatus = statusTd.locator("span");
+            await simulationModelStatus.waitFor({ state: "visible" });
+            var actualSimulationModelStatus = await simulationModelStatus.textContent();
+
+            console.log("Actual Status: ", actualSimulationModelStatus);
+
+            activationStatusTd = simulationModelRow[8].tdLocator;
+            simulationModelActivationStatus = activationStatusTd.locator("span");
+            await simulationModelActivationStatus.waitFor({ state: "visible" });
+            var actualSimulationModelActivationStatus = await simulationModelActivationStatus.textContent();
+
+            console.log("Actual Activation Status: ", actualSimulationModelActivationStatus);
+        }
+
+        if (
+            actualSimulationModelArabicName === simulationModelData.getSimulationModelArName() &&
+            actualSimulationModelEnglishName === simulationModelData.getSimulationModelEnName() &&
+            actualSimulationModelStatus === global.testConfig.SimulationModels.simulationModelStatusReady &&
+                actualSimulationModelActivationStatus === global.testConfig.SimulationModels.acivationStatusEnabled
+        ) {
+            console.log("Simulation Model Information matched successfully.");
+            let simulationModelId = await simulationModelRow[0].tdLocator.textContent();
+            simulationModelData.setCreatedSimulationModelEditedId(simulationModelId);
+            console.log("Edited simulation Model ID set in simulationModelData: " + simulationModelData.getCreatedSimulationModelEditedId());
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Validates that the simulation Model page is opened.
+     * @param {Object} simulationModelData - The data required to identify the simulation Model.
+     * @returns {Promise<void>} - Resolves when the validation is complete.
+     */
+    async VerifySimulationModelVersionsDetails(simulationModelData) {
+        await this.page.click(this.ThreeDotsActionsButton);
+        console.log('Actions Simulaion Model Button Clicked');
+        await this.page.click(this.ModelVersionsButton);
+        console.log('Simulaion Model Versions Button Clicked');
+        return await this.simulationModelVersionsViewPage.filterSimulationModelVersions(simulationModelData);
     }
 
 }

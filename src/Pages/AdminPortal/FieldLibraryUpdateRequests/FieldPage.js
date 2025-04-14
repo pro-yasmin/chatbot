@@ -64,13 +64,14 @@ export class FieldPage {
     var createdFieldEnName = fieldData.getEnglishFieldName();
     var fieldType = fieldData.getFieldType();
 
-
     // Fill Field Data Definition section
-    await this.page.fill(this.arabicFieldName, createdFieldArName);
-    await this.page.fill(this.englishFieldName, createdFieldEnName);
+    if (![Constants.INTEGRATION_FIELD].includes(fieldType)) {
+      await this.page.fill(this.arabicFieldName, createdFieldArName);
+      await this.page.fill(this.englishFieldName, createdFieldEnName);}
+
     await this.selectDropdownOption(this.fieldTypeMenu , 1);
 
-    if ([Constants.COMPLEX_FIELD, Constants.GROUP_FIELD, Constants.CALCULATION_FIELD].includes(fieldType)) {
+    if ([Constants.COMPLEX_FIELD, Constants.GROUP_FIELD, Constants.CALCULATION_FIELD, Constants.INTEGRATION_FIELD].includes(fieldType)) {
       await this.selectParentOption(this.parentLocator);
     }
     await this.selectDropdownOption(this.fieldNature,2);
@@ -81,7 +82,15 @@ export class FieldPage {
 
     fieldData.setArabicFieldName(createdFieldArName);
     fieldData.setEnglishFieldName(createdFieldEnName);
+
+    fieldData.setGlossaryParentName(global.testConfig.createField.glossaryParentAfterApprove);
+    fieldData.setGlossaryFieldNature(global.testConfig.createField.glossaryFieldNature); 
+    fieldData.setGlossaryFieldSource(global.testConfig.createField.glossaryFieldSource);
+    fieldData.setGlossaryAxonStatus(global.testConfig.createField.glossaryFieldAxsonStatus);
+
     console.log("Filling Data Definition Ending ")
+
+
   }
 
   /**
@@ -94,17 +103,19 @@ export class FieldPage {
 
     // Fill Field Data Definition section
     await this.selectDropdownOption(this.classification , 1);
-    await this.page.click(this.requierdOptionBtn);
-    await this.page.click(this.multipleFieldBtn);
+    if (![Constants.INTEGRATION_FIELD].includes(fieldType)) {
+        await this.page.click(this.requierdOptionBtn);
+        await this.page.click(this.multipleFieldBtn);
+      }
     await this.selectDropdownOption(this.periodicDataUpdate ,3);
-    await this.selectDropdownOption(this.privacy ,4 );
-    await this.selectDropdownOption(this.impactDegree  ,5 );
+    if (![Constants.INTEGRATION_FIELD].includes(fieldType)) {
+      await this.selectDropdownOption(this.privacy ,4 );
+      await this.selectDropdownOption(this.impactDegree  ,5 );
+    }
     await this.selectDropdownOption(this.DataMenuesettingsSeverity ,6);
-
     if ([Constants.CALCULATION_FIELD].includes(fieldType)) {
       await this.page.fill(this.descriptionCalculatedField, global.testConfig.createField.descriptionCalculatedField);
     }
-
     await this.page.click(this.fieldSettingDefinationBtn);
     console.log("Filling Field Settings Ending ");
   }
@@ -128,7 +139,7 @@ export class FieldPage {
     if ([Constants.GROUP_FIELD].includes(fieldType)) {
       var result = await popUpMsg.popUpMessage( this.backToFieldRequestPage , global.testConfig.createField.createAnotherFieldMsg);  }
     else 
-      if ([Constants.INPUT_FIELD ,Constants.CALCULATION_FIELD].includes(fieldType)) {
+      if ([Constants.INPUT_FIELD ,Constants.CALCULATION_FIELD,Constants.INTEGRATION_FIELD].includes(fieldType)) {
     var result = await popUpMsg.popUpMessage(this.doneButton , global.testConfig.createField.confirmaCreateFieldMsg);}
     return result;
   }
@@ -146,7 +157,7 @@ export class FieldPage {
     var optionsLocator = this.page.locator(menuOptionsLocator);
     await optionsLocator.first().waitFor({ state: "visible", timeout: 5000 });
     await optionsLocator.first().click({ force: true });
-    await this.page.waitForTimeout(500);
+    await this.page.waitForTimeout(1000);
 }
 
   /**
@@ -157,11 +168,11 @@ export class FieldPage {
   async selectParentOption(parentLocatorField) {
     await this.page.click(parentLocatorField);
     await this.page.waitForTimeout(1000);
-    const socialRecordItem = this.page.locator('//div[contains(@class, "MuiTreeItem-content")]//span[contains(text(), "السجل الاجتماعي  الموحد")]');
+    const socialRecordItem = this.page.locator('//span[contains(text(), "السجل الاجتماعي  الموحد")]');
     await socialRecordItem.waitFor({ state: 'visible', timeout: 5000 });
     await socialRecordItem.click();    
     await this.page.waitForTimeout(1000);
-    const personalDataItem = this.page.locator('//div[contains(@class, "MuiTreeItem-content")]//span[contains(text(), "البيانات الشخصية")]');
+    const personalDataItem = this.page.locator('//span[contains(text(), "البيانات الشخصية")]');
     await personalDataItem.waitFor({ state: 'visible', timeout: 5000 });
     await personalDataItem.click();
     await this.page.waitForTimeout(1000);
@@ -198,13 +209,39 @@ export class FieldPage {
 
 
 /**
-   * Creates a new lookup entry by filling in the necessary information.
-   * @param {Object} lookupData - The data required to create the lookup.
-   * @returns {Promise<boolean>} - Returns true if the lookup design and item creation were successful, otherwise false.
+   * Creates a new calculation Field by filling in the necessary information.
    */
 async calculationField(fieldData, fieldType) {
   // Common steps for all applicable field types
     await this.listOfAvailableFields();
+    var fieldCreated =await this.creationField(fieldData, fieldType); 
+    return fieldCreated ; 
+}
+
+
+
+async integrationDataList (axsonFieldName) {  
+
+  var allPageButtons = this.page.locator('button[data-testid="paginationItem"]:not([aria-label*="next"])');
+  var lastPageButton = allPageButtons.last();
+  await lastPageButton.click(); 
+
+  var row = await this.search.getRowInTableWithSpecificText(axsonFieldName);
+  var firstTd  = row[0].tdLocator;
+  const radioBtn = firstTd.locator('div>>input');
+  await radioBtn.click(); 
+    var selectIntegrationField = await this.page.locator('//button[@data-testid="next-button"]').click();
+    return selectIntegrationField; 
+  }
+
+
+
+/**
+   * Creates a new Integration Field by filling in the necessary information.
+   */
+async integrationField(fieldData,fieldType) {
+     let fieldArName = fieldData.getArabicFieldName();
+    await this.integrationDataList(fieldArName);
     var fieldCreated =await this.creationField(fieldData, fieldType); 
     return fieldCreated ; 
 }

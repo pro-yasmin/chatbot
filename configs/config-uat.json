@@ -20,7 +20,9 @@
     "expectSubProgramTaskType": "اعتماد برنامج فرعي",
     "expectBenefitTaskType": "اعتماد إعانة",
     "expectFieldTaskType": "تحديث مكتبة الحقول",
-    "expectedSubDomainTaskTypetest": "طلب تحديث الفئات",
+    "executionLogApproval": "اعتماد سجل تنفيذ",
+    "prepareSimulationModel": "تجهيز نموذج المحاكاة",
+     "expectedSubDomainTaskTypetest": "طلب تحديث الفئات",
     "expectedSubDomainTaskType":"DOMAIN_LIBRARY_UPDATE"
   },
   "taskDetails": {
@@ -28,6 +30,7 @@
     "enableStatusActive": "متاح",
     "ReadyForExecution": "جاهز للتنفيذ",
     "Approved": "معتمد",
+    "Completed": "مكتمل",
     "note": "تم إضافة ملاحظة جديدة",
     "ensureNoteMsg": "هل أنت متأكد من إضافة الملاحظة؟",
     "confirmNoteMsg": "تم إضافة الملاحظة بنجاح",
@@ -212,11 +215,11 @@
     "fieldDeactivatedSuccessMsg": "تم حجب الحقل بنجاح ولا يمكن استخدامه في المنصة.",
     "fieldActivationErrorMsg": "لا يمكن حجب الحقل حيث إنه مرتبط بمكونات أخرى في النظام.",
     "deactivateConfirmationMsgForLockedField": "هل أنت متأكد أنك تريد حجب",
-    "calculated" :"حسابي",
-    "group" :"مجموعة",
-    "complex" :"مركب",
-    "input" :"إدخال",
-    "integration" :"تكامل"
+    "calculated": "حسابي",
+    "group": "مجموعة",
+    "complex": "مركب",
+    "input": "إدخال",
+    "integration": "تكامل"
   },
   "SocialRecordCopies": {
     "socialRecordActiveCopy": "ISR_ISRVR_00000021",
@@ -278,7 +281,9 @@
     "SendForApprovalSuccessMsg": "تم إرسال سجل التنفيذ للاعتماد بنجاح",
     "sentForApprovalTask": "ELG_EXEC",
     "approveExecutionSimulationBtnSuccessMsgText": "تم قبول اعتماد سجل تنفيذ",
-    "saveAsDraftSuccessMsg": "تم حفظ تعريف بيانات نموذج المحاكاة كمسودة بنجاح"
+    "saveAsDraftSuccessMsg": "تم حفظ تعريف بيانات نموذج المحاكاة كمسودة بنجاح",
+    "deleteDraftSimulationModelConfirmationMsg": "هل انت متأكد من حذف نسخة المسودة؟",
+    "deleteDraftSimulationModelSuccessMsg": "تم حذف المسودة بنجاح"
   },
   "createField": {
     "fieldArabicName": "حقل جديد",
@@ -298,10 +303,15 @@
     "requestStatusComplete": "مكتمل",
     "desitionStatusAccepted": "مقبول",
     "desitionStatusRejected": "مرفوض",
-    "availableField1" : "الاسم الأول",
-    "availableField2" : "الاسم الثانى",
-    "descriptionCalculatedField" : "وصف العملية الحسابية",
-    "API_Default_ParentKey":"education",
+    "availableField1": "الاسم الأول",
+    "availableField2": "الاسم الثانى",
+    "descriptionCalculatedField": "وصف العملية الحسابية",
+    "glossaryParentBeforeApprove":"SP file",
+    "glossaryParentAfterApprove":"Personal Information",
+    "glossaryFieldNature": "صحي",
+    "glossaryFieldSource":"تكامل",
+    "glossaryFieldAxsonStatus":"Active",
+    "glossaryFieldEmptyValue":"Not specified", "API_Default_ParentKey":"education",
     "API_Default_ParentDomain":"DOMAIN",
     "API_Classification":"public",
     "API_Classification_Ar":"عام",
@@ -317,23 +327,20 @@
     "API_FieldNature_id":"675edd657215dc2057c65774",
     "API_FieldNature_nameEn":"Health",
     "API_FieldNature_nameAr":"صحي"
-
-
-
   
-  },
-  "createSubDomain": {
-    "subDomainArabicName": "فئة جديدة",
-    "subDomainEnglishName": "subDomain New",
-    "assignedDomain":"السجل الاجتماعي  الموحد",
-    "subDomainDescription": "وصف الفئة الجديدة للتجربة",
-    "subDomainFile":"test.pdf",
-    "createSubDomainSuccessMsg":"تم إرسال طلبك رقم",
-    "subDomainProcessingStatus" : "معالجة",
-    "subDomainApprovedStatus":"معتمد",
-    "subDomainRejectedStatus":"غير معتمد",
-    "subDomainEnableStatus":"متاح",
-    "subDomainDisableStatus":"محجوب"
+},
+"createSubDomain": {
+  "subDomainArabicName": "فئة جديدة",
+  "subDomainEnglishName": "subDomain New",
+  "assignedDomain":"السجل الاجتماعي  الموحد",
+  "subDomainDescription": "وصف الفئة الجديدة للتجربة",
+  "subDomainFile":"test.pdf",
+  "createSubDomainSuccessMsg":"تم إرسال طلبك رقم",
+  "subDomainProcessingStatus" : "معالجة",
+  "subDomainApprovedStatus":"معتمد",
+  "subDomainRejectedStatus":"غير معتمد",
+  "subDomainEnableStatus":"متاح",
+  "subDomainDisableStatus":"محجوب"
 }
 
 }

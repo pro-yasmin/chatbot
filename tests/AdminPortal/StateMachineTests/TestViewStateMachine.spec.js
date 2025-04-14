@@ -11,9 +11,11 @@ let homePage;
 let stateMachineManagmentPage;
 let stateMachineData;
 
-
-test('View State Machine', async ({ page }) => {
-
+let context;
+let page;
+test('View State Machine', async ({ browser }) => {
+    context = await browser.newContext();
+    page = await context.newPage();
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     stateMachineManagmentPage = new StateMachineManagmentPage(page);
@@ -58,6 +60,7 @@ test('View State Machine', async ({ page }) => {
     await test.step('Logout from Admin Portal', async () => {
         await homePage.logout();
         console.log('Logout done Successfully');
+        await context.close();
     });
 
 });

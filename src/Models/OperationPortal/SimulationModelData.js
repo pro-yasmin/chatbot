@@ -7,6 +7,9 @@ export class SimulationModelData {
     this.simulationModelArName = null;
     this.simulationModelEnName = null;
     this.simulationModelDescription = null;
+    this.simulationModelEditedArName = null;
+    this.simulationModelEditedEnName = null;
+    this.simulationModelEditedDescription = null;
     this.variableOneArName = null;
     this.variableOneEnName = null;
     this.variableOneDescription = null;
@@ -83,20 +86,51 @@ export class SimulationModelData {
     this.simulationModelDescription = value;
   }
 
+  // Getter and Setter for Edited Simulation Model Arabic Name
+  getEditedSimulationModelArName() {
+    if (this.simulationModelEditedArName == null) {
+      this.simulationModelEditedArName =
+        global.testConfig.SimulationModels.simulationModelArName +
+        this.utils.generateRandomArabicString(3) +
+        " " +
+        "أوتو";
+    }
+    return this.simulationModelEditedArName;
+  }
+  setEditedSimulationModelArName(value) {
+    this.simulationModelEditedArName = value;
+  }
+
+  // Getter and Setter for Edited Simulation Model English Name
+  getEditedSimulationModelEnName() {
+    if (this.simulationModelEditedEnName == null) {
+      this.simulationModelEditedEnName =
+        global.testConfig.SimulationModels.simulationModelEnName +
+        " " +
+        this.utils.generateRandomEnglishString(3) +
+        " " +
+        "Auto";
+    }
+    return this.simulationModelEditedEnName;
+  }
+  setEditedSimulationModelEnName(value) {
+    this.simulationModelEditedEnName = value;
+  }
+
   // Getter and Setter for Edited Simulation Model Description
   getEditedSimulationModelDescription() {
-    if (this.simulationModelDescription == null) {
-      this.simulationModelDescription =
+    if (this.simulationModelEditedDescription == null) {
+      this.simulationModelEditedDescription =
         global.testConfig.SimulationModels.simulationModelDescription +
         " " +
         this.utils.generateRandomArabicString(3) +
         " " +
         "أوتو";
     }
-    return this.simulationModelDescription;
+    return this.simulationModelEditedDescription;
   }
   setEditedSimulationModelDescription(value) {
-    this.simulationModelDescription = value;
+    this.simulationModelEditedDescription = value;
   }
 
   // Getter and Setter for variable Arabic Name

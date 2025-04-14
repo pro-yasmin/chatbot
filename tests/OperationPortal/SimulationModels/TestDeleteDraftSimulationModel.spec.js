@@ -10,10 +10,10 @@ let loginPage;
 let homeOperationPage;
 let simulationModelData;
 let simulationModelManagementPage;
-let tasksPage;
 let context;
 let page;
-test.beforeEach(async ({  browser }) => {
+
+test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
     loginPage = new LoginPage(page);
@@ -36,7 +36,7 @@ test.beforeEach(async ({  browser }) => {
     });
 });
 
-test('Define New Simulation Model', async () => {
+test('Delete Draft Simulation Model', async ({ page }) => {
     // Step1: Navigate to Simulation Models Managment page
     await test.step('Navigate to Simulation Models Management page', async () => {
         await homeOperationPage.navigateToSimulationModels();
@@ -44,15 +44,21 @@ test('Define New Simulation Model', async () => {
     });
 
     // Step2: Fill Simulation Model Information
-    await test.step('Fill Simulation Model Information', async () => {
-        expect(await simulationModelManagementPage.defineSimulationModel(simulationModelData)).toBe(true);
-        console.log('Simulation Model Information filled Successfully');
+    await test.step('Fill Simulation Model First Tab then Save it as Draft', async () => {
+        expect(await simulationModelManagementPage.defineSimulationModelAsDraft(simulationModelData)).toBe(true);
+        console.log('Simulation Model First Tab filled and saved as Draft Successfully');
     });
 
-    // Step3: Search & Verify Simulation Model Information
-    await test.step('Search on Simulation Model created', async () => {
-        expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData, null, null, null)).toBe(true);
-        console.log('New Simulation Model Details Checked Successfully');
+    // Step3: Search & Verify Draft Simulation Model Information
+    await test.step('Search on Draft Simulation Model created', async () => {
+        expect(await simulationModelManagementPage.checkDraftSimulationModelCreated(simulationModelData, false)).toBe(true);
+        console.log('Draft Simulation Model Details Checked Successfully');
+    });
+
+    // Step4: Delete Draft Simulation Model
+    await test.step('Delete Draft Simulation Model', async () => {
+        expect(await simulationModelManagementPage.deleteDraftSimulaionModel(simulationModelData)).toBe(true);
+        console.log('Draft Simulation Model Deleted Successfully');
     });
 });
 
