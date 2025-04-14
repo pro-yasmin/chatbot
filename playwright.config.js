@@ -117,6 +117,6 @@ module.exports = defineConfig({
         //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
         // },
      //
-   ],
+   //],
 });
 module.exports.ENV = ENV;

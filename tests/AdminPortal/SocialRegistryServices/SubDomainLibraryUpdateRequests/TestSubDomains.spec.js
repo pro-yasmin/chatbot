@@ -1,15 +1,15 @@
 const { test, expect } = require('@playwright/test');
-import Constants from '../../src/Utils/Constants';
+import Constants from '../../../../src/Utils/Constants';
 
-const { LoginPage } = require('../../src/Pages/LoginPage');
-const { HomePage } = require('../../src/Pages/AdminPortal/HomePage');
-const {ManageSubDomainUpdateRequestsPage} = require('../../src/Pages/AdminPortal/SubDomainLibraryUpdateRequest/ManageSubDomainUpdateRequestsPage');
-const{SubDomainCreationPage} = require('../../src/Pages/AdminPortal/SubDomainLibraryUpdateRequest/SubDomainCreationPage');
-const{SubDomainLibraryUpdateReqPage}= require('../../src/Pages/AdminPortal/SubDomainLibraryUpdateRequest/SubDomainLibraryUpdateReqPage');
-const {TasksPage} = require("../../src/Pages/AdminPortal/Tasks/TasksPage");
-const{SubDomainData} = require("../../src/Models/AdminPortal/SubDomainData");
-const{SubDomainLibraryManagementPage} = require("../../src/Pages/AdminPortal/SubDomainLibrary/SubDomainLibraryManagementPage");
-const{FieldsTreePage}= require("../../src/Pages/AdminPortal/FieldsTree/FieldsTreePage");
+const { LoginPage } = require('../../../../src/Pages/LoginPage');
+const { HomePage } = require('../../../../src/Pages/AdminPortal/HomePage');
+const {ManageSubDomainUpdateRequestsPage} = require('../../../../src/Pages/AdminPortal/SubDomainLibraryUpdateRequest/ManageSubDomainUpdateRequestsPage');
+const{SubDomainCreationPage} = require('../../../../src/Pages/AdminPortal/SubDomainLibraryUpdateRequest/SubDomainCreationPage');
+const{SubDomainLibraryUpdateReqPage}= require('../../../../src/Pages/AdminPortal/SubDomainLibraryUpdateRequest/SubDomainLibraryUpdateReqPage');
+const {TasksPage} = require("../../../../src/Pages/AdminPortal/Tasks/TasksPage");
+const{SubDomainData} = require("../../../../src/Models/AdminPortal/SubDomainData");
+const{SubDomainLibraryManagementPage} = require("../../../../src/Pages/AdminPortal/SubDomainLibrary/SubDomainLibraryManagementPage");
+const{FieldsTreePage}= require("../../../../src/Pages/AdminPortal/FieldsTree/FieldsTreePage");
 
 
 
@@ -17,9 +17,12 @@ let loginPage,homePage,manageSubDomainUpdateRequestsPage,subDomainCreationPage,s
 let subDomainData;
 let RequestID,myMap;;
 let adminUsername, adminPassword, isrManagerUsername , isrManagerPassword;
+let context;
+let page;
 
-test.beforeEach(async ({ page }) => {
-  
+test.beforeEach(async ({ browser }) => {
+  context = await browser.newContext();
+  page = await context.newPage();
   loginPage = new LoginPage(page);
   homePage = new HomePage(page);
   manageSubDomainUpdateRequestsPage = new ManageSubDomainUpdateRequestsPage(page);
@@ -119,5 +122,14 @@ test.beforeEach(async ({ page }) => {
               console.log("SubDomain details displayed right");
             });
 
+  });
+
+  test.afterEach(async () => {
+    // Step 6: Logout
+    await test.step('Logout from Admin Portal', async () => {
+    await homePage.logout();
+    console.log('User logged out successfully');
+    await context.close();
+    });
 
   });
