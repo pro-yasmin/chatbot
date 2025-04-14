@@ -9,10 +9,11 @@ const{SubDomainLibraryUpdateReqPage}= require('../../src/Pages/AdminPortal/SubDo
 const {TasksPage} = require("../../src/Pages/AdminPortal/Tasks/TasksPage");
 const{SubDomainData} = require("../../src/Models/AdminPortal/SubDomainData");
 const{SubDomainLibraryManagementPage} = require("../../src/Pages/AdminPortal/SubDomainLibrary/SubDomainLibraryManagementPage");
+const{FieldsTreePage}= require("../../src/Pages/AdminPortal/FieldsTree/FieldsTreePage");
 
 
 
-let loginPage,homePage,manageSubDomainUpdateRequestsPage,subDomainCreationPage,subDomainLibraryUpdateReqPage,tasksPage,subDomainLibraryManagementPage;
+let loginPage,homePage,manageSubDomainUpdateRequestsPage,subDomainCreationPage,subDomainLibraryUpdateReqPage,tasksPage,subDomainLibraryManagementPage,fieldsTreePage;
 let subDomainData;
 let RequestID,myMap;;
 let adminUsername, adminPassword, isrManagerUsername , isrManagerPassword;
@@ -27,6 +28,7 @@ test.beforeEach(async ({ page }) => {
   subDomainData = new SubDomainData(page);
   tasksPage = new TasksPage(page);
   subDomainLibraryManagementPage= new SubDomainLibraryManagementPage(page);
+  fieldsTreePage= new FieldsTreePage(page);
   
   
 
@@ -57,7 +59,7 @@ test.beforeEach(async ({ page }) => {
         console.log("Sub domain request submitted " + RequestID);
       });
     
-    /*  await test.step("check request status",async ()=> {
+      await test.step("check request status",async ()=> {
         var expectedRequestStatus = global.testConfig.createSubDomain.subDomainProcessingStatus;
         expect(await subDomainLibraryUpdateReqPage.checkSubDomainReqStatus(expectedRequestStatus,RequestID)).toBe(true);
         console.log("request Status processing");
@@ -74,7 +76,7 @@ test.beforeEach(async ({ page }) => {
       expect(await subDomainLibraryManagementPage.checkSubDomainsListAtLibrary(subDomainData.getsubDomainArabicName(), Constants.SUBDOMAIN_LIB_UNDERREVIEW)).toBe(true);
       console.log("created subDomains displayed at under-review tab successfully");
 
-    });*/
+    });
 
     // Switch to ISR Manager User
          await test.step('Logout from FIELD MANAGEMENT User and login as ISR Manager User', async () => {
@@ -99,8 +101,23 @@ test.beforeEach(async ({ page }) => {
             await test.step("check sub domains status at library", async ()=>{
               await homePage.navigateToSubDomainLibrary();
         
-              expect(await subDomainLibraryManagementPage.checkSubDomainsListAtLibrary(subDomainData.getsubDomainArabicName()[0]),Constants.SUBDOMAIN_LIB_APPROVED).toBe(true);
-              console.log("Approved subDomains displayed at approved sub-domains library tab successfully");
+              expect(await subDomainLibraryManagementPage.checkSubDomainStatusDetails(subDomainData.getsubDomainArabicName()[0],Constants.SUBDOMAIN_LIB_APPROVED)).toBe(true);
+              console.log("Approved subDomains displayed at approved sub-domains library tab successfully with right status");
+
+              expect(await subDomainLibraryManagementPage.checkSubDomainStatusDetails(subDomainData.getsubDomainArabicName()[1],Constants.SUBDOMAIN_LIB_REJECTED)).toBe(true);
+              console.log("Rejected subDomains displayed at rejected sub-domains library tab successfully with right status");
         
             });
+
+            await test.step("check approved sub domain at fields tree", async ()=>{
+              await homePage.navigateToFieldTree();
+
+              expect(await fieldsTreePage.checkSubDomainsExists(subDomainData.getsubDomainArabicName()[0],Constants.SUBDOMAINTYPE));
+              console.log("Approved subDomain displayed successfully at fields tree");
+
+              expect(await fieldsTreePage.checkSubDomainDetails(subDomainData));
+              console.log("SubDomain details displayed right");
+            });
+
+
   });

@@ -83,7 +83,7 @@ test('Group and Input Fields Request Flow', async () => {
             myMap.set(requestChecks[1], Constants.APPROVE);
             myMap.set(requestChecks[2], Constants.REJECT); 
         
-            var taskManage = await tasksPage.manageRequestField(requestChecks[0],myMap );
+            var taskManage = await tasksPage.manageRequestField(requestChecks[0],myMap,Constants.FIELDS_REQUEST);
             expect(taskManage).toBe(true);
             console.log("Field Request Done Successfully");
         });

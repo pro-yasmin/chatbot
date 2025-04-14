@@ -28,26 +28,47 @@ async createSubDomain(SubDomainData,NumOfDomains) {
 
     // Retrieve domain names from the provided data
    // var subDomainAr = SubDomainData.getsubDomainArabicName();
+
    if (!SubDomainData.arabicNames) {
     // Generate arabic names only once.
     SubDomainData.setsubDomainArabicName(NumOfDomains);
     SubDomainData.arabicNames = SubDomainData.getsubDomainArabicName();
     SubDomainData.currentIndex = 0;
   }
+
+  if (!SubDomainData.englishNames) {
+    // Generate english names only once.
+    SubDomainData.setsubDomainEnglishName(NumOfDomains);
+    SubDomainData.englishNames = SubDomainData.getsubDomainEnglishName();
+    SubDomainData.currentIndex = 0;
+  }
+
    const arabicNames = SubDomainData.getsubDomainArabicName();
-    var subDomainEng = SubDomainData.getsubDomainEnglishName();
+   const englishNames = SubDomainData.getsubDomainEnglishName();
     var acceptedChildType = SubDomainData.getacceptChildType();
     var assignedDomain=SubDomainData.getassignedDomain();
     var subDomainDesc=SubDomainData.getsubDomainDescription();
-     
+    
+    //enter sub domain names
     if (arabicNames && arabicNames.length > SubDomainData.currentIndex) {
       await this.page.fill(this.subDomainArName, arabicNames[SubDomainData.currentIndex]); // Fill with the name at currentIndex.
+      await this.page.fill(this.subDomainEngName, englishNames[SubDomainData.currentIndex]); // Fill with the name at currentIndex.
+
       SubDomainData.currentIndex++; // Increment the index for the next call.
     } else {
       console.error("No more arabic names available.");
     }
 
-      await this.page.fill(this.subDomainEngName,subDomainEng);
+    //enter sub domain english name
+  /*  if (englishNames && englishNames.length > SubDomainData.currentIndex) {
+      await this.page.fill(this.subDomainEngName, englishNames[SubDomainData.currentIndex]); // Fill with the name at currentIndex.
+      SubDomainData.currentIndex++; // Increment the index for the next call.
+    } else {
+      console.error("No more english names available.");
+    }*/
+
+
+   //   await this.page.fill(this.subDomainEngName,subDomainEng);
     if(acceptedChildType==Constants.acceptChildTypeField){
         await this.page.click(this.acceptChildTypeField);
     }else{

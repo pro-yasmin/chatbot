@@ -16,7 +16,7 @@ export class ManageSubDomainUpdateRequestsPage {
         this.utils = Utils;
 
       
-        this.createSubDomain ='//button[text()="تعريف فئة جديدة"]';
+        this.createSubDomain ='//div[@data-testid="toolbar-container"]//button[@type="button"]';
         this.justification='//div[@class="form-control ui fluid selection dropdown"]';
         this.justificationList ='(//*[@role="listbox"]//*[contains(@id,"item-choice-1")])';
         this.chooseFileBtn= '//span[text()="اختيار الملف"]';
@@ -46,10 +46,6 @@ export class ManageSubDomainUpdateRequestsPage {
   
        for(let i=0;i<NumOfDomains;i++){
        await this.clickOnCreateSubDomainBtn();
-       //ini new values for sub domain name AR/ENG
-
-       SubDomainData.setsubDomainEnglishName(global.testConfig.createSubDomain.subDomainEnglishName +" "+ this.utils.generateRandomEnglishString(5)+" "+"Auto"); 
-
        await subDomainPage.createSubDomain(SubDomainData,2);
        }
        var result = await this.sendRequestToApproval(SubDomainData);

@@ -329,7 +329,11 @@
     "subDomainDescription": "وصف الفئة الجديدة للتجربة",
     "subDomainFile":"test.pdf",
     "createSubDomainSuccessMsg":"تم إرسال طلبك رقم",
-    "subDomainProcessingStatus" : "معالجة"
+    "subDomainProcessingStatus" : "معالجة",
+    "subDomainApprovedStatus":"معتمد",
+    "subDomainRejectedStatus":"غير معتمد",
+    "subDomainEnableStatus":"متاح",
+    "subDomainDisableStatus":"محجوب"
 }
 
 }

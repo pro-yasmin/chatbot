@@ -7,7 +7,7 @@ export class SubDomainData {
     constructor() {
       this.utils = Utils;
       this.subDomainArabicName=[];
-      this.subDomainEnglishName;
+      this.subDomainEnglishName=[];
       this.acceptChildType= null;
       this.assignedDomain= null;
       this.subDomainDescription= null;
@@ -18,11 +18,8 @@ export class SubDomainData {
  getsubDomainArabicName() {
       return  this.subDomainArabicName;
     }
-    
-
 setsubDomainArabicName(numberOfNames){
-     // this.subDomainArabicName = value;
-     if (typeof numberOfNames === "number" && numberOfNames > 0) {
+     if (typeof numberOfNames == "number" && numberOfNames > 0) {
        // this.subDomainArabicName = []; // Clear the array before adding new values
         for (let i = 0; i < numberOfNames; i++){
           const randomName = global.testConfig.createSubDomain.subDomainArabicName + " " + this.utils.generateRandomArabicString(5) + " أوتو";
@@ -35,13 +32,18 @@ setsubDomainArabicName(numberOfNames){
 
     // Getter and Setter for subDomainEnglishName
  getsubDomainEnglishName() {
-    if (this.subDomainEnglishName == null) {
-        this.subDomainEnglishName =global.testConfig.createSubDomain.subDomainEnglishName +" "+ this.utils.generateRandomEnglishString(5)+" "+"Auto";
-    }
     return this.subDomainEnglishName;
     }
-setsubDomainEnglishName(value) {
-      this.subDomainEnglishName = value;
+setsubDomainEnglishName(numberOfNames) {
+     if (typeof numberOfNames == "number" && numberOfNames > 0) {
+      // this.subDomainArabicName = []; // Clear the array before adding new values
+       for (let i = 0; i < numberOfNames; i++){
+         const randomName = global.testConfig.createSubDomain.subDomainEnglishName + " " + this.utils.generateRandomEnglishString(5) + " Auto";
+         this.subDomainEnglishName.push(randomName);
+       }
+     } else {
+       console.error("Invalid input: numberOfNames must be a positive number.");
+     }
     }
 
     // Getter and Setter for assignedDomain
