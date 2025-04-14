@@ -101,7 +101,7 @@ test('Integration Field Request Flow With Axon integration', async ({ page }) =>
         await tasksPage.assignTaskToMe(requestChecks[0]); 
         myMap = new Map(); 
         myMap.set(requestChecks[1], Constants.APPROVE);
-        var taskManage = await tasksPage.manageRequestField(requestChecks[0],myMap );
+        var taskManage = await tasksPage.manageRequestField(requestChecks[0],myMap , Constants.FIELDS_REQUEST);
         expect(taskManage).toBe(true);
         console.log("Field Request Done Successfully");
         await homePage.logout();
