@@ -278,7 +278,7 @@ async manageRequestField(requestNumber ,fieldsMap, reqType) {
    // Process each field from the map
    for (const [fieldID, actionType] of fieldsMap.entries()) {
     console.log(`Processing Field: ${fieldID} with Action: ${actionType}`);
-    var processResult = await this.taskDetailsPage.processFields(fieldID, actionType);
+    var processResult = await this.taskDetailsPage.processFields(fieldID, actionType,reqType);
     if (!processResult) {
       allFieldsProcessed = false;
     }

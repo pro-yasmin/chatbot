@@ -12,7 +12,7 @@ export class SubProgramDetailsPage {
     // Selectors for sub program details elements
     this.detailsTab = '//button[@id="tab-3"]';
     this.benefitsTab = '//button[@data-testid="tab-4"]';
-    this.createBenefitBtn = '//button[@type="button" and contains(text(),"تعريف إعانة")]';
+    this.createBenefitBtn = '//button[@data-testid="create-benefit"]';
 
     this.searchInput = '//form[@data-testid="search-input"]';
     this.metaDataTab ='//button[@data-testid="tab-1"]';

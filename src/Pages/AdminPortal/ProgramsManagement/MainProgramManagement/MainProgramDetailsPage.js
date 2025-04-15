@@ -14,7 +14,7 @@ export class MainProgramDetailsPage {
     // Selectors for main program details elements
     this.subProgramTab = '//button[@data-testid="tab-2"]';
     this.benefitsTab = '//button[@data-testid="tab-3"]';
-    this.createSubProgramBtn = '//button[@type="button" and contains(text(),"تعريف برنامج فرعي")]'; 
+    this.createSubProgramBtn = '//button[@data-testid="create-sub-program"]'; 
     this.searchInput = '//form[@data-testid="search-input"]';
    
     this.programId = '//span[@data-testid="value_main-program-serialNumber"]'

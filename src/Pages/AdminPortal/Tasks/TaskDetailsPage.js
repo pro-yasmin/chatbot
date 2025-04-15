@@ -195,7 +195,7 @@ async completeTask(actionType, taskType , confirmMsg) {
  * @param {string} actionType - The action to perform ('approve' or 'reject').
  * @returns {Promise<boolean>} - Returns true if the task is accepted or rejected successfully.
  */
-async completeFieldTask(actionType) {
+async completeFieldTask(actionType, requestType) {
   let actionBtn ,notesFieldLocator ,confirmFieldMsg;
   var popUpMsg = new PopUpPage(this.page);
 
@@ -207,11 +207,13 @@ async completeFieldTask(actionType) {
 
   await this.page.click(actionBtn);
 
+
   //await this.page.waitForTimeout(2000);
   await popUpMsg.inputPopUpMessage(this.ensureFieldTaskNotesField,notesFieldLocator,global.testConfig.createField.addCompleteTaskNote);
   var result = await popUpMsg.popUpMessage(this.backToTasksBtn, confirmFieldMsg);
-
+  if(requestType==Constants.DOMAINS_REQUEST){
   await this.page.click(this.backToTasksBtn); //yasmine
+}
   if (result) {
       console.log(`The Field ${actionType === Constants.APPROVE ? 'Accepted' : 'Rejected'} Successfully.`);
   }
@@ -220,7 +222,7 @@ async completeFieldTask(actionType) {
 }
 
 
-async processFields(fieldID,actionType) {
+async processFields(fieldID,actionType,requestType) {
 
   let fieldRow = await this.search.getRowInTableWithSpecificText(fieldID);
  var lastTd  = fieldRow[fieldRow.length - 1].tdLocator;
@@ -232,7 +234,7 @@ async processFields(fieldID,actionType) {
   console.log(`Clicked action button for field: ${fieldID}`);
 
   // Complete the task (either APPROVE or REJECT)
-  var result =   await this.completeFieldTask(actionType);
+  var result =   await this.completeFieldTask(actionType, requestType);
   return result;
 }
 
@@ -244,7 +246,7 @@ async processFields(fieldID,actionType) {
   return true;
 }
 
-async checkFieldsDecisionStatus(fieldsMap ) {
+async checkFieldsDecisionStatus(fieldsMap,requestType ) {
 let fieldsMatched = true ;
    // Process each field from the map
    for (const [fieldID, actionType] of fieldsMap.entries()) {
@@ -255,8 +257,12 @@ let fieldsMatched = true ;
 
       // Retrieve details for both rows using their row IDs
     let rowDetails = await this.search.getRowInTableWithSpecificText(fieldID);
+    let rowStatus = await rowDetails[5].tdLocator.textContent();
       // Assuming the enablement status
-    let rowStatus = await rowDetails[4].tdLocator.textContent();
+      if(requestType==Constants.DOMAINS_REQUEST){
+        rowStatus = await rowDetails[4].tdLocator.textContent()
+      }
+   
     console.log(`Row Field Status (ID:  ${fieldID} ) is ${rowStatus}`);
 
       if (rowStatus.trim() === expectedStatus.trim()) {

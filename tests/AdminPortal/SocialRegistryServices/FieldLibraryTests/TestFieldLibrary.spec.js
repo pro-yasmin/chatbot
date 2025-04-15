@@ -29,7 +29,7 @@ test.beforeEach(async ({ browser }) => {
     });
 });
 
-test('Activate & Deactivate Field without link to ISR schema & calculation field', async ({ page }) => {
+test('Activate & Deactivate Field without link to ISR schema & calculation field', async () => {
     // Step1: Navigate to Field Library Managment page
     await test.step('Navigate to Field Library Managment page', async () => {
         await homePage.navigateToFieldLibrary();
