@@ -5,6 +5,7 @@ require("./global.js"); // Load the global configuration
  * @see https://playwright.dev/docs/test-configuration
  */
 
+
 const ENV = "uat";
 
 module.exports = defineConfig({
@@ -82,7 +83,7 @@ module.exports = defineConfig({
        testDir: "./tests/OperationPortal", // Test directory
     },
 
-        /*{
+       /* {
           name: 'chromium',
           use: { ...devices['Desktop Chrome'] },
         },*/

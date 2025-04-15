@@ -21,7 +21,9 @@
     "expectBenefitTaskType": "اعتماد إعانة",
     "expectFieldTaskType": "تحديث مكتبة الحقول",
     "executionLogApproval": "اعتماد سجل تنفيذ",
-    "prepareSimulationModel": "تجهيز نموذج المحاكاة"
+    "prepareSimulationModel": "تجهيز نموذج المحاكاة",
+     "expectedSubDomainTaskTypetest": "طلب تحديث الفئات",
+    "expectedSubDomainTaskType":"DOMAIN_LIBRARY_UPDATE"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",
@@ -325,5 +327,20 @@
     "API_FieldNature_id":"675edd657215dc2057c65774",
     "API_FieldNature_nameEn":"Health",
     "API_FieldNature_nameAr":"صحي"
-  }
+  
+},
+"createSubDomain": {
+  "subDomainArabicName": "فئة جديدة",
+  "subDomainEnglishName": "subDomain New",
+  "assignedDomain":"السجل الاجتماعي  الموحد",
+  "subDomainDescription": "وصف الفئة الجديدة للتجربة",
+  "subDomainFile":"test.pdf",
+  "createSubDomainSuccessMsg":"تم إرسال طلبك رقم",
+  "subDomainProcessingStatus" : "معالجة",
+  "subDomainApprovedStatus":"معتمد",
+  "subDomainRejectedStatus":"غير معتمد",
+  "subDomainEnableStatus":"متاح",
+  "subDomainDisableStatus":"محجوب"
+}
+
 }

@@ -23,5 +23,15 @@ export default {
     EDIT_SIMULATION_MODEL : "Edit_Simulation_Model",
     EXECUTE_SIMULATION_MODEL : "Execute_Simulation_Model",
     VERIFY_FILE_UPLOADED : "verifyFileUploaded",
-    API_Input_Source_Input:"ادخال"
+    API_Input_Source_Input:"ادخال",
+    SUBDOMAIN_CHILD_FIELD: "Field",
+    SUBDOMAIN_CHILD_DOMAIN:"Domain",
+    SUBDOMAIN_LIB_ALLTABS:"All_Tabs",
+    SUBDOMAIN_LIB_UNDERREVIEW:"subDomain_UnderReview",
+    SUBDOMAIN_LIB_APPROVED:"subDomain_Approved",
+    SUBDOMAIN_LIB_REJECTED:"subDomain_Rejected",
+    FIELDS_REQUEST:"Field_Library_Update",
+    DOMAINS_REQUEST:"Domain_Library_Update",
+    SUBDOMAINTYPE:"فئة"
+
 };
