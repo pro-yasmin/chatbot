@@ -3,7 +3,6 @@ const { LoginPage } = require('../../../src/Pages/LoginPage');
 const { HomeOperationPage } = require('../../../src/Pages/OperationPortal/HomeOperationPage');
 const { SimulationModelData } = require('../../../src/Models/OperationPortal/SimulationModelData');
 const { SimulationModelManagementPage } = require('../../../src/Pages/OperationPortal/SimualtionModel/SimulationModelManagementPage');
-const { TasksPage } = require('../../../src/Pages/OperationPortal/Tasks/TasksPage');
 const { Simulation } = require("../../../src/Apis/Business/Simulation");
 
 
@@ -11,7 +10,6 @@ let loginPage;
 let homeOperationPage;
 let simulationModelData;
 let simulationModelManagementPage;
-let tasksPage;
 let simulation;
 let context;
 let page;
@@ -24,7 +22,6 @@ test.beforeEach(async ({ browser }) => {
     homeOperationPage = new HomeOperationPage(page);
     simulationModelData = new SimulationModelData();
     simulationModelManagementPage = new SimulationModelManagementPage(page);
-    tasksPage = new TasksPage(page);
     simulation = new Simulation(page);
 
     var baseUrl = global.testConfig.OPERATION_BASE_URL;

@@ -126,7 +126,7 @@ test('Edit New Simulation Model', async ({ page }) => {
 
     // Step10: Navigate to Simulation Models Managment page
     await test.step('Navigate to Simulation Models Management page', async () => {
-        await page.waitForTimeout(10000);
+        //await page.waitForTimeout(10000);
         await homeOperationPage.navigateToSimulationModels();
         console.log('Navigate to Simulation Models Management page');
     });

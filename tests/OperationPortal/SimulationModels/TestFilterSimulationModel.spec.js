@@ -53,7 +53,7 @@ test('Filter Simulation Model', async ({ page }) => {
 
     // Step4: Filter Simulation Model Versions
     await test.step('Filter Simulation Model Versions', async () => {
-        expect(await simulationModelManagementPage.VerifySimulationModelVersionsDetails(simulationModelData)).toBe(true);
+        expect(await simulationModelManagementPage.filterSimulationModelVersions(simulationModelData)).toBe(true);
         console.log('Simulation Model Versions Filtered Successfully');
     });
 });

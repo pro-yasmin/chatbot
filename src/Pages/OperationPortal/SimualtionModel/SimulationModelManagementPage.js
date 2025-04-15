@@ -583,7 +583,7 @@ export class SimulationModelManagementPage {
      * @param {Object} simulationModelData - The data required to identify the simulation Model.
      * @returns {Promise<void>} - Resolves when the validation is complete.
      */
-    async VerifySimulationModelVersionsDetails(simulationModelData) {
+    async filterSimulationModelVersions(simulationModelData) {
         await this.page.click(this.ThreeDotsActionsButton);
         console.log('Actions Simulaion Model Button Clicked');
         await this.page.click(this.ModelVersionsButton);
