@@ -20,6 +20,7 @@ module.exports = defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: 0,
+  retries: 0,
   /* Opt out of parallel tests on CI. */
   workers: 1,
   //workers: process.env.CI ? 1 : undefined,
