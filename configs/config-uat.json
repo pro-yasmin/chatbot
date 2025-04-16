@@ -26,7 +26,7 @@
     "expectedSubDomainTaskType":"DOMAIN_LIBRARY_UPDATE"
   },
   "taskDetails": {
-    "enableStatusHidden": "محجوب",
+    "enableStatusHidden": "معطَّل",
     "enableStatusActive": "متاح",
     "ReadyForExecution": "جاهز للتنفيذ",
     "Approved": "معتمد",
@@ -103,7 +103,7 @@
     "reApplyAfterExistCode": "",
     "viewSubProgramType": "برنامج قائم دون أي تغيير",
     "viewapplicationEnablementPerm": "دائم",
-    "viewEnablementStatus": "محجوب",
+    "viewEnablementStatus": "معطَّل",
     "viewApprovalStatus": "معالجة",
     "viewActivationStatus": "خامل",
     "viewAassistanceUnit": "مجموعة مخصصة",
@@ -185,7 +185,7 @@
     "applicationChannelCodes": ["14"],
     "viewbenefitResponsibleEntity": "جهة مسؤولة عن التنفيذ جديده",
     "viewTargetApproach": "COMPREHENSIVE",
-    "viewEnablementStatus": "محجوب",
+    "viewEnablementStatus": "معطَّل",
     "viewApprovalStatus": "معالجة",
     "viewActivationStatus": "خامل"
   },
@@ -295,7 +295,7 @@
     "sendRequestBtnTxt": "إرسال الطلب للموافقة",
     "sendFieldMsg": "تم إرسال طلبك",
     "requestStatusProcessing": "معالجة",
-    "enableStatusHidden": "محجوب",
+    "enableStatusHidden": "معطَّل",
     "fieldRequestView": "/social-registry-services/field-requests/67bf860a89b26c12cb68ddad",
     "addCompleteTaskNote": "ملاحظةلاكمال المهمة",
     "confirmApproveMsg": "تم قبول حقل",

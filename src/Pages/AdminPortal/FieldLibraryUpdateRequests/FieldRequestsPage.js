@@ -128,9 +128,10 @@ export class FieldRequestsPage {
             await this.uploadFilePage.uploadFile(fileName, this.uploadBtnXPath , Constants.VERIFY_FILE_UPLOADED);
             console.log('File upload competed');
         }           
-
+        await this.page.waitForTimeout(2000);
         await this.page.click(this.justification);
-        await this.page.waitForTimeout(1000);
+        console.log('justification list displayed');
+        await this.page.waitForTimeout(2000);
         var optionsLocator = this.page.locator(this.justificationList);
         await optionsLocator.first().waitFor({ state: "visible", timeout: 5000 });
         await optionsLocator.first().click({ force: true });
