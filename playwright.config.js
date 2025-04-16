@@ -49,7 +49,7 @@ module.exports = defineConfig({
   projects: [
     {
       name: "Sainty",
-      testDir: "./tests/AdminPortal/SocialRegistryServices/FieldLibraryUpdateRequests/TestCalculatedField.spec.js", // Test directory
+      testDir: "./tests/AdminPortal/SocialRegistryServices/FieldLibraryUpdateRequests", // Test directory
     },
    {
      name: "Admin",
