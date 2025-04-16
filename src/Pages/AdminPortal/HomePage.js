@@ -145,11 +145,13 @@ export class HomePage {
     await this.navigateToSocialRegistryServices();
     await this.page.waitForSelector(this.fieldTreeTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.fieldTreeTab);
-    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+    await this.page.waitForTimeout(5000);
+    //await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 
   async navigateToFieldLibraryRequests() {
     await this.navigateToSocialRegistryServices();
+    await this.page.waitForTimeout(2000);
     await this.page.waitForSelector(this.fieldLibraryUpdateRequestsTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.fieldLibraryUpdateRequestsTab);
     await this.page.waitForTimeout(5000);
