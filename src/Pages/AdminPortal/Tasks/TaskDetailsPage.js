@@ -136,10 +136,7 @@ export class TaskDetailsPage {
     await popUpMsg.inputPopUpMessage(this.noteOnTaskField, this.acceptNoteOnTaskBtn,global.testConfig.taskDetails.note);
     await popUpMsg.popUpMessage(this.acceptEnsureNoteMsgBtn ,global.testConfig.taskDetails.ensureNoteMsg);
     await popUpMsg.popUpMessage(this.acceptConfirmNoteMsgBtn,global.testConfig.taskDetails.confirmNoteMsg);
-   
-
     let result = await this.checkNoteIsAdded(global.testConfig.taskDetails.note);
-    await this.page.click(this.addNoteOnTask);
     return result;
   }
 
