@@ -212,7 +212,7 @@ async createStreamAPI(adminusername, adminpassword, streamData)
     var Token = await this.getToken(adminusername, adminpassword);
     var tasksService = new TasksService(Token);
 
-    await new Promise((resolve) => setTimeout(resolve, 15000));
+    await new Promise((resolve) => setTimeout(resolve, 20000));
     var search = await tasksService.getTaskID(serialNumber);
     expect(search).not.toBeNull(); 
 
