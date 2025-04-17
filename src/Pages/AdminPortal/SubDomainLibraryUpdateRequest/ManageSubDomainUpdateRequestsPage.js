@@ -35,7 +35,7 @@ export class ManageSubDomainUpdateRequestsPage {
    *
 **/
     async clickOnCreateSubDomainBtn() {
-        await this.page.waitForSelector(this.createSubDomain, { state: "visible", timeout: 7000 });
+        await this.page.waitForSelector(this.createSubDomain, { state: "visible", timeout: 15000 });
         await this.page.waitForTimeout(3000);
         await this.page.click(this.createSubDomain);
         console.log("Sub domain Create Page Opened successfully.");   

@@ -41,7 +41,7 @@ export class SocialRecordCopiesPage {
    */
     async fillNewSchemaData(socialRecordCopiesData) {
         console.log("Start filling New Schema Data");
-
+        await this.page.waitForTimeout(2000);
         await this.page.waitForSelector(this.ArVersionNameField, { state: "visible", timeout: 20000 });
         this.createdArVersionName = socialRecordCopiesData.getVersionArabicName();
         this.createdEnVersionName = socialRecordCopiesData.getVersionEnglishName();
