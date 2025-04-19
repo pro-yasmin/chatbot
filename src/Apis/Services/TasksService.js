@@ -113,7 +113,7 @@ export class TasksService {
 
     var response = await requestContext.get(this.completedTasksUrl, {
         headers: {"Content-Type": "application/json",Authorization: this.token,Accept: "application/json" },
-        timeout: 30000, });
+        timeout: 50000, });
 
     if (response.ok()) {
         var responseBody = await response.json();
