@@ -15,6 +15,8 @@ export class HomeOperationPage {
     this.tasksButton = '//a[@data-testid="menu-tasks"]';
     this.viewExecutionLogsRequestsButton = '//a[@data-testid="menu-view-execution-logs-requests"]';
     this.approvedExecutionLogsButton = '//a[@data-testid="menu-approved-execution-logs"]';
+    this.generalSettingsTab = '//a[@data-testid="menu-general-settings"]';
+    this.componentsAuditLogsButton = '//a[@data-testid="components-audit-logs"]';
   }
 
   /**
@@ -69,6 +71,15 @@ export class HomeOperationPage {
   async navigateToApprovedExecutionLogsTab() {
     await this.page.waitForSelector(this.approvedExecutionLogsButton, { state: "visible", timeout: 20000 });
     await this.page.click(this.approvedExecutionLogsButton);
+  }
+
+  async navigateToComponentsAuditLogsTab() {
+    await this.page.waitForSelector(this.generalSettingsTab, { state: "visible", timeout: 20000 });
+    await this.page.click(this.generalSettingsTab);
+    await this.page.waitForSelector(this.componentsAuditLogsButton, { state: "visible", timeout: 20000 });
+    await this.page.click(this.componentsAuditLogsButton);
+    //await this.page.waitForTimeout(5000);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 
 }
