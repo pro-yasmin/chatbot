@@ -195,6 +195,7 @@ export class FieldPage {
     }
 
     async listOfAvailableFields () {
+      
       const fields = [
         global.testConfig.createField.availableField1,
         global.testConfig.createField.availableField2 ];
