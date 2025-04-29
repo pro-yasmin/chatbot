@@ -205,8 +205,8 @@
     "stateMachineEditedSuccessMsg": "تم تعديل دورة الحالة بنجاح."
   },
   "FieldLibrary": {
-    "unlockedField": "ISR_FLib_00000200",
-    "lockedField": "ISR_FLib_00000195",
+    "unlockedField": "ISR_FLib_00001816",
+    "lockedField": "ISR_FLib_00001794",
     "fieldEnablementStatusDeactivated": "معطَّل",
     "fieldEnablementStatusActivated": "متاح",
     "activateConfirmationMsg": "هل أنت متأكد أنك تريد إتاحة",

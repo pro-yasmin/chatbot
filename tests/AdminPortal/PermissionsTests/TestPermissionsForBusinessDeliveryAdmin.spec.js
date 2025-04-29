@@ -1,22 +1,19 @@
 const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../../../src/Pages/LoginPage');
 const { HomePage } = require('../../../src/Pages/AdminPortal/HomePage');
-const { SocialRecordCopiesManagementPage } = require('../../../src/Pages/AdminPortal/SocialRecordCopies/SocialRecordCopiesManagementPage');
 const { FieldLibraryUpdateRequestsPage } = require('../../../src/Pages/AdminPortal/FieldLibraryUpdateRequests/FieldLibraryUpdateRequestsPage');
 
 let loginPage;
 let homePage;
-let socialRecordCopiesManagementPage;
 let fieldLibraryUpdateRequestsPage;
 
 let context;
 let page;
-test.beforeEach(async ({browser }) => {
+test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
-    socialRecordCopiesManagementPage = new SocialRecordCopiesManagementPage(page);
     fieldLibraryUpdateRequestsPage = new FieldLibraryUpdateRequestsPage(page);
     var baseUrl = global.testConfig.BASE_URL;
     var adminusername = global.testConfig.BUSINESS_DELIVERY_ADMIN;
@@ -34,33 +31,34 @@ test.beforeEach(async ({browser }) => {
 
 test('Verify Permissions Granted to Business Delivery Admin', async () => {
     // Step1: Verify User can not Manage Social Record Managment page
-    await test.step('Verify User can manage to Social Record Managment page', async () => {
+    await test.step('Verify User can not manage Social Record Managment page', async () => {
         expect(await homePage.navigateToSocialRegistryServices()).toBe(false);
-        console.log('Manage Social Record Managment page allowed for Fields Management Specialist');
+        console.log('Manage Social Record Managment page not allowed for User');
     });
 
-    // Step2: Verify User can Manage my Tasks page
-    await test.step('Verify User can Manage to My Tasks page', async () => {
-        expect(await homePage.navigateToTasks()).toBe(false);
-        console.log('Manage My Tasks page is allowed for Fields Management Specialist');
+    // Step2: Verify User can not View or Manage my Tasks page
+    await test.step('Verify User can not View or Manage to My Tasks page', async () => {
+        expect(await homePage.verifyTasksPage()).toBe(false);
+        console.log('View and Manage My Tasks page is not allowed for User');
     });
 
-    // Step3: Verify User can View my Tasks page
-    await test.step('Verify User can View to My Tasks page', async () => {
-        expect(await homePage.navigateToTasks()).toBe(false);
-        console.log('View My Tasks page is allowed for Fields Management Specialist');
-    });
-
-    // Step4: Verify User can View Field Library Requests
-    await test.step('Verify User can View Field Library Requests', async () => {
-        expect(await homePage.navigateToFieldLibraryRequests()).toBe(false);
-        console.log('View Field Library Requests is allowed for Fields Management Specialist');
-    });
-
-    // Step5: Verify User can Manage Field Library Requests
-    await test.step('Verify User can Manage Field Library Requests', async () => {
+    // Step3: Verify User can't Manage Field Library Update Requests
+    await test.step('Verify User can not Manage Field Library Update Requests', async () => {
+        await homePage.navigateToFieldLibraryRequests();
         expect(await fieldLibraryUpdateRequestsPage.verifyfieldLibraryUpdateRequestButtonExists()).toBe(false);
-        console.log('Manage Field Library Requests is allowed for Fields Management Specialist');
+        console.log('Manage Field Library Update Requests is not allowed for User');
+    });
+
+    // Step4: Verify User can't View Field Library Requests
+    await test.step('Verify User can not View Field Library Requests', async () => {
+        expect(await homePage.navigateToFieldLibrary()).toBe(false);
+        console.log('View Field Library Requests is not allowed for User');
+    });
+
+    // Step5: Verify User can't Manage Field Library Requests
+    await test.step('Verify User can not Manage Field Library Requests', async () => {
+        expect(await homePage.navigateToFieldLibrary()).toBe(false);
+        console.log('Manage Field Library Requests is not allowed for User');
     });
 });
 

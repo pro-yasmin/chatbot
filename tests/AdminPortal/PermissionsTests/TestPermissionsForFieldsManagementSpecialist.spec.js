@@ -1,23 +1,24 @@
 const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../../../src/Pages/LoginPage');
 const { HomePage } = require('../../../src/Pages/AdminPortal/HomePage');
-const { SocialRecordCopiesManagementPage } = require('../../../src/Pages/AdminPortal/SocialRecordCopies/SocialRecordCopiesManagementPage');
 const { FieldLibraryUpdateRequestsPage } = require('../../../src/Pages/AdminPortal/FieldLibraryUpdateRequests/FieldLibraryUpdateRequestsPage');
+const { FieldLibraryManagementPage } = require('../../../src/Pages/AdminPortal/FieldLibrary/FieldLibraryManagementPage');
 
 let loginPage;
 let homePage;
-let socialRecordCopiesManagementPage;
 let fieldLibraryUpdateRequestsPage;
+let fieldLibraryManagementPage;
 
 let context;
 let page;
-test.beforeEach(async ({browser }) => {
+test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
-    socialRecordCopiesManagementPage = new SocialRecordCopiesManagementPage(page);
     fieldLibraryUpdateRequestsPage = new FieldLibraryUpdateRequestsPage(page);
+    fieldLibraryManagementPage = new FieldLibraryManagementPage(page);
+    
     var baseUrl = global.testConfig.BASE_URL;
     var adminusername = global.testConfig.FIELD_MANAGEMENT_SPECIALIST;
     var adminpassword = global.testConfig.FIELD_MANAGEMENT_SPECIALIST_PASS;
@@ -34,33 +35,35 @@ test.beforeEach(async ({browser }) => {
 
 test('Verify Permissions Granted to Fields Management Specialist', async () => {
     // Step1: Verify User can not Manage Social Record Managment page
-    await test.step('Verify User can not manage to Social Record Managment page', async () => {
+    await test.step('Verify User can not manage Social Record Managment page', async () => {
         expect(await homePage.navigateToSocialRecordCopies()).toBe(false);
-        console.log('Manage Social Record Managment page is not allowed for Fields Management Specialist');
+        console.log('Manage Social Record Managment page not allowed for User');
     });
 
-    // Step2: Verify User can Manage my Tasks page
-    await test.step('Verify User can Manage to My Tasks page', async () => {
-        expect(await homePage.navigateToTasks()).toBe(true);
-        console.log('Manage My Tasks page is allowed for Fields Management Specialist');
+    // Step2: Verify User can View and Manage my Tasks page
+    await test.step('Verify User can View and Manage to My Tasks page', async () => {
+        expect(await homePage.verifyTasksPage()).toBe(true);
+        console.log('View and Manage My Tasks page is allowed for User');
     });
 
-    // Step3: Verify User can View my Tasks page
-    await test.step('Verify User can View to My Tasks page', async () => {
-        expect(await homePage.navigateToTasks()).toBe(true);
-        console.log('View My Tasks page is allowed for Fields Management Specialist');
-    });
-
-    // Step4: Verify User can View Field Library Requests
+    // Step3: Verify User can View Field Library Requests
     await test.step('Verify User can View Field Library Requests', async () => {
-        expect(await homePage.navigateToFieldLibraryRequests()).toBe(true);
-        console.log('View Field Library Requests is allowed for Fields Management Specialist');
+        expect(await homePage.navigateToFieldLibrary()).toBe(true);
+        console.log('View Field Library Requests is allowed for User');
     });
 
-    // Step5: Verify User can Manage Field Library Requests
+    // Step4: Verify User can Manage Field Library Requests
     await test.step('Verify User can Manage Field Library Requests', async () => {
+        //expect(await homePage.navigateToFieldLibrary()).toBe(true);
+        expect(await fieldLibraryManagementPage.verifyUserCanManageFieldLibrary()).toBe(true);
+        console.log('Manage Field Library Requests is allowed for User');
+    });
+
+    // Step5: Verify User can Manage Field Library Update Requests
+    await test.step('Verify User can Manage Field Library Update Requests', async () => {
+        await homePage.navigateToFieldLibraryUpdateRequests();
         expect(await fieldLibraryUpdateRequestsPage.verifyfieldLibraryUpdateRequestButtonExists()).toBe(true);
-        console.log('Manage Field Library Requests is allowed for Fields Management Specialist');
+        console.log('Manage Field Library Update Requests is allowed for User');
     });
 });
 

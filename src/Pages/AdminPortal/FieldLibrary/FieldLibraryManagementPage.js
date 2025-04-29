@@ -21,6 +21,13 @@ export class FieldLibraryManagementPage {
         this.fieldEnablementStatus = '//div[@data-testid="tag"]';
     }
 
+    async verifyUserCanManageFieldLibrary() {
+        if (await this.page.locator(this.threeDotsMenu).first().isVisible()) {
+            return true;
+        }
+        return false;
+    }
+
     async navigateToApprovedFieldsTab() {
         await this.page.click(this.approvedFieldsTab);
     }
