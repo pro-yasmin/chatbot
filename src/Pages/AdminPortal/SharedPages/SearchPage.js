@@ -17,7 +17,7 @@ export class SearchPage {
     let tds;
     let tdDetails = [];
     // Step 1: Enter the search value in the input field
-    await  this.page.waitForTimeout(10000); //shimaa
+    await  this.page.waitForTimeout(15000); //shimaa
     await this.page.fill(searchInputSelector, '');
     await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' , timeout: 10000});
     await this.page.waitForSelector(searchInputSelector, { state: 'visible' }); 
@@ -132,7 +132,7 @@ export class SearchPage {
     let tds;
     let tdDetails = [];
 
-    await  this.page.waitForTimeout(10000);
+    await  this.page.waitForTimeout(15000);
     table = this.page.locator(this.tableSelector);
     
   
