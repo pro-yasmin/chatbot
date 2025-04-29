@@ -283,7 +283,9 @@
     "approveExecutionSimulationBtnSuccessMsgText": "تم قبول اعتماد سجل تنفيذ",
     "saveAsDraftSuccessMsg": "تم حفظ تعريف بيانات نموذج المحاكاة كمسودة بنجاح",
     "deleteDraftSimulationModelConfirmationMsg": "هل أنت متأكد من حذف نسخة المسودة؟",
-    "deleteDraftSimulationModelSuccessMsg": "تم حذف المسودة بنجاح."
+    "deleteDraftSimulationModelSuccessMsg": "تم حذف المسودة بنجاح.",
+    "changeStatusSuccess": "نجاح",
+    "changeCreatorSameUser": "المستخدم"
   },
   "createField": {
     "fieldArabicName": "حقل جديد",

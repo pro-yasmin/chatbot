@@ -3,7 +3,7 @@ const { LoginPage } = require('../../../src/Pages/LoginPage');
 const { HomeOperationPage } = require('../../../src/Pages/OperationPortal/HomeOperationPage');
 const { SimulationModelData } = require('../../../src/Models/OperationPortal/SimulationModelData');
 const { SimulationModelManagementPage } = require('../../../src/Pages/OperationPortal/SimualtionModel/SimulationModelManagementPage');
-
+const { ComponentsAuditLogsPage } = require('../../../src/Pages/OperationPortal/ComponentsAuditLogsPage');
 
 let loginPage;
 let homeOperationPage;
@@ -11,6 +11,8 @@ let simulationModelData;
 let simulationModelManagementPage;
 let context;
 let page;
+let componentsAuditLogsPage;
+
 test.beforeEach(async ({  browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
@@ -18,6 +20,7 @@ test.beforeEach(async ({  browser }) => {
     homeOperationPage = new HomeOperationPage(page);
     simulationModelData = new SimulationModelData();
     simulationModelManagementPage = new SimulationModelManagementPage(page);
+    componentsAuditLogsPage = new ComponentsAuditLogsPage(page);
 
 
     var baseUrl = global.testConfig.OPERATION_BASE_URL;
@@ -50,6 +53,18 @@ test('Define New Simulation Model', async () => {
     await test.step('Search on Simulation Model created', async () => {
         expect(await simulationModelManagementPage.checkNewSimulationModelAdded(simulationModelData, null, null, null)).toBe(true);
         console.log('New Simulation Model Details Checked Successfully');
+    });
+
+    // Step4: Navigate to Components Audit Logs page
+    await test.step('Navigate to Components Audit Logs page', async () => {
+        await homeOperationPage.navigateToComponentsAuditLogsTab();
+        console.log('Navigate to Components Audit Logs page');
+    });
+
+    // Step5: Verify Simulaion Model Created Added To Audit Logs
+    await test.step('Verify Simulaion Model Created Added To Audit Logs', async () => {
+        expect(await componentsAuditLogsPage.verifyObjectAddedToAuditLogs(simulationModelData.getSimulationModelArName())).toBe(true);
+        console.log('Simulaion Model Created Added To Audit Logs Successfully');
     });
 });
 
