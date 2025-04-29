@@ -12,6 +12,7 @@ module.exports = defineConfig({
   timeout: 600000,
 
   globalSetup: require.resolve("./global-setup"),
+  //globalTeardown: './globalTeardown.js',
 
   testDir: "./tests",
   /* Run tests in files in parallel */
