@@ -1,4 +1,5 @@
-const { test, expect } = require('@playwright/test');
+//const { test, expect } = require('@playwright/test');
+import { test, expect } from '../../fixtures.js';
 const { LoginPage } = require('../../../src/Pages/LoginPage');
 const { HomePage } = require('../../../src/Pages/AdminPortal/HomePage');
 const { LookupsManagmentPage } = require('../../../src/Pages/AdminPortal/Lookups/LookupsManagmentPage');
@@ -10,13 +11,11 @@ let loginPage;
 let homePage;
 let lookupsManagmentPage;
 let lookupData;
-let context;
-let page;
 
 
-test('Create and View New Lookup', async ({browser}) => {
-    context = await browser.newContext();
-    page = await context.newPage();
+
+test('Create and View New Lookup', async ({page}) => {
+  
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     lookupsManagmentPage = new LookupsManagmentPage(page);
@@ -52,7 +51,7 @@ test('Create and View New Lookup', async ({browser}) => {
     await test.step('Logout from Admin Portal', async () => {
         await homePage.logout();
         console.log('Logout done Successfully');
-        await context.close();
+       
     });
 
 });
