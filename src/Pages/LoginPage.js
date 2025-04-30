@@ -70,6 +70,7 @@ export class LoginPage {
     await this.page.fill(this.userNameField, userName);
     await this.page.fill(this.passwordField, password);
     await this.page.click(this.loginButton);
+    await this.page.waitForSelector(this.invalidCredentialsErrorMsg, { visible: true });
     var actuaLoginErrorMsg = await this.page.$eval(this.invalidCredentialsErrorMsg, element => element.textContent);
     console.log("Actual Login Error Message: ", actuaLoginErrorMsg);
     var expectedLoginErrorMsg = global.testConfig.Login.invalidLoginDataErrorMsg;
