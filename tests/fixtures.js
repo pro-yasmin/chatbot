@@ -59,7 +59,7 @@ export const test = base.extend({
     await use(page);
 
     // Attach screenshot if the test fails
-    if (testInfo.status !== testInfo.expectedStatus) {
+   /* if (testInfo.status !== testInfo.expectedStatus) {
       try {
         await page.waitForTimeout(3000); // Wait for rendering
         const screenshotPath = path.join(
@@ -78,7 +78,7 @@ export const test = base.extend({
       } catch (err) {
         console.warn('⚠️ Screenshot capture failed:', err);
       }
-    }
+    }*/
   },
 });
 
