@@ -2,8 +2,6 @@ import { test as base, expect as baseExpect } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 
-const filesToCleanup = [];
-
 export const test = base.extend({
   context: async ({ browser }, use, testInfo) => {
     const videoDir = path.join(testInfo.outputDir, 'videos');
@@ -18,7 +16,7 @@ export const test = base.extend({
 
     const page = await context.newPage();
 
-    // Dynamically get screen size
+    // Dynamically set viewport based on screen size
     const screenSize = await page.evaluate(() => {
       const style = document.createElement('style');
       style.textContent = '* { font-display: swap !important; }';
@@ -34,14 +32,12 @@ export const test = base.extend({
       height: screenSize.height,
     });
 
-    // Store the page in context so it can be reused
-    context._page = page;
-
     await use(context);
-    await page.close();
-    await context.close(); // Ensure video is flushed to disk
 
-    // Attach video after context is closed
+    await page.close();
+    await context.close(); // This flushes the video to disk
+
+    // Attach video to test report
     const video = page.video();
     if (video) {
       try {
@@ -51,57 +47,39 @@ export const test = base.extend({
             path: videoPath,
             contentType: 'video/webm',
           });
-          filesToCleanup.push(videoPath);
         }
       } catch (err) {
-        console.warn('Video attachment failed:', err);
+        console.warn('⚠️ Video attachment failed:', err);
       }
     }
   },
 
   page: async ({ context }, use, testInfo) => {
-    const page = context._page;
-
+    const [page] = context.pages(); // Reuse the created page
     await use(page);
 
-    // Attach screenshot on failure
+    // Attach screenshot if the test fails
     if (testInfo.status !== testInfo.expectedStatus) {
-      const screenshotPath = path.join(
-        testInfo.outputDir,
-        `${testInfo.title.replace(/\s+/g, '_')}-failed.png`
-      );
-
       try {
-        await page.waitForTimeout(1000); // Let fonts/rendering settle
+        await page.waitForTimeout(1000); // Wait for rendering
+        const screenshotPath = path.join(
+          testInfo.outputDir,
+          `${testInfo.title.replace(/\s+/g, '_')}-failure.png`
+        );
         await page.screenshot({
           path: screenshotPath,
-          timeout: 10000,
+          fullPage: true,
+          timeout: 10000, // Increase timeout for CI
         });
-
-        if (fs.existsSync(screenshotPath)) {
-          await testInfo.attach('Failure Screenshot', {
-            path: screenshotPath,
-            contentType: 'image/png',
-          });
-          filesToCleanup.push(screenshotPath);
-        }
+        await testInfo.attach('Failure Screenshot', {
+          path: screenshotPath,
+          contentType: 'image/png',
+        });
       } catch (err) {
         console.warn('⚠️ Screenshot capture failed:', err);
       }
     }
   },
-});
-
-// Optional: cleanup after all tests
-test.afterAll(async () => {
-  for (const file of filesToCleanup) {
-    try {
-      fs.unlinkSync(file);
-      console.log(`🧹 Deleted: ${file}`);
-    } catch (err) {
-      console.warn(`⚠️ Could not delete file: ${file}`, err);
-    }
-  }
 });
 
 export const expect = baseExpect;
