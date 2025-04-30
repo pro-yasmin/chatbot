@@ -1,4 +1,5 @@
-const { test, expect } = require('@playwright/test');
+//const { test, expect } = require('@playwright/test');
+import { test, expect } from '../../fixtures.js';
 const { LoginPage } = require('../../../src/Pages/LoginPage');
 const { HomePage } = require('../../../src/Pages/AdminPortal/HomePage');
 const { StateMachineManagmentPage } = require('../../../src/Pages/AdminPortal/StateMachine/StateMachineManagmentPage');
@@ -11,11 +12,8 @@ let homePage;
 let stateMachineManagmentPage;
 let stateMachineData;
 
-let context;
-let page;
-test('View State Machine', async ({ browser }) => {
-    context = await browser.newContext();
-    page = await context.newPage();
+
+test('View State Machine', async ({ page }) => {
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     stateMachineManagmentPage = new StateMachineManagmentPage(page);
@@ -60,7 +58,7 @@ test('View State Machine', async ({ browser }) => {
     await test.step('Logout from Admin Portal', async () => {
         await homePage.logout();
         console.log('Logout done Successfully');
-        await context.close();
+       
     });
 
 });
