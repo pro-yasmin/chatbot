@@ -1,4 +1,5 @@
-const { test, expect } = require('@playwright/test');
+//const { test, expect } = require('@playwright/test');
+import { test, expect } from '../../../fixtures.js';
 const { LoginPage } = require('../../../../src/Pages/LoginPage');
 const { HomePage } = require('../../../../src/Pages/AdminPortal/HomePage');
 const { FieldLibraryManagementPage } = require('../../../../src/Pages/AdminPortal/FieldLibrary/FieldLibraryManagementPage');
@@ -6,12 +7,10 @@ const { FieldLibraryManagementPage } = require('../../../../src/Pages/AdminPorta
 let loginPage;
 let homePage;
 let fieldLibraryManagementPage;
-let context;
-let page;
 
-test.beforeEach(async ({ browser }) => {
-    context = await browser.newContext();
-    page = await context.newPage();
+
+test.beforeEach(async ({ page }) => {
+   
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     fieldLibraryManagementPage = new FieldLibraryManagementPage(page);
@@ -73,7 +72,7 @@ test.afterEach(async () => {
     await test.step("Logout from Admin Portal", async () => {
         await homePage.logout();
         console.log("User Logout Successfully");
-        await context.close();
+      
     });
 
 });

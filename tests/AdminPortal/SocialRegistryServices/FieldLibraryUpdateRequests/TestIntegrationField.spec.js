@@ -1,4 +1,5 @@
-const { test, expect } = require('@playwright/test');
+//const { test, expect } = require('@playwright/test');
+import { test, expect } from '../../../fixtures.js';
 import Constants from '../../../../src/Utils/Constants';
 
 const { LoginPage } = require('../../../../src/Pages/LoginPage');
