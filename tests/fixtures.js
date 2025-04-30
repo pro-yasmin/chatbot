@@ -61,7 +61,7 @@ export const test = base.extend({
     // Attach screenshot if the test fails
     if (testInfo.status !== testInfo.expectedStatus) {
       try {
-        await page.waitForTimeout(1000); // Wait for rendering
+        await page.waitForTimeout(3000); // Wait for rendering
         const screenshotPath = path.join(
           testInfo.outputDir,
           `${testInfo.title.replace(/\s+/g, '_')}-failure.png`
