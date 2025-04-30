@@ -91,28 +91,28 @@ test('Calculation Field Request Flow', async () => {
             // var myMap = new Map();
             // myMap.set('ISR_FLib_00001206',Constants.APPROVE); 
             var result = await fieldLibraryManagementPage.checkFieldStatusDetails(myMap);
-            expect(result).toBe(true);
+            expect(result).toBe(true);            
+            await homePage.logout();
             console.log("Field Stauts Matched Successfully");
         });
 
-    //  // Switch to FIELD_MANAGEMENT_SPECIALIST User
-    //     await test.step('Logout from ISR Manager User and login as FIELD MANAGEMENT User', async () => {
-    //         await homePage.logout();
-    //         console.log('Logged out from ISR Manager');
-    //         var fieldspecialistUsername = global.testConfig.FIELD_MANAGEMENT_SPECIALIST;
-    //         var fieldspecialistPassword = global.testConfig.FIELD_MANAGEMENT_SPECIALIST_PASS;
-    //         const loginSuccess = await loginPage.login(fieldspecialistUsername, fieldspecialistPassword);
-    //         expect(loginSuccess).toBe(true);
-    //         console.log('Logged in as FIELD MANAGEMENT User');
-    //     });
+     // Switch to FIELD_MANAGEMENT_SPECIALIST User
+        await test.step('Logout from ISR Manager User and login as FIELD MANAGEMENT User', async () => {
+            console.log('Logged out from ISR Manager');
+            var fieldspecialistUsername = global.testConfig.FIELD_MANAGEMENT_SPECIALIST;
+            var fieldspecialistPassword = global.testConfig.FIELD_MANAGEMENT_SPECIALIST_PASS;
+            const loginSuccess = await loginPage.login(fieldspecialistUsername, fieldspecialistPassword);
+            expect(loginSuccess).toBe(true);
+            console.log('Logged in as FIELD MANAGEMENT User');
+        });
     
-    //     // Deactivate Field Library
-    //     await test.step('Deactivate Field Library', async () => {
-    //         await homePage.navigateToFieldLibrary();//
-    //         var deactivation = await fieldLibraryManagementPage.toggleFieldLibraryEntry(requestChecks[1] , false);
-    //         expect(deactivation).toBe(true);
-    //         console.log('Field Deactivated Successfully');
-    //     });
+        // Deactivate Field Library
+        await test.step('Deactivate Field Library', async () => {
+            await homePage.navigateToFieldLibrary();//
+            var deactivation = await fieldLibraryManagementPage.toggleFieldLibraryEntry(requestChecks[1] , false);
+            expect(deactivation).toBe(true);
+            console.log('Field Deactivated Successfully');
+        });
 });
 
     test.afterEach(async () => {
