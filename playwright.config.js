@@ -42,7 +42,7 @@ module.exports = defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
     video: "on",
-    screenshot: "only-on-failure", // Capture screenshot always
+   // screenshot: "only-on-failure", // Capture screenshot always
     actionTimeout: 200000, // Timeout for Playwright actions (15 seconds)
     navigationTimeout: 600000, // Timeout for page navigation (60 seconds)
   },
@@ -123,6 +123,6 @@ module.exports = defineConfig({
         //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
         // },
      //
-   ],
+  ],
 });
 module.exports.ENV = ENV;
