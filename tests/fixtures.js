@@ -20,6 +20,9 @@ export const test = base.extend({
 
     // Get the screen's available width and height dynamically in the browser context
     var screenSize = await page.evaluate(() => {
+      const style = document.createElement('style');
+     style.textContent = '* { font-display: swap !important; }';
+     document.head.appendChild(style);
       return {
         width: window.screen.availWidth,
         height: window.screen.availHeight,
