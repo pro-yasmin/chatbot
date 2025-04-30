@@ -1,4 +1,5 @@
-const { test, expect } = require('@playwright/test');
+//const { test, expect } = require('@playwright/test');
+import { test, expect } from '../../../fixtures.js';
 import Constants from '../../../../src/Utils/Constants';
 
 const { LoginPage } = require('../../../../src/Pages/LoginPage');
@@ -17,12 +18,9 @@ let loginPage,homePage,manageSubDomainUpdateRequestsPage,subDomainCreationPage,s
 let subDomainData;
 let RequestID,myMap;;
 let adminUsername, adminPassword, isrManagerUsername , isrManagerPassword;
-let context;
-let page;
 
-test.beforeEach(async ({ browser }) => {
-  context = await browser.newContext();
-  page = await context.newPage();
+
+test.beforeEach(async ({ page }) => {
   loginPage = new LoginPage(page);
   homePage = new HomePage(page);
   manageSubDomainUpdateRequestsPage = new ManageSubDomainUpdateRequestsPage(page);
@@ -129,7 +127,7 @@ test.beforeEach(async ({ browser }) => {
     await test.step('Logout from Admin Portal', async () => {
     await homePage.logout();
     console.log('User logged out successfully');
-    await context.close();
+    
     });
 
   });

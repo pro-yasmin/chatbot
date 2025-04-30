@@ -1,4 +1,5 @@
-const { test, expect } = require('@playwright/test');
+//const { test, expect } = require('@playwright/test');
+import { test, expect } from '../../../fixtures.js';
 import Constants from '../../../../src/Utils/Constants';
 
 const { LoginPage } = require('../../../../src/Pages/LoginPage');
@@ -14,25 +15,8 @@ let complexFieldData, inputFieldData;
 let adminUsername, adminPassword ,isrManagerUsername , isrManagerPassword;
 let requestChecks ,myMap;
 let fieldLibraryManagementPage ;
-let context;
-let page;
 
-
-//Helper Function to refresh page object pages 
- function refreshPageObjects(currentPage) {
-    loginPage.updatePage(currentPage);
-    homePage.updatePage(currentPage);
-    fieldLibraryUpdateRequestsPage.updatePage(currentPage);
-    fieldLibraryManagementPage.updatePage(currentPage);
-    fieldsTreePage.updatePage(currentPage);
-    tasksPage.updatePage(currentPage);
-    console.log('Page Objects refreshed successfully after login.');
-}
-
-
-test.beforeEach(async ({ browser }) => {
-    context = await browser.newContext();
-    page = await context.newPage();
+test.beforeEach(async ({page }) => {
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     fieldLibraryUpdateRequestsPage = new FieldLibraryUpdateRequestsPage(page);
@@ -144,6 +128,6 @@ test('Complex and Input Fields Request Flow', async () => {
         await test.step('Logout from Admin Portal', async () => {
             await homePage.logout();
             console.log('User logged out successfully');
-            await context.close();
+          
         });
 });
