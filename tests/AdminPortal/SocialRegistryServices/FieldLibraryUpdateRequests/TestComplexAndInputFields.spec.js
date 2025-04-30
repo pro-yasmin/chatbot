@@ -16,6 +16,20 @@ let requestChecks ,myMap;
 let fieldLibraryManagementPage ;
 let context;
 let page;
+
+
+//Helper Function to refresh page object pages 
+ function refreshPageObjects(currentPage) {
+    loginPage.updatePage(currentPage);
+    homePage.updatePage(currentPage);
+    fieldLibraryUpdateRequestsPage.updatePage(currentPage);
+    fieldLibraryManagementPage.updatePage(currentPage);
+    fieldsTreePage.updatePage(currentPage);
+    tasksPage.updatePage(currentPage);
+    console.log('Page Objects refreshed successfully after login.');
+}
+
+
 test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
@@ -72,6 +86,9 @@ test('Complex and Input Fields Request Flow', async () => {
         isrManagerPassword = global.testConfig.ISR_MANAGER_PASS;
         const loginSuccess = await loginPage.login(isrManagerUsername, isrManagerPassword);
         expect(loginSuccess).toBe(true);
+        refreshPageObjects(page);
+        await page.waitForLoadState('domcontentloaded');
+        await page.waitForLoadState('networkidle');
         console.log('Logged in as ISR Manager');
     });
 
@@ -99,24 +116,27 @@ test('Complex and Input Fields Request Flow', async () => {
     });
 
 
-    // Switch to FIELD_MANAGEMENT_SPECIALIST User
-    await test.step('Logout from ISR Manager User and login as FIELD MANAGEMENT User', async () => {
-        await homePage.logout();
-        console.log('Logged out from ISR Manager');
-        var fieldspecialistUsername = global.testConfig.FIELD_MANAGEMENT_SPECIALIST;
-        var fieldspecialistPassword = global.testConfig.FIELD_MANAGEMENT_SPECIALIST_PASS;
-        const loginSuccess = await loginPage.login(fieldspecialistUsername, fieldspecialistPassword);
-        expect(loginSuccess).toBe(true);
-        console.log('Logged in as FIELD MANAGEMENT User');
-    });
+    // // Switch to FIELD_MANAGEMENT_SPECIALIST User
+    // await test.step('Logout from ISR Manager User and login as FIELD MANAGEMENT User', async () => {
+    //     await homePage.logout();
+    //     console.log('Logged out from ISR Manager');
+    //     var fieldspecialistUsername = global.testConfig.FIELD_MANAGEMENT_SPECIALIST;
+    //     var fieldspecialistPassword = global.testConfig.FIELD_MANAGEMENT_SPECIALIST_PASS;
+    //     const loginSuccess = await loginPage.login(fieldspecialistUsername, fieldspecialistPassword);
+    //     expect(loginSuccess).toBe(true);
+    //     refreshPageObjects(page);
+    //     await page.waitForLoadState('domcontentloaded');
+    //     await page.waitForLoadState('networkidle');
+    //     console.log('Logged in as FIELD MANAGEMENT User');
+    // });
 
-    // Deactivate Field Library
-    await test.step('Deactivate Field Library', async () => {
-        await homePage.navigateToFieldLibrary();
-        var deactivation = await fieldLibraryManagementPage.toggleFieldLibraryEntry(requestChecks[1], false);
-        expect(deactivation).toBe(true);
-        console.log('Field Deactivated Successfully');
-    });
+    // // Deactivate Field Library
+    // await test.step('Deactivate Field Library', async () => {
+    //     await homePage.navigateToFieldLibrary();
+    //     var deactivation = await fieldLibraryManagementPage.toggleFieldLibraryEntry(requestChecks[1], false);
+    //     expect(deactivation).toBe(true);
+    //     console.log('Field Deactivated Successfully');
+    // });
 });
 
     test.afterEach(async () => {

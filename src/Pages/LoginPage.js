@@ -21,6 +21,12 @@ export class LoginPage {
     this.nationalField = '//span[contains(text(),"رقم الهوية الوطنية")]';
   }
 
+
+// used if we need to refresh page object
+  async updatePage(newPage) {
+    this.page = newPage;
+  }
+
   /**
    * Navigates to the admin portal .
    * @param {string} baseUrl - The URL of the admin portal.

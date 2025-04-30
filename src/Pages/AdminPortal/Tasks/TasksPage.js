@@ -28,6 +28,13 @@ export class TasksPage {
     this.cancelAssignBtn = '//button[contains(text(),"إلغاء")]';
   }
 
+
+  // used if we need to refresh page object
+  async updatePage(newPage) {
+    this.page = newPage;
+  }
+
+  
   /**
    * Navigates to the "My Tasks" tab.
    * @returns {Promise<void>} - Completes the navigation.

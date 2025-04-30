@@ -168,11 +168,11 @@ export class FieldPage {
   async selectParentOption(parentLocatorField) {
     await this.page.click(parentLocatorField);
     await this.page.waitForTimeout(1000);
-    const socialRecordItem = this.page.locator('//span[contains(text(), "السجل الاجتماعي  الموحد")]');
+    const socialRecordItem = this.page.locator(`//span[contains(text(), "${global.testConfig.createField.firstParent}")]`);
     await socialRecordItem.waitFor({ state: 'visible', timeout: 5000 });
     await socialRecordItem.click();    
     await this.page.waitForTimeout(1000);
-    const personalDataItem = this.page.locator('//span[contains(text(), "البيانات الشخصية")]');
+    const personalDataItem = this.page.locator(`//span[contains(text(), "${global.testConfig.createField.secoundParent}")]`);
     await personalDataItem.waitFor({ state: 'visible', timeout: 5000 });
     await personalDataItem.click();
     await this.page.waitForTimeout(1000);
@@ -195,7 +195,7 @@ export class FieldPage {
     }
 
     async listOfAvailableFields () {
-      
+
       const fields = [
         global.testConfig.createField.availableField1,
         global.testConfig.createField.availableField2 ];

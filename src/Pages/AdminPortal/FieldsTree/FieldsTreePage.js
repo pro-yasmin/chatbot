@@ -4,7 +4,7 @@ export class FieldsTreePage {
       this.page = page;
 
       this.ISRBtn = '//input[@type="radio"]';
-      this.personalInformationBtn = '//span[contains(text(),"البيانات الشخصية")]';
+      this.parentElementBtn = `//span[contains(text(),"${global.testConfig.createField.secoundParent}")]`;
       this.fieldsSection = '//li[@id="mui-tree-view-4-personalInformation"]//ul[@role="group"]';
       this.openTree='//div[contains(@class,"MuiTreeItem-content")]';
       this.ArName='(//label[contains(@id,"arabicName")]//following::div[@ref="value"])[1]';
@@ -16,6 +16,11 @@ export class FieldsTreePage {
       
     }
   
+    // used if we need to refresh page object
+    async updatePage(newPage) {
+      this.page = newPage;
+    }
+
     /**
      * open Personal Information section
      */
@@ -25,10 +30,9 @@ export class FieldsTreePage {
      //await this.page.waitForSelector(this.ISRBtn, { state: "visible", timeout: 60000 });
       await this.page.locator(this.ISRBtn).click({ timeout: 5000 });
       //await this.page.click(this.ISRBtn);  
-      await this.page.waitForSelector(this.personalInformationBtn, { state: "visible", timeout: 10000 });
-      await this.page.locator(this.personalInformationBtn).click({ timeout: 5000 });
+      await this.page.waitForSelector(this.parentElementBtn, { state: "visible", timeout: 10000 });
+      await this.page.locator(this.parentElementBtn).click({ timeout: 5000 });
      // await this.page.click(this.personalInformationBtn);
-      console.log("Fields Personal Information opened successfully");
     }
   
     /**

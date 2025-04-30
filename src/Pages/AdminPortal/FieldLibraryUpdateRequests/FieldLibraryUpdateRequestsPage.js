@@ -12,8 +12,13 @@ export class FieldLibraryUpdateRequestsPage {
         this.fieldLibraryUpdateRequestButton = '//button[contains(text(),"طلب تحديث مكتبة الحقول")]';
         this.tableActions='table-actions';
 
-
     }
+
+
+    // used if we need to refresh page object
+  async updatePage(newPage) {
+    this.page = newPage;
+  }
 
     async navigateToFieldRequestsPage() {
         var button = this.page.locator(this.fieldLibraryUpdateRequestButton);

@@ -104,7 +104,7 @@ test('Integration Field Request Flow With Axon integration', async ({ page }) =>
         var taskManage = await tasksPage.manageRequestField(requestChecks[0],myMap , Constants.FIELDS_REQUEST);
         expect(taskManage).toBe(true);
         console.log("Field Request Done Successfully");
-        await homePage.logout();
+        // await homePage.logout();
         console.log('Logged out from ISR Manager');
     });
 

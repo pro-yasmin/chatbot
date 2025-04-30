@@ -21,6 +21,12 @@ export class FieldLibraryManagementPage {
         this.fieldEnablementStatus = '//div[@data-testid="tag"]';
     }
 
+
+// used if we need to refresh page object
+async updatePage(newPage) {
+    this.page = newPage;
+  }
+
     async navigateToApprovedFieldsTab() {
         await this.page.click(this.approvedFieldsTab);
     }

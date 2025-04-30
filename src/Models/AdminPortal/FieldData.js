@@ -16,6 +16,7 @@ export class FieldData {
     this.glossaryFieldNature = null;
     this.glossaryFieldSource = null;
     this.glossaryAxonStatus = null;
+    this.glossaryServiceName == null ;
 
     //API
     this.requestId=null;
@@ -138,11 +139,22 @@ setFieldType(value) {
         this.glossaryAxonStatus = Value;
     }
 
+       // Getter and Setter for Glossary Axon Service Name
+       getGlossaryServiceName() {
+        if (this.glossaryServiceName == null) {
+            this.glossaryServiceName =global.testConfig.createField.glossaryServiceName;
+        }
+        return this.glossaryServiceName;
+        }
+        // Setter for Glossary Axon Service Name
+        setGlossaryServiceName(Value) {
+            this.glossaryServiceName = Value;
+        }
+
       // Getter and Setter for API Request field ID Number
       getRequestId() {
-        
         return this.requestId;
-    }
+     }
 
     // Setter for FieldID
     setRequestId(Value) {
@@ -178,15 +190,11 @@ setFieldType(value) {
         this.parentDomain = Value;
     }
 
-
-
      // Getter and Setter for API input source
      getInputSource() {
        
         return this.inputSource;
     }
-
-    
     setInputSource(Value) {
         this.inputSource = Value;
     }
