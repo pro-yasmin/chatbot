@@ -222,8 +222,8 @@
     "integration": "تكامل"
   },
   "SocialRecordCopies": {
-    "socialRecordActiveCopy": "ISR_ISRVR_00000021",
-    "socialRecordActiveStatus": "مفعلة",
+    "socialRecordActiveCopy": "ISR_ISRVR_00000387", 
+    "socialRecordActiveStatus": "مفعل",
     "socialRecordDraftStatus": "مسودة",
     "socialRecordUnderReviewStatus": "تحت الاعتماد",
     "existingDraftCopyIsAlreadyExistMsg": "لديك بالفعل مسودة من النسخة المفعلة.",

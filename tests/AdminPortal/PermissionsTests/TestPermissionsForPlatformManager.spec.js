@@ -33,7 +33,7 @@ test.beforeEach(async ({ browser }) => {
     });
 });
 
-test('Verify Permissions Granted to Platform Manager  ', async () => {
+test('Verify Permissions Granted to Platform Manager', async () => {
     // Step1: Verify User can not Manage Social Record Managment page
     await test.step('Verify User can not manage Social Record Managment page', async () => {
         expect(await homePage.navigateToSocialRecordCopies()).toBe(false);

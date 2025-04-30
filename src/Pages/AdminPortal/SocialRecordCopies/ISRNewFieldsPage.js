@@ -21,7 +21,8 @@ export class ISRNewFieldsPage {
         console.log("start Adding New Registry Fields");
         await this.socialRecordCopiesPage.clickAddNewRegistryFieldsButton();
         //await this.page.waitForSelector(this.fieldListFirstOption, { state: "visible", timeout: 60000});
-        await this.page.click(this.lastPageButton + '[last()-1]');
+        // await this.page.click(this.lastPageButton + '[last()-1]');
+        // await this.page.click(this.fieldListOption + '[last()]');
         await this.page.click(this.fieldListOption + '[last()]');
         await this.getFieldArNameText(socialRecordCopiesData);
         await this.page.waitForSelector(this.proceedButton, { state: "visible", timeout: 60000});
