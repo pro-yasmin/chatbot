@@ -108,6 +108,7 @@ export class SocialRecordCopiesPage {
     async getExistingFieldsData(socialRecordCopiesData) {
         const rows = await this.page.locator(`${this.existFieldsTable}//tr`);
         const rowCount = await rows.count();
+        const actualFieldsCount = await rows.count()+1;
         let textValues = [];
 
         for (let i = 0; i < rowCount; i++) {
@@ -116,6 +117,8 @@ export class SocialRecordCopiesPage {
             console.log(`Row ${i + 1}: ${text}`);
             textValues.push(text);
         }
+        socialRecordCopiesData.setRowCount(actualFieldsCount);
+        console.log("Existing Fields Rows Count = " + actualFieldsCount);
         socialRecordCopiesData.setExistingFieldsArName(textValues);
         return true;
     }

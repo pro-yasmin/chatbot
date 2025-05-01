@@ -22,8 +22,10 @@
     "expectFieldTaskType": "تحديث مكتبة الحقول",
     "executionLogApproval": "اعتماد سجل تنفيذ",
     "prepareSimulationModel": "تجهيز نموذج المحاكاة",
-     "expectedSubDomainTaskTypetest": "طلب تحديث الفئات",
-    "expectedSubDomainTaskType":"DOMAIN_LIBRARY_UPDATE"
+    "expectedSubDomainTaskTypetest": "طلب تحديث الفئات",
+    "expectedSubDomainTaskType": "DOMAIN_LIBRARY_UPDATE",
+    "expectISRTaskType": "تحديث السجل الاجتماعي",
+    "isrRejectReason": "تم رفض السجل الاجتماعي"
   },
   "taskDetails": {
     "enableStatusHidden": "معطَّل",
@@ -42,7 +44,9 @@
     "confirmRejectBenefitMsg": "تم رفض تعريف الإعانة بنجاح.",
     "confirmSubProgramsMsg": "تم قبول تعريف البرنامج الفرعي بنجاح",
     "confirmBenefitsMsg": "تم قبول تعريف الإعانة بنجاح",
-    "addCompleteTaskNote": "ملاحظةلاكمال المهمة"
+    "addCompleteTaskNote": "ملاحظةلاكمال المهمة",
+    "dummy": "تم رفض نسخة السجل بنجاح",
+    "confirmRejectISRMsg": "isrSchemaVersionReject"
   },
   "createMainProgram": {
     "backUpStreamNumber": "PRG_StrSt_296",
@@ -78,17 +82,29 @@
     "businessKey": null,
     "regulationsPublishedDate": "2025-12-22T22:00:00.000Z",
     "designResponsibleGovernance": [
-      { "code": "Responsible", "responsibleCodes": ["Agency3"] }
+      {
+        "code": "Responsible",
+        "responsibleCodes": [
+          "Agency3"
+        ]
+      }
     ],
     "executionResponsibleGovernance": [
-      { "code": "1234", "responsibleCodes": ["test"] }
+      {
+        "code": "1234",
+        "responsibleCodes": [
+          "test"
+        ]
+      }
     ],
     "programFundingSourcesCode": "source1",
     "relatedPastPrograms": [],
     "subProgramRisks": [],
     "requiresGrandfatheringAndGradualImplementation": true,
     "assistanceUnitCode": "customGroup",
-    "conditionsAssistanceUnits": ["شروط تشكيل وحدة الدعم"],
+    "conditionsAssistanceUnits": [
+      "شروط تشكيل وحدة الدعم"
+    ],
     "approach": "COMPREHENSIVE",
     "benefitedSegments": [],
     "geographicalTargeting": [],
@@ -98,7 +114,9 @@
     "applicationEnablementPermAr": "دائم",
     "applicationEnablementTemp": "TEMPORARY",
     "requireRegisterApplication": true,
-    "applicationChannelCodes": ["14"],
+    "applicationChannelCodes": [
+      "14"
+    ],
     "periodAfterExistCode": "",
     "reApplyAfterExistCode": "",
     "viewSubProgramType": "برنامج قائم دون أي تغيير",
@@ -147,7 +165,9 @@
       "benefitTypeNonCash": "NON_CASH",
       "natureValue": "test2",
       "natureValueType": "cashBenefitNature",
-      "providerCodes": ["camp"],
+      "providerCodes": [
+        "camp"
+      ],
       "providerCodesAr": "كامب",
       "estimatedValue": "القيمة التقديرية للإعانة"
     },
@@ -182,7 +202,9 @@
     "temporaryFrom": null,
     "temporaryTo": null,
     "requireRegisterApplication": true,
-    "applicationChannelCodes": ["14"],
+    "applicationChannelCodes": [
+      "14"
+    ],
     "viewbenefitResponsibleEntity": "جهة مسؤولة عن التنفيذ جديده",
     "viewTargetApproach": "COMPREHENSIVE",
     "viewEnablementStatus": "معطَّل",
@@ -222,7 +244,7 @@
     "integration": "تكامل"
   },
   "SocialRecordCopies": {
-    "socialRecordActiveCopy": "ISR_ISRVR_00000387", 
+    "socialRecordActiveCopy": "ISR_ISRVR_00000387",
     "socialRecordActiveStatus": "مفعل",
     "socialRecordDraftStatus": "مسودة",
     "socialRecordUnderReviewStatus": "تحت الاعتماد",
@@ -233,7 +255,8 @@
     "deleteDraftSocialRecordCopyConfirmationMsg": "تم حذف المسودة بنجاح من نسخ السجل الاجتماعي",
     "ISRaddNewFieldSuccessMsg": "تم إضافة الحقل بنجاح.",
     "schemaUpdateSuccessMsg": "تم إرسال تحديث النسخة للموافقة بنجاح.",
-    "newAddedFieldTag": "مضاف حديثًا"
+    "newAddedFieldTag": "مضاف حديثًا",
+    "socialRecordCopyStatusCompleted": "مكتمل"
   },
   "SimulationModels": {
     "simulationModelArName": "اسم المحاكاه",
@@ -308,41 +331,40 @@
     "availableField1": "الاسم الأول",
     "availableField2": "الاسم الثانى",
     "descriptionCalculatedField": "وصف العملية الحسابية",
-    "glossaryParentBeforeApprove":"SP file",
-    "glossaryParentAfterApprove":"Personal Information",
+    "glossaryParentBeforeApprove": "SP file",
+    "glossaryParentAfterApprove": "Personal Information",
     "glossaryFieldNature": "صحي",
-    "glossaryFieldSource":"تكامل",
-    "glossaryFieldAxsonStatus":"Active",
-    "glossaryFieldEmptyValue":"Not specified", "API_Default_ParentKey":"education",
-    "API_Default_ParentDomain":"DOMAIN",
-    "API_Classification":"public",
-    "API_Classification_Ar":"عام",
-    "API_PeriodicDataUpdate_id":"675edfc28d5d8a38173540aa",
-    "API_PeriodicDataUpdate_nameEn":"monthly",
-    "API_PeriodicDataUpdate_nameAr":"شهري",
-    "API_Privacy":"Top Secret",
-    "API_ImpactDegree":"Low",
-    "API_Severity_id":"675edd7f270cc3ce790d2709",
-    "API_Severity_nameEn":"low",
-    "API_Severity_nameAr":"منخفض",
-    "API_Assigned_Domain":"التعليم",
-    "API_FieldNature_id":"675edd657215dc2057c65774",
-    "API_FieldNature_nameEn":"Health",
-    "API_FieldNature_nameAr":"صحي"
-  
-},
-"createSubDomain": {
-  "subDomainArabicName": "فئة جديدة",
-  "subDomainEnglishName": "subDomain New",
-  "assignedDomain":"السجل الاجتماعي  الموحد",
-  "subDomainDescription": "وصف الفئة الجديدة للتجربة",
-  "subDomainFile":"test.pdf",
-  "createSubDomainSuccessMsg":"تم إرسال طلبك رقم",
-  "subDomainProcessingStatus" : "معالجة",
-  "subDomainApprovedStatus":"معتمد",
-  "subDomainRejectedStatus":"غير معتمد",
-  "subDomainEnableStatus":"متاح",
-  "subDomainDisableStatus":"معطَّل"
-}
-
+    "glossaryFieldSource": "تكامل",
+    "glossaryFieldAxsonStatus": "Active",
+    "glossaryFieldEmptyValue": "Not specified",
+    "API_Default_ParentKey": "education",
+    "API_Default_ParentDomain": "DOMAIN",
+    "API_Classification": "public",
+    "API_Classification_Ar": "عام",
+    "API_PeriodicDataUpdate_id": "675edfc28d5d8a38173540aa",
+    "API_PeriodicDataUpdate_nameEn": "monthly",
+    "API_PeriodicDataUpdate_nameAr": "شهري",
+    "API_Privacy": "Top Secret",
+    "API_ImpactDegree": "Low",
+    "API_Severity_id": "675edd7f270cc3ce790d2709",
+    "API_Severity_nameEn": "low",
+    "API_Severity_nameAr": "منخفض",
+    "API_Assigned_Domain": "التعليم",
+    "API_FieldNature_id": "675edd657215dc2057c65774",
+    "API_FieldNature_nameEn": "Health",
+    "API_FieldNature_nameAr": "صحي"
+  },
+  "createSubDomain": {
+    "subDomainArabicName": "فئة جديدة",
+    "subDomainEnglishName": "subDomain New",
+    "assignedDomain": "السجل الاجتماعي  الموحد",
+    "subDomainDescription": "وصف الفئة الجديدة للتجربة",
+    "subDomainFile": "test.pdf",
+    "createSubDomainSuccessMsg": "تم إرسال طلبك رقم",
+    "subDomainProcessingStatus": "معالجة",
+    "subDomainApprovedStatus": "معتمد",
+    "subDomainRejectedStatus": "غير معتمد",
+    "subDomainEnableStatus": "متاح",
+    "subDomainDisableStatus": "معطَّل"
+  }
 }

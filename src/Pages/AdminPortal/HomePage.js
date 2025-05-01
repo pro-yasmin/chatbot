@@ -217,6 +217,16 @@ export class HomePage {
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 
+  async navigateToRequestUpdateSocialRecordCopies() {
+    await this.navigateToSocialRegistryServices();
+    if (await this.page.locator(this.requestUpdateSocialRecordCopiesTab).isVisible()) {
+      await this.page.click(this.requestUpdateSocialRecordCopiesTab);
+      await this.page.waitForTimeout(2000);
+      return true;
+    }
+    return false;
+  }
+
 }
 
 module.exports = { HomePage };
