@@ -1,4 +1,5 @@
-const { test, expect } = require('@playwright/test');
+//const { test, expect } = require('@playwright/test');
+import { test, expect } from '../../../fixtures.js';
 import Constants from '../../../../src/Utils/Constants.js';
 const { LoginPage } = require('../../../../src/Pages/LoginPage');
 const { HomePage } = require('../../../../src/Pages/AdminPortal/HomePage');
@@ -14,11 +15,8 @@ let socialRecordCopiesData;
 let tasksPage;
 let requestUpdateSocialRecordCopiesPage;
 
-let context;
-let page;
-test.beforeEach(async ({ browser }) => {
-    context = await browser.newContext();
-    page = await context.newPage();
+
+test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     socialRecordCopiesManagementPage = new SocialRecordCopiesManagementPage(page);
@@ -124,7 +122,6 @@ test.afterEach(async () => {
     await test.step("Logout from Admin Portal", async () => {
         await homePage.logout();
         console.log("User Logout Successfully");
-        await context.close();
     });
 
 });
