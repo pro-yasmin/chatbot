@@ -1,4 +1,5 @@
-const { test, expect } = require('@playwright/test');
+//const { test, expect } = require('@playwright/test');
+import { test, expect } from '../../fixtures.js';
 const { LoginPage } = require('../../../src/Pages/LoginPage');
 const { HomeOperationPage } = require('../../../src/Pages/OperationPortal/HomeOperationPage');
 const { SimulationModelData } = require('../../../src/Models/OperationPortal/SimulationModelData');
@@ -14,8 +15,7 @@ let simulationModelData;
 let simulationModelManagementPage;
 let tasksPage;
 let simulation;
-let context;
-let page;
+
 
 var baseUrl = global.testConfig.OPERATION_BASE_URL;
 var programsAndPoliciesSpecalistUsername = global.testConfig.PROGRAMS_AND_POLICIES_SPECIALIST;
@@ -24,9 +24,8 @@ var programsAndPoliciesSpecalistPassword = global.testConfig.PROGRAMS_AND_POLICI
 var programsAndPoliciesManagerUsername = global.testConfig.PROGRAMS_AND_POLICIES_MANAGER;
 var programsAndPoliciesManagerPassword = global.testConfig.PROGRAMS_AND_POLICIES_MANAGER_PASS;
 
-test.beforeEach(async ({ browser }) => {
-    context = await browser.newContext();
-    page = await context.newPage();
+test.beforeEach(async ({ page }) => {
+   
     loginPage = new LoginPage(page);
     homeOperationPage = new HomeOperationPage(page);
     simulationModelData = new SimulationModelData();
@@ -146,7 +145,7 @@ test.afterEach(async () => {
     await test.step("Logout from Operation Portal", async () => {
         await homeOperationPage.logout();
         console.log("User Logout Successfully");
-        await context.close();
+      
     });
 
 });
