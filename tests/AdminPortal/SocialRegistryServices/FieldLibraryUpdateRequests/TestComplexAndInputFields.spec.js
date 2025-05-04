@@ -70,6 +70,8 @@ test('Complex and Input Fields Request Flow', async () => {
         isrManagerPassword = global.testConfig.ISR_MANAGER_PASS;
         const loginSuccess = await loginPage.login(isrManagerUsername, isrManagerPassword);
         expect(loginSuccess).toBe(true);
+        // await page.waitForLoadState('domcontentloaded');
+        // await page.waitForLoadState('networkidle');
         console.log('Logged in as ISR Manager');
     });
 

@@ -8,9 +8,10 @@ export class GlossaryPage {
       this.parentNameLocator ='[id="axon_appbundle_catitemcategorytype_Parent_button"]';
       this.parentSearch= '//td[contains(@class,"filter") and @role="columnheader"]//input[@type="text"]';
       this.arabicFieldDescription ='//textarea[@placeholder="Enter Arabic Field Description (Text)"]';
-      this.glossaryRequired ='[id="axon_appbundle_catitemcategorytype_11"]';
-      this.glossaryMultipleField ='[id="axon_appbundle_catitemcategorytype_13"]';
-      
+      this.glossaryRequired ='[id="axon_appbundle_catitemcategorytype_8"]';
+      this.glossaryMultipleField ='[id="axon_appbundle_catitemcategorytype_10"]';
+      this.glossaryServiceName = '[id="axon_appbundle_catitemcategorytype_12"]';
+
       this.classificationsTypeMenu ='[id="select2-axon_appbundle_catitemcategorytype_Type-container"]';
       this.classificationsType ='//li[text()="Term"]';
 
@@ -35,6 +36,7 @@ export class GlossaryPage {
      await this.page.fill(this.Definition, fieldData.getEnglishFieldDescription());
      await this.page.fill(this.arabicFieldName, fieldData.getArabicFieldName());
      await this.page.fill(this.arabicFieldDescription , fieldData.getArabicFieldDescription());
+     await this.page.fill(this.glossaryServiceName , fieldData.getGlossaryServiceName() );
      await this.page.click(this.glossaryRequired );
      await this.page.click(this.glossaryMultipleField);
 

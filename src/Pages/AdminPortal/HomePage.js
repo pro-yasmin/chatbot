@@ -45,13 +45,31 @@ export class HomePage {
   }
 
 
+
   async logout() {
     await this.page.waitForTimeout(2000);
-    await this.page.locator(this.userMenu).waitFor({ state: 'visible', timeout: 5000 });
+    await this.page.locator(this.userMenu).waitFor({ state: 'visible', timeout: 10000 });
     await this.page.click(this.userMenu);
-    await this.page.locator(this.logoutButton).waitFor({ state: 'visible', timeout: 5000 });
+    await this.page.locator(this.logoutButton).waitFor({ state: 'visible', timeout: 10000 });
     await this.page.click(this.logoutButton);
+    console.log('Logout completed');
+
   }
+
+  // async logout() {
+  //   await this.page.waitForTimeout(500);
+  
+  //   await this.page.locator(this.userMenu).waitFor({ state: 'visible', timeout: 10000 });
+  //   await this.page.click(this.userMenu);
+  
+  //   await this.page.locator(this.logoutButton).waitFor({ state: 'visible', timeout: 10000 });
+  //   await Promise.all([
+  //     this.page.waitForNavigation({ waitUntil: 'networkidle' }),
+  //     this.page.click(this.logoutButton)
+  //   ]);
+  
+  //   console.log('✅ Logout completed');
+  // }
 
   /**
    * Navigates to the "Program Management" section of the application.
