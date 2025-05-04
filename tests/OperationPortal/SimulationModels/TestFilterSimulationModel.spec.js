@@ -1,4 +1,5 @@
-const { test, expect } = require('@playwright/test');
+//const { test, expect } = require('@playwright/test');
+import { test, expect } from '../../fixtures.js';
 const { LoginPage } = require('../../../src/Pages/LoginPage.js');
 const { HomeOperationPage } = require('../../../src/Pages/OperationPortal/HomeOperationPage.js');
 const { SimulationModelData } = require('../../../src/Models/OperationPortal/SimulationModelData.js');
