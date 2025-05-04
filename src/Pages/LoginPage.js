@@ -21,6 +21,8 @@ export class LoginPage {
     this.nationalField = '//span[contains(text(),"رقم الهوية الوطنية")]';
   }
 
+
+
   /**
    * Navigates to the admin portal .
    * @param {string} baseUrl - The URL of the admin portal.

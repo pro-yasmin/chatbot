@@ -91,13 +91,13 @@ test('Calculation Field Request Flow', async () => {
             // var myMap = new Map();
             // myMap.set('ISR_FLib_00001206',Constants.APPROVE); 
             var result = await fieldLibraryManagementPage.checkFieldStatusDetails(myMap);
-            expect(result).toBe(true);
+            expect(result).toBe(true);            
+            await homePage.logout();
             console.log("Field Stauts Matched Successfully");
         });
 
      // Switch to FIELD_MANAGEMENT_SPECIALIST User
         await test.step('Logout from ISR Manager User and login as FIELD MANAGEMENT User', async () => {
-            await homePage.logout();
             console.log('Logged out from ISR Manager');
             var fieldspecialistUsername = global.testConfig.FIELD_MANAGEMENT_SPECIALIST;
             var fieldspecialistPassword = global.testConfig.FIELD_MANAGEMENT_SPECIALIST_PASS;

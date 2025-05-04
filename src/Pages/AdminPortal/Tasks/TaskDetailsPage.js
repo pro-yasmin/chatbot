@@ -139,7 +139,6 @@ export class TaskDetailsPage {
 
 
     let result = await this.checkNoteIsAdded(global.testConfig.taskDetails.note);
-    //await this.page.click(this.addNoteOnTask);
     return result;
   }
 

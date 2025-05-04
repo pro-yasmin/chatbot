@@ -26,7 +26,7 @@ let integrationFieldData , glossaryViewDetials , adminTab;
 test('Integration Field Request Flow With Axon integration', async ({ page }) => {
 
     const baseUrl = global.testConfig.BASE_URL;
-    AxonUrl = global.testConfig.AXSON_BASE_URL;
+    AxonUrl = global.testConfig.AXON_BASE_URL;
 
     fieldManagerUserName = global.testConfig.FIELD_MANAGEMENT_SPECIALIST;
     fieldManagerPassword = global.testConfig.FIELD_MANAGEMENT_SPECIALIST_PASS;
@@ -34,8 +34,8 @@ test('Integration Field Request Flow With Axon integration', async ({ page }) =>
     isrManagerUsername = global.testConfig.ISR_MANAGER;
     isrManagerPassword = global.testConfig.ISR_MANAGER_PASS;
 
-    axonUsername = global.testConfig.AXSON_USER;
-    axonPassword = global.testConfig.AXSON_PASS;
+    axonUsername = global.testConfig.AXON_USER;
+    axonPassword = global.testConfig.AXON_PASS;
 
     integrationFieldData = new FieldData();
     integrationFieldData.setFieldType(Constants.INTEGRATION_FIELD);
@@ -129,6 +129,7 @@ test('Integration Field Request Flow With Axon integration', async ({ page }) =>
         await adminTab.bringToFront();
         console.log('Back to Admin Portal to Deactivate Integration Field');
      
+        // await loginPage.gotoAdminPortal(baseUrl);
         var Managerlogin = await loginPage.login(fieldManagerUserName, fieldManagerPassword);
         expect(Managerlogin).toBe(true);
         console.log('Logged in as FIELD MANAGEMENT User');
