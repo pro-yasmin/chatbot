@@ -17,7 +17,7 @@ export class SearchPage {
     let tds;
     let tdDetails = [];
     // Step 1: Enter the search value in the input field
-    await  this.page.waitForTimeout(30000); //shimaa
+    await  this.page.waitForTimeout(10000); //shimaa
     await this.page.fill(searchInputSelector, '');
     await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' , timeout: 10000});
     await this.page.waitForSelector(searchInputSelector, { state: 'visible' }); 
@@ -62,7 +62,7 @@ export class SearchPage {
 
     // Step 2: Wait for the table rows to update (assuming the table is dynamically updated)
     await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' });
-    await  this.page.waitForTimeout(10000); //shimaa
+    await  this.page.waitForTimeout(5000); //shimaa
      // Step 3: Get all visible rows in the table
      rows = await  this.page.locator(`${this.tableSelector}//tr`).filter({ has: this.page.locator('td') });
     // Step 4: Ensure only one row is visible
@@ -132,7 +132,7 @@ export class SearchPage {
     let tds;
     let tdDetails = [];
 
-    await  this.page.waitForTimeout(40000);//shimaa
+    await  this.page.waitForTimeout(10000);//shimaa
     table = this.page.locator(this.tableSelector);
     
   

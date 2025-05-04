@@ -9,7 +9,7 @@ require("./global.js"); // Load the global configuration
 const ENV = "uat";
 
 module.exports = defineConfig({
-  timeout: 600000,
+  timeout: 1200000,
 
   globalSetup: require.resolve("./global-setup"),
   //globalTeardown: './globalTeardown.js',
@@ -20,7 +20,7 @@ module.exports = defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: 1,
+  retries: 0,
   /* Opt out of parallel tests on CI. */
   workers: 1,
   //workers: process.env.CI ? 1 : undefined,
