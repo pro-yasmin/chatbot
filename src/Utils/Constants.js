@@ -32,6 +32,7 @@ export default {
     SUBDOMAIN_LIB_REJECTED:"subDomain_Rejected",
     FIELDS_REQUEST:"Field_Library_Update",
     DOMAINS_REQUEST:"Domain_Library_Update",
-    SUBDOMAINTYPE:"فئة"
+    SUBDOMAINTYPE:"فئة",
+    ISRCOPY:"تحديث السجل الاجتماعي"
 
 };

@@ -19,8 +19,10 @@
     "expectMainProgramTaskType": "اعتماد برنامج رئيسي",
     "expectSubProgramTaskType": "اعتماد برنامج فرعي",
     "expectBenefitTaskType": "اعتماد إعانة",
-     "executionLogApproval": "اعتماد سجل تنفيذ",
-    "prepareSimulationModel": "تجهيز نموذج المحاكاة"
+    "executionLogApproval": "اعتماد سجل تنفيذ",
+    "prepareSimulationModel": "تجهيز نموذج المحاكاة",
+    "expectISRTaskType": "تحديث السجل الاجتماعي",
+    "isrRejectReason": "تم رفض السجل الاجتماعي"
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",
@@ -39,7 +41,8 @@
     "confirmRejectBenefitMsg": "تم رفض تعريف الإعانة بنجاح.",
     "confirmSubProgramsMsg": "تم قبول تعريف البرنامج الفرعي بنجاح",
     "confirmBenefitsMsg": "تم قبول تعريف الإعانة بنجاح",
-    "addCompleteTaskNote": "ملاحظةلاكمال المهمة"
+    "addCompleteTaskNote": "ملاحظةلاكمال المهمة",
+    "confirmRejectISRMsg": "تم رفض نسخة السجل بنجاح"
   },
   "createMainProgram": {
     "backUpStreamNumber": "PRG_StrSt_129",
@@ -76,13 +79,17 @@
     "designResponsibleGovernance": [
       {
         "code": "Responsible",
-        "responsibleCodes": ["Agency"]
+        "responsibleCodes": [
+          "Agency"
+        ]
       }
     ],
     "executionResponsibleGovernance": [
       {
         "code": "1234",
-        "responsibleCodes": ["test"]
+        "responsibleCodes": [
+          "test"
+        ]
       }
     ],
     "programFundingSourcesCode": "source1",
@@ -90,7 +97,9 @@
     "subProgramRisks": [],
     "requiresGrandfatheringAndGradualImplementation": true,
     "assistanceUnitCode": "customGroup",
-    "conditionsAssistanceUnits": ["شروط تشكيل وحدة الدعم"],
+    "conditionsAssistanceUnits": [
+      "شروط تشكيل وحدة الدعم"
+    ],
     "approach": "COMPREHENSIVE",
     "benefitedSegments": [],
     "geographicalTargeting": [],
@@ -100,7 +109,9 @@
     "applicationEnablementPermAr": "دائم",
     "applicationEnablementTemp": "TEMPORARY",
     "requireRegisterApplication": true,
-    "applicationChannelCodes": ["15"],
+    "applicationChannelCodes": [
+      "15"
+    ],
     "periodAfterExistCode": "",
     "reApplyAfterExistCode": "",
     "viewapplicationEnablementPerm": "دائم",
@@ -145,7 +156,9 @@
       "benefitTypeNonCash": "NON_CASH",
       "natureValue": "test2",
       "natureValueType": "cashBenefitNature",
-      "providerCodes": ["camp"],
+      "providerCodes": [
+        "camp"
+      ],
       "providerCodesAr": "كامب",
       "estimatedValue": "القيمة التقديرية للإعانة"
     },
@@ -180,7 +193,9 @@
     "temporaryFrom": null,
     "temporaryTo": null,
     "requireRegisterApplication": true,
-    "applicationChannelCodes": ["15"],
+    "applicationChannelCodes": [
+      "15"
+    ],
     "viewTargetApproach": "شامل",
     "viewEnablementStatus": "محجوب",
     "viewApprovalStatus": "معالجة",
@@ -230,7 +245,8 @@
     "deleteDraftSocialRecordCopyConfirmationMsg": "تم حذف النسخة المسودة بنجاح من نسخ السجل الاجتماعي.",
     "ISRaddNewFieldSuccessMsg": "تم إضافة الحقل بنجاح.",
     "schemaUpdateSuccessMsg": "تم إرسال تحديث النسخة للموافقة بنجاح.",
-    "newAddedFieldTag": "مضاف حديثًا"
+    "newAddedFieldTag": "مضاف حديثًا",
+    "socialRecordCopyStatusCompleted": "مكتمل"
   },
   "SimulationModels": {
     "simulationModelArName": "اسم المحاكاه",
@@ -299,25 +315,25 @@
     "requestStatusComplete": "مكتمل",
     "desitionStatusAccepted": "مقبول",
     "desitionStatusRejected": "مرفوض",
-    "availableField1" : "الاسم الأول",
-    "availableField2" : "الاسم الثانى",
-    "descriptionCalculatedField" : "وصف العملية الحسابية",
-     "integrationDataList": "نص",
-    "API_Default_ParentKey":"personalInformation",
-    "API_Default_ParentDomain":"DOMAIN",
-    "API_Classification":"public",
-    "API_Classification_Ar":"عام",
-    "API_PeriodicDataUpdate_id":"67102c322999d72c9cdaee3c",
-    "API_PeriodicDataUpdate_nameEn":"monthly",
-    "API_PeriodicDataUpdate_nameAr":"شهري",
-    "API_Privacy":"Public",
-    "API_ImpactDegree":"High",
-    "API_Severity_id":"67102aecd4803a11ae9b0e35",
-    "API_Severity_nameEn":"low",
-    "API_Severity_nameAr":"منخفض",
-    "API_Assigned_Domain":"البيانات الشخصيه",
-    "API_FieldNature_id":"67102ab03925f78df65687c3",
-    "API_FieldNature_nameEn":"Health",
-    "API_FieldNature_nameAr":"صحي"
+    "availableField1": "الاسم الأول",
+    "availableField2": "الاسم الثانى",
+    "descriptionCalculatedField": "وصف العملية الحسابية",
+    "integrationDataList": "نص",
+    "API_Default_ParentKey": "personalInformation",
+    "API_Default_ParentDomain": "DOMAIN",
+    "API_Classification": "public",
+    "API_Classification_Ar": "عام",
+    "API_PeriodicDataUpdate_id": "67102c322999d72c9cdaee3c",
+    "API_PeriodicDataUpdate_nameEn": "monthly",
+    "API_PeriodicDataUpdate_nameAr": "شهري",
+    "API_Privacy": "Public",
+    "API_ImpactDegree": "High",
+    "API_Severity_id": "67102aecd4803a11ae9b0e35",
+    "API_Severity_nameEn": "low",
+    "API_Severity_nameAr": "منخفض",
+    "API_Assigned_Domain": "البيانات الشخصيه",
+    "API_FieldNature_id": "67102ab03925f78df65687c3",
+    "API_FieldNature_nameEn": "Health",
+    "API_FieldNature_nameAr": "صحي"
   }
 }
