@@ -8,28 +8,27 @@ export class FieldLibraryUpdateRequestsPage {
         this.search = new SearchPage(this.page);
         this.fieldRequestsPage = new FieldRequestsPage(this.page);
         this.fieldRequestDetialsPage = new FieldRequestDetialsPage(this.page);
-        
-        this.fieldLibraryUpdateRequestButton = '//button[contains(text(),"طلب تحديث مكتبة الحقول")]';
-        this.tableActions='table-actions';
+
+        this.fieldLibraryUpdateRequestButton = '//button[@data-testid="field-library-update-request"]';
+        this.tableActions = 'table-actions';
+
 
     }
 
-
-    // used if we need to refresh page object
-  async updatePage(newPage) {
-    this.page = newPage;
-  }
+    async verifyfieldLibraryUpdateRequestButtonExists() {
+        return await this.page.locator(this.fieldLibraryUpdateRequestButton).isVisible();
+    }
 
     async navigateToFieldRequestsPage() {
         var button = this.page.locator(this.fieldLibraryUpdateRequestButton);
         await button.waitFor({ state: "visible", timeout: 15000 });
         await button.click();
-        console.log("Field Requests Page Opened successfully.");   
+        console.log("Field Requests Page Opened successfully.");
     }
-    
+
 
     async checkFieldRowRequestStatus(ExpectedFieldStatus) {
-        let requestTd ,requestType;
+        let requestTd, requestType;
         let fieldRow = [];
         fieldRow = await this.search.getFirstRow();
 
@@ -42,10 +41,10 @@ export class FieldLibraryUpdateRequestsPage {
         console.log("The Request status for created field is: ", actualRequestStatus);
         if (actualRequestStatus === ExpectedFieldStatus) {
             return true;
-          }
-          return false;
+        }
+        return false;
     }
-    
+
     /**
      * Opens the details page of a specific field by its identifier.
      * 
@@ -58,74 +57,70 @@ export class FieldLibraryUpdateRequestsPage {
         fieldRow = await this.search.getRowInTableWithSpecificText(requestNumber);
         var actionlocator = "button";
         if (fieldRow && fieldRow.length > 0) {
-            await this.search.clickRowAction(fieldRow,this.tableActions, actionlocator);
+            await this.search.clickRowAction(fieldRow, this.tableActions, actionlocator);
             console.log("Request Details Page is opened successfully.");
         }
     }
 
 
-      /**
-     * Creates Complex and Input fields.*/
-     async createComplexFieldRequest(complexFieldData, inputFieldData) {
+    /**
+   * Creates Complex and Input fields.*/
+    async createComplexFieldRequest(complexFieldData, inputFieldData) {
         await this.navigateToFieldRequestsPage();
         var complexFieldCreated = await this.fieldRequestsPage.createField(complexFieldData);
-        var inputFieldCreated =await this.fieldRequestsPage.createField(inputFieldData);
-        if ( complexFieldCreated && inputFieldCreated )
-        {
+        var inputFieldCreated = await this.fieldRequestsPage.createField(inputFieldData);
+        if (complexFieldCreated && inputFieldCreated) {
             var complexFieldID = await this.fieldRequestsPage.checkFieldRowDetails(complexFieldData);
             var inputFieldID = await this.fieldRequestsPage.checkFieldRowDetails(inputFieldData);
             var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval(complexFieldData);
             console.log('Fields created successfully');
-            return [RequestNumber ,complexFieldID ,inputFieldID]
+            return [RequestNumber, complexFieldID, inputFieldID]
         }
 
     }
 
-  /**
-     * Validates field details and makes a decision.
-     */
-  async validateFieldDetailsAndMakeDecision(requestChecks ,expectedRequestStatus ,expectedEnablementStatus) {
-    
-    await this.openViewRequestDetailsPage(requestChecks[0]);
-    await this.fieldRequestDetialsPage.checkInsideRequestStatus(expectedRequestStatus);
-    var sendRequest = await this.fieldRequestDetialsPage.verifyFieldEnablementStatusesAndMakeDecision(requestChecks, expectedEnablementStatus);
-    if (sendRequest) {
-        return true;
+    /**
+       * Validates field details and makes a decision.
+       */
+    async validateFieldDetailsAndMakeDecision(requestChecks, expectedRequestStatus, expectedEnablementStatus) {
+
+        await this.openViewRequestDetailsPage(requestChecks[0]);
+        await this.fieldRequestDetialsPage.checkInsideRequestStatus(expectedRequestStatus);
+        var sendRequest = await this.fieldRequestDetialsPage.verifyFieldEnablementStatusesAndMakeDecision(requestChecks, expectedEnablementStatus);
+        if (sendRequest) {
+            return true;
+        }
+        return false;
     }
-    return false;
-}
 
     /**
      * Creates Group and Input fields.*/
-    async createGroupFieldRequest(groupFieldData ,inputFieldData) {
+    async createGroupFieldRequest(groupFieldData, inputFieldData) {
         await this.navigateToFieldRequestsPage();
         var groupFieldCreated = await this.fieldRequestsPage.createField(groupFieldData);
-        if ( groupFieldCreated )
-        {
+        if (groupFieldCreated) {
             var groupFieldID = await this.fieldRequestsPage.checkFieldRowDetails(groupFieldData);
-            await this.fieldRequestsPage.addFieldFromInside(groupFieldID) ;
+            await this.fieldRequestsPage.addFieldFromInside(groupFieldID);
             await this.page.waitForTimeout(1000);
-            var inputFieldCreated =await this.fieldRequestsPage.createField(inputFieldData);
-            if ( inputFieldCreated  )
-                {  var inputFieldID = await this.fieldRequestsPage.checkFieldRowDetails(inputFieldData);}
+            var inputFieldCreated = await this.fieldRequestsPage.createField(inputFieldData);
+            if (inputFieldCreated) { var inputFieldID = await this.fieldRequestsPage.checkFieldRowDetails(inputFieldData); }
             var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval(groupFieldData);
             console.log('Fields created successfully');
-            return [RequestNumber ,groupFieldID ,inputFieldID]
+            return [RequestNumber, groupFieldID, inputFieldID]
         }
     }
 
-/**
-     * Creates Anther Fields (Calculated field And Integration field).*/
-async createOntherFieldRequest(FieldData ) {
-    await this.navigateToFieldRequestsPage();
-    var FieldCreated = await this.fieldRequestsPage.createField(FieldData);
-    if ( FieldCreated )
-    {
-        var FieldID = await this.fieldRequestsPage.checkFieldRowDetails(FieldData);
-        var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval(FieldData);
-        return [RequestNumber ,FieldID ]
+    /**
+         * Creates Anther Fields (Calculated field And Integration field).*/
+    async createOntherFieldRequest(FieldData) {
+        await this.navigateToFieldRequestsPage();
+        var FieldCreated = await this.fieldRequestsPage.createField(FieldData);
+        if (FieldCreated) {
+            var FieldID = await this.fieldRequestsPage.checkFieldRowDetails(FieldData);
+            var RequestNumber = await this.fieldRequestsPage.sendRequestToApproval(FieldData);
+            return [RequestNumber, FieldID]
+        }
     }
-}
 
 }
 module.exports = { FieldLibraryUpdateRequestsPage };
