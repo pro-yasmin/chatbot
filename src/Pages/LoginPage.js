@@ -22,10 +22,6 @@ export class LoginPage {
   }
 
 
-// used if we need to refresh page object
-  async updatePage(newPage) {
-    this.page = newPage;
-  }
 
   /**
    * Navigates to the admin portal .

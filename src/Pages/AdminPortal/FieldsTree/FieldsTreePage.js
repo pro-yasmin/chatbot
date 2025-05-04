@@ -16,10 +16,7 @@ export class FieldsTreePage {
       
     }
   
-    // used if we need to refresh page object
-    async updatePage(newPage) {
-      this.page = newPage;
-    }
+  
 
     /**
      * open Personal Information section

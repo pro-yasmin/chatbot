@@ -44,10 +44,6 @@ export class HomePage {
     return await this.page.locator(this.avatar).isVisible();
   }
 
-  // used if we need to refresh page object
-  async updatePage(newPage) {
-    this.page = newPage;
-  }
 
 
   async logout() {
