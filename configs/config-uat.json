@@ -28,7 +28,7 @@
     "isrRejectReason": "تم رفض السجل الاجتماعي"
   },
   "taskDetails": {
-    "enableStatusHidden": "معطَّل",
+    "enableStatusHidden": "محجوب",
     "enableStatusActive": "متاح",
     "ReadyForExecution": "جاهز للتنفيذ",
     "Approved": "معتمد",
