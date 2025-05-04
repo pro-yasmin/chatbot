@@ -9,7 +9,7 @@
   "APPLICANT_PASS": "123456",
   "APPLICANT_STREAMS_URL": "https://aounportal-uat.iis-ssb.com/ar/streams",
   "APPLICANT_USER": "system_user1",
-  "AXSON_BASE_URL": "https://inf-ax-uat-n1.iis-ssb.com:9443/login",
+  "AXON_BASE_URL": "https://inf-ax-uat-n1.iis-ssb.com:9443/login",
   "AXSON_PASS": "iis-ssb@UserAdmin1",
   "AXSON_USER": "dataadmin@iis-ssb.com",
   "BASE_URL": "https://adminportal-uat.iis-ssb.com/auth/login",
@@ -154,7 +154,9 @@
     "executionLogApproval": "اعتماد سجل تنفيذ",
     "prepareSimulationModel": "تجهيز نموذج المحاكاة",
     "expectedSubDomainTaskTypetest": "طلب تحديث الفئات",
-    "expectedSubDomainTaskType": "DOMAIN_LIBRARY_UPDATE"
+    "expectedSubDomainTaskType": "DOMAIN_LIBRARY_UPDATE",
+    "expectISRTaskType": "تحديث السجل الاجتماعي",
+    "isrRejectReason": "تم رفض السجل الاجتماعي"
   },
   "taskDetails": {
     "enableStatusHidden": "معطَّل",
@@ -173,7 +175,9 @@
     "confirmRejectBenefitMsg": "تم رفض تعريف الإعانة بنجاح.",
     "confirmSubProgramsMsg": "تم قبول تعريف البرنامج الفرعي بنجاح",
     "confirmBenefitsMsg": "تم قبول تعريف الإعانة بنجاح",
-    "addCompleteTaskNote": "ملاحظةلاكمال المهمة"
+    "addCompleteTaskNote": "ملاحظةلاكمال المهمة",
+    "dummy": "تم رفض نسخة السجل بنجاح",
+    "confirmRejectISRMsg": "isrSchemaVersionReject"
   },
   "createMainProgram": {
     "backUpStreamNumber": "PRG_StrSt_296",
@@ -354,8 +358,8 @@
     "stateMachineEditedSuccessMsg": "تم تعديل دورة الحالة بنجاح."
   },
   "FieldLibrary": {
-    "unlockedField": "ISR_FLib_00000200",
-    "lockedField": "ISR_FLib_00000195",
+    "unlockedField": "ISR_FLib_00001816",
+    "lockedField": "ISR_FLib_00001794",
     "fieldEnablementStatusDeactivated": "معطَّل",
     "fieldEnablementStatusActivated": "متاح",
     "activateConfirmationMsg": "هل أنت متأكد أنك تريد إتاحة",
@@ -371,8 +375,8 @@
     "integration": "تكامل"
   },
   "SocialRecordCopies": {
-    "socialRecordActiveCopy": "ISR_ISRVR_00000021",
-    "socialRecordActiveStatus": "مفعلة",
+    "socialRecordActiveCopy": "ISR_ISRVR_00000387",
+    "socialRecordActiveStatus": "مفعل",
     "socialRecordDraftStatus": "مسودة",
     "socialRecordUnderReviewStatus": "تحت الاعتماد",
     "existingDraftCopyIsAlreadyExistMsg": "لديك بالفعل مسودة من النسخة المفعلة.",
@@ -382,7 +386,8 @@
     "deleteDraftSocialRecordCopyConfirmationMsg": "تم حذف المسودة بنجاح من نسخ السجل الاجتماعي",
     "ISRaddNewFieldSuccessMsg": "تم إضافة الحقل بنجاح.",
     "schemaUpdateSuccessMsg": "تم إرسال تحديث النسخة للموافقة بنجاح.",
-    "newAddedFieldTag": "مضاف حديثًا"
+    "newAddedFieldTag": "مضاف حديثًا",
+    "socialRecordCopyStatusCompleted": "مكتمل"
   },
   "SimulationModels": {
     "simulationModelArName": "اسم المحاكاه",
@@ -460,7 +465,7 @@
     "availableField2": "الاسم الكامل للمؤجر",
     "descriptionCalculatedField": "وصف العملية الحسابية",
     "glossaryParentBeforeApprove": "SP",
-    "glossaryParentAfterApprove": " sub domain fields auto",
+    "glossaryParentAfterApprove": "sub domain fields auto",
     "glossaryFieldNature": "صحي",
     "glossaryFieldSource": "تكامل",
     "glossaryFieldAxsonStatus": "Active",
