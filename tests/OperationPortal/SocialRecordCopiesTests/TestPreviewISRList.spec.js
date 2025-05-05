@@ -9,7 +9,7 @@ let loginPage;
 let homeOperationPage;
 let isrListPreviewPage;
 
-test.beforeEach(async ({ page}) => {
+test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
     homeOperationPage = new HomeOperationPage(page);
     isrListPreviewPage = new ISRListPreviewPage(page);
@@ -28,7 +28,7 @@ test.beforeEach(async ({ page}) => {
     });
 });
 
-test('Preview AU List Details', async ({ page }) => {
+test('Preview ISR List', async ({ page }) => {
     // Step1: Navigate to ISR List Preview page
     await test.step('Navigate to ISR List Preview page', async () => {
         await homeOperationPage.navigateToISRListPreviewTab();
@@ -41,22 +41,41 @@ test('Preview AU List Details', async ({ page }) => {
         console.log('Search ISR List Preview page by National ID done successfully');
     });
 
-    // Step3: Open AU List Preview page
+    // Step3: Open IBR List Preview page
+    await test.step('Open IBR List Preview page', async () => {
+        expect(await isrListPreviewPage.openIBRListPreviewPage()).toBe(true);
+        console.log('IBR List Preview page opened successfully');
+    });
+
+    // Step4: Filter IBR List
+    await test.step('Filter IBR List', async () => {
+        expect(await isrListPreviewPage.filterIBRList()).toBe(true);
+        console.log('IBR List Filtered successfully');
+    });
+
+
+    // Step5: Get Back to ISR List Preview page
+    await test.step('Get Back to ISR List Preview page', async () => {
+        await isrListPreviewPage.backPage();
+        console.log('Get Back to ISR List Preview page');
+    });
+
+    // Step6: Search ISR List Preview page by National ID
+    await test.step('Search ISR List Preview page by National ID', async () => {
+        expect(await isrListPreviewPage.getIsrByNationalId(global.testConfig.SocialRecordCopies.nationalId)).toBe(true);
+        console.log('Search ISR List Preview page by National ID done successfully');
+    });
+
+    // Step7: Open AU List Preview page
     await test.step('Open AU List Preview page', async () => {
         expect(await isrListPreviewPage.openAUListPreviewPage()).toBe(true);
         console.log('AU List Preview page opened successfully');
     });
 
-    // Step4: Filter AU List Preview page
-    await test.step('Filter AU List Preview page', async () => {
-        expect(await isrListPreviewPage.filterListPreviewPage()).toBe(true);
-        console.log('AU List Preview page Filtered successfully');
-    });
-
-    // Step5: Verify Results details
-    await test.step('Verify Results Details', async () => {
-        expect(await isrListPreviewPage.verifyISRListDetails()).toBe(true);
-        console.log('IBR List Details Verified successfully');
+    // Step8: Filter AU List
+    await test.step('Filter AU List', async () => {
+        expect(await isrListPreviewPage.filterAUList()).toBe(true);
+        console.log('AU List Filtered successfully');
     });
 });
 
@@ -68,7 +87,7 @@ test.afterEach(async () => {
     await test.step("Logout from Operation Portal", async () => {
         await homeOperationPage.logout();
         console.log("User Logout Successfully");
-   
+
     });
 
 });
