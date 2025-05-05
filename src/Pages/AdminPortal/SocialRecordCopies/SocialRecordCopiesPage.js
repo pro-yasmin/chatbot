@@ -48,18 +48,22 @@ export class SocialRecordCopiesPage {
 
         await this.page.fill(this.ArVersionNameField, this.createdArVersionName);
         await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
-        await this.page.waitForTimeout(5000);
-        await this.page.click(this.activationDateForApplicant);
-        await this.page.waitForTimeout(3000);
-        await this.page.click(this.nextMonthBtn);
-        await this.page.waitForTimeout(3000);
-        await this.page.click(this.firstDayOfNextMonth);
-        await this.page.click(this.activationDateForPrograms);
-        await this.page.waitForTimeout(3000);
-        await this.page.click(this.nextMonthBtn);
-        await this.page.click(this.firstDayOfNextMonth);
         await this.page.click(this.activationDate);
+        await this.page.waitForTimeout(1000);
         await this.page.click(this.todayDate);
+        await this.page.waitForTimeout(1000);
+        await this.page.click(this.activationDateForApplicant);
+        await this.page.waitForTimeout(1000);
+        await this.page.click(this.nextMonthBtn);
+        await this.page.waitForTimeout(1000);
+        await this.page.click(this.firstDayOfNextMonth);
+        await this.page.waitForTimeout(1000);
+        await this.page.click(this.activationDateForPrograms);
+        await this.page.waitForTimeout(1000);
+        await this.page.click(this.nextMonthBtn);
+        await this.page.waitForTimeout(1000);
+        await this.page.click(this.firstDayOfNextMonth);
+        await this.page.waitForTimeout(1000);
 
         socialRecordCopiesData.setVersionArabicName(this.createdArVersionName);
         socialRecordCopiesData.setVersionEnglishName(this.createdEnVersionName);
