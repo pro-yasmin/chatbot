@@ -48,19 +48,22 @@ export class SocialRecordCopiesPage {
         await this.page.waitForTimeout(5000);
         await this.page.fill(this.ArVersionNameField, this.createdArVersionName);
         await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
-       await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(1000);
         console.log('activation date should be selected')
         //await this.page.click(this.activationDate);
-        const firstDateelement = await this.page.$(this.activationDate);
-        await firstDateelement.click();
+        await (await this.page.$(this.activationDate))?.click();
         console.log('today  date should be appeared')
+        await this.page.waitForSelector(this.todayDate, { state: "visible", timeout: 60000 });
         //await this.page.waitForTimeout(5000);
-        await this.page.click(this.todayDate);
+        await (await this.page.$(this.todayDate))?.click();
+        // await this.page.click(this.todayDate);
         console.log('today  date should be selected')
        // await this.page.waitForTimeout(5000);
+       await this.page.mouse.wheel(0, 1000);
        console.log('activationDateForApplicant date should be selected')
-        const element = await this.page.$(this.activationDateForApplicant);
-        await element.click();
+       await (await this.page.$(this.activationDateForApplicant))?.click();
+       await this.page.waitForTimeout(3000);
+       await (await this.page.$(this.activationDateForApplicant))?.click();
         //await this.page.click(this.activationDateForApplicant, { delay: 5000 });
         console.log('next month  should be appeared')
         await this.page.click(this.nextMonthBtn);
