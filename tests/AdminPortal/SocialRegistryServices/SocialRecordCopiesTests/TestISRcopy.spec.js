@@ -67,7 +67,7 @@ test('Add ISR copy with status under Review', async () => {
  });
 
 
-test('Add ISR copy And Verify ISR copy details', async () => {
+test.only('Add ISR copy And Verify ISR copy details', async () => {
     // Step1: Navigate to Social Record Managment page
     await test.step('Navigate to Social Record Managment page', async () => {
         await homePage.navigateToSocialRecordCopies();
