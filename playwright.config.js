@@ -48,6 +48,11 @@ module.exports = defineConfig({
   },
   // /* Configure projects for major browsers */
    projects: [
+
+    {
+      name: "Sainty",
+       testDir: "./tests/AdminPortal/SocialRegistryServices/SocialRecordCopiesTests", // Test directory
+        },
    {
     name: "Admin",
      testDir: "./tests/AdminPortal", // Test directory
@@ -123,6 +128,6 @@ module.exports = defineConfig({
   //       //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
   //       // },
   //    //
-   ],
+  ],
 });
 module.exports.ENV = ENV;
