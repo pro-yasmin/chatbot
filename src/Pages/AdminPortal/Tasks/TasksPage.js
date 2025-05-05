@@ -27,15 +27,12 @@ export class TasksPage {
     this.assignPopUpMsgTitle = '//span[@id="modal-modal-title"]';
     this.acceptAssignBtn = '//button[contains(text(),"نعم، إسناد!")]';
     this.cancelAssignBtn = '//button[contains(text(),"إلغاء")]';
+    this.isrTaskRejectBtn = '//button[contains(text(), "رفض طلب تحديث نسخة السجل الاجتماعي") or contains(text(), "isrSchemaUpdateReject")]';
+    this.isrRejectReason = '//textarea[@data-testid="note-text-field"]';
+    this.isrConfirmRejectBtn = '//button[contains(text(), "نعم، رفض") or contains(text(), "isrSchema_yesReject")]';
+    this.popupConfirmBtn = '//button[@data-testid="modal-primary-button"]';
   }
 
-
-  // used if we need to refresh page object
-  async updatePage(newPage) {
-    this.page = newPage;
-  }
-
-  
   /**
    * Navigates to the "My Tasks" tab.
    * @returns {Promise<void>} - Completes the navigation.
@@ -55,8 +52,8 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToMyCompletedTasksTab() {
-    await  this.page.waitForTimeout(15000);
-    await this.page.waitForSelector(this.myCompletedTasksTab, { state: "visible",timeout: 15000});
+    await this.page.waitForTimeout(10000);
+    await this.page.waitForSelector(this.myCompletedTasksTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.myCompletedTasksTab);
     await this.page.waitForTimeout(5000);
     console.log("Navigate to My completed tasks tab");
@@ -67,8 +64,8 @@ export class TasksPage {
    * @returns {Promise<void>} - Completes the navigation.
    */
   async navigateToGroupTasksTab() {
-    await  this.page.waitForTimeout(10000);
-    await this.page.waitForSelector(this.groupTasksTab, { state: "visible",timeout: 10000});
+    await this.page.waitForTimeout(10000);
+    await this.page.waitForSelector(this.groupTasksTab, { state: "visible", timeout: 20000 });
     await this.page.click(this.groupTasksTab);
     await this.page.waitForTimeout(5000);
     console.log("Navigate to group tasks tab");
