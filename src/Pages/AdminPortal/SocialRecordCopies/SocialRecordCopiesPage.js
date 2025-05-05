@@ -48,8 +48,11 @@ export class SocialRecordCopiesPage {
         await this.page.waitForTimeout(5000);
         await this.page.fill(this.ArVersionNameField, this.createdArVersionName);
         await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
+       await this.page.waitForTimeout(1000);
         console.log('activation date should be selected')
-        await this.page.click(this.activationDate);
+        //await this.page.click(this.activationDate);
+        const firstDateelement = await this.page.$(this.activationDate);
+        await firstDateelement.click();
         console.log('today  date should be appeared')
         //await this.page.waitForTimeout(5000);
         await this.page.click(this.todayDate);
