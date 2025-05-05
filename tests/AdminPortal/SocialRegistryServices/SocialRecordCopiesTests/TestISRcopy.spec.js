@@ -31,7 +31,7 @@ test.beforeEach(async ({page }) => {
     });
 });
 
- test('Remove ISR copy with status draft', async () => {
+ /*test('Remove ISR copy with status draft', async () => {
      // Step1: Navigate to Social Record Managment page
      await test.step('Navigate to Social Record Managment page', async () => {
          await homePage.navigateToSocialRecordCopies();
@@ -50,9 +50,9 @@ test.beforeEach(async ({page }) => {
         expect(await socialRecordCopiesManagementPage.deleteDraftCopy(socialRecordCopiesData)).toBe(true);
          console.log('Draft Social Record Copy Deleted Successfully');
      });
- });
+ });*/
 
-test('Add ISR copy with status under Review', async () => {
+/*test('Add ISR copy with status under Review', async () => {
      // Step1: Navigate to Social Record Managment page
    await test.step('Navigate to Social Record Managment page', async () => {
         await homePage.navigateToSocialRecordCopies();
@@ -64,10 +64,10 @@ test('Add ISR copy with status under Review', async () => {
         expect(await socialRecordCopiesManagementPage.addNewFieldsToISRCopy(socialRecordCopiesData)).toBe(true);
          console.log('New Fields added To New ISR Copy Successfully');
      });
- });
+ });*/
 
 
-test.only('Add ISR copy And Verify ISR copy details', async () => {
+test('Add ISR copy And Verify ISR copy details', async () => {
     // Step1: Navigate to Social Record Managment page
     await test.step('Navigate to Social Record Managment page', async () => {
         await homePage.navigateToSocialRecordCopies();
