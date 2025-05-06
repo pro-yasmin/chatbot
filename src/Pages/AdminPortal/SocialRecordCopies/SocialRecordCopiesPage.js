@@ -48,34 +48,27 @@ export class SocialRecordCopiesPage {
 
         await this.page.fill(this.ArVersionNameField, this.createdArVersionName);
         await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
-        await this.page.waitForTimeout(5000);
+        await this.page.waitForTimeout(2000);
         await this.page.waitForSelector(this.activationDate, { state: 'visible' });
-        console.log('activationDateis visiable')
+        console.log('activationDateis visible')
          await this.page.click(this.activationDate);
         await this.page.waitForSelector(this.todayDate, { state: 'visible' });
-        console.log('todayDate visiable')
+        console.log('todayDate visible')
         await this.page.click(this.todayDate);
-        await this.page.waitForTimeout(5000);
-
         await this.page.waitForSelector(this.activationDateForApplicant, { state: 'visible' });
-        console.log('activationDateForApplicant is visiable')
+        console.log('activationDateForApplicant is visible')
         await this.page.click(this.activationDateForApplicant);
         await this.page.waitForSelector(this.nextMonthBtn, { state: 'visible' });
-        console.log('nextMonthBtn is visiable')
+        console.log('nextMonthBtn is visible')
         await this.page.click(this.nextMonthBtn);
         await this.page.click(this.firstDayOfNextMonth);
-        await this.page.waitForTimeout(5000);
-      
         await this.page.waitForSelector(this.activationDateForPrograms, { state: 'visible' });
-        console.log('activationDateForPrograms is visiable')
+        console.log('activationDateForPrograms is visible')
         await this.page.click(this.activationDateForPrograms);
         await this.page.waitForSelector(this.nextMonthBtn, { state: 'visible' });
-        console.log('nextMonthBtn is visiable')
+        console.log('nextMonthBtn is visible')
         await this.page.click(this.nextMonthBtn);
         await this.page.click(this.firstDayOfNextMonth);
-        await this.page.waitForTimeout(5000);
-       
-
         socialRecordCopiesData.setVersionArabicName(this.createdArVersionName);
         socialRecordCopiesData.setVersionEnglishName(this.createdEnVersionName);
         socialRecordCopiesData.setActivationDate(this.createdActivationDate);
