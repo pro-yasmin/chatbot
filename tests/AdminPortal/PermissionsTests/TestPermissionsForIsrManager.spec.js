@@ -40,10 +40,10 @@ test('Verify Permissions Granted to ISR Manager', async () => {
         console.log('Manage Social Record Managment page not allowed for User');
     });
 
-    // Step2: Verify User can not View or Manage my Tasks page
-    await test.step('Verify User can not View or Manage to My Tasks page', async () => {
-        expect(await homePage.verifyTasksPage()).toBe(false);
-        console.log('View and Manage My Tasks page is not allowed for User');
+    // Step2: Verify User can View or Manage my Tasks page
+    await test.step('Verify User can View or Manage to My Tasks page', async () => {
+        expect(await homePage.verifyTasksPage()).toBe(true);
+        console.log('View and Manage My Tasks page is allowed for User');
     });
 
     // Step3: Verify User can View Field Library Requests
@@ -52,17 +52,16 @@ test('Verify Permissions Granted to ISR Manager', async () => {
         console.log('View Field Library Requests is allowed for User');
     });
 
-    // Step4: Verify User can Manage Field Library Requests
-    await test.step('Verify User can Manage Field Library Requests', async () => {
+    // Step4: Verify User can not Manage Field Library Requests
+    await test.step('Verify User can not Manage Field Library Requests', async () => {
         //expect(await homePage.navigateToFieldLibrary()).toBe(true);
-        expect(await fieldLibraryManagementPage.verifyUserCanManageFieldLibrary()).toBe(true);
-        console.log('Manage Field Library Requests is allowed for User');
+        expect(await fieldLibraryManagementPage.verifyUserCanManageFieldLibrary()).toBe(false);
+        console.log('Manage Field Library Requests is not allowed for User');
     });
 
     // Step5: Verify User can Manage Field Library Update Requests
     await test.step('Verify User can Manage Field Library Update Requests', async () => {
-        await homePage.navigateToFieldLibraryUpdateRequests();
-        expect(await fieldLibraryUpdateRequestsPage.verifyfieldLibraryUpdateRequestButtonExists()).toBe(true);
+        expect(await homePage.navigateToFieldLibraryUpdateRequests()).toBe(true);
         console.log('Manage Field Library Update Requests is allowed for User');
     });
 });

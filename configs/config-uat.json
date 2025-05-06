@@ -28,7 +28,7 @@
     "isrRejectReason": "تم رفض السجل الاجتماعي"
   },
   "taskDetails": {
-    "enableStatusHidden": "معطَّل",
+    "enableStatusHidden": "محجوب",
     "enableStatusActive": "متاح",
     "ReadyForExecution": "جاهز للتنفيذ",
     "Approved": "معتمد",
@@ -244,7 +244,7 @@
     "integration": "تكامل"
   },
   "SocialRecordCopies": {
-    "socialRecordActiveCopy": "ISR_ISRVR_00000387",
+    "socialRecordActiveCopy": "ISR_ISRVR_00000454",
     "socialRecordActiveStatus": "مفعل",
     "socialRecordDraftStatus": "مسودة",
     "socialRecordUnderReviewStatus": "تحت الاعتماد",
@@ -256,7 +256,8 @@
     "ISRaddNewFieldSuccessMsg": "تم إضافة الحقل بنجاح.",
     "schemaUpdateSuccessMsg": "تم إرسال تحديث النسخة للموافقة بنجاح.",
     "newAddedFieldTag": "مضاف حديثًا",
-    "socialRecordCopyStatusCompleted": "مكتمل"
+    "socialRecordCopyStatusCompleted": "مكتمل",
+    "nationalId": "1141600173"
   },
   "SimulationModels": {
     "simulationModelArName": "اسم المحاكاه",

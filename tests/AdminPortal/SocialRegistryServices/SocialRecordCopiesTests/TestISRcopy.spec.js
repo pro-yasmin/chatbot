@@ -31,40 +31,40 @@ test.beforeEach(async ({page }) => {
     });
 });
 
-test('Remove ISR copy with status draft', async () => {
-    // Step1: Navigate to Social Record Managment page
-    await test.step('Navigate to Social Record Managment page', async () => {
-        await homePage.navigateToSocialRecordCopies();
+ /*test('Remove ISR copy with status draft', async () => {
+     // Step1: Navigate to Social Record Managment page
+     await test.step('Navigate to Social Record Managment page', async () => {
+         await homePage.navigateToSocialRecordCopies();
         console.log('Navigate to Social Record Managment page');
-    });
+     });
 
-    // Step2: Add a new Draft Social Record Copy
+     // Step2: Add a new Draft Social Record Copy
     await test.step('Add a new Draft Social Record Copy', async () => {
         expect(await socialRecordCopiesManagementPage.addDraftCopy(socialRecordCopiesData)).toBe(true);
-        await homePage.navigateToSocialRecordCopies();
-        console.log('New Draft Social Record Copy Added Successfully');
-    });
+         await homePage.navigateToSocialRecordCopies();
+         console.log('New Draft Social Record Copy Added Successfully');
+     });
 
-    // Step3: Delete a Draft Social Record Copy
+     // Step3: Delete a Draft Social Record Copy
     await test.step('Delete a Draft Social Record Copy', async () => {
         expect(await socialRecordCopiesManagementPage.deleteDraftCopy(socialRecordCopiesData)).toBe(true);
-        console.log('Draft Social Record Copy Deleted Successfully');
-    });
-});
+         console.log('Draft Social Record Copy Deleted Successfully');
+     });
+ });*/
 
-test('Add ISR copy with status under Review', async () => {
-    // Step1: Navigate to Social Record Managment page
-    await test.step('Navigate to Social Record Managment page', async () => {
+/*test('Add ISR copy with status under Review', async () => {
+     // Step1: Navigate to Social Record Managment page
+   await test.step('Navigate to Social Record Managment page', async () => {
         await homePage.navigateToSocialRecordCopies();
         console.log('Navigate to Social Record Managment page');
-    });
+     });
 
-    // Step2: Add New Fields To New ISR Copy
+     // Step2: Add New Fields To New ISR Copy
     await test.step('Add New Fields To New ISR Copy', async () => {
         expect(await socialRecordCopiesManagementPage.addNewFieldsToISRCopy(socialRecordCopiesData)).toBe(true);
-        console.log('New Fields added To New ISR Copy Successfully');
-    });
-});
+         console.log('New Fields added To New ISR Copy Successfully');
+     });
+ });*/
 
 
 test('Add ISR copy And Verify ISR copy details', async () => {

@@ -12,9 +12,9 @@ export class SocialRecordCopiesPage {
 
         this.ArVersionNameField = '//input[@name="data[schemaNameAr]"]';
         this.EnVersionNameField = '//input[@name="data[schemaNameEn]"]';
-        this.activationDateForApplicant = '//input[@name="data[activatedAtForApplicant]"]//following::input[1]';
-        this.activationDateForPrograms = '//input[@name="data[activatedAtForProgram]"]//following::input[1]';
-        this.activationDate = '//input[@name="data[activatedAt]"]//following::input[1]';
+        this.activationDateForApplicant = '//input[@name="data[activatedAtForApplicant]"]//parent::div';
+        this.activationDateForPrograms = '//input[@name="data[activatedAtForProgram]"]//parent::div';
+        this.activationDate = '//input[@name="data[activatedAt]"]//parent::div';
         this.todayDate = '//div[contains(@class, "open")]//span[@class="flatpickr-day today"]';
         this.nextMonthBtn = '//div[contains(@class, "open")]//span[@class="flatpickr-next-month"]';
         this.firstDayOfNextMonth = '(//div[contains(@class, "open")]//span[@class="flatpickr-day"])[1]';
@@ -48,15 +48,33 @@ export class SocialRecordCopiesPage {
 
         await this.page.fill(this.ArVersionNameField, this.createdArVersionName);
         await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
-        await this.page.waitForTimeout(2000);
-        await this.page.click(this.activationDateForApplicant);
-        await this.page.click(this.nextMonthBtn);
-        await this.page.click(this.firstDayOfNextMonth);
-        await this.page.click(this.activationDateForPrograms);
-        await this.page.click(this.nextMonthBtn);
-        await this.page.click(this.firstDayOfNextMonth);
-        await this.page.click(this.activationDate);
+        await this.page.waitForTimeout(5000);
+        await this.page.waitForSelector(this.activationDate, { state: 'visible' });
+        console.log('activationDateis visiable')
+         await this.page.click(this.activationDate);
+        await this.page.waitForSelector(this.todayDate, { state: 'visible' });
+        console.log('todayDate visiable')
         await this.page.click(this.todayDate);
+        await this.page.waitForTimeout(5000);
+
+        await this.page.waitForSelector(this.activationDateForApplicant, { state: 'visible' });
+        console.log('activationDateForApplicant is visiable')
+        await this.page.click(this.activationDateForApplicant);
+        await this.page.waitForSelector(this.nextMonthBtn, { state: 'visible' });
+        console.log('nextMonthBtn is visiable')
+        await this.page.click(this.nextMonthBtn);
+        await this.page.click(this.firstDayOfNextMonth);
+        await this.page.waitForTimeout(5000);
+      
+        await this.page.waitForSelector(this.activationDateForPrograms, { state: 'visible' });
+        console.log('activationDateForPrograms is visiable')
+        await this.page.click(this.activationDateForPrograms);
+        await this.page.waitForSelector(this.nextMonthBtn, { state: 'visible' });
+        console.log('nextMonthBtn is visiable')
+        await this.page.click(this.nextMonthBtn);
+        await this.page.click(this.firstDayOfNextMonth);
+        await this.page.waitForTimeout(5000);
+       
 
         socialRecordCopiesData.setVersionArabicName(this.createdArVersionName);
         socialRecordCopiesData.setVersionEnglishName(this.createdEnVersionName);

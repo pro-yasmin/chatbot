@@ -9,7 +9,7 @@ require("./global.js"); // Load the global configuration
 const ENV = "uat";
 
 module.exports = defineConfig({
-  timeout: 1200000,
+  timeout: 600000,
 
   globalSetup: require.resolve("./global-setup"),
   //globalTeardown: './globalTeardown.js',
@@ -47,42 +47,51 @@ module.exports = defineConfig({
     navigationTimeout: 600000, // Timeout for page navigation (60 seconds)
   },
   // /* Configure projects for major browsers */
-  // projects: [
-  //  {
-  //    name: "Admin",
-  //    testDir: "./tests/AdminPortal", // Test directory
-  //    },
+ /*  projects: [
 
-  //  {
-  //     name: "Login",
-  //    testDir: "./tests/Login", // Test directory
-  // },
-  //  {
-  //   name: "All",
-  //    testDir: "./tests", // Test directory
-  //  },
-  //   {
-  //     name: "Programs",
-  //    testDir: "./tests/AdminPortal/ProgramManagementTests", // Test directory
-  //    },
-  //  {
-  //   name: "Lookups",
-  //      testDir: "./tests/AdminPortal/LookupsTests", // Test directory
-  //    },
-  //   {
-  //     name: "StateMachine",
-  //    testDir: "./tests/AdminPortal/StateMachineTests", // Test directory
-  //  },
+    {
+      name: "Sainty",
+       testDir: "./tests/AdminPortal/SocialRegistryServices/SocialRecordCopiesTests", // Test directory
+        },
+   {
+    name: "Admin",
+     testDir: "./tests/AdminPortal", // Test directory
+      },
 
-  //   {
-  //     name: "SocialRegistryServices",
-  //     testDir: "./tests/AdminPortal/SocialRegistryServices", // Test directory
-  // },
+   {
+       name: "Login",
+     testDir: "./tests/Login", // Test directory
+},
+    {
+     name: "All",
+     testDir: "./tests", // Test directory
+    },
+     {
+      name: "Programs",
+     testDir: "./tests/AdminPortal/ProgramManagementTests", // Test directory
+     },
+   {
+    name: "Lookups",
+        testDir: "./tests/AdminPortal/LookupsTests", // Test directory
+     },
+    {
+       name: "StateMachine",
+      testDir: "./tests/AdminPortal/StateMachineTests", // Test directory
+   },
 
-  //    {
-  //     name: "Operation",
-  //      testDir: "./tests/OperationPortal", // Test directory
-  //   },
+    {
+      name: "SocialRegistryServices",
+      testDir: "./tests/AdminPortal/SocialRegistryServices", // Test directory
+  },
+  {
+    name: "Authroization",
+    testDir: "./tests/AdminPortal/PermissionsTests", // Test directory
+    },
+
+     {
+       name: "Operation",
+      testDir: "./tests/OperationPortal", // Test directory
+       },
 
   //      /* {
   //         name: 'chromium',
@@ -119,6 +128,6 @@ module.exports = defineConfig({
   //       //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
   //       // },
   //    //
-  //  ],
+  //],
 });
 module.exports.ENV = ENV;

@@ -17,6 +17,8 @@ export class HomeOperationPage {
     this.approvedExecutionLogsButton = '//a[@data-testid="menu-approved-execution-logs"]';
     this.generalSettingsTab = '//a[@data-testid="menu-general-settings"]';
     this.componentsAuditLogsButton = '//a[@data-testid="components-audit-logs"]';
+    this.isrListTab = '//a[@data-testid="menu-isr-list"]';
+    this.isrListPreviewButton = '//a[@data-testid="submenu-isr-list-preview"]';
   }
 
   /**
@@ -82,6 +84,17 @@ export class HomeOperationPage {
     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
   }
 
+  async navigateToISRListTab() {
+    await this.page.waitForSelector(this.isrListTab, { state: "visible", timeout: 20000 });
+    await this.page.click(this.isrListTab);
+  }
+
+  async navigateToISRListPreviewTab() {
+    await this.navigateToISRListTab();
+    await this.page.waitForSelector(this.isrListPreviewButton, { state: "visible", timeout: 20000 });
+    await this.page.click(this.isrListPreviewButton);
+    await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
+  }
 }
 
 module.exports = { HomeOperationPage };

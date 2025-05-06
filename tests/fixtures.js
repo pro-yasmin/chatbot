@@ -17,7 +17,7 @@ export const test = base.extend({
     const page = await context.newPage();
 
     // Dynamically set viewport based on screen size
-    const screenSize = await page.evaluate(() => {
+    /*const screenSize = await page.evaluate(() => {
       const style = document.createElement('style');
       style.textContent = '* { font-display: swap !important; }';
       document.head.appendChild(style);
@@ -30,7 +30,7 @@ export const test = base.extend({
     await page.setViewportSize({
       width: screenSize.width,
       height: screenSize.height,
-    });
+    });*/
 
     await use(context);
 
