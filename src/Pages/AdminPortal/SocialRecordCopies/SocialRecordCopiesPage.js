@@ -48,7 +48,8 @@ export class SocialRecordCopiesPage {
 
         await this.page.fill(this.ArVersionNameField, this.createdArVersionName);
         await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(5000);
+        await this.page.waitForSelector(this.activationDateForApplicant, { state: 'visible' });
         await this.page.click(this.activationDateForApplicant);
         await this.page.click(this.nextMonthBtn);
         await this.page.click(this.firstDayOfNextMonth);
