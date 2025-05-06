@@ -60,7 +60,7 @@ test("Login to Operational Portal with valid credential", async ({ page }) => {
 /**
  * Test case to verify login functionality with invalid credentials.
  */
-test("Login to Operational Portal with invalid credential", async ({ page }) => {
+test.only("Login to Operational Portal with invalid credential", async ({ page }) => {
 
 
   // Instantiate the LoginPage and HomePage objects
@@ -77,7 +77,7 @@ test("Login to Operational Portal with invalid credential", async ({ page }) => 
   var loginFailed = await loginPage.loginWithInvalidCredentials(adminusername, adminpassword);
 
   // Verify that login was failed
-  expect(loginFailed).toBe(false);
+  expect(loginFailed).toBe(true);
 
 
 

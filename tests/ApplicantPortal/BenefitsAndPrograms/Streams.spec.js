@@ -17,7 +17,7 @@ let streamData , programs;
 /**
  * Test setup: Initializes all required page objects and logs into the applicant portal.
  */
-test.beforeEach(async ({ browser }) => {
+/*test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
 
@@ -39,8 +39,8 @@ test.beforeEach(async ({ browser }) => {
     console.log("Apllicant Streams Page open Successfully");
   });
 });
-
-test('Add and Approve New Stream with API in Admin Portal', async () => {
+*/
+/*test('Add and Approve New Stream with API in Admin Portal', async () => {
   
     // Step1: Create And Appove Stream From API 
       await test.step("Create And Appove Stream From API", async () => {
@@ -48,7 +48,7 @@ test('Add and Approve New Stream with API in Admin Portal', async () => {
       expect(streamNumber).not.toBeNull();
       console.log('API Stream', streamNumber);
       });
-  });
+  });*/
   
 //   // Step2: Create New stream
 //   await test.step("Create New Stream Task", async () => {

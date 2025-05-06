@@ -12,9 +12,9 @@ export class SocialRecordCopiesPage {
 
         this.ArVersionNameField = '//input[@name="data[schemaNameAr]"]';
         this.EnVersionNameField = '//input[@name="data[schemaNameEn]"]';
-        this.activationDateForApplicant = '//input[@name="data[activatedAtForApplicant]"]//following::input[1]';
-        this.activationDateForPrograms = '//input[@name="data[activatedAtForProgram]"]//following::input[1]';
-        this.activationDate = '//input[@name="data[activatedAt]"]//following::input[1]';
+        this.activationDateForApplicant = '//input[@name="data[activatedAtForApplicant]"]//parent::div';
+        this.activationDateForPrograms = '//input[@name="data[activatedAtForProgram]"]//parent::div';
+        this.activationDate = '//input[@name="data[activatedAt]"]//parent::div';
         this.todayDate = '//div[contains(@class, "open")]//span[@class="flatpickr-day today"]';
         this.nextMonthBtn = '//div[contains(@class, "open")]//span[@class="flatpickr-next-month"]';
         this.firstDayOfNextMonth = '(//div[contains(@class, "open")]//span[@class="flatpickr-day"])[1]';
@@ -45,33 +45,31 @@ export class SocialRecordCopiesPage {
         await this.page.waitForSelector(this.ArVersionNameField, { state: "visible", timeout: 20000 });
         this.createdArVersionName = socialRecordCopiesData.getVersionArabicName();
         this.createdEnVersionName = socialRecordCopiesData.getVersionEnglishName();
-        await this.page.waitForTimeout(5000);
         await this.page.fill(this.ArVersionNameField, this.createdArVersionName);
         await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(5000);
         console.log('activation date should be selected')
-        //await this.page.click(this.activationDate);
-        await (await this.page.$(this.activationDate))?.click();
+        await this.page.click(this.activationDate);
+       // await (await this.page.$(this.activationDate))?.click();
+        //await this.page.waitForTimeout(2000);
+       // await (await this.page.$(this.activationDate))?.click();
         console.log('today  date should be appeared')
         await this.page.waitForSelector(this.todayDate, { state: "visible", timeout: 60000 });
         //await this.page.waitForTimeout(5000);
         await (await this.page.$(this.todayDate))?.click();
         // await this.page.click(this.todayDate);
         console.log('today  date should be selected')
-       // await this.page.waitForTimeout(5000);
-       await this.page.mouse.wheel(0, 1000);
-       console.log('activationDateForApplicant date should be selected')
+        await this.page.waitForTimeout(3000);
+        console.log('activationDateForApplicant date should be selected')
        await (await this.page.$(this.activationDateForApplicant))?.click();
-       await this.page.waitForTimeout(3000);
-       await (await this.page.$(this.activationDateForApplicant))?.click();
-        //await this.page.click(this.activationDateForApplicant, { delay: 5000 });
+       //await this.page.click(this.activationDateForApplicant, { delay: 5000 });
         console.log('next month  should be appeared')
         await this.page.click(this.nextMonthBtn);
         console.log('next month  should be selected')
        // await this.page.waitForTimeout(5000);
         await this.page.click(this.firstDayOfNextMonth);
         console.log('firstDayOfNextMonth should be selected')
-        //await this.page.waitForTimeout(5000);
+        await this.page.waitForTimeout(3000);
         console.log('activationDateForPrograms should be appeared')
         await this.page.click(this.activationDateForPrograms);
         console.log('activationDateForPrograms should be selected')
