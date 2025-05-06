@@ -54,15 +54,16 @@ export class SocialRecordCopiesPage {
         //await this.page.waitForTimeout(2000);
        // await (await this.page.$(this.activationDate))?.click();
         console.log('today  date should be appeared')
-        await this.page.waitForSelector(this.todayDate, { state: "visible", timeout: 60000 });
-        //await this.page.waitForTimeout(5000);
-        await (await this.page.$(this.todayDate))?.click();
+       // await this.page.waitForSelector(this.todayDate, { state: "visible", timeout: 60000 });
+        //await this.page.waitForTimeout(3000);
+        await this.page.click(this.todayDate);
+        //await (await this.page.$(this.todayDate))?.click();
         // await this.page.click(this.todayDate);
         console.log('today  date should be selected')
-        await this.page.waitForTimeout(3000);
+       // await this.page.waitForTimeout(3000);
         console.log('activationDateForApplicant date should be selected')
-       await (await this.page.$(this.activationDateForApplicant))?.click();
-       //await this.page.click(this.activationDateForApplicant, { delay: 5000 });
+       //await (await this.page.$(this.activationDateForApplicant))?.click();
+       await this.page.click(this.activationDateForApplicant, { delay: 5000 });
         console.log('next month  should be appeared')
         await this.page.click(this.nextMonthBtn);
         console.log('next month  should be selected')
