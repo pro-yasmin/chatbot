@@ -40,12 +40,15 @@ export class FieldRequestsPage {
         let fieldType = fieldData.getFieldType();
 
         // Get Specific Locator
-        let fieldLocator;
+        let fieldLocator; 
         switch (fieldType) {
             case Constants.INTEGRATION_FIELD:
                 fieldLocator = this.integrationFieldBtn;
                 break;
             case Constants.INPUT_FIELD:
+                fieldLocator = this.inputFieldBtn;
+                break;
+            case Constants.INPUT_LOOKUP_FIELD:
                 fieldLocator = this.inputFieldBtn;
                 break;
             case Constants.CALCULATION_FIELD:
@@ -72,7 +75,7 @@ export class FieldRequestsPage {
         await this.page.waitForTimeout(2000);
         await this.navigateToFieldPage(fieldData);
         
-        if ([Constants.GROUP_FIELD,Constants.INPUT_FIELD, Constants.COMPLEX_FIELD].includes(fieldType)) {
+        if ([Constants.GROUP_FIELD,Constants.INPUT_FIELD, Constants.COMPLEX_FIELD,Constants.INPUT_LOOKUP_FIELD].includes(fieldType)) {
             var result = await this.fieldPage.creationField(fieldData, fieldType);
             return result ;
         } 

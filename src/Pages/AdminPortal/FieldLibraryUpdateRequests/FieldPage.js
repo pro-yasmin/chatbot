@@ -28,7 +28,7 @@ export class FieldPage {
     this.arabicFieldDescription = '//textarea[@name="data[arabicFieldDescription]"]';
     this.englishFieldDescription = '//textarea[@name="data[englishFieldDescription]"]';
     this.fieldDataDefinitionBtn ='//button[@data-testid="next-button"]';
-    // Selectors for field settings
+    // Selectors for field settings  
     this.classification ="//div[@class='form-control ui fluid selection dropdown'][//select[@name='data[classification]']]";
     this.settingMenuOptionsLocator = '.choices__list[role="listbox"] .choices__item.choices__item--selectable';
     this.requierdOptionBtn ='//input[@value="mandatory"]';
@@ -69,12 +69,20 @@ export class FieldPage {
       await this.page.fill(this.arabicFieldName, createdFieldArName);
       await this.page.fill(this.englishFieldName, createdFieldEnName);}
 
-    await this.selectDropdownOption(this.fieldTypeMenu , 1);
+      if (![Constants.INPUT_LOOKUP_FIELD].includes(fieldType)) {
+         await this.selectDropdownOption(this.fieldTypeMenu , 1);
+         await this.selectDropdownOption(this.fieldNature,2);
+        }
 
-    if ([Constants.COMPLEX_FIELD, Constants.GROUP_FIELD, Constants.CALCULATION_FIELD, Constants.INTEGRATION_FIELD].includes(fieldType)) {
+      if ([Constants.INPUT_LOOKUP_FIELD].includes(fieldType)) {
+        await this.selectLookupOption(this.fieldTypeMenu );
+        await this.selectDropdownOption(this.fieldNature,3);
+      }
+ 
+
+    if (![Constants.INPUT_FIELD].includes(fieldType)) {
       await this.selectParentOption(this.parentLocator);
     }
-    await this.selectDropdownOption(this.fieldNature,2);
     await this.page.fill(this.arabicFieldDescription, fieldData.getArabicFieldDescription());
     await this.page.fill(this.englishFieldDescription, fieldData.getEnglishFieldDescription());
     await this.page.click(this.fieldDataDefinitionBtn);
@@ -139,7 +147,7 @@ export class FieldPage {
     if ([Constants.GROUP_FIELD].includes(fieldType)) {
       var result = await popUpMsg.popUpMessage( this.backToFieldRequestPage , global.testConfig.createField.createAnotherFieldMsg);  }
     else 
-      if ([Constants.INPUT_FIELD ,Constants.CALCULATION_FIELD,Constants.INTEGRATION_FIELD].includes(fieldType)) {
+      if ([Constants.INPUT_FIELD ,Constants.CALCULATION_FIELD,Constants.INTEGRATION_FIELD,Constants.INPUT_LOOKUP_FIELD].includes(fieldType)) {
     var result = await popUpMsg.popUpMessage(this.doneButton , global.testConfig.createField.confirmaCreateFieldMsg);}
     return result;
   }
@@ -159,6 +167,22 @@ export class FieldPage {
     await optionsLocator.first().click({ force: true });
     await this.page.waitForTimeout(1000);
 }
+
+
+async selectLookupOption(dropdownLocator) {
+  await this.page.click(dropdownLocator);
+  await this.page.waitForTimeout(2000); 
+  var lookupOption = this.page.locator(`//*[@role='listbox']//*[@data-value='Lookup']`);
+  await lookupOption.waitFor({ state: 'visible', timeout: 5000 });
+  await lookupOption.click();  
+  await this.page.waitForTimeout(1000);
+  var lookupNameMenu = '//div[contains(@class, "ui fluid selection dropdown")][.//select[@data-testid="lookup_name"]]';
+  await this.page.waitForTimeout(9000); 
+  await this.selectDropdownOption(lookupNameMenu,2);
+}
+
+
+
 
   /**
    * Selects the value option from a fields tree.
