@@ -48,6 +48,17 @@ export class SocialRecordCopiesPage {
         await this.page.fill(this.ArVersionNameField, this.createdArVersionName);
         await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
         await this.page.waitForTimeout(5000);
+        await this.page.click(this.activationDateForPrograms);
+        console.log('activationDateForPrograms should be selected')
+        //await this.page.waitForTimeout(5000);
+        console.log('next month2  should be appeared')
+        await this.page.click(this.nextMonthBtn);
+        console.log('next month2  should be selected')
+        //await this.page.waitForTimeout(5000);
+        await this.page.click(this.firstDayOfNextMonth);
+        console.log('firstDayOfNextMonth2 should be selected')
+        //await this.page.waitForTimeout(3000);
+        console.log('firstDayOfNextMonth2 should be selected')
         console.log('activation date should be selected')
         await this.page.click(this.activationDate);
        // await (await this.page.$(this.activationDate))?.click();
@@ -63,7 +74,7 @@ export class SocialRecordCopiesPage {
        // await this.page.waitForTimeout(3000);
         console.log('activationDateForApplicant date should be selected')
        //await (await this.page.$(this.activationDateForApplicant))?.click();
-       await this.page.click(this.activationDateForApplicant, { delay: 5000 });
+       await this.page.click(this.activationDateForApplicant);
         console.log('next month  should be appeared')
         await this.page.click(this.nextMonthBtn);
         console.log('next month  should be selected')
@@ -72,17 +83,7 @@ export class SocialRecordCopiesPage {
         console.log('firstDayOfNextMonth should be selected')
         await this.page.waitForTimeout(3000);
         console.log('activationDateForPrograms should be appeared')
-        await this.page.click(this.activationDateForPrograms);
-        console.log('activationDateForPrograms should be selected')
-        //await this.page.waitForTimeout(5000);
-        console.log('next month2  should be appeared')
-        await this.page.click(this.nextMonthBtn);
-        console.log('next month2  should be selected')
-        //await this.page.waitForTimeout(5000);
-        await this.page.click(this.firstDayOfNextMonth);
-        console.log('firstDayOfNextMonth2 should be selected')
-        //await this.page.waitForTimeout(3000);
-        console.log('firstDayOfNextMonth2 should be selected')
+       
 
         socialRecordCopiesData.setVersionArabicName(this.createdArVersionName);
         socialRecordCopiesData.setVersionEnglishName(this.createdEnVersionName);
