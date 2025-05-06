@@ -55,6 +55,7 @@ export class SocialRecordCopiesPage {
         await this.page.waitForSelector(this.todayDate, { state: 'visible' });
         console.log('todayDate visiable')
         await this.page.click(this.todayDate);
+        await this.page.waitForTimeout(5000);
 
         await this.page.waitForSelector(this.activationDateForApplicant, { state: 'visible' });
         console.log('activationDateForApplicant is visiable')
@@ -63,7 +64,7 @@ export class SocialRecordCopiesPage {
         console.log('nextMonthBtn is visiable')
         await this.page.click(this.nextMonthBtn);
         await this.page.click(this.firstDayOfNextMonth);
-       
+        await this.page.waitForTimeout(5000);
       
         await this.page.waitForSelector(this.activationDateForPrograms, { state: 'visible' });
         console.log('activationDateForPrograms is visiable')
@@ -72,7 +73,7 @@ export class SocialRecordCopiesPage {
         console.log('nextMonthBtn is visiable')
         await this.page.click(this.nextMonthBtn);
         await this.page.click(this.firstDayOfNextMonth);
-       
+        await this.page.waitForTimeout(5000);
        
 
         socialRecordCopiesData.setVersionArabicName(this.createdArVersionName);
