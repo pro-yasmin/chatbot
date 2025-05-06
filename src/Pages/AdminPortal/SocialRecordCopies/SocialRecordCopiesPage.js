@@ -49,6 +49,7 @@ export class SocialRecordCopiesPage {
         await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
         await this.page.waitForTimeout(5000);
         await this.page.click(this.activationDateForPrograms);
+        await this.page.click(this.activationDateForPrograms);
         console.log('activationDateForPrograms should be selected')
         //await this.page.waitForTimeout(5000);
         console.log('next month2  should be appeared')
