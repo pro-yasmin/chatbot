@@ -60,7 +60,7 @@ test("Login to Operational Portal with valid credential", async ({ page }) => {
 /**
  * Test case to verify login functionality with invalid credentials.
  */
-test.only("Login to Operational Portal with invalid credential", async ({ page }) => {
+test("Login to Operational Portal with invalid credential", async ({ page }) => {
 
 
   // Instantiate the LoginPage and HomePage objects
