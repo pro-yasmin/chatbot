@@ -50,12 +50,17 @@ export class SocialRecordCopiesPage {
         await this.page.fill(this.EnVersionNameField, this.createdEnVersionName);
         await this.page.waitForTimeout(5000);
         await this.page.waitForSelector(this.activationDateForApplicant, { state: 'visible' });
+        console.log('activationDateForApplicant is visiable')
         await this.page.click(this.activationDateForApplicant);
         await this.page.click(this.nextMonthBtn);
         await this.page.click(this.firstDayOfNextMonth);
+        console.log('activationDateForPrograms is visiable')
+        await this.page.waitForSelector(this.activationDateForPrograms, { state: 'visible' });
         await this.page.click(this.activationDateForPrograms);
         await this.page.click(this.nextMonthBtn);
         await this.page.click(this.firstDayOfNextMonth);
+        console.log('activationDateis visiable')
+        await this.page.waitForSelector(this.activationDateForPrograms, { state: 'visible' });
         await this.page.click(this.activationDate);
         await this.page.click(this.todayDate);
 
