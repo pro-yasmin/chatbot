@@ -122,5 +122,20 @@ export class FieldLibraryUpdateRequestsPage {
         }
     }
 
+     /**
+       * Validates Input Lookup field details and makes a decision.
+       */
+     async validateInputLookupFieldType(requestChecks, expectedRequestStatus, expectedFieldType,expectedEnablementStatus) {
+
+        await this.openViewRequestDetailsPage(requestChecks[0]);
+        await this.fieldRequestDetialsPage.checkInsideRequestStatus(expectedRequestStatus);
+        var fieldType = await this.fieldRequestDetialsPage.checkFieldType(requestChecks, expectedFieldType);
+        var sendRequest = await this.fieldRequestDetialsPage.verifyFieldEnablementStatusesAndMakeDecision(requestChecks, expectedEnablementStatus);
+        if (sendRequest && fieldType) {
+            return true ;
+        }
+        return false ;
+    }
+
 }
 module.exports = { FieldLibraryUpdateRequestsPage };

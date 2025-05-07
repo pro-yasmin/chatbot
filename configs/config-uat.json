@@ -324,6 +324,7 @@
     "sendFieldMsg": "تم إرسال طلبك",
     "requestStatusProcessing": "معالجة",
     "enableStatusHidden": "معطَّل",
+    "inputLookupFieldType": "Lookup",
     "fieldRequestView": "/social-registry-services/field-requests/67bf860a89b26c12cb68ddad",
     "addCompleteTaskNote": "ملاحظةلاكمال المهمة",
     "confirmApproveMsg": "تم قبول حقل",

@@ -76,7 +76,7 @@ export class FieldPage {
 
       if ([Constants.INPUT_LOOKUP_FIELD].includes(fieldType)) {
         await this.selectLookupOption(this.fieldTypeMenu );
-        await this.selectDropdownOption(this.fieldNature,3);
+        await this.selectDropdownOption(this.fieldNature,6);
       }
  
 
