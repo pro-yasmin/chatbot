@@ -52,7 +52,7 @@ test.beforeEach(async ({page }) => {
      });
  });
 
-/*test('Add ISR copy with status under Review', async () => {
+test('Add ISR copy with status under Review', async () => {
      // Step1: Navigate to Social Record Managment page
    await test.step('Navigate to Social Record Managment page', async () => {
         await homePage.navigateToSocialRecordCopies();
@@ -85,7 +85,7 @@ test('Add ISR copy And Verify ISR copy details', async () => {
         expect(await socialRecordCopiesManagementPage.verifyIsrDetails(socialRecordCopiesData)).toBe(true);
         console.log('ISR Copy Details Verified Successfully');
     });
-});*/
+});
 
 /**
  * Test teardown: Logs out of the admin portal after each test.
