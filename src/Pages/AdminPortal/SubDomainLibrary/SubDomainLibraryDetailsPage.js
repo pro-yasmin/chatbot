@@ -1,4 +1,4 @@
-const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage.js");
+const { SearchPage } = require("../../SharedPages/SearchPage.js");
 import Constants from '../../../../src/Utils/Constants.js';
 
 export class SubDomainLibraryDetailsPage {

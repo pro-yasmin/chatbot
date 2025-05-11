@@ -1,6 +1,6 @@
 import { features } from "process";
 
-const { PopUpPage } = require("../../SharedPages/PopUpPage");
+const { PopUpPage } = require("../../../SharedPages/PopUpPage");
 
 /**
  * Represents the Benefits page and manages the creation of new benefits,

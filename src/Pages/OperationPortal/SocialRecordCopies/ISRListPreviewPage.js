@@ -1,4 +1,4 @@
-const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage");
+const { SearchPage } = require("../../SharedPages/SearchPage");
 const { IBRListPreviewPage } = require('../SocialRecordCopies/IBRListPreviewPage.js');
 const { AUListPreviewPage } = require('../SocialRecordCopies/AUListPreviewPage.js');
 

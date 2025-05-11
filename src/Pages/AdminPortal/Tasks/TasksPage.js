@@ -1,8 +1,8 @@
 import Constants from '../../../Utils/Constants.js';
 
 
-const { SearchPage } = require("../SharedPages/SearchPage");
-const { PopUpPage } = require("../SharedPages/PopUpPage");
+const { SearchPage } = require("../../SharedPages/SearchPage");
+const { PopUpPage } = require("../../SharedPages/PopUpPage");
 const { TaskDetailsPage } = require("./TaskDetailsPage");
 
 /**

@@ -1,4 +1,4 @@
-const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage.js");
+const { SearchPage } = require("../../SharedPages/SearchPage.js");
 const{SubDomainCreationPage} = require('./SubDomainCreationPage');
 const{ManageSubDomainUpdateRequestsPage} = require ('./ManageSubDomainUpdateRequestsPage.js');
 const{ViewSubDomainRequestPage} = require ('./ViewSubDomainRequestPage.js');

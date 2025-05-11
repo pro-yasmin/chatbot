@@ -1,6 +1,6 @@
 import Constants from '../../../Utils/Constants.js';
-const { PopUpPage } = require("../SharedPages/PopUpPage");
-const { SearchPage } = require("../SharedPages/SearchPage");
+const { PopUpPage } = require("../../SharedPages/PopUpPage");
+const { SearchPage } = require("../../SharedPages/SearchPage");
 
 /**
  * Manages task details, including opening tabs, adding notes, and accepting various task types.

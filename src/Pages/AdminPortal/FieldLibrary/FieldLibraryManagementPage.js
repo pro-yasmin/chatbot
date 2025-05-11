@@ -1,6 +1,6 @@
 import Constants from '../../../Utils/Constants';
 
-const { SearchPage } = require("../SharedPages/SearchPage");
+const { SearchPage } = require("../../SharedPages/SearchPage");
 const { FieldLibraryPage } = require("../FieldLibrary/FieldLibraryPage");
 
 

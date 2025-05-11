@@ -1,5 +1,5 @@
-const { SearchPage } = require("../SharedPages/SearchPage");
-const { PopUpPage } = require('../SharedPages/PopUpPage');
+const { SearchPage } = require("../../SharedPages/SearchPage");
+const { PopUpPage } = require('../../SharedPages/PopUpPage');
 const { SocialRecordCopiesPage } = require("../SocialRecordCopies/SocialRecordCopiesPage");
 const { ISRNewFieldsPage } = require("../SocialRecordCopies/ISRNewFieldsPage");
 

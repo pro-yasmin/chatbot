@@ -1,4 +1,4 @@
-const { PopUpPage } = require('../SharedPages/PopUpPage');
+const { PopUpPage } = require('../../SharedPages/PopUpPage');
 const { SocialRecordCopiesPage } = require("../SocialRecordCopies/SocialRecordCopiesPage");
 
 export class ISRNewFieldsPage {

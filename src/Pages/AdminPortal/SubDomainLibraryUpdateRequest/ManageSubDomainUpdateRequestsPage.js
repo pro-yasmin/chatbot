@@ -1,6 +1,6 @@
-const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage.js");
-const {UploadFilePage} = require("../SharedPages/UploadFilePage.js");
-const { PopUpPage } = require("../../AdminPortal/SharedPages/PopUpPage.js");
+const { SearchPage } = require("../../SharedPages/SearchPage.js");
+const {UploadFilePage} = require("../../SharedPages/UploadFilePage.js");
+const { PopUpPage } = require("../../SharedPages/PopUpPage.js");
 const{SubDomainCreationPage} = require('./SubDomainCreationPage');
 const {Utils}= require('../../../Utils/utils.js');
 

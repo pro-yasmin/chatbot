@@ -1,5 +1,5 @@
 const { expect } = require('@playwright/test');
-const { UploadFilePage } = require('../SharedPages/UploadFilePage.js');
+const { UploadFilePage } = require('../../SharedPages/UploadFilePage.js');
 
 export class UploadLookupItemsPage {
     constructor(page) {

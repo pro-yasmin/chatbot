@@ -1,6 +1,6 @@
 import Constants from '../../../Utils/Constants';
 
-const { PopUpPage } = require('../SharedPages/PopUpPage');
+const { PopUpPage } = require('../../SharedPages/PopUpPage');
 
 export class FieldLibraryPage {
     constructor(page) {

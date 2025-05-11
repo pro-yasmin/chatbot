@@ -1,4 +1,4 @@
-const { PopUpPage } = require('../../AdminPortal/SharedPages/PopUpPage');
+const { PopUpPage } = require('../../SharedPages/PopUpPage');
 
 export class SimulationModelEditVariablesPage {
     constructor(page) {

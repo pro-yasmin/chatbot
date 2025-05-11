@@ -1,4 +1,4 @@
-const { PopUpPage } = require("../../SharedPages/PopUpPage");
+const { PopUpPage } = require("../../../SharedPages/PopUpPage");
 
 /**
  * Manages actions for creating and handling subprograms, including metadata,
