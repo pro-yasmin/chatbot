@@ -1,4 +1,6 @@
-const { StreamsPage } = require("./ProgramsManagement/Streams/StreamsPage");
+const { ApplicantStreamsPage } = require("./ProgramsManagement/Streams/ApplicantStreamsPage");
+const { ApplicantMainProgramsPage } = require("./ProgramsManagement/MainPrograms/ApplicantMainProgramsPage");
+
 
 export class ApplicantLoginPage {
   constructor(page) {
@@ -14,9 +16,24 @@ export class ApplicantLoginPage {
     await this.page.goto(baseUrl);
     await this.page.waitForTimeout(30000);
 
-    var streamsPage = new StreamsPage(this.page);
-    var navigationStreams = await streamsPage.verifyStreams();
+    var applicantStreamsPage = new ApplicantStreamsPage(this.page);
+    var navigationStreams = await applicantStreamsPage.verifyStreams();
     return navigationStreams;  
+  }
+
+
+  /**
+   * Navigates to the Applicant Main Programs page.
+   * @param {string} baseUrl - The URL of the Applicant portal for Main Programs.
+   * @returns {Promise<boolean>} - True if navigation to main programs page was successful.
+   */
+  async gotoApplicantMainPrograms(baseUrl) {
+    await this.page.goto(baseUrl);
+    await this.page.waitForTimeout(30000);
+
+    var applicantMainProgramsPage = new ApplicantMainProgramsPage(this.page);
+    var navigationSuccess = await applicantMainProgramsPage.verifyMainPrograms();
+    return navigationSuccess;
   }
  
 }

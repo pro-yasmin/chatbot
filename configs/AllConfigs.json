@@ -6,6 +6,7 @@
   "ANDROID_HOME": "C:\\Users\\VEGA Laptop\\AppData\\Local\\Android\\Sdk",
   "APPDATA": "C:\\Users\\VEGA Laptop\\AppData\\Roaming",
   "APPLICANT_BASE_URL": "https://aounportal-uat.iis-ssb.com/ar/",
+  "APPLICANT_MAIN_PROGRAMS_URL": "https://aounportal-uat.iis-ssb.com/ar/main-programs",
   "APPLICANT_PASS": "123456",
   "APPLICANT_STREAMS_URL": "https://aounportal-uat.iis-ssb.com/ar/streams",
   "APPLICANT_USER": "system_user1",
@@ -22,7 +23,7 @@
   "BUSSINESS_RULES_SPECIALIST_PASS": "P@$sw0rd",
   "BUSSINES_ADMIN_MANAGER": "auto_uat_business_administration_manager",
   "BUSSINES_ADMIN_MANAGER_PASS": "P@$sw0rd",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_14276_XAWQKXANGCUTPMSW",
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_1832_SYQIOJBBNCZVTGEP",
   "COLOR": "1",
   "COLORTERM": "truecolor",
   "CommonProgramFiles": "C:\\Program Files\\Common Files",
@@ -52,6 +53,10 @@
   "ISR_SPECIALIST_PASS": "P@$sw0rd",
   "JAVA_HOME": "C:\\Program Files\\Java\\jdk-21",
   "LANG": "en_US.UTF-8",
+  "LIFERAY_MAIN_PROGRAMS_URL": "https://liferay-uat.iis-ssb.com/web/guest/main-programs",
+  "LIFERAY_PASS": "gizasystem_testteam",
+  "LIFERAY_STREAMS_URL": "https://liferay-uat.iis-ssb.com/web/guest/streams",
+  "LIFERAY_USER": "aya.fares@gizasystems.com",
   "LOCALAPPDATA": "C:\\Users\\VEGA Laptop\\AppData\\Local",
   "LOGONSERVER": "\\\\DESKTOP-NJGUAIL",
   "MAVEN_HOME": "C:\\Program Files\\apache-maven-3.8.8",
@@ -115,7 +120,7 @@
   "SystemRoot": "C:\\Windows",
   "TEMP": "C:\\Users\\VEGALA~1\\AppData\\Local\\Temp",
   "TERM_PROGRAM": "vscode",
-  "TERM_PROGRAM_VERSION": "1.99.3",
+  "TERM_PROGRAM_VERSION": "1.100.0",
   "TMP": "C:\\Users\\VEGALA~1\\AppData\\Local\\Temp",
   "UPLOAD_PATH": "Resources/upload/",
   "USERDOMAIN": "DESKTOP-NJGUAIL",
@@ -127,7 +132,7 @@
   "VSCODE_GIT_ASKPASS_NODE": "C:\\Users\\VEGA Laptop\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
   "VSCODE_GIT_IPC_HANDLE": "\\\\.\\pipe\\vscode-git-ca9d1d47b2-sock",
   "VSCODE_INJECTION": "1",
-  "VSCODE_NONCE": "d154d18d-78b6-4760-ad2c-ae94de65a32e",
+  "VSCODE_NONCE": "4f16de76-ad2f-4d55-9e7b-d5ea101647f6",
   "VSCODE_STABLE": "1",
   "windir": "C:\\Windows",
   "__PSLockDownPolicy": "0",
@@ -489,7 +494,8 @@
     "API_Assigned_Domain": "التعليم",
     "API_FieldNature_id": "675edd657215dc2057c65774",
     "API_FieldNature_nameEn": "Health",
-    "API_FieldNature_nameAr": "صحي"
+    "API_FieldNature_nameAr": "صحي",
+    "lookupFieldTypeValue": "قائمة مرجعية"
   },
   "createSubDomain": {
     "subDomainArabicName": "فئة جديدة",
@@ -503,5 +509,9 @@
     "subDomainRejectedStatus": "غير معتمد",
     "subDomainEnableStatus": "متاح",
     "subDomainDisableStatus": "معطَّل"
+  },
+  "Liferay": {
+    "iconImage": "Liferay/Icon.png",
+    "coverImage": "Liferay/CoverMedia.jpg"
   }
 }

@@ -57,7 +57,7 @@ test('Input Lookup Fields Request Flow', async () => {
             var expectedEnablementStatus = global.testConfig.createField.enableStatusHidden;
             var expectedInputLookupFieldType = global.testConfig.createField.inputLookupFieldType;
             await fieldLibraryUpdateRequestsPage.checkFieldRowRequestStatus(processingStatus);
-            var sendRequest = await fieldLibraryUpdateRequestsPage.validateInputLookupFieldType(requestChecks,expectedRequestStatus,expectedInputLookupFieldType ,expectedEnablementStatus);
+            var sendRequest = await fieldLibraryUpdateRequestsPage.validateFieldDetailsAndMakeDecision(requestChecks,expectedRequestStatus ,expectedEnablementStatus,expectedInputLookupFieldType);
             expect(sendRequest).toBe(true);
         });
 

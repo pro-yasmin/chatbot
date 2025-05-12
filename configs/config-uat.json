@@ -357,8 +357,8 @@
     "API_Assigned_Domain":"التعليم",
     "API_FieldNature_id":"675edd657215dc2057c65774",
     "API_FieldNature_nameEn":"Health",
-    "API_FieldNature_nameAr":"صحي"
-  
+    "API_FieldNature_nameAr":"صحي",
+    "lookupFieldTypeValue" : "قائمة مرجعية"
 },
 "createSubDomain": {
   "subDomainArabicName": "فئة جديدة",
@@ -372,6 +372,11 @@
   "subDomainRejectedStatus":"غير معتمد",
   "subDomainEnableStatus":"متاح",
   "subDomainDisableStatus":"معطَّل"
+},
+"Liferay":
+{
+  "iconImage": "Liferay/Icon.png",
+  "coverImage": "Liferay/CoverMedia.jpg"
 }
-
+    
 }

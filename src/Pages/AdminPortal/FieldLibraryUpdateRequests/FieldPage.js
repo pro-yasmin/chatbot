@@ -22,26 +22,25 @@ export class FieldPage {
     this.MenuLocators = "//*[@role='listbox']//*[contains(@id,'item-choice-1')]";
 
     this.dataMenuOptionsLocator='.choices__list.is-active .choices__item.choices__item--selectable';
-    this.fieldTypeMenu ='//div[contains(@class, "ui fluid selection dropdown")][.//select[@name="data[fieldType]"]]';
+    this.fieldTypeMenu ='//select[@name="data[fieldType]"]/parent::div';
     this.parentLocator ='//input[@data-testid="assigned-domain"]';
-    this.fieldNature ='//div[contains(@class, "ui fluid selection dropdown")][.//select[@name="data[fieldNature]"]]';
+    this.fieldNature ='//select[@name="data[fieldNature]"]/parent::div';
+    this.lookupNameMenu = '//select[@data-testid="lookup_name"]/parent::div'
     this.arabicFieldDescription = '//textarea[@name="data[arabicFieldDescription]"]';
     this.englishFieldDescription = '//textarea[@name="data[englishFieldDescription]"]';
     this.fieldDataDefinitionBtn ='//button[@data-testid="next-button"]';
     // Selectors for field settings  
-    this.classification ="//div[@class='form-control ui fluid selection dropdown'][//select[@name='data[classification]']]";
-    this.settingMenuOptionsLocator = '.choices__list[role="listbox"] .choices__item.choices__item--selectable';
+    this.classification ="//select[@name='data[classification]']//parent::div";
+    this.MenuOptionsLocator = '.choices__list[role="listbox"] .choices__item.choices__item--selectable';
     this.requierdOptionBtn ='//input[@value="mandatory"]';
     this.multipleFieldBtn ='//input[contains(@name,"data[multipleField]") and @value="yes"]';  
     this.periodicDataUpdate = "//select[@name='data[periodicDataUpdate]']//parent::div";
     this.dataMenuSettings ='.choices__list.is-active .choices__item.choices__item--selectable[role="option"]'
-    this.privacy ='//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[privacy]"]]';
-    this.impactDegree = '//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[impactDegree]"]]'
-    this.DataMenuesettingsSeverity  ='//div[contains(@class, "form-control ui fluid selection dropdown")][.//select[@name="data[severity]"]]';
+    this.privacy ='//select[@name="data[privacy]"]//parent::div';
+    this.impactDegree = '//select[@name="data[impactDegree]"]//parent::div'
+    this.DataMenuesettingsSeverity  ='//select[@name="data[severity]"]//parent::div';
     this.fieldSettingDefinationBtn='//button[@data-testid="next-button"]';
-    this.descriptionCalculatedField ='//input[@name="data[calculationProcessDescription]"]';;  
-
-
+    this.descriptionCalculatedField ='//input[@name="data[calculationProcessDescription]"]';
 
     // Selectors for field Display
     this.fieldDisplyBtn ='//button[@data-testid="next-button"]';
@@ -49,14 +48,9 @@ export class FieldPage {
     this.addAnotherField ='//button[@data-testid="confirmation-modal-primary-button"]';
     this.backToFieldRequestPage ='//button[@data-testid="confirmation-modal-secondary-button"]';
     this.doneButton = '//button[@data-testid="modal-primary-button"]';
-  
   }
 
-  /**
-   * fill Field Data Definition using the provided data.
-   * @param {object} fieldData - The data object containing field data defination tab.
-   * @returns {Promise<boolean>} - Returns true if the filed data is created successfully.
-   */
+ 
   async fillFieldDataDefinition(fieldData) {
 
     // Retrieve Field names from the provided data
@@ -69,37 +63,36 @@ export class FieldPage {
       await this.page.fill(this.arabicFieldName, createdFieldArName);
       await this.page.fill(this.englishFieldName, createdFieldEnName);}
 
-      if (![Constants.INPUT_LOOKUP_FIELD].includes(fieldType)) {
-         await this.selectDropdownOption(this.fieldTypeMenu , 1);
-         await this.selectDropdownOption(this.fieldNature,2);
-        }
-
       if ([Constants.INPUT_LOOKUP_FIELD].includes(fieldType)) {
-        await this.selectLookupOption(this.fieldTypeMenu );
-        await this.selectDropdownOption(this.fieldNature,6);
+        var fieldTypeValue = global.testConfig.createField.lookupFieldTypeValue;
+        await this.selectDropdownValue(this.fieldTypeMenu, fieldTypeValue);
+        await this.selectDropdownValue(this.lookupNameMenu );
+        await this.selectDropdownValue(this.fieldNature);
       }
+        else {
+          await this.selectDropdownValue(this.fieldTypeMenu  );
+          await this.selectDropdownValue(this.fieldNature );
+        }
  
-
     if (![Constants.INPUT_FIELD].includes(fieldType)) {
       await this.selectParentOption(this.parentLocator);
     }
-    await this.page.fill(this.arabicFieldDescription, fieldData.getArabicFieldDescription());
-    await this.page.fill(this.englishFieldDescription, fieldData.getEnglishFieldDescription());
-    await this.page.click(this.fieldDataDefinitionBtn);
-    await this.page.waitForTimeout(1000);
+      await this.page.fill(this.arabicFieldDescription, fieldData.getArabicFieldDescription());
+      await this.page.fill(this.englishFieldDescription, fieldData.getEnglishFieldDescription());
+      await this.page.click(this.fieldDataDefinitionBtn);
+      await this.page.waitForTimeout(1000);
 
-    fieldData.setArabicFieldName(createdFieldArName);
-    fieldData.setEnglishFieldName(createdFieldEnName);
+      fieldData.setArabicFieldName(createdFieldArName);
+      fieldData.setEnglishFieldName(createdFieldEnName);
 
-    fieldData.setGlossaryParentName(global.testConfig.createField.glossaryParentAfterApprove);
-    fieldData.setGlossaryFieldNature(global.testConfig.createField.glossaryFieldNature); 
-    fieldData.setGlossaryFieldSource(global.testConfig.createField.glossaryFieldSource);
-    fieldData.setGlossaryAxonStatus(global.testConfig.createField.glossaryFieldAxsonStatus);
+      fieldData.setGlossaryParentName(global.testConfig.createField.glossaryParentAfterApprove);
+      fieldData.setGlossaryFieldNature(global.testConfig.createField.glossaryFieldNature); 
+      fieldData.setGlossaryFieldSource(global.testConfig.createField.glossaryFieldSource);
+      fieldData.setGlossaryAxonStatus(global.testConfig.createField.glossaryFieldAxsonStatus);
 
-    console.log("Filling Data Definition Ending ")
-
-
+      console.log("Filling Data Definition Ending ")
   }
+
 
   /**
    * fill Field Settings using the provided data.
@@ -110,17 +103,17 @@ export class FieldPage {
     var fieldType = fieldData.getFieldType();
 
     // Fill Field Data Definition section
-    await this.selectDropdownOption(this.classification , 1);
+    await this.selectDropdownValue(this.classification );
     if (![Constants.INTEGRATION_FIELD].includes(fieldType)) {
         await this.page.click(this.requierdOptionBtn);
         await this.page.click(this.multipleFieldBtn);
       }
-    await this.selectDropdownOption(this.periodicDataUpdate ,3);
+    await this.selectDropdownValue(this.periodicDataUpdate );
     if (![Constants.INTEGRATION_FIELD].includes(fieldType)) {
-      await this.selectDropdownOption(this.privacy ,4 );
-      await this.selectDropdownOption(this.impactDegree  ,5 );
+      await this.selectDropdownValue(this.privacy  );
+      await this.selectDropdownValue(this.impactDegree  );
     }
-    await this.selectDropdownOption(this.DataMenuesettingsSeverity ,6);
+    await this.selectDropdownValue(this.DataMenuesettingsSeverity );
     if ([Constants.CALCULATION_FIELD].includes(fieldType)) {
       await this.page.fill(this.descriptionCalculatedField, global.testConfig.createField.descriptionCalculatedField);
     }
@@ -152,37 +145,55 @@ export class FieldPage {
     return result;
   }
   
-  /**
- * Selects an option from a dropdown menu based on the provided index.
+
+ /**
+ * Selects an option from a dropdown menu based on its visible text,
+ * or selects the first visible option if no expectedValue is provided.
  * @param {string} dropdownLocator - The selector for the dropdown element.
- * @param {number} menuOptionsIndex - The index of the option to select (1-based).
- * @returns {Promise<void>} - Completes the dropdown selection.
+ * @param {string|null} [expectedValue=null] - The visible text of the option to select (optional).
+ * @returns {Promise<void>}
  */
-  async selectDropdownOption(dropdownLocator, menuOptionsIndex) {
+  async selectDropdownValue(dropdownLocator, expectedValue = null) {
+    await this.page.click(dropdownLocator);
+    await this.page.waitForTimeout(1000);
+
+    const optionsLocator = this.page.locator(this.MenuOptionsLocator);
+    const count = await optionsLocator.count();
+
+    if (expectedValue) {
+      for (let i = 0; i < count; i++) {
+        const option = optionsLocator.nth(i);
+        if (await option.isVisible()) {
+          const text = await option.textContent();
+          if (text?.trim() === expectedValue.trim()) {
+            await option.click({ force: true });
+            console.log(`Selected option: ${text.trim()}`);
+            return;
+          }
+        }
+      }
+    } else {
+      for (let i = 0; i < count; i++) {
+        const option = optionsLocator.nth(i);
+        if (await option.isVisible()) {
+          await option.click({ force: true });
+          return;
+        }
+      }
+    }
+  }
+
+  async selectLookupOption(dropdownLocator) {
     await this.page.click(dropdownLocator);
     await this.page.waitForTimeout(2000); 
-    let menuOptionsLocator = `(${this.MenuLocators})[${menuOptionsIndex}]`;
-    var optionsLocator = this.page.locator(menuOptionsLocator);
-    await optionsLocator.first().waitFor({ state: "visible", timeout: 5000 });
-    await optionsLocator.first().click({ force: true });
+    var lookupOption = this.page.locator(`//*[@role='listbox']//*[@data-value='Lookup']`);
+    await lookupOption.waitFor({ state: 'visible', timeout: 5000 });
+    await lookupOption.click();  
     await this.page.waitForTimeout(1000);
-}
-
-
-async selectLookupOption(dropdownLocator) {
-  await this.page.click(dropdownLocator);
-  await this.page.waitForTimeout(2000); 
-  var lookupOption = this.page.locator(`//*[@role='listbox']//*[@data-value='Lookup']`);
-  await lookupOption.waitFor({ state: 'visible', timeout: 5000 });
-  await lookupOption.click();  
-  await this.page.waitForTimeout(1000);
-  var lookupNameMenu = '//div[contains(@class, "ui fluid selection dropdown")][.//select[@data-testid="lookup_name"]]';
-  await this.page.waitForTimeout(9000); 
-  await this.selectDropdownOption(lookupNameMenu,2);
-}
-
-
-
+    var lookupNameMenu = '//div[contains(@class, "ui fluid selection dropdown")][.//select[@data-testid="lookup_name"]]';
+    await this.page.waitForTimeout(9000); 
+    await this.selectDropdownOption(lookupNameMenu,2);
+  }
 
   /**
    * Selects the value option from a fields tree.
@@ -218,57 +229,51 @@ async selectLookupOption(dropdownLocator) {
         return fieldDisplay; 
     }
 
-    async listOfAvailableFields () {
-
-      const fields = [
-        global.testConfig.createField.availableField1,
-        global.testConfig.createField.availableField2 ];
-      for (const field of fields) {
-          await this.search.searchOnUniqueRow(this.searchInput ,field);
-          var checkbox = await this.page.locator('//input[@type="checkbox"]');
-          await checkbox.click();
-        }
-        var selectField = await this.page.locator('//button[@data-testid="next-button"]').click();
-        return selectField; 
+  async listOfAvailableFields () {
+    const fields = [
+      global.testConfig.createField.availableField1,
+      global.testConfig.createField.availableField2 ];
+    for (const field of fields) {
+        await this.search.searchOnUniqueRow(this.searchInput ,field);
+        var checkbox = await this.page.locator('//input[@type="checkbox"]');
+        await checkbox.click();
       }
+      var selectField = await this.page.locator('//button[@data-testid="next-button"]').click();
+      return selectField; 
+    }
 
+    /**
+       * Creates a new calculation Field by filling in the necessary information.
+       */
+    async calculationField(fieldData, fieldType) {
+      // Common steps for all applicable field types
+        await this.listOfAvailableFields();
+        var fieldCreated =await this.creationField(fieldData, fieldType); 
+        return fieldCreated ; 
+    }
 
-/**
-   * Creates a new calculation Field by filling in the necessary information.
-   */
-async calculationField(fieldData, fieldType) {
-  // Common steps for all applicable field types
-    await this.listOfAvailableFields();
-    var fieldCreated =await this.creationField(fieldData, fieldType); 
-    return fieldCreated ; 
-}
+  async integrationDataList (axsonFieldName) {  
 
+    var allPageButtons = this.page.locator('button[data-testid="paginationItem"]:not([aria-label*="next"])');
+    var lastPageButton = allPageButtons.last();
+    await lastPageButton.click(); 
 
-
-async integrationDataList (axsonFieldName) {  
-
-  var allPageButtons = this.page.locator('button[data-testid="paginationItem"]:not([aria-label*="next"])');
-  var lastPageButton = allPageButtons.last();
-  await lastPageButton.click(); 
-
-  var row = await this.search.getRowInTableWithSpecificText(axsonFieldName);
-  var firstTd  = row[0].tdLocator;
-  const radioBtn = firstTd.locator('div>>input');
-  await radioBtn.click(); 
-    var selectIntegrationField = await this.page.locator('//button[@data-testid="next-button"]').click();
-    return selectIntegrationField; 
+    var row = await this.search.getRowInTableWithSpecificText(axsonFieldName);
+    var firstTd  = row[0].tdLocator;
+    const radioBtn = firstTd.locator('div>>input');
+    await radioBtn.click(); 
+      var selectIntegrationField = await this.page.locator('//button[@data-testid="next-button"]').click();
+      return selectIntegrationField; 
   }
 
-
-
-/**
-   * Creates a new Integration Field by filling in the necessary information.
-   */
-async integrationField(fieldData,fieldType) {
-     let fieldArName = fieldData.getArabicFieldName();
-    await this.integrationDataList(fieldArName);
-    var fieldCreated =await this.creationField(fieldData, fieldType); 
-    return fieldCreated ; 
-}
+  /**
+  * Creates a new Integration Field by filling in the necessary information.
+  */
+  async integrationField(fieldData,fieldType) {
+      let fieldArName = fieldData.getArabicFieldName();
+      await this.integrationDataList(fieldArName);
+      var fieldCreated =await this.creationField(fieldData, fieldType); 
+      return fieldCreated ; 
+  }
 
 }
