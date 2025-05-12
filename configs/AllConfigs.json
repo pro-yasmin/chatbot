@@ -11,8 +11,8 @@
   "APPLICANT_STREAMS_URL": "https://aounportal-uat.iis-ssb.com/ar/streams",
   "APPLICANT_USER": "system_user1",
   "AXON_BASE_URL": "https://inf-ax-uat-n1.iis-ssb.com:9443/login",
-  "AXON_PASS": "iis-ssb@UserAdmin1",
-  "AXON_USER": "dataadmin@iis-ssb.com",
+  "AXON_PASS": "Ma@giza.987",
+  "AXON_USER": "marwa.yousef@gizasystems.com",
   "BASE_URL": "https://adminportal-uat.iis-ssb.com/auth/login",
   "BASE_URL_API": "https://uat-gw-ext-lb.iis-ssb.com:8243",
   "BUSINESS_DELIVERY_ADMIN": "auto_uat_business_delivery_admin",
@@ -343,7 +343,7 @@
       "14"
     ],
     "viewbenefitResponsibleEntity": "جهة مسؤولة عن التنفيذ جديده",
-    "viewTargetApproach": "COMPREHENSIVE",
+    "viewTargetApproach": "شامل",
     "viewEnablementStatus": "معطَّل",
     "viewApprovalStatus": "معالجة",
     "viewActivationStatus": "خامل"
@@ -381,7 +381,7 @@
     "integration": "تكامل"
   },
   "SocialRecordCopies": {
-    "socialRecordActiveCopy": "ISR_ISRVR_00000454",
+    "socialRecordActiveCopy": "ISR_ISRVR_00000462",
     "socialRecordActiveStatus": "مفعل",
     "socialRecordDraftStatus": "مسودة",
     "socialRecordUnderReviewStatus": "تحت الاعتماد",

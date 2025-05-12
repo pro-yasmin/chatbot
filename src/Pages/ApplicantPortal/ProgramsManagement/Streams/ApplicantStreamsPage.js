@@ -1,4 +1,4 @@
-const { SearchPage } = require("../../SearchPage");
+const { SearchPage } = require("../../../SharedPages/SearchPage");
 
 export class ApplicantStreamsPage {
   constructor(page) {
