@@ -45,6 +45,22 @@ export class FieldRequestDetialsPage {
         return true;
     }
 
+    async checkFieldType(requestChecks, expectedFieldType) {
+        let rowIds = requestChecks.slice(1); // Ignore the first element
+    
+        for (let rowId of rowIds) {
+            let rowDetails = await this.search.getRowInTableWithSpecificText(rowId);
+            let rowStatus = await rowDetails[3].tdLocator.textContent();
+    
+            console.log(`Row Status (ID: ${rowId}): ${rowStatus}`);
+    
+            if (rowStatus !== expectedFieldType) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 
     async openFieldDetailsPage(fieldData) {

@@ -76,7 +76,8 @@ export class FieldLibraryManagementPage {
 
         const FIELD_TYPE_MAPPING = {
             [global.testConfig.FieldLibrary.calculated] : Constants.CALCULATION_FIELD,  
-            [global.testConfig.FieldLibrary.input] : Constants.INPUT_FIELD,               
+            [global.testConfig.FieldLibrary.input] : Constants.INPUT_FIELD,             
+            [global.testConfig.FieldLibrary.input] : Constants.INPUT_LOOKUP_FIELD ,              
             [global.testConfig.FieldLibrary.group] : Constants.GROUP_FIELD,          
             [global.testConfig.FieldLibrary.complex] : Constants.COMPLEX_FIELD ,   
             [global.testConfig.FieldLibrary.integration] : Constants.INTEGRATION_FIELD 

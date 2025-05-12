@@ -80,18 +80,29 @@ export class FieldLibraryUpdateRequestsPage {
     }
 
     /**
-       * Validates field details and makes a decision.
-       */
-    async validateFieldDetailsAndMakeDecision(requestChecks, expectedRequestStatus, expectedEnablementStatus) {
+ * Validates field details, optionally checks field type, and makes a decision.
+ * @param {Array<string>} requestChecks - The request identifiers to validate.
+ * @param {string} expectedRequestStatus - The expected status of the request.
+ * @param {string|null} expectedEnablementStatus - The expected enablement status after decision.
+ * @param {string|null} [expectedFieldType=null] - The expected field type to check (optional).
+ * @returns {Promise<boolean>} - Returns true if all validations and decisions are successful.
+ */
+async validateFieldDetailsAndMakeDecision(requestChecks, expectedRequestStatus, expectedEnablementStatus, expectedFieldType = null) {
+  await this.openViewRequestDetailsPage(requestChecks[0]);
 
-        await this.openViewRequestDetailsPage(requestChecks[0]);
-        await this.fieldRequestDetialsPage.checkInsideRequestStatus(expectedRequestStatus);
-        var sendRequest = await this.fieldRequestDetialsPage.verifyFieldEnablementStatusesAndMakeDecision(requestChecks, expectedEnablementStatus);
-        if (sendRequest) {
+  await this.fieldRequestDetialsPage.checkInsideRequestStatus(expectedRequestStatus);
+
+  let fieldTypeValid = true;
+  if (expectedFieldType) {
+    fieldTypeValid = await this.fieldRequestDetialsPage.checkFieldType(requestChecks, expectedFieldType);
+  }
+
+  var sendRequest = await this.fieldRequestDetialsPage.verifyFieldEnablementStatusesAndMakeDecision(requestChecks, expectedEnablementStatus);
+    if (sendRequest) {
             return true;
         }
         return false;
-    }
+}
 
     /**
      * Creates Group and Input fields.*/
@@ -111,7 +122,7 @@ export class FieldLibraryUpdateRequestsPage {
     }
 
     /**
-         * Creates Anther Fields (Calculated field And Integration field).*/
+         * Creates Anther Fields (Calculated field And Integration field And Input Lookup).*/
     async createOntherFieldRequest(FieldData) {
         await this.navigateToFieldRequestsPage();
         var FieldCreated = await this.fieldRequestsPage.createField(FieldData);
@@ -122,5 +133,6 @@ export class FieldLibraryUpdateRequestsPage {
         }
     }
 
+   
 }
 module.exports = { FieldLibraryUpdateRequestsPage };

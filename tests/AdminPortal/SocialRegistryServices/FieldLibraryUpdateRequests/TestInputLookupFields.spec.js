@@ -1,17 +1,17 @@
 //const { test, expect } = require('@playwright/test');
 import { test, expect } from '../../../fixtures.js';
-import Constants from '../../../../src/Utils/Constants';
+import Constants from '../../../../src/Utils/Constants.js';
 
-const { LoginPage } = require('../../../../src/Pages/LoginPage');
-const { HomePage } = require('../../../../src/Pages/AdminPortal/HomePage');
-const { FieldLibraryUpdateRequestsPage } = require('../../../../src/Pages/AdminPortal/FieldLibraryUpdateRequests/FieldLibraryUpdateRequestsPage');
-const { FieldLibraryManagementPage } = require('../../../../src/Pages/AdminPortal/FieldLibrary/FieldLibraryManagementPage');
-const { FieldsTreePage } = require('../../../../src/Pages/AdminPortal/FieldsTree/FieldsTreePage');
-const { FieldData } = require("../../../../src/Models/AdminPortal/FieldData");
-const { TasksPage } = require("../../../../src/Pages/AdminPortal/Tasks/TasksPage");
+const { LoginPage } = require('../../../../src/Pages/LoginPage.js');
+const { HomePage } = require('../../../../src/Pages/AdminPortal/HomePage.js');
+const { FieldLibraryUpdateRequestsPage } = require('../../../../src/Pages/AdminPortal/FieldLibraryUpdateRequests/FieldLibraryUpdateRequestsPage.js');
+const { FieldLibraryManagementPage } = require('../../../../src/Pages/AdminPortal/FieldLibrary/FieldLibraryManagementPage.js');
+const { FieldsTreePage } = require('../../../../src/Pages/AdminPortal/FieldsTree/FieldsTreePage.js');
+const { FieldData } = require("../../../../src/Models/AdminPortal/FieldData.js");
+const { TasksPage } = require("../../../../src/Pages/AdminPortal/Tasks/TasksPage.js");
 
 let loginPage, homePage, fieldLibraryUpdateRequestsPage, tasksPage ,fieldsTreePage;
-let groupFieldData, inputFieldData ,inputFieldData2;
+let inputLookupFieldData ;
 let adminUsername, adminPassword ,isrManagerUsername , isrManagerPassword;
 let requestChecks ,myMap;
 let fieldLibraryManagementPage ;
@@ -27,21 +27,14 @@ test.beforeEach(async ({ page }) => {
 
     tasksPage = new TasksPage(page);
 
-    groupFieldData = new FieldData(page);
-    inputFieldData = new FieldData(page);
-    inputFieldData2 = new FieldData(page);
+    inputLookupFieldData = new FieldData(page);
 
-    groupFieldData.setFieldType(Constants.GROUP_FIELD);
-    inputFieldData.setFieldType(Constants.INPUT_FIELD);
-    inputFieldData2.setFieldType(Constants.INPUT_FIELD);
+    inputLookupFieldData.setFieldType(Constants.INPUT_LOOKUP_FIELD);
 
     const baseUrl = global.testConfig.BASE_URL;
-    adminUsername = global.testConfig.FIELD_MANAGEMENT_SPECIALIST;
-    adminPassword = global.testConfig.FIELD_MANAGEMENT_SPECIALIST_PASS;
+    adminUsername = global.testConfig.ADMIN_USER;
+    adminPassword = global.testConfig.ADMIN_PASS;
  
-    // adminUsername = global.testConfig.ADMIN_USER;
-    // adminPassword = global.testConfig.ADMIN_PASS;
-
     await test.step('Login to Admin Portal', async () => {
         await loginPage.gotoAdminPortal(baseUrl);
         const loginSuccess = await loginPage.login(adminUsername, adminPassword);
@@ -50,20 +43,21 @@ test.beforeEach(async ({ page }) => {
     });
 });
 
-test('Group and Input Fields Request Flow', async () => {
+test('Input Lookup Fields Request Flow', async () => {
 
-        await test.step("Navigate to Field Library Requests and Create Fields", async () => {
+        await test.step("Navigate to Field Library Requests and Create Field", async () => {
             await homePage.navigateToFieldLibraryRequests();
-            requestChecks = await fieldLibraryUpdateRequestsPage.createGroupFieldRequest(groupFieldData, inputFieldData);
+            requestChecks = await fieldLibraryUpdateRequestsPage.createOntherFieldRequest(inputLookupFieldData);
             expect(requestChecks[0]).not.toBeNull(); 
         });
 
-        await test.step("Validate Field Request Status, Details and Make a Decision ", async () => {
+        await test.step("Validate Input Lookup Field Request Status,Type , Details and Make a Decision ", async () => {
             var processingStatus = global.testConfig.createField.requestStatusProcessing;
             var expectedRequestStatus = global.testConfig.createField.requestStatusProcessing;
             var expectedEnablementStatus = global.testConfig.createField.enableStatusHidden;
+            var expectedInputLookupFieldType = global.testConfig.createField.inputLookupFieldType;
             await fieldLibraryUpdateRequestsPage.checkFieldRowRequestStatus(processingStatus);
-            var sendRequest = await fieldLibraryUpdateRequestsPage.validateFieldDetailsAndMakeDecision(requestChecks,expectedRequestStatus ,expectedEnablementStatus);
+            var sendRequest = await fieldLibraryUpdateRequestsPage.validateFieldDetailsAndMakeDecision(requestChecks,expectedRequestStatus ,expectedEnablementStatus,expectedInputLookupFieldType);
             expect(sendRequest).toBe(true);
         });
 
@@ -83,7 +77,6 @@ test('Group and Input Fields Request Flow', async () => {
             await tasksPage.assignTaskToMe(requestChecks[0]); 
             myMap = new Map(); 
             myMap.set(requestChecks[1], Constants.APPROVE);
-            myMap.set(requestChecks[2], Constants.REJECT); 
         
             var taskManage = await tasksPage.manageRequestField(requestChecks[0],myMap,Constants.FIELDS_REQUEST);
             expect(taskManage).toBe(true);
@@ -92,7 +85,7 @@ test('Group and Input Fields Request Flow', async () => {
 
         await test.step("Check fields in fields Trees", async () => {
             await homePage.navigateToFieldTree();
-            var fieldExist = await fieldsTreePage.checkFieldExists(groupFieldData); 
+            var fieldExist = await fieldsTreePage.checkFieldExists(inputLookupFieldData); 
             expect(fieldExist).toBe(true);
             console.log("Field Exist in Fields Tree");
         });

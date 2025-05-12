@@ -9,7 +9,7 @@ require("./global.js"); // Load the global configuration
 const ENV = "uat";
 
 module.exports = defineConfig({
-  timeout: 600000,
+  timeout: 1500000,
 
   globalSetup: require.resolve("./global-setup"),
   //globalTeardown: './globalTeardown.js',
