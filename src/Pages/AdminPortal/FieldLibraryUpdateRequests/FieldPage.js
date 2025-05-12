@@ -1,7 +1,7 @@
 import Constants from '../../../Utils/Constants.js';
 
-const { SearchPage } = require("../SharedPages/SearchPage.js");
-const { PopUpPage } = require("../../AdminPortal/SharedPages/PopUpPage.js");
+const { SearchPage } = require("../../SharedPages/SearchPage.js");
+const { PopUpPage } = require("../../SharedPages/PopUpPage.js");
 
 /**
  * Represents the Field page and manages the creation of new Field,

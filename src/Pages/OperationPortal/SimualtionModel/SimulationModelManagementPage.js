@@ -1,5 +1,5 @@
-const { SearchPage } = require("../../../Pages/AdminPortal/SharedPages/SearchPage");
-const { PopUpPage } = require('../../AdminPortal/SharedPages/PopUpPage');
+const { SearchPage } = require("../../SharedPages/SearchPage");
+const { PopUpPage } = require('../../SharedPages/PopUpPage');
 const { SimualtionModelPage } = require("../SimualtionModel/SimualtionModelPage");
 const { SimualtionModelDetailsPage } = require("../SimualtionModel/SimualtionModelDetailsPage");
 const { SimulationModelVersionsViewPage } = require("../SimualtionModel/SimulationModelVersionsViewPage");

@@ -1,4 +1,4 @@
-const { PopUpPage } = require("../../SharedPages/PopUpPage");
+const { PopUpPage } = require("../../../SharedPages/PopUpPage");
 
 /**
  * Manages stream-related actions, such as creating a new stream with metadata, goals,

@@ -1,6 +1,6 @@
 import Constants from '../../../Utils/Constants.js';
 
-const { PopUpPage } = require("../../AdminPortal/SharedPages/PopUpPage.js");
+const { PopUpPage } = require("../../SharedPages/PopUpPage.js");
 
 
 export class SubDomainCreationPage {

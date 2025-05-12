@@ -1,4 +1,4 @@
-const { SearchPage } = require("../SharedPages/SearchPage");
+const { SearchPage } = require("../../SharedPages/SearchPage");
 
 export class RequestUpdateSocialRecordCopiesPage {
     constructor(page) {

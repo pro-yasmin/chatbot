@@ -1,8 +1,8 @@
 import Constants from '../../../Utils/Constants.js';
 const { FieldPage } = require("./FieldPage");
-const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage.js");
-const { PopUpPage } = require("../../AdminPortal/SharedPages/PopUpPage.js");
-const { UploadFilePage } = require('../../../Pages/AdminPortal/SharedPages/UploadFilePage.js');
+const { SearchPage } = require("../../SharedPages/SearchPage.js");
+const { PopUpPage } = require("../../SharedPages/PopUpPage.js");
+const { UploadFilePage } = require('../../SharedPages/UploadFilePage.js');
 
 
 export class FieldRequestsPage {

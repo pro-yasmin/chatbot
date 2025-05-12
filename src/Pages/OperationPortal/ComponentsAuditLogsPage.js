@@ -1,4 +1,4 @@
-const { SearchPage } = require("../../Pages/AdminPortal/SharedPages/SearchPage");
+const { SearchPage } = require("../SharedPages/SearchPage");
 
 export class ComponentsAuditLogsPage {
   //Page Construtor

@@ -1,4 +1,4 @@
-const { SearchPage } = require("../../SharedPages/SearchPage");
+const { SearchPage } = require("../../../SharedPages/SearchPage");
 const { StreamPage } = require("./StreamPage");
 const { StreamDetailsPage } = require("./StreamDetailsPage");
 

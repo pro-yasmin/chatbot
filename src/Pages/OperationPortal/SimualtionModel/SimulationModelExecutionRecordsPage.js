@@ -1,4 +1,4 @@
-const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage");
+const { SearchPage } = require("../../SharedPages/SearchPage");
 
 
 export class SimulationModelExecutionRecordsPage {

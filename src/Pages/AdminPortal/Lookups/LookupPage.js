@@ -1,5 +1,5 @@
-const { PopUpPage } = require('../SharedPages/PopUpPage');
-const { SearchPage } = require('../SharedPages/SearchPage');
+const { PopUpPage } = require('../../SharedPages/PopUpPage');
+const { SearchPage } = require('../../SharedPages/SearchPage');
 
 export class LookupPage {
   constructor(page) {

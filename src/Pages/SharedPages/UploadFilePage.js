@@ -1,4 +1,4 @@
-import Constants from "../../../Utils/Constants";
+import Constants from "../../Utils/Constants";
 
 /**
  * Manages search-related actions for tables, including searching for rows by value or text,

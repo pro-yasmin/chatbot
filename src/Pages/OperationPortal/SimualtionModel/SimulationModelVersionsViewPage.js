@@ -1,5 +1,5 @@
-const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage");
-const { PopUpPage } = require('../../AdminPortal/SharedPages/PopUpPage');
+const { SearchPage } = require("../../SharedPages/SearchPage");
+const { PopUpPage } = require('../../SharedPages/PopUpPage');
 
 
 export class SimulationModelVersionsViewPage {

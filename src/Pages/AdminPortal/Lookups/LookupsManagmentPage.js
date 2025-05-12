@@ -1,8 +1,8 @@
 const { expect } = require('@playwright/test');
-const { SearchPage } = require("../SharedPages/SearchPage");
+const { SearchPage } = require("../../SharedPages/SearchPage");
 const { LookupPage } = require("../../AdminPortal/Lookups/LookupPage");
 const { UploadLookupItemsPage } = require("../../AdminPortal/Lookups/UploadLookupItemsPage");
-const { UploadFilePage } = require('../../AdminPortal/SharedPages/UploadFilePage.js');
+const { UploadFilePage } = require('../../SharedPages/UploadFilePage.js');
 
 export class LookupsManagmentPage {
     constructor(page) {

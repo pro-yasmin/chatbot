@@ -1,4 +1,4 @@
-const { PopUpPage } = require("../../SharedPages/PopUpPage");
+const { PopUpPage } = require("../../../SharedPages/PopUpPage");
 
 /**
  * Represents the Main Program page and manages the creation of new main programs,

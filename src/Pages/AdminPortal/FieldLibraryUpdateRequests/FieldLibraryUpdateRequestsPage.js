@@ -1,4 +1,4 @@
-const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage.js");
+const { SearchPage } = require("../../SharedPages/SearchPage.js");
 const { FieldRequestsPage } = require("./FieldRequestsPage");
 const { FieldRequestDetialsPage } = require("./FieldRequestDetialsPage");
 
