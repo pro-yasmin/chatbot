@@ -12,7 +12,7 @@ export class FieldsTreePage {
       this.assignedDomain='(//label[contains(@id,"assignedDomain")]//following::div[@ref="value"])[1]';
       this.acceptChildType='(//label[contains(@id,"acceptChildType")]//following::div[@ref="value"])[1]';
       this.description='(//label[contains(@id,"description")]//following::div[@ref="value"])[1]';
-
+      this.closeButtonPop='(//*[@data-testid="modal-title"]//following::button)[1]';
       
     }
   
@@ -57,6 +57,10 @@ export class FieldsTreePage {
 
   async checkSubDomainsExists(subDomainName,ExpectType){
     await this.page.click(this.openTree);
+    var domainChild = this.page.locator(`//span[contains(text(), "${global.testConfig.createSubDomain.assignedDomainChild}")]`);
+    await domainChild.waitFor({ state: 'visible', timeout: 5000 });
+    await domainChild.click();
+    await this.page.waitForTimeout(1000);
     const subDomainLocator = `//span[contains(text(),"${subDomainName}")]`;
     const TypeLocator=`(//span[contains(text(),"${subDomainName}")]//following::span)[1]`;
    
@@ -90,11 +94,12 @@ export class FieldsTreePage {
 
    validations.push(ActualArName==subDomainData.getsubDomainArabicName()[0]);
    validations.push(ActualEngName==subDomainData.getsubDomainEnglishName()[0]);
-   validations.push(ActualAssignedDomain==subDomainData.getassignedDomain());
-   validations.push(ActualAcceptChildType==subDomainData.getacceptChildType());
+   validations.push(ActualAssignedDomain==global.testConfig.createSubDomain.assignedDomainChild);
+   validations.push(ActualAcceptChildType.trim()==subDomainData.getacceptChildType());
    validations.push(ActualDescription==subDomainData.getsubDomainDescription());
 
    allTrue = validations.every(element => element === true);
+   await this.page.click(this.closeButtonPop);
    return allTrue;
   }
 

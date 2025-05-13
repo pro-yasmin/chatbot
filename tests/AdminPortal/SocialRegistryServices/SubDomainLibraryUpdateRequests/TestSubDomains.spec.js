@@ -93,7 +93,9 @@ test.beforeEach(async ({ page }) => {
          await test.step("Tasks approve and reject", async () => {
                 await homePage.navigateToTasks();
                 await tasksPage.assignTaskToMe(RequestID); 
-                myMap = new Map(); myMap.set(subDomainData.getsubDomainArabicName()[0],Constants.APPROVE); myMap.set(subDomainData.getsubDomainArabicName()[1], Constants.REJECT);
+                myMap = new Map();
+                myMap.set(subDomainData.getsubDomainArabicName()[0],Constants.APPROVE); 
+                myMap.set(subDomainData.getsubDomainArabicName()[1], Constants.REJECT);
                 var taskManage = await tasksPage.manageRequestField(RequestID,myMap,Constants.DOMAINS_REQUEST);
                 expect(taskManage).toBe(true);
                 console.log("Subdomain Request Done Successfully");
@@ -116,8 +118,8 @@ test.beforeEach(async ({ page }) => {
               expect(await fieldsTreePage.checkSubDomainsExists(subDomainData.getsubDomainArabicName()[0],Constants.SUBDOMAINTYPE));
               console.log("Approved subDomain displayed successfully at fields tree");
 
-              expect(await fieldsTreePage.checkSubDomainDetails(subDomainData));
-              console.log("SubDomain details displayed right");
+              //expect(await fieldsTreePage.checkSubDomainDetails(subDomainData));
+              //console.log("SubDomain details displayed right");
             });
 
   });

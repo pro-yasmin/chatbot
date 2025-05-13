@@ -84,7 +84,14 @@ async createSubDomain(SubDomainData,NumOfDomains) {
 
       async selectAssignedDomain(domainName) {
         await this.page.click(this.assignedDomain);
-        await this.page.getByText(domainName).click();
+        var socialRecordItem = this.page.locator(`//span[contains(text(), "${domainName}")]`);
+        await socialRecordItem.waitFor({ state: 'visible', timeout: 5000 });
+        await socialRecordItem.click();    
+        await this.page.waitForTimeout(1000);
+        var domainChild = this.page.locator(`//span[contains(text(), "${global.testConfig.createSubDomain.assignedDomainChild}")]`);
+        await domainChild.waitFor({ state: 'visible', timeout: 5000 });
+        await domainChild.click();
+        await this.page.waitForTimeout(1000);
         await this.page.click(this.chooseAssignedDomain);
 
         }

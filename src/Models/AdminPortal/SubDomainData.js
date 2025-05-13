@@ -49,7 +49,7 @@ setsubDomainEnglishName(numberOfNames) {
     // Getter and Setter for assignedDomain
  getassignedDomain() {
     if (this.assignedDomain == null) {
-        this.assignedDomain =global.testConfig.createSubDomain.assignedDomain;
+        this.assignedDomain =global.testConfig.createSubDomain.assignedDomainParent;
     }
     return this.assignedDomain;
     }
@@ -60,7 +60,7 @@ setassignedDomain(value) {
 // Getter and Setter for acceptChildType
 getacceptChildType() {
     if (this.acceptChildType == null) {
-        this.acceptChildType =Constants.SUBDOMAIN_CHILD_FIELD;
+        this.acceptChildType =Constants.SUBDOMAINTYPE;
     }
     return this.acceptChildType;
     }

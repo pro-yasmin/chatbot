@@ -230,7 +230,7 @@ export class TasksPage {
 * @param {string} actionType - The action to perform ('approve' or 'reject').
 * @returns {Promise<boolean>} - Returns true if the task is processed successfully.
 */
-  async ensureFieldTaskStatus(requestNumber, fieldsMap) {
+  async ensureFieldTaskStatus(requestNumber, fieldsMap,requestType) {
     let expectedStatus;
     // await this.navigateToGroupTasksTab();
     await this.navigateToMyCompletedTasksTab();
@@ -246,7 +246,7 @@ export class TasksPage {
     var result = await this.taskDetailsPage.checkFieldRequestStatus(expectedStatus);
 
     // Check if the status is updated accordingly
-    var result = await this.taskDetailsPage.checkFieldsDecisionStatus(fieldsMap);
+    var result = await this.taskDetailsPage.checkFieldsDecisionStatus(fieldsMap,requestType);
     // Log the result based on the action
     if (result) { return true }
     return false
@@ -292,7 +292,7 @@ export class TasksPage {
     }
     var sendRequest = await this.taskDetailsPage.clickOnProcessRequrstBtn();
 
-    var ensureStatus = await this.ensureFieldTaskStatus(requestNumber, fieldsMap);
+    var ensureStatus = await this.ensureFieldTaskStatus(requestNumber, fieldsMap,reqType);
 
     // If all steps are successful, return true && ensureStatus && requestType
     if (status && allFieldsProcessed && ensureStatus && sendRequest) { return true; }
