@@ -346,10 +346,9 @@ export class TasksPage {
 
     if (actionType === Constants.REJECT) {
       //reject request
+     
       await this.page.click(this.isrTaskRejectBtn);
-      await this.page.waitForSelector(this.isrRejectReason, { state: 'visible', timeout: 50000 });
-      await this.page.fill(this.isrRejectReason, global.testConfig.tasks.isrRejectReason);
-      await this.page.click(this.isrConfirmRejectBtn);
+      await this.popUpMsg.inputPopUpMessage(this.isrRejectReason, this.isrConfirmRejectBtn, global.testConfig.taskDetails.isrRejectReason);
       var popUpResult = await this.popUpMsg.popUpMessage(this.popupConfirmBtn, global.testConfig.taskDetails.confirmRejectISRMsg);
       console.log("The Task Rejected successfully");
     }

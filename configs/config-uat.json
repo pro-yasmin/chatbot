@@ -24,8 +24,8 @@
     "prepareSimulationModel": "تجهيز نموذج المحاكاة",
      "expectedSubDomainTaskTypetest": "طلب تحديث الفئات",
     "expectedSubDomainTaskType":"DOMAIN_LIBRARY_UPDATE",
-    "expectISRTaskType": "تحديث السجل الاجتماعي",
-    "isrRejectReason": "تم رفض السجل الاجتماعي"
+    "expectISRTaskType": "تحديث السجل الاجتماعي"
+   
   },
   "taskDetails": {
     "enableStatusHidden": "محجوب",
@@ -45,8 +45,9 @@
     "confirmSubProgramsMsg": "تم قبول تعريف البرنامج الفرعي بنجاح",
     "confirmBenefitsMsg": "تم قبول تعريف الإعانة بنجاح",
     "addCompleteTaskNote": "ملاحظةلاكمال المهمة",
-    "dummy": "تم رفض نسخة السجل بنجاح",
-    "confirmRejectISRMsg": "isrSchemaVersionReject"
+    "confirmRejectISRMsg": "تم رفض نسخة السجل بنجاح",
+     "isrRejectReason": "تم رفض السجل الاجتماعي"
+    
   },
   "createMainProgram": {
     "backUpStreamNumber": "PRG_StrSt_296",
@@ -342,7 +343,7 @@
     "glossaryFieldAxsonStatus":"Active",
     "glossaryFieldEmptyValue":"Not specified", 
     "glossaryServiceName" :"ServiceName",
-    "API_Default_ParentKey":"education",
+    "API_Default_ParentKey":"subDomainFieldsAuto",
     "API_Default_ParentDomain":"DOMAIN",
     "API_Classification":"public",
     "API_Classification_Ar":"عام",
@@ -363,7 +364,8 @@
 "createSubDomain": {
   "subDomainArabicName": "فئة جديدة",
   "subDomainEnglishName": "subDomain New",
-  "assignedDomain":"السجل الاجتماعي  الموحد",
+  "assignedDomainParent":"السجل الاجتماعي  الموحد",
+  "assignedDomainChild" :"فئة اوتوميشن",
   "subDomainDescription": "وصف الفئة الجديدة للتجربة",
   "subDomainFile":"test.pdf",
   "createSubDomainSuccessMsg":"تم إرسال طلبك رقم",
