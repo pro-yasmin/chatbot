@@ -24,7 +24,7 @@ export default {
     EDIT_SIMULATION_MODEL : "Edit_Simulation_Model",
     EXECUTE_SIMULATION_MODEL : "Execute_Simulation_Model",
     VERIFY_FILE_UPLOADED : "verifyFileUploaded",
-    API_Input_Source_Input:"ادخال",
+    API_Input_Source_Input: "إدخال",
     SUBDOMAIN_CHILD_FIELD: "Field",
     SUBDOMAIN_CHILD_DOMAIN:"Domain",
     SUBDOMAIN_LIB_ALLTABS:"All_Tabs",
