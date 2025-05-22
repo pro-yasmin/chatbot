@@ -207,8 +207,8 @@ setFieldType(value) {
     "parentType": this.getParentDomain(),
     "metaData": 
     {
-        "required": true,
-        "multipleField": true,
+        "required": false,
+        "multipleField": false,
         "tags": null,
         "privacy": global.testConfig.createField.API_Privacy,
         "impactDegree": global.testConfig.createField.API_ImpactDegree,
