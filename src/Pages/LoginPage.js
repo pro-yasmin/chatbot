@@ -21,6 +21,8 @@ export class LoginPage {
     this.nationalField = '//span[contains(text(),"رقم الهوية الوطنية")]';
   }
 
+
+
   /**
    * Navigates to the admin portal .
    * @param {string} baseUrl - The URL of the admin portal.
@@ -70,6 +72,7 @@ export class LoginPage {
     await this.page.fill(this.userNameField, userName);
     await this.page.fill(this.passwordField, password);
     await this.page.click(this.loginButton);
+    await this.page.waitForSelector(this.invalidCredentialsErrorMsg, { visible: true });
     var actuaLoginErrorMsg = await this.page.$eval(this.invalidCredentialsErrorMsg, element => element.textContent);
     console.log("Actual Login Error Message: ", actuaLoginErrorMsg);
     var expectedLoginErrorMsg = global.testConfig.Login.invalidLoginDataErrorMsg;

@@ -1,5 +1,5 @@
-const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage");
-const { PopUpPage } = require('../../AdminPortal/SharedPages/PopUpPage');
+const { SearchPage } = require("../../SharedPages/SearchPage");
+const { PopUpPage } = require('../../SharedPages/PopUpPage');
 
 
 export class SimulationModelVersionsViewPage {
@@ -10,7 +10,7 @@ export class SimulationModelVersionsViewPage {
 
         //popup
         //this.popUpYesButton = '//button[@data-testid="modal-primary-button"]';
-        this.popUpYesButton = '//button[contains(text(),"نعم, إرسال")]';
+        this.popUpYesButton = '//button[contains(text(),"نعم، إرسال!")]';
         this.popUpGotoExecutions = '//button[contains(text(),"العودة إلى سجلات التنفيذ")]';
         this.searchInput = '//form[@data-testid="search-input"]//input';
         this.sendForApprovalButton = '//button[@data-testid="table-action-[object Object]"]';

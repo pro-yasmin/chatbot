@@ -11,6 +11,8 @@ export class SocialRecordCopiesData {
         this.activationDateForPrograms = null;
         this.fieldArName = null;
         this.existFieldsArNames = [];
+        this.rowsCount = 0;
+        this.isrTaskNumbrer = null;
     }
 
     // Getter and Setter for Version Arabic Name
@@ -88,6 +90,28 @@ export class SocialRecordCopiesData {
     setExistingFieldsArName(values) {
         this.existFieldsArNames = values;
     }
+
+    // Getter for Existing Fields Row counts
+    getRowCount() {
+        return this.rowsCount;
+    }
+
+    // Setter for Existing Fields Row Counts
+    setRowCount(values) {
+        this.rowsCount = values;
+    }
+
+    // Getter and Setter for ISR task number
+    getIsrTaskNumber() {
+        if (this.isrTaskNumbrer == null) {
+            return false;
+        }
+        return this.isrTaskNumbrer;
+    }
+    setIsrTaskNumber(value) {
+        this.isrTaskNumbrer = value;
+    }
+
 }
 
 module.exports = { SocialRecordCopiesData };

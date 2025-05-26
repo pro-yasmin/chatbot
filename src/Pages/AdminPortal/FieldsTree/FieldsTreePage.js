@@ -4,7 +4,7 @@ export class FieldsTreePage {
       this.page = page;
 
       this.ISRBtn = '//input[@type="radio"]';
-      this.personalInformationBtn = '//span[contains(text(),"البيانات الشخصية")]';
+      this.parentElementBtn = `//span[contains(text(),"${global.testConfig.createField.secoundParent}")]`;
       this.fieldsSection = '//li[@id="mui-tree-view-4-personalInformation"]//ul[@role="group"]';
       this.openTree='//div[contains(@class,"MuiTreeItem-content")]';
       this.ArName='(//label[contains(@id,"arabicName")]//following::div[@ref="value"])[1]';
@@ -12,23 +12,24 @@ export class FieldsTreePage {
       this.assignedDomain='(//label[contains(@id,"assignedDomain")]//following::div[@ref="value"])[1]';
       this.acceptChildType='(//label[contains(@id,"acceptChildType")]//following::div[@ref="value"])[1]';
       this.description='(//label[contains(@id,"description")]//following::div[@ref="value"])[1]';
-
+      this.closeButtonPop='(//*[@data-testid="modal-title"]//following::button)[1]';
       
     }
   
+  
+
     /**
      * open Personal Information section
      */
     async openFieldsSection() {
 
-     // await this.page.waitForTimeout(5000);
+      await this.page.waitForTimeout(3000);
      //await this.page.waitForSelector(this.ISRBtn, { state: "visible", timeout: 60000 });
       await this.page.locator(this.ISRBtn).click({ timeout: 5000 });
       //await this.page.click(this.ISRBtn);  
-      await this.page.waitForSelector(this.personalInformationBtn, { state: "visible", timeout: 10000 });
-      await this.page.locator(this.personalInformationBtn).click({ timeout: 5000 });
+      await this.page.waitForSelector(this.parentElementBtn, { state: "visible", timeout: 10000 });
+      await this.page.locator(this.parentElementBtn).click({ timeout: 5000 });
      // await this.page.click(this.personalInformationBtn);
-      console.log("Fields Personal Information opened successfully");
     }
   
     /**
@@ -56,6 +57,10 @@ export class FieldsTreePage {
 
   async checkSubDomainsExists(subDomainName,ExpectType){
     await this.page.click(this.openTree);
+    var domainChild = this.page.locator(`//span[contains(text(), "${global.testConfig.createSubDomain.assignedDomainChild}")]`);
+    await domainChild.waitFor({ state: 'visible', timeout: 5000 });
+    await domainChild.click();
+    await this.page.waitForTimeout(1000);
     const subDomainLocator = `//span[contains(text(),"${subDomainName}")]`;
     const TypeLocator=`(//span[contains(text(),"${subDomainName}")]//following::span)[1]`;
    
@@ -89,11 +94,12 @@ export class FieldsTreePage {
 
    validations.push(ActualArName==subDomainData.getsubDomainArabicName()[0]);
    validations.push(ActualEngName==subDomainData.getsubDomainEnglishName()[0]);
-   validations.push(ActualAssignedDomain==subDomainData.getassignedDomain());
-   validations.push(ActualAcceptChildType==subDomainData.getacceptChildType());
+   validations.push(ActualAssignedDomain==global.testConfig.createSubDomain.assignedDomainChild);
+   validations.push(ActualAcceptChildType.trim()==subDomainData.getacceptChildType());
    validations.push(ActualDescription==subDomainData.getsubDomainDescription());
 
    allTrue = validations.every(element => element === true);
+   await this.page.click(this.closeButtonPop);
    return allTrue;
   }
 

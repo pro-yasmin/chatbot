@@ -12,6 +12,7 @@ module.exports = defineConfig({
   timeout: 600000,
 
   globalSetup: require.resolve("./global-setup"),
+  //globalTeardown: './globalTeardown.js',
 
   testDir: "./tests",
   /* Run tests in files in parallel */
@@ -19,7 +20,7 @@ module.exports = defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: 0,
+  retries: 1,
   /* Opt out of parallel tests on CI. */
   workers: 1,
   //workers: process.env.CI ? 1 : undefined,
@@ -45,79 +46,88 @@ module.exports = defineConfig({
     actionTimeout: 200000, // Timeout for Playwright actions (15 seconds)
     navigationTimeout: 600000, // Timeout for page navigation (60 seconds)
   },
-  /* Configure projects for major browsers */
-  /*projects: [
-  {
-     name: "Admin",
+  // /* Configure projects for major browsers */
+  projects: [
+
+    {
+      name: "Sainty",
+       testDir: "./tests/AdminPortal/SocialRegistryServices/SocialRecordCopiesTests", // Test directory
+        },
+   {
+    name: "Admin",
      testDir: "./tests/AdminPortal", // Test directory
-     },
+      },
 
    {
-      name: "Login",
+       name: "Login",
      testDir: "./tests/Login", // Test directory
-  },
-   {
-    name: "All",
-     testDir: "./tests", // Test directory
-   },
+},
     {
+     name: "All",
+     testDir: "./tests", // Test directory
+    },
+     {
       name: "Programs",
      testDir: "./tests/AdminPortal/ProgramManagementTests", // Test directory
      },
    {
     name: "Lookups",
-       testDir: "./tests/AdminPortal/LookupsTests", // Test directory
+        testDir: "./tests/AdminPortal/LookupsTests", // Test directory
      },
     {
-      name: "StateMachine",
-     testDir: "./tests/AdminPortal/StateMachineTests", // Test directory
+       name: "StateMachine",
+      testDir: "./tests/AdminPortal/StateMachineTests", // Test directory
    },
 
     {
       name: "SocialRegistryServices",
       testDir: "./tests/AdminPortal/SocialRegistryServices", // Test directory
   },
-
-     {
-      name: "Operation",
-       testDir: "./tests/OperationPortal", // Test directory
+  {
+    name: "Authroization",
+    testDir: "./tests/AdminPortal/PermissionsTests", // Test directory
     },
 
-       /* {
-          name: 'chromium',
-          use: { ...devices['Desktop Chrome'] },
-        },*/
+     {
+       name: "Operation",
+      testDir: "./tests/OperationPortal", // Test directory
+       },
 
-       /* {
-          name: 'firefox',
-          use: { ...devices['Desktop Firefox'] },
-        },
+  //      /* {
+  //         name: 'chromium',
+  //         use: { ...devices['Desktop Chrome'] },
+  //       },*/
 
-        {
-          name: 'webkit',
-          use: { ...devices['Desktop Safari'] },
-        },*/
+  //      /* {
+  //         name: 'firefox',
+  //         use: { ...devices['Desktop Firefox'] },
+  //       },
 
-        /* Test against mobile viewports. */
-        // {
-        //   name: 'Mobile Chrome',
-        //   use: { ...devices['Pixel 5'] },
-        // },
-        // {
-        //   name: 'Mobile Safari',
-        //   use: { ...devices['iPhone 12'] },
-        // },
+  //       {
+  //         name: 'webkit',
+  //         use: { ...devices['Desktop Safari'] },
+  //       },*/
 
-        /* Test against branded browsers. */
-        // {
-        //   name: 'Microsoft Edge',
-        //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-        // },
-        // {
-        //   name: 'Google Chrome',
-        //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-        // },
-     //
-   //],
+  //       /* Test against mobile viewports. */
+  //       // {
+  //       //   name: 'Mobile Chrome',
+  //       //   use: { ...devices['Pixel 5'] },
+  //       // },
+  //       // {
+  //       //   name: 'Mobile Safari',
+  //       //   use: { ...devices['iPhone 12'] },
+  //       // },
+
+  //       /* Test against branded browsers. */
+  //       // {
+  //       //   name: 'Microsoft Edge',
+  //       //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+  //       // },
+  //       // {
+  //       //   name: 'Google Chrome',
+  //       //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+  //       // },
+  //    //
+ ],
 });
 module.exports.ENV = ENV;

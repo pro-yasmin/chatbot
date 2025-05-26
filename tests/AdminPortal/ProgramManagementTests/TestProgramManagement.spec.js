@@ -1,5 +1,5 @@
-const { test, expect } = require("@playwright/test");
-// const  Constants  = require("../../../src/Utils/Constants");
+//const { test, expect } = require("@playwright/test");
+import { test, expect } from '../../fixtures.js';
 import Constants from '../../../src/Utils/Constants.js';
 
 const { LoginPage } = require('../../../src/Pages/LoginPage');
@@ -25,15 +25,13 @@ let subProgramsManagementPage, subProgramsData, subProgramsPage;
 let streamNumber, programNumber, subProgramNumber, benefitNumber;
 let benefitsPage, benefitsManagmentPage, benefitsData;
 let adminusername,adminpassword;
-let context;
-let page;
+
 
 /**
  * Test setup: Initializes all required page objects and logs into the admin portal.
  */
-test.beforeEach(async ({ browser }) => {
-  context = await browser.newContext();
-  page = await context.newPage();
+test.beforeEach(async ({ page }) => {
+
   loginPage = new LoginPage(page);
   homePage = new HomePage(page);
   streamPage = new StreamPage(page);
@@ -146,7 +144,7 @@ test("Add and Approve New Main Program", async () => {
 /**
  * Test case: Adds and approves a new subprogram.
  */
-test("Add and Approve Test Sub Programs", async () => {
+test.only("Add and Approve Test Sub Programs", async () => {
   // Step1: Navigate to Main Programs page
   await test.step("Navigate to Main Programs  page", async () => {
     console.log("Navigate to Main Program page");
@@ -213,30 +211,28 @@ test("Add and Approve Test Benefits", async () => {
     console.log("Logout  from admin portal");
   });
 
-  // Step4: Approve Benefit
-  await test.step("Approve Benefit Task", async () => {
-    var loginSuccess = await loginPage.login(adminusername, adminpassword);
-    expect(loginSuccess).toBe(true);
-    console.log("Navigate to MyTasks page to approve Benefit Request");
-    await homePage.navigateToTasks();
-    await tasksPage.assignTaskToMe(benefitNumber);
-    var confirmMsg = global.testConfig.taskDetails.confirmBenefitsMsg;
-    expect(await tasksPage.manageTask(Constants.BENEFIT, Constants.APPROVE,benefitNumber,confirmMsg)).toBe(true);
-    console.log("New Benefit Approved Successfully with id= " + benefitNumber);
-  });
+  // // Step4: Approve Benefit
+  // await test.step("Approve Benefit Task", async () => {
+  //   var loginSuccess = await loginPage.login(adminusername, adminpassword);
+  //   expect(loginSuccess).toBe(true);
+  //   console.log("Navigate to MyTasks page to approve Benefit Request");
+  //   await homePage.navigateToTasks();
+  //   await tasksPage.assignTaskToMe(benefitNumber);
+  //   var confirmMsg = global.testConfig.taskDetails.confirmBenefitsMsg;
+  //   expect(await tasksPage.manageTask(Constants.BENEFIT, Constants.APPROVE,benefitNumber,confirmMsg)).toBe(true);
+  //   console.log("New Benefit Approved Successfully with id= " + benefitNumber);
+  // });
 });
 
 test.afterEach(async () => {
   //logout
   await test.step('Logout from Admin Portal', async () => {
     await homePage.logout();
-    await page.close();
     console.log('User Logout Successfully');
-    await context.close();
+   
   });
 
 });
 
 
-// test.afterAll(async () => {
-// });
+

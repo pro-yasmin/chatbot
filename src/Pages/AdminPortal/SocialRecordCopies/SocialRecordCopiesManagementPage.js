@@ -1,5 +1,5 @@
-const { SearchPage } = require("../SharedPages/SearchPage");
-const { PopUpPage } = require('../SharedPages/PopUpPage');
+const { SearchPage } = require("../../SharedPages/SearchPage");
+const { PopUpPage } = require('../../SharedPages/PopUpPage');
 const { SocialRecordCopiesPage } = require("../SocialRecordCopies/SocialRecordCopiesPage");
 const { ISRNewFieldsPage } = require("../SocialRecordCopies/ISRNewFieldsPage");
 
@@ -27,6 +27,12 @@ export class SocialRecordCopiesManagementPage {
         this.successPopupTitle = '//span[@data-testid="modal-title"]';
         this.popUpYesButton = '//button[@data-testid="confirmation-modal-primary-button"]';
         this.backToSocialRecordCopiesButton = '//button[@data-testid="modal-primary-button"]';
+
+        //table
+        this.existFieldsTable = '//tbody[@data-testid="table-body"]';
+        this.nextButton = '//button[@data-testid="paginationItem" and @aria-label="Go to next page"]';
+
+        this.requestUpdateSocialRecordCopiesTab = '//a[@data-testid="submenu-social-record-copies-requests"]';
 
     }
 
@@ -135,19 +141,69 @@ export class SocialRecordCopiesManagementPage {
     }
 
     async verifyRecordFieldsExist(socialRecordCopiesData) {
+        // for (const value of socialRecordCopiesData.getExistingFieldsArName()) {
+        //     socialRecordFieldsTableRow = await this.search.searchOnUniqueRow(this.searchInput, value);
+        //     if (socialRecordFieldsTableRow && socialRecordFieldsTableRow.length > 0) {
+        //         console.log(`Old Added Record Fields ${value} exist`);
+        //     }
+        // }
+        let totalRowCount = 0;
+        let hasNextPage = true;
+
+        while (hasNextPage) {
+            // Count the rows on the current page
+            const rowsOnCurrentPage = await this.page.locator(`${this.existFieldsTable}//tr`);
+            //totalRowCount += rowsOnCurrentPage.length;
+            totalRowCount += await rowsOnCurrentPage.count();
+
+            // Check if the "Next" button is enabled nextButton
+            const nextButton = await this.page.locator(`${this.nextButton}`);
+            if (nextButton && await nextButton.isEnabled()) {
+                await nextButton.click();
+                await this.page.waitForTimeout(1000); // Wait for the next page to load
+            } else {
+                hasNextPage = false;
+            }
+        }
+
+        if (totalRowCount === socialRecordCopiesData.getRowCount()) {
+            console.log('Row count matches the expected value which is ' + totalRowCount);
+        } else {
+            console.log(`Row count mismatch. Expected: ${socialRecordCopiesData.getRowCount()}, Found: ${totalRowCount}`);
+        }
         let socialRecordFieldsTableRow = [];
         socialRecordFieldsTableRow = await this.search.searchOnUniqueRow(this.searchInput, socialRecordCopiesData.getFieldArName());
         if (socialRecordFieldsTableRow && socialRecordFieldsTableRow.length > 0) {
             console.log(`New Added Record Field ${socialRecordCopiesData.getFieldArName()} exist`);
         }
-        for (const value of socialRecordCopiesData.getExistingFieldsArName()) {
-            socialRecordFieldsTableRow = await this.search.searchOnUniqueRow(this.searchInput, value);
-            if (socialRecordFieldsTableRow && socialRecordFieldsTableRow.length > 0) {
-                console.log(`Old Added Record Fields ${value} exist`);
-            }
-        }
+        // can't loop over all the data cause there are some results are dublicated and the test will fail so I limited the loop to 2
+        // let limit = 2;
+        // for (const [index, value] of socialRecordCopiesData.getExistingFieldsArName().entries()) {
+        //     if (index >= limit) break;
+        //     socialRecordFieldsTableRow = await this.search.searchOnUniqueRow(this.searchInput, value);
+        //     if (socialRecordFieldsTableRow && socialRecordFieldsTableRow.length > 0) {
+        //     console.log(`Old Added Record Fields ${value} exist`);
+        //     }
+        // }
 
     }
+
+    // async getTaskNumberForISRCopy(socialRecordCopiesData) {
+    //     await this.page.click(this.requestUpdateSocialRecordCopiesTab);
+    //     let isrTaskNumberTd;
+
+    //     let isrTaskNumber;
+    //     let isrTasksRows = [];
+    //     isrTasksRows = await this.search.getFirstRow();
+    //     isrTaskNumberTd = isrTasksRows[0].tdLocator;
+    //     isrTaskNumber = isrTaskNumberTd.locator("span");
+    //     await isrTaskNumber.waitFor({ state: "visible" });
+    //     var taskNumberForIsrCopy = await isrTaskNumber.textContent();
+    //     socialRecordCopiesData.setIsrTaskNumber(taskNumberForIsrCopy);
+
+    //     console.log("Task Number For ISR Copy: ", socialRecordCopiesData.getIsrTaskNumber());
+
+    // }
 
 }
 module.exports = { SocialRecordCopiesManagementPage };

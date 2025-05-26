@@ -1,6 +1,6 @@
 import { features } from "process";
 
-const { PopUpPage } = require("../../SharedPages/PopUpPage");
+const { PopUpPage } = require("../../../SharedPages/PopUpPage");
 
 /**
  * Represents the Benefits page and manages the creation of new benefits,
@@ -23,7 +23,7 @@ export class BenefitsPage {
     this.benefitEstimatedValue ='//input[@name="benefitDetails.estimatedValue"]';
     this.defineMetadataBtn ='//button[contains(text(),"تعريف البيانات الوصفية")]';
     // Selectors for targeting data section
-    this.defineTargetingDataBtn ='//button[contains(text(),"تعريف بيانات الاستهداف")]';
+    this.defineTargetingDataBtn ='//button[@data-testid="next-button"]';
     // Selectors for benefit features section
     this.assessmentNeedinput ='//input[@name="assessmentNeed" and @value="false"]';
     this.meritRecurrencePattern ='//div[@id="mui-component-select-entitlementPeriod.pattern"]';

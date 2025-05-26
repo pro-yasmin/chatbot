@@ -1,4 +1,5 @@
-const { test, expect } = require('@playwright/test');
+//const { test, expect } = require('@playwright/test');
+import { test, expect } from '../../fixtures.js';
 import Constants from '../../../src/Utils/Constants';
 const { StreamData } = require('../../../src/Models/AdminPortal/StreamData');
 const { MainProgramData } = require('../../../src/Models/AdminPortal/MainProgramData');
@@ -29,8 +30,7 @@ let subProgram1, subProgram2, subProgramData, subProgramData1, subProgramData2, 
 let programs;
 let benefit1, benefit2, benefitsData, benefitsData1, benefitsData2, benefit1Id;
 let baseUrl, adminusername, adminpassword;
-let context;
-let page;
+
 test.beforeAll(async () => {
   
   baseUrl = global.testConfig.BASE_URL;
@@ -82,10 +82,8 @@ test.beforeAll(async () => {
 });
 
 
-test.beforeEach(async ({browser }) => {
-  context = await browser.newContext();
-  page = await context.newPage();
-  loginPage = new LoginPage(page);
+test.beforeEach(async ({page }) => {
+ loginPage = new LoginPage(page);
   homePage = new HomePage(page);
   streamDetailsPage = new StreamDetailsPage(page);
   streamManagementPage = new StreamManagementPage(page);
@@ -240,7 +238,7 @@ test.afterEach(async () => {
   await test.step("Logout from Admin Portal", async () => {
     await homePage.logout();
     console.log("User Logout Successfully");
-    await context.close();
+   
   });
 
 });

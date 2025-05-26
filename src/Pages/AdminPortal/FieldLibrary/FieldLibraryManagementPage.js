@@ -1,6 +1,6 @@
 import Constants from '../../../Utils/Constants';
 
-const { SearchPage } = require("../SharedPages/SearchPage");
+const { SearchPage } = require("../../SharedPages/SearchPage");
 const { FieldLibraryPage } = require("../FieldLibrary/FieldLibraryPage");
 
 
@@ -19,6 +19,13 @@ export class FieldLibraryManagementPage {
         this.threeDotsMenu = '//div[@data-testid="three-dots-menu"]';
         this.activate_deactivate_Button = '//li[@data-testid="three-dots-menu-option-0"]';
         this.fieldEnablementStatus = '//div[@data-testid="tag"]';
+    }
+
+    async verifyUserCanManageFieldLibrary() {
+        if (await this.page.locator(this.threeDotsMenu).first().isVisible()) {
+            return true;
+        }
+        return false;
     }
 
     async navigateToApprovedFieldsTab() {
@@ -69,7 +76,8 @@ export class FieldLibraryManagementPage {
 
         const FIELD_TYPE_MAPPING = {
             [global.testConfig.FieldLibrary.calculated] : Constants.CALCULATION_FIELD,  
-            [global.testConfig.FieldLibrary.input] : Constants.INPUT_FIELD,               
+            [global.testConfig.FieldLibrary.input] : Constants.INPUT_FIELD,             
+            [global.testConfig.FieldLibrary.input] : Constants.INPUT_LOOKUP_FIELD ,              
             [global.testConfig.FieldLibrary.group] : Constants.GROUP_FIELD,          
             [global.testConfig.FieldLibrary.complex] : Constants.COMPLEX_FIELD ,   
             [global.testConfig.FieldLibrary.integration] : Constants.INTEGRATION_FIELD 

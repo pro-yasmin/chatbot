@@ -1,4 +1,5 @@
-const { test, expect } = require('@playwright/test');
+//const { test, expect } = require('@playwright/test');
+import { test, expect } from '../../../fixtures.js';
 const { LoginPage } = require('../../../../src/Pages/LoginPage');
 const { HomePage } = require('../../../../src/Pages/AdminPortal/HomePage');
 const { SocialRecordCopiesManagementPage } = require('../../../../src/Pages/AdminPortal/SocialRecordCopies/SocialRecordCopiesManagementPage');
@@ -9,11 +10,9 @@ let homePage;
 let socialRecordCopiesManagementPage;
 let socialRecordCopiesData;
 
-let context;
-let page;
-test.beforeEach(async ({browser }) => {
-    context = await browser.newContext();
-    page = await context.newPage();
+
+test.beforeEach(async ({page }) => {
+   
     loginPage = new LoginPage(page);
     homePage = new HomePage(page);
     socialRecordCopiesManagementPage = new SocialRecordCopiesManagementPage(page);
@@ -32,40 +31,40 @@ test.beforeEach(async ({browser }) => {
     });
 });
 
-test('Remove ISR copy with status draft', async () => {
-    // Step1: Navigate to Social Record Managment page
-    await test.step('Navigate to Social Record Managment page', async () => {
-        await homePage.navigateToSocialRecordCopies();
+ test('Remove ISR copy with status draft', async () => {
+     // Step1: Navigate to Social Record Managment page
+     await test.step('Navigate to Social Record Managment page', async () => {
+         await homePage.navigateToSocialRecordCopies();
         console.log('Navigate to Social Record Managment page');
-    });
+     });
 
-    // Step2: Add a new Draft Social Record Copy
+     // Step2: Add a new Draft Social Record Copy
     await test.step('Add a new Draft Social Record Copy', async () => {
         expect(await socialRecordCopiesManagementPage.addDraftCopy(socialRecordCopiesData)).toBe(true);
-        await homePage.navigateToSocialRecordCopies();
-        console.log('New Draft Social Record Copy Added Successfully');
-    });
+         await homePage.navigateToSocialRecordCopies();
+         console.log('New Draft Social Record Copy Added Successfully');
+     });
 
-    // Step3: Delete a Draft Social Record Copy
+     // Step3: Delete a Draft Social Record Copy
     await test.step('Delete a Draft Social Record Copy', async () => {
         expect(await socialRecordCopiesManagementPage.deleteDraftCopy(socialRecordCopiesData)).toBe(true);
-        console.log('Draft Social Record Copy Deleted Successfully');
-    });
-});
+         console.log('Draft Social Record Copy Deleted Successfully');
+     });
+ });
 
 test('Add ISR copy with status under Review', async () => {
-    // Step1: Navigate to Social Record Managment page
-    await test.step('Navigate to Social Record Managment page', async () => {
+     // Step1: Navigate to Social Record Managment page
+   await test.step('Navigate to Social Record Managment page', async () => {
         await homePage.navigateToSocialRecordCopies();
         console.log('Navigate to Social Record Managment page');
-    });
+     });
 
-    // Step2: Add New Fields To New ISR Copy
+     // Step2: Add New Fields To New ISR Copy
     await test.step('Add New Fields To New ISR Copy', async () => {
         expect(await socialRecordCopiesManagementPage.addNewFieldsToISRCopy(socialRecordCopiesData)).toBe(true);
-        console.log('New Fields added To New ISR Copy Successfully');
-    });
-});
+         console.log('New Fields added To New ISR Copy Successfully');
+     });
+ });
 
 
 test('Add ISR copy And Verify ISR copy details', async () => {
@@ -96,7 +95,7 @@ test.afterEach(async () => {
     await test.step("Logout from Admin Portal", async () => {
         await homePage.logout();
         console.log("User Logout Successfully");
-        await context.close();
+       
     });
 
 });

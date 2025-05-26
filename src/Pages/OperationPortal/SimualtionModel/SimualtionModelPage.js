@@ -1,6 +1,6 @@
 import filesPaths from '../../../../configs/paths.js';
-const { PopUpPage } = require('../../AdminPortal/SharedPages/PopUpPage');
-const { UploadFilePage } = require('../../AdminPortal/SharedPages/UploadFilePage.js');
+const { PopUpPage } = require('../../SharedPages/PopUpPage');
+const { UploadFilePage } = require('../../SharedPages/UploadFilePage.js');
 import Constants from "../../../Utils/Constants";
 
 export class SimualtionModelPage {

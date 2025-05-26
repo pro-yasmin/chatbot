@@ -1,4 +1,4 @@
-const { PopUpPage } = require('../../AdminPortal/SharedPages/PopUpPage');
+const { PopUpPage } = require('../../SharedPages/PopUpPage');
 
 export class SimulationModelEditVariablesPage {
     constructor(page) {
@@ -12,7 +12,7 @@ export class SimulationModelEditVariablesPage {
 
         //popup
         this.popUpYesButton = '//button[@data-testid="modal-primary-button"]';
-        this.confirmEditButton = '//button[contains(text(), "نعم تعديل")]'; 
+        this.confirmEditButton = '//button[contains(text(), "نعم، تعديل!")]'; 
     }
 
     /**

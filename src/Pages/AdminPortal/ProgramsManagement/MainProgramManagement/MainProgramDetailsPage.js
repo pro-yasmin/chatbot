@@ -14,7 +14,7 @@ export class MainProgramDetailsPage {
     // Selectors for main program details elements
     this.subProgramTab = '//button[@data-testid="tab-2"]';
     this.benefitsTab = '//button[@data-testid="tab-3"]';
-    this.createSubProgramBtn = '//button[@type="button" and contains(text(),"تعريف برنامج فرعي")]'; 
+    this.createSubProgramBtn = '//button[@data-testid="create-sub-program"]'; 
     this.searchInput = '//form[@data-testid="search-input"]';
    
     this.programId = '//span[@data-testid="value_main-program-serialNumber"]'
@@ -41,7 +41,7 @@ export class MainProgramDetailsPage {
   async InsideCreateSubProgram() {
     await this.page.click(this.subProgramTab);
     //await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
-    await this.page.waitForTimeout(1000);
+    await this.page.waitForTimeout(2000);
     await this.page.waitForSelector(this.createSubProgramBtn, {state: "visible"});
     //await this.page.waitForTimeout(1000);
     await this.page.click(this.createSubProgramBtn);

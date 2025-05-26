@@ -16,7 +16,7 @@ export class StreamDetailsPage {
     this.mainProgramTab = '//button[@data-testid="tab-2"]';
     this.subProgramTab = '//button[@data-testid="tab-3"]';
     this.benefitsTab = '//button[@data-testid="tab-4"]';
-    this.createMainProgramBtn = '//button[@type="button" and contains(text(),"تعريف برنامج رئيسي")]';
+    this.createMainProgramBtn = '//button[@data-testid="tooltip-button"]';
     this.searchInput = '//form[@data-testid="search-input"]';
 
 

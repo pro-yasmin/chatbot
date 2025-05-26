@@ -1,4 +1,5 @@
-const { test, expect } = require('@playwright/test');
+//const { test, expect } = require('@playwright/test');
+import { test, expect } from '../../fixtures.js';
 const { LoginPage } = require('../../../src/Pages/LoginPage.js');
 const { HomeOperationPage } = require('../../../src/Pages/OperationPortal/HomeOperationPage.js');
 const { SimulationModelData } = require('../../../src/Models/OperationPortal/SimulationModelData.js');
@@ -53,7 +54,7 @@ test('Filter Simulation Model', async ({ page }) => {
 
     // Step4: Filter Simulation Model Versions
     await test.step('Filter Simulation Model Versions', async () => {
-        expect(await simulationModelManagementPage.VerifySimulationModelVersionsDetails(simulationModelData)).toBe(true);
+        expect(await simulationModelManagementPage.filterSimulationModelVersions(simulationModelData)).toBe(true);
         console.log('Simulation Model Versions Filtered Successfully');
     });
 });

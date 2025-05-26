@@ -1,4 +1,5 @@
-const { test, expect } = require('@playwright/test');
+//const { test, expect } = require('@playwright/test');
+import { test, expect } from '../../fixtures.js';
 const { LoginPage } = require('../../../src/Pages/LoginPage');
 const { HomeOperationPage } = require('../../../src/Pages/OperationPortal/HomeOperationPage');
 const { SimulationModelData } = require('../../../src/Models/OperationPortal/SimulationModelData');
@@ -14,8 +15,7 @@ let simulationModelData;
 let simulationModelManagementPage;
 let tasksPage;
 let simulation;
-let context;
-let page;
+
 
 var baseUrl = global.testConfig.OPERATION_BASE_URL;
 var programsAndPoliciesSpecialist_UserName = global.testConfig.PROGRAMS_AND_POLICIES_SPECIALIST;
@@ -24,9 +24,7 @@ var programsAndPoliciesSpecialist_Password = global.testConfig.PROGRAMS_AND_POLI
 var businessRules_Username = global.testConfig.BUSSINESS_RULES_SPECIALIST;
 var businessRules_Password = global.testConfig.BUSSINESS_RULES_SPECIALIST_PASS;
 
-test.beforeEach(async ({ browser }) => {
-    context = await browser.newContext();
-    page = await context.newPage();
+test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
     homeOperationPage = new HomeOperationPage(page);
     simulationModelData = new SimulationModelData();
@@ -126,7 +124,7 @@ test('Edit New Simulation Model', async ({ page }) => {
 
     // Step10: Navigate to Simulation Models Managment page
     await test.step('Navigate to Simulation Models Management page', async () => {
-        await page.waitForTimeout(10000);
+        //await page.waitForTimeout(10000);
         await homeOperationPage.navigateToSimulationModels();
         console.log('Navigate to Simulation Models Management page');
     });
@@ -146,7 +144,7 @@ test.afterEach(async () => {
     await test.step("Logout from Operation Portal", async () => {
         await homeOperationPage.logout();
         console.log("User Logout Successfully");
-        await context.close();
+        
     });
 
 });

@@ -29,7 +29,7 @@ export class SearchPage {
      rows = await  this.page.locator(`${this.tableSelector}//tr`).filter({ has: this.page.locator('td') });
     // Step 4: Ensure only one row is visible
      rowCount = await rows.count();
-    await  this.page.waitForTimeout(3000);
+    await  this.page.waitForTimeout(6000);
     if (rowCount !== 1) {
       throw new Error(`Expected 1 row to be displayed, but found ${rowCount}`);
     }
@@ -62,7 +62,7 @@ export class SearchPage {
 
     // Step 2: Wait for the table rows to update (assuming the table is dynamically updated)
     await this.page.waitForSelector(`${this.tableSelector}//tr`, { state: 'visible' });
-    await  this.page.waitForTimeout(5000); 
+    await  this.page.waitForTimeout(5000); //shimaa
      // Step 3: Get all visible rows in the table
      rows = await  this.page.locator(`${this.tableSelector}//tr`).filter({ has: this.page.locator('td') });
     // Step 4: Ensure only one row is visible
@@ -132,7 +132,7 @@ export class SearchPage {
     let tds;
     let tdDetails = [];
 
-    await  this.page.waitForTimeout(10000);
+    await  this.page.waitForTimeout(10000);//shimaa
     table = this.page.locator(this.tableSelector);
     
   

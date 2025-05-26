@@ -1,18 +1,14 @@
-const { test, expect } = require("@playwright/test");
+import { test, expect } from '../fixtures.js';
 const { LoginPage } = require("../../src/Pages/LoginPage");
 const { HomePage } = require("../../src/Pages/AdminPortal/HomePage");
 
 let loginPage;
-let homePage, page, context;
+let homePage;
 
 /**
  * Test case to verify login functionality with valid credentials.
  */
-test("Login to Admin Portal with valid credential", async ({ browser }) => {
-  // Create a new browser context and page instance
-  context = await browser.newContext();
-  page = await context.newPage();
-
+test("Login to Admin Portal with valid credential", async ({ page }) => {
   // Instantiate the LoginPage and HomePage objects
   loginPage = new LoginPage(page);
   homePage = new HomePage(page);
@@ -31,16 +27,14 @@ test("Login to Admin Portal with valid credential", async ({ browser }) => {
 
   // Perform logout and close the browser context
   await homePage.logout();
-  await context.close();
+ 
 });
 
 /**
  * Test case to verify login functionality with valid credentials.
  */
-test("Login to Operational Portal with valid credential", async ({ browser }) => {
-  // Create a new browser context and page instance
-  context = await browser.newContext();
-  page = await context.newPage();
+test("Login to Operational Portal with valid credential", async ({ page }) => {
+
 
   // Instantiate the LoginPage and HomePage objects
   loginPage = new LoginPage(page);
@@ -60,16 +54,14 @@ test("Login to Operational Portal with valid credential", async ({ browser }) =>
 
   // Perform logout and close the browser context
   await homePage.logout();
-  await context.close();
+
 });
 
 /**
  * Test case to verify login functionality with invalid credentials.
  */
-test("Login to Operational Portal with invalid credential", async ({ browser }) => {
-  // Create a new browser context and page instance
-  context = await browser.newContext();
-  page = await context.newPage();
+test("Login to Operational Portal with invalid credential", async ({ page }) => {
+
 
   // Instantiate the LoginPage and HomePage objects
   loginPage = new LoginPage(page);
@@ -87,6 +79,6 @@ test("Login to Operational Portal with invalid credential", async ({ browser }) 
   // Verify that login was failed
   expect(loginFailed).toBe(true);
 
-  // Perform logout and close the browser context
-  await context.close();
+
+
 });

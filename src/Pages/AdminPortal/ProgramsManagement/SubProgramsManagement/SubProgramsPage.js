@@ -1,4 +1,4 @@
-const { PopUpPage } = require("../../SharedPages/PopUpPage");
+const { PopUpPage } = require("../../../SharedPages/PopUpPage");
 
 /**
  * Manages actions for creating and handling subprograms, including metadata,
@@ -37,7 +37,7 @@ export class SubProgramsPage {
     this.reapplicationAfterExit ='//input[@name="resubmitAfterEligible.allowResubmitAfterEligible" and @value="false"]';
     this.reapplicationAfterwithdrawal ='//input[@name="resubmitAfterWithdrawal.allowResubmitAfterWithdrawal" and @value="false"]';
     this.defineProgramFeaturesBtn ='//button[contains(text(),"تعريف خصائص البرنامج")]';
-    this.createSubProgramBtn = '//button[contains(text(),"تعريف برنامج فرعي")]';
+    this.createSubProgramBtn = '//button[@data-testid="next-button"]';//'//button[@data-testid="next-button"]'
 
     // Selectors for success confirmation
     this.successPopupTitle = '//span[@id="modal-modal-title"]';

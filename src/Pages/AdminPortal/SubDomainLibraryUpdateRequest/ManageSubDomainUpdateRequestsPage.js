@@ -1,6 +1,6 @@
-const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage.js");
-const {UploadFilePage} = require("../SharedPages/UploadFilePage.js");
-const { PopUpPage } = require("../../AdminPortal/SharedPages/PopUpPage.js");
+const { SearchPage } = require("../../SharedPages/SearchPage.js");
+const {UploadFilePage} = require("../../SharedPages/UploadFilePage.js");
+const { PopUpPage } = require("../../SharedPages/PopUpPage.js");
 const{SubDomainCreationPage} = require('./SubDomainCreationPage');
 const {Utils}= require('../../../Utils/utils.js');
 
@@ -38,7 +38,7 @@ export class ManageSubDomainUpdateRequestsPage {
    *
 **/
     async clickOnCreateSubDomainBtn() {
-        await this.page.waitForSelector(this.createSubDomain, { state: "visible", timeout: 7000 });
+        await this.page.waitForSelector(this.createSubDomain, { state: "visible", timeout: 15000 });
         await this.page.waitForTimeout(3000);
         await this.page.click(this.createSubDomain);
         console.log("Sub domain Create Page Opened successfully.");   

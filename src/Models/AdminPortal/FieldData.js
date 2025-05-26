@@ -16,6 +16,7 @@ export class FieldData {
     this.glossaryFieldNature = null;
     this.glossaryFieldSource = null;
     this.glossaryAxonStatus = null;
+    this.glossaryServiceName == null ;
 
     //API
     this.requestId=null;
@@ -138,11 +139,22 @@ setFieldType(value) {
         this.glossaryAxonStatus = Value;
     }
 
+       // Getter and Setter for Glossary Axon Service Name
+       getGlossaryServiceName() {
+        if (this.glossaryServiceName == null) {
+            this.glossaryServiceName =global.testConfig.createField.glossaryServiceName;
+        }
+        return this.glossaryServiceName;
+        }
+        // Setter for Glossary Axon Service Name
+        setGlossaryServiceName(Value) {
+            this.glossaryServiceName = Value;
+        }
+
       // Getter and Setter for API Request field ID Number
       getRequestId() {
-        
         return this.requestId;
-    }
+     }
 
     // Setter for FieldID
     setRequestId(Value) {
@@ -178,87 +190,88 @@ setFieldType(value) {
         this.parentDomain = Value;
     }
 
-
-
      // Getter and Setter for API input source
      getInputSource() {
        
         return this.inputSource;
     }
-
-    
     setInputSource(Value) {
         this.inputSource = Value;
     }
 
-
-
-    toJSON() {
+ toJSON() {
         return {
-            "dataSource": this.getFieldType(),
-            "isrRequestId":this.getRequestId(),
-            "parentKey": this.getParentKey(),
-            "parentType": this.getParentDomain(),
-            "metaData": {
-                "classification": {
-                    "id": global.testConfig.createField.API_Classification,
-                    "code": global.testConfig.createField.API_Classification,
-                    "nameEn": global.testConfig.createField.API_Classification,
-                    "nameAr": global.testConfig.createField.API_Classification_Ar
-                },
-                "required": true,
-                "multipleField": true,
-                "tags": null,
-                "periodicDataUpdate": {
-                    "id": global.testConfig.createField.API_PeriodicDataUpdate_id,
+     "dataSource": this.getFieldType(),
+    "isrRequestId": this.getRequestId(),
+    "parentKey": this.getParentKey(),
+    "parentType": this.getParentDomain(),
+    "metaData": 
+    {
+        "required": false,
+        "multipleField": false,
+        "tags": null,
+        "privacy": global.testConfig.createField.API_Privacy,
+        "impactDegree": global.testConfig.createField.API_ImpactDegree,
+        "encrypted": false,
+        "index": null,
+        "activationDate": null,
+        "expirationDate": null,
+        "alarmForUnAllowedValues1": [
+            {
+                "textField": "",
+                "alarmForUnallowedValues": "",
+                "dataQualityRules": ""
+            }
+        ],
+        "alarmForUnAllowedValues": [],
+        "note": null,
+        "id": "",
+        "arabicFieldName": this.getArabicFieldName(),
+        "englishFieldName": this.getEnglishFieldName(),
+        "fieldType": "Text",
+        "assignedDomain": global.testConfig.createField.API_Assigned_Domain,
+        "inputSource": this.getInputSource(),
+        "arabicFieldDescription": null,
+        "englishFieldDescription": null,
+         "fieldNature": {
+                    "id": global.testConfig.createField.API_FieldNature_id,
                     "code": null,
-                    "nameEn": global.testConfig.createField.API_PeriodicDataUpdate_nameEn,
-                    "nameAr": global.testConfig.createField.API_PeriodicDataUpdate_nameAr
+                    "nameEn":global.testConfig.createField.API_FieldNature_nameEn,
+                    "nameAr": global.testConfig.createField.API_FieldNature_nameAr
                 },
-                "privacy": global.testConfig.createField.API_Privacy,
-                "impactDegree": global.testConfig.createField.API_ImpactDegree,
+         
                 "severity": {
                     "id":global.testConfig.createField.API_Severity_id,
                     "code": null,
                     "nameEn": global.testConfig.createField.API_Severity_nameEn,
                     "nameAr":global.testConfig.createField.API_Severity_nameAr
                 },
-                "encrypted": true,
-                "index": null,
-                "activationDate": null,
-                "expirationDate": null,
-                "alarmForUnAllowedValues1": [
-                    {
-                        "textField": "",
-                        "alarmForUnallowedValues": "",
-                        "dataQualityRules": ""
-                    }
-                ],
-                "alarmForUnAllowedValues": [],
-                "note": null,
-                "id": "",
-                "arabicFieldName": this.getArabicFieldName(),
-                "englishFieldName": this.getEnglishFieldName(),
-                "fieldType": "Text",
-                "assignedDomain": global.testConfig.createField.API_Assigned_Domain,
-                "inputSource": this.getInputSource(),
-                "fieldNature": {
-                    "id": global.testConfig.createField.API_FieldNature_id,
+        "periodicDataUpdate": {
+                    "id": global.testConfig.createField.API_PeriodicDataUpdate_id,
                     "code": null,
-                    "nameEn":global.testConfig.createField.API_FieldNature_nameEn,
-                    "nameAr": global.testConfig.createField.API_FieldNature_nameAr
+                    "nameEn": global.testConfig.createField.API_PeriodicDataUpdate_nameEn,
+                    "nameAr": global.testConfig.createField.API_PeriodicDataUpdate_nameAr
                 },
-                "arabicFieldDescription": null,
-                "englishFieldDescription": null,
-                "dataQualityRules": null
-            }
-      }
-
-
-
-
-
+         "classification": {
+                    "id": global.testConfig.createField.API_Classification,
+                    "code": global.testConfig.createField.API_Classification,
+                    "nameEn": global.testConfig.createField.API_Classification,
+                    "nameAr": global.testConfig.createField.API_Classification_Ar
+                },
+        "dataQualityRules": null
+            
+        }
+    
     }
+ }
+  
+}
+
+
+
+
+
+    
 
    /* toComplexJson()
     { 
@@ -325,7 +338,7 @@ setFieldType(value) {
     }*/
     
 
-}
+
 
 
 module.exports = { FieldData };

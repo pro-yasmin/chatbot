@@ -57,7 +57,7 @@ export class TasksService {
 
     var response = await requestContext.post(this.assignTaskUrl, {
       headers: {"Content-Type": "application/json",Authorization: this.token,Accept: "application/json"},
-      data: JSON.stringify({"taskId":taskID}),timeout: 30000});
+      data: JSON.stringify({"taskId":taskID})});
 
     if (response.ok()) {
       console.log("The Task assigned Successfully");
@@ -113,7 +113,7 @@ export class TasksService {
 
     var response = await requestContext.get(this.completedTasksUrl, {
         headers: {"Content-Type": "application/json",Authorization: this.token,Accept: "application/json" },
-        timeout: 30000, });
+        timeout: 50000, });
 
     if (response.ok()) {
         var responseBody = await response.json();

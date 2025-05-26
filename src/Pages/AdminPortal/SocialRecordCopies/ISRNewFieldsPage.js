@@ -1,4 +1,4 @@
-const { PopUpPage } = require('../SharedPages/PopUpPage');
+const { PopUpPage } = require('../../SharedPages/PopUpPage');
 const { SocialRecordCopiesPage } = require("../SocialRecordCopies/SocialRecordCopiesPage");
 
 export class ISRNewFieldsPage {
@@ -23,6 +23,7 @@ export class ISRNewFieldsPage {
         //await this.page.waitForSelector(this.fieldListFirstOption, { state: "visible", timeout: 60000});
         await this.page.click(this.lastPageButton + '[last()-1]');
         await this.page.click(this.fieldListOption + '[last()]');
+        //await this.page.click(this.fieldListOption + '[last()]');
         await this.getFieldArNameText(socialRecordCopiesData);
         await this.page.waitForSelector(this.proceedButton, { state: "visible", timeout: 60000});
         await this.page.click(this.proceedButton);

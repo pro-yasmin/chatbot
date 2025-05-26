@@ -1,6 +1,7 @@
+const { test, expect } = require('@playwright/test');
+
 import Constants from './src/Utils/Constants.js';
 
-const { test, expect } = require('@playwright/test');
 const { StreamData } = require('./src/Models/AdminPortal/StreamData.js');
 const { MainProgramData } = require('./src/Models/AdminPortal/MainProgramData.js');
 const { SubProgramsData } = require('./src/Models/AdminPortal/SubProgramsData.js');
@@ -34,9 +35,6 @@ test.beforeEach(async () => {
   programs = new Programs();
   simulation = new Simulation();
   fieldRequests=new FieldRequests();
-
-
-
 });
 
   test('API Test - Create stream', async () => {
@@ -73,20 +71,24 @@ test.beforeEach(async () => {
     
   });
 
-  test('API Test - Create Benefit', async () => {
-  
+  test.only('API Test - Create Benefit', async () => {
+   
     stream = await programs.createStreamAndApproveAPI(adminusername, adminpassword, streamData) 
     console.log('Stream', stream);
     mainProgram = await programs.createMainProgramAndApproveAPI(adminusername, adminpassword, mainProgramData, stream[0]);
     console.log('mainProgram', mainProgram);
     subProgram = await programs.createSubProgramAndApproveAPI(adminusername, adminpassword, subProgramData, mainProgram[0]);
     console.log('subProgram', subProgram);
-    createBenefit = await programs.createBenefitAPI(adminusername, adminpassword, benefitsData,subProgram[0]) 
-    expect(createBenefit).not.toBeNull();
-    console.log('Benefit', createBenefit);
+    // createBenefit = await programs.createBenefitAPI(adminusername, adminpassword, benefitsData,subProgram[0]) 
+    // expect(createBenefit).not.toBeNull();
+   
+ createApproveBenefit = await programs.createBenefitAndApproveAPI(adminusername, adminpassword, benefitsData,subProgram[0]);
+    console.log('Benefit', createApproveBenefit);
+    expect(createApproveBenefit).not.toBeNull();
 
-    // createApproveBenefit = await programs.createBenefitAndApproveAPI(adminusername, adminpassword, benefitsData,subProgram[0]);
-    // console.log('Benefit', createApproveBenefit);
+    
+
+    
 
    });
 
@@ -96,7 +98,7 @@ test.beforeEach(async () => {
     console.log('Simulation Model ID = ' + simulationData.getCreatedSimulationModelId());
    });
 
-   test.only('API Test -Create & Approve field Request', async ({context}) => {
+   test('API Test -Create & Approve field Request', async ({context}) => {
     var fields =[];
     //create & approve input field
     inputFieldData= new FieldData();

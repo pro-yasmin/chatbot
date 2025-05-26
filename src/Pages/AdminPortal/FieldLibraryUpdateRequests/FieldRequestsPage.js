@@ -1,8 +1,8 @@
 import Constants from '../../../Utils/Constants.js';
 const { FieldPage } = require("./FieldPage");
-const { SearchPage } = require("../../AdminPortal/SharedPages/SearchPage.js");
-const { PopUpPage } = require("../../AdminPortal/SharedPages/PopUpPage.js");
-const { UploadFilePage } = require('../../../Pages/AdminPortal/SharedPages/UploadFilePage.js');
+const { SearchPage } = require("../../SharedPages/SearchPage.js");
+const { PopUpPage } = require("../../SharedPages/PopUpPage.js");
+const { UploadFilePage } = require('../../SharedPages/UploadFilePage.js');
 
 
 export class FieldRequestsPage {
@@ -40,12 +40,15 @@ export class FieldRequestsPage {
         let fieldType = fieldData.getFieldType();
 
         // Get Specific Locator
-        let fieldLocator;
+        let fieldLocator; 
         switch (fieldType) {
             case Constants.INTEGRATION_FIELD:
                 fieldLocator = this.integrationFieldBtn;
                 break;
             case Constants.INPUT_FIELD:
+                fieldLocator = this.inputFieldBtn;
+                break;
+            case Constants.INPUT_LOOKUP_FIELD:
                 fieldLocator = this.inputFieldBtn;
                 break;
             case Constants.CALCULATION_FIELD:
@@ -72,7 +75,7 @@ export class FieldRequestsPage {
         await this.page.waitForTimeout(2000);
         await this.navigateToFieldPage(fieldData);
         
-        if ([Constants.GROUP_FIELD,Constants.INPUT_FIELD, Constants.COMPLEX_FIELD].includes(fieldType)) {
+        if ([Constants.GROUP_FIELD,Constants.INPUT_FIELD, Constants.COMPLEX_FIELD,Constants.INPUT_LOOKUP_FIELD].includes(fieldType)) {
             var result = await this.fieldPage.creationField(fieldData, fieldType);
             return result ;
         } 
@@ -128,9 +131,10 @@ export class FieldRequestsPage {
             await this.uploadFilePage.uploadFile(fileName, this.uploadBtnXPath , Constants.VERIFY_FILE_UPLOADED);
             console.log('File upload competed');
         }           
-
+        await this.page.waitForTimeout(2000);
         await this.page.click(this.justification);
-        await this.page.waitForTimeout(1000);
+        console.log('justification list displayed');
+        await this.page.waitForTimeout(2000);
         var optionsLocator = this.page.locator(this.justificationList);
         await optionsLocator.first().waitFor({ state: "visible", timeout: 5000 });
         await optionsLocator.first().click({ force: true });

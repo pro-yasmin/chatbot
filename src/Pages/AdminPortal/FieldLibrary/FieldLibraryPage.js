@@ -1,6 +1,6 @@
 import Constants from '../../../Utils/Constants';
 
-const { PopUpPage } = require('../SharedPages/PopUpPage');
+const { PopUpPage } = require('../../SharedPages/PopUpPage');
 
 export class FieldLibraryPage {
     constructor(page) {
@@ -45,7 +45,7 @@ export class FieldLibraryPage {
 
         let fieldTabLocator;
 
-        if ([Constants.INPUT_FIELD ,Constants.CALCULATION_FIELD,Constants.INTEGRATION_FIELD].includes(fieldType)) {
+        if ([Constants.INPUT_FIELD ,Constants.CALCULATION_FIELD,Constants.INTEGRATION_FIELD,Constants.INPUT_LOOKUP_FIELD].includes(fieldType)) {
             fieldTabLocator = this.page.locator(this.fieldRecordThirdTab);
         } else  if ([ Constants.GROUP_FIELD ,Constants.COMPLEX_FIELD].includes(fieldType)) {
                 fieldTabLocator = this.page.locator(this.fieldRecordFourthTab);
