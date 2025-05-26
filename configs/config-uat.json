@@ -332,7 +332,7 @@
 "createSubDomain": {
   "subDomainArabicName": "فئة جديدة",
   "subDomainEnglishName": "subDomain New",
-  "assignedDomain":"السجل الاجتماعي  الموحد",
+  "assignedDomain":"فئة اوتوميشن",
   "subDomainDescription": "وصف الفئة الجديدة للتجربة",
   "subDomainFile":"test.pdf",
   "createSubDomainSuccessMsg":"تم إرسال طلبك رقم",
@@ -340,7 +340,9 @@
   "subDomainApprovedStatus":"معتمد",
   "subDomainRejectedStatus":"غير معتمد",
   "subDomainEnableStatus":"متاح",
-  "subDomainDisableStatus":"محجوب"
+  "subDomainDisableStatus":"محجوب",
+  "darftsubDomainSuccessMsg":"تم حفظ المسودة بنجاح.",
+  "subDomainJustification":"تحديث عام"
 }
 
 }

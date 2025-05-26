@@ -13,6 +13,7 @@ export class ManageSubDomainUpdateRequestsPage {
         this.page = page;
         this.search = new SearchPage(this.page);
         this.uploadFile= new UploadFilePage(this.page);
+        this.popUpMsg= new PopUpPage(this.page);
         this.utils = Utils;
 
       
@@ -24,8 +25,10 @@ export class ManageSubDomainUpdateRequestsPage {
         this.sendRequestBtn= '//button[text()="إرسال الطلب للموافقة"]';
         this.successPopUpMsg='//span[@data-testid="modal-title"]';
         this.closeSuccessPopup='//button[@data-testid="modal-primary-button"]';
+        this.draftSubDomainBtn='//button[@data-testid="save-draft-request-sub-domains"]';
+        this.backToReqPageBtn='//button[@data-testid="confirmation-modal-secondary-button"]';
+        this.searchField= '//input[@data-testid="search-input-base"]';
 
-       // this.createSubDomain = '//button[contains(@class,"MuiButton-containedSizeLarge")]';
     }
 
     /**
@@ -46,11 +49,32 @@ export class ManageSubDomainUpdateRequestsPage {
   
        for(let i=0;i<NumOfDomains;i++){
        await this.clickOnCreateSubDomainBtn();
-       await subDomainPage.createSubDomain(SubDomainData,2);
+       await subDomainPage.createSubDomain(SubDomainData,NumOfDomains);
        }
        var result = await this.sendRequestToApproval(SubDomainData);
        return result; 
     }
+
+async createDraftSubDomain(SubDomainData){
+    var subDomainPage = new SubDomainCreationPage(this.page);
+    await this.clickOnCreateSubDomainBtn();
+    await subDomainPage.createSubDomain(SubDomainData,1);
+
+    //upload file
+    await this.uploadFileForSubDomain(SubDomainData.getfile());
+
+    //select justification
+    await this.selectJustification();
+
+    await this.page.waitForTimeout(3000);
+    await this.page.click(this.draftSubDomainBtn);
+
+    let successMsg= await this.popUpMsg.popUpMessage( this.successPopUpMsg,this.confirmSendMeg,global.testConfig.createSubDomain.darftsubDomainSuccessMsg);
+   
+    await this.page.click(this.backToReqPageBtn);
+
+    return  successMsg;
+}
 
     async selectJustification(){
         await this.page.click(this.justification);
@@ -61,17 +85,21 @@ export class ManageSubDomainUpdateRequestsPage {
         await this.page.keyboard.press("Tab");
     }
 
-    async sendRequestToApproval(SubDomainData){
-        await this.uploadFile.uploadFile(SubDomainData.getfile(),this.chooseFileBtn);
+    async uploadFileForSubDomain(fileName){
+        await this.uploadFile.uploadFile(fileName,this.chooseFileBtn);
         await this.page.click(this.uploadFileBtn);
+    }
+
+    async sendRequestToApproval(SubDomainData){
+        await this.uploadFileForSubDomain(SubDomainData.getfile());
         await this.selectJustification();
         await this.page.waitForTimeout(3000);
         await this.page.click(this.sendRequestBtn);
 
         var getRequestNumber = await this.getRequestNumber(this.successPopUpMsg);
-                var popUpMsg = new PopUpPage(this.page);
+               // var popUpMsg = new PopUpPage(this.page);
                 if (getRequestNumber)
-                    {await popUpMsg.popUpMessage( this.closeSuccessPopup,this.confirmSendMeg,global.testConfig.createSubDomain.createSubDomainSuccessMsg); 
+                    {await this.popUpMsg.popUpMessage( this.closeSuccessPopup,this.confirmSendMeg,global.testConfig.createSubDomain.createSubDomainSuccessMsg); 
                     await this.page.click(this.closeSuccessPopup);
                         return getRequestNumber}
                 else return false;
@@ -88,6 +116,41 @@ export class ManageSubDomainUpdateRequestsPage {
             }
         }
     }
+
+    async checkSubDomainName(subDomainName){
+        let requestRowInfo=[];
+        let status;
+        let requestStatus;
+
+        requestRowInfo = await this.search.searchOnUniqueRow(this.searchField, subDomainName);
+        if (requestRowInfo && requestRowInfo.length > 0) {
+            status = requestRowInfo[1].tdLocator;
+            requestStatus = status.locator("span");
+            await requestStatus.waitFor({ state: "visible" });
+            var actual = await requestStatus.textContent();
+        }
+        if(actual==subDomainName){
+            return true;
+        }
+    }
+
+    async checkSubDomainDraftData(SubDomainData){
+        const justificationName=global.testConfig.createSubDomain.subDomainJustification;
+        var expectedJustification = "//*[contains(text(), '" + justificationName + "')]";
+
+      const justificationStatus= await this.page.waitForSelector(expectedJustification, { visible: true });  
+      const fileStatus= await this.uploadFile.checkUploadedFile(SubDomainData.getfile());
+      const addedSubdomainStatus= await this.checkSubDomainName(SubDomainData.getsubDomainArabicName()[i])
+
+      if(justificationStatus && fileStatus && addedSubdomainStatus){
+        return true;
+      }else{
+        return false;
+      }
+
+    }
+
+   
 
 
 }

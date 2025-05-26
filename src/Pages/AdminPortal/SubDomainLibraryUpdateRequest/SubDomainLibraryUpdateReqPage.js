@@ -16,6 +16,7 @@ export class SubDomainLibraryUpdateReqPage {
         this.subdomainLibraryUpdateRequest = '//button[contains(@class,"MuiButton-containedSizeLarge")]';
         this.searchField= '//input[@data-testid="search-input-base"]';
         this.tableActions='table-actions';
+        this.draftsTab='//button[@data-testid="tab-2"]';
 
     }
 /**
@@ -36,6 +37,12 @@ export class SubDomainLibraryUpdateReqPage {
     
        await this.clickOnSubDomainUpdateLibraryReqBtn();
        return await subDomainRequestManagement.submitSubDomainCreateRequest(SubDomainData,NumOfDomains);
+    }
+
+    async saveSubDomainAsDraft(SubDomainData){
+        var subDomainRequestManagement= new ManageSubDomainUpdateRequestsPage(this.page);
+        await this.clickOnSubDomainUpdateLibraryReqBtn();
+        return await subDomainRequestManagement.createDraftSubDomain(SubDomainData);
     }
 
     async checkSubDomainReqStatus(expectedStatus, requestID){
@@ -73,7 +80,17 @@ export class SubDomainLibraryUpdateReqPage {
     
     }
 
+    async editDraftSubDomain(){
+       await this.page.click(this.draftsTab);
+        const firstRowDetails = await this.search.getFirstRow();
+       /* const secondTDLocator = firstRowDetails[3].tdLocator;
+        const firstChildOfSecondTD = await secondTDLocator.locator(`[data-testid="table-Actions"]`).locator("button").first();
+        await firstChildOfSecondTD.click();*/
 
+        var actionlocator = "button:nth-of-type(1)";
+        await this.search.clickRowAction(firstRowDetails,this.tableActions, actionlocator);
+
+    } 
 
 
 

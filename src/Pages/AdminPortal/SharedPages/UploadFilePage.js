@@ -22,5 +22,12 @@ export class UploadFilePage {
     }
 
   }
+
+  async checkUploadedFile(fileName){
+    var expectedFileName = "//*[contains(text(), '" + fileName + "')]";
+     return   await this.page.waitForSelector(expectedFileName, { visible: true });
+  }
+
+  
 }
 module.exports = { UploadFilePage };

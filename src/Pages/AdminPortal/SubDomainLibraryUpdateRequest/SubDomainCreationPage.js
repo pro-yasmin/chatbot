@@ -12,9 +12,11 @@ this.subDomainEngName= '//input[@data-testid="sub-domain-englishName"]';
 this.acceptChildTypeField ='//input[@data-testid="childType" and @value="FIELD"]';
 this.acceptChildTypeDomain='//input[@data-testid="childType" and @value="DOMAIN"]';
 this.assignedDomain='//input[@data-testid="assigned-domain"]';
+this.selectMainDomain='//span[@data-testid="tree-radio"]';
 this.chooseAssignedDomain='(//button[contains(@class,"MuiButton-containedSizeMedium")])[2]';
 this.subDomainDesc='//textarea[contains(@id,"description")]';
 this.createDomainBtn='//button[@data-testid="next-button"]';
+
     }
 
  /**
@@ -27,8 +29,6 @@ this.createDomainBtn='//button[@data-testid="next-button"]';
 async createSubDomain(SubDomainData,NumOfDomains) {
 
     // Retrieve domain names from the provided data
-   // var subDomainAr = SubDomainData.getsubDomainArabicName();
-
    if (!SubDomainData.arabicNames) {
     // Generate arabic names only once.
     SubDomainData.setsubDomainArabicName(NumOfDomains);
@@ -59,15 +59,6 @@ async createSubDomain(SubDomainData,NumOfDomains) {
       console.error("No more arabic names available.");
     }
 
-    //enter sub domain english name
-  /*  if (englishNames && englishNames.length > SubDomainData.currentIndex) {
-      await this.page.fill(this.subDomainEngName, englishNames[SubDomainData.currentIndex]); // Fill with the name at currentIndex.
-      SubDomainData.currentIndex++; // Increment the index for the next call.
-    } else {
-      console.error("No more english names available.");
-    }*/
-
-
    //   await this.page.fill(this.subDomainEngName,subDomainEng);
     if(acceptedChildType==Constants.acceptChildTypeField){
         await this.page.click(this.acceptChildTypeField);
@@ -77,16 +68,14 @@ async createSubDomain(SubDomainData,NumOfDomains) {
     this.selectAssignedDomain(assignedDomain);
     await this.page.fill(this.subDomainDesc, subDomainDesc);
     await this.page.click(this.createDomainBtn);
-        
-
       }
 
 
       async selectAssignedDomain(domainName) {
         await this.page.click(this.assignedDomain);
+        await this.page.click(this.selectMainDomain);
         await this.page.getByText(domainName).click();
         await this.page.click(this.chooseAssignedDomain);
-
         }
 
 
