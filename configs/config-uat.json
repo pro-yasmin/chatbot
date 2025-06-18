@@ -364,7 +364,7 @@
 "createSubDomain": {
   "subDomainArabicName": "فئة جديدة",
   "subDomainEnglishName": "subDomain New",
-  "assignedDomainChild" :"فئة اوتوميشن",
+  "assignedDomainParent" :"فئة اوتوميشن",
   "subDomainDescription": "وصف الفئة الجديدة للتجربة",
   "subDomainFile":"test.pdf",
   "createSubDomainSuccessMsg":"تم إرسال طلبك رقم",
