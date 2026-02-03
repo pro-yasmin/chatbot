@@ -1,4 +1,4 @@
-Hybrid API & Mobile Test Automation Framework
+Hybrid API & WEB Test Automation Framework
 This repository contains an end-to-end automation suite designed to validate the creation and consistency of data across a Chatbot application. The framework utilizes a "Shift-Left" approach by combining API requests for data seeding and Mobile UI verification for functional validation.
 
 🚀 Overview
@@ -15,11 +15,11 @@ API Execution: Submit a POST request to create an entity (e.g., a chatbot or use
 UI Validation: Launch the mobile application via Appium and verify that the created entity appears with the correct attributes.
 
 🛠 Tech Stack
-Language: Java 11+
+Language: Java script
 
 API Testing: RestAssured
 
-Mobile Testing: Appium (Android/iOS)
+Web Testing: Playwright
 
 Data Handling: Jackson / Gson (for JSON-to-POJO mapping)
 
@@ -72,18 +72,14 @@ public void testBotCreationConsistency() {
 
     // 3. UI Verification
     mobilePage.navigateToDashboard();
-    ChatbotModel actualData = mobilePage.getBotDetails(expectedData.getBotName());
+    ChatbotModel actualData = WebPage.getBotDetails(expectedData.getBotName());
     
     Assert.assertEquals(actualData.getCategory(), expectedData.getCategory(), "Data Mismatch!");
 }
 ⚙️ Setup & Execution
 Prerequisites
 
-Java JDK 11 or higher.
-
-Node.js & Appium Server installed.
-
-Android SDK / Xcode (for mobile emulators/simulators).
+Node.js & playwright Server installed.
 
 Maven installed.
 
@@ -99,10 +95,9 @@ Bash
 mvn clean install
 Running Tests
 
-To run the full suite via Maven:
+To run use terminal :
+npx playwright test tests/Login/TestLogin --headed  
 
-Bash
-mvn test -DsuiteXmlFile=testng.xml
 📊 Integration (DevSecOps)
 This framework is designed to run within CloudBees/Jenkins pipelines. It supports:
 
