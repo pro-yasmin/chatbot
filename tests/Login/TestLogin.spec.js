@@ -1,6 +1,6 @@
 import { test, expect } from '../fixtures.js';
 const { LoginPage } = require("../../src/Pages/LoginPage");
-const { HomePage } = require("../../src/Pages/AdminPortal/HomePage");
+const { HomePage } = require("../../src/Pages/HomePage.js");
 
 let loginPage;
 let homePage;
@@ -8,77 +8,27 @@ let homePage;
 /**
  * Test case to verify login functionality with valid credentials.
  */
-test("Login to Admin Portal with valid credential", async ({ page }) => {
+test("UI behavior: widget loads, send message, input clears", async ({ page }) => {
   // Instantiate the LoginPage and HomePage objects
   loginPage = new LoginPage(page);
   homePage = new HomePage(page);
 
   // Retrieve credentials and base URL from global configuration
   var baseUrl = global.testConfig.BASE_URL;
-  var adminusername = global.testConfig.BUSSINESS_ADMIN_USER;
-  var adminpassword = global.testConfig.BUSSINESS_ADMIN_PASS;
+  var username = global.testConfig.USER_EMAIL;
+  var password = global.testConfig.PASS;
 
   // Navigate to the admin portal and perform login
-  await loginPage.gotoAdminPortal(baseUrl);
-  var loginSuccess = await loginPage.login(adminusername, adminpassword);
+  await loginPage.gotoChatBot(baseUrl);
+  var loginSuccess = await loginPage.login(username, password);
 
   // Verify that login was successful
   expect(loginSuccess).toBe(true);
 
-  // Perform logout and close the browser context
-  await homePage.logout();
- 
-});
+ const c = global.testConfig.english.find(x => x.id === "EN_UI_001");
+    await homePage.sendMessage(c.prompt);
 
-/**
- * Test case to verify login functionality with valid credentials.
- */
-test("Login to Operational Portal with valid credential", async ({ page }) => {
-
-
-  // Instantiate the LoginPage and HomePage objects
-  loginPage = new LoginPage(page);
-  homePage = new HomePage(page);
-
-  // Retrieve credentials and base URL from global configuration
-  var baseUrl = global.testConfig.OPERATION_BASE_URL;
-  var adminusername = global.testConfig.PROGRAMS_AND_POLICIES_SPECIALIST;
-  var adminpassword = global.testConfig.PROGRAMS_AND_POLICIES_SPECIALIST_PASS;
-
-  // Navigate to the admin portal and perform login
-  await loginPage.gotoOperationPortal(baseUrl);
-  var loginSuccess = await loginPage.login(adminusername, adminpassword);
-
-  // Verify that login was successful
-  expect(loginSuccess).toBe(true);
-
-  // Perform logout and close the browser context
-  await homePage.logout();
-
-});
-
-/**
- * Test case to verify login functionality with invalid credentials.
- */
-test("Login to Operational Portal with invalid credential", async ({ page }) => {
-
-
-  // Instantiate the LoginPage and HomePage objects
-  loginPage = new LoginPage(page);
-  homePage = new HomePage(page);
-
-  // Retrieve credentials and base URL from global configuration
-  var baseUrl = global.testConfig.OPERATION_BASE_URL;
-  var adminusername = global.testConfig.INVALID_USER;
-  var adminpassword = global.testConfig.INVALID_PASS;
-
-  // Navigate to the admin portal and perform login
-  await loginPage.gotoOperationPortal(baseUrl);
-  var loginFailed = await loginPage.loginWithInvalidCredentials(adminusername, adminpassword);
-
-  // Verify that login was failed
-  expect(loginFailed).toBe(true);
-
-
-
+    await homePage.inputShouldBeCleared();
+    const resp = await homePage.lastBotMessageText();
+    expect(resp.length).toBeGreaterThan(0);
 });
